@@ -83,9 +83,9 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 .tk{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;margin:8px 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 8px 22px rgba(0,0,0,.35)}
 .tk.done{border-color:rgba(0,196,212,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 0 1px rgba(0,196,212,.12),0 0 26px rgba(0,196,212,.14),0 8px 22px rgba(0,0,0,.35)}
 .tk .t{flex:1;min-width:0}
-.tk .t b{font-weight:700;font-size:13px;letter-spacing:.03em;text-transform:uppercase;display:block;line-height:1.25}
+.tk .t b{font-weight:600;font-size:14.5px;letter-spacing:-.1px;display:block;line-height:1.3}
 .tk.done .t b{text-decoration:line-through;color:var(--mut)}
-@media(max-width:1023px){.tk .t b{font-size:12px;letter-spacing:.02em}.tk .step button{width:28px;height:38px}.tk .step input{width:38px;font-size:13px}.tk{gap:10px;padding:10px 10px 10px 12px}.tk .chk{width:40px;height:40px}}
+@media(max-width:1023px){.tk .t b{font-size:14px}.tk .step button{width:28px;height:38px}.tk .step input{width:38px;font-size:13px}.tk{gap:10px;padding:10px 10px 10px 12px}.tk .chk{width:40px;height:40px}}
 .tk .t .meta{font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.04em;margin-top:2px}
 .tk .t .hint{font-size:12px;color:var(--pb);margin-top:4px}
 .chk{width:36px;height:36px;border-radius:12px;border:1px solid var(--line2);display:grid;place-items:center;flex:none;background:rgba(0,0,0,.25);box-shadow:inset 0 2px 6px rgba(0,0,0,.4),inset 0 -1px 0 rgba(255,255,255,.06);transition:.2s}
@@ -213,7 +213,7 @@ details>summary::before{content:"▸ ";color:var(--pb)}details[open]>summary::be
 .mg{display:grid;grid-template-columns:124px repeat(var(--n),34px) 110px;gap:8px 6px;align-items:center;width:max-content;min-width:100%}
 .mgh{font-family:var(--mono);font-size:11px;color:var(--dim);text-align:center;height:22px;line-height:22px;border-radius:8px}
 .mgh.td{color:#fff;background:rgba(155,111,232,.28)}
-.mgn{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;line-height:1.2;color:var(--tx);padding-right:8px;white-space:normal;overflow:hidden;max-height:34px;display:flex;align-items:center;gap:7px;position:sticky;left:-14px;z-index:2;background:linear-gradient(90deg,rgba(16,13,27,.97) 80%,rgba(16,13,27,0));padding-left:14px;margin-left:-14px;height:34px}
+.mgn{font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:600;letter-spacing:-.1px;line-height:1.2;color:var(--tx);padding-right:8px;white-space:normal;overflow:hidden;max-height:34px;display:flex;align-items:center;gap:7px;position:sticky;left:-14px;z-index:2;background:linear-gradient(90deg,rgba(16,13,27,.97) 80%,rgba(16,13,27,0));padding-left:14px;margin-left:-14px;height:34px}
 .mgn .dot{width:7px;height:7px;flex:0 0 auto}
 .mgn em{font-style:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .mgc{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#03181C;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.08);padding:0;transition:transform .12s,background .15s}
@@ -541,7 +541,7 @@ body{background:radial-gradient(900px 480px at 50% -25%,rgba(124,79,212,.16),tra
 input,textarea,select{background:#0C0C11;box-shadow:none}
 input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(124,92,230,.25)}
 .bar i,.bar.c i,.pline i,.gbar i,.tbars i{box-shadow:none}
-.tk .t b{letter-spacing:.04em}
+.tk .t b{letter-spacing:-.1px}
 .stk,.stk svg,.mgs .fl{color:#F5B84B}
 .hp .hpi,.at .ai{box-shadow:none;background:rgba(255,255,255,.05)}
 .hp.on,.at.has{border-color:#7C5CE6;background:rgba(124,92,230,.14);box-shadow:none}
@@ -1209,7 +1209,7 @@ progDay(d,scope){let a=0,b=0;this.progRows(scope).forEach(r=>{const[f,sc]=r.k===
 smooth(pts){if(pts.length<2)return '';let d='M'+pts[0][0].toFixed(1)+','+pts[0][1].toFixed(1);for(let i=0;i<pts.length-1;i++){const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
   const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6],c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];d+=`C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`}return d},
 areaChart(series,opts){const o=Object.assign({h:120,col:'#5EE0EE',id:'ac'+uid(),labels:true},opts||{});const W=100,H=40;const vals=series.map(x=>x.p);
-  const pts=series.map((x,i)=>[series.length>1?i/(series.length-1)*W:W/2,x.p==null?null:H-2-x.p*(H-6)]).filter(p=>p[1]!=null);
+  let pts=series.map((x,i)=>[series.length>1?i/(series.length-1)*W:W/2,x.p==null?null:H-2-x.p*(H-6)]).filter(p=>p[1]!=null);if(pts.length===1)pts=[[0,pts[0][1]],[W,pts[0][1]]];else if(pts.length>1){if(pts[0][0]>0)pts.unshift([0,pts[0][1]]);if(pts[pts.length-1][0]<W)pts.push([W,pts[pts.length-1][1]])}
   const path=this.smooth(pts),area=path?path+`L${pts[pts.length-1][0].toFixed(1)},${H}L${pts[0][0].toFixed(1)},${H}Z`:'';const last=pts[pts.length-1];
   return `<div class="acw" id="${o.id}" data-n="${series.length}"><svg viewBox="0 0 100 40" preserveAspectRatio="none" style="width:100%;height:${o.h}px;overflow:visible"><defs><linearGradient id="${o.id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${o.col}" stop-opacity=".42"/><stop offset="1" stop-color="${o.col}" stop-opacity="0"/></linearGradient></defs>
     ${[.25,.5,.75].map(y=>`<line x1="0" x2="100" y1="${(H-2-y*(H-6)).toFixed(1)}" y2="${(H-2-y*(H-6)).toFixed(1)}" stroke="rgba(255,255,255,.05)" stroke-width=".3"/>`).join('')}
@@ -1243,7 +1243,7 @@ pvHabits(){
     ${mode==='d'?`<button class="ic" onclick="APP._gm='${pm}';APP.render()">${I.l}</button><button class="ic" onclick="APP._gm='${nm}';APP.render()">${I.r}</button>`:''}</div>
    <div class="pline"><i style="width:${schToday?Math.round(doneToday/schToday*100):0}%"></i></div></div>
    <div class="row hseg"><div class="pseg sp"><button class="${mode==='d'?'on':''}" onclick="APP._gmode='d';APP.render()">По дням</button><button class="${mode==='w'?'on':''}" onclick="APP._gmode='w';APP.render()">По неделям</button></div><button class="btn pr" onclick="APP.editH(null)">${I.plus} Привычка</button></div>`;
-  const tr2=this.trimLead(trend,7);this._trendDays=tr2.length;this._series={main:tr2};this._trendHtml=this.areaChart(tr2,{h:window.innerWidth>=1024?96:72,labels:false});this._trendAvg=avg30;this._noHead=true;
+  const tr2=this.trimLead(trend,2);this._trendDays=tr2.length;this._series={main:tr2};this._trendHtml=this.areaChart(tr2,{h:window.innerWidth>=1024?96:72,labels:false});this._trendAvg=avg30;this._noHead=true;
   h+='__S2__'+(mode==='w'?this.weekGrid(rows):this.monthGrid(hs,tt));this._trendHtml='';this._noHead=false;
   const have=new Set(hs.map(x=>x.title));const lib=HABIT_LIB.filter(([t])=>!have.has(t));
   if(lib.length&&(!hs.length||this._libOpen))h+=this.hPicker(hs.length>0);
@@ -1286,7 +1286,7 @@ pvTasks(){const S=this.S,td=today();const m0=add(this.monday(td),7*(this._tw||0)
 copyTasks(from,to){(this.S.tasks||[]).filter(x=>x.date===from).forEach(x=>this.S.tasks.push({id:'k'+uid(),title:x.title,date:to,done:'',t:Date.now()}));this.save();this.render();this.toast('Задачи скопированы')},
 /* ---------- Инсайты ---------- */
 pvInsights(){const td=today(),rng=this._irng||30,scope=this._iscope||'all';
-  let series=[];for(let i=rng-1;i>=0;i--){const d=add(td,-i);series.push({d,p:this.progDay(d,scope)})}series=this.trimLead(series,7);
+  let series=[];for(let i=rng-1;i>=0;i--){const d=add(td,-i);series.push({d,p:this.progDay(d,scope)})}series=this.trimLead(series,2);
   const v=series.map(x=>x.p).filter(x=>x!=null),avg=v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length*100):null;
   const m0=this.monday(td);const wk=off=>{let a=0,b=0;for(let i=0;i<7;i++){const d=add(add(m0,-7*off),i);if(d>td)break;const p=this.progDay(d,scope);if(p!=null){a+=p;b++}}return b?Math.round(a/b*100):null};
   const thisW=wk(0),lastW=wk(1),delta=thisW!=null&&lastW!=null?thisW-lastW:null;
