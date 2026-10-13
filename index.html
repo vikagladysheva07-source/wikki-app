@@ -1293,7 +1293,6 @@ pvHabits(){
   const have=new Set(hs.map(x=>x.title));const lib=HABIT_LIB.filter(([t])=>!have.has(t));
   if(lib.length&&(!hs.length||this._libOpen))h+=this.hPicker(hs.length>0);
   else if(lib.length)h+=`<button class="btn gh w" onclick="APP._libOpen=true;APP.render()">Идеи привычек ${I.r}</button>`;
-  if(hs.length||tt.length)h+=`<div class="sech"><b>Статистика</b><span>30 дней</span></div>`+this.pvInsights(true);
   const arch=S.habits.filter(x=>x.archived);if(arch.length)h+=`<div class="card"><div class="lbl">Архив</div>${arch.map(x=>`<div class="list-item"><span class="sp mut">${esc(x.title)}</span><button class="btn sm" onclick="APP.hArch('${x.id}',false)">Вернуть</button></div>`).join('')}</div>`;
   return h;
 },
