@@ -569,14 +569,14 @@ const TPL=[
 const PROGRAMS=[
  {id:'w12',name:'12 недель',origin:'Брайан Моран, «12 недель в году»',weeks:12,mode:'score',color:'#9B6FE8',glyph:'◆',free:true,
   rules:['До трёх целей и тактики под каждой','Каждую неделю счёт: закрыто ≥85% тактик','Воскресный разбор, 13-я неделя — итоги']},
- {id:'arc',name:'Winter Arc',origin:'Тренд: «зима, когда ты меняешься»',fixed:['10-01','01-01'],mode:'score',color:'#5EE0EE',glyph:'◇',free:true,
-  rules:['С 1 октября до 1 января','Тело, дело, дисциплина — свои цели','Тот же недельный счёт 85%']},
- {id:'m6',name:'Теория шести месяцев',origin:'Тренд: «за полгода можно изменить жизнь»',weeks:26,mode:'score',color:'#C4A4FF',glyph:'●',free:true,
-  rules:['26 недель, до трёх больших целей','Недельный счёт и итоги каждые 4 недели','Длинная дистанция: заморозки важнее']},
  {id:'h75',name:'75 Hard',origin:'Энди Фриселла',days:75,mode:'strict',color:'#F2EDE2',glyph:'■',
   rules:['Две тренировки в день, одна на улице','Диета без читмилов, без алкоголя','4 литра воды, 10 страниц, фото прогресса','Пропуск любого пункта — день 1 заново'],
   tactics:[['Тренировка 1 (45 мин)','check',{tod:'m'}],['Тренировка 2 на улице (45 мин)','check',{tod:'e'}],['Диета соблюдена, без алкоголя','check',{tod:'e'}],['4 литра воды','check',{tod:''}],['10 страниц нон-фикшн','check',{tod:'e'}],['Фото прогресса','check',{tod:'m'}]]},
- {id:'d30',name:'30 дней',origin:'Классика: месяц на одну привычку',days:30,mode:'count',color:'#5B2FBE',glyph:'◐',
+ {id:'arc',name:'Winter Arc',origin:'Тренд: «зима, когда ты меняешься»',fixed:['10-01','01-01'],mode:'score',color:'#5EE0EE',glyph:'◇',free:true,
+  rules:['С 1 октября до 1 января','Тело, дело, дисциплина — свои цели','Тот же недельный счёт 85%']},
+ {id:'m6',hidden:true,name:'Теория шести месяцев',origin:'Тренд: «за полгода можно изменить жизнь»',weeks:26,mode:'score',color:'#C4A4FF',glyph:'●',free:true,
+  rules:['26 недель, до трёх больших целей','Недельный счёт и итоги каждые 4 недели','Длинная дистанция: заморозки важнее']},
+ {id:'d30',hidden:true,name:'30 дней',origin:'Классика: месяц на одну привычку',days:30,mode:'count',color:'#5B2FBE',glyph:'◐',
   rules:['Одна привычка, 30 дней подряд','Считаются выполненные дни','Хорошо как первый шаг перед длинной программой'],
   tactics:[['Привычка дня','check',{tod:''}]]},
  {id:'own',hidden:true,name:'Своя программа',origin:'Любая длительность и правила',weeks:12,mode:'score',color:'#9B6FE8',glyph:'+',free:true,rules:['Срок, цели и тактики на твой выбор','Режим счёта: планка, строгий или копилка']}
@@ -820,7 +820,7 @@ vHome(){
   ${this.homeBoard(dp,pct,inS,w,sc,prog,fz)}`;
   if(inS&&this.mode==='strict'&&this.day===td&&this.dayFull(add(td,-1))===false&&this.dayIndex(td)>1)h+=`<div class="card small" style="border-color:rgba(196,164,255,.4)"><b>Вчера день не закрыт.</b> <span>По правилам программы счётчик начался заново: сегодня день 1.</span> <span>Сбросов за программу:</span> <span>${this.strictResets()}</span></div>`;
   if(!S.goals.length)h+=`<div class="card"><div class="lbl">Начало</div><div class="h2" style="margin-top:6px">Выбери программу</div>
-    <div class="small mut" style="margin-top:6px">12 недель, Winter Arc, 75 Hard, Теория шести месяцев — любая идёт на одном движке: цели, тактики, счёт недели и разбор. Привычки и задачи работают уже сейчас, без программы.</div>
+    <div class="small mut" style="margin-top:6px">12 недель, 75 Hard или Winter Arc — любая идёт на одном движке: цели, тактики, счёт недели и разбор. Привычки и задачи работают уже сейчас, без программы.</div>
     <button class="btn pr w" style="margin-top:14px" onclick="APP.startWizard()">Выбрать программу ${I.r}</button></div>`;
   else if(td<this.st)h+=`<div class="card small mut">Спринт начинается ${fd(this.st)}. Отмечать можно уже сейчас.</div>`;
   const ytop=((S.checkin||{})[add(this.day,-1)]||{}).top;
@@ -858,7 +858,7 @@ homeBoard(dp,pct,inS,w,sc,prog,fz){const td=today(),dd=pd(this.day),S=this.S,ci=
   const C=inS?`<div class="card hb3"><div class="row"><div class="sp"><div class="lbl">Программа</div><div class="pn">${esc(P?P.name:(S.sprint.title||'Программа'))}</div></div><button class="pill" onclick="APP.go('goals')">${I.r}</button></div>
     <div class="pd"><b>День ${di}</b><span>из ${this.sprintDays()}</span><span class="sp"></span><em>${Math.round(pp*100)}%</em></div><div class="wseg" style="--n:${this.W}">${Array.from({length:this.W},(_,i)=>{const k=i+1,cw=this.weekOf(td),s2=k<=cw?this.score(k):null,th=+S.sprint.threshold||85;return `<button title="Неделя ${k}${s2!=null?' · '+s2+'%':''}" onclick="APP.wk=${k};APP.go('week')" class="${k<cw?(s2!=null&&s2>=th?'ok':'past'):k===cw?'cur':''}"></button>`}).join('')}</div>
     <div class="kg"><div><b class="fl">${I.flame}${ds}</b><span>серия дней</span></div><div><b>${a30??'—'}${a30!=null?'%':''}</b><span>среднее 30 дн.</span></div><div><b>${c30}</b><span>закрытых дней</span></div><div><b>${this.mode==='strict'?this.strictRun():this.mode==='count'?this.countDays():(sc??'—')+(sc!=null?'%':'')}</b><span>${this.mode==='strict'?'подряд':this.mode==='count'?'в копилке':'счёт недели '+w}</span></div></div></div>`
-   :`<div class="card hb3"><div class="lbl">Программа</div><div class="pn">Не выбрана</div><div class="small mut" style="margin-top:6px">12 недель, Winter Arc, 75 Hard, шесть месяцев или 30 дней. Привычки и задачи работают и без программы.</div>
+   :`<div class="card hb3"><div class="lbl">Программа</div><div class="pn">Не выбрана</div><div class="small mut" style="margin-top:6px">12 недель, 75 Hard или Winter Arc. Привычки и задачи работают и без программы.</div>
     <div class="kg"><div><b class="fl">${I.flame}${ds}</b><span>серия дней</span></div><div><b>${a30??'—'}${a30!=null?'%':''}</b><span>среднее 30 дн.</span></div></div><button class="btn pr w" style="margin-top:14px" onclick="APP.startWizard()">Выбрать программу</button></div>`;
   return `<div class="dboard">${A}${B}${C}</div>`},
 setGroup(g){this.S.pref=this.S.pref||{};this.S.pref.group=g;this.save();this.render()},
