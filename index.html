@@ -843,6 +843,9 @@ input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(124,92,230,.25
 .rmsg{display:grid;gap:8px;text-align:center}.rmsg span{color:var(--dim);font-size:14px;margin-bottom:6px}
 .nws{display:grid;gap:4px;margin-top:8px}.nw{padding:14px 0;border-bottom:1px solid var(--line)}.nw:last-child{border:0}.nw span{font-size:12.5px;color:#9B7BFF;font-weight:600}.nw b{display:block;font-size:16px;margin:2px 0 4px}.nw p{margin:0;color:var(--dim);font-size:14px;line-height:1.5}
 .ios-st{display:grid;gap:10px}.ios-st div{display:flex;gap:12px;align-items:center;font-size:15px}.ios-st span{width:28px;height:28px;flex:none;border-radius:50%;display:grid;place-items:center;background:rgba(155,123,255,.18);color:#C9B8FF;font-weight:700;font-size:13px}.nbtn{margin-top:4px;background:#16161C;border:1px solid var(--line)}
+.akp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.ak{background:var(--card,#131318);border:1px solid var(--line);border-radius:16px;padding:14px}.ak span{display:block;font-size:12.5px;color:var(--dim)}.ak b{display:block;font-size:26px;margin:4px 0 2px}.ak em{font-style:normal;font-size:12px;color:#7EE6EE}
+.abars{padding:16px!important}.ab-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}.ab-h span,.ab-f{font-size:12px;color:var(--dim)}.ab{display:flex;align-items:flex-end;gap:3px;height:120px}.ab i{flex:1;background:linear-gradient(#22D3E0,rgba(34,211,224,.25));border-radius:4px 4px 1px 1px;position:relative;min-width:0}.ab s{position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--dim);text-decoration:none}.ab-f{display:flex;justify-content:space-between;margin-top:8px}
+@media(min-width:1024px){.akp{grid-template-columns:repeat(4,1fr);max-width:640px;margin-left:auto;margin-right:auto}.abars{max-width:640px;margin-left:auto!important;margin-right:auto!important}}
 .sc-cl{margin:-4px 4px 12px}
 @media(min-width:1024px){.nme,.ngrp,.nout,.sbk,.sttl{max-width:640px;margin-left:auto;margin-right:auto}.sttl{text-align:left;font-size:22px}}
 </style>
@@ -894,6 +897,7 @@ plug:f('<path d="M8 2v5H6v4a6 6 0 0 0 5 5.9V22h2v-5.1A6 6 0 0 0 18 11V7h-2V2h-2v
 star:f('<path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/>'),
 spark:f('<path d="M10 2l1.9 5.6L17.5 9.5l-5.6 1.9L10 17l-1.9-5.6L2.5 9.5l5.6-1.9zM18 13l1 2.9 3 1.1-3 1.1-1 2.9-1-2.9-3-1.1 3-1.1z"/>'),
 doc:f('<path d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 1.5V9h5.5zM8 13v2h8v-2zm0 4v2h6v-2z" fill-rule="evenodd"/>'),
+chart:f('<path d="M4 20h17v2H2V3h2zm2-3V11h3v6zm5 0V6h3v11zm5 0v-8h3v8z"/>'),
 medal:f('<path d="M7 2h4l1 4 1-4h4l-3 7.2A6 6 0 1 1 10 9.2zM12 11a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>')}})();
 const I={
   dash:sv('<rect x="3" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.8"/>',22),
@@ -1002,7 +1006,7 @@ sb:null,user:null,cloud:'off',
 fresh(){return {v:2,profile:{name:''},sprint:{title:'12 недель',start:nextMonday(),weeks:12,threshold:85,vision:'',partner:''},goals:[],tactics:[],habits:[],log:{},hlog:{},lt:{},weeks:{},deals:[],del:[],archive:[],skip:{},checkin:{},pref:{group:'tod'},tasks:[],t:0}},
 norm(s){const f=this.fresh();for(const k in f)if(s[k]==null)s[k]=f[k];return s},
 load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.sprint)return this.norm(s)}catch(e){}return this.fresh()},
-save(){this._tix=Object.fromEntries(this.S.tactics.map(t=>[t.id,t]));this.S.t=Date.now();try{localStorage.setItem(KEY,JSON.stringify(this.S))}catch(e){}
+save(){this._tix=Object.fromEntries(this.S.tactics.map(t=>[t.id,t]));this.S.t=Date.now();this.trackMarks();try{localStorage.setItem(KEY,JSON.stringify(this.S))}catch(e){}
   if(this.user){clearTimeout(this._pt);this._pt=setTimeout(()=>this.push(),1200)}},
 toast(m,undo){const t=$('toast');t.innerHTML=esc(m)+(undo?` <button class="tundo" onclick="APP.undo()">Отменить</button>`:'');this.tr(t);t.classList.toggle('act',!!undo);t.classList.add('on');clearTimeout(this._tt);this._tt=setTimeout(()=>t.classList.remove('on'),undo?4500:2000)},
 snap(){const S=this.S;this._snap={log:JSON.stringify(S.log),hlog:JSON.stringify(S.hlog),skip:JSON.stringify(S.skip||{}),tasks:JSON.stringify(S.tasks||[]),lt:JSON.stringify(S.lt||{})}},
@@ -1022,8 +1026,9 @@ init(){
   this.render();
   this.initAuth();
   this.initMobile();
+  setTimeout(()=>this.track('open',{pwa:this.isStandalone(),tab:this.tab},'day'),2500);
   window.addEventListener('hashchange',()=>{const t=new URLSearchParams(location.hash.slice(1)).get('tpl');if(t){history.replaceState(null,'',location.pathname);this.applyTpl(t)}});
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden){if(this.user)this.pull();if(this.tm)this.tmTick()}});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){this.track('open',{pwa:this.isStandalone()},'day');if(this.user)this.pull();if(this.tm)this.tmTick()}});
 },
 TOD:{m:'Утро',d:'День',e:'Вечер','':'В любое время'},
 buzz(ms){try{if((this.S.pref||{}).haptics===false)return;if(navigator.vibrate&&(!navigator.userActivation||navigator.userActivation.hasBeenActive))navigator.vibrate(ms||12)}catch(e){}},
@@ -2212,7 +2217,13 @@ vMe(){
     row(ic('list','#9A9AAE'),'Условия использования','',"window.open('./legal/terms.html'+(APP.lang()==='en'?'#en':''),'_blank')")]);
   const pdata=pages.data;pages.data=()=>pdata()+`<div class="sdanger"><button class="srow warn" onclick="APP.wipe()"><div class="sp">Начать с нуля</div></button>${this.user?`<button class="srow warn" onclick="APP.deleteMe()"><div class="sp">Удалить аккаунт</div></button>`:''}</div>`;
   pages.lang=()=>`<div class="card sgrp">${[['ru','Русский'],['en','English']].map(([k,n])=>`<button class="srow" onclick="APP.setLang('${k}');APP._sset='lang';APP.render()"><div class="sp"><div>${n}</div></div>${lang===k?`<span class="lck">${I.ok}</span>`:''}</button>`).join('')}</div>`;
-  const TT={integ:'Интеграции',legal:'Правовое',lang:'Язык',account:'Аккаунт',premium:'Полный доступ',program:'Программа',day:'День и неделя',notif:'Уведомления',look:'Оформление',data:'Данные и приватность',help:'Помощь и обратная связь'};
+  pages.stats=()=>{const m=this._adm||{},dl=m.daily||[],mx=Math.max(1,...dl.map(x=>x.dau)),pc=(a,b)=>b?Math.round(100*a/b)+'%':'—';
+    const k=(t,v,s)=>`<div class="ak"><span>${t}</span><b>${v==null?'—':v}</b>${s?`<em>${s}</em>`:''}</div>`;
+    return `<div class="akp">${k('Устройства',m.devices,'всего открывали')}${k('Аккаунты',m.users,pc(m.users,m.devices)+' от устройств')}${k('Первая отметка',m.activated,pc(m.activated,m.devices)+' активация')}${k('Пуши',m.push,'подписок')}${k('Возврат на 2-й день',m.d1==null?null:m.d1+'%',m.c1?'из '+m.c1+' устройств':'мало данных')}${k('Возврат через неделю',m.d7==null?null:m.d7+'%',m.c7?'из '+m.c7+' устройств':'мало данных')}${k('Видели оплату',m.pw_view,'')}${k('Нажали купить',m.pw_click,pc(m.pw_click,m.pw_view))}</div>
+    <div class="card abars"><div class="ab-h"><b>Активные за 30 дней</b><span>в день</span></div><div class="ab">${dl.map(x=>`<i style="height:${Math.max(3,x.dau/mx*100)}%" title="${x.d}: ${x.dau}"></i>`).join('')}</div><div class="ab-f"><span>${dl[0]?fd(dl[0].d):''}</span><span>сегодня</span></div></div>
+    <button class="btn w nbtn" onclick="APP.loadStats().then(()=>APP.toast('Обновлено'))">Обновить</button>
+    <div class="small mut" style="text-align:center;margin-top:10px">Видишь только ты. Считаются события без содержания записей.</div>`};
+  const TT={stats:'Аналитика',integ:'Интеграции',legal:'Правовое',lang:'Язык',account:'Аккаунт',premium:'Полный доступ',program:'Программа',day:'День и неделя',notif:'Уведомления',look:'Оформление',data:'Данные и приватность',help:'Помощь и обратная связь'};
   const cur=this._sset&&pages[this._sset]?this._sset:null;
   if(cur){h+=`<div class="sbk"><button class="sbk-b" onclick="APP._sset=null;APP.render();window.scrollTo(0,0)" aria-label="Назад">${I.l}</button><b>${TT[cur]}</b><span></span></div>`+pages[cur]().replace(/<div class="lbl sec">[^<]*<\/div>/,'');return h}
   const go=k=>`APP._sset='${k}';APP.render();window.scrollTo(0,0)`;
@@ -2220,6 +2231,7 @@ vMe(){
   const grp=rows=>`<div class="card ngrp">${rows.join('')}</div>`;
   if(this.user){const Pp=S.profile||{},av=Pp.ava&&Pp.ava!=='shark'?hIco(Pp.ava):SHARK,R=this.rpgData(),na=R.ach.filter(x=>x[2]).length;
     h+=`<button class="nme" onclick="APP.go('profile')"><span class="nme-av">${av}</span><span class="sp"><b>${esc(Pp.name||Pp.hero||'Без имени')}</b><span class="nme-ch"><em class="lv">Ур. ${R.lvl}</em><em class="ac">${SI.medal}${na} ${this.pl(na,'достижение','достижения','достижений')}</em></span></span>${I.r}</button>`}
+  if(this._adm)h+=grp([nr('chart','#22D3E0','Аналитика',(this._adm.users||0)+' акк.',go('stats'))]);
   h+=grp([nr('crown','#F5B84B','Полный доступ','скоро',go('premium'))]);
   h+=grp([nr('target','#9B7BFF','Программа',P?esc(P.name):'',go('program')),nr('cal','#9B7BFF','День и неделя','',go('day')),nr('bell','#9B7BFF','Уведомления','',go('notif')),nr('globe','#9B7BFF','Язык',lang==='en'?'English':'Русский',go('lang')),nr('brush','#9B7BFF','Оформление','',go('look'))]);
   h+=grp([...(this.user?[nr('user','#22D3E0','Аккаунт','',go('account'))]:[]),nr('lock','#22D3E0','Данные и приватность','',go('data')),nr('plug','#22D3E0','Интеграции','',go('integ'))]);
@@ -2231,10 +2243,10 @@ vMe(){
 },
 setPref(k,v){this.S.pref=this.S.pref||{};this.S.pref[k]=v;this.save();this.render()},
 vacOn(){const v=((this.S.pref||{}).vacs||[]).slice(-1)[0];return v&&!v.to?v:null},
-toggleVac(){const P=this.S.pref=this.S.pref||{};P.vacs=P.vacs||[];const v=this.vacOn(),td=today();if(v){v.to=add(td,-1);if(v.to<v.from)P.vacs.pop();this.toast('С возвращением! Отпуск выключен',true)}else{P.vacs.push({from:td,to:null});this.toast('Отпуск включён: серии не рвутся',true)}this.save();this.render()},
+toggleVac(){const P=this.S.pref=this.S.pref||{};P.vacs=P.vacs||[];const v=this.vacOn(),td=today();if(v){v.to=add(td,-1);if(v.to<v.from)P.vacs.pop();this.toast('С возвращением! Отпуск выключен')}else{P.vacs.push({from:td,to:null});this.toast('Отпуск включён: серии не рвутся')}this.save();this.render()},
 hashPin(x){let h=5381;for(const c of String(x))h=((h<<5)+h+c.charCodeAt(0))|0;return 'p'+(h>>>0).toString(36)},
-pinSet(){const a=prompt('Придумай код из 4 цифр');if(!a)return;if(!/^\d{4}$/.test(a))return this.toast('Нужно 4 цифры');const b=prompt('Повтори код');if(a!==b)return this.toast('Коды не совпали');this.setPref('pin',this.hashPin(a));try{sessionStorage.setItem('tw-unlock','1')}catch(e){}this.toast('Код установлен',true)},
-pinOff(){const a=prompt('Введи текущий код');if(a==null)return;if(this.hashPin(a)!==(this.S.pref||{}).pin)return this.toast('Неверный код');this.setPref('pin',null);this.toast('Код выключен',true)},
+pinSet(){const a=prompt('Придумай код из 4 цифр');if(!a)return;if(!/^\d{4}$/.test(a))return this.toast('Нужно 4 цифры');const b=prompt('Повтори код');if(a!==b)return this.toast('Коды не совпали');this.setPref('pin',this.hashPin(a));try{sessionStorage.setItem('tw-unlock','1')}catch(e){}this.toast('Код установлен')},
+pinOff(){const a=prompt('Введи текущий код');if(a==null)return;if(this.hashPin(a)!==(this.S.pref||{}).pin)return this.toast('Неверный код');this.setPref('pin',null);this.toast('Код выключен')},
 vLock(){return `<div class="lock"><span class="au-mark">${SHARK}</span><div class="au-t">Введи код</div><input id="pinIn" class="pinin" type="password" inputmode="numeric" maxlength="4" autocomplete="off" oninput="if(this.value.length===4)APP.unlock(this.value)"><div class="small" id="pinMsg" style="color:var(--pb);margin-top:10px"></div><button class="au-fg" onclick="APP.pinForgot()">Забыли код?</button></div>`},
 unlock(v){if(this.hashPin(v)===(this.S.pref||{}).pin){try{sessionStorage.setItem('tw-unlock','1')}catch(e){}this._unl=1;this.render()}else{const m=$('pinMsg');if(m)m.textContent='Неверный код';const i=$('pinIn');if(i)i.value=''}},
 pinForgot(){if(!confirm('Сбросить код? Данные останутся. Чтобы защитить их снова, поставь новый код в настройках.'))return;this.S.pref.pin=null;this.save();this._unl=1;this.render()},
@@ -2273,6 +2285,11 @@ rate(n){this.S.pref=this.S.pref||{};this.S.pref.rate=n;this.save();document.quer
 newsSheet(){const N=[['Октябрь 2026','Новые настройки','Профиль сверху, разделы по группам, язык и интеграции на виду. Политика конфиденциальности и условия.'],['Октябрь 2026','Трекер привычек','Таблица на месяц, отметки в одно касание, серии и рекорды. Трекер работает без программы.'],['Октябрь 2026','Профиль героя','Уровень, характеристики и достижения растут от каждой отметки.'],['Октябрь 2026','Прогресс','Колесо баланса и год в пикселях.']];
   this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Что нового</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="nws">${N.map(x=>`<div class="nw"><span>${x[0]}</span><b>${x[1]}</b><p>${x[2]}</p></div>`).join('')}</div>`)},
+async loadStats(){try{const{data,error}=await this.sb.rpc('tw_metrics',{days:30});if(!error&&data){this._adm=data;if(this.tab==='me')this.render()}}catch(e){}},
+did(){try{let d=localStorage.getItem('tw-did');if(!d){d=(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36)).replace(/-/g,'').slice(0,24);localStorage.setItem('tw-did',d)}return d}catch(e){return 'nodevice0'}},
+track(ev,props,once){try{if(!this.sb||location.hostname==='localhost')return;const k='tw-ev-'+ev+(once==='day'?'-'+today():'');if(once){if(localStorage.getItem(k))return;localStorage.setItem(k,'1')}
+  this.sb.from('tw_events').insert({did:this.did(),uid:this.user?this.user.id:null,ev,props:props||{},d:today()}).then(()=>{},()=>{})}catch(e){}},
+trackMarks(){if(this._fmk)return;const S=this.S,has=o=>Object.values(o||{}).some(x=>x&&Object.keys(x).length);if(has(S.hlog)||has(S.log)){this._fmk=1;this.track('first_mark',null,'ever')}},
 VAPID:'BDAUrTsDVqNLfDpt0giGnSTzxis_9Rq393FySipLm5Za0yTPZUvxyUgAo8yn8tQvPalCzZTD8uj2hdj4Pn4IA_k',
 pushPrefs(){const P=(this.S.pref||{}).push||{};return{morning:P.morning===undefined?'07:30':P.morning,evening:P.evening===undefined?'21:00':P.evening,review:P.review!==false,wheel:P.wheel!==false}},
 pushSupported(){return 'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window},
@@ -2288,13 +2305,13 @@ async pushOn(){
     const reg=await navigator.serviceWorker.ready;let sub=await reg.pushManager.getSubscription();
     if(!sub){const b=this.VAPID.replace(/-/g,'+').replace(/_/g,'/'),raw=atob(b+'='.repeat((4-b.length%4)%4)),key=Uint8Array.from(raw,c=>c.charCodeAt(0));sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:key})}
     const{error}=await this.sb.from('tw_push').upsert(await this.pushRow(sub),{onConflict:'endpoint'});if(error)throw error;
-    this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPrefs(),on:true};this.save();this._pushOn=true;this.pushSum(true);this.render();this.toast('Уведомления включены',true)
+    this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPrefs(),on:true};this.save();this._pushOn=true;this.pushSum(true);this.track('push_on',null,'ever');this.render();this.toast('Уведомления включены')
   }catch(e){this.toast('Не получилось включить: '+this.errText(e))}},
 async pushOff(){try{const sub=await this.pushSub();if(sub){await this.sb.from('tw_push').delete().eq('endpoint',sub.endpoint);await sub.unsubscribe()}}catch(e){}
   this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPrefs(),on:false};this.save();this._pushOn=false;this.render();this.toast('Уведомления выключены')},
 async pushSet(k,v){this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPrefs(),on:!!this._pushOn,[k]:v};this.save();this.render();
   const sub=await this.pushSub();if(sub&&this.user)await this.sb.from('tw_push').update({prefs:this.pushPrefs(),lang:this.lang(),tz:Intl.DateTimeFormat().resolvedOptions().timeZone,updated_at:new Date().toISOString()}).eq('endpoint',sub.endpoint)},
-async pushTest(){try{const{data,error}=await this.sb.functions.invoke('tw-push',{body:{test:true}});if(error)throw error;const ok=(data.sent||[]).filter(x=>x>=200&&x<300).length;this.toast(ok?'Отправили. Уведомление придёт через пару секунд':'Не дошло. Выключи и включи уведомления заново',!!ok)}catch(e){this.toast('Ошибка: '+this.errText(e))}},
+async pushTest(){try{const{data,error}=await this.sb.functions.invoke('tw-push',{body:{test:true}});if(error)throw error;const ok=(data.sent||[]).filter(x=>x>=200&&x<300).length;this.toast(ok?'Отправили. Уведомление придёт через пару секунд':'Не дошло. Выключи и включи уведомления заново')}catch(e){this.toast('Ошибка: '+this.errText(e))}},
 async pushSum(force){if(!this.user||!this.sb||!this._pushOn)return;const td=today(),a=this.dayAll(td),sm={date:td,n:a.n-a.done,st:this.dayStreak()},k=JSON.stringify(sm);if(!force&&k===this._pSum)return;this._pSum=k;
   try{await this.sb.from('tw_push').update({sum:sm}).eq('user_id',this.user.id)}catch(e){}},
 async pushCheck(){const sub=this.pushSupported()?await this.pushSub():null,on=!!sub&&Notification.permission==='granted';if(on!==this._pushOn){this._pushOn=on;if(this.tab==='me')this.render()}},
@@ -2340,7 +2357,7 @@ initAuth(){
   this.sb=supabase.createClient(CFG.url,CFG.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'tw-auth'}});
   this.sb.auth.onAuthStateChange((ev,ses)=>{
     if(ev==='PASSWORD_RECOVERY'){this._am='reset';this._amsg='Придумай новый пароль';this.user=null;this.go('me');return}
-    const u=ses&&ses.user;const was=this.user&&this.user.id;this.user=u||null;if(this.user)this.pushCheck();
+    const u=ses&&ses.user;const was=this.user&&this.user.id;this.user=u||null;if(this.user){this.pushCheck();this.loadStats()}
     if(u&&u.id!==was){if(!this.S.profile.name&&u.user_metadata&&u.user_metadata.name)this.S.profile.name=u.user_metadata.name;this.pull(true);this.grpLoad()}if(!u){this.groups=[];this.boards={}}
     if(!u&&was){this.cloud='off'}
     this.render()});
@@ -2364,6 +2381,7 @@ async auth(mode){
     if(mode==='link'){const{error}=await this.sb.auth.signInWithOtp({email:e,options:{emailRedirectTo:location.origin+location.pathname}});if(error)throw error;return this.msg('Письмо отправлено. Открой ссылку из него на этом устройстве.')}
     if(mode==='up'){if(p.length<8)return this.msg('Пароль не короче 8 символов');const n=($('aN')||{}).value||'';if(n)this.S.profile.name=n.trim();this.save();
       const{data,error}=await this.sb.auth.signUp({email:e,password:p,options:{data:{name:n.trim()},emailRedirectTo:location.origin+location.pathname}});if(error)throw error;
+      this.track('signup',{lang:this.lang()},'ever');
       if(!data.session)this.msg('Готово. Подтверди почту по ссылке из письма и войди.')}
     else{const{error}=await this.sb.auth.signInWithPassword({email:e,password:p});if(error)throw error;this._amsg=''}
   }catch(err){this.msg(this.errText(err))}
