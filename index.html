@@ -997,6 +997,10 @@ body.wlc .wl-s,body.wlc .wl-f span{color:rgba(225,240,250,.82)}
 .st-own{font-size:14px;color:var(--dim);padding:8px;text-decoration:underline;text-underline-offset:3px}
 .st-empty{display:grid;gap:10px;text-align:center;padding:26px 20px!important}.st-empty b{font-size:19px}.st-empty span{color:var(--dim);font-size:14.5px}
 body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,0,.9)}body.wlc .stw .st-t{text-shadow:0 2px 16px rgba(0,0,0,.7)}body.wlc .st-i{background:rgba(6,12,22,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.mgc.part{background:conic-gradient(var(--c,#5EE0EE) calc(var(--f)*1turn),rgba(255,255,255,.08) 0)!important;-webkit-mask:radial-gradient(circle,transparent 55%,#000 57%);mask:radial-gradient(circle,transparent 55%,#000 57%);box-shadow:none!important}
+.mgc.part.td{outline:2px solid var(--pb);outline-offset:2px}
+.hcal .mgc.part{-webkit-mask:radial-gradient(circle,transparent 60%,#000 62%);mask:radial-gradient(circle,transparent 60%,#000 62%)}
+.mgc.on svg{filter:drop-shadow(0 1px 1px rgba(255,255,255,.4))}
 </style>
 </head>
 <body>
@@ -2082,8 +2086,9 @@ monthGrid(hs,tt){
   const days=[];for(let i=1;i<=n;i++)days.push(y+'-'+pad(mo)+'-'+pad(i));
   const cell=(r,d,num)=>{const[f,sch]=r.k==='h'?this.hFns(r.o):this.tFns(r.o);const fut=d>td,on=f(d),sc=sch(d),fz=this.frozen(d);
     const tog=r.k==='h'?`APP.hAsk('${r.o.id}','${d}')`:`APP.tHabitToggle('${r.o.id}','${d}')`;const kk=r.k==='h'?(r.o.kind||'check'):'check';const vv=r.k==='h'&&kk!=='check'?this.hVal(r.o,d):0;
-    const inner=kk==='check'?(on?I.ok2:(num?`<s>${pd(d).getDate()}</s>`:'')):(vv?`<i>${vv>=1000?Math.round(vv/1000)+'k':vv}</i>`:(num?`<s>${pd(d).getDate()}</s>`:''));
-    return `<button class="mgc ${on?'on':''} ${fz&&!on?'fz':''} ${!sc&&!on&&!fz?'x':''} ${d===td?'td':''} ${vv&&!on?'part':''} ${fut?'fut':''}" ${fut||r.k==='t'&&d<this.st?'disabled':`onclick="${tog}"`}>${inner}</button>`};
+    const tg=+r.o.target||0,fr=vv&&!on?(kk==='scale'?1:tg?Math.min(.95,Math.max(.12,vv/tg)):.5):0,ttl=vv?` title="${vv}${r.o.unit?' '+esc(r.o.unit):''}${tg&&kk!=='scale'?' из '+tg:''}"`:'';
+    const inner=on?I.ok2:(vv?'':(num?`<s>${pd(d).getDate()}</s>`:''));
+    return `<button class="mgc ${on?'on':''} ${fz&&!on?'fz':''} ${!sc&&!on&&!fz?'x':''} ${d===td?'td':''} ${fr?'part':''} ${fut?'fut':''}"${fr?` style="--f:${fr.toFixed(2)}"`:''}${ttl} ${fut||r.k==='t'&&d<this.st?'disabled':`onclick="${tog}"`}>${inner}</button>`};
   const stats=r=>{const[f2,s2,fr2]=r.k==='h'?this.hFns(r.o):this.tFns(r.o);const rt=this.rate(f2,s2,fr2,30);return `<b>${rt==null?'—':rt+'%'}</b><span class="fl">${I.flame}${this.streak(f2,s2,fr2)}</span><span class="st">${I.star}${this.best(f2,s2,fr2)}</span>`};
   const edit=r=>r.k==='h'?`APP.editH('${r.o.id}')`:`APP.editT('${r.o.id}')`;
   const addForm=`${this.qaBox('h','APP.hQuick(this.q.value)','Название привычки')}`;
