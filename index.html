@@ -1120,7 +1120,7 @@ S:null,tab:'home',sub:null,day:today(),wk:null,
 sb:null,user:null,cloud:'off',
 
 fresh(){return {v:2,profile:{name:''},sprint:{title:'12 недель',start:nextMonday(),weeks:12,threshold:85,vision:'',partner:''},goals:[],tactics:[],habits:[],log:{},hlog:{},lt:{},weeks:{},deals:[],del:[],archive:[],skip:{},checkin:{},pref:{group:'tod'},tasks:[],t:0}},
-norm(s){const f=this.fresh();for(const k in f)if(s[k]==null)s[k]=f[k];const AM={travel:'fun',comm:'rel'};(s.goals||[]).forEach(g=>{if(AM[g.area])g.area=AM[g.area]});(s.archive||[]).forEach(x=>(x.goals||[]).forEach(g=>{if(AM[g.area])g.area=AM[g.area]}));return s},
+norm(s){const f=this.fresh();for(const k in f)if(s[k]==null)s[k]=f[k];const HL=s.hlog||{};(s.habits||[]).forEach(h=>{for(const d in HL){const v=HL[d]&&HL[d][h.id];if(v&&(!h.created||d<h.created))h.created=d}});const AM={travel:'fun',comm:'rel'};(s.goals||[]).forEach(g=>{if(AM[g.area])g.area=AM[g.area]});(s.archive||[]).forEach(x=>(x.goals||[]).forEach(g=>{if(AM[g.area])g.area=AM[g.area]}));return s},
 load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.sprint)return this.norm(s)}catch(e){}return this.fresh()},
 save(){this._tix=Object.fromEntries(this.S.tactics.map(t=>[t.id,t]));this.S.t=Date.now();this.trackMarks();try{localStorage.setItem(KEY,JSON.stringify(this.S))}catch(e){}
   if(this.user){clearTimeout(this._pt);this._pt=setTimeout(()=>this.push(),1200)}},
@@ -1403,7 +1403,7 @@ toggleMs(tid,d){const t=this.S.tactics.find(x=>x.id===tid);
 /* ---------- привычки ---------- */
 hVal(h,d){const v=(this.S.hlog[d]||{})[h.id];return v===true?1:+v||0},
 hOn(h,d){const k=h.kind||'check';const v=(this.S.hlog[d]||{})[h.id];if(k==='check')return !!v;const n=+v||0;if(k==='scale')return n>0;return h.target>0?n>=+h.target:n>0},
-hSet(id,d,val){if(d>today())return;const h=this.S.habits.find(x=>x.id===id);if(!h)return;const el=this._lastEl();this.snap();const L=this.S.hlog;this.stamp('H|'+d+'|'+id);L[d]=L[d]||{};const was=this.hOn(h,d);val=Math.max(0,+val||0);if(h.kind==='scale')val=Math.min(5,Math.round(val));if(val>0)L[d][id]=val;else delete L[d][id];if(!Object.keys(L[d]).length)delete L[d];const now=this.hOn(h,d);if(now&&!was){this.buzz(12);this._pop=id;this.burst(el)}this.save();this.render();if(this._hcal)this.hCal(id);else if(now&&!was){this.toast('Отмечено',true);this.dayParty(d)}},
+hSet(id,d,val){if(d>today())return;const h=this.S.habits.find(x=>x.id===id);if(!h)return;if(h.created&&d<h.created&&+val)h.created=d;const el=this._lastEl();this.snap();const L=this.S.hlog;this.stamp('H|'+d+'|'+id);L[d]=L[d]||{};const was=this.hOn(h,d);val=Math.max(0,+val||0);if(h.kind==='scale')val=Math.min(5,Math.round(val));if(val>0)L[d][id]=val;else delete L[d][id];if(!Object.keys(L[d]).length)delete L[d];const now=this.hOn(h,d);if(now&&!was){this.buzz(12);this._pop=id;this.burst(el)}this.save();this.render();if(this._hcal)this.hCal(id);else if(now&&!was){this.toast('Отмечено',true);this.dayParty(d)}},
 hInc(id,d,delta){const h=this.S.habits.find(x=>x.id===id);if(!h)return;this.hSet(id,d,Math.round((this.hVal(h,d)+delta)*100)/100)},
 hAsk(id,d){const h=this.S.habits.find(x=>x.id===id);if(!h||d>today())return;const v=this.hVal(h,d),k=h.kind||'check';if(k==='check')return this.hToggle(id,d);
   this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">${esc(h.title)}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="small mut" style="margin-top:4px">${fd(d)}${h.target?` · цель ${h.target} ${esc(h.unit||(k==='time'?'мин':''))}`:''}</div>
@@ -1412,7 +1412,7 @@ hAsk(id,d){const h=this.S.habits.find(x=>x.id===id);if(!h||d>today())return;cons
    <div class="row" style="margin-top:10px;gap:8px">${[1,2,4].map(n=>`<button class="btn sp" onclick="$('hv').value=Math.round(((+$('hv').value||0)+${n*(+h.step||1)})*100)/100">+${n*(+h.step||1)}</button>`).join('')}</div>
    <button class="btn pr w" style="margin-top:14px" onclick="APP.close();APP.hSet('${id}','${d}',$('hv').value.replace(',','.'))">Сохранить</button>`}`);setTimeout(()=>$('hv')&&$('hv').focus(),50)},
 hSched(h,d){return d>=h.created&&(h.days||[]).includes(pd(d).getDay())&&!this.skipped(h.id,d)},
-hToggle(id,d){if(d>today())return;const el=this._lastEl();this.snap();const L=this.S.hlog;this.stamp('H|'+d+'|'+id);L[d]=L[d]||{};if(L[d][id])delete L[d][id];else{L[d][id]=true;this.buzz(12);this._pop=id;this.burst(el)}if(!Object.keys(L[d]).length)delete L[d];this.save();this.render();if(this._hcal)this.hCal(id);else if(L[d]&&L[d][id]){this.toast('Отмечено',true);this.dayParty(d)}},
+hToggle(id,d){if(d>today())return;{const h=this.S.habits.find(x=>x.id===id);if(h&&h.created&&d<h.created)h.created=d}const el=this._lastEl();this.snap();const L=this.S.hlog;this.stamp('H|'+d+'|'+id);L[d]=L[d]||{};if(L[d][id])delete L[d][id];else{L[d][id]=true;this.buzz(12);this._pop=id;this.burst(el)}if(!Object.keys(L[d]).length)delete L[d];this.save();this.render();if(this._hcal)this.hCal(id);else if(L[d]&&L[d][id]){this.toast('Отмечено',true);this.dayParty(d)}},
 /* универсальная серия: fn(d) — выполнено ли, sch(d) — запланировано ли */
 streak(fn,sch,from){let d=today(),n=0,lim=400;if(!fn(d))d=add(d,-1);
   while(lim--&&d>=from){if(sch(d)){if(fn(d))n++;else break}d=add(d,-1)}return n},
