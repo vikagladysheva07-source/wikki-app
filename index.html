@@ -975,6 +975,10 @@ body.wlc .wl-s,body.wlc .wl-f span{color:rgba(225,240,250,.82)}
 .qml{display:grid;gap:8px;margin-top:12px}.qml button{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--tx);font-size:15px;text-align:left}.qml button span{color:#C9B8FF;display:grid}.qml svg{width:20px;height:20px}
 .dz-s2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 10px}.dz-s2 div{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line)}.dz-s2 b{display:block;font-size:30px;font-weight:800}.dz-s2 span{font-size:12px;color:var(--dim)}
 .ptr{display:flex;align-items:center;gap:12px;padding:8px 0}.pta{width:36px;height:36px;flex:none;border-radius:50%;display:grid;place-items:center;font-weight:800;background:rgba(94,224,238,.15);color:#7EE6EE}.pta.me{background:rgba(155,123,255,.2);color:#C9B8FF}.ptr-h{display:flex;justify-content:space-between;margin-bottom:6px}.ptr-h span{font-weight:800}
+.dz-banS{min-height:0!important;padding:14px!important}.dz-banS .dz-pr{background:rgba(2,8,16,.45)}
+.pgml{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;color:var(--dim);margin:0 2px 4px}.pgml svg{width:14px;height:14px}
+.gc2-more{font-size:13px;color:#C9B8FF!important}.gc2-f{align-items:center}
+@media(max-width:400px){.pseg3 button{font-size:13px;padding-left:4px;padding-right:4px}}
 </style>
 </head>
 <body>
@@ -1211,7 +1215,7 @@ qMenu(){const it=[['Дело на сегодня','list',"APP.close();APP.ask('�
 partnerW(){const head=`<div class="dz-ch"><span class="dz-ti">${I.chat||''}Партнёр</span></div>`;
   if(!this.user)return `<div class="card dz-c dz-pt">${head}<div class="dz-pw0t">Войди в аккаунт, чтобы видеть прогресс друг друга.</div><button class="pill" onclick="APP.go('me')">Войти ${I.r}</button></div>`;
   const g=(this.groups||[])[0],m0=this.monday(today());
-  if(!g)return `<div class="card dz-c dz-pt">${head}<div class="dz-pw0t">Позови одного человека: вы видите процент недели друг друга. Когда о прогрессе знает кто-то ещё, цели достигаются чаще (Harkin, 2016).</div><div class="pg-act"><button class="btn pr sm" onclick="APP.ptCreate()">Позвать партнёра</button><button class="pill" onclick="APP.ptJoin()">У меня есть код</button></div></div>`;
+  if(!g)return `<div class="card dz-c dz-pt">${head}<div class="dz-pw0t">Позови одного человека: вы видите процент недели друг друга и держите друг друга в тонусе.</div><div class="pg-act"><button class="btn pr sm" onclick="APP.ptCreate()">Позвать партнёра</button><button class="pill" onclick="APP.ptJoin()">У меня есть код</button></div></div>`;
   const b=this.boards[g.code]||{members:[]},ms=(b.members||[]).slice().sort((a,c)=>(c.id===this.user.id)-(a.id===this.user.id));
   const rows=ms.map(x=>{const s=(x.scores||{})[m0]||{},v=s.score,me=x.id===this.user.id,nm=me?'Ты':(x.name||'Партнёр');return `<div class="ptr"><span class="pta ${me?'me':''}">${esc(nm.charAt(0).toUpperCase())}</span><div class="sp"><div class="ptr-h"><b>${esc(nm)}</b><span>${v!=null?v+'%':'—'}</span></div><div class="pex-bar"><i style="width:${v||0}%"></i></div></div></div>`}).join('');
   return `<div class="card dz-c dz-pt">${head}<div class="small mut" style="margin:-4px 0 10px">Процент этой недели</div>${rows}${ms.length<2?`<div class="pg-note">Пока никто не присоединился. Код: <b style="color:#7EE6EE;letter-spacing:.12em">${esc(g.code)}</b></div><button class="pill" style="margin-top:10px" onclick="APP.ptInvite('${g.code}')">Отправить приглашение ${I.r}</button>`:''}</div>`},
@@ -1223,7 +1227,7 @@ pgFrom(){return this.inPrg()?this.st:add(today(),-89)},
 pgFromTxt(){return this.inPrg()?'за программу':'за 90 дней'},
 dTxt(d){return d===today()?'сегодня':d===add(today(),-1)?'вчера':fd(d)},
 /* 4.1 исполнение по неделям */
-execData(){const S=this.S,td=today(),inP=this.inPrg();
+execData(){const S=this.S,td=today(),inP=false;
   if(inP){const W=this.W,cw=Math.min(Math.max(this.curWeek(),1),W),th=+S.sprint.threshold||85;
     const weeks=Array.from({length:W},(_,k)=>{const i=k+1;return {i,lab:String(i),v:i<=cw?this.score(i):null,cur:i===cw}});
     const ts=S.tactics.filter(t=>this.activeIn(t,cw)),dn=ts.filter(t=>this.wDone(t,cw)).length,need=Math.ceil(th/100*ts.length)-dn;
@@ -1235,7 +1239,7 @@ execData(){const S=this.S,td=today(),inP=this.inPrg();
   const left=Math.max(0,Math.ceil(th/100*n)-dn);return {inP,th,weeks,cur,left,unit:this.pl(left,'отметка','отметки','отметок')}},
 pgExec(){const x=this.execData(),vals=x.weeks.filter(w=>w.v!=null&&!w.cur),avg=vals.length?Math.round(vals.reduce((a,w)=>a+w.v,0)/vals.length):null,inz=vals.filter(w=>w.v>=x.th).length;
   const bars=x.weeks.map(w=>`<button class="pex-b ${w.cur?'cur':''}" onclick="APP.pgWeek('${w.i}')"><b>${w.v==null?'':w.v}</b><span><i class="${w.v!=null&&w.v>=x.th?'ok':''}" style="height:${w.v==null?0:Math.max(3,w.v)}%"></i></span><em>${w.lab}</em></button>`).join('');
-  return `<div class="card pg-s" id="pg-exec"><div class="pg-sh"><b>Исполнение по неделям</b><span>${x.inP?'программа · планка '+x.th+'%':'дела и привычки · цель '+x.th+'%'}</span></div>
+  return `<div class="card pg-s" id="pg-exec"><div class="pg-sh"><b>Исполнение по неделям</b><span>${x.inP?'':'все дела и привычки · цель '+x.th+'%'}</span></div>
   <div class="pex-top"><div class="pex-n">${x.cur??'—'}<small>${x.cur!=null?'%':''}</small></div><div class="sp"><div class="pex-l">${x.cur!=null&&x.cur>=x.th?'Неделя в зоне победы':x.left?`Ещё ${x.left} ${x.unit} до ${x.th}%`:'Начни неделю с первой отметки'}</div><div class="pex-bar"><i style="width:${Math.min(100,(x.cur||0)/x.th*100)}%"></i></div></div></div>
   <div class="pex" style="--n:${x.weeks.length}">${bars}</div>
   <div class="pg-note">${avg!=null?`В среднем ${avg}% · недель в зоне: ${inz} из ${vals.length}. `:''}Нажми на неделю, чтобы разобрать её.</div></div>`},
@@ -1248,7 +1252,7 @@ pgWeek(w){const inP=this.inPrg();let body='';
 winsAll(){const C=this.S.checkin||{};return Object.keys(C).filter(d=>C[d]&&C[d].win&&String(C[d].win).trim()).sort().reverse().map(d=>({d,t:String(C[d].win).trim()}))},
 pgWins(){const w=this.winsAll(),pf=this.pgFrom(),n=w.filter(x=>x.d>=pf).length;
   return `<div class="card pg-s" id="pg-wins"><div class="pg-sh"><b>Банк побед</b><span>${n} ${this.pl(n,'победа','победы','побед')} ${this.pgFromTxt()}</span></div>
-  ${w.length?`<div class="pwl">${w.slice(0,3).map(x=>`<div class="pwi"><em>${this.dTxt(x.d)}</em><span>${esc(x.t)}</span></div>`).join('')}</div>`:`<div class="pg-empty">Записывай одну маленькую победу в конце дня. По исследованию Терезы Амабайл, ощущение небольшого продвижения сильнее всего держит мотивацию.</div>`}
+  ${w.length?`<div class="pwl">${w.slice(0,3).map(x=>`<div class="pwi"><em>${this.dTxt(x.d)}</em><span>${esc(x.t)}</span></div>`).join('')}</div>`:`<div class="pg-empty">Записывай одну маленькую победу в конце дня — так видно, что ты движешься, даже в трудные недели.</div>`}
   <div class="pg-act"><button class="btn pr sm" onclick="APP.winAdd()">${I.plus} Победа дня</button>${w.length>3?`<button class="pill" onclick="APP.winWall()">Все ${w.length} ${I.r}</button>`:''}</div></div>`},
 winAdd(){const td=today(),c=(this.S.checkin||{})[td]||{};this.ask('Что сегодня продвинулось?',c.win||'',v=>this.jSet(td,'win',(v||'').trim(),true),'textarea')},
 winWall(){const w=this.winsAll();let last='';this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Стена побед · ${w.length}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="pwl" style="margin-top:12px">${w.map(x=>{const m=MONF[+x.d.slice(5,7)-1]+' '+x.d.slice(0,4),hd=m!==last?`<div class="pwm">${m}</div>`:'';last=m;return hd+`<div class="pwi"><em>${fd(x.d)}</em><span>${esc(x.t)}</span></div>`}).join('')}</div>`)},
@@ -1280,7 +1284,7 @@ pgCons(){const hs=this.S.habits.filter(h=>!h.archived);if(!hs.length)return `<di
   let A=0,B=0;const rows=hs.map(h=>{const c=this.cons30(h),s=this.softStreak(h),dc=this.doneCount(h);A+=c.a;B+=c.b;const y=add(today(),-1),ret=this.hSched(h,y)&&!this.hOn(h,y)&&!this.frozen(y)&&!this.hOn(h,today());
     return `<div class="pcr">${this.tile(h,'h')}<div class="sp"><div class="pcr-h"><b>${esc(h.title)}</b><span>${c.p??'—'}${c.p!=null?'%':''}</span></div><div class="pcr-m">${I.flame}${s.n} ${this.pl(s.n,'день','дня','дней')}${s.rest?' · <em>восстановлено</em>':''}${ret?' · <em class="rt">сегодня день возврата</em>':''}</div><div class="pcr-b"><i style="width:${Math.min(100,dc/66*100)}%"></i></div><div class="pcr-a">${dc>=66?'Автоматизм: 66+ выполнений':`До автоматизма: ${dc} из 66`}</div></div></div>`}).join('');
   const P=B?Math.round(A/B*100):null;
-  return `<div class="card pg-s" id="pg-cons"><div class="pg-sh"><b>Постоянство</b><span>за 30 дней · правило «не пропускай дважды»</span></div><div class="pex-top"><div class="pex-n">${P??'—'}<small>${P!=null?'%':''}</small></div><div class="sp"><div class="pex-l">Один пропуск не обнуляет серию</div><div class="pex-bar"><i style="width:${P||0}%"></i></div></div></div><div class="pg-note">Серия рвётся только после двух пропусков подряд. 66 выполнений — средний срок, за который привычка становится автоматической (Lally, 2010).</div><div class="pcl">${rows}</div></div>`},
+  return `<div class="card pg-s" id="pg-cons"><div class="pg-sh"><b>Постоянство</b><span>за 30 дней · правило «не пропускай дважды»</span></div><div class="pex-top"><div class="pex-n">${P??'—'}<small>${P!=null?'%':''}</small></div><div class="sp"><div class="pex-l">Один пропуск не обнуляет серию</div><div class="pex-bar"><i style="width:${P||0}%"></i></div></div></div><div class="pg-note">Серия рвётся только после двух пропусков подряд. 66 выполнений — в среднем столько нужно, чтобы привычка стала автоматической.</div><div class="pcl">${rows}</div></div>`},
 /* 4.5 часы фокуса */
 focusOf(d){const f=(this.S.focus||{})[d];return f?+f.m||0:0},
 focusAdd(min,d,gid,quiet){d=d||today();const F=this.S.focus=this.S.focus||{};const x=F[d]=Object.assign({m:0,g:{}},F[d]||{});x.m=(+x.m||0)+min;if(gid){x.g=Object.assign({},x.g||{});x.g[gid]=(x.g[gid]||0)+min}x.t=Date.now();this.save();if(!quiet){this.buzz(8);this.render();this.toast('+'+min+' мин фокуса')}},
@@ -1288,7 +1292,7 @@ focusGoalSet(){this.ask('Цель: часов фокуса в неделю',(thi
 pgFocus(){const td=today(),m0=this.monday(td),g=(this.S.pref||{}).focusGoal||10,days=[0,1,2,3,4,5,6].map(i=>{const d=add(m0,i);return {d,m:this.focusOf(d)}}),tot=days.reduce((a,x)=>a+x.m,0),mx=Math.max(60,...days.map(x=>x.m));
   const hrs=v=>(Math.round(v/6)/10).toString().replace('.',',');
   let share='';if(this.inPrg()){const F=this.S.focus||{},gm={};for(const d in F)if(d>=this.st)for(const k in (F[d].g||{}))gm[k]=(gm[k]||0)+F[d].g[k];const sum=Object.values(gm).reduce((a,b)=>a+b,0);if(sum)share=`<div class="pfs">${this.S.goals.map(x=>gm[x.id]?`<i style="flex:${gm[x.id]};background:${x.color}" title="${esc(x.title)}"></i>`:'').join('')}</div><div class="pg-note">${this.S.goals.filter(x=>gm[x.id]).map(x=>`<span class="dot" style="display:inline-block;background:${x.color};margin:0 4px 0 0"></span>${esc(x.title)} ${hrs(gm[x.id])} ч`).join(' · ')}</div>`}
-  return `<div class="card pg-s" id="pg-focus"><div class="pg-sh"><b>Часы фокуса</b><span>глубокая работа по Кэлу Ньюпорту</span></div>
+  return `<div class="card pg-s" id="pg-focus"><div class="pg-sh"><b>Часы фокуса</b><span>глубокая работа</span></div>
   <div class="pex-top"><div class="pex-n">${hrs(tot)}<small> ч</small></div><div class="sp"><button class="pex-l pfg" onclick="APP.focusGoalSet()">из ${g} ч за неделю ${I.ed}</button><div class="pex-bar"><i style="width:${Math.min(100,tot/60/g*100)}%"></i></div></div></div>
   <div class="pfb">${days.map(x=>`<div class="${x.d===td?'td':''}"><span><i style="height:${x.m/mx*100}%"></i></span><em>${WD[pd(x.d).getDay()]}</em></div>`).join('')}</div>${share}
   <div class="pg-act"><span class="pg-note" style="margin:0">Добавить сегодня:</span>${[30,60,90].map(v=>`<button class="pill" onclick="APP.focusAdd(${v})">+${v} мин</button>`).join('')}</div>
@@ -1317,10 +1321,10 @@ vReport(){const D=this.repData(),R=D.R,S=this.S,r=(S.reports||{})[R.key]||{keep:
   <div class="rkg">${k('в среднем выполнено',(D.avg??'—')+(D.avg!=null?'%':''),R.inP?`недель на ${th}%+: ${D.weeks.filter(v=>v>=th).length} из ${D.weeks.length}`:`дней на 80%+: ${D.good}`)}${k('часов фокуса',String(D.fh).replace('.',','))}${k('лучшая серия',D.best,this.pl(D.best,'день','дня','дней'))}${k('постоянство',(D.cons??'—')+(D.cons!=null?'%':''))}${k('побед записано',D.wins.length)}${k('дней на 80%+',D.good,'из '+D.days)}</div>
   ${wl}
   ${D.top12.length?`<div class="card pg-s"><div class="pg-sh"><b>Главные победы</b><span>по одной на неделю</span></div><div class="pwl">${D.top12.map(x=>`<div class="pwi"><em>${fd(x.d)}</em><span>${esc(x.t)}</span></div>`).join('')}</div></div>`:''}
-  ${D.top.length||D.low.length?`<div class="card pg-s"><div class="pg-sh"><b>80/20: что оставить</b><span>по Тиму Феррису</span></div>${D.top.length?`<div class="r8h">Тянут остальное вверх</div>${D.top.map(x=>pick(x,true)).join('')}`:''}${D.low.length?`<div class="r8h">Даются тяжелее всего</div>${D.low.map(x=>pick(x,false)).join('')}`:''}</div>`:''}
-  <div class="card pg-s"><div class="pg-sh"><b>Два вопроса</b><span>по Крису Гиллебо</span></div><label class="lbl">Что получилось?</label><textarea onchange="APP.repSet('good',this.value)" placeholder="3 строки о главном">${esc(r.good||'')}</textarea><label class="lbl" style="margin-top:12px;display:block">Что не получилось — только то, что под твоим контролем?</label><textarea onchange="APP.repSet('bad',this.value)" placeholder="Без самокритики, по фактам">${esc(r.bad||'')}</textarea></div>
+  ${D.top.length||D.low.length?`<div class="card pg-s"><div class="pg-sh"><b>80/20: что оставить</b><span>что тянет вверх, а что тормозит</span></div>${D.top.length?`<div class="r8h">Тянут остальное вверх</div>${D.top.map(x=>pick(x,true)).join('')}`:''}${D.low.length?`<div class="r8h">Даются тяжелее всего</div>${D.low.map(x=>pick(x,false)).join('')}`:''}</div>`:''}
+  <div class="card pg-s"><div class="pg-sh"><b>Два вопроса</b><span>3 минуты</span></div><label class="lbl">Что получилось?</label><textarea onchange="APP.repSet('good',this.value)" placeholder="3 строки о главном">${esc(r.good||'')}</textarea><label class="lbl" style="margin-top:12px;display:block">Что не получилось — только то, что под твоим контролем?</label><textarea onchange="APP.repSet('bad',this.value)" placeholder="Без самокритики, по фактам">${esc(r.bad||'')}</textarea></div>
   <div class="rpa"><button class="btn pr w" onclick="APP.repShare()">Поделиться карточкой</button>${R.inP?`<button class="btn w" onclick="APP.openSub('programs')">Начать следующий цикл ${I.r}</button>`:''}</div>
-  <div class="pg-note" style="text-align:center">По мета-анализу Harkin (2016), рассказ о прогрессе другим людям усиливает эффект отслеживания.</div>`},
+  `},
 async repShare(){const D=this.repData(),R=D.R,c=document.createElement('canvas');c.width=1080;c.height=1920;const x=c.getContext('2d');
   await new Promise(res=>{const im=new Image();im.onload=()=>{const s=Math.max(1080/im.width,1920/im.height),w=im.width*s,h=im.height*s;x.drawImage(im,(1080-w)/2,(1920-h)/2,w,h);res()};im.onerror=res;im.src='ocean.jpg'});
   const g=x.createLinearGradient(0,0,0,1920);g.addColorStop(0,'rgba(2,5,12,.55)');g.addColorStop(.5,'rgba(2,5,12,.82)');g.addColorStop(1,'rgba(2,5,12,.96)');x.fillStyle=g;x.fillRect(0,0,1080,1920);
@@ -1480,7 +1484,7 @@ tHabitToggle(tid,d){if(d>today()||d<this.st)return;const t=this.S.tactics.find(x
   if(t.type==='check')this.toggle(tid,d);else this.setLog(tid,d,this.v(t,d)>=(+t.per||1)?0:+t.per||1)},
 
 /* ---------- навигация ---------- */
-go(tab,sub){this._ie=null;this._sset=null;tab=this.normTab(tab);this.tab=tab;this.sub=sub||null;try{sessionStorage.setItem('tw-tab',tab)}catch(e){}window.scrollTo(0,0);this.render()},
+go(tab,sub){this._ie=null;this._sset=null;if(tab==='profile'){this._prv='hero';tab='progress'}tab=this.normTab(tab);this.tab=tab;this.sub=sub||null;try{sessionStorage.setItem('tw-tab',tab)}catch(e){}window.scrollTo(0,0);this.render()},
 openSub(sub){this.sub=sub;window.scrollTo(0,0);this.render()},
 shiftDay(n){const d=add(this.day,n);if(d>add(today(),30))return;this.day=d;this.render()},
 goDay(d){this.day=d;this.go('home')},
@@ -1516,7 +1520,7 @@ render(){
   const ttl=this.sub==='programs'?'Программы':this.sub==='deals'?'Воронка':this.sub==='onboard'?'Старт':{home:'Сегодня',habits:'Прогресс',goals:(P?P.name:'Программа'),week:'Неделя',me:'Профиль'}[this.tab];
   const Pp=this.S.profile||{};
   $('snav').innerHTML=`<div class="sb-brand"><span class="sn-mark">${SHARK}</span><div><b>wikki.app</b><span>дисциплина · рост</span></div></div>
-   <div class="sb-nav">${(simple?tabs:[...tabs.slice(0,-1),['profile','Профиль',I.me],tabs[tabs.length-1]]).map(([k,l,ic])=>`<button class="${this.tab===k&&!this.sub?'on':''}" onclick="APP.go('${k}')">${ic}<span>${({tracker:'Трекер привычек',journal:'Дневник рефлексии'})[k]||l}</span></button>`).join('')}</div>
+   <div class="sb-nav">${tabs.map(([k,l,ic])=>`<button class="${this.tab===k&&!this.sub?'on':''}" onclick="APP.go('${k}')">${ic}<span>${({tracker:'Трекер привычек',journal:'Дневник рефлексии'})[k]||l}</span></button>`).join('')}</div>
    <div class="sb-q">«${esc(Pp.motto||'Дисциплина — это выбор между тем, чего хочешь сейчас, и тем, чего хочешь больше всего.')}»<i></i></div>
    <button class="sb-me" onclick="APP.go('profile')"><span class="ava">${esc(this.initial())}</span><span class="sp"><b>${esc(Pp.hero||Pp.name||'Гость')}</b><span>Профиль героя</span></span></button>`;
   this.tr($('nav'));this.tr($('snav'));
@@ -2149,6 +2153,8 @@ vHome(){const S=this.S,td=today(),P=S.profile||{};
   const rows=this.progRows('all');
   const sl=rows.map(r=>{const[f,sc,fr]=r.k==='h'?this.hFns(r.o):this.tFns(r.o);return {r,st:this.streak(f,sc,fr)}}).sort((a,b)=>b.st-a.st).slice(0,5);
   const ws=this.wkStat(m0);const dpT=this.dayAll(td);
+  const bK=today();let bFull=true;try{const seen=localStorage.getItem('tw-ban'),ses=sessionStorage.getItem('tw-ban-s');if(seen===bK&&!ses)bFull=false;if(seen!==bK){localStorage.setItem('tw-ban',bK);sessionStorage.setItem('tw-ban-s','1')}}catch(e){}
+  const bannerS=`<div class="card dz-ban dz-banS"><div class="dz-bb2" style="margin:0;max-width:none"><div class="dz-pr"><div class="dz-prt"><b>${dpT.done}</b><span>/${dpT.n}</span><em>${dpT.n&&dpT.done>=dpT.n?'день закрыт':'дел сегодня'}</em><i class="sp"></i><strong>${dpT.n?Math.round(dpT.p*100)+'%':''}</strong></div><div class="dz-prb"><i style="width:${dpT.n?Math.round(dpT.p*100):0}%"></i></div></div><button class="dz-jr" onclick="APP._jd=today();APP.go('journal')" aria-label="Дневник">${I.ed}</button></div></div>`;
   const banner=`<div class="card dz-ban"><div class="dz-bt"><div class="dz-h">Дисциплина сегодня,<br><em>свобода</em> завтра</div><div class="dz-s">${P.motto?esc(P.motto):'Дисциплина — мост между целями и результатом.'}</div>
      <div class="dz-bb2"><div class="dz-pr"><div class="dz-prt"><b>${dpT.done}</b><span>/${dpT.n}</span><em>${dpT.n&&dpT.done>=dpT.n?'день закрыт':'дел сегодня'}</em><i class="sp"></i><strong>${dpT.n?Math.round(dpT.p*100)+'%':''}</strong></div><div class="dz-prb"><i style="width:${dpT.n?Math.round(dpT.p*100):0}%"></i></div></div><button class="dz-jr" onclick="APP._jd=today();APP.go('journal')" aria-label="Дневник">${I.ed}</button></div></div></div>`;
   const over=this.ovChart();
@@ -2162,7 +2168,7 @@ vHome(){const S=this.S,td=today(),P=S.profile||{};
      <div class="dz-pwf"><span>${toSun?'Разбор недели через '+toSun+' '+this.pl(toSun,'день','дня','дней'):'Сегодня разбор недели'}</span><button class="pill" onclick="APP._pgv='week';APP.go('program')">Открыть неделю ${I.r}</button></div></div>`
     :'';
 
-  const cons=`<div class="card dz-c dz-cons"><div class="dz-cl"><div class="dz-ch"><span class="dz-ti">Постоянство</span></div>${hm}</div><div class="dz-cr"><div><span>Этот месяц</span><b>${thisM??'—'}${thisM!=null?'%':''}</b></div><div><span>Лучший месяц</span><b class="sm">${bestM!=null?MONF[bestM]+' · '+Math.round(bestMv*100)+'%':'—'}</b></div></div></div>`;
+  const cons=`<div class="card dz-c dz-cons"><div class="dz-cl"><div class="dz-ch"><span class="dz-ti">Карта дней</span></div>${hm}</div><div class="dz-cr"><div><span>Этот месяц</span><b>${thisM??'—'}${thisM!=null?'%':''}</b></div><div><span>Лучший месяц</span><b class="sm">${bestM!=null?MONF[bestM]+' · '+Math.round(bestMv*100)+'%':'—'}</b></div></div></div>`;
   const strH=`<div class="card dz-c dz-sl"><div class="dz-ch"><span class="dz-ti">Серии</span></div>${sl.length?sl.map(x=>`<div class="dz-sr">${this.tile(x.r.o,x.r.k,x.r.k==='h'?null:this.gColor(x.r.o.goal))}<span class="sp">${esc(x.r.o.title)}</span><b>${I.flame}${x.st} ${this.pl(x.st,'день','дня','дней')}</b></div>`).join(''):'<div class="small mut">Отмечай привычки — здесь появятся серии.</div>'}<button class="dz-all" onclick="APP.go('tracker')">Все серии ${I.r}</button></div>`;
   const wkH=`<div class="card dz-c dz-wk"><div class="dz-ch"><span class="dz-ti">Прогресс недели</span><span class="sp"></span><span class="dz-sub">${ws.pct??'—'}${ws.pct!=null?'%':''}</span></div><div class="dz-wb"><div class="dz-wy">${[100,75,50,25,0].map(v=>`<span>${v}%</span>`).join('')}</div>${ws.days.map(x=>`<button class="${x.d===td?'td':''}" onclick="APP.goDay('${x.d}')"><span class="dz-bar"><i class="${x.p!=null&&x.p>=.8?'ok':''}" style="height:${x.p==null?0:Math.max(3,Math.round(x.p*100))}%"></i></span><em>${WD[pd(x.d).getDay()]}</em></button>`).join('')}</div></div>`;
   this._noBoard=true;let t=this.vToday();this._noBoard=false;t=this.stripV(t);
@@ -2174,8 +2180,8 @@ vHome(){const S=this.S,td=today(),P=S.profile||{};
   let body='',chunk='';const flush=()=>{if(chunk){body+=`<div class="dz dz2">${chunk}</div>`;chunk=''}};
   this.dzOrder().forEach(([k,on])=>{if(!on||!WG[k])return;if(k==='today'){flush();body+=WG[k]}else chunk+=WG[k]});flush();
   const repC=this.inPrg()&&this.curWeek()>=12?`<button class="card pg-rep" onclick="APP.openSub('report')"><span>${I.trophy}</span><div class="sp"><b>Итоги цикла готовы</b><em>Цифры, победы и карточка для сторис</em></div>${I.r}</button>`:'';
-  return `<div class="dz-hd"><div class="h1">Дашборд</div><button class="dz-cfg" onclick="APP.dzSheet()">${I.gear}<span>Настроить</span></button></div>__S1__<div class="dz">${banner}</div>${this.mitH()}${this.ctxH()}${this.tipH()}${this.badDayWin()}${repC}${body}<button class="qfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${I.plus}</button>`},
-DZW:[['today','Дела дня','Отмечать дела прямо с дашборда'],['streak','Серии','Дни подряд, рекорд и лучшие привычки'],['week','Неделя программы','Счёт недели, фокус и дни до разбора'],['partner','Партнёр','Процент недели друг друга'],['progress','Общий прогресс','График с выбором периода'],['cons','Постоянство','Каждый день на тепловой карте'],['wkbars','Прогресс недели','Столбики по дням недели'],['wheel','Колесо баланса','Средний балл и слабая сфера месяца']],
+  return `<div class="dz-hd"><div class="h1">Дашборд</div><button class="dz-cfg" onclick="APP.dzSheet()">${I.gear}<span>Настроить</span></button></div>__S1__<div class="dz">${bFull?banner:bannerS}</div>${this.mitH()}${this.ctxH()}${this.tipH()}${this.badDayWin()}${repC}${body}<button class="qfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${I.plus}</button>`},
+DZW:[['today','Дела дня','Отмечать дела прямо с дашборда'],['streak','Серии','Дни подряд, рекорд и лучшие привычки'],['week','Неделя программы','Счёт недели, фокус и дни до разбора'],['partner','Партнёр','Процент недели друг друга'],['progress','Общий прогресс','График с выбором периода'],['cons','Карта дней','Каждый день на тепловой карте'],['wkbars','Прогресс недели','Столбики по дням недели'],['wheel','Колесо баланса','Средний балл и слабая сфера месяца']],
 dzOrder(){const def=this.DZW.map(x=>[x[0],!['wheel','wkbars'].includes(x[0])]),cur=((this.S.pref||{}).dz||[]).filter(x=>this.DZW.some(w=>w[0]===x[0]));def.forEach(d=>{if(!cur.some(x=>x[0]===d[0]))cur.push([d[0],d[1]])});return cur},
 dzSet(o){this.S.pref=this.S.pref||{};this.S.pref.dz=o;this.save();this.render();this.dzSheet()},
 dzTog(k){this.dzSet(this.dzOrder().map(x=>x[0]===k?[x[0],!x[1]]:x))},
@@ -2189,9 +2195,9 @@ vProgram(){const pv=this._pgv==='week'?'week':'goals';
   const seg=`<div class="pseg">${[['goals','Цели'],['week','Неделя']].map(([k,l])=>`<button class="${pv===k?'on':''}" onclick="APP._pgv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
   const body=pv==='week'?this.stripV(this.vWeek()):this.stripV(this.vGoals());
   return `<div class="h1">Программа</div>${this.S.goals.length?seg:''}__S1____S2__${body}`},
-vProgress(){const pv=['balance','year'].includes(this._prv)?this._prv:'over';
-  const seg=`<div class="pseg pseg3">${[['over','Обзор'],['balance','Колесо'],['year','Год']].map(([k,l])=>`<button class="${pv===k?'on':''}" onclick="APP._prv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
-  return `<div class="h1">Прогресс</div>${seg}__S1____S2__${pv==='year'?this.pvYear():pv==='balance'?this.pvBalance():this.pvOver()}`},
+vProgress(){const pv=['balance','year','hero'].includes(this._prv)?this._prv:'over';
+  const seg=`<div class="pseg pseg3">${[['over','Обзор'],['balance','Колесо'],['year','Год'],['hero','Герой']].map(([k,l])=>`<button class="${pv===k?'on':''}" onclick="APP._prv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
+  return `<div class="h1">Прогресс</div>${seg}__S1____S2__${pv==='year'?this.pvYear():pv==='balance'?this.pvBalance():pv==='hero'?this.rpg().replace(/__S\d__/g,''):this.pvOver()}`},
 vTracker(){const h=`<div class="h1">Трекер привычек</div>__S1____S2__`+this.pvHabits().replace(/__S\d__/g,'');
   setTimeout(()=>{document.querySelectorAll('.acw').forEach(w=>{w._data=(this._series||{}).main||[]});this.acBind()},0);return h},
 vJournal(){const S=this.S,td=today(),d=this._jd&&this._jd<=td?this._jd:td,C=S.checkin||{},c=C[d]||{};const dd=pd(d);
@@ -2267,10 +2273,7 @@ vGoals(){
     <div class="pgh-tl" style="--n:${W}">${seg}</div>
     <div class="pgh-k"><div><b>${scw??'—'}${scw!=null?'<small>%</small>':''}</b><span>эта неделя</span></div><div><b>${av??'—'}${av!=null?'<small>%</small>':''}</b><span>в среднем</span></div><div><b>${nd}<small>/${S.goals.length}</small></b><span>целей взято</span></div></div>
   </div></div>__S1____S2__`;
-  if(!(S.pref||{}).pgm)h+=`<div class="pgm"><div class="pgm-h"><b>Почему это работает</b><button class="xcl" onclick="APP.setPref('pgm',1)" aria-label="Скрыть">${I.x}</button></div>
-    <div class="pgm-l"><div><span>1</span><p><b>Год сжат в ${W} недель.</b> Дедлайн всегда близко, поэтому нет «потом успею».</p></div>
-    <div><span>2</span><p><b>Ты отвечаешь за действия, а не за результат.</b> Тактики — то, что ты делаешь сам каждый день.</p></div>
-    <div><span>3</span><p><b>Неделя на ${th}% и выше — цель приближается.</b> Счёт показывает правду раньше, чем итог.</p></div></div></div>`;
+  h+=`<button class="pgml" onclick="APP.methodSheet()">Как работает метод ${I.r}</button>`;
   h+=`<div class="pgsh"><b>Цели</b><span>${S.goals.length} из 3</span><span class="sp"></span>${S.goals.length<3?`<button class="qadd" onclick="APP.editGoal(null)">${I.plus} Цель</button>`:''}</div>`;
   h+='<div class="gcw">';
   S.goals.forEach((g,gi)=>{
@@ -2281,18 +2284,19 @@ vGoals(){
         <div class="gc2-ch"><em class="${dn?'ok':''}">${dn?'Достигнута':'В работе'}</em>${ar?`<em>${esc(ar[1])}</em>`:''}${g.date?`<em>${this.dleft(g.date)}</em>`:''}</div></div>
         <div class="gc2-p"><b>${pr}<small>%</small></b><span>к цели</span></div></div>
       <div class="gc2-bar"><i style="width:${pr}%"></i></div>
-      ${g.result?`<div class="gc2-r">${esc(g.result)}</div>`:''}`;
-    ms.forEach(m=>{const v=this.metricVal(m),st=+m.start||0,tg=+m.target||0,pp=tg===st?(v===tg?1:0):Math.max(0,Math.min((v-st)/(tg-st),1)),pc=tg>st?this.pace(v,tg,st):null,step=Math.abs(tg-st)>=50?Math.max(1,Math.round(Math.abs(tg-st)/20)):1;
+      ${g.result&&this._gx===g.id?`<div class="gc2-r">${esc(g.result)}</div>`:''}`;
+    const gOpen=this._gx===g.id;if(gOpen)ms.forEach(m=>{const v=this.metricVal(m),st=+m.start||0,tg=+m.target||0,pp=tg===st?(v===tg?1:0):Math.max(0,Math.min((v-st)/(tg-st),1)),pc=tg>st?this.pace(v,tg,st):null,step=Math.abs(tg-st)>=50?Math.max(1,Math.round(Math.abs(tg-st)/20)):1;
       h+=`<div class="gm"><div class="gm-h"><span class="sp">${esc(m.name)}</span>${m.auto?`<b class="gm-v">${v}</b>`:`<div class="gm-st"><button onclick="APP.setMetric('${g.id}','${m.id}',${+(v-step).toFixed(2)})" aria-label="Меньше">−</button><input inputmode="decimal" value="${v}" onchange="APP.setMetric('${g.id}','${m.id}',this.value)"><button onclick="APP.setMetric('${g.id}','${m.id}',${+(v+step).toFixed(2)})" aria-label="Больше">+</button></div>`}<span class="gm-tg">/ ${tg}${m.unit?' '+esc(m.unit):''}</span></div>
         <div class="gm-bar"><i style="width:${pp*100}%"></i></div>${pc?`<div class="pace ${pc.cls}">${pc.txt}</div>`:''}</div>`});
-    tot.forEach(t=>{const v=this.total(t),pc=this.pace(v,t.total,0);h+=`<div class="gm"><div class="gm-h"><span class="sp">${esc(t.title)}, всего</span><b class="gm-v">${v}</b><span class="gm-tg">/ ${t.total}</span></div><div class="gm-bar"><i style="width:${Math.min(v/t.total,1)*100}%"></i></div>${pc?`<div class="pace ${pc.cls}">${pc.txt}</div>`:''}</div>`});
+    if(gOpen)tot.forEach(t=>{const v=this.total(t),pc=this.pace(v,t.total,0);h+=`<div class="gm"><div class="gm-h"><span class="sp">${esc(t.title)}, всего</span><b class="gm-v">${v}</b><span class="gm-tg">/ ${t.total}</span></div><div class="gm-bar"><i style="width:${Math.min(v/t.total,1)*100}%"></i></div>${pc?`<div class="pace ${pc.cls}">${pc.txt}</div>`:''}</div>`});
     h+=`<div class="gt2-h"><span>Тактики этой недели</span>${gs!=null?`<b class="${gs>=th?'ok':''}">${gs}%</b>`:''}</div><div class="gt2 rl" data-rl="t:${g.id}">`;
     ts.forEach(t=>{const act=this.activeIn(t,cw),wv=this.wVal(t,cw),wt=this.wTarget(t,cw),ok=act&&wv>=wt,f=wt?Math.min(wv/wt,1):0;
       h+=`<button class="gt2-r ${act?'':'off'}" data-id="${t.id}" onclick="APP.editT('${t.id}')"><span class="gt2-o ${ok?'ok':''}" style="--f:${f}">${ok?I.ok:''}</span><span class="sp"><span class="gt2-n">${esc(t.title)}</span><span class="gt2-d">${this.tDesc(t)}</span></span>${act&&t.type!=='ms'?`<span class="gt2-v">${+wv.toFixed?+wv.toFixed(1):wv}<small>/${wt}</small></span>`:''}</button>`});
     h+=`</div><button class="qadd gt2-add" onclick="APP.editT(null,'${g.id}')">${I.plus} Тактика</button>`;
-    if(g.woop&&g.woop.obstacle)h+=`<div class="gc2-w"><span>Если помешает</span>${esc(g.woop.obstacle)}${g.woop.plan?`<span>то я</span>${esc(g.woop.plan)}`:''}</div>`;
-    if(ms.some(m=>m.auto==='paid'))h+=`<button class="btn w" style="margin-top:12px" onclick="APP.openSub('deals')">Воронка продаж ${I.r}</button>`;
-    h+=`<div class="gc2-f">${gi?`<button onclick="APP.moveGoal(${gi})">${I.l} выше</button>`:''}<button onclick="APP.editGoal('${g.id}')">${I.ed} изменить цель</button></div></div>`;
+    if(gOpen&&g.woop&&g.woop.obstacle)h+=`<div class="gc2-w"><span>Если помешает</span>${esc(g.woop.obstacle)}${g.woop.plan?`<span>то я</span>${esc(g.woop.plan)}`:''}</div>`;
+    if(gOpen&&ms.some(m=>m.auto==='paid'))h+=`<button class="btn w" style="margin-top:12px" onclick="APP.openSub('deals')">Воронка продаж ${I.r}</button>`;
+    const extra=(ms.length||tot.length||g.result||(g.woop&&g.woop.obstacle));
+    h+=`<div class="gc2-f">${extra?`<button class="gc2-more" onclick="APP._gx=APP._gx==='${g.id}'?null:'${g.id}';APP.render()">${gOpen?'Свернуть':'Метрики и детали'}</button><span class="sp"></span>`:''}${gi?`<button onclick="APP.moveGoal(${gi})">${I.l} выше</button>`:''}<button onclick="APP.editGoal('${g.id}')">${I.ed} изменить цель</button></div></div>`;
   });
   h+='</div>';
   h+='__S3__';
@@ -2729,7 +2733,7 @@ iosSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px"
   <div class="ios-st">${['Открой wikki.app в Safari','Нажми «Поделиться» внизу экрана','Выбери «На экран "Домой"»','Открой приложение с иконки и включи уведомления здесь'].map((t,i)=>`<div><span>${i+1}</span>${t}</div>`).join('')}</div>
   <button class="btn pr w" style="margin-top:16px" onclick="APP.close()">Понятно</button>`)},
 methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">На чём построена система</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
-  <div class="small mut" style="margin-top:10px;line-height:1.55">Каркас — «12 недель в году» Брайана Морана: тактики вместо результатов, недельный счёт, планка 85%, еженедельный разбор, 13-я неделя на итоги.<br><br>Разделение действий и результата — «4 дисциплины исполнения». «Если — то» — Питер Гольвитцер. WOOP — Габриэль Эттинген. Привычки и «не пропускай дважды» — Джеймс Клир. Отчёт партнёру — исследование Гейл Мэтьюз. Строгие программы — по правилам их авторов.</div>`)},
+  <div class="small mut" style="margin-top:10px;line-height:1.55">Каркас — «12 недель в году» Брайана Морана: тактики вместо результатов, недельный счёт, планка 85%, еженедельный разбор, 13-я неделя на итоги.<br><br>Разделение действий и результата — «4 дисциплины исполнения». Банк побед — исследование Терезы Амабайл о малых победах. «Не пропускай дважды» и 66 дней до автоматизма — Джеймс Клир и Филиппа Лалли. Часы фокуса — Кэл Ньюпорт, «Глубокая работа». Партнёр и итоги для сторис — мета-анализ Харкин (2016): когда о прогрессе знают другие, цели достигаются чаще. «Если — то» — Питер Гольвитцер. WOOP — Габриэль Эттинген. Привычки и «не пропускай дважды» — Джеймс Клир. Отчёт партнёру — исследование Гейл Мэтьюз. Строгие программы — по правилам их авторов.</div>`)},
 lang(){return ((this.S.pref||{}).lang)||'ru'},
 async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
 async loadDict(){if(this._dict)return;try{const r=await fetch('i18n-en.json?v=1');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}},
