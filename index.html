@@ -839,7 +839,10 @@ input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(124,92,230,.25
 .nout{display:block;width:100%;text-align:center;color:#FF6B8A;font-size:16px;font-weight:600;padding:16px!important;margin:4px 0 12px}
 .sbk{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;margin:4px 0 16px}.sbk b{text-align:center;font-size:17px}
 .sbk-b{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#16161C;border:1px solid var(--line);color:var(--tx)}
-.lck{display:grid}.srow .lck svg{color:#9B7BFF}.sc-cl{margin:-4px 4px 12px}
+.lck{display:grid}.srow .lck svg{color:#9B7BFF}.rstars{display:flex;gap:10px;justify-content:center;margin:6px 0 18px}.rstars button{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;background:#1A1A22;border:1px solid var(--line);color:#3A3A48}.rstars button svg{width:28px;height:28px}.rstars button.on{color:#F5B84B;border-color:rgba(245,184,75,.4);background:rgba(245,184,75,.08)}
+.rmsg{display:grid;gap:8px;text-align:center}.rmsg span{color:var(--dim);font-size:14px;margin-bottom:6px}
+.nws{display:grid;gap:4px;margin-top:8px}.nw{padding:14px 0;border-bottom:1px solid var(--line)}.nw:last-child{border:0}.nw span{font-size:12.5px;color:#9B7BFF;font-weight:600}.nw b{display:block;font-size:16px;margin:2px 0 4px}.nw p{margin:0;color:var(--dim);font-size:14px;line-height:1.5}
+.sc-cl{margin:-4px 4px 12px}
 @media(min-width:1024px){.nme,.ngrp,.nout,.sbk,.sttl{max-width:640px;margin-left:auto;margin-right:auto}.sttl{text-align:left;font-size:22px}}
 </style>
 </head>
@@ -886,6 +889,10 @@ help:f('<path d="M5 3h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-5l-4 4v-4H5a2 2 0 0 1-2
 share:f('<path d="M14 4l8 7-8 7v-4.2C8.6 13.8 5 15.6 2 20c.9-6.3 4.6-11.2 12-12.2z"/>'),
 info:f('<path d="M5 3h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H9l-5 3V5a2 2 0 0 1 1-2zm3 5v2h8V8zm0 4v2h5v-2z" fill-rule="evenodd"/>'),
 globe:f('<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 9h-3a15 15 0 0 0-1.3-5.6A8 8 0 0 1 18.9 11zM12 4.1c.9 1.2 1.8 3.6 2 6.9h-4c.2-3.3 1.1-5.7 2-6.9zM9.4 5.4A15 15 0 0 0 8.1 11h-3a8 8 0 0 1 4.3-5.6zM5.1 13h3a15 15 0 0 0 1.3 5.6A8 8 0 0 1 5.1 13zm6.9 6.9c-.9-1.2-1.8-3.6-2-6.9h4c-.2 3.3-1.1 5.7-2 6.9zm2.6-1.3a15 15 0 0 0 1.3-5.6h3a8 8 0 0 1-4.3 5.6z" fill-rule="evenodd"/>'),
+plug:f('<path d="M8 2v5H6v4a6 6 0 0 0 5 5.9V22h2v-5.1A6 6 0 0 0 18 11V7h-2V2h-2v5h-4V2z"/>'),
+star:f('<path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/>'),
+spark:f('<path d="M10 2l1.9 5.6L17.5 9.5l-5.6 1.9L10 17l-1.9-5.6L2.5 9.5l5.6-1.9zM18 13l1 2.9 3 1.1-3 1.1-1 2.9-1-2.9-3-1.1 3-1.1z"/>'),
+doc:f('<path d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 1.5V9h5.5zM8 13v2h8v-2zm0 4v2h6v-2z" fill-rule="evenodd"/>'),
 medal:f('<path d="M7 2h4l1 4 1-4h4l-3 7.2A6 6 0 1 1 10 9.2zM12 11a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>')}})();
 const I={
   dash:sv('<rect x="3" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.8"/>',22),
@@ -2168,7 +2175,6 @@ vMe(){
     row(ic('list','#4B7BE6'),'Первый день недели',pr.wk0==='sun'?'воскресенье':'понедельник',"APP.setPref('wk0',(APP.S.pref||{}).wk0==='sun'?'mon':'sun')"),
     tog(ic('tree','#16B8C4'),'Режим отпуска',vac,"APP.toggleVac()",vac?`с ${fd(vac.from)} · привычки на паузе, серии не рвутся`:'Ставит все привычки на паузу, пока ты отдыхаешь')]);
   pages.notif=()=>sec('Уведомления',[
-    row(ic('moon','#7C5CE6'),'Напоминания в календарь','',"APP.exportIcs()",'Утро, день, вечер, чек-ин и воскресный разбор — в календарь телефона'),
     row(ic('phone','#56566A'),'Пуш-уведомления','скоро',null,'Утренняя и вечерняя сводка, разбор недели, колесо баланса')]);
   pages.look=()=>sec('Оформление',[
     row(ic('dumb','#F5B84B'),'Режим',this.simple()?'Простой':'Полный',"APP.setSimple(!APP.simple())",this.simple()?'Дашборд, трекер и настройки':'Все разделы'),
@@ -2183,11 +2189,18 @@ vMe(){
   pages.help=()=>sec('Поддержка',[
     row(ic('chat','#4B7BE6'),'Написать в поддержку','',"window.open('https://t.me/wikki_shark','_blank')",'Ответим в Telegram'),
     row(ic('star','#F5B84B'),'Предложить идею','',"window.open('https://t.me/wikki_shark','_blank')"),
-    row(ic('heart','#E65CA8'),'Поделиться приложением','',"APP.shareApp()"),
     row(ic('book','#7C5CE6'),'Метод','',"APP.methodSheet()",'Моран, 4DX, Гольвитцер, Эттинген, Клир')]);
+  pages.integ=()=>sec('Интеграции',[
+    row(ic('moon','#7C5CE6'),'Календарь телефона','',"APP.exportIcs()",'Утро, день, вечер, чек-ин и разбор недели в твоём календаре'),
+    row(ic('heart','#56566A'),'Apple Здоровье','скоро',null,'Шаги и сон отмечаются сами'),
+    row(ic('chat','#56566A'),'Telegram-бот','скоро',null,'Напоминания и отметки прямо в мессенджере'),
+    row(ic('list','#56566A'),'Импорт из других трекеров','скоро',null,'Habitify, Streaks, Loop: история переедет с тобой')]);
+  pages.legal=()=>sec('Правовое',[
+    row(ic('book','#9A9AAE'),'Политика конфиденциальности','',"window.open('./legal/privacy.html'+(APP.lang()==='en'?'#en':''),'_blank')"),
+    row(ic('list','#9A9AAE'),'Условия использования','',"window.open('./legal/terms.html'+(APP.lang()==='en'?'#en':''),'_blank')")]);
   const pdata=pages.data;pages.data=()=>pdata()+`<div class="sdanger"><button class="srow warn" onclick="APP.wipe()"><div class="sp">Начать с нуля</div></button>${this.user?`<button class="srow warn" onclick="APP.deleteMe()"><div class="sp">Удалить аккаунт</div></button>`:''}</div>`;
   pages.lang=()=>`<div class="card sgrp">${[['ru','Русский'],['en','English']].map(([k,n])=>`<button class="srow" onclick="APP.setLang('${k}');APP._sset='lang';APP.render()"><div class="sp"><div>${n}</div></div>${lang===k?`<span class="lck">${I.ok}</span>`:''}</button>`).join('')}</div>`;
-  const TT={lang:'Язык',account:'Аккаунт',premium:'Полный доступ',program:'Программа',day:'День и неделя',notif:'Уведомления',look:'Оформление',data:'Данные и приватность',help:'Помощь и обратная связь'};
+  const TT={integ:'Интеграции',legal:'Правовое',lang:'Язык',account:'Аккаунт',premium:'Полный доступ',program:'Программа',day:'День и неделя',notif:'Уведомления',look:'Оформление',data:'Данные и приватность',help:'Помощь и обратная связь'};
   const cur=this._sset&&pages[this._sset]?this._sset:null;
   if(cur){h+=`<div class="sbk"><button class="sbk-b" onclick="APP._sset=null;APP.render();window.scrollTo(0,0)" aria-label="Назад">${I.l}</button><b>${TT[cur]}</b><span></span></div>`+pages[cur]().replace(/<div class="lbl sec">[^<]*<\/div>/,'');return h}
   const go=k=>`APP._sset='${k}';APP.render();window.scrollTo(0,0)`;
@@ -2197,8 +2210,9 @@ vMe(){
     h+=`<button class="nme" onclick="APP.go('profile')"><span class="nme-av">${av}</span><span class="sp"><b>${esc(Pp.name||Pp.hero||'Без имени')}</b><span class="nme-ch"><em class="lv">Ур. ${R.lvl}</em><em class="ac">${SI.medal}${na} ${this.pl(na,'достижение','достижения','достижений')}</em></span></span>${I.r}</button>`}
   h+=grp([nr('crown','#F5B84B','Полный доступ','скоро',go('premium'))]);
   h+=grp([nr('target','#9B7BFF','Программа',P?esc(P.name):'',go('program')),nr('cal','#9B7BFF','День и неделя','',go('day')),nr('bell','#9B7BFF','Уведомления','',go('notif')),nr('globe','#9B7BFF','Язык',lang==='en'?'English':'Русский',go('lang')),nr('brush','#9B7BFF','Оформление','',go('look'))]);
-  h+=grp([...(this.user?[nr('user','#22D3E0','Аккаунт','',go('account'))]:[]),nr('lock','#22D3E0','Данные и приватность','',go('data'))]);
-  h+=grp([nr('help','#F5B84B','Помощь и обратная связь','',go('help')),nr('share','#F5B84B','Поделиться приложением','',"APP.shareApp()"),nr('info','#F5B84B','О приложении','v1.0',"APP.methodSheet()")]);
+  h+=grp([...(this.user?[nr('user','#22D3E0','Аккаунт','',go('account'))]:[]),nr('lock','#22D3E0','Данные и приватность','',go('data')),nr('plug','#22D3E0','Интеграции','',go('integ'))]);
+  h+=grp([nr('help','#F5B84B','Помощь и обратная связь','',go('help')),nr('star','#F5B84B','Оценить приложение',(S.pref||{}).rate?'★'.repeat((S.pref||{}).rate):'',"APP.rateSheet()"),nr('spark','#F5B84B','Что нового','',"APP.newsSheet()"),nr('share','#F5B84B','Поделиться приложением','',"APP.shareApp()"),nr('info','#F5B84B','О приложении','v1.0',"APP.methodSheet()")]);
+  h+=grp([nr('doc','#9A9AAE','Правовое','',go('legal'))]);
   if(this.user)h+=`<button class="card nout" onclick="APP.logout()">Выйти</button>`;
   h+=`<div class="sver">wikki.app · WIKKI.OCEAN</div>`;
   return h;
@@ -2239,6 +2253,14 @@ ask(label,cur,cb,type){const t=type||'text';this._askCb=cb;
   <div class="f">${t==='textarea'?`<textarea id="askV" style="min-height:120px">${esc(cur||'')}</textarea>`:`<input id="askV" type="${t}" value="${esc(cur==null?'':cur)}" ${t==='number'?'inputmode="numeric"':''}>`}</div>
   <button class="btn pr w" onclick="const v=$('askV').value;APP.close();APP._askCb&&APP._askCb(v)">Сохранить</button>`);setTimeout(()=>{const e=$('askV');if(e){e.focus();if(e.select)e.select()}},60)},
 async pwReset(){if(!this.user||!this.sb)return;try{const{error}=await this.sb.auth.resetPasswordForEmail(this.user.email,{redirectTo:location.origin+location.pathname});if(error)throw error;this.toast('Письмо для смены пароля отправлено')}catch(e){this.toast(this.errText(e))}},
+rateSheet(){const r=(this.S.pref||{}).rate||0;this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Как тебе wikki.app?</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+  <div class="small mut" style="margin:4px 0 18px">Оценка помогает понять, что улучшать в первую очередь.</div>
+  <div class="rstars">${[1,2,3,4,5].map(i=>`<button class="${i<=r?'on':''}" onclick="APP.rate(${i})" aria-label="${i}">${SI.star}</button>`).join('')}</div><div id="rMsg"></div>`)},
+rate(n){this.S.pref=this.S.pref||{};this.S.pref.rate=n;this.save();document.querySelectorAll('.rstars button').forEach((b,i)=>b.classList.toggle('on',i<n));this.buzz&&this.buzz();
+  const m=$('rMsg');if(m)m.innerHTML=n>=4?`<div class="rmsg"><b>Спасибо!</b><span>Поделись приложением с тем, кому оно тоже поможет держать слово.</span><button class="btn pr w" onclick="APP.close();APP.shareApp()">Поделиться</button></div>`:`<div class="rmsg"><b>Что нам исправить?</b><span>Напиши в двух словах, что мешает. Отвечаем лично.</span><button class="btn pr w" onclick="window.open('https://t.me/wikki_shark','_blank')">Написать в Telegram</button></div>`;this.render()},
+newsSheet(){const N=[['Октябрь 2026','Новые настройки','Профиль сверху, разделы по группам, язык и интеграции на виду. Политика конфиденциальности и условия.'],['Октябрь 2026','Трекер привычек','Таблица на месяц, отметки в одно касание, серии и рекорды. Трекер работает без программы.'],['Октябрь 2026','Профиль героя','Уровень, характеристики и достижения растут от каждой отметки.'],['Октябрь 2026','Прогресс','Колесо баланса и год в пикселях.']];
+  this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Что нового</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+  <div class="nws">${N.map(x=>`<div class="nw"><span>${x[0]}</span><b>${x[1]}</b><p>${x[2]}</p></div>`).join('')}</div>`)},
 methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">На чём построена система</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin-top:10px;line-height:1.55">Каркас — «12 недель в году» Брайана Морана: тактики вместо результатов, недельный счёт, планка 85%, еженедельный разбор, 13-я неделя на итоги.<br><br>Разделение действий и результата — «4 дисциплины исполнения». «Если — то» — Питер Гольвитцер. WOOP — Габриэль Эттинген. Привычки и «не пропускай дважды» — Джеймс Клир. Отчёт партнёру — исследование Гейл Мэтьюз. Строгие программы — по правилам их авторов.</div>`)},
 lang(){return ((this.S.pref||{}).lang)||'ru'},
