@@ -1584,7 +1584,7 @@ tHabitToggle(tid,d){if(d>today()||d<this.st)return;const t=this.S.tactics.find(x
   if(t.type==='check')this.toggle(tid,d);else this.setLog(tid,d,this.v(t,d)>=(+t.per||1)?0:+t.per||1)},
 
 /* ---------- навигация ---------- */
-go(tab,sub){this._ie=null;this._sset=null;if(tab==='profile'){this._prv='hero';tab='progress'}tab=this.normTab(tab);this.tab=tab;this.sub=sub||null;try{sessionStorage.setItem('tw-tab',tab)}catch(e){}window.scrollTo(0,0);this.render()},
+go(tab,sub){this._ie=null;this._sset=null;tab=this.normTab(tab);this.tab=tab;this.sub=sub||null;try{sessionStorage.setItem('tw-tab',tab)}catch(e){}window.scrollTo(0,0);this.render()},
 openSub(sub){this.sub=sub;window.scrollTo(0,0);this.render()},
 shiftDay(n){const d=add(this.day,n);if(d>add(today(),30))return;this.day=d;this.render()},
 goDay(d){this.day=d;this.go('home')},
@@ -1621,7 +1621,7 @@ render(){
   const ttl=this.sub==='programs'?'Программы':this.sub==='deals'?'Воронка':this.sub==='onboard'?'Старт':{home:'Сегодня',habits:'Прогресс',goals:(P?P.name:'Программа'),week:'Неделя',me:'Профиль'}[this.tab];
   const Pp=this.S.profile||{};
   $('snav').innerHTML=`<div class="sb-brand"><span class="sn-mark">${SHARK}</span><div><b>wikki.app</b><span>дисциплина · рост</span></div></div>
-   <div class="sb-nav">${tabs.map(([k,l,ic])=>`<button class="${this.tab===k&&!this.sub?'on':''}" onclick="APP.go('${k}')">${ic}<span>${({tracker:'Трекер привычек',journal:'Дневник рефлексии'})[k]||l}</span></button>`).join('')}</div>
+   <div class="sb-nav">${(simple?tabs:[...tabs.slice(0,-1),['profile','Профиль',I.me],tabs[tabs.length-1]]).map(([k,l,ic])=>`<button class="${this.tab===k&&!this.sub?'on':''}" onclick="APP.go('${k}')">${ic}<span>${({tracker:'Трекер привычек',journal:'Дневник рефлексии'})[k]||l}</span></button>`).join('')}</div>
    <div class="sb-q">«${esc(Pp.motto||'Дисциплина — это выбор между тем, чего хочешь сейчас, и тем, чего хочешь больше всего.')}»<i></i></div>
    <button class="sb-me" onclick="APP.go('profile')"><span class="ava">${esc(this.initial())}</span><span class="sp"><b>${esc(Pp.hero||Pp.name||'Гость')}</b><span>Профиль героя</span></span></button>`;
   this.tr($('nav'));this.tr($('snav'));
@@ -2304,9 +2304,9 @@ vProgram(){const pv=this._pgv==='week'?'week':'goals';
   const seg=`<div class="pseg">${[['goals','Цели'],['week','Неделя']].map(([k,l])=>`<button class="${pv===k?'on':''}" onclick="APP._pgv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
   const body=pv==='week'?this.stripV(this.vWeek()):this.stripV(this.vGoals());
   return `<div class="h1">Программа</div>${this.S.goals.length?seg:''}__S1____S2__${body}`},
-vProgress(){const pv=['balance','year','hero'].includes(this._prv)?this._prv:'over';
-  const seg=`<div class="pseg pseg3">${[['over','Обзор'],['balance','Колесо'],['year','Год'],['hero','Герой']].map(([k,l])=>`<button class="${pv===k?'on':''}" onclick="APP._prv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
-  return `<div class="h1">Прогресс</div>${seg}__S1____S2__${pv==='year'?this.pvYear():pv==='balance'?this.pvBalance():pv==='hero'?this.rpg().replace(/__S\d__/g,''):this.pvOver()}`},
+vProgress(){const pv=['balance','year'].includes(this._prv)?this._prv:'over';
+  const seg=`<div class="pseg pseg3">${[['over','Обзор'],['balance','Колесо'],['year','Год']].map(([k,l])=>`<button class="${pv===k?'on':''}" onclick="APP._prv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
+  return `<div class="h1">Прогресс</div>${seg}__S1____S2__${pv==='year'?this.pvYear():pv==='balance'?this.pvBalance():this.pvOver()}`},
 vTracker(){const h=`<div class="h1">Трекер привычек</div>__S1____S2__`+this.pvHabits().replace(/__S\d__/g,'');
   setTimeout(()=>{document.querySelectorAll('.acw').forEach(w=>{w._data=(this._series||{}).main||[]});this.acBind()},0);return h},
 vJournal(){const S=this.S,td=today(),d=this._jd&&this._jd<=td?this._jd:td,C=S.checkin||{},c=C[d]||{};const dd=pd(d);
