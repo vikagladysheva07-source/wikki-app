@@ -1971,7 +1971,7 @@ pvHabits(){
   const gmb=this._gm||td.slice(0,7),[gyy,gmm]=gmb.split('-').map(Number),gn=new Date(gyy,gmm,0).getDate();
   let trend=[];for(let i=1;i<=gn;i++){const d=gmb+'-'+pad(i);trend.push({d,p:d>td||(d===td&&!(this.progDay(d,'h')>0))?null:(this.progDay(d,'h')??0)})}
   const avg30=(()=>{const v=trend.filter(t=>t.d<=td&&this.progDay(t.d,'h')!=null).map(t=>t.p);return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length*100):null})();
-  const mode=this._gmode||'d';
+  const mode='d';
   const stx=hs.map(x=>{const[f,sc,fr]=this.hFns(x);return {c:this.streak(f,sc,fr),b:this.best(f,sc,fr)}}),curS=Math.max(0,...stx.map(x=>x.c)),bestS=Math.max(0,...stx.map(x=>x.b)),tp=schToday?Math.round(doneToday/schToday*100):0;
   const kpi=hs.length?`<div class="tkpi tkpi3"><div class="card"><span>Серия сейчас</span><b class="fl">${I.flame}${curS}</b><em>${this.pl(curS,'день','дня','дней')}</em></div><div class="card"><span>Рекорд серии</span><b>${bestS}</b><em>${this.pl(bestS,'день','дня','дней')}</em></div><div class="card"><span>Среднее, месяц</span><b>${avg30??'—'}${avg30!=null?'<i>%</i>':''}</b><em>${hs.length} ${this.pl(hs.length,'привычка','привычки','привычек')}</em></div></div>`:'';
   const base=this._gm||td.slice(0,7),[gy,gmo]=base.split('-').map(Number),pm=iso(new Date(gy,gmo-2,1)).slice(0,7),nm=iso(new Date(gy,gmo,1)).slice(0,7);
@@ -1979,7 +1979,7 @@ pvHabits(){
   let h=kpi+`<div class="card" style="padding:16px 18px"><div class="row"><div class="sp"><div class="lbl">${MONF[gmo-1]} ${gy}</div><div class="hbig">${doneToday}/${schToday} <span>${this.pl(schToday,'привычка','привычки','привычек')} сегодня</span></div></div>
     ${mode==='d'?`<button class="ic" onclick="APP._gm='${pm}';APP.render()">${I.l}</button><button class="ic" onclick="APP._gm='${nm}';APP.render()">${I.r}</button>`:''}</div>
    <div class="pline"><i style="width:${schToday?Math.round(doneToday/schToday*100):0}%"></i></div></div>
-   <div class="row hseg"><div class="pseg sp"><button class="${mode==='d'?'on':''}" onclick="APP._gmode='d';APP.render()">По дням</button><button class="${mode==='w'?'on':''}" onclick="APP._gmode='w';APP.render()">По неделям</button></div><button class="btn pr" onclick="APP.editH(null)">${I.plus} Привычка</button></div>`;
+   <div class="row hseg"><span class="sp"></span><button class="btn pr" onclick="APP.editH(null)">${I.plus} Привычка</button></div>`;
   const tr2=trend;this._trendDays=tr2.length;this._series={main:tr2};this._trendHtml=this.areaChart(tr2,{h:window.innerWidth>=1024?96:72,labels:false,extend:false,col:'#9B7BFF'});this._trendAvg=avg30;this._noHead=true;
   h+='__S2__'+(mode==='w'?this.weekGrid(rows):this.monthGrid(hs,tt));this._trendHtml='';this._noHead=false;
   const have=new Set(hs.map(x=>x.title));const lib=HABIT_LIB.filter(([t])=>!have.has(t));
