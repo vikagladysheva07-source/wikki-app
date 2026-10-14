@@ -1017,6 +1017,12 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 .mg.fit .mgh{font-size:10px}
 .trc{margin-left:118px!important;margin-right:78px!important}
 }
+.mgc.on{background:radial-gradient(circle at 35% 30%,#D9CCFF,#9B7BFF 55%,#6B4FD8)!important;color:#fff!important;box-shadow:0 0 12px rgba(155,123,255,.55),inset 0 0 0 1.5px rgba(255,255,255,.22)!important}
+.mgc.td.on{box-shadow:0 0 12px rgba(155,123,255,.55),0 0 0 2px #C9B8FF!important}
+.mgc.part{background:conic-gradient(#9B7BFF calc(var(--f)*1turn),rgba(255,255,255,.08) 0)!important}
+.mgc.td{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.08),0 0 0 2px #C9B8FF}
+.trv b{color:#C9B8FF!important}
+.hcard .hti,.hcard .tile,.mgn .hti{color:#C9B8FF!important;background:rgba(155,123,255,.14)!important;border-color:rgba(155,123,255,.28)!important}.hcard .hti svg,.mgn .hti svg{color:#C9B8FF!important}
 </style>
 </head>
 <body>
@@ -1974,7 +1980,7 @@ pvHabits(){
     ${mode==='d'?`<button class="ic" onclick="APP._gm='${pm}';APP.render()">${I.l}</button><button class="ic" onclick="APP._gm='${nm}';APP.render()">${I.r}</button>`:''}</div>
    <div class="pline"><i style="width:${schToday?Math.round(doneToday/schToday*100):0}%"></i></div></div>
    <div class="row hseg"><div class="pseg sp"><button class="${mode==='d'?'on':''}" onclick="APP._gmode='d';APP.render()">По дням</button><button class="${mode==='w'?'on':''}" onclick="APP._gmode='w';APP.render()">По неделям</button></div><button class="btn pr" onclick="APP.editH(null)">${I.plus} Привычка</button></div>`;
-  const tr2=trend;this._trendDays=tr2.length;this._series={main:tr2};this._trendHtml=this.areaChart(tr2,{h:window.innerWidth>=1024?96:72,labels:false,extend:false});this._trendAvg=avg30;this._noHead=true;
+  const tr2=trend;this._trendDays=tr2.length;this._series={main:tr2};this._trendHtml=this.areaChart(tr2,{h:window.innerWidth>=1024?96:72,labels:false,extend:false,col:'#9B7BFF'});this._trendAvg=avg30;this._noHead=true;
   h+='__S2__'+(mode==='w'?this.weekGrid(rows):this.monthGrid(hs,tt));this._trendHtml='';this._noHead=false;
   const have=new Set(hs.map(x=>x.title));const lib=HABIT_LIB.filter(([t])=>!have.has(t));
   if(lib.length&&(!hs.length||this._libOpen))h+=this.hPicker(hs.length>0);
