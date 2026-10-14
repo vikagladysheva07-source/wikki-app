@@ -770,8 +770,8 @@ body.obd .wrap .h1{display:block!important;font-size:30px;margin:18px 0 8px}
 .prem b{display:block;font-size:15.5px}.prem .sp>span{font-size:12.5px;color:var(--mut)}
 .pr-ch{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.pr-ch em{font-style:normal;font-size:11px;font-weight:600;color:#F5DC6A;padding:3px 8px;border-radius:8px;background:rgba(245,184,75,.1)}
 .sgrp{padding:4px 14px!important}
-.srow .si{width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;color:#fff;background:var(--c)}.srow .si svg{width:16px;height:16px;color:#fff!important;stroke-width:2}
-.srow{gap:12px}
+.srow .si{width:26px;height:26px;flex:none;display:grid;place-items:center;color:var(--c);background:none}.srow .si svg{width:21px;height:21px;color:var(--c)!important;stroke-width:2.1}
+.srow{gap:14px}.sgrp .srow{font-size:16px}
 .tgl{width:46px;height:28px;flex:none;border-radius:14px;background:rgba(255,255,255,.12);position:relative;transition:.2s}.tgl i{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 2px 6px rgba(0,0,0,.4)}
 .tgl.on{background:#22D3E0}.tgl.on i{left:21px}
 .sdanger{margin-top:22px;border-radius:18px;background:#131318;border:1px solid var(--line);padding:4px 14px}
@@ -824,6 +824,23 @@ input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(124,92,230,.25
 .kv div,.stat div{background:var(--s1)}
 .actip{box-shadow:none}
 .toast{box-shadow:0 12px 32px rgba(0,0,0,.5)}
+.sttl{text-align:center;font-weight:700;font-size:17px;margin:8px 0 18px;color:#fff}
+.nme{display:flex;align-items:center;gap:16px;width:100%;padding:6px 4px 18px;text-align:left;color:var(--tx)}
+.nme-av{width:72px;height:72px;flex:none;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,#2a2340,#141420);border:1px solid rgba(155,123,255,.35);overflow:hidden}.nme-av svg{width:44px;height:44px}
+.nme b{display:block;font-size:20px;font-weight:700;margin-bottom:8px}
+.nme-ch{display:flex;gap:8px;flex-wrap:wrap}.nme-ch em{font-style:normal;font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:99px;display:inline-flex;align-items:center;gap:5px}
+.nme-ch .lv{background:rgba(155,123,255,.18);color:#C9B8FF}.nme-ch .ac{background:rgba(34,211,224,.12);color:#7EE6EE}.nme-ch .ac svg{width:13px;height:13px}
+.nme>svg,.nrow>svg{color:var(--dim);flex:none}
+.ngrp{padding:4px 0!important;margin-bottom:12px}
+.nrow{display:flex;align-items:center;gap:14px;width:100%;padding:15px 18px;text-align:left;font-size:16px;color:var(--tx)}
+.nrow:active{background:rgba(255,255,255,.03)}
+.ni{width:24px;height:24px;display:grid;place-items:center;flex:none}
+.nval{color:var(--dim);font-size:14px;margin-right:2px}
+.nout{display:block;width:100%;text-align:center;color:#FF6B8A;font-size:16px;font-weight:600;padding:16px!important;margin:4px 0 12px}
+.sbk{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;margin:4px 0 16px}.sbk b{text-align:center;font-size:17px}
+.sbk-b{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#16161C;border:1px solid var(--line);color:var(--tx)}
+.sc-cl{margin:-4px 4px 12px}
+@media(min-width:1024px){.nme,.ngrp,.nout,.sbk,.sttl{max-width:640px;margin-left:auto;margin-right:auto}.sttl{text-align:left;font-size:22px}}
 </style>
 </head>
 <body>
@@ -857,6 +874,18 @@ const COLORS=['#9B6FE8','#00C4D4','#C4A4FF','#5EE0EE','#7C4FD4'];
 const TYPES={check:'Галочка: N дней в неделю',num:'Число каждый день',count:'N раз в неделю',ms:'Веха с дедлайном'};
 const STAGES=['Касание','Созвон','Оффер','Договор','Оплачено'];
 const sv=(p,w=18,sw=2)=>`<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const SI=(()=>{const f=(p)=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">${p}</svg>`;return{
+crown:f('<path d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 12H5z"/>'),
+target:f('<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" fill-rule="evenodd"/>'),
+cal:f('<path d="M7 2h2v2h6V2h2v2h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2zM5 9v10h14V9z"/><rect x="7" y="11" width="4" height="4" rx="1"/>'),
+bell:f('<path d="M12 2a6 6 0 0 0-6 6v4.5L4 16v1h16v-1l-2-3.5V8a6 6 0 0 0-6-6zm-2.5 17a2.5 2.5 0 0 0 5 0z"/>'),
+brush:f('<path d="M4 3h13a2 2 0 0 1 2 2v1h1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7v2h1v7a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-7h1v-4h7V8h-1v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>'),
+user:f('<circle cx="12" cy="7.5" r="4.5"/><path d="M3 21c0-4.4 4-7.5 9-7.5s9 3.1 9 7.5z"/>'),
+lock:f('<path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 0 1 6 0v3z"/>'),
+help:f('<path d="M5 3h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-5l-4 4v-4H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm7 3.5l1.2 2.6 2.8.3-2.1 1.9.6 2.8L12 12.7l-2.5 1.4.6-2.8L8 9.4l2.8-.3z" fill-rule="evenodd"/>'),
+share:f('<path d="M14 4l8 7-8 7v-4.2C8.6 13.8 5 15.6 2 20c.9-6.3 4.6-11.2 12-12.2z"/>'),
+info:f('<path d="M5 3h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H9l-5 3V5a2 2 0 0 1 1-2zm3 5v2h8V8zm0 4v2h5v-2z" fill-rule="evenodd"/>'),
+medal:f('<path d="M7 2h4l1 4 1-4h4l-3 7.2A6 6 0 1 1 10 9.2zM12 11a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>')}})();
 const I={
   dash:sv('<rect x="3" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.8"/>',22),
   chart:sv('<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',22),
@@ -1097,7 +1126,7 @@ tHabitToggle(tid,d){if(d>today()||d<this.st)return;const t=this.S.tactics.find(x
   if(t.type==='check')this.toggle(tid,d);else this.setLog(tid,d,this.v(t,d)>=(+t.per||1)?0:+t.per||1)},
 
 /* ---------- навигация ---------- */
-go(tab,sub){this._ie=null;tab=this.normTab(tab);this.tab=tab;this.sub=sub||null;try{sessionStorage.setItem('tw-tab',tab)}catch(e){}window.scrollTo(0,0);this.render()},
+go(tab,sub){this._ie=null;this._sset=null;tab=this.normTab(tab);this.tab=tab;this.sub=sub||null;try{sessionStorage.setItem('tw-tab',tab)}catch(e){}window.scrollTo(0,0);this.render()},
 openSub(sub){this.sub=sub;window.scrollTo(0,0);this.render()},
 shiftDay(n){const d=add(this.day,n);if(d>add(today(),30))return;this.day=d;this.render()},
 goDay(d){this.day=d;this.go('home')},
@@ -2101,9 +2130,9 @@ newSprint(){const s=prompt('Дата старта нового спринта (�
 /* ================= Я (личный кабинет) ================= */
 vMe(){
   const S=this.S;let h='';
-  if(!this.user){
+  if(!this.user&&!this._sset){
     let m=this._am||'in';if(m==='link')m='in';
-    h+=`<div class="h1">Настройки</div>
+    h+=`<div class="sttl">Настройки</div>
     <div class="card auth"><span class="au-mark">${SHARK}</span><div class="au-t">${m==='up'?'Создай аккаунт':m==='reset'?'Новый пароль':'С возвращением'}</div><div class="au-s">${m==='up'?'Система в облаке: телефон и компьютер видят одно и то же.':m==='reset'?'Придумай новый пароль, не короче 8 символов.':'Войди, чтобы продолжить с того же места на любом устройстве.'}</div>
      ${m==='reset'?'':`<div class="pseg au-seg"><button class="${m==='in'?'on':''}" onclick="APP._am='in';APP._amsg='';APP.render()">Вход</button><button class="${m==='up'?'on':''}" onclick="APP._am='up';APP._amsg='';APP.render()">Регистрация</button></div>`}
      ${m==='up'?`<div class="f"><label class="lbl">Имя</label><input id="aN" autocomplete="name" value="${esc(S.profile.name)}" placeholder="Как тебя зовут"></div>`:''}
@@ -2113,52 +2142,64 @@ vMe(){
      ${m==='in'?`<button class="au-fg" onclick="APP.forgot()">Забыли пароль?</button>`:''}
      <div class="small" id="aMsg" style="margin-top:10px;color:var(--pb);text-align:center">${esc(this._amsg||'')}</div>
      ${this.cloud==='err'?'<div class="small" style="margin-top:6px;color:var(--pb);text-align:center">Сервер сейчас недоступен. Данные сохраняются на этом устройстве.</div>':''}</div>`;
-  }else{
-    const Pp=S.profile||{},av=Pp.ava&&Pp.ava!=='shark'?hIco(Pp.ava):SHARK;
-    h+=`<div class="h1">Настройки</div>__S1____S2__<div class="card acct"><span class="acav">${av}</span><div class="sp"><b>${esc(Pp.name||Pp.hero||'Без имени')}</b><span>${esc(this.user.email)}</span>
-      <div class="cloud ${this.cloud==='on'?'on':this.cloud==='err'?'err':''}"><i></i>${this.cloud==='on'?'в облаке'+(this._last?' · '+new Date(this._last).toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'}):''):this.cloud==='err'?'нет связи, сохранено локально':'синхронизация…'}</div></div><button class="pill" onclick="APP.go('profile')">профиль ${I.r}</button></div>`;
+  }else if(!this._sset){
+    h+=`<div class="sttl">Настройки</div>`;
   }
   const ic=(k,c)=>`<span class="si" style="--c:${c}">${typeof k==='string'&&k.startsWith('<svg')?k:hIco(k)}</span>`;
   const row=(icon,label,value,act,sub,cls)=>`<button class="srow ${cls||''}" ${act?`onclick="${act}"`:'disabled style="cursor:default"'}>${icon||''}<div class="sp"><div>${label}</div>${sub?`<div class="small mut">${sub}</div>`:''}</div>${value?`<span class="sval">${value}</span>`:''}${act?I.r:''}</button>`;
   const tog=(icon,label,on,act,sub)=>`<button class="srow" onclick="${act}">${icon}<div class="sp"><div>${label}</div>${sub?`<div class="small mut">${sub}</div>`:''}</div><span class="tgl ${on?'on':''}"><i></i></span></button>`;
   const sec=(t,rows)=>`<div class="lbl sec">${t}</div><div class="card sgrp">${rows.join('')}</div>`;
   const lang=this.lang(),P=this.prog(),pr=S.pref||{},vac=this.vacOn();
-  h+=`<div class="card prem"><span class="pr-ic">${I.star}</span><div class="sp"><b>Полный доступ</b><span>Разовая покупка без подписки · 14 дней на возврат</span><div class="pr-ch"><em>Все программы</em><em>Облако</em><em>Разбор недели</em><em>Колесо и год</em></div></div><button class="btn sm" disabled>Скоро</button></div>`;
-  if(this.user)h+=sec('Аккаунт',[
+  const pages={};
+  pages.account=()=>sec('Аккаунт',[
     row(ic('heart','#E65CA8'),'Имя',esc(S.profile.name||'—'),"APP.ask('Имя',APP.S.profile.name,v=>{APP.S.profile.name=v.trim();APP.save();APP.render()})"),
-    row(ic('chat','#4B7BE6'),'Почта',esc(this.user.email)),
-    row(ic('target','#7C5CE6'),'Сменить пароль','',"APP.pwReset()",'Пришлём ссылку на почту')]);
-  h+=sec('Программа',[
+    row(ic('chat','#4B7BE6'),'Почта',esc(this.user?this.user.email:'—')),
+    row(ic('target','#7C5CE6'),'Сменить пароль','',"APP.pwReset()",'Пришлём ссылку на почту')])+`<div class="cloud sc-cl ${this.cloud==='on'?'on':this.cloud==='err'?'err':''}"><i></i>${this.cloud==='on'?'Данные в облаке'+(this._last?' · '+new Date(this._last).toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'}):''):this.cloud==='err'?'Нет связи, сохранено на устройстве':'Синхронизация…'}</div>`;
+  pages.premium=()=>`<div class="card prem"><span class="pr-ic">${I.star}</span><div class="sp"><b>Полный доступ</b><span>Разовая покупка без подписки · 14 дней на возврат</span><div class="pr-ch"><em>Все программы</em><em>Облако</em><em>Разбор недели</em><em>Колесо и год</em></div></div><button class="btn sm" disabled>Скоро</button></div>`;
+  pages.program=()=>sec('Программа',[
     row(ic('target','#7C5CE6'),'Программа',P?esc(P.name):'не выбрана',"APP.openSub('programs')",P?({score:'планка 85%',strict:'строгий режим',count:'копилка дней'}[this.mode]):''),
     row(ic('sun','#F5B84B'),'Дата старта',fd(S.sprint.start),"APP.ask('Дата старта',APP.S.sprint.start,v=>{if(/^\\d{4}-\\d{2}-\\d{2}$/.test(v)){APP.S.sprint.start=v;APP.save();APP.render()}},'date')"),
     S.sprint.days?row(ic('list','#16B8C4'),'Длительность',S.sprint.days+' дней'):row(ic('list','#16B8C4'),'Длина программы',this.W+' недель',"APP.ask('Недель',APP.W,v=>{APP.S.sprint.weeks=Math.max(1,Math.min(52,+v||12));APP.save();APP.render()},'number')"),
     row(ic('star','#22D3E0'),'Планка счёта',(S.sprint.threshold||85)+'%',"APP.ask('Планка, %',APP.S.sprint.threshold||85,v=>{APP.S.sprint.threshold=Math.max(50,Math.min(100,+v||85));APP.save();APP.render()},'number')"),
     row(ic('snow','#5EE0EE'),'Заморозок в месяц',String(this.frzLimit()),"APP.ask('Заморозок в месяц',APP.frzLimit(),v=>{APP.S.pref=APP.S.pref||{};APP.S.pref.freezes=Math.max(0,+v||0);APP.save();APP.render()},'number')",'Болезнь, перелёт: серии не рвутся'),
     row(ic('pen','#B49CFF'),'Видение на 3 года',S.sprint.vision?'заполнено':'—',"APP.ask('Видение: какой я хочу видеть свою жизнь через 3 года',APP.S.sprint.vision,v=>{APP.S.sprint.vision=v;APP.save();APP.render()},'textarea')")]);
-  h+=sec('День и неделя',[
+  pages.day=()=>sec('День и неделя',[
     row(ic('list','#4B7BE6'),'Первый день недели',pr.wk0==='sun'?'воскресенье':'понедельник',"APP.setPref('wk0',(APP.S.pref||{}).wk0==='sun'?'mon':'sun')"),
     tog(ic('tree','#16B8C4'),'Режим отпуска',vac,"APP.toggleVac()",vac?`с ${fd(vac.from)} · привычки на паузе, серии не рвутся`:'Ставит все привычки на паузу, пока ты отдыхаешь')]);
-  h+=sec('Уведомления',[
+  pages.notif=()=>sec('Уведомления',[
     row(ic('moon','#7C5CE6'),'Напоминания в календарь','',"APP.exportIcs()",'Утро, день, вечер, чек-ин и воскресный разбор — в календарь телефона'),
     row(ic('phone','#56566A'),'Пуш-уведомления','скоро',null,'Утренняя и вечерняя сводка, разбор недели, колесо баланса')]);
-  h+=sec('Оформление',[
+  pages.look=()=>sec('Оформление',[
     row(ic('chat','#22D3E0'),'Язык',lang==='en'?'English':'Русский',"APP.setLang(APP.lang()==='en'?'ru':'en')"),
     row(ic('dumb','#F5B84B'),'Режим',this.simple()?'Простой':'Полный',"APP.setSimple(!APP.simple())",this.simple()?'Дашборд, трекер и настройки':'Все разделы'),
     tog(ic('heart','#E65CA8'),'Вибрация при отметке',pr.haptics!==false,"APP.setPref('haptics',(APP.S.pref||{}).haptics===false)"),
     row(ic('moon','#56566A'),'Тема','тёмная')]);
-  h+=sec('Данные и приватность',[
+  pages.data=()=>sec('Данные и приватность',[
     tog(ic('ban','#E65CA8'),'Код-пароль',!!pr.pin,pr.pin?"APP.pinOff()":"APP.pinSet()",pr.pin?'Приложение спрашивает код при открытии':'Закрыть приложение 4-значным кодом'),
     row(ic('book','#7C5CE6'),'Выгрузить данные','JSON',"APP.exportData()"),
     `<label class="srow" style="cursor:pointer">${ic('book','#16B8C4')}<div class="sp"><div>Загрузить данные</div></div>${I.r}<input type="file" accept=".json" style="display:none" onchange="APP.importData(this)"></label>`,
     row(ic('target','#B49CFF'),'Ссылка-шаблон','',"APP.tplLink().then(l=>APP.copy(l))",'Передать цели и тактики другому человеку'),
     row(ic('list','#F5B84B'),'Прошлые программы',String((S.archive||[]).length),(S.archive||[]).length?"APP.historySheet()":null)]);
-  h+=sec('Поддержка',[
+  pages.help=()=>sec('Поддержка',[
     row(ic('chat','#4B7BE6'),'Написать в поддержку','',"window.open('https://t.me/wikki_shark','_blank')",'Ответим в Telegram'),
     row(ic('star','#F5B84B'),'Предложить идею','',"window.open('https://t.me/wikki_shark','_blank')"),
     row(ic('heart','#E65CA8'),'Поделиться приложением','',"APP.shareApp()"),
     row(ic('book','#7C5CE6'),'Метод','',"APP.methodSheet()",'Моран, 4DX, Гольвитцер, Эттинген, Клир')]);
-  h+=`<div class="sdanger">${this.user?`<button class="srow warn" onclick="APP.logout()"><div class="sp">Выйти из аккаунта</div></button>`:''}<button class="srow warn" onclick="APP.wipe()"><div class="sp">Начать с нуля</div></button>${this.user?`<button class="srow warn" onclick="APP.deleteMe()"><div class="sp">Удалить аккаунт</div></button>`:''}</div>
-   <div class="sver">wikki.app · версия 1.0 · WIKKI.OCEAN</div>`;
+  const pdata=pages.data;pages.data=()=>pdata()+`<div class="sdanger"><button class="srow warn" onclick="APP.wipe()"><div class="sp">Начать с нуля</div></button>${this.user?`<button class="srow warn" onclick="APP.deleteMe()"><div class="sp">Удалить аккаунт</div></button>`:''}</div>`;
+  const TT={account:'Аккаунт',premium:'Полный доступ',program:'Программа',day:'День и неделя',notif:'Уведомления',look:'Оформление',data:'Данные и приватность',help:'Помощь и обратная связь'};
+  const cur=this._sset&&pages[this._sset]?this._sset:null;
+  if(cur){h+=`<div class="sbk"><button class="sbk-b" onclick="APP._sset=null;APP.render();window.scrollTo(0,0)" aria-label="Назад">${I.l}</button><b>${TT[cur]}</b><span></span></div>`+pages[cur]().replace(/<div class="lbl sec">[^<]*<\/div>/,'');return h}
+  const go=k=>`APP._sset='${k}';APP.render();window.scrollTo(0,0)`;
+  const nr=(k,c,label,val,act)=>`<button class="nrow" onclick="${act}"><span class="ni" style="color:${c}">${SI[k]}</span><span class="sp">${label}</span>${val?`<span class="nval">${val}</span>`:''}${I.r}</button>`;
+  const grp=rows=>`<div class="card ngrp">${rows.join('')}</div>`;
+  if(this.user){const Pp=S.profile||{},av=Pp.ava&&Pp.ava!=='shark'?hIco(Pp.ava):SHARK,R=this.rpgData(),na=R.ach.filter(x=>x[2]).length;
+    h+=`<button class="nme" onclick="APP.go('profile')"><span class="nme-av">${av}</span><span class="sp"><b>${esc(Pp.name||Pp.hero||'Без имени')}</b><span class="nme-ch"><em class="lv">Ур. ${R.lvl}</em><em class="ac">${SI.medal}${na} ${this.pl(na,'достижение','достижения','достижений')}</em></span></span>${I.r}</button>`}
+  h+=grp([nr('crown','#F5B84B','Полный доступ','скоро',go('premium'))]);
+  h+=grp([nr('target','#9B7BFF','Программа',P?esc(P.name):'',go('program')),nr('cal','#9B7BFF','День и неделя','',go('day')),nr('bell','#9B7BFF','Уведомления','',go('notif')),nr('brush','#9B7BFF','Оформление','',go('look'))]);
+  h+=grp([...(this.user?[nr('user','#22D3E0','Аккаунт','',go('account'))]:[]),nr('lock','#22D3E0','Данные и приватность','',go('data'))]);
+  h+=grp([nr('help','#F5B84B','Помощь и обратная связь','',go('help')),nr('share','#F5B84B','Поделиться приложением','',"APP.shareApp()"),nr('info','#F5B84B','О приложении','v1.0',"APP.methodSheet()")]);
+  if(this.user)h+=`<button class="card nout" onclick="APP.logout()">Выйти</button>`;
+  h+=`<div class="sver">wikki.app · WIKKI.OCEAN</div>`;
   return h;
 },
 setPref(k,v){this.S.pref=this.S.pref||{};this.S.pref[k]=v;this.save();this.render()},
