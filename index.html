@@ -962,6 +962,19 @@ body.wlc .wl-s,body.wlc .wl-f span{color:rgba(225,240,250,.82)}
 .pg-s textarea{width:100%;min-height:76px;margin-top:6px}.rpa{display:grid;gap:8px;margin:6px 0 10px}
 @media(min-width:1024px){.pgg{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;margin-bottom:14px}.pgg .pg-s{margin:0}.pgg #pg-cons{grid-column:1/-1}.pgg #pg-cons .pcl{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}.pgtg{grid-template-columns:repeat(4,1fr)}.rkg{grid-template-columns:repeat(6,1fr)}}
 .ovs .ovy{fill:rgba(255,255,255,.3)}
+.mit{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:16px 18px!important;margin:12px 0 0;color:var(--tx);border:1px solid rgba(155,123,255,.3)!important;background:linear-gradient(120deg,rgba(155,123,255,.12),rgba(155,123,255,.02)),#121218!important}
+.mit em,.dtip em,.slq em{display:block;font-style:normal;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#C9B8FF;margin-bottom:3px}.mit b{font-size:17px;font-weight:700;line-height:1.3}.mit0 b{font-size:15px;font-weight:500;color:var(--dim)}.mit>svg{color:var(--dim);flex:none}
+.mit-c{width:34px;height:34px;flex:none;border-radius:11px;border:2px solid rgba(155,123,255,.6);display:grid;place-items:center;color:#05131A}.mit-c svg{width:18px;height:18px}.mit.done .mit-c{background:#5EE0EE;border-color:#5EE0EE}.mit.done b{text-decoration:line-through;color:var(--dim)}
+.dtip{display:flex;gap:12px;align-items:flex-start;padding:14px 16px!important;margin:12px 0 0;border:1px solid rgba(94,224,238,.2)!important;background:linear-gradient(120deg,rgba(94,224,238,.08),transparent),#121218!important}.dtip>span{color:#5EE0EE;margin-top:2px}.dtip em{color:#7EE6EE}.dtip p{margin:0;font-size:14.5px;line-height:1.5}
+.slq{display:block;padding:14px 16px!important;margin:12px 0 0}.slq b{font-size:15px}.slq em{color:var(--dim)}.slq-b{display:flex;gap:6px;margin-top:10px}.slq-b button{flex:1;height:40px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--tx);font-weight:700}
+.cld{padding:16px!important;margin:12px 0 0;border:1px solid rgba(155,123,255,.25)!important}.cld-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}.cld-h b{font-size:17px}.cld-h span{font-size:12.5px;color:var(--dim)}
+.cld-r{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0}.cld-r span{font-size:14px;color:var(--dim)}.cld-d{display:flex;gap:6px}.cld-d button{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--tx);font-weight:700}.cld-d button.on{background:#9B7BFF;border-color:#9B7BFF;color:#fff}
+.cld-i{width:100%;margin-top:8px}.cld-ok{display:flex;align-items:center;gap:12px;width:100%;text-align:left;color:var(--tx)}.cld-ok>span:first-child{width:30px;height:30px;border-radius:50%;background:#5EE0EE;color:#05131A;display:grid;place-items:center}.cld-ok b{display:block}.cld-ok em{display:block;font-style:normal;font-size:12.5px;color:var(--dim)}
+.qfab{position:fixed;right:16px;bottom:calc(98px + env(safe-area-inset-bottom));z-index:41;width:50px;height:50px;border-radius:18px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#9B7BFF,#6B4FD8);box-shadow:0 12px 30px rgba(107,79,216,.5)}.qfab svg{width:24px;height:24px}
+@media(min-width:1024px){.qfab{bottom:28px;right:28px}.slq-b{max-width:420px}}
+.qml{display:grid;gap:8px;margin-top:12px}.qml button{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--tx);font-size:15px;text-align:left}.qml button span{color:#C9B8FF;display:grid}.qml svg{width:20px;height:20px}
+.dz-s2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 10px}.dz-s2 div{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line)}.dz-s2 b{display:block;font-size:30px;font-weight:800}.dz-s2 span{font-size:12px;color:var(--dim)}
+.ptr{display:flex;align-items:center;gap:12px;padding:8px 0}.pta{width:36px;height:36px;flex:none;border-radius:50%;display:grid;place-items:center;font-weight:800;background:rgba(94,224,238,.15);color:#7EE6EE}.pta.me{background:rgba(155,123,255,.2);color:#C9B8FF}.ptr-h{display:flex;justify-content:space-between;margin-bottom:6px}.ptr-h span{font-weight:800}
 </style>
 </head>
 <body>
@@ -1163,6 +1176,48 @@ areaSheet(){const a=this.areasGet();AREAS=this.areaList();
   <div class="arl">${a.map((x,i)=>`<div class="arr"><button class="arr-i" onclick="APP.areaIco(${i})" aria-label="Иконка">${aIco(x.k)}</button><input value="${esc(x.n)}" maxlength="40" onchange="APP.areaRen(${i},this.value)"><div class="dzr-m"><button ${i?'':'disabled'} onclick="APP.areaMove(${i},-1)" aria-label="Выше">${I.l}</button><button ${i<a.length-1?'':'disabled'} onclick="APP.areaMove(${i},1)" aria-label="Ниже">${I.r}</button></div><button class="arr-x" onclick="APP.areaDel(${i})" aria-label="Убрать">${I.x}</button></div>`).join('')}</div>
   ${a.length<12?`<button class="qadd" style="margin-top:12px" onclick="APP.areaAdd()">${I.plus} Добавить сферу</button>`:''}
   <button class="btn gh w" style="margin-top:14px" onclick="if(confirm('Вернуть 8 классических сфер?')){APP.S.areas=null;APP.save();APP.render();APP.areaSheet()}">Вернуть классические 8 сфер</button>`)},
+/* главное дело дня */
+mitText(){return (((this.S.checkin||{})[add(today(),-1)])||{}).top||''},
+mitDone(){return !!(((this.S.checkin||{})[today()])||{}).mitDone},
+mitSet(){this.ask('Главное дело сегодня',this.mitText(),v=>this.jSet(add(today(),-1),'top',(v||'').trim(),true))},
+mitTog(){const on=!this.mitDone();this.jSet(today(),'mitDone',on,true);if(on){this.burst(null,true);this.buzz([20,40,20])}},
+mitH(){const mt=this.mitText(),md=this.mitDone();
+  return mt?`<div class="card mit ${md?'done':''}"><button class="mit-c" onclick="APP.mitTog()" aria-label="Готово">${md?I.ok:''}</button><div class="sp" onclick="APP.mitSet()"><em>Главное сегодня</em><b>${esc(mt)}</b></div></div>`
+    :`<button class="card mit mit0" onclick="APP.mitSet()"><span class="mit-c"></span><span class="sp"><em>Главное сегодня</em><b>Назови одно дело, после которого день точно удался</b></span>${I.plus}</button>`},
+/* подсказка дня */
+dayTip(){const P=this.pattern(),td=today(),c=((this.S.checkin||{})[td])||{},wd=pd(td).getDay(),cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+  if(P.n<14)return `Отмечай дни ещё ${14-P.n} ${this.pl(14-P.n,'день','дня','дней')} — и приложение начнёт подсказывать, что влияет на твою продуктивность.`;
+  const sl=+String(c.sleep||'').replace(',','.'),fs=P.f.find(f=>f.kind==='s'&&f.d>0);
+  if(sl&&sl<7&&fs)return `Сон меньше 7 часов. В такие дни дела выполняются на ${fs.d}% реже — выбери 3 главных и начни с них.`;
+  if(P.wd&&P.wd.best.k===wd)return `${cap(WDF[wd])} — твой лучший день недели (${P.wd.best.v}%). Поставь на него самое сложное.`;
+  if(P.wd&&P.wd.worst.k===wd)return `${cap(WDF[wd])} — обычно самый слабый день (${P.wd.worst.v}%). Начни с самого лёгкого дела, чтобы набрать ход.`;
+  const fh=P.f.find(f=>f.kind==='h'&&f.d>0);if(fh){const h=this.S.habits.find(x=>x.title===fh.name);if(h&&!this.hOn(h,td))return `Сделай «${esc(fh.name)}» пораньше: в такие дни остальное выполняется на ${fh.d}% чаще.`}
+  if(P.f.length)return this.patTxt(P.f[0])+'.';
+  return ''},
+tipH(){const t=this.dayTip();return t?`<div class="card dtip"><span>${I.spark||I.star}</span><div class="sp"><em>Подсказка дня</em><p>${t}</p></div></div>`:''},
+/* утро: сон, вечер: закрыть день */
+ctxH(){const td=today(),hr=this._hr??new Date().getHours(),c=((this.S.checkin||{})[td])||{};
+  if(hr>=4&&hr<13&&!c.sleep)return `<div class="card slq"><div class="sp"><em>Как спалось?</em><b>Сон этой ночью, часов</b></div><div class="slq-b">${[5,6,7,8,9].map(v=>`<button onclick="APP.jSet('${td}','sleep','${v}',true)">${v}${v===9?'+':''}</button>`).join('')}</div></div>`;
+  if(hr>=18||hr<4){const dots=k=>`<div class="cld-d">${[1,2,3,4,5].map(n=>`<button class="${+c[k]===n?'on':''}" onclick="APP.jSet('${td}','${k}',${n},true)">${n}</button>`).join('')}</div>`;
+    if(c.mood&&c.energy&&c.win)return `<button class="card cld cld-ok" onclick="APP._jd=today();APP.go('journal')"><span>${I.ok}</span><span class="sp"><b>День закрыт</b><em>настроение ${c.mood} · энергия ${c.energy}${c.top?' · завтра: '+esc(c.top):''}</em></span>${I.r}</button>`;
+    return `<div class="card cld"><div class="cld-h"><b>Закрой день</b><span>60 секунд</span></div><div class="cld-r"><span>Настроение</span>${dots('mood')}</div><div class="cld-r"><span>Энергия</span>${dots('energy')}</div>
+      <input class="cld-i" placeholder="Что сегодня продвинулось?" value="${esc(c.win||'')}" onchange="APP.jSet('${td}','win',this.value.trim(),true)">
+      <input class="cld-i" placeholder="Главное дело на завтра" value="${esc(c.top||'')}" onchange="APP.jSet('${td}','top',this.value.trim(),true)"></div>`}
+  return ''},
+/* быстрые действия */
+qMenu(){const it=[['Дело на сегодня','list',"APP.close();APP.ask('Новое дело на сегодня','',v=>{APP.taskAdd(v);APP.render()})"],['Привычка','check',"APP.close();APP.editH()"],['Победа дня','star',"APP.close();APP.winAdd()"],['30 минут фокуса','target',"APP.close();APP.focusAdd(30)"],['Запись в дневник','pen',"APP.close();APP._jd=today();APP.go('journal')"]];
+  this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Быстро добавить</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="qml">${it.map(([t,ic,a])=>`<button onclick="${a}"><span>${SI[ic]||hIco(ic)}</span>${t}</button>`).join('')}</div>`)},
+/* партнёр по ответственности */
+partnerW(){const head=`<div class="dz-ch"><span class="dz-ti">${I.chat||''}Партнёр</span></div>`;
+  if(!this.user)return `<div class="card dz-c dz-pt">${head}<div class="dz-pw0t">Войди в аккаунт, чтобы видеть прогресс друг друга.</div><button class="pill" onclick="APP.go('me')">Войти ${I.r}</button></div>`;
+  const g=(this.groups||[])[0],m0=this.monday(today());
+  if(!g)return `<div class="card dz-c dz-pt">${head}<div class="dz-pw0t">Позови одного человека: вы видите процент недели друг друга. Когда о прогрессе знает кто-то ещё, цели достигаются чаще (Harkin, 2016).</div><div class="pg-act"><button class="btn pr sm" onclick="APP.ptCreate()">Позвать партнёра</button><button class="pill" onclick="APP.ptJoin()">У меня есть код</button></div></div>`;
+  const b=this.boards[g.code]||{members:[]},ms=(b.members||[]).slice().sort((a,c)=>(c.id===this.user.id)-(a.id===this.user.id));
+  const rows=ms.map(x=>{const s=(x.scores||{})[m0]||{},v=s.score,me=x.id===this.user.id,nm=me?'Ты':(x.name||'Партнёр');return `<div class="ptr"><span class="pta ${me?'me':''}">${esc(nm.charAt(0).toUpperCase())}</span><div class="sp"><div class="ptr-h"><b>${esc(nm)}</b><span>${v!=null?v+'%':'—'}</span></div><div class="pex-bar"><i style="width:${v||0}%"></i></div></div></div>`}).join('');
+  return `<div class="card dz-c dz-pt">${head}<div class="small mut" style="margin:-4px 0 10px">Процент этой недели</div>${rows}${ms.length<2?`<div class="pg-note">Пока никто не присоединился. Код: <b style="color:#7EE6EE;letter-spacing:.12em">${esc(g.code)}</b></div><button class="pill" style="margin-top:10px" onclick="APP.ptInvite('${g.code}')">Отправить приглашение ${I.r}</button>`:''}</div>`},
+async ptCreate(){try{const code=await this.grpRpc('tw_group_create',{p_name:'Партнёры',p_me:this.S.profile.name||''});await this.grpLoad();await this.grpPush();await this.grpLoad();this.render();this.ptInvite(code)}catch(e){this.toast(this.grpErr(e))}},
+ptInvite(code){const url='https://vikagladysheva07-source.github.io/12-weeks/',t=`Давай держать друг друга в тонусе в wikki.app. Мой код: ${code}. Открой ${url}, на дашборде в блоке «Партнёр» нажми «У меня есть код».`;if(navigator.share)navigator.share({text:t}).catch(()=>{});else this.copy(t)},
+ptJoin(){this.ask('Код партнёра','',async v=>{v=(v||'').trim();if(v.length<4)return this.toast('Введи код из 6 символов');try{const g=await this.grpRpc('tw_group_join',{p_code:v,p_me:this.S.profile.name||''});await this.grpLoad();await this.grpPush();await this.grpLoad();this.render();this.toast('Вы теперь партнёры: «'+g.name+'»')}catch(e){this.toast(this.grpErr(e))}})},
 inPrg(){const S=this.S,td=today();return S.goals.length>0&&td>=this.st&&td<=add(this.end(),7)},
 pgFrom(){return this.inPrg()?this.st:add(today(),-89)},
 pgFromTxt(){return this.inPrg()?'за программу':'за 90 дней'},
@@ -1509,7 +1564,7 @@ vToday(){
   if(!S.goals.length){}
   else if(td<this.st)h+=`<div class="card small mut">Спринт начинается ${fd(this.st)}. Отмечать можно уже сейчас.</div>`;
   const ytop=((S.checkin||{})[add(this.day,-1)]||{}).top;
-  if(ytop)h+=`<button class="quote" style="margin:14px 0;display:block;width:100%;text-align:left" onclick="APP.editTop('${add(this.day,-1)}')"><span class="lbl" style="display:block;margin-bottom:2px">Главное на ${this.day===td?'сегодня':'этот день'}</span>${esc(ytop)}</button>`;
+  if(ytop&&!this._noBoard)h+=`<button class="quote" style="margin:14px 0;display:block;width:100%;text-align:left" onclick="APP.editTop('${add(this.day,-1)}')"><span class="lbl" style="display:block;margin-bottom:2px">Главное на ${this.day===td?'сегодня':'этот день'}</span>${esc(ytop)}</button>`;
   const grp=(S.pref||{}).group||'tod';
   h+=`__S2__`;
   if(fz)h+=`<div class="card frozen small"><b>День заморожен.</b> Отметки не обязательны, серии не прервутся, счёт недели пересчитан без этого дня. <button class="btn sm" style="margin-left:6px" onclick="APP.freeze('${this.day}',false)">Разморозить</button></div>`;
@@ -2114,13 +2169,14 @@ vHome(){const S=this.S,td=today(),P=S.profile||{};
   const nTk=(t.match(/class="tk /g)||[]).length,more=nTk>6?`<button class="dz-more" onclick="APP._dzAll=!APP._dzAll;APP.render()">${this._dzAll?'Свернуть':'Показать все '+nTk}</button>`:'';
   const Wv=S.wheel&&S.wheel[td.slice(0,7)]||{},wf=AREAS.filter(x=>Wv[x[0]]),wav=wf.length?(wf.reduce((a,x)=>a+ +Wv[x[0]],0)/wf.length).toFixed(1):null,wlo=wf.length?wf.slice().sort((a,b)=>Wv[a[0]]-Wv[b[0]])[0]:null;
   const whlH=`<div class="card dz-c dz-whl"><div class="dz-ch"><span class="dz-ti">${I.goal}Колесо баланса</span></div>${wav?`<div class="dz-big"><b>${wav}</b><span>из 10</span></div><div class="dz-whb">${AREAS.map(x=>`<i style="height:${(+Wv[x[0]]||0)*10}%" class="${wlo&&x[0]===wlo[0]?'lo':''}" title="${x[1]}"></i>`).join('')}</div><div class="dz-whl-s">Слабее всего: ${wlo[1]}</div>`:`<div class="dz-pw0t">Оцени 8 сфер жизни, чтобы видеть баланс месяц к месяцу.</div>`}<button class="pill" style="margin-top:12px" onclick="APP._prv='balance';APP.go('progress')">${wav?'Открыть колесо':'Оценить сферы'} ${I.r}</button></div>`;
-  const WG={today:`<div class="dz-today ${this._dzAll?'all':''}">${t}${more}</div>`,streak:stk,week:progH,progress:over,series:strH,cons,wkbars:wkH,wheel:whlH};
+  const stk2=`<div class="card dz-c dz-stk2"><div class="dz-ch"><span class="dz-ti">${I.fire}Серии</span></div><div class="dz-s2"><div><b>${cur}</b><span>${this.pl(cur,'день','дня','дней')} подряд сейчас</span></div><div><b>${best}</b><span>рекорд</span></div></div>${sl.slice(0,3).map(x=>`<div class="dz-sr">${this.tile(x.r.o,x.r.k,x.r.k==='h'?null:this.gColor(x.r.o.goal))}<span class="sp">${esc(x.r.o.title)}</span><b>${I.flame}${x.st}</b></div>`).join('')}<button class="dz-all" onclick="APP.go('tracker')">Все серии ${I.r}</button></div>`;
+  const WG={today:`<div class="dz-today ${this._dzAll?'all':''}">${t}${more}</div>`,streak:stk2,week:progH,partner:this.partnerW(),progress:over,cons,wkbars:wkH,wheel:whlH};
   let body='',chunk='';const flush=()=>{if(chunk){body+=`<div class="dz dz2">${chunk}</div>`;chunk=''}};
   this.dzOrder().forEach(([k,on])=>{if(!on||!WG[k])return;if(k==='today'){flush();body+=WG[k]}else chunk+=WG[k]});flush();
   const repC=this.inPrg()&&this.curWeek()>=12?`<button class="card pg-rep" onclick="APP.openSub('report')"><span>${I.trophy}</span><div class="sp"><b>Итоги цикла готовы</b><em>Цифры, победы и карточка для сторис</em></div>${I.r}</button>`:'';
-  return `<div class="dz-hd"><div class="h1">Дашборд</div><button class="dz-cfg" onclick="APP.dzSheet()">${I.gear}<span>Настроить</span></button></div>__S1__<div class="dz">${banner}</div>${this.badDayWin()}${repC}${body}`},
-DZW:[['today','Дела дня','Отмечать дела прямо с дашборда'],['streak','Серии дней','Текущая и самая длинная серия'],['week','Неделя программы','Счёт недели, фокус и дни до разбора'],['progress','Общий прогресс','График с выбором периода'],['series','Лучшие серии','Привычки с самыми длинными сериями'],['cons','Постоянство','Каждый день на тепловой карте'],['wkbars','Прогресс недели','Столбики по дням недели'],['wheel','Колесо баланса','Средний балл и слабая сфера месяца']],
-dzOrder(){const def=this.DZW.map(x=>[x[0],x[0]!=='wheel']),cur=((this.S.pref||{}).dz||[]).filter(x=>this.DZW.some(w=>w[0]===x[0]));def.forEach(d=>{if(!cur.some(x=>x[0]===d[0]))cur.push([d[0],d[1]])});return cur},
+  return `<div class="dz-hd"><div class="h1">Дашборд</div><button class="dz-cfg" onclick="APP.dzSheet()">${I.gear}<span>Настроить</span></button></div>__S1__<div class="dz">${banner}</div>${this.mitH()}${this.ctxH()}${this.tipH()}${this.badDayWin()}${repC}${body}<button class="qfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${I.plus}</button>`},
+DZW:[['today','Дела дня','Отмечать дела прямо с дашборда'],['streak','Серии','Дни подряд, рекорд и лучшие привычки'],['week','Неделя программы','Счёт недели, фокус и дни до разбора'],['partner','Партнёр','Процент недели друг друга'],['progress','Общий прогресс','График с выбором периода'],['cons','Постоянство','Каждый день на тепловой карте'],['wkbars','Прогресс недели','Столбики по дням недели'],['wheel','Колесо баланса','Средний балл и слабая сфера месяца']],
+dzOrder(){const def=this.DZW.map(x=>[x[0],!['wheel','wkbars'].includes(x[0])]),cur=((this.S.pref||{}).dz||[]).filter(x=>this.DZW.some(w=>w[0]===x[0]));def.forEach(d=>{if(!cur.some(x=>x[0]===d[0]))cur.push([d[0],d[1]])});return cur},
 dzSet(o){this.S.pref=this.S.pref||{};this.S.pref.dz=o;this.save();this.render();this.dzSheet()},
 dzTog(k){this.dzSet(this.dzOrder().map(x=>x[0]===k?[x[0],!x[1]]:x))},
 dzMove(i,d){const o=this.dzOrder(),j=i+d;if(j<0||j>=o.length)return;[o[i],o[j]]=[o[j],o[i]];this.dzSet(o)},
@@ -2749,13 +2805,13 @@ groups:[],boards:{},
 monday(d){return (this.S.pref||{}).wk0==='sun'?add(d,-pd(d).getDay()):add(d,-((pd(d).getDay()+6)%7))},
 wdl(){return (this.S.pref||{}).wk0==='sun'?['вс','пн','вт','ср','чт','пт','сб']:['пн','вт','ср','чт','пт','сб','вс']},
 woff(dt){return (this.S.pref||{}).wk0==='sun'?dt.getDay():(dt.getDay()+6)%7},
-myScores(){const out={};if(!this.S.goals.length)return out;const m0=this.monday(today());
+myScores(){const out={};const m0=this.monday(today());if(!this.S.goals.length){for(let k=0;k<3;k++){const mon=add(m0,-7*k),st=this.wkStat(mon);out[mon]={score:st.pct,day:this.dayAll(today()).p,u:1,t:Date.now()}}return out}
   for(let k=0;k<3;k++){const mon=add(m0,-7*k);const w=this.weekOf(mon);if(w<1||w>this.W)continue;const ts=this.S.tactics.filter(t=>this.activeIn(t,w));
     out[mon]={w,score:this.score(w),done:ts.filter(t=>this.wDone(t,w)).length,total:ts.length,day:this.dayAll(today()).p,t:Date.now()}}
   return out},
 async grpRpc(fn,args){const{data,error}=await this.sb.rpc(fn,args||{});if(error)throw error;return data},
 grpErr(e){const m=String(e&&e.message||e);return /not_found/.test(m)?'Группы с таким кодом нет':/full/.test(m)?'В группе уже 12 человек':/limit/.test(m)?'Можно создать не больше 5 групп':/auth|JWT/.test(m)?'Нужно войти в аккаунт':'Ошибка: '+m.slice(0,60)},
-async grpLoad(){if(!this.user||!this.sb)return;try{this.groups=await this.grpRpc('tw_my_groups')||[];for(const g of this.groups)this.boards[g.code]=await this.grpRpc('tw_group_board',{p_code:g.code});if(this.tab==='week')this.render()}catch(e){}},
+async grpLoad(){if(!this.user||!this.sb)return;try{this.groups=await this.grpRpc('tw_my_groups')||[];for(const g of this.groups)this.boards[g.code]=await this.grpRpc('tw_group_board',{p_code:g.code});if(['week','home'].includes(this.tab)&&!(document.activeElement&&/INPUT|TEXTAREA/.test(document.activeElement.tagName)))this.render()}catch(e){}},
 async grpPush(){if(!this.user||!this.sb||!this.groups.length)return;const sc=this.myScores();for(const g of this.groups){try{await this.grpRpc('tw_group_score',{p_code:g.code,p_me:this.S.profile.name||'',p_scores:sc})}catch(e){}}},
 async grpCreate(){const n=($('grN')||{}).value||'';if(!n.trim())return this.toast('Назови группу');
   try{const code=await this.grpRpc('tw_group_create',{p_name:n.trim(),p_me:this.S.profile.name||''});await this.grpLoad();await this.grpPush();await this.grpLoad();this.toast('Группа создана: '+code)}catch(e){this.toast(this.grpErr(e))}},
