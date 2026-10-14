@@ -907,6 +907,7 @@ body.wlc .wl-s,body.wlc .wl-f span{color:rgba(225,240,250,.82)}
 @media(max-width:700px){.dz-ban{background:linear-gradient(180deg,rgba(2,5,12,.55) 0%,rgba(2,5,12,.78) 55%,rgba(2,5,12,.95) 100%),url(ocean.jpg) center 30%/cover no-repeat,#03101a!important}}
 .radar .rl{font-size:12.5px;font-weight:500;fill:rgba(220,225,240,.62)}.radar .rv{font-size:12.5px;font-weight:700;fill:#fff}.radar .rv.lo{fill:#F5B84B}
 .radw{max-width:420px}.rc b{font-size:34px;font-weight:800;letter-spacing:-1px;background:linear-gradient(180deg,#fff,#C9B8FF);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}.rc span{font-family:inherit;font-size:11px;letter-spacing:.06em}
+.pph2{margin:16px 2px 18px}.pph2-t{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.15;color:#fff}.pph2-s{color:var(--dim);font-size:14.5px;line-height:1.55;margin-top:8px;max-width:560px}@media(min-width:1024px){.pph2-t{font-size:30px}}
 </style>
 </head>
 <body>
@@ -1565,7 +1566,7 @@ vPrograms(asTab){const cur=this.S.sprint.program,inS=this.S.goals.length>0;
   const FOR={w12:'1–3 цели и результат к концу квартала',h75:'Перезагрузка эффективности: 75 дней без пропусков',m6:'Большая цель и длинный разгон на полгода'};
   const BG={w12:'prog-w12.jpg) 62% 50%',h75:'prog-h75.jpg) 55% 45%',m6:'prog-m6.jpg) 60% 45%'};
   let h=`${asTab?'':`<button class="back" onclick="APP.sub=null;APP.render()">${I.l} Назад</button>`}
-  <div class="pgh ocean pph"><div class="pgh-in"><span class="pgh-ey">Программы</span><div class="pgh-t">Выбери, как пройдёшь ближайшие месяцы</div><div class="pgh-s">Одна программа за раз. Цели, ежедневные действия и счёт недели — система сама подскажет, что делать сегодня.</div></div></div>
+  <div class="pph2"><div class="pph2-t">Выбери, как пройдёшь ближайшие месяцы</div><div class="pph2-s">Одна программа за раз. Цели, ежедневные действия и счёт недели — система сама подскажет, что делать сегодня.</div></div>
   <div class="ppl">`;
   PROGRAMS.filter(p=>!p.hidden).forEach(p=>{const on=inS&&cur===p.id;const len=p.days?p.days+' дней':p.weeks+' недель';
     const modeTxt={score:'планка 85%',strict:'пропуск — заново',count:'копилка дней'}[p.mode];
