@@ -1102,6 +1102,13 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 .drm-g+.vs-2,.drm-g+.izm,.drm-g+.pcg{margin-top:14px}
 @media(min-width:1024px){.vsh-in{min-height:420px;padding:24px 28px 26px}.vsh-n{font-size:46px}.vsh-q{max-width:640px}.vs-2{grid-template-columns:1fr 1fr}}
 @media(max-width:1023px){.drm-g{grid-template-columns:repeat(3,1fr)!important;gap:6px!important}.drm-i,.drm-add{aspect-ratio:1/1!important;border-radius:14px}.drm-add em{display:none}.drm-add b{font-size:12.5px}.drm-i em{font-size:11px;padding:16px 7px 6px}}
+.vb{display:grid;gap:14px;max-width:680px;margin:6px auto 0}
+.vb-t{display:block;width:100%;text-align:left;font-size:18px;line-height:1.65;color:var(--tx);padding:6px 4px;border-radius:12px;font-weight:400;letter-spacing:-.1px}.vb-t:active{background:rgba(255,255,255,.03)}
+.vb-i{display:block;width:100%;padding:0;border-radius:20px;overflow:hidden;position:relative;background:#121218}.vb-i img{width:100%;height:auto;display:block}.vb-i em{display:block;font-style:normal;font-size:13.5px;color:var(--dim);text-align:left;padding:10px 4px 2px;background:var(--bg)}
+.vb-i .drm-ld{height:220px}
+.vb-add{display:flex;justify-content:center;gap:10px;margin:22px auto 10px;max-width:680px}.vb-add button,.vb-add label{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--dim);padding:10px 16px;border-radius:99px;border:1px dashed rgba(255,255,255,.18);cursor:pointer}.vb-add svg{width:15px;height:15px}
+.vb-empty{max-width:520px;margin:30px auto 0;text-align:center}.vb-empty b{font-size:22px}.vb-empty p{color:var(--dim);font-size:15px;line-height:1.6;margin:10px 0 0}
+.vbm{display:flex;gap:8px;margin:2px 0 12px}.vbm button{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.05);color:var(--tx)}.vbm button svg{width:14px;height:14px;transform:rotate(90deg)}.vbm button:disabled{opacity:.3}
 </style>
 </head>
 <body>
@@ -1388,23 +1395,25 @@ visionEdit(){const Z=this.S.ideal||{},V=this.S.vision||{},SK=this.skillsData();
   <div class="lbl" style="margin-top:6px">Целевой уровень навыков</div><div class="izg">${SK.map(s=>`<label><span>${hIco(s.ic)}${s.n}<em>сейчас ${s.L}</em></span><input id="izL_${s.k}" type="number" inputmode="numeric" min="1" max="99" value="${(Z.target||{})[s.k]||Math.max(s.L+5,10)}"></label>`).join('')}</div>
   <button class="btn pr w" style="margin-top:12px" onclick="APP.visionSave()">Сохранить</button>`)},
 visionSave(){const V=this.S.vision=this.S.vision||{items:[]};V.text=$('izV').value.trim();this.idealSave()},
-cabVision(){const Z=this.S.ideal||{},V=this.S.vision||{text:'',items:[]},it=V.items||[],SK=this.skillsData(),T=Z.target||{},has=Z.name||Z.desc||V.text||it.length||Object.keys(T).length;
-  const bg=(Z.img?this.visSrc('ideal'):'')||(it[0]?this.visSrc(it[0].id):'')||'ocean.jpg';
-  const tot=SK.reduce((a,s)=>a+Math.min(s.L,T[s.k]||s.L),0),need=SK.reduce((a,s)=>a+(T[s.k]||s.L),0),pr=Object.keys(T).length&&need?Math.round(tot/need*100):null;
-  const hero=`<div class="vsh" style="background-image:linear-gradient(180deg,rgba(6,5,14,.35) 0%,rgba(6,5,14,.55) 45%,rgba(6,5,14,.96) 100%),url('${bg}')"><div class="vsh-in">
-    <div class="vsh-top"><span>Моё видение</span><div><label class="vsh-b">${I.ed}<span>Фон</span><input type="file" accept="image/*" style="display:none" onchange="APP.idealPhoto(this)"></label><button class="vsh-b" onclick="APP.visionEdit()">${I.ed}<span>Изменить</span></button></div></div>
-    <div class="vsh-n">${esc(Z.name||'Я, к которому иду')}</div>
-    ${V.text?`<div class="vsh-q">«${esc(V.text)}»</div>`:`<button class="vsh-q vsh-q0" onclick="APP.visionEdit()">Опиши жизнь мечты: где живёшь, чем занимаешься, кто рядом</button>`}
-    ${(Z.traits||[]).length?`<div class="vsh-t">${Z.traits.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`:''}
-    ${pr!=null?`<div class="vsh-p"><div><span>Путь к идеалу</span><b>${pr}%</b></div><div class="vsh-bar"><i style="width:${pr}%"></i></div></div>`:''}</div></div>`;
-  if(!has)return hero+`<div class="card izc0"><span>${SI.star}</span><b>Создай своё видение</b><p>Опиши жизнь мечты и человека, которым хочешь стать, добавь картинки и целевые уровни навыков. Каждый день ты будешь видеть, насколько ближе.</p><button class="btn pr" onclick="APP.visionEdit()">Начать</button></div>`;
-  const board=`<div class="vs-h"><b>Доска мечты</b><span>${it.length} из 12</span></div><div class="drm-g">${it.map(x=>{const src=this.visSrc(x.id);return `<button class="drm-i" onclick="APP.dreamView('${x.id}')">${src?`<img src="${src}" alt="" loading="lazy">`:'<span class="drm-ld"></span>'}${x.cap?`<em>${esc(x.cap)}</em>`:''}</button>`}).join('')}${it.length<12?`<label class="drm-add">${I.plus}<b>Добавить</b><em>дом, путешествия, тело, дело</em><input type="file" accept="image/*" multiple style="display:none" onchange="APP.dreamAdd(this)"></label>`:''}</div>`;
-  let path='';if(Object.keys(T).length){const mx=Math.max(10,...SK.map(s=>Math.max(s.L,T[s.k]||0))),n=SK.length,R=76,C=110,pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/n,r=R*v;return [(C+r*Math.cos(a)).toFixed(1),(C+r*Math.sin(a)).toFixed(1)]},poly=f=>SK.map((s,i)=>pt(i,f(s)/mx).join(',')).join(' ');
-    const rad=`<svg viewBox="0 0 220 220" class="izr">${[.33,.66,1].map(l=>`<polygon points="${SK.map((_,i)=>pt(i,l).join(',')).join(' ')}" fill="none" stroke="rgba(255,255,255,${l===1?.14:.06})"/>`).join('')}<polygon points="${poly(s=>T[s.k]||0)}" fill="rgba(245,184,75,.08)" stroke="#F5B84B" stroke-dasharray="4 4" stroke-width="1.5"/><polygon points="${poly(s=>s.L)}" fill="rgba(155,123,255,.35)" stroke="#B49CFF" stroke-width="2"/>${SK.map((s,i)=>{const p=pt(i,1.22);return `<text x="${p[0]}" y="${+p[1]+4}" text-anchor="middle">${s.n}</text>`}).join('')}</svg>`;
-    path=`<div class="card izm"><div class="pg-sh"><b>Путь к идеалу по навыкам</b><span>${pr}% пройдено</span></div><div class="izw">${rad}<div class="izleg"><span><i class="cur"></i>сейчас</span><span><i class="tg"></i>идеал</span></div></div>${SK.map(s=>{const t=T[s.k]||s.L,ok=s.L>=t;return `<div class="izs"><span class="skc-i sm">${hIco(s.ic)}</span><span class="sp">${s.n}</span><b>${s.L} → ${t}</b><em class="${ok?'ok':''}">${ok?'достигнуто':'ещё '+(t-s.L)+' ур.'}</em></div>`}).join('')}</div>`}
-  else path=`<button class="card pcg pcg0" onclick="APP.visionEdit()"><em>Путь к идеалу</em><b>Поставь целевые уровни навыков — увидишь, сколько осталось</b>${I.plus}</button>`;
-  const two=(Z.desc||Z.day)?`<div class="vs-2">${Z.desc?`<div class="card izd"><em>Кто этот человек</em><p>${esc(Z.desc)}</p></div>`:''}${Z.day?`<div class="card izd"><em>Идеальный день</em><p>${esc(Z.day)}</p></div>`:''}</div>`:'';
-  return hero+board+two+path+(!this.user&&it.length?'<div class="pg-note">Войди в аккаунт, чтобы видение было на всех устройствах.</div>':'')},
+/* видение: свободные блоки текста и картинок */
+vBlocks(){const V=this.S.vision=this.S.vision||{};if(!V.blocks){const b=[];const Z=this.S.ideal||{};
+    if(V.text)b.push({id:'b'+uid(),type:'text',text:V.text});if(Z.desc)b.push({id:'b'+uid(),type:'text',text:Z.desc});
+    (V.items||[]).forEach(x=>b.push({id:x.id,type:'img',text:x.cap||''}));if(Z.day)b.push({id:'b'+uid(),type:'text',text:Z.day});V.blocks=b}
+  return V.blocks},
+vbAddText(){this.ask('Новый текст','',v=>{v=(v||'').trim();if(!v)return;this.vBlocks().push({id:'b'+uid(),type:'text',text:v});this.save();this.render()},'textarea')},
+async vbAddImg(inp){const fs=[...(inp.files||[])];if(!fs.length)return;const B=this.vBlocks();for(const f of fs){if(B.filter(x=>x.type==='img').length>=12){this.toast('Максимум 12 картинок');break}const id='v'+uid();await this.visPut(f,id);B.push({id,type:'img',text:''})}this.save();this.render()},
+vbEdit(id){const B=this.vBlocks(),i=B.findIndex(x=>x.id===id),b=B[i];if(!b)return;const src=b.type==='img'?this.visSrc(b.id):'';
+  this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">${b.type==='img'?'Картинка':'Текст'}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+  ${b.type==='img'?`${src?`<img class="dv-img" src="${src}" alt="">`:''}<div class="f"><label class="lbl">Подпись, если нужна</label><input id="vbT" value="${esc(b.text||'')}" placeholder="Например: дом у океана"></div>`:`<div class="f"><textarea id="vbT" style="min-height:160px">${esc(b.text||'')}</textarea></div>`}
+  <div class="vbm"><button ${i?'':'disabled'} onclick="APP.vbMove('${id}',-1)">${I.l}<span>Выше</span></button><button ${i<B.length-1?'':'disabled'} onclick="APP.vbMove('${id}',1)">${I.r}<span>Ниже</span></button></div>
+  <div class="row"><button class="btn pr sp" onclick="APP.vbSave('${id}',$('vbT').value)">Сохранить</button><button class="btn del" onclick="APP.vbDel('${id}')">Удалить</button></div>`)},
+vbSave(id,v){const b=this.vBlocks().find(x=>x.id===id);if(b){b.text=(v||'').trim();if(b.type==='text'&&!b.text)return this.vbDel(id,true)}this.save();this.close();this.render()},
+vbMove(id,d){const B=this.vBlocks(),i=B.findIndex(x=>x.id===id),j=i+d;if(i<0||j<0||j>=B.length)return;[B[i],B[j]]=[B[j],B[i]];this.save();this.render();this.vbEdit(id)},
+async vbDel(id,quiet){if(!quiet&&!confirm('Удалить этот блок?'))return;const V=this.S.vision;const b=V.blocks.find(x=>x.id===id);V.blocks=V.blocks.filter(x=>x.id!==id);if(V.items)V.items=V.items.filter(x=>x.id!==id);this.save();if(b&&b.type==='img')await this.visRemove(id);this.close();this.render()},
+cabVision(){const B=this.vBlocks();
+  const add=`<div class="vb-add"><button onclick="APP.vbAddText()">${I.plus} Текст</button><label>${I.plus} Картинка<input type="file" accept="image/*" multiple style="display:none" onchange="APP.vbAddImg(this)"></label></div>`;
+  if(!B.length)return `<div class="vb-empty"><b>Моё видение</b><p>Слова и картинки о жизни, к которой идёшь, и о человеке, которым становишься. Добавляй что угодно — в любом порядке.</p></div>`+add;
+  return `<div class="vb">${B.map(b=>{if(b.type==='img'){const src=this.visSrc(b.id);return `<button class="vb-i" onclick="APP.vbEdit('${b.id}')">${src?`<img src="${src}" alt="" loading="lazy">`:'<span class="drm-ld"></span>'}${b.text?`<em>${esc(b.text)}</em>`:''}</button>`}return `<button class="vb-t" onclick="APP.vbEdit('${b.id}')">${esc(b.text).replace(/\n/g,'<br>')}</button>`}).join('')}</div>`+add+(!this.user&&B.some(x=>x.type==='img')?'<div class="pg-note">Войди в аккаунт, чтобы картинки были на всех устройствах.</div>':'')},
 cabTabs(){const ct=['dream','ideal'].includes(this._ct)?'vision':(this._ct||'hero');return `<div class="pseg cabt">${[['hero','Герой'],['skills','Навыки'],['vision','Видение']].map(([k,l])=>`<button class="${ct===k?'on':''}" onclick="APP._ct='${k}';APP.render()">${l}</button>`).join('')}</div>`},
 cabSkills(){const SK=this.skillsData();
   return `<div class="skl">${SK.map(s=>{const un=this.PLV.filter(l=>s.L>=l).length;return `<div class="card skc"><div class="skc-h"><span class="skc-i">${hIco(s.ic)}</span><div class="sp"><b>${s.n}</b><em>${s.sub}</em></div><div class="skc-l"><span>ур.</span><b>${s.L}</b></div></div>
