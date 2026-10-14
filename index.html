@@ -854,7 +854,7 @@ input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(124,92,230,.25
 .pw-on{display:grid;justify-items:center;text-align:center;gap:6px;padding:24px!important;margin-bottom:16px}.pw-on span{color:#F5B84B}.pw-on span svg{width:34px;height:34px}.pw-on b{font-size:18px}.pw-on em{font-style:normal;color:var(--dim)}
 .sc-cl{margin:-4px 4px 12px}
 @media(min-width:1024px){.nme,.ngrp,.nout,.sbk,.sttl{max-width:640px;margin-left:auto;margin-right:auto}.sttl{text-align:left;font-size:22px}}
-.ocean{background:linear-gradient(180deg,rgba(2,5,12,.55) 0%,rgba(2,6,14,.6) 45%,rgba(2,6,12,.96) 100%),url(ocean-w.jpg) center 35%/cover no-repeat,#06202c}
+.ocean{background:linear-gradient(180deg,rgba(2,5,12,.55) 0%,rgba(2,6,14,.6) 45%,rgba(2,6,12,.96) 100%),var(--ph,url(ocean-w.jpg)) var(--pp,center 35%)/cover no-repeat,#06202c}
 .pgh{border-radius:24px;overflow:hidden;border:1px solid rgba(94,224,238,.18);margin:6px 0 14px;box-shadow:0 20px 50px -20px rgba(10,80,100,.55)}
 .pgh-in{padding:20px 20px 18px;min-height:250px;display:flex;flex-direction:column}
 .pgh-top{display:flex;align-items:center;justify-content:space-between}.pgh-ey{font-size:12.5px;letter-spacing:.06em;color:rgba(220,245,250,.75)}
@@ -884,7 +884,7 @@ input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(124,92,230,.25
 .gc2-w{margin-top:14px;padding:12px 14px;border-radius:14px;background:rgba(155,123,255,.07);border:1px solid rgba(155,123,255,.18);font-size:14px;line-height:1.5}.gc2-w span{display:block;font-size:11.5px;color:#C9B8FF;letter-spacing:.05em;text-transform:uppercase;margin-top:6px}.gc2-w span:first-child{margin-top:0}
 .gc2-f{display:flex;justify-content:flex-end;gap:4px;margin-top:10px;border-top:1px solid var(--line);padding-top:6px}.gc2-f button{display:inline-flex;align-items:center;gap:5px;color:var(--dim);font-size:13px;padding:8px 10px;border-radius:10px}.gc2-f button svg{width:14px;height:14px}.gc2-f button:first-child:not(:last-child) svg{transform:rotate(90deg)}
 .pg-mini{display:flex;margin:6px auto 12px}
-@media(min-width:1024px){.pgh-in{min-height:300px;padding:28px 32px 26px}.pgh-t{font-size:46px}.pgh-k{max-width:520px}.pgh.ocean{background:linear-gradient(90deg,rgba(2,5,12,.96) 0%,rgba(2,5,12,.78) 45%,rgba(2,5,12,.5) 100%),linear-gradient(0deg,rgba(2,5,12,.8),transparent 60%),url(ocean.jpg) center 22%/cover no-repeat,#06202c}.pgh-tl{max-width:520px}.gcw{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:14px;align-items:start}.gcw .gc2{margin:0}.pgm-l{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.pgm-l>div{border:0;padding:6px 0}}
+@media(min-width:1024px){.pgh-in{min-height:300px;padding:28px 32px 26px}.pgh-t{font-size:46px}.pgh-k{max-width:520px}.pgh.ocean{background:linear-gradient(90deg,rgba(2,5,12,.96) 0%,rgba(2,5,12,.78) 45%,rgba(2,5,12,.5) 100%),linear-gradient(0deg,rgba(2,5,12,.8),transparent 60%),var(--phw,url(ocean.jpg)) var(--ppw,center 22%)/cover no-repeat,#06202c}.pgh-tl{max-width:520px}.gcw{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:14px;align-items:start}.gcw .gc2{margin:0}.pgm-l{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.pgm-l>div{border:0;padding:6px 0}}
 .gm .pace{font-family:inherit;letter-spacing:0;font-size:12.5px;margin-top:8px}
 body.wlc{background:linear-gradient(180deg,rgba(1,4,10,.45),rgba(1,4,10,.75) 55%,rgba(1,3,8,.95)),url(ocean-2.jpg) center top/cover no-repeat,#01040a;background-attachment:fixed}
 body.wlc .wl{position:relative;background:rgba(3,8,16,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:24px 20px 16px;margin-top:12vh}
@@ -1557,13 +1557,13 @@ obStart(ex){const s=$('obStart').value||this.st;this.S.sprint.start=s;this.S.spr
 /* ================= ПРОГРАММЫ ================= */
 vPrograms(asTab){const cur=this.S.sprint.program,inS=this.S.goals.length>0;
   const FOR={w12:'1–3 цели и результат к концу квартала',h75:'Жёсткая перезагрузка дисциплины за 75 дней',m6:'Большая цель и длинный разгон на полгода'};
-  const BG={w12:'ocean-w.jpg) center 35%',h75:'ocean.jpg) center 78%',m6:'ocean-2.jpg) center 20%'};
+  const BG={w12:'prog-w12.jpg) 62% 50%',h75:'prog-h75.jpg) 55% 45%',m6:'prog-m6.jpg) 60% 45%'};
   let h=`${asTab?'':`<button class="back" onclick="APP.sub=null;APP.render()">${I.l} Назад</button>`}
   <div class="pgh ocean pph"><div class="pgh-in"><span class="pgh-ey">Программы</span><div class="pgh-t">Выбери, как пройдёшь ближайшие месяцы</div><div class="pgh-s">Одна программа за раз. Цели, ежедневные действия и счёт недели — система сама подскажет, что делать сегодня.</div></div></div>
   <div class="ppl">`;
   PROGRAMS.filter(p=>!p.hidden).forEach(p=>{const on=inS&&cur===p.id;const len=p.days?p.days+' дней':p.weeks+' недель';
     const modeTxt={score:'планка 85%',strict:'пропуск — заново',count:'копилка дней'}[p.mode];
-    h+=`<div class="ppc ${on?'on':''}"><div class="ppc-top" style="background:linear-gradient(180deg,rgba(2,5,12,.5),rgba(2,5,12,.92)),url(${BG[p.id]||'ocean-w.jpg) center'}/cover no-repeat,#06202c">
+    h+=`<div class="ppc ${on?'on':''}"><div class="ppc-top" style="background:linear-gradient(180deg,rgba(2,5,12,.35),rgba(2,5,12,.9)),url(${BG[p.id]||'ocean-w.jpg) center'}/cover no-repeat,#06202c">
       ${on?'<span class="ppc-on">идёт сейчас</span>':''}<div class="ppc-n">${esc(p.name)}</div><div class="ppc-o">${esc(p.origin)}</div>
       <div class="ppc-ch"><em>${len}</em><em class="${p.mode==='strict'?'st':''}">${modeTxt}</em></div></div>
       <div class="ppc-b"><div class="ppc-f">${esc(FOR[p.id]||'')}</div>
@@ -1949,7 +1949,8 @@ vGoals(){
   const nd=S.goals.filter(g=>this.gDone(g)).length,dayN=Math.max(1,Math.min(this.dayIndex(today()),this.sprintDays())),sd=this.sprintDays();
   const scw=this.score(cw),av=this.avg(),left=Math.max(0,sd-dayN);
   const seg=Array.from({length:W},(_,k)=>{const i=k+1,v=i<=cw?this.score(i):null;return `<i class="${i<cw?(v!=null&&v>=th?'ok':'past'):i===cw?'cur':''}"></i>`}).join('');
-  let h=`<div class="pgh ocean"><div class="pgh-in">
+  const PH={w12:'prog-w12.jpg',h75:'prog-h75.jpg',m6:'prog-m6.jpg'}[P&&P.id],phs=PH?` style="--ph:url(${PH});--pp:62% 50%;--phw:url(${PH});--ppw:center 50%"`:'';
+  let h=`<div class="pgh ocean"${phs}><div class="pgh-in">
     <div class="pgh-top"><span class="pgh-ey">${fd(this.st)} — ${fd(this.end())}</span><button class="pgh-ch" onclick="APP.openSub('programs')">сменить</button></div>
     <div class="pgh-t">${P?esc(P.name):esc(S.sprint.title||'Программа')}</div>
     <div class="pgh-s">День ${dayN} из ${sd} · неделя ${Math.min(cw,W)} из ${W} · ${left?'осталось '+left+' '+this.pl(left,'день','дня','дней'):'финиш'}</div>
