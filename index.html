@@ -1161,6 +1161,16 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 .dvb-t{display:grid;grid-template-columns:1fr 2px 1fr;align-items:center;height:12px}.dvb-c{height:16px;background:rgba(255,255,255,.25)}.dvb-l{display:flex;justify-content:flex-end}.dvb-l i,.dvb-rr i{display:block;height:9px;border-radius:5px}.dvb-l i{background:linear-gradient(270deg,#F5B84B,rgba(245,184,75,.4))}.dvb-rr i{background:linear-gradient(90deg,#5EE0EE,rgba(94,224,238,.4))}
 .dvb-r b{text-align:right;font-size:13px}.dvb-r b.up{color:#5EE0EE}.dvb-r b.dn{color:#F5B84B}.dvb-lg{display:grid;grid-template-columns:minmax(0,1fr) 120px 46px;gap:8px;font-size:10.5px;color:var(--dim)}.dvb-lg>div{display:flex;justify-content:space-between}
 .pcr-rg{position:relative;width:48px;height:48px;flex:none}.pcr-rg b{position:absolute;inset:0;display:grid;place-items:center;font-size:12.5px;font-weight:800}
+.ab-h{border-radius:26px;overflow:hidden;margin-bottom:18px;border:1px solid rgba(155,123,255,.25)}.ab-hi{display:flex;flex-direction:column;align-items:center;text-align:center;padding:34px 20px 28px}
+.ab-l{width:76px;height:76px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(145deg,#7C5CE6,#4B33A8);box-shadow:0 0 30px rgba(124,92,230,.55)}.ab-l svg{width:52px;height:52px}
+.ab-hi b{font-size:28px;font-weight:800;margin-top:14px;color:#fff}.ab-hi p{margin:6px 0 0;font-size:15px;color:rgba(235,240,250,.85);max-width:280px;line-height:1.45}
+.ab-s{margin:0 4px 6px}.ab-lead{font-size:16px;line-height:1.65;margin:0 0 12px;color:var(--tx)}
+.ab-t{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#C9B8FF;margin:22px 4px 10px}
+.ab-f{display:grid;gap:10px}.ab-f>div{padding:14px 16px;border-radius:18px;background:#121218;border:1px solid var(--line);display:grid;grid-template-columns:40px 1fr;column-gap:12px}.ab-f span{grid-row:span 2;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(155,123,255,.14);color:#C9B8FF}.ab-f span svg{width:20px;height:20px}.ab-f b{font-size:15.5px}.ab-f p{margin:3px 0 0;font-size:13.5px;color:var(--dim);line-height:1.5}
+.ab-m{padding:16px!important}.ab-m p{margin:0 0 12px;font-size:14.5px;line-height:1.55;color:var(--dim)}.ab-ch{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}.ab-ch span{font-size:12.5px;padding:5px 10px;border-radius:99px;background:rgba(94,224,238,.1);color:#7EE6EE}
+.ab-p{display:grid;gap:10px}.ab-p>div{padding:16px;border-radius:18px;background:linear-gradient(135deg,rgba(155,123,255,.08),#121218 60%);border:1px solid var(--line)}.ab-p em{font-style:normal;font-size:12px;font-weight:700;color:#F5B84B}.ab-p b{display:block;font-size:16px;margin:4px 0}.ab-p p{margin:0;font-size:13.5px;color:var(--dim);line-height:1.5}
+.ab-w{display:flex;gap:14px;align-items:center;padding:16px!important;margin:18px 0 12px}.ab-wl{width:46px;height:46px;flex:none;border-radius:14px;display:grid;place-items:center;background:rgba(155,123,255,.15)}.ab-wl svg{width:32px;height:32px}.ab-w b{display:block;font-size:15px}.ab-w p{margin:3px 0 0;font-size:13px;color:var(--dim);line-height:1.45}
+@media(min-width:1024px){.ab-f,.ab-p{grid-template-columns:1fr 1fr}.ab-h,.ab-s,.ab-t,.ab-f,.ab-m,.ab-p,.ab-w{max-width:760px;margin-left:auto;margin-right:auto}.ab-s,.ab-t{padding:0 4px}}
 </style>
 </head>
 <body>
@@ -2966,6 +2976,19 @@ vMe(){
     row(ic('chat','#4B7BE6'),'Написать в поддержку','',"window.open('https://t.me/wikki_shark','_blank')",'Ответим в Telegram'),
     row(ic('star','#F5B84B'),'Предложить идею','',"window.open('https://t.me/wikki_shark','_blank')"),
     row(ic('book','#7C5CE6'),'Метод','',"APP.methodSheet()",'Моран, 4DX, Гольвитцер, Эттинген, Клир')]);
+  pages.about=()=>{const F=[['dash','Дашборд на каждый день','Главное дело, дела по времени и подсказка из твоих же данных. Утром план, вечером закрыть день за минуту.'],['check','Трекер привычек','Отметка в одно касание, кольца прогресса и серии, которые не обнуляются от одного пропуска.'],['target','Программы','«12 недель», «75 Hard: Фокус» и «Теория шести месяцев». Цель, ежедневные действия и честный счёт недели.'],['chart','Прогресс','Что влияет на твои дни, часы фокуса, банк побед и итоги цикла с карточкой для сторис.'],['pen','Дневник','Страница на каждый день. Пишется как в блокноте, сохраняется сама.'],['user','Личный кабинет','Навыки растут от отметок, а рядом хранится твоё видение жизни мечты.']];
+    const IC={dash:I.dash,check:SI.check,target:SI.target,chart:SI.chart,pen:hIco('pen'),user:SI.user};
+    const P=[['Честные цифры','Приложение показывает реальный процент выполнения. Никаких наград за то, что его просто открыли.'],['Один пропуск ничего не ломает','Серия рвётся только после двух пропусков подряд. Так легче вернуться, чем начинать с нуля.'],['Данные принадлежат тебе','Без рекламы и сторонних счётчиков. Выгрузить или удалить всё можно в пару касаний.'],['Покупка один раз','Без подписки и автосписаний. 14 дней на возврат, если не подошло.']];
+    const M=['Брайан Моран','Джеймс Клир','Кэл Ньюпорт','Тереза Амабайл','Филиппа Лалли','Питер Гольвитцер','Габриэль Эттинген','4 дисциплины исполнения'];
+    return `<div class="ab-h ocean"><div class="ab-hi"><span class="ab-l">${SHARK}</span><b>wikki.app</b><p>Система, которая помогает держать слово, данное себе</p></div></div>
+    <div class="ab-s"><p class="ab-lead">Большинство людей знает, что им делать. Сложнее делать это каждый день, когда первый запал прошёл, а результата ещё не видно. Мы собрали в одном месте всё, что для этого нужно: план дня, привычки, цели на 12 недель, дневник и честные цифры о том, как идут дела.</p>
+    <p class="ab-lead">Приложение не требует силы воли каждую минуту. Оно напоминает о главном, показывает, что уже получилось, и подсказывает, где ты теряешь силы.</p></div>
+    <div class="ab-t">Что внутри</div><div class="ab-f">${F.map(([i,t,d])=>`<div><span>${IC[i]}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>
+    <div class="ab-t">На чём построено</div><div class="card ab-m"><p>Мы не придумывали метод с нуля. В основе исследования и системы, которые годами проверяли на тысячах людей.</p><div class="ab-ch">${M.map(x=>`<span>${x}</span>`).join('')}</div><button class="pill" onclick="APP.methodSheet()">Подробнее о методе ${I.r}</button></div>
+    <div class="ab-t">Наши принципы</div><div class="ab-p">${P.map(([t,d],i)=>`<div><em>0${i+1}</em><b>${t}</b><p>${d}</p></div>`).join('')}</div>
+    <div class="card ab-w"><span class="ab-wl">${SHARK}</span><div class="sp"><b>Сделано в WIKKI.OCEAN</b><p>Мы строим системы роста для людей и компаний. wikki.app — наш первый продукт для каждого дня.</p></div></div>
+    <div class="card sgrp">${[['Политика конфиденциальности',"window.open('./legal/privacy.html'+(APP.lang()==='en'?'#en':''),'_blank')"],['Условия использования',"window.open('./legal/terms.html'+(APP.lang()==='en'?'#en':''),'_blank')"],['Написать нам в Telegram',"window.open('https://t.me/wikki_shark','_blank')"]].map(([l,a])=>`<button class="srow" onclick="${a}"><div class="sp"><div>${l}</div></div>${I.r}</button>`).join('')}</div>
+    <div class="sver">wikki.app · версия 1.0</div>`};
   pages.integ=()=>sec('Интеграции',[
     row(ic('moon','#7C5CE6'),'Календарь телефона','',"APP.exportIcs()",'Утро, день, вечер, чек-ин и разбор недели в твоём календаре'),
     row(ic('heart','#56566A'),'Apple Здоровье','скоро',null,'Шаги и сон отмечаются сами'),
@@ -2982,7 +3005,7 @@ vMe(){
     <div class="card abars"><div class="ab-h"><b>Активные за 30 дней</b><span>в день</span></div><div class="ab">${dl.map(x=>`<i style="height:${Math.max(3,x.dau/mx*100)}%" title="${x.d}: ${x.dau}"></i>`).join('')}</div><div class="ab-f"><span>${dl[0]?fd(dl[0].d):''}</span><span>сегодня</span></div></div>
     <button class="btn w nbtn" onclick="APP.loadStats().then(()=>APP.toast('Обновлено'))">Обновить</button>
     <div class="small mut" style="text-align:center;margin-top:10px">Видишь только ты. Считаются события без содержания записей.</div>`};
-  const TT={stats:'Аналитика',integ:'Интеграции',legal:'Правовое',lang:'Язык',account:'Аккаунт',premium:'Полный доступ',program:'Программа',day:'День и неделя',notif:'Уведомления',look:'Оформление',data:'Данные и приватность',help:'Помощь и обратная связь'};
+  const TT={about:'О приложении',stats:'Аналитика',integ:'Интеграции',legal:'Правовое',lang:'Язык',account:'Аккаунт',premium:'Полный доступ',program:'Программа',day:'День и неделя',notif:'Уведомления',look:'Оформление',data:'Данные и приватность',help:'Помощь и обратная связь'};
   const cur=this._sset&&pages[this._sset]?this._sset:null;
   if(cur){h+=`<div class="sbk"><button class="sbk-b" onclick="APP._sset=null;APP.render();window.scrollTo(0,0)" aria-label="Назад">${I.l}</button><b>${TT[cur]}</b><span></span></div>`+pages[cur]().replace(/<div class="lbl sec">[^<]*<\/div>/,'');return h}
   const go=k=>`APP._sset='${k}';APP.render();window.scrollTo(0,0)`;
@@ -2994,7 +3017,7 @@ vMe(){
   h+=grp([nr('crown','#F5B84B','Полный доступ',this.paid()?(this._acc.until?'до '+fd(this._acc.until):'активен'):'',go('premium'))]);
   h+=grp([nr('target','#9B7BFF','Программа',P?esc(P.name):'',go('program')),nr('cal','#9B7BFF','День и неделя','',go('day')),nr('bell','#9B7BFF','Уведомления','',go('notif')),nr('globe','#9B7BFF','Язык',lang==='en'?'English':'Русский',go('lang')),nr('brush','#9B7BFF','Оформление','',go('look'))]);
   h+=grp([...(this.user?[nr('user','#22D3E0','Аккаунт','',go('account'))]:[]),nr('lock','#22D3E0','Данные и приватность','',go('data')),nr('plug','#22D3E0','Интеграции','',go('integ'))]);
-  h+=grp([nr('help','#F5B84B','Помощь и обратная связь','',go('help')),nr('star','#F5B84B','Оценить приложение',(S.pref||{}).rate?'★'.repeat((S.pref||{}).rate):'',"APP.rateSheet()"),nr('spark','#F5B84B','Что нового','',"APP.newsSheet()"),nr('share','#F5B84B','Поделиться приложением','',"APP.shareApp()"),nr('info','#F5B84B','О приложении','v1.0',"APP.methodSheet()")]);
+  h+=grp([nr('help','#F5B84B','Помощь и обратная связь','',go('help')),nr('star','#F5B84B','Оценить приложение',(S.pref||{}).rate?'★'.repeat((S.pref||{}).rate):'',"APP.rateSheet()"),nr('spark','#F5B84B','Что нового','',"APP.newsSheet()"),nr('share','#F5B84B','Поделиться приложением','',"APP.shareApp()"),nr('info','#F5B84B','О приложении','v1.0',go('about'))]);
   h+=grp([nr('doc','#9A9AAE','Правовое','',go('legal'))]);
   if(this.user)h+=`<button class="card nout" onclick="APP.logout()">Выйти</button>`;
   h+=`<div class="sver">wikki.app · WIKKI.OCEAN</div>`;
