@@ -916,6 +916,11 @@ body.wlc .wl-s,body.wlc .wl-f span{color:rgba(225,240,250,.82)}
 .dz-pw0t{color:var(--dim);font-size:14.5px;line-height:1.55;margin:8px 0 14px}.dz-pw0 .btn{width:100%}
 @media(min-width:1024px){.dz2 .dz-pw{grid-column:span 2}.dz2 .dz-ov{grid-column:span 2}.dz2 .dz-sl{grid-column:span 1}.dz2 .dz-cons{grid-column:span 2}.dz2 .dz-wk{grid-column:span 1}.dz-today{margin:6px 0 20px}}
 .dz-today:not(.all) .tgrid>.tk:nth-child(n+7){display:none}.dz-more{display:block;width:100%;margin-top:10px;padding:12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--tx);font-size:14px;font-weight:600}
+.dz-bb2{display:flex;align-items:center;gap:10px;margin-top:22px;max-width:460px}
+.dz-pr{flex:1;min-width:0;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.dz-prt{display:flex;align-items:baseline;gap:2px}.dz-prt b{font-size:22px;font-weight:800;color:#fff;line-height:1}.dz-prt span{font-size:15px;font-weight:600;color:rgba(255,255,255,.55)}.dz-prt em{font-style:normal;font-size:13px;color:rgba(225,240,248,.75);margin-left:8px}.dz-prt strong{font-size:14px;font-weight:700;color:#7EE6EE}
+.dz-prb{height:5px;border-radius:3px;background:rgba(255,255,255,.1);margin-top:10px;overflow:hidden}.dz-prb i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#9B7BFF,#5EE0EE);box-shadow:0 0 12px rgba(94,224,238,.5)}
+.dz-jr{width:54px;height:54px;flex:none;border-radius:16px;display:grid;place-items:center;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.dz-jr svg{width:20px;height:20px}.dz-jr:active{background:rgba(255,255,255,.12)}
 </style>
 </head>
 <body>
@@ -1880,7 +1885,7 @@ vHome(){const S=this.S,td=today(),P=S.profile||{};
   const sl=rows.map(r=>{const[f,sc,fr]=r.k==='h'?this.hFns(r.o):this.tFns(r.o);return {r,st:this.streak(f,sc,fr)}}).sort((a,b)=>b.st-a.st).slice(0,5);
   const ws=this.wkStat(m0);const dpT=this.dayAll(td);
   const banner=`<div class="card dz-ban"><div class="dz-bt"><div class="dz-h">Дисциплина сегодня,<br><em>свобода</em> завтра</div><div class="dz-s">${P.motto?esc(P.motto):'Дисциплина — мост между целями и результатом.'}</div>
-     <div class="dz-bb"><span class="dz-chip">Сегодня ${dpT.done} из ${dpT.n}${dpT.n?' · '+Math.round(dpT.p*100)+'%':''}</span><button class="btn pr sm" onclick="APP._jd=today();APP.go('journal')">${I.ed} Записать день</button></div></div></div>`;
+     <div class="dz-bb2"><div class="dz-pr"><div class="dz-prt"><b>${dpT.done}</b><span>/${dpT.n}</span><em>${dpT.n&&dpT.done>=dpT.n?'день закрыт':'дел сегодня'}</em><i class="sp"></i><strong>${dpT.n?Math.round(dpT.p*100)+'%':''}</strong></div><div class="dz-prb"><i style="width:${dpT.n?Math.round(dpT.p*100):0}%"></i></div></div><button class="dz-jr" onclick="APP._jd=today();APP.go('journal')" aria-label="Дневник">${I.ed}</button></div></div></div>`;
   const over=`<div class="card dz-c dz-ov"><div class="dz-ch"><span class="dz-ti">${I.chart}Общий прогресс</span><span class="sp"></span>${delta!=null?`<span class="dz-dl ${delta>=0?'up':'dn'}">${delta>0?'+':''}${delta}%<em>к прошлым 30 дням</em></span>`:''}</div>${chart}</div>`;
   const stk=`<div class="dz-col"><div class="card dz-c dz-st"><span class="dz-ti">Текущая серия</span><div class="dz-big"><b>${cur}</b><span>${this.pl(cur,'день','дня','дней')}</span></div><i class="dz-fl">${I.fire}</i></div>
      <div class="card dz-c dz-st2"><span class="dz-ti">Самая длинная серия</span><div class="dz-mid"><i>${I.trophy}</i><b>${best}</b><span>${this.pl(best,'день','дня','дней')}</span></div></div></div>`;
