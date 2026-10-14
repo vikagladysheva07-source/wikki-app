@@ -901,6 +901,12 @@ body.wlc .wl-s,body.wlc .wl-f span{color:rgba(225,240,250,.82)}
 .ppc-r div{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:14px;color:var(--dim);line-height:1.45}.ppc-r svg{width:15px;height:15px;color:#5EE0EE;flex:none;margin-top:3px}
 .ppc-b .btn{margin-top:12px}
 @media(min-width:1024px){.ppl{grid-template-columns:repeat(3,1fr);align-items:stretch}.ppc{display:flex;flex-direction:column}.ppc-b{flex:1;display:flex;flex-direction:column}.ppc-b .btn{margin-top:auto}.ppc-r{margin-bottom:14px}.pph .pgh-t{font-size:38px;max-width:640px}.pph .pgh-s{max-width:560px}}
+.dz-ban{background:linear-gradient(90deg,rgba(2,5,12,.94) 0%,rgba(2,5,12,.72) 50%,rgba(2,5,12,.4) 100%),linear-gradient(0deg,rgba(2,5,12,.75),transparent 55%),url(ocean.jpg) center 32%/cover no-repeat,#03101a!important;border:1px solid rgba(94,224,238,.16)!important}
+.dz-ban .dz-h em{color:#7EE6EE;text-shadow:0 0 24px rgba(94,224,238,.45)}
+.dz-ban .dz-chip{background:rgba(2,8,16,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+@media(max-width:700px){.dz-ban{background:linear-gradient(180deg,rgba(2,5,12,.55) 0%,rgba(2,5,12,.78) 55%,rgba(2,5,12,.95) 100%),url(ocean.jpg) center 30%/cover no-repeat,#03101a!important}}
+.radar .rl{font-size:12.5px;font-weight:500;fill:rgba(220,225,240,.62)}.radar .rv{font-size:12.5px;font-weight:700;fill:#fff}.radar .rv.lo{fill:#F5B84B}
+.radw{max-width:420px}.rc b{font-size:34px;font-weight:800;letter-spacing:-1px;background:linear-gradient(180deg,#fff,#C9B8FF);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}.rc span{font-family:inherit;font-size:11px;letter-spacing:.06em}
 </style>
 </head>
 <body>
@@ -1012,9 +1018,9 @@ const TPL=[
 const PROGRAMS=[
  {id:'w12',name:'12 недель',origin:'Брайан Моран, «12 недель в году»',weeks:12,mode:'score',color:'#9B6FE8',glyph:'◆',free:true,
   rules:['До трёх целей и тактики под каждой','Каждую неделю счёт: закрыто ≥85% тактик','Воскресный разбор, 13-я неделя — итоги']},
- {id:'h75',name:'75 Hard',origin:'Энди Фриселла',days:75,mode:'strict',color:'#F2EDE2',glyph:'■',
-  rules:['Две тренировки в день, одна на улице','Диета без читмилов, без алкоголя','4 литра воды, 10 страниц, фото прогресса','Пропуск любого пункта — день 1 заново'],
-  tactics:[['Тренировка 1 (45 мин)','check',{tod:'m'}],['Тренировка 2 на улице (45 мин)','check',{tod:'e'}],['Диета соблюдена, без алкоголя','check',{tod:'e'}],['4 литра воды','check',{tod:''}],['10 страниц нон-фикшн','check',{tod:'e'}],['Фото прогресса','check',{tod:'m'}]]},
+ {id:'h75',name:'75 Hard: Фокус',origin:'По мотивам 75 Hard Энди Фриселлы — версия для дела',days:75,mode:'strict',color:'#F2EDE2',glyph:'■',
+  rules:['2 часа глубокой работы без телефона каждый день','Главная задача дня закрыта до обеда','Движение 45 минут — энергия для работы','10 страниц книги по делу и план на завтра','Пропуск любого пункта — день 1 заново'],
+  tactics:[['Глубокая работа 2 часа без телефона','check',{tod:'m'}],['Главная задача дня закрыта до обеда','check',{tod:'d'}],['Движение 45 минут','check',{tod:''}],['10 страниц книги по делу','check',{tod:'e'}],['План на завтра: 3 главные задачи','check',{tod:'e'}],['Экраны выключены до 23:00','check',{tod:'e'}]]},
  {id:'arc',hidden:true,name:'Winter Arc',origin:'Тренд: «зима, когда ты меняешься»',fixed:['10-01','01-01'],mode:'score',color:'#5EE0EE',glyph:'◇',free:true,
   rules:['С 1 октября до 1 января','Тело, дело, дисциплина — свои цели','Тот же недельный счёт 85%']},
  {id:'m6',name:'Теория шести месяцев',origin:'Тренд: «за полгода можно изменить жизнь»',weeks:26,mode:'score',color:'#C4A4FF',glyph:'●',free:true,
@@ -1556,7 +1562,7 @@ obStart(ex){const s=$('obStart').value||this.st;this.S.sprint.start=s;this.S.spr
 
 /* ================= ПРОГРАММЫ ================= */
 vPrograms(asTab){const cur=this.S.sprint.program,inS=this.S.goals.length>0;
-  const FOR={w12:'1–3 цели и результат к концу квартала',h75:'Жёсткая перезагрузка дисциплины за 75 дней',m6:'Большая цель и длинный разгон на полгода'};
+  const FOR={w12:'1–3 цели и результат к концу квартала',h75:'Перезагрузка эффективности: 75 дней без пропусков',m6:'Большая цель и длинный разгон на полгода'};
   const BG={w12:'prog-w12.jpg) 62% 50%',h75:'prog-h75.jpg) 55% 45%',m6:'prog-m6.jpg) 60% 45%'};
   let h=`${asTab?'':`<button class="back" onclick="APP.sub=null;APP.render()">${I.l} Назад</button>`}
   <div class="pgh ocean pph"><div class="pgh-in"><span class="pgh-ey">Программы</span><div class="pgh-t">Выбери, как пройдёшь ближайшие месяцы</div><div class="pgh-s">Одна программа за раз. Цели, ежедневные действия и счёт недели — система сама подскажет, что делать сегодня.</div></div></div>
@@ -1679,15 +1685,20 @@ copyTasks(from,to){(this.S.tasks||[]).filter(x=>x.date===from).forEach(x=>this.S
 pvBalance(){const S=this.S,td=today(),cur=td.slice(0,7),mo=this._wm||cur,[y,m]=mo.split('-').map(Number);
   const pm=iso(new Date(y,m-2,1)).slice(0,7),nm=iso(new Date(y,m,1)).slice(0,7),W=S.wheel||{},A=W[mo]||{},B=W[pm]||{};
   const SH=['Здоровье','Карьера','Финансы','Отношения','Любовь','Духовность','Дом','Путешествия','Хобби','Сообщество'];
-  const n=AREAS.length,R=118,C=170,pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/n,r=R*v/10;return [C+r*Math.cos(a),C+r*Math.sin(a)]};
+  const n=AREAS.length,R=112,C=170,pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/n,r=R*v/10;return [C+r*Math.cos(a),C+r*Math.sin(a)]};
   const poly=V=>AREAS.map((x,i)=>pt(i,+V[x[0]]||0).map(z=>z.toFixed(1)).join(',')).join(' ');
   const filled=Object.keys(A).filter(k=>k!=='t').length,avg=filled?(AREAS.reduce((s2,x)=>s2+(+A[x[0]]||0),0)/filled):null,pavg=(()=>{const k=Object.keys(B).filter(k=>k!=='t');return k.length?AREAS.reduce((s2,x)=>s2+(+B[x[0]]||0),0)/k.length:null})();
   const weak=filled?AREAS.filter(x=>A[x[0]]).sort((a,b)=>A[a[0]]-A[b[0]])[0]:null;
-  let svg=`<svg class="radar" viewBox="0 0 340 340">`;
-  [2,4,6,8,10].forEach(l=>{svg+=`<polygon points="${AREAS.map((x,i)=>pt(i,l).map(z=>z.toFixed(1)).join(',')).join(' ')}" fill="none" stroke="rgba(255,255,255,${l===10?.12:.06})" stroke-width="1"/>`});
-  AREAS.forEach((x,i)=>{const [ex,ey]=pt(i,10);svg+=`<line x1="${C}" y1="${C}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="rgba(255,255,255,.05)"/>`;const [lx,ly]=pt(i,12.3);svg+=`<text x="${lx.toFixed(1)}" y="${(ly+3.5).toFixed(1)}" text-anchor="${Math.abs(lx-C)<8?'middle':lx<C?'end':'start'}" class="rl">${SH[i]}</text>`});
-  if(Object.keys(B).filter(k=>k!=='t').length)svg+=`<polygon points="${poly(B)}" fill="rgba(34,211,224,.06)" stroke="#22D3E0" stroke-width="1.5" stroke-dasharray="4 4" stroke-linejoin="round"/>`;
-  if(filled)svg+=`<polygon points="${poly(A)}" fill="rgba(124,92,230,.32)" stroke="#9C82F0" stroke-width="2.2" stroke-linejoin="round"/>`+AREAS.map((x,i)=>A[x[0]]?`<circle cx="${pt(i,+A[x[0]])[0].toFixed(1)}" cy="${pt(i,+A[x[0]])[1].toFixed(1)}" r="3.5" fill="#fff"/>`:'').join('');
+  const lo=filled?Math.min(...AREAS.filter(x=>A[x[0]]).map(x=>+A[x[0]])):0;
+  let svg=`<svg class="radar" viewBox="-44 -22 428 384"><defs><radialGradient id="rgF" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#5EE0EE" stop-opacity=".55"/><stop offset=".55" stop-color="#7C5CE6" stop-opacity=".42"/><stop offset="1" stop-color="#7C5CE6" stop-opacity=".2"/></radialGradient><radialGradient id="rgB" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#7C5CE6" stop-opacity=".16"/><stop offset="1" stop-color="#7C5CE6" stop-opacity="0"/></radialGradient><filter id="rgG" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6"/></filter></defs>`;
+  svg+=`<circle cx="${C}" cy="${C}" r="${R+6}" fill="url(#rgB)"/>`;
+  [2,4,6,8,10].forEach(l=>{svg+=`<polygon points="${AREAS.map((x,i)=>pt(i,l).map(z=>z.toFixed(1)).join(',')).join(' ')}" fill="${l===10?'rgba(255,255,255,.015)':'none'}" stroke="rgba(255,255,255,${l===10?.14:.06})" stroke-width="1"/>`});
+  AREAS.forEach((x,i)=>{const [ex,ey]=pt(i,10);svg+=`<line x1="${C}" y1="${C}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="rgba(255,255,255,.05)"/>`;
+    const a=-Math.PI/2+i*2*Math.PI/n,ca=Math.cos(a),sa=Math.sin(a),rr=R+(Math.abs(ca)<.3?20:16),lx=C+rr*ca,ly=C+rr*sa,anc=Math.abs(ca)<.3?'middle':ca<0?'end':'start',v=+A[x[0]]||0;
+    const y0=sa<-.8?ly-18:sa>.8?ly+6:ly-4;
+    svg+=`<text x="${lx.toFixed(1)}" y="${y0.toFixed(1)}" text-anchor="${anc}"><tspan class="rl">${SH[i]}</tspan><tspan class="rv ${v&&v===lo&&lo<7?'lo':''}" x="${lx.toFixed(1)}" dy="15">${v||'—'}</tspan></text>`});
+  if(Object.keys(B).filter(k=>k!=='t').length)svg+=`<polygon points="${poly(B)}" fill="none" stroke="#22D3E0" stroke-opacity=".7" stroke-width="1.4" stroke-dasharray="4 4" stroke-linejoin="round"/>`;
+  if(filled)svg+=`<polygon points="${poly(A)}" fill="#7C5CE6" opacity=".45" filter="url(#rgG)"/><polygon points="${poly(A)}" fill="url(#rgF)" stroke="#B49CFF" stroke-width="2" stroke-linejoin="round"/>`+AREAS.map((x,i)=>A[x[0]]?`<circle cx="${pt(i,+A[x[0]])[0].toFixed(1)}" cy="${pt(i,+A[x[0]])[1].toFixed(1)}" r="6" fill="#B49CFF" opacity=".25"/><circle cx="${pt(i,+A[x[0]])[0].toFixed(1)}" cy="${pt(i,+A[x[0]])[1].toFixed(1)}" r="3.2" fill="#fff"/>`:'').join('');
   svg+=`</svg>`;
   let h=`<div class="tgrid2 bal"><div class="card"><div class="row"><button class="ic" onclick="APP._wm='${pm}';APP.render()">${I.l}</button><div class="sp" style="text-align:center"><b>${MONF[m-1]} ${y}</b></div><button class="ic" ${mo>=cur?'disabled style="opacity:.3"':''} onclick="APP._wm='${nm}';APP.render()">${I.r}</button></div>
     <div class="radw">${svg}${filled?`<div class="rc"><b>${avg.toFixed(1)}</b><span>из 10</span></div>`:''}</div>
@@ -1864,7 +1875,7 @@ vHome(){const S=this.S,td=today(),P=S.profile||{};
   const sl=rows.map(r=>{const[f,sc,fr]=r.k==='h'?this.hFns(r.o):this.tFns(r.o);return {r,st:this.streak(f,sc,fr)}}).sort((a,b)=>b.st-a.st).slice(0,5);
   const ws=this.wkStat(m0);const dpT=this.dayAll(td);
   const banner=`<div class="card dz-ban"><div class="dz-bt"><div class="dz-h">Дисциплина сегодня,<br><em>свобода</em> завтра</div><div class="dz-s">${P.motto?esc(P.motto):'Дисциплина — мост между целями и результатом.'}</div>
-     <div class="dz-bb"><span class="dz-chip">Сегодня ${dpT.done} из ${dpT.n}${dpT.n?' · '+Math.round(dpT.p*100)+'%':''}</span><button class="btn pr sm" onclick="APP._jd=today();APP.go('journal')">${I.ed} Записать день</button></div></div><div class="dz-art">${SHARK}</div></div>`;
+     <div class="dz-bb"><span class="dz-chip">Сегодня ${dpT.done} из ${dpT.n}${dpT.n?' · '+Math.round(dpT.p*100)+'%':''}</span><button class="btn pr sm" onclick="APP._jd=today();APP.go('journal')">${I.ed} Записать день</button></div></div></div>`;
   const over=`<div class="card dz-c dz-ov"><div class="dz-ch"><span class="dz-ti">${I.chart}Общий прогресс</span><span class="sp"></span>${delta!=null?`<span class="dz-dl ${delta>=0?'up':'dn'}">${delta>0?'+':''}${delta}%<em>к прошлым 30 дням</em></span>`:''}</div>${chart}</div>`;
   const stk=`<div class="dz-col"><div class="card dz-c dz-st"><span class="dz-ti">Текущая серия</span><div class="dz-big"><b>${cur}</b><span>${this.pl(cur,'день','дня','дней')}</span></div><i class="dz-fl">${I.fire}</i></div>
      <div class="card dz-c dz-st2"><span class="dz-ti">Самая длинная серия</span><div class="dz-mid"><i>${I.trophy}</i><b>${best}</b><span>${this.pl(best,'день','дня','дней')}</span></div></div></div>`;
