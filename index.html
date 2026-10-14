@@ -842,6 +842,7 @@ input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(124,92,230,.25
 .lck{display:grid}.srow .lck svg{color:#9B7BFF}.rstars{display:flex;gap:10px;justify-content:center;margin:6px 0 18px}.rstars button{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;background:#1A1A22;border:1px solid var(--line);color:#3A3A48}.rstars button svg{width:28px;height:28px}.rstars button.on{color:#F5B84B;border-color:rgba(245,184,75,.4);background:rgba(245,184,75,.08)}
 .rmsg{display:grid;gap:8px;text-align:center}.rmsg span{color:var(--dim);font-size:14px;margin-bottom:6px}
 .nws{display:grid;gap:4px;margin-top:8px}.nw{padding:14px 0;border-bottom:1px solid var(--line)}.nw:last-child{border:0}.nw span{font-size:12.5px;color:#9B7BFF;font-weight:600}.nw b{display:block;font-size:16px;margin:2px 0 4px}.nw p{margin:0;color:var(--dim);font-size:14px;line-height:1.5}
+.ios-st{display:grid;gap:10px}.ios-st div{display:flex;gap:12px;align-items:center;font-size:15px}.ios-st span{width:28px;height:28px;flex:none;border-radius:50%;display:grid;place-items:center;background:rgba(155,123,255,.18);color:#C9B8FF;font-weight:700;font-size:13px}.nbtn{margin-top:4px;background:#16161C;border:1px solid var(--line)}
 .sc-cl{margin:-4px 4px 12px}
 @media(min-width:1024px){.nme,.ngrp,.nout,.sbk,.sttl{max-width:640px;margin-left:auto;margin-right:auto}.sttl{text-align:left;font-size:22px}}
 </style>
@@ -1014,6 +1015,8 @@ init(){
   if(tp){history.replaceState(null,'',location.pathname);this.applyTpl(tp)}
   this.day=this.clampDay(today());
   try{this.tab=sessionStorage.getItem('tw-tab')||'home'}catch(e){}
+  const qt=new URLSearchParams(location.search).get('tab');if(qt){this.tab=this.normTab(qt);history.replaceState(null,'',location.pathname+location.hash)}
+  if(navigator.serviceWorker)navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.tab)this.go(e.data.tab)});
   document.documentElement.lang=this.lang();
   if(this.lang()==='en')this.loadDict().then(()=>this.render());
   this.render();
@@ -2174,8 +2177,17 @@ vMe(){
   pages.day=()=>sec('День и неделя',[
     row(ic('list','#4B7BE6'),'Первый день недели',pr.wk0==='sun'?'воскресенье':'понедельник',"APP.setPref('wk0',(APP.S.pref||{}).wk0==='sun'?'mon':'sun')"),
     tog(ic('tree','#16B8C4'),'Режим отпуска',vac,"APP.toggleVac()",vac?`с ${fd(vac.from)} · привычки на паузе, серии не рвутся`:'Ставит все привычки на паузу, пока ты отдыхаешь')]);
-  pages.notif=()=>sec('Уведомления',[
-    row(ic('phone','#56566A'),'Пуш-уведомления','скоро',null,'Утренняя и вечерняя сводка, разбор недели, колесо баланса')]);
+  pages.notif=()=>{const pp=this.pushPrefs(),on=!!this._pushOn,dis=on?'':' style="opacity:.4;pointer-events:none"';
+    return `<div class="card sgrp">${tog(ic('moon','#9B7BFF'),'Пуш-уведомления',on,on?"APP.pushOff()":"APP.pushOn()",on?'Включены на этом устройстве':'Утренний план, вечернее закрытие дня, разбор недели')}</div>
+    <div class="lbl sec">Когда напоминать</div><div class="card sgrp"${dis}>${[
+      tog(ic('sun','#F5B84B'),'Утро',!!pp.morning,"APP.pushSet('morning',APP.pushPrefs().morning?'':'07:30')",pp.morning?'План на день в '+pp.morning:'Выключено'),
+      pp.morning?row(ic('list','#F5B84B'),'Время утром',pp.morning,"APP.ask('Время утром',APP.pushPrefs().morning,v=>v&&APP.pushSet('morning',v),'time')"):'',
+      tog(ic('moon','#7C5CE6'),'Вечер',!!pp.evening,"APP.pushSet('evening',APP.pushPrefs().evening?'':'21:00')",pp.evening?'Закрыть день в '+pp.evening:'Выключено'),
+      pp.evening?row(ic('list','#7C5CE6'),'Время вечером',pp.evening,"APP.ask('Время вечером',APP.pushPrefs().evening,v=>v&&APP.pushSet('evening',v),'time')"):'',
+      tog(ic('target','#22D3E0'),'Разбор недели',pp.review,"APP.pushSet('review',!APP.pushPrefs().review)",'Воскресенье, 18:00'),
+      tog(ic('lotus','#E65CA8'),'Колесо баланса',pp.wheel,"APP.pushSet('wheel',!APP.pushPrefs().wheel)",'1-е число месяца, 12:00')].join('')}</div>
+    ${on?`<button class="btn w nbtn" onclick="APP.pushTest()">Отправить тестовое уведомление</button>`:''}
+    ${!this.user?'<div class="small mut" style="text-align:center;margin-top:10px">Войди в аккаунт, чтобы включить уведомления</div>':''}`};
   pages.look=()=>sec('Оформление',[
     row(ic('dumb','#F5B84B'),'Режим',this.simple()?'Простой':'Полный',"APP.setSimple(!APP.simple())",this.simple()?'Дашборд, трекер и настройки':'Все разделы'),
     tog(ic('heart','#E65CA8'),'Вибрация при отметке',pr.haptics!==false,"APP.setPref('haptics',(APP.S.pref||{}).haptics===false)"),
@@ -2261,6 +2273,35 @@ rate(n){this.S.pref=this.S.pref||{};this.S.pref.rate=n;this.save();document.quer
 newsSheet(){const N=[['Октябрь 2026','Новые настройки','Профиль сверху, разделы по группам, язык и интеграции на виду. Политика конфиденциальности и условия.'],['Октябрь 2026','Трекер привычек','Таблица на месяц, отметки в одно касание, серии и рекорды. Трекер работает без программы.'],['Октябрь 2026','Профиль героя','Уровень, характеристики и достижения растут от каждой отметки.'],['Октябрь 2026','Прогресс','Колесо баланса и год в пикселях.']];
   this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Что нового</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="nws">${N.map(x=>`<div class="nw"><span>${x[0]}</span><b>${x[1]}</b><p>${x[2]}</p></div>`).join('')}</div>`)},
+VAPID:'BDAUrTsDVqNLfDpt0giGnSTzxis_9Rq393FySipLm5Za0yTPZUvxyUgAo8yn8tQvPalCzZTD8uj2hdj4Pn4IA_k',
+pushPrefs(){const P=(this.S.pref||{}).push||{};return{morning:P.morning===undefined?'07:30':P.morning,evening:P.evening===undefined?'21:00':P.evening,review:P.review!==false,wheel:P.wheel!==false}},
+pushSupported(){return 'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window},
+isIOS(){return /iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)},
+isStandalone(){return navigator.standalone===true||matchMedia('(display-mode: standalone)').matches},
+async pushSub(){try{const r=await navigator.serviceWorker.getRegistration();return r?await r.pushManager.getSubscription():null}catch(e){return null}},
+async pushRow(sub){const j=sub.toJSON();return{user_id:this.user.id,endpoint:j.endpoint,p256dh:j.keys.p256dh,auth:j.keys.auth,tz:Intl.DateTimeFormat().resolvedOptions().timeZone||'Europe/Moscow',lang:this.lang(),prefs:this.pushPrefs(),updated_at:new Date().toISOString()}},
+async pushOn(){
+  if(!this.user)return this.toast('Сначала войди в аккаунт: уведомления привязаны к нему');
+  if(this.isIOS()&&!this.isStandalone())return this.iosSheet();
+  if(!this.pushSupported())return this.toast('Этот браузер не поддерживает уведомления');
+  try{const perm=await Notification.requestPermission();if(perm!=='granted')return this.toast(perm==='denied'?'Уведомления запрещены в настройках браузера':'Разрешение не получено');
+    const reg=await navigator.serviceWorker.ready;let sub=await reg.pushManager.getSubscription();
+    if(!sub){const b=this.VAPID.replace(/-/g,'+').replace(/_/g,'/'),raw=atob(b+'='.repeat((4-b.length%4)%4)),key=Uint8Array.from(raw,c=>c.charCodeAt(0));sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:key})}
+    const{error}=await this.sb.from('tw_push').upsert(await this.pushRow(sub),{onConflict:'endpoint'});if(error)throw error;
+    this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPrefs(),on:true};this.save();this._pushOn=true;this.pushSum(true);this.render();this.toast('Уведомления включены',true)
+  }catch(e){this.toast('Не получилось включить: '+this.errText(e))}},
+async pushOff(){try{const sub=await this.pushSub();if(sub){await this.sb.from('tw_push').delete().eq('endpoint',sub.endpoint);await sub.unsubscribe()}}catch(e){}
+  this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPrefs(),on:false};this.save();this._pushOn=false;this.render();this.toast('Уведомления выключены')},
+async pushSet(k,v){this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPrefs(),on:!!this._pushOn,[k]:v};this.save();this.render();
+  const sub=await this.pushSub();if(sub&&this.user)await this.sb.from('tw_push').update({prefs:this.pushPrefs(),lang:this.lang(),tz:Intl.DateTimeFormat().resolvedOptions().timeZone,updated_at:new Date().toISOString()}).eq('endpoint',sub.endpoint)},
+async pushTest(){try{const{data,error}=await this.sb.functions.invoke('tw-push',{body:{test:true}});if(error)throw error;const ok=(data.sent||[]).filter(x=>x>=200&&x<300).length;this.toast(ok?'Отправили. Уведомление придёт через пару секунд':'Не дошло. Выключи и включи уведомления заново',!!ok)}catch(e){this.toast('Ошибка: '+this.errText(e))}},
+async pushSum(force){if(!this.user||!this.sb||!this._pushOn)return;const td=today(),a=this.dayAll(td),sm={date:td,n:a.n-a.done,st:this.dayStreak()},k=JSON.stringify(sm);if(!force&&k===this._pSum)return;this._pSum=k;
+  try{await this.sb.from('tw_push').update({sum:sm}).eq('user_id',this.user.id)}catch(e){}},
+async pushCheck(){const sub=this.pushSupported()?await this.pushSub():null,on=!!sub&&Notification.permission==='granted';if(on!==this._pushOn){this._pushOn=on;if(this.tab==='me')this.render()}},
+iosSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Уведомления на iPhone</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+  <div class="small mut" style="margin:4px 0 16px">iPhone присылает уведомления только приложениям с экрана «Домой». Это займёт 10 секунд.</div>
+  <div class="ios-st">${['Открой wikki.app в Safari','Нажми «Поделиться» внизу экрана','Выбери «На экран "Домой"»','Открой приложение с иконки и включи уведомления здесь'].map((t,i)=>`<div><span>${i+1}</span>${t}</div>`).join('')}</div>
+  <button class="btn pr w" style="margin-top:16px" onclick="APP.close()">Понятно</button>`)},
 methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">На чём построена система</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin-top:10px;line-height:1.55">Каркас — «12 недель в году» Брайана Морана: тактики вместо результатов, недельный счёт, планка 85%, еженедельный разбор, 13-я неделя на итоги.<br><br>Разделение действий и результата — «4 дисциплины исполнения». «Если — то» — Питер Гольвитцер. WOOP — Габриэль Эттинген. Привычки и «не пропускай дважды» — Джеймс Клир. Отчёт партнёру — исследование Гейл Мэтьюз. Строгие программы — по правилам их авторов.</div>`)},
 lang(){return ((this.S.pref||{}).lang)||'ru'},
@@ -2299,7 +2340,7 @@ initAuth(){
   this.sb=supabase.createClient(CFG.url,CFG.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'tw-auth'}});
   this.sb.auth.onAuthStateChange((ev,ses)=>{
     if(ev==='PASSWORD_RECOVERY'){this._am='reset';this._amsg='Придумай новый пароль';this.user=null;this.go('me');return}
-    const u=ses&&ses.user;const was=this.user&&this.user.id;this.user=u||null;
+    const u=ses&&ses.user;const was=this.user&&this.user.id;this.user=u||null;if(this.user)this.pushCheck();
     if(u&&u.id!==was){if(!this.S.profile.name&&u.user_metadata&&u.user_metadata.name)this.S.profile.name=u.user_metadata.name;this.pull(true);this.grpLoad()}if(!u){this.groups=[];this.boards={}}
     if(!u&&was){this.cloud='off'}
     this.render()});
@@ -2330,7 +2371,7 @@ async auth(mode){
 async forgot(){const e=($('aE')||{}).value.trim();if(!/.+@.+\..+/.test(e))return this.msg('Впиши почту выше, и я пришлю ссылку');
   try{const{error}=await this.sb.auth.resetPasswordForEmail(e,{redirectTo:location.origin+location.pathname});if(error)throw error;this.msg('Письмо со ссылкой отправлено')}catch(err){this.msg(this.errText(err))}},
 async logout(){if(!confirm('Выйти? Данные останутся в облаке, а с этого устройства будут стёрты.'))return;
-  clearTimeout(this._pt);await this.push();try{await this.sb.auth.signOut()}catch(e){}
+  clearTimeout(this._pt);await this.push();try{const sub=await this.pushSub();if(sub){await this.sb.from('tw_push').delete().eq('endpoint',sub.endpoint);await sub.unsubscribe()}}catch(e){}this._pushOn=false;try{await this.sb.auth.signOut()}catch(e){}
   this.user=null;this.cloud='off';localStorage.removeItem(KEY);this.S=this.fresh();this.go('home')},
 /* ---------- группы: общий счёт недели ---------- */
 groups:[],boards:{},
@@ -2378,7 +2419,7 @@ async pull(first){if(!this.user||!this.sb)return;
   }catch(e){this.cloud='err';this.render()}},
 async push(){if(!this.user||!this.sb)return;
   try{const{error}=await this.sb.from('tw_state').upsert({user_id:this.user.id,data:this.S,updated_at:new Date().toISOString()});if(error)throw error;
-    if(this.cloud!=='on'){this.cloud='on';if(this.tab==='me')this.render()}this._last=Date.now();this.grpPush()}catch(e){this.cloud='err'}},
+    if(this.cloud!=='on'){this.cloud='on';if(this.tab==='me')this.render()}this._last=Date.now();this.grpPush();this.pushSum()}catch(e){this.cloud='err'}},
 mergeLog(a,b,lta,ltb,pre){const out={};
   new Set([...Object.keys(a||{}),...Object.keys(b||{})]).forEach(d=>{const x=(a||{})[d]||{},y=(b||{})[d]||{},o={};
     new Set([...Object.keys(x),...Object.keys(y)]).forEach(k=>{const key=pre+d+'|'+k,ta=(lta||{})[key]||0,tb=(ltb||{})[key]||0;let v;
