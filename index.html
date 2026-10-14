@@ -846,6 +846,12 @@ input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(124,92,230,.25
 .akp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.ak{background:var(--card,#131318);border:1px solid var(--line);border-radius:16px;padding:14px}.ak span{display:block;font-size:12.5px;color:var(--dim)}.ak b{display:block;font-size:26px;margin:4px 0 2px}.ak em{font-style:normal;font-size:12px;color:#7EE6EE}
 .abars{padding:16px!important}.ab-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}.ab-h span,.ab-f{font-size:12px;color:var(--dim)}.ab{display:flex;align-items:flex-end;gap:3px;height:120px}.ab i{flex:1;background:linear-gradient(#22D3E0,rgba(34,211,224,.25));border-radius:4px 4px 1px 1px;position:relative;min-width:0}.ab s{position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--dim);text-decoration:none}.ab-f{display:flex;justify-content:space-between;margin-top:8px}
 @media(min-width:1024px){.akp{grid-template-columns:repeat(4,1fr);max-width:640px;margin-left:auto;margin-right:auto}.abars{max-width:640px;margin-left:auto!important;margin-right:auto!important}}
+.pw{max-width:560px;margin:8px auto 0}.pw-ey{font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C9B8FF}.pw-t{font-size:28px;font-weight:800;line-height:1.12;letter-spacing:-.5px;margin:8px 0 10px;color:#fff}.pw-s{color:var(--dim);font-size:15px;line-height:1.55;margin-bottom:20px}
+.pw-f{display:grid;gap:2px;background:#131318;border:1px solid var(--line);border-radius:18px;padding:6px 16px;margin-bottom:14px}.pw-f div{display:grid;grid-template-columns:28px 1fr;column-gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.pw-f div:last-child{border:0}.pw-f span{grid-row:span 2;color:#9B7BFF;display:grid;align-items:start;padding-top:2px}.pw-f span svg{width:22px;height:22px}.pw-f b{font-size:15.5px}.pw-f em{font-style:normal;color:var(--dim);font-size:13.5px}
+.pw-p{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px;border-radius:18px;background:radial-gradient(90% 140% at 0% 0%,rgba(155,123,255,.22),transparent 60%),#15131E;border:1px solid rgba(155,123,255,.4);margin-bottom:14px}.pw-p s{color:var(--dim);font-size:14px;display:block}.pw-p b{font-size:30px;font-weight:800;color:#fff;display:block;line-height:1.1}.pw-p span{font-size:13px;color:var(--dim)}.pw-p em{font-style:normal;font-size:12.5px;font-weight:700;color:#0A0A0F;background:#F5B84B;padding:6px 10px;border-radius:99px;white-space:nowrap}
+.pw-go{padding:16px!important;font-size:16px}.pw-g{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin:14px 0 6px;font-size:13px;color:var(--dim)}.pw-g span{display:inline-flex;align-items:center;gap:5px}.pw-g svg{width:14px;height:14px;color:#22D3E0}
+.pw-code{display:block;margin:6px auto 0;color:var(--dim);font-size:14px;text-decoration:underline;text-underline-offset:3px;padding:8px}
+.pw-on{display:grid;justify-items:center;text-align:center;gap:6px;padding:24px!important;margin-bottom:16px}.pw-on span{color:#F5B84B}.pw-on span svg{width:34px;height:34px}.pw-on b{font-size:18px}.pw-on em{font-style:normal;color:var(--dim)}
 .sc-cl{margin:-4px 4px 12px}
 @media(min-width:1024px){.nme,.ngrp,.nout,.sbk,.sttl{max-width:640px;margin-left:auto;margin-right:auto}.sttl{text-align:left;font-size:22px}}
 </style>
@@ -898,6 +904,7 @@ star:f('<path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-
 spark:f('<path d="M10 2l1.9 5.6L17.5 9.5l-5.6 1.9L10 17l-1.9-5.6L2.5 9.5l5.6-1.9zM18 13l1 2.9 3 1.1-3 1.1-1 2.9-1-2.9-3-1.1 3-1.1z"/>'),
 doc:f('<path d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 1.5V9h5.5zM8 13v2h8v-2zm0 4v2h6v-2z" fill-rule="evenodd"/>'),
 chart:f('<path d="M4 20h17v2H2V3h2zm2-3V11h3v6zm5 0V6h3v11zm5 0v-8h3v8z"/>'),
+check:f('<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 13.6L6.6 11.4 8 10l2.8 2.8L16 7.6 17.4 9z"/>'),
 medal:f('<path d="M7 2h4l1 4 1-4h4l-3 7.2A6 6 0 1 1 10 9.2zM12 11a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>')}})();
 const I={
   dash:sv('<rect x="3" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.8"/>',22),
@@ -1161,9 +1168,11 @@ render(){
   const locked=(this.S.pref||{}).pin&&!this._unl&&(()=>{try{return !sessionStorage.getItem('tw-unlock')}catch(e){return true}})();document.body.classList.toggle('wlc',this.sub==='welcome'||!!locked);
   if(locked)body=this.vLock();
   else if(this.sub==='welcome')body=this.vWelcome();
+  else if((this.sub==='onboard'||this.sub==='programs')&&!this.paid())body=this.vPaywall('program');
   else if(this.sub==='onboard')body=this.vOnboard();
   else if(this.sub==='programs')body=this.vPrograms();
   else if(this.sub==='deals')body=this.vDeals();
+  else if(['program','progress'].includes(this.normTab(this.tab))&&!this.paid()){this.tab=this.normTab(this.tab);body=this.vPaywall(this.tab)}
   else{this.tab=this.normTab(this.tab);body={profile:this.vProfile,home:this.vHome,program:this.vProgram,progress:this.vProgress,tracker:this.vTracker,journal:this.vJournal,me:this.vMe}[this.tab].call(this)}
   $('app').innerHTML=this.top()+this.dash(body);this.tr($('app'));
   const simple=this.simple();
@@ -1199,9 +1208,9 @@ ring(v,th,cap){const r=52,C=2*Math.PI*r,p=v==null?0:v/100,a=th/100*360-90,x=59+r
    <circle cx="${x}" cy="${y}" r="3.5" fill="var(--tx)"/></svg><div class="v"><div><b>${v??'—'}${v!=null?'%':''}</b><span>${cap||'ЦЕЛЬ '+th}</span></div></div></div>`},
 
 /* ================= ГЛАВНОЕ ================= */
-vWelcome(){return `<div class="wl"><span class="wl-mark">${SHARK}</span><div class="wl-t">wikki.app</div><div class="wl-s">Система достижения целей за одну программу: цели, тактики, счёт недели и разбор. Без подписки.</div>
-  <div class="wl-f"><div>${I.goal}<span>До трёх целей и тактики под каждой</span></div><div>${I.habit}<span>Привычки и задачи в одной сетке</span></div><div>${I.week}<span>Счёт недели и воскресный разбор</span></div></div>
-  <button class="btn pr w" style="margin-top:22px;padding:15px" onclick="APP.seen();APP.sub=null;APP.startWizard()">Начать бесплатно</button>
+vWelcome(){return `<div class="wl"><span class="wl-mark">${SHARK}</span><div class="wl-t">wikki.app</div><div class="wl-s">Привычки, цели и прогресс в одной системе. Начни с 2–3 привычек: первая отметка займёт минуту.</div>
+  <div class="wl-f"><div>${I.habit}<span>Трекер привычек: отметка в одно касание</span></div><div>${I.goal}<span>Программы: 12 недель, 75 Hard, 6 месяцев</span></div><div>${I.week}<span>Серии, уровень и прогресс за год</span></div></div>
+  <button class="btn pr w" style="margin-top:22px;padding:15px" onclick="APP.seen();APP.sub=null;APP.track('start',null,'ever');APP.go('tracker')">Начать бесплатно</button>
   <button class="btn gh w" style="margin-top:8px" onclick="APP.seen();APP.sub=null;APP.go('me')">У меня есть аккаунт</button>
   <button class="btn gh w small" style="margin-top:2px;color:var(--dim)" onclick="APP.seen();APP.sub=null;APP.go('home')">Сначала посмотреть</button></div>`},
 seen(){this.S.pref=this.S.pref||{};this.S.pref.seen=1;this.save()},
@@ -1837,7 +1846,7 @@ vJournal(){const S=this.S,td=today(),d=this._jd&&this._jd<=td?this._jd:td,C=S.ch
   h+=`<div class="sech"><b>Записи</b><span>${hist.length}</span></div><div class="jr-h">${hist.length?hist.map(x=>{const e=C[x];return `<button class="card jr-i" onclick="APP._jd='${x}';APP.render();window.scrollTo(0,0)"><div class="row"><b class="sp">${WDF[pd(x).getDay()]}, ${fd(x)}</b>${e.mood?`<span class="pill p">настр. ${e.mood}</span>`:''}${e.energy?`<span class="pill c">эн. ${e.energy}</span>`:''}</div>${e.win?`<div class="jr-t">${esc(e.win)}</div>`:''}${e.note?`<div class="jr-n">${esc(e.note)}</div>`:''}</button>`}).join(''):'<div class="card small mut">Здесь будут твои прошлые записи.</div>'}</div></div></div>`;
   return h},
 jSet(d,k,v,re){const S=this.S;S.checkin=S.checkin||{};const c=S.checkin[d]=Object.assign({energy:0,sleep:'',win:'',top:'',note:''},S.checkin[d]||{});c[k]=v;c.t=Date.now();this.save();if(re){this.buzz(6);this.render()}else this.toast('Сохранено',true)},
-hQuick(t){t=(t||'').trim();if(!t)return;this.S.habits.push(H(t));this.save();this.buzz(10);this.render();this.toast('Привычка добавлена',true);this.qaOpen('h')},
+hQuick(t){t=(t||'').trim();if(!t)return;if(!this.canAddH(1))return;this.S.habits.push(H(t));this.save();this.buzz(10);this.render();this.toast('Привычка добавлена',true);this.qaOpen('h')},
 hCal(id,m){
   const x=this.S.habits.find(h=>h.id===id);if(!x)return;this._hcal=1;
   const base=m||this._hm||today().slice(0,7);this._hm=base;
@@ -1866,7 +1875,7 @@ hForm(){const x=this._h,order=(this.S.pref||{}).wk0==='sun'?[0,1,2,3,4,5,6]:[1,2
   <div class="small dim">Привязка к тому, что уже делаешь каждый день, — самый надёжный способ закрепить привычку (Джеймс Клир).</div>
   <div class="row" style="margin-top:18px"><button class="btn pr sp" onclick="APP.hSave()">Сохранить</button>${this._hNew?'':`<button class="btn del" onclick="APP.hDel()">Удалить</button>`}</div>`)},
 hKeep(){if($('hT')){this._h.title=$('hT').value;this._h.when=$('hW').value;if($('hG'))this._h.target=+String($('hG').value).replace(',','.')||0;if($('hU'))this._h.unit=$('hU').value.trim();if($('hS'))this._h.step=+$('hS').value||5;if(this._h.kind==='time'){this._h.unit='мин';if(!this._h.step||this._h.step===1)this._h.step=5}if(this._h.kind==='num'&&!this._h.step)this._h.step=1}},
-hSave(){this.hKeep();const x=this._h;if(!x.title.trim())return this.toast('Назови привычку');if(!x.days.length)return this.toast('Выбери хотя бы один день');
+hSave(){this.hKeep();const x=this._h;if(!x.title.trim())return this.toast('Назови привычку');if(!this.S.habits.some(h=>h.id===x.id)&&!this.canAddH(1)){this.close();return}if(!x.days.length)return this.toast('Выбери хотя бы один день');
   const i=this.S.habits.findIndex(h=>h.id===x.id);if(i<0)this.S.habits.push(x);else this.S.habits[i]=x;this.save();this.close();this.render()},
 hDel(){if(!confirm('Удалить привычку вместе с историей? Можно вместо этого отправить в архив.'))return;this.S.habits=this.S.habits.filter(h=>h.id!==this._h.id);this.save();this.close();this.render()},
 hPicker(more){const have=new Set(this.S.habits.map(x=>x.title)),sel=this._pick||(this._pick=new Set());const TOD={m:'утро',d:'день',e:'вечер'};
@@ -1875,8 +1884,8 @@ hPicker(more){const have=new Set(this.S.habits.map(x=>x.title)),sel=this._pick||
     <div class="hpg">${tiles}</div>
     <div class="row hpact"><button class="btn gh" onclick="APP._pick=null;APP.editH()">Своя</button><button class="btn pr sp" ${sel.size?'':'disabled'} onclick="APP.pickAdd()">${sel.size?`Добавить ${sel.size} ${this.pl(sel.size,'привычку','привычки','привычек')}`:'Выбери привычки'}</button></div></div>`},
 pickT(i){const sel=this._pick||(this._pick=new Set());sel.has(i)?sel.delete(i):sel.add(i);this.buzz(6);this.render()},
-pickAdd(){const sel=this._pick||new Set();if(!sel.size)return;[...sel].sort((a,b)=>a-b).forEach(i=>{const [t,tod,,ex]=HABIT_LIB[i];if(!this.S.habits.some(h=>h.title===t))this.S.habits.push(H(t,Object.assign({tod},ex||{})))});const n=sel.size;this._pick=null;this._libOpen=false;this.save();this.buzz(14);this.render();this.toast(`Добавлено: ${n} ${this.pl(n,'привычка','привычки','привычек')}`,false)},
-addLib(i){const [t,tod,,ex]=HABIT_LIB[i];if(this.S.habits.some(h=>h.title===t))return;this.S.habits.push(H(t,Object.assign({tod},ex||{})));this.save();this.buzz(10);this.render();this.toast('Добавлено: '+t,false)},
+pickAdd(){const sel=this._pick||new Set();if(!sel.size)return;if(!this.canAddH(sel.size))return;[...sel].sort((a,b)=>a-b).forEach(i=>{const [t,tod,,ex]=HABIT_LIB[i];if(!this.S.habits.some(h=>h.title===t))this.S.habits.push(H(t,Object.assign({tod},ex||{})))});const n=sel.size;this._pick=null;this._libOpen=false;this.save();this.buzz(14);this.render();this.toast(`Добавлено: ${n} ${this.pl(n,'привычка','привычки','привычек')}`,false)},
+addLib(i){const [t,tod,,ex]=HABIT_LIB[i];if(this.S.habits.some(h=>h.title===t))return;if(!this.canAddH(1))return;this.S.habits.push(H(t,Object.assign({tod},ex||{})));this.save();this.buzz(10);this.render();this.toast('Добавлено: '+t,false)},
 hArch(id,v){const x=this.S.habits.find(h=>h.id===id);x.archived=v;this.save();this.close();this.render()},
 
 /* ================= ЦЕЛИ ================= */
@@ -2171,7 +2180,7 @@ vMe(){
     row(ic('heart','#E65CA8'),'Имя',esc(S.profile.name||'—'),"APP.ask('Имя',APP.S.profile.name,v=>{APP.S.profile.name=v.trim();APP.save();APP.render()})"),
     row(ic('chat','#4B7BE6'),'Почта',esc(this.user?this.user.email:'—')),
     row(ic('target','#7C5CE6'),'Сменить пароль','',"APP.pwReset()",'Пришлём ссылку на почту')])+`<div class="cloud sc-cl ${this.cloud==='on'?'on':this.cloud==='err'?'err':''}"><i></i>${this.cloud==='on'?'Данные в облаке'+(this._last?' · '+new Date(this._last).toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'}):''):this.cloud==='err'?'Нет связи, сохранено на устройстве':'Синхронизация…'}</div>`;
-  pages.premium=()=>`<div class="card prem"><span class="pr-ic">${I.star}</span><div class="sp"><b>Полный доступ</b><span>Разовая покупка без подписки · 14 дней на возврат</span><div class="pr-ch"><em>Все программы</em><em>Облако</em><em>Разбор недели</em><em>Колесо и год</em></div></div><button class="btn sm" disabled>Скоро</button></div>`;
+  pages.premium=()=>this.paid()?`<div class="card pw-on"><span>${SI.crown}</span><b>Полный доступ активен</b><em>${this._acc.until?'До '+fd(this._acc.until):'Навсегда'}${this._acc.source==='founder'?' · основатель':''}</em></div>${this._acc.until?this.payBody('full'):''}`:this.payBody('full');
   pages.program=()=>sec('Программа',[
     row(ic('target','#7C5CE6'),'Программа',P?esc(P.name):'не выбрана',"APP.openSub('programs')",P?({score:'планка 85%',strict:'строгий режим',count:'копилка дней'}[this.mode]):''),
     row(ic('sun','#F5B84B'),'Дата старта',fd(S.sprint.start),"APP.ask('Дата старта',APP.S.sprint.start,v=>{if(/^\\d{4}-\\d{2}-\\d{2}$/.test(v)){APP.S.sprint.start=v;APP.save();APP.render()}},'date')"),
@@ -2232,7 +2241,7 @@ vMe(){
   if(this.user){const Pp=S.profile||{},av=Pp.ava&&Pp.ava!=='shark'?hIco(Pp.ava):SHARK,R=this.rpgData(),na=R.ach.filter(x=>x[2]).length;
     h+=`<button class="nme" onclick="APP.go('profile')"><span class="nme-av">${av}</span><span class="sp"><b>${esc(Pp.name||Pp.hero||'Без имени')}</b><span class="nme-ch"><em class="lv">Ур. ${R.lvl}</em><em class="ac">${SI.medal}${na} ${this.pl(na,'достижение','достижения','достижений')}</em></span></span>${I.r}</button>`}
   if(this._adm)h+=grp([nr('chart','#22D3E0','Аналитика',(this._adm.users||0)+' акк.',go('stats'))]);
-  h+=grp([nr('crown','#F5B84B','Полный доступ','скоро',go('premium'))]);
+  h+=grp([nr('crown','#F5B84B','Полный доступ',this.paid()?(this._acc.until?'до '+fd(this._acc.until):'активен'):'',go('premium'))]);
   h+=grp([nr('target','#9B7BFF','Программа',P?esc(P.name):'',go('program')),nr('cal','#9B7BFF','День и неделя','',go('day')),nr('bell','#9B7BFF','Уведомления','',go('notif')),nr('globe','#9B7BFF','Язык',lang==='en'?'English':'Русский',go('lang')),nr('brush','#9B7BFF','Оформление','',go('look'))]);
   h+=grp([...(this.user?[nr('user','#22D3E0','Аккаунт','',go('account'))]:[]),nr('lock','#22D3E0','Данные и приватность','',go('data')),nr('plug','#22D3E0','Интеграции','',go('integ'))]);
   h+=grp([nr('help','#F5B84B','Помощь и обратная связь','',go('help')),nr('star','#F5B84B','Оценить приложение',(S.pref||{}).rate?'★'.repeat((S.pref||{}).rate):'',"APP.rateSheet()"),nr('spark','#F5B84B','Что нового','',"APP.newsSheet()"),nr('share','#F5B84B','Поделиться приложением','',"APP.shareApp()"),nr('info','#F5B84B','О приложении','v1.0',"APP.methodSheet()")]);
@@ -2279,13 +2288,40 @@ ask(label,cur,cb,type){const t=type||'text';this._askCb=cb;
 async pwReset(){if(!this.user||!this.sb)return;try{const{error}=await this.sb.auth.resetPasswordForEmail(this.user.email,{redirectTo:location.origin+location.pathname});if(error)throw error;this.toast('Письмо для смены пароля отправлено')}catch(e){this.toast(this.errText(e))}},
 rateSheet(){const r=(this.S.pref||{}).rate||0;this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Как тебе wikki.app?</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin:4px 0 18px">Оценка помогает понять, что улучшать в первую очередь.</div>
-  <div class="rstars">${[1,2,3,4,5].map(i=>`<button class="${i<=r?'on':''}" onclick="APP.rate(${i})" aria-label="${i}">${SI.star}</button>`).join('')}</div><div id="rMsg"></div>`)},
-rate(n){this.S.pref=this.S.pref||{};this.S.pref.rate=n;this.save();document.querySelectorAll('.rstars button').forEach((b,i)=>b.classList.toggle('on',i<n));this.buzz&&this.buzz();
+  <div class="rstars">${[1,2,3,4,5].map(i=>`<button class="${i<=r?'on':''}" onclick="APP.rateSet(${i})" aria-label="${i}">${SI.star}</button>`).join('')}</div><div id="rMsg"></div>`)},
+rateSet(n){this.S.pref=this.S.pref||{};this.S.pref.rate=n;this.save();document.querySelectorAll('.rstars button').forEach((b,i)=>b.classList.toggle('on',i<n));this.buzz&&this.buzz();
   const m=$('rMsg');if(m)m.innerHTML=n>=4?`<div class="rmsg"><b>Спасибо!</b><span>Поделись приложением с тем, кому оно тоже поможет держать слово.</span><button class="btn pr w" onclick="APP.close();APP.shareApp()">Поделиться</button></div>`:`<div class="rmsg"><b>Что нам исправить?</b><span>Напиши в двух словах, что мешает. Отвечаем лично.</span><button class="btn pr w" onclick="window.open('https://t.me/wikki_shark','_blank')">Написать в Telegram</button></div>`;this.render()},
 newsSheet(){const N=[['Октябрь 2026','Новые настройки','Профиль сверху, разделы по группам, язык и интеграции на виду. Политика конфиденциальности и условия.'],['Октябрь 2026','Трекер привычек','Таблица на месяц, отметки в одно касание, серии и рекорды. Трекер работает без программы.'],['Октябрь 2026','Профиль героя','Уровень, характеристики и достижения растут от каждой отметки.'],['Октябрь 2026','Прогресс','Колесо баланса и год в пикселях.']];
   this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Что нового</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="nws">${N.map(x=>`<div class="nw"><span>${x[0]}</span><b>${x[1]}</b><p>${x[2]}</p></div>`).join('')}</div>`)},
 async loadStats(){try{const{data,error}=await this.sb.rpc('tw_metrics',{days:30});if(!error&&data){this._adm=data;if(this.tab==='me')this.render()}}catch(e){}},
+FREE_H:3,
+paid(){if(!this.user)return false;const a=this._acc;return !!a&&(!a.until||a.until>=today())},
+async loadAcc(){if(!this.user||!this.sb)return;const k='tw-acc-'+this.user.id;try{const c=localStorage.getItem(k);if(c&&!this._acc)this._acc=JSON.parse(c)}catch(e){}
+  try{const{data,error}=await this.sb.from('tw_access').select('plan,source,until').eq('user_id',this.user.id).maybeSingle();if(error)throw error;this._acc=data||null;try{data?localStorage.setItem(k,JSON.stringify(data)):localStorage.removeItem(k)}catch(e){}this.render()}catch(e){}},
+canAddH(n){if(this.paid())return true;const c=this.S.habits.filter(h=>!h.archived).length;if(c+n<=this.FREE_H)return true;this.paySheet('habits');return false},
+price(){return this.lang()==='en'?{v:'$29'}:{v:'2 490 ₽'}},
+payBody(kind){const T={program:['Программы','Цель за 12 недель, а не за год','Готовая система: цели, ежедневные тактики, счёт недели и воскресный разбор. Ты точно знаешь, что делать сегодня.'],
+    progress:['Прогресс','Видно, как меняется жизнь','Колесо баланса по 10 сферам и год в пикселях. Через месяц ты увидишь разницу в цифрах, а не на ощущениях.'],
+    habits:['Привычки','Больше трёх привычек','В бесплатной версии 3 привычки. Полный доступ снимает ограничение и открывает всю систему.'],
+    full:['Полный доступ','Вся система дисциплины','Программы, безлимит привычек, прогресс и разборы. Один раз и навсегда.']}[kind]||[],pr=this.price();
+  const F=[['target','Программы','12 недель, 75 Hard, Теория шести месяцев'],['check','Безлимит привычек','Сколько нужно, с любыми типами отметок'],['chart','Колесо и год','10 сфер жизни и каждый день года на одной картинке'],['spark','Разбор недели','Счёт, выводы и фокус на следующую неделю']];
+  return `<div class="pw"><div class="pw-ey">${T[0]}</div><div class="pw-t">${T[1]}</div><div class="pw-s">${T[2]}</div>
+  <div class="pw-f">${F.map(f=>`<div><span>${SI[f[0]]||I.ok}</span><b>${f[1]}</b><em>${f[2]}</em></div>`).join('')}</div>
+  <div class="pw-p"><div><b>${pr.v}</b><span>один раз, навсегда</span></div><em>цена запуска</em></div>
+  <button class="btn pr w pw-go" onclick="APP.buy()">Открыть полный доступ</button>
+  <div class="pw-g"><span>${I.ok}Без подписки</span><span>${I.ok}14 дней на возврат</span><span>${I.ok}Все обновления</span></div>
+  <button class="pw-code" onclick="APP.codeAsk()">У меня есть код доступа</button></div>`},
+vPaywall(kind){this.track('paywall',{kind},'day');return `<div class="h1">${kind==='progress'?'Прогресс':'Программа'}</div>`+this.payBody(kind)},
+paySheet(kind){this.track('paywall',{kind},'day');this.open(`<div class="row"><span class="sp"></span><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>`+this.payBody(kind))},
+buy(){this.track('buy_click',null,'day');this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Оплата скоро откроется</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+  <div class="small mut" style="margin:6px 0 16px;line-height:1.55">Мы подключаем оплату картой. Напиши нам в Telegram: откроем доступ по цене запуска, как только оплата заработает.</div>
+  <button class="btn pr w" onclick="window.open('https://t.me/wikki_shark','_blank')">Написать в Telegram</button>
+  <button class="btn gh w" style="margin-top:8px" onclick="APP.codeAsk()">У меня есть код</button>`)},
+codeAsk(){if(!this.user){this.close();this._amsg='Войди или создай аккаунт, чтобы активировать код';this._am='up';this.sub=null;return this.go('me')}
+  this.ask('Код доступа','',v=>this.redeem(v))},
+async redeem(c){c=(c||'').trim();if(!c)return;try{const{data,error}=await this.sb.rpc('tw_redeem',{c});if(error)throw error;if(!data.ok)return this.toast(data.err||'Код не подошёл');
+  this.track('redeem',{code:c.toUpperCase()},'ever');await this.loadAcc();this.close();this.sub=null;this.render();this.toast(data.until?'Полный доступ открыт до '+fd(data.until):'Полный доступ открыт навсегда')}catch(e){this.toast('Ошибка: '+this.errText(e))}},
 did(){try{let d=localStorage.getItem('tw-did');if(!d){d=(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36)).replace(/-/g,'').slice(0,24);localStorage.setItem('tw-did',d)}return d}catch(e){return 'nodevice0'}},
 track(ev,props,once){try{if(!this.sb||location.hostname==='localhost')return;const k='tw-ev-'+ev+(once==='day'?'-'+today():'');if(once){if(localStorage.getItem(k))return;localStorage.setItem(k,'1')}
   this.sb.from('tw_events').insert({did:this.did(),uid:this.user?this.user.id:null,ev,props:props||{},d:today()}).then(()=>{},()=>{})}catch(e){}},
@@ -2357,7 +2393,7 @@ initAuth(){
   this.sb=supabase.createClient(CFG.url,CFG.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'tw-auth'}});
   this.sb.auth.onAuthStateChange((ev,ses)=>{
     if(ev==='PASSWORD_RECOVERY'){this._am='reset';this._amsg='Придумай новый пароль';this.user=null;this.go('me');return}
-    const u=ses&&ses.user;const was=this.user&&this.user.id;this.user=u||null;if(this.user){this.pushCheck();this.loadStats()}
+    const u=ses&&ses.user;const was=this.user&&this.user.id;this.user=u||null;if(this.user){this.pushCheck();this.loadStats();this.loadAcc()}else{this._acc=null}
     if(u&&u.id!==was){if(!this.S.profile.name&&u.user_metadata&&u.user_metadata.name)this.S.profile.name=u.user_metadata.name;this.pull(true);this.grpLoad()}if(!u){this.groups=[];this.boards={}}
     if(!u&&was){this.cloud='off'}
     this.render()});
