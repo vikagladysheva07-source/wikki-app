@@ -1,7 +1,7 @@
 {
-  "name": "12 недель",
-  "short_name": "12 недель",
-  "description": "Система 12 недель: цели, тактики, недельный счёт и разбор",
+  "name": "wikki.app",
+  "short_name": "wikki.app",
+  "description": "wikki.app — система дисциплины: программы, привычки, прогресс и дневник",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
