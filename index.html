@@ -1294,6 +1294,11 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 .mxq-e{font-size:12.5px;color:var(--dim);padding:10px 0}.mxq-m{font-size:12.5px;color:#C9B8FF;padding:6px 0}
 .mxq-a input{width:100%;margin-top:8px;background:rgba(255,255,255,.03);border:1px dashed var(--line);border-radius:10px;height:36px;padding:0 10px;color:var(--tx);font-size:13px}
 @media(max-width:760px){.mxg{grid-template-columns:minmax(0,1fr)}.mxq{min-height:0}.mxq .plr-d{display:none}}
+[data-sw]{touch-action:pan-y;will-change:transform}
+.swg{position:relative;z-index:3}.sw-r{background:linear-gradient(90deg,rgba(124,92,230,.55),rgba(124,92,230,.12))!important;box-shadow:inset 3px 0 0 #9B7BFF}.sw-l{background:linear-gradient(270deg,rgba(245,184,75,.4),rgba(245,184,75,.08))!important;box-shadow:inset -3px 0 0 #F5B84B}
+.swhint{display:flex;align-items:center;gap:8px;padding:9px 12px;margin:0 0 12px;border-radius:12px;background:rgba(155,123,255,.1);border:1px solid rgba(155,123,255,.25);font-size:12.5px;color:#C9B8FF}.swhint span{flex:1}.swhint button{display:grid;color:var(--dim)}.swhint svg{width:13px;height:13px}
+.km-r{display:inline-flex;align-items:center;gap:4px;color:#C9B8FF}
+.krd{margin:-4px 0 12px}
 </style>
 </head>
 <body>
@@ -1473,7 +1478,7 @@ init(){
   if(this.lang()==='en')this.loadDict().then(()=>this.render());
   this.render();
   this.initAuth();
-  this.initMobile();
+  this.initMobile();this.initSwipe();
   setTimeout(()=>this.track('open',{pwa:this.isStandalone(),tab:this.tab},'day'),2500);
   window.addEventListener('hashchange',()=>{const t=new URLSearchParams(location.hash.slice(1)).get('tpl');if(t){history.replaceState(null,'',location.pathname);this.applyTpl(t)}});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden){this.track('open',{pwa:this.isStandalone()},'day');if(this.user)this.pull();if(this.tm)this.tmTick()}});
@@ -1515,7 +1520,13 @@ parseTask(text,base){let t=' '+String(text||'').trim()+' ',d=base||this.day||tod
   const WDN=[['воскресенье','вс'],['понедельник','пн'],['вторник','вт'],['среду','среда','ср'],['четверг','чт'],['пятницу','пятница','пт'],['субботу','суббота','сб']];
   const MON=['янв','фев','мар','апр','ма','июн','июл','авг','сен','окт','ноя','дек'];
   const cut=re=>{const m=t.match(re);if(m){t=t.replace(m[0],' ');return m}return null};
-  let m;
+  let m,rp=null;
+  if(cut(/\s(каждый день|ежедневно)\s/i))rp={f:'d'};
+  else if(cut(/\s(по будням)\s/i))rp={f:'wd'};
+  else if((m=cut(/\sкажд(?:ый|ую|ое)\s(понедельник|вторник|среду|четверг|пятницу|субботу|воскресенье)\s/i))){const wi=['воскресенье','понедельник','вторник','среду','четверг','пятницу','субботу'].indexOf(m[1].toLowerCase());rp={f:'w',days:[wi]};let x=td;while(pd(x).getDay()!==wi)x=add(x,1);d=x;hit=WDF[wi]}
+  else if(cut(/\s(каждую неделю|еженедельно)\s/i))rp={f:'w'};
+  else if(cut(/\s(каждый месяц|ежемесячно)\s/i))rp={f:'m'};
+  else if(cut(/\s(каждый год|ежегодно)\s/i))rp={f:'y'};
   if(cut(/\s(сегодня)\s/i)){d=td;hit='сегодня'}
   else if(cut(/\s(послезавтра)\s/i)){d=add(td,2);hit='послезавтра'}
   else if(cut(/\s(завтра)\s/i)){d=add(td,1);hit='завтра'}
@@ -1528,7 +1539,8 @@ parseTask(text,base){let t=' '+String(text||'').trim()+' ',d=base||this.day||tod
   else if((m=cut(/\sв\s([01]?\d|2[0-3])(?:\s?ч(?:ас[а-я]*)?)?\s/i))){tm=pad(+m[1])+':00'}
   let pr=0;if((m=cut(/\s!([1-3])\s/))){pr=4-(+m[1])}else if((m=cut(/\s(!{1,3})\s/))){pr=m[1].length}
   const tags=[];let g;while((g=t.match(/\s#([\p{L}][\p{L}\d_-]*)/u))){tags.push(g[1].toLowerCase());t=t.replace(g[0],' ')}
-  const title=t.replace(/\s+/g,' ').trim();return {title:title||String(text).trim(),date:d,tm,hit,pr,tags}},
+  if(rp){if(rp.f==='w'&&!rp.days)rp.days=[pd(d).getDay()];if(rp.f==='m')rp.dom=+d.slice(8)}
+  const title=t.replace(/\s+/g,' ').trim();return {title:title||String(text).trim(),date:d,tm,hit,pr,tags,rep:rp}},
 taskWhen(x){return (x.tm?x.tm:'')},
 taskMove(id,d){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;x.date=d;x.t=Date.now();this.save();this.close();this.render();this.toast(d===add(today(),1)?'Перенесено на завтра':'Перенесено на '+fd(d))},
 weekStrip(){const td=today(),cur=this.day||td,m0=this.monday(cur),days=[0,1,2,3,4,5,6].map(i=>add(m0,i));
@@ -1786,9 +1798,10 @@ pxFilterSheet(){const groups=[['k','Дела'],['h','Привычки']].map(([k
 /* вкладка «Планы» и компактный блок на дашборде */
 vPlans(){const v=['list','matrix'].includes(this._plv)?this._plv:'day';
   const seg=`<div class="pseg pseg3">${[['day','День'],['list','Все задачи'],['matrix','Матрица']].map(([k,l])=>`<button class="${v===k?'on':''}" onclick="APP._plv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
-  if(v==='list')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vPlanList();
+  const hint=matchMedia('(pointer:coarse)').matches&&!(this.S.pref||{}).swh?`<div class="swhint"><span>Свайп вправо — готово, влево — на завтра</span><button onclick="APP.setPref('swh',1)" aria-label="Скрыть">${I.x}</button></div>`:'';
+  if(v==='list')return `<div class="h1">Планы</div>${seg}__S1____S2__`+hint+this.vPlanList();
   if(v==='matrix')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vMatrix();
-  this._noBoard=true;let t=this.vToday();this._noBoard=false;return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.stripV(t)},
+  this._noBoard=true;let t=this.vToday();this._noBoard=false;return `<div class="h1">Планы</div>${seg}__S1____S2__`+hint+this.stripV(t)},
 dzPlans(){const td=today(),dp=this.dayAll(td),pct=dp.n?Math.round(dp.p*100):0,ord={m:0,d:1,e:2,'':3},hr=new Date().getHours(),now=hr<12?'m':hr<18?'d':'e';
   const tk=this.tasksFor(td).filter(x=>!x.done).map(x=>({k:'k',o:x,tod:'',tm:x.tm||''}));
   const hs=this.S.habits.filter(x=>!x.archived&&this.hSched(x,td)&&!this.hOn(x,td)).map(x=>({k:'h',o:x,tod:x.tod||'',tm:''}));
@@ -1796,7 +1809,7 @@ dzPlans(){const td=today(),dp=this.dayAll(td),pct=dp.n?Math.round(dp.p*100):0,or
   const L=[...tk,...hs].sort((a,b)=>rank(a)-rank(b)||(a.tm||'99').localeCompare(b.tm||'99')),top=L.slice(0,3);
   const row=i=>{const x=i.o,chk=i.k==='k'?`APP.taskToggle('${x.id}')`:(x.kind||'check')==='check'?`APP.hToggle('${x.id}','${td}')`:`APP.go('plans')`;
     const sub=i.k==='k'?(x.tm?x.tm:x.date<td?'перенесено':'задача'):(x.kind==='num'||x.kind==='time')?`${this.hVal(x,td)||0} / ${x.target||'—'} ${esc(x.unit||(x.kind==='time'?'мин':''))}`:x.kind==='scale'?'оценка 1–5':this.TOD[x.tod||''].toLowerCase();
-    return `<div class="dzp-r"><button class="chk ${i.k==='k'?'kp'+(x.pr||0):''}" onclick="${chk}" aria-label="Отметить"></button><button class="dzp-t" onclick="APP.go('plans')"><b>${esc(x.title)}</b><em>${sub}</em></button></div>`};
+    return `<div class="dzp-r" ${i.k==='k'?`data-sw="k:${x.id}"`:(x.kind||'check')==='check'?`data-sw="h:${x.id}:${td}"`:''}><button class="chk ${i.k==='k'?'kp'+(x.pr||0):''}" onclick="${chk}" aria-label="Отметить"></button><button class="dzp-t" onclick="APP.go('plans')"><b>${esc(x.title)}</b><em>${sub}</em></button></div>`};
   return `<div class="card dzp"><div class="dz-ch"><span class="dz-ti">${I.plan}Планы</span><span class="sp"></span><span class="dzp-n"><b>${dp.done}</b> из ${dp.n}</span></div>
    <div class="dzp-bar"><i style="width:${pct}%"></i></div>
    ${top.length?`<div class="dzp-l">${top.map(row).join('')}</div>`:`<div class="dzp-ok">${dp.n?'Все планы на сегодня закрыты':'На сегодня планов нет'}</div>`}
@@ -1810,7 +1823,7 @@ kSubAdd(id,v){v=(v||'').trim();if(!v)return;const x=this.kKeep(id);x.sub=x.sub||
 kSubTog(id,sid){const x=this.kKeep(id),s=x&&(x.sub||[]).find(z=>z.id===sid);if(!s)return;s.d=s.d?0:1;if(s.d)this.buzz(6);this.save();this.taskEdit(id)},
 kSubSet(id,sid,v){const x=(this.S.tasks||[]).find(t=>t.id===id),s=x&&(x.sub||[]).find(z=>z.id===sid);if(!s)return;s.t=v.trim()||s.t;x.t=Date.now();this.save()},
 kSubDel(id,sid){const x=this.kKeep(id);x.sub=(x.sub||[]).filter(z=>z.id!==sid);this.save();this.taskEdit(id)},
-kMeta(x){const td=today(),out=[];const sb=x.sub||[];if(sb.length)out.push(`<span class="km-s">${sb.filter(s=>s.d).length}/${sb.length}</span>`);if(x.note)out.push(`<span class="km-n" title="Есть заметка"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 6h14M5 12h14M5 18h9"/></svg></span>`);
+kMeta(x){const td=today(),out=[];if(x.rep)out.push(`<span class="km-r"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 01-3 3H3"/></svg>${this.kRepTxt(x.rep)}</span>`);const sb=x.sub||[];if(sb.length)out.push(`<span class="km-s">${sb.filter(s=>s.d).length}/${sb.length}</span>`);if(x.note)out.push(`<span class="km-n" title="Есть заметка"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 6h14M5 12h14M5 18h9"/></svg></span>`);
   (x.tags||[]).forEach(g=>out.push(`<span class="km-t">#${esc(g)}</span>`));return out.length?`<div class="kmeta">${out.join('')}</div>`:''},
 taskEdit(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;const pr=x.pr||0,sb=x.sub||[];
   this.open(`<div class="row"><div class="h2 sp">Задача</div><button class="xcl" onclick="APP.kKeep('${id}');APP.close();APP.render()" aria-label="Закрыть">${I.x}</button></div>
@@ -1818,6 +1831,10 @@ taskEdit(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;const pr
   <div class="kprs">${[3,2,1,0].map(n=>`<button class="${pr===n?'on':''}" style="--c:${n?this.PRC[n]:'#8A8F9E'}" onclick="APP.kPr('${id}',${n})">${this.kFlag(n,15)}<span>${['Нет','Низкий','Средний','Высокий'][n]}</span></button>`).join('')}</div>
   <div class="kqd">${[['Сегодня',today()],['Завтра',add(today(),1)],['Послезавтра',add(today(),2)],['Через неделю',add(today(),7)]].map(([l,v])=>`<button onclick="$('kD').value='${v}';document.querySelectorAll('.kqd button').forEach(b=>b.classList.remove('on'));this.classList.add('on')" class="${x.date===v?'on':''}">${l}</button>`).join('')}</div>
   <div class="f2"><div class="f"><label class="lbl">Дата</label><input id="kD" type="date" value="${x.date}"></div><div class="f"><label class="lbl">Время</label><input id="kM" type="time" value="${x.tm||''}"></div></div>
+  <label class="lbl">Повтор</label>
+  <div class="kqd krep">${[['','Нет'],['d','Каждый день'],['wd','По будням'],['w','Каждую неделю'],['m','Каждый месяц'],['y','Каждый год']].map(([f,l])=>`<button class="${((x.rep&&x.rep.f)||'')===f?'on':''}" onclick="APP.kRep('${id}','${f}')">${l}</button>`).join('')}</div>
+  ${x.rep&&x.rep.f==='w'?`<div class="seg krd">${[1,2,3,4,5,6,0].map(d=>`<button class="${(x.rep.days||[]).includes(d)?'on':''}" onclick="APP.kRepDay('${id}',${d})">${WD[d]}</button>`).join('')}</div>`:''}
+  ${x.rep?`<div class="small mut" style="margin:-2px 0 14px">Когда отметишь, следующая появится сама: ${this.kRepTxt(x.rep)}.</div>`:''}
   <label class="lbl">Подзадачи${sb.length?` · ${sb.filter(s=>s.d).length} из ${sb.length}`:''}</label>
   <div class="ksub">${sb.map(s=>`<div class="ksub-r ${s.d?'on':''}"><button class="chk ${s.d?'on':''}" onclick="APP.kSubTog('${id}','${s.id}')">${s.d?I.ok:''}</button><input value="${esc(s.t)}" onchange="APP.kSubSet('${id}','${s.id}',this.value)"><button class="pd-x" onclick="APP.kSubDel('${id}','${s.id}')" aria-label="Удалить">${I.x}</button></div>`).join('')}
    <form class="ksub-add" onsubmit="event.preventDefault();APP.kSubAdd('${id}',this.q.value)"><span>${I.plus}</span><input id="kSn" name="q" placeholder="Добавить подзадачу" autocomplete="off"></form></div>
@@ -1828,7 +1845,7 @@ taskEdit(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;const pr
 plBulk(){const td=today();let n=0;(this.S.tasks||[]).forEach(x=>{if(!x.done&&x.date<td){x.date=td;x.t=Date.now();n++}});this.save();this.render();this.toast(`На сегодня: ${n} ${this.pl(n,'задача','задачи','задач')}`)},
 plRow(x,showDate){const td=today(),over=!x.done&&x.date<td,pr=x.pr||0;
   const when=showDate?(x.date===td?'Сегодня':x.date===add(td,1)?'Завтра':x.date===add(td,-1)?'Вчера':WD[pd(x.date).getDay()]+', '+fd(x.date)):'';
-  return `<div class="plr ${x.done?'done':''}"><button class="chk ${x.done?'on':''} kp${pr}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><button class="plr-t" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b>${this.kMeta(x)}${this.pxChips('k',x)}</button><span class="plr-d ${over?'over':''}">${[x.tm,when].filter(Boolean).join(' · ')}</span></div>`},
+  return `<div class="plr ${x.done?'done':''}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${pr}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><button class="plr-t" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b>${this.kMeta(x)}${this.pxChips('k',x)}</button><span class="plr-d ${over?'over':''}">${[x.tm,when].filter(Boolean).join(' · ')}</span></div>`},
 plAdd(){const s=this._plv==='matrix';return `<form class="pl-add" onsubmit="event.preventDefault();APP.taskAdd(this.q.value,today());this.q.value=''"><span>${I.plus}</span><input name="q" placeholder="${s?'Задача… !1 — срочно и важно':'Задача… завтра в 15:00 !1 #работа'}" autocomplete="off"></form>`},
 vPlanList(){const td=today(),T=(this.S.tasks||[]).filter(x=>!(this.S.del||[]).includes(x.id)),open=T.filter(x=>!x.done);
   const srt=(a,b)=>a.date.localeCompare(b.date)||(b.pr||0)-(a.pr||0)||(a.tm||'99').localeCompare(b.tm||'99');
@@ -1848,6 +1865,31 @@ vMatrix(){const td=today(),open=(this.S.tasks||[]).filter(x=>!x.done&&!(this.S.d
       <div class="mxq-l">${L.length?L.slice(0,this._mxa===n?99:6).map(x=>this.plRow(x,true)).join(''):'<div class="mxq-e">Пусто</div>'}${L.length>6&&this._mxa!==n?`<button class="mxq-m" onclick="APP._mxa=${n};APP.render()">Ещё ${L.length-6}</button>`:''}</div>
       <form class="mxq-a" onsubmit="event.preventDefault();APP.taskAdd(this.q.value,today(),${n});this.q.value=''"><input name="q" placeholder="+ Добавить" autocomplete="off"></form></div>`}).join('')}</div>
     <div class="small mut" style="margin:10px 2px 0">Квадрант задаётся приоритетом. Поменяй приоритет в задаче, и она переедет.</div>`},
+/* повторяющиеся задачи */
+REPN:{d:'Каждый день',wd:'По будням',w:'Каждую неделю',m:'Каждый месяц',y:'Каждый год'},
+kRepTxt(r){if(!r||!this.REPN[r.f])return '';if(r.f==='w'&&r.days&&r.days.length&&r.days.length<7)return 'по '+[1,2,3,4,5,6,0].filter(d=>r.days.includes(d)).map(d=>WD[d]).join(', ');return this.REPN[r.f].toLowerCase()},
+kNext(x){const r=x.rep,td=today();
+  const st=d=>{if(r.f==='d')return add(d,1);
+    if(r.f==='wd'){let n=add(d,1);while([0,6].includes(pd(n).getDay()))n=add(n,1);return n}
+    if(r.f==='w'){const ds=r.days&&r.days.length?r.days:[pd(x.date).getDay()];let n=add(d,1);for(let i=0;i<8&&!ds.includes(pd(n).getDay());i++)n=add(n,1);return n}
+    const y=+d.slice(0,4),m=+d.slice(5,7);
+    if(r.f==='m'){const nm=m%12+1,ny=m===12?y+1:y,day=Math.min(r.dom||+d.slice(8),new Date(ny,nm,0).getDate());return ny+'-'+pad(nm)+'-'+pad(day)}
+    return (y+1)+d.slice(4)};
+  let n=st(x.date),g=0;while(n<=td&&g++<800)n=st(n);return n},
+kRep(id,f){const x=this.kKeep(id);if(!x)return;if(!f)delete x.rep;else{x.rep={f};if(f==='w')x.rep.days=[pd(x.date).getDay()];if(f==='m')x.rep.dom=+x.date.slice(8)}this.save();this.taskEdit(id)},
+kRepDay(id,d){const x=this.kKeep(id);if(!x||!x.rep)return;const a=x.rep.days||[];x.rep.days=a.includes(d)?a.filter(z=>z!==d):[...a,d];if(!x.rep.days.length)x.rep.days=[d];this.save();this.taskEdit(id)},
+/* свайпы по строкам: вправо — готово, влево — на завтра */
+initSwipe(){const app=$('app');let el=null,sx=0,sy=0,dx=0,on=false;
+  app.addEventListener('touchstart',e=>{const r=e.target.closest('[data-sw]');el=null;if(!r||e.target.closest('input,textarea,select'))return;el=r;const t=e.touches[0];sx=t.clientX;sy=t.clientY;dx=0;on=false},{passive:true});
+  app.addEventListener('touchmove',e=>{if(!el)return;const t=e.touches[0],x=t.clientX-sx,y=t.clientY-sy;
+    if(!on){if(Math.abs(y)>10&&Math.abs(y)>=Math.abs(x)){el=null;return}if(Math.abs(x)>14&&Math.abs(x)>Math.abs(y)*1.5){on=true;el.classList.add('swg')}else return}
+    e.preventDefault();this._swing=Date.now();const k=el.dataset.sw.split(':')[0];dx=Math.max(k==='h'?0:-150,Math.min(150,x));el.style.transform=`translateX(${dx}px)`;el.classList.toggle('sw-r',dx>72);el.classList.toggle('sw-l',dx<-72)},{passive:false});
+  const end=()=>{if(!el)return;const r=el,[k,id,d0]=r.dataset.sw.split(':'),d=dx,was=on;el=null;on=false;if(!was)return;this._swing=Date.now();
+    r.style.transition='transform .18s';r.style.transform='';setTimeout(()=>{r.style.transition='';r.classList.remove('swg','sw-r','sw-l')},190);
+    if(d>72){this.buzz(12);setTimeout(()=>{k==='k'?this.taskToggle(id):this.hToggle(id,d0||this.day||today())},120)}
+    else if(d<-72&&k==='k'){this.buzz(12);const x=(this.S.tasks||[]).find(t=>t.id===id);if(x)setTimeout(()=>this.taskMove(id,add(x.date>today()?x.date:today(),1)),120)}};
+  app.addEventListener('touchend',end,{passive:true});app.addEventListener('touchcancel',end,{passive:true});
+  app.addEventListener('click',e=>{if(this._swing&&Date.now()-this._swing<350){e.stopPropagation();e.preventDefault()}},true)},
 /* дневник-блокнот */
 jNote(d,v){clearTimeout(this._jnt);const st=$('jrSt');if(st)st.textContent='сохраняю…';this._jnt=setTimeout(()=>{const S=this.S;S.checkin=S.checkin||{};const c=S.checkin[d]=Object.assign({energy:0,sleep:'',win:'',top:'',note:''},S.checkin[d]||{});c.note=v;c.t=Date.now();this.save();const s2=$('jrSt');if(s2)s2.textContent='сохранено'},600)},
 jGrow(el){el.style.height='auto';el.style.height=Math.max(260,el.scrollHeight+4)+'px'},
@@ -2217,7 +2259,7 @@ initMobile(){
   app.addEventListener('touchmove',e=>{const t=e.touches[0];if(Math.abs(t.clientX-sx)>8||Math.abs(t.clientY-sy)>8){moved=true;if(lp){clearTimeout(lp);lp=null;if(lpEl)lpEl.classList.remove('lp-on')}}},{passive:true});
   app.addEventListener('touchend',e=>{const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
     if(lp){clearTimeout(lp);lp=null}if(lpEl){lpEl.classList.remove('lp-on');lpEl=null}
-    if(this.tab==='home'&&!this.sub&&Math.abs(dx)>70&&Math.abs(dy)<40&&Date.now()-st<600&&!/INPUT|TEXTAREA/.test(e.target.tagName)){this.shiftDay(dx<0?1:-1);this.buzz(8)}},{passive:true});
+    if(this.tab==='home'&&!this.sub&&!(this._swing&&Date.now()-this._swing<400)&&Math.abs(dx)>70&&Math.abs(dy)<40&&Date.now()-st<600&&!/INPUT|TEXTAREA/.test(e.target.tagName)){this.shiftDay(dx<0?1:-1);this.buzz(8)}},{passive:true});
   const down=e=>{const el=e.target.closest('[data-lp]');if(!el||e.target.closest('button,input,.step,.days'))return;
     lpEl=el;lp=setTimeout(()=>{lp=null;el.classList.remove('lp-on');this.buzz(20);const[k,id]=el.dataset.lp.split(':');this.lpMenu(k,id)},480);
     setTimeout(()=>{if(lp)el.classList.add('lp-on')},120)};
@@ -2444,7 +2486,7 @@ hRow(x){const d=this.day,on=this.hOn(x,d),[f,s,fr]=this.hFns(x),st=this.streak(f
   let left=`<button class="chk ${on?'on':''}" onclick="APP.hToggle('${x.id}','${d}')">${on?I.ok:''}</button>`,right='';
   if(k==='num'||k==='time'){const fr=!on&&v&&x.target?Math.min(.95,Math.max(.12,v/x.target)):0,un=esc(x.unit||(k==='time'?'мин':''));left=`<button class="chk ${on?'on':''} ${fr?'part':''}" ${fr?`style="--f:${fr.toFixed(2)}"`:''} onclick="APP.hSet('${x.id}','${d}',${on?0:(+x.target||+x.step||1)})">${on?I.ok:''}</button>`;right=`<button class="qx" onclick="APP.hInc('${x.id}','${d}',${+x.step||1})" aria-label="Добавить ${+x.step||1}">+${+x.step||1}</button>`;meta=`<button class="qm" onclick="event.stopPropagation();APP.hAsk('${x.id}','${d}')">${v||0}${x.target?' / '+x.target:''} ${un}</button>`+(meta?' · '+meta:'')}
   else if(k==='scale'){left=`<button class="chk ${on?'on':''}" onclick="APP.hAsk('${x.id}','${d}')">${on?v:''}</button>`;right=`<div class="sc5">${[1,2,3,4,5].map(n=>`<button class="${v>=n?'on':''}" onclick="APP.hSet('${x.id}','${d}',${v===n?0:n})"></button>`).join('')}</div>`}
-  return `<div class="tk ${on?'done':''} ${sk?'skip':''} ${this._pop===x.id?'pop':''}" data-lp="h:${x.id}">${left}<div class="t" onclick="APP.ieStart('h','${x.id}')">${this.nmE('h',x,1)}${meta?`<div class="meta">${meta}</div>`:''}${this.pxChips('h',x)}</div>
+  return `<div class="tk ${on?'done':''} ${sk?'skip':''} ${this._pop===x.id?'pop':''}" data-lp="h:${x.id}" ${k==='check'?`data-sw="h:${x.id}:${d}"`:''}>${left}<div class="t" onclick="APP.ieStart('h','${x.id}')">${this.nmE('h',x,1)}${meta?`<div class="meta">${meta}</div>`:''}${this.pxChips('h',x)}</div>
     ${right}${!on&&!sk&&this.mode!=='strict'&&k==='check'?`<button class="fzb" title="Пропустить в этот день" onclick="APP.setSkip('${x.id}','${d}',true)">${I.snow}</button>`:''}<span class="stk">${I.flame}${st||0}</span></div>`},
 dayMenu(){const d=this.day,fz=this.frozen(d);
   this.open(`<div class="row"><div class="h2 sp">${fd(d)}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="menu" style="margin-top:8px">
@@ -2489,12 +2531,14 @@ editFocus(w){const ws=this.S.weeks[w]||{};
 tasksFor(d){const td=today();return (this.S.tasks||[]).filter(x=>x.date===d||(!x.done&&x.date<d&&d===td)).sort((a,b)=>(a.done?1:0)-(b.done?1:0)||(b.pr||0)-(a.pr||0)||((a.tm||'99')<(b.tm||'99')?-1:(a.tm||'99')>(b.tm||'99')?1:0)||(a.t||0)-(b.t||0))},
 tasksBlock(tk){const d=this.day;
   let h=`<div class="todh"><span class="lbl">Задачи</span><span class="ln"></span></div><div class="tgrid">`;
-  tk.forEach(x=>{const over=x.date<d;h+=`<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}"><button class="chk ${x.done?'on':''} kp${x.pr||0}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${this.nmE('k',x,1)}${over?`<div class="meta">перенесено с ${fd(x.date)}</div>`:''}${this.pxChips('k',x)}</div></div>`});
+  tk.forEach(x=>{const over=x.date<d;h+=`<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${x.pr||0}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${this.nmE('k',x,1)}${over?`<div class="meta">перенесено с ${fd(x.date)}</div>`:''}${this.pxChips('k',x)}</div></div>`});
   h+='</div>';
   h+=`<form class="row" style="margin:6px 0 2px" onsubmit="event.preventDefault();APP.taskAdd(this.q.value,'${d}');this.q.value=''"><input name="q" placeholder="Новая задача на этот день" autocomplete="off" style="flex:1"><button class="ic" type="submit" aria-label="Добавить">${I.plus}</button></form>`;
   return h},
-taskAdd(title,d,pr0){title=(title||'').trim();if(!title)return;const P=this.parseTask(title,d||today());this.S.tasks=this.S.tasks||[];const o={id:'k'+uid(),title:P.title,date:P.date,tm:P.tm||'',done:'',t:Date.now()};const pr=P.pr||pr0||0;if(pr)o.pr=pr;if(P.tags.length)o.tags=P.tags;this.S.tasks.push(o);this.save();this.render();this.buzz(8);if(P.hit||P.tm){const tdd=today(),w=P.date===tdd?'сегодня':P.date===add(tdd,1)?'завтра':WD[pd(P.date).getDay()]+', '+fd(P.date);this.toast('Задача на '+w+(P.tm?' в '+P.tm:''))}},
-taskToggle(id){const x=this.S.tasks.find(t=>t.id===id);if(!x)return;this.snap();x.done=x.done?'':today();x.t=Date.now();if(x.done){this.buzz(12);this._pop=id;this.burst(this._lastEl())}this.save();this.render();if(x.done){this.toast('Сделано',true);this.dayParty(today())}},
+taskAdd(title,d,pr0){title=(title||'').trim();if(!title)return;const P=this.parseTask(title,d||today());this.S.tasks=this.S.tasks||[];const o={id:'k'+uid(),title:P.title,date:P.date,tm:P.tm||'',done:'',t:Date.now()};const pr=P.pr||pr0||0;if(pr)o.pr=pr;if(P.tags.length)o.tags=P.tags;if(P.rep)o.rep=P.rep;this.S.tasks.push(o);this.save();this.render();this.buzz(8);if(P.hit||P.tm){const tdd=today(),w=P.date===tdd?'сегодня':P.date===add(tdd,1)?'завтра':WD[pd(P.date).getDay()]+', '+fd(P.date);this.toast('Задача на '+w+(P.tm?' в '+P.tm:''))}},
+taskToggle(id){const x=this.S.tasks.find(t=>t.id===id);if(!x)return;this.snap();x.done=x.done?'':today();x.t=Date.now();let nxt='';
+  if(x.done&&x.rep&&!x.nx){const n=JSON.parse(JSON.stringify(x));n.id='k'+uid();n.date=this.kNext(x);n.done='';n.t=Date.now();delete n.nx;(n.sub||[]).forEach(z=>z.d=0);this.S.tasks.push(n);x.nx=n.id;delete x.rep;nxt=n.date}
+  else if(!x.done&&x.nx){const n=this.S.tasks.find(t=>t.id===x.nx);if(n&&!n.done){x.rep=n.rep;this.S.tasks=this.S.tasks.filter(t=>t.id!==n.id);this.S.del=[...(this.S.del||[]),n.id]}delete x.nx}if(x.done){this.buzz(12);this._pop=id;this.burst(this._lastEl())}this.save();this.render();if(x.done){this.toast(nxt?'Сделано · следующая '+(nxt===add(today(),1)?'завтра':fd(nxt)):'Сделано',true);this.dayParty(today())}},
 taskDel(id){this.S.del=[...(this.S.del||[]),id];this.S.tasks=this.S.tasks.filter(t=>t.id!==id);this.save();this.close();this.render()},
 /* выполнение дня по всем делам: тактики, привычки, задачи */
 dayAll(d){const w=this.S.goals.length&&d>=this.st&&d<=this.end()?this.weekOf(d):0;let n=0,done=0;
@@ -2578,7 +2622,7 @@ rowsDone(items,w,key){const tod=((this.S.pref||{}).group||'tod')==='tod';const o
   const nowM=this.day===today()?new Date().toTimeString().slice(0,5):null;let nl=false;const rr=i=>{let pre='';if(nowM&&!nl&&i.k==='k'&&i.o.tm&&i.o.tm>nowM&&open.some(z=>z.k==='k'&&z.o.tm)){nl=true;pre=`<div class="nowl"><span>сейчас ${nowM}</span></div>`}return pre+r(i)};
   return `<div class="tgrid">`+open.map(rr).join('')+'</div>'+(open.length?'':`<div class="tall">Всё на этот день сделано</div>`)+(done.length?`<button class="tdn" onclick="APP._showDone=!APP._showDone;APP.render()">${I.ok}<span>Сделано · ${done.length}</span><em>${this._showDone?'скрыть':'показать'}</em></button>${this._showDone?`<div class="tgrid tgd">${done.map(r).join('')}</div>`:''}`:'')},
 tAsk(id,d){const t=this.S.tactics.find(x=>x.id===id);if(!t)return;const cur=this.v(t,d);this.ask('Сколько сегодня',cur||'',v=>{this.setLog(id,d,Math.max(0,+String(v).replace(',','.')||0));this.render()},'number')},
-kRow(x){const d=this.day,over=x.date<d;return `<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}"><button class="chk ${x.done?'on':''} kp${x.pr||0}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${x.tm?`<span class="ktm">${x.tm}</span>`:''}${this.nmE('k',x,1)}${over?`<div class="meta kov">просрочено с ${fd(x.date)}</div>`:''}${this.kMeta(x)}${this.pxChips('k',x)}</div>${!x.done?`<button class="kmv" title="На завтра" onclick="APP.taskMove('${x.id}',add(APP.day,1))">${I.r}<span>завтра</span></button>`:''}<button class="kmn" onclick="APP.taskEdit('${x.id}')" aria-label="Изменить">⋯</button></div>`},
+kRow(x){const d=this.day,over=x.date<d;return `<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${x.pr||0}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${x.tm?`<span class="ktm">${x.tm}</span>`:''}${this.nmE('k',x,1)}${over?`<div class="meta kov">просрочено с ${fd(x.date)}</div>`:''}${this.kMeta(x)}${this.pxChips('k',x)}</div>${!x.done?`<button class="kmv" title="На завтра" onclick="APP.taskMove('${x.id}',add(APP.day,1))">${I.r}<span>завтра</span></button>`:''}<button class="kmn" onclick="APP.taskEdit('${x.id}')" aria-label="Изменить">⋯</button></div>`},
 tRow(t,w,showGoal){
   const d=this.day,val=this.v(t,d),wv=this.wVal(t,w),wt=this.wTarget(t,w),done=wv>=wt,sk=this.skipped(t.id,d)&&!this.frozen(d);
   let left='',right='',meta='';
