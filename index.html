@@ -1225,6 +1225,33 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 .np-add{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0 26px}.np-add button{font-size:12.5px;padding:7px 11px;border-radius:99px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--dim)}.np-add button:hover{color:var(--tx);border-color:rgba(155,123,255,.45)}
 .np-mn{display:flex;flex-direction:column;gap:6px;margin-top:8px}.np-mn button{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--tx);font-size:15px}.np-mn button svg{width:17px;height:17px;color:#C9B8FF}.np-mn .dl,.np-mn .dl svg{color:#FF8A8A}
 @media(max-width:760px){.np-title{font-size:23px}.np-g{grid-template-columns:1fr 1fr}.np-c{min-height:120px;padding:14px}}
+.pfx-wrap{margin:0 0 14px}.pfx-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:8px 2px 12px}.pfx-top b{display:block;font-size:19px;font-weight:800}.pfx-top span{font-size:12.5px;color:var(--dim)}
+.pfx-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.pfx{padding:16px!important;margin:0!important}.pfx-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:12px}.pfx-h button{text-align:left;color:var(--tx)}.pfx-h b{font-size:16px}.pfx-h em{font-style:normal;font-size:11.5px;color:var(--dim)}
+.pfx-k{margin-bottom:10px}.pfx-k b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.pfx-svg{width:100%;height:auto;display:block}.pfx-svg text{font-size:10.5px;fill:var(--dim)}
+.pfx-dots{display:grid;grid-template-columns:repeat(var(--c),1fr);gap:4px;margin:4px 0 6px}.pfx-dots i{aspect-ratio:1;border-radius:4px;background:rgba(255,255,255,.07)}.pfx-dots i.on{background:linear-gradient(145deg,#B49CFF,#7C5CF0);box-shadow:0 0 8px rgba(155,123,255,.35)}
+.pfx-sel{display:flex;flex-direction:column;gap:8px}.pfx-sel>div{display:grid;grid-template-columns:minmax(0,90px) 1fr 28px;align-items:center;gap:10px}.pfx-sel em{font-style:normal;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pfx-sel b{font-size:13px;text-align:right}.pfx-sb{height:10px;border-radius:5px;background:rgba(255,255,255,.06);overflow:hidden}.pfx-sb i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#9B7BFF,#5EE0EE)}
+.pfx-tx{display:flex;flex-direction:column;gap:8px}.pfx-tx>div{padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04)}.pfx-tx em{display:block;font-style:normal;font-size:11.5px;color:var(--dim);margin-bottom:2px}.pfx-tx span{font-size:13.5px;line-height:1.45}
+.pfx-l{margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(155,123,255,.08);border:1px solid rgba(155,123,255,.2);font-size:13px;line-height:1.45}.pfx-l b{font-size:14px}.pfx-l.up b{color:#5EE0EE}.pfx-l.dn b{color:#FF9A9A}.pfx-l span{color:var(--dim)}
+.pfx-r{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:12px;color:var(--dim)}
+.pfx-e .jf-pre{margin-top:10px}
+@media(max-width:760px){.pfx-g{grid-template-columns:minmax(0,1fr)}.pfx-k b{font-size:18px!important}.pfx-k span{font-size:11px!important}.pfx-k>div{padding:10px!important}}
+.pfx{min-width:0}.pfx-k{grid-template-columns:repeat(3,minmax(0,1fr))!important}.pfx-k>div{min-width:0}.pfx-k small{font-size:.6em}
+/* без обрезок на узких экранах */
+.cld-d{flex:none}.cld-d button{width:clamp(30px,9.4vw,38px);height:clamp(30px,9.4vw,38px)}
+@media(max-width:380px){.cld-r{gap:6px}.cld-r span{font-size:13px}.cld-d{gap:4px}}
+.hcal{grid-template-columns:repeat(7,minmax(0,1fr))}.hcal .mgc{width:100%;max-width:40px;height:auto;aspect-ratio:1}
+@media(max-width:360px){.nav button{padding:0 3px;gap:5px}.nav button.on{padding:0 10px}.nav button svg{width:20px;height:20px}.nav .in{gap:2px;padding:5px}}
+.dz-sr .sp{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.3}
+.mg.fit .mgn{height:auto;max-height:none;min-height:36px}.mg.fit .mgn em{-webkit-line-clamp:unset;display:block;white-space:normal;text-overflow:clip;overflow:visible}
+.jf-n{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.3}
+.pfx-k b{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+@media(max-width:360px){.pfx-k b{font-size:16px!important}.pfx-k{gap:6px!important}}
+.pcg b{display:block;padding-right:30px}
+@media(max-width:420px){.pcab-ed span{display:none}.pcab-ed{padding:8px;width:34px;height:34px;justify-content:center}.pcab-ed svg{width:16px;height:16px}.pcab-sh{top:56px!important}}
+.rxb.sk em{overflow:visible;text-overflow:clip;font-size:clamp(9px,2.9vw,12px);letter-spacing:-.01em}
+.hcard .nm{white-space:normal!important;overflow:visible!important;min-width:0}.hcard .nm em{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important;display:block;line-height:1.25;min-width:0}
 </style>
 </head>
 <body>
@@ -1936,7 +1963,43 @@ pvOver(){this._pat=null;const x=this.execData(),hs=this.S.habits.filter(h=>!h.ar
   const R=this.repPeriod();
   return `<div class="pgtg">${t('pg-exec','Исполнение',(x.cur??'—')+(x.cur!=null?'%':''),x.cur!=null&&x.cur>=x.th?'неделя в зоне':x.left?`ещё ${x.left} до ${x.th}%`:'эта неделя',this.mRing((x.cur||0)/100,'#9B7BFF'))}${t('pg-cons','Постоянство',(cp??'—')+(cp!=null?'%':''),'за 30 дней',this.mRing((cp||0)/100,'#5EE0EE'))}${t('pg-wins','Победы',wn,this.pgFromTxt(),`<div class="pgt-wb">${ww.map(x=>`<i style="height:${Math.max(8,x.c/wmx*100)}%;opacity:${x.c?1:.25}"></i>`).join('')}</div>`)}${t('pg-pat','Паттерн',ptv,pts,P.n>=14&&P.f.length?`<span class="pgt-ar ${P.f[0].d>0?'up':'dn'}">${P.f[0].d>0?'↑':'↓'}</span>`:'')}</div>
   <div class="pgg">${this.pgExec()}${this.pgFocus()}${this.pgWins()}${this.pgPattern()}${this.pgCons()}</div>
+  ${this.pgFields()}
   <button class="card pg-rep" onclick="APP.openSub('report')"><span>${I.trophy}</span><div class="sp"><b>${R.inP?'Итоги цикла':'Итоги месяца'}</b><em>Цифры, победы, колесо, 80/20 и карточка для сторис</em></div>${I.r}</button>`},
+pgFields(){const F=this.fList();
+  if(!F.length)return `<div class="card pg-s pfx-e" id="pg-fields"><div class="pg-sh"><b>Мои поля</b><span>то, что отслеживаешь сам</span></div><div class="pg-empty">Добавь свои поля в дневнике: шаги, воду, вес, расходы. Здесь появятся графики и связь с выполнением дел.</div><div class="jf-pre"><div>${this.FPRE.slice(0,5).map((p,i)=>`<button onclick="APP.fPreset(${i})">+ ${p[0]}</button>`).join('')}</div></div></div>`;
+  const per=this._fpp||'30',N=+per,td=today(),days=[...Array(N)].map((_,i)=>add(td,i-N+1)),prevD=[...Array(N)].map((_,i)=>add(td,i-2*N+1));
+  const seg=[['7','Неделя'],['30','Месяц'],['90','3 мес']].map(([k,l])=>`<button class="${per===k?'on':''}" onclick="APP._fpp='${k}';APP.render()">${l}</button>`).join('');
+  const num=v=>{const n=parseFloat(v);return isNaN(n)?null:n},fmt=v=>(+(Math.abs(v)<10?v.toFixed(1):v.toFixed(0))).toLocaleString('ru-RU'),U=f=>f.unit?' '+esc(f.unit):'',fk=v=>Math.abs(v)>=1e5?(+(v/1e3).toFixed(0)).toLocaleString('ru-RU')+' тыс':fmt(v),Uc=f=>f.unit?', '+esc(f.unit):'';
+  const dp=d=>{const a=this.dayAll(d);return a.n?a.p:null},avgP=ds=>{const v=ds.map(dp).filter(x=>x!=null);return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length*100):null};
+  const link=(on,off,lab1,lab2)=>{const a=avgP(on),b=avgP(off);if(a==null||b==null||on.length<3||off.length<3)return '';const d=a-b;if(Math.abs(d)<5)return `<div class="pfx-l">${lab1}: дела выполняются так же, как в остальные дни</div>`;return `<div class="pfx-l ${d>0?'up':'dn'}"><b>${d>0?'+':''}${d}%</b> выполнения дел ${lab1} <span>(${a}% против ${b}% ${lab2})</span></div>`};
+  const lab=i=>{const d=pd(days[i]);return N<=7?WD[d.getDay()]:d.getDate()+'.'+pad(d.getMonth()+1)},ticks=N<=7?days.map((_,i)=>i):[0,Math.round((N-1)/2),N-1];
+  const card=f=>{const vals=days.map(d=>this.fVal(d,f.id)),pv=prevD.map(d=>this.fVal(d,f.id));let viz='',kpi='',ins='';
+    if(f.type==='num'||f.type==='scale'){const nv=vals.map(num),ok=nv.filter(v=>v!=null),pok=pv.map(num).filter(v=>v!=null);
+      if(!ok.length)return `<div class="card pfx"><div class="pfx-h"><b>${esc(f.name)}</b><em>${N} дн.</em></div><div class="pg-empty">За этот период записей нет. Вноси значение в дневнике или на дашборде.</div></div>`;
+      const avg=ok.reduce((a,b)=>a+b,0)/ok.length,pavg=pok.length?pok.reduce((a,b)=>a+b,0)/pok.length:null,dl=pavg?Math.round((avg-pavg)/Math.abs(pavg)*100):null,sum=ok.reduce((a,b)=>a+b,0),mx=Math.max(...ok),mn=Math.min(...ok),last=ok[ok.length-1];
+      const W=380,H=150,L=6,R=6,T=18,B=22,lo=f.type==='scale'?0:Math.min(0,mn),hi=f.type==='scale'?5:mx*1.08||1,X=i=>L+(N>1?i/(N-1):.5)*(W-L-R),Y=v=>T+(1-(v-lo)/((hi-lo)||1))*(H-T-B);
+      const pts=nv.map((v,i)=>v==null?null:[X(i),Y(v)]).filter(Boolean),path=pts.length>1?this.smooth(pts):'',gid='pfg'+f.id;
+      const ay=Y(avg);
+      viz=`<svg viewBox="0 0 ${W} ${H}" class="pfx-svg"><defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9B7BFF" stop-opacity=".35"/><stop offset="1" stop-color="#9B7BFF" stop-opacity="0"/></linearGradient></defs>
+        <line x1="${L}" x2="${W-R}" y1="${ay}" y2="${ay}" stroke="rgba(94,224,238,.4)" stroke-dasharray="3 5"/><text x="${W-R}" y="${ay-6}" text-anchor="end" class="ovth">среднее ${fmt(avg)}</text>
+        ${path?`<path d="${path}L${pts[pts.length-1][0].toFixed(1)},${H-B}L${pts[0][0].toFixed(1)},${H-B}Z" fill="url(#${gid})"/><path d="${path}" fill="none" stroke="#B49CFF" stroke-width="2.4" stroke-linecap="round"/>`:''}
+        ${N<=31||pts.length<2?pts.map((q,i)=>`<circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="${i===pts.length-1?4.2:2.4}" fill="${i===pts.length-1?'#fff':'#C9B8FF'}"/>`).join(''):`<circle cx="${pts[pts.length-1][0].toFixed(1)}" cy="${pts[pts.length-1][1].toFixed(1)}" r="4.2" fill="#fff"/>`}
+        ${ticks.map(i=>`<text x="${X(i).toFixed(1)}" y="${H-6}" text-anchor="${N>7&&i===0?'start':N>7&&i===N-1?'end':'middle'}">${lab(i)}</text>`).join('')}</svg>`;
+      kpi=`<div><b>${fk(avg)}</b><span>в среднем${Uc(f)}</span></div>${f.type==='num'?`<div><b>${fk(sum)}</b><span>всего${Uc(f)}</span></div>`:`<div><b>${fmt(last)}</b><span>последняя оценка</span></div>`}<div><b class="${dl==null?'':dl>=0?'up':'dn'}">${dl==null?'—':(dl>0?'+':'')+dl+'<small>%</small>'}</b><span>к прошлому периоду</span></div>`;
+      const sorted=[...ok].sort((a,b)=>a-b),med=sorted[Math.floor(sorted.length/2)],hiD=days.filter((d,i)=>nv[i]!=null&&nv[i]>med),loD=days.filter((d,i)=>nv[i]!=null&&nv[i]<=med);
+      ins=link(hiD,loD,'в дни, когда «'+esc(f.name)+'» выше обычного','в остальные')+`<div class="pfx-r"><span>мин ${fmt(mn)}${U(f)}</span><span>макс ${fmt(mx)}${U(f)}</span><span>${ok.length} ${this.pl(ok.length,'запись','записи','записей')}</span></div>`}
+    else if(f.type==='check'){const n=vals.filter(Boolean).length,pn=pv.filter(Boolean).length,pc=Math.round(n/N*100);let st=0;for(let i=N-1;i>=0;i--){if(vals[i])st++;else if(i<N-1)break}
+      viz=`<div class="pfx-dots" style="--c:${N<=7?7:N<=30?15:23}">${vals.map((v,i)=>`<i class="${v?'on':''}" title="${fd(days[i])}"></i>`).join('')}</div>`;
+      kpi=`<div><b>${pc}<small>%</small></b><span>дней</span></div><div><b>${n}<small>/${N}</small></b><span>раз за период</span></div><div><b>${st}</b><span>${this.pl(st,'день','дня','дней')} подряд</span></div>`;
+      ins=link(days.filter((d,i)=>vals[i]),days.filter((d,i)=>!vals[i]),'в дни с «'+esc(f.name)+'»','без')+(pn||n?`<div class="pfx-r"><span>прошлый период: ${pn} из ${N}</span></div>`:'')}
+    else if(f.type==='sel'){const c={};vals.forEach(v=>{if(v)c[v]=(c[v]||0)+1});const tot=Object.values(c).reduce((a,b)=>a+b,0),opts=[...new Set([...(f.opts||[]),...Object.keys(c)])].sort((a,b)=>(c[b]||0)-(c[a]||0)),mx=Math.max(1,...Object.values(c));
+      viz=tot?`<div class="pfx-sel">${opts.map(o=>`<div><em>${esc(o)}</em><div class="pfx-sb"><i style="width:${(c[o]||0)/mx*100}%"></i></div><b>${c[o]||0}</b></div>`).join('')}</div>`:'<div class="pg-empty">За этот период выборов нет.</div>';
+      kpi=tot?`<div><b>${esc(opts[0])}</b><span>чаще всего</span></div><div><b>${tot}</b><span>${this.pl(tot,'запись','записи','записей')}</span></div>`:''}
+    else{const e=days.map((d,i)=>[d,vals[i]]).filter(x=>x[1]).reverse();
+      kpi=`<div><b>${e.length}</b><span>${this.pl(e.length,'запись','записи','записей')} за период</span></div>`;
+      viz=e.length?`<div class="pfx-tx">${e.slice(0,4).map(([d,v])=>`<div><em>${fd(d)}</em><span>${esc(String(v).slice(0,140))}</span></div>`).join('')}</div>`:'<div class="pg-empty">За этот период записей нет.</div>'}
+    return `<div class="card pfx"><div class="pfx-h"><button onclick="APP.fEdit('${f.id}')"><b>${esc(f.name)}</b></button><em>${{num:'число',scale:'шкала 1–5',check:'да / нет',sel:'выбор',text:'текст'}[f.type]||''}</em></div>${kpi?`<div class="ovk pfx-k">${kpi}</div>`:''}${viz}${ins}</div>`};
+  return `<div class="pfx-wrap" id="pg-fields"><div class="pfx-top"><div><b>Мои поля</b><span>то, что отслеживаешь сам</span></div><div class="ovseg">${seg}</div></div><div class="pfx-g">${F.map(card).join('')}</div><button class="jf-add" onclick="APP.fEdit()">${I.plus}<span>Своё поле</span></button></div>`},
 ovChart(){const td=today(),per=this._ovp||'30';
   let first=null;if(per==='all')for(let i=365;i>=0;i--){const d=add(td,-i),a=this.dayAll(d);if(a.n&&(a.done>0||i<=0)){first=d;break}}
   const span=per==='all'?Math.max(7,first?Math.round((pd(td)-pd(first))/864e5)+1:7):+per;
