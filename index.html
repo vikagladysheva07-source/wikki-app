@@ -1252,6 +1252,19 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 @media(max-width:420px){.pcab-ed span{display:none}.pcab-ed{padding:8px;width:34px;height:34px;justify-content:center}.pcab-ed svg{width:16px;height:16px}.pcab-sh{top:56px!important}}
 .rxb.sk em{overflow:visible;text-overflow:clip;font-size:clamp(9px,2.9vw,12px);letter-spacing:-.01em}
 .hcard .nm{white-space:normal!important;overflow:visible!important;min-width:0}.hcard .nm em{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important;display:block;line-height:1.25;min-width:0}
+.pv{margin:14px 0 4px;padding:12px 0 4px;border-top:1px solid var(--line)}.pv-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}.pv-h button{display:flex;align-items:center;gap:5px;font-size:13px;color:#C9B8FF}.pv-h svg{width:14px;height:14px}
+.pv-r{display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 0}.pv-r.pv-wide{flex-wrap:wrap}.pv-n0{flex:0 0 34%;min-width:0;text-align:left;font-size:14px;color:var(--dim);line-height:1.3;padding:6px 0}.pv-n0:hover{color:var(--tx)}
+.pv-o{flex:1;display:flex;flex-wrap:wrap;gap:6px;min-width:0}.pv-o em{font-size:12px;color:var(--dim);font-style:normal}
+.pv-o button{font-size:13px;padding:6px 11px;border-radius:99px;border:1px solid color-mix(in srgb,var(--c) 40%,transparent);background:transparent;color:var(--tx)}.pv-o button.on{background:color-mix(in srgb,var(--c) 26%,transparent);border-color:var(--c);color:#fff}
+.pv-i{flex:1;min-width:0;height:38px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:0 10px;color:var(--tx);font-size:14px}.pv-i.pv-n{flex:0 0 96px;text-align:right;font-weight:700}
+.pd-o{display:flex;flex-direction:column;gap:6px;margin:6px 0 12px}.pd-o>div{display:flex;align-items:center;gap:8px}.pd-o input{flex:1;height:40px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:0 10px;color:var(--tx);font-size:14px}
+.pd-c{width:24px;height:24px;flex:none;border-radius:50%;background:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 25%,transparent)}.pd-x{width:30px;height:30px;flex:none;display:grid;place-items:center;color:var(--dim)}.pd-x svg{width:14px;height:14px}
+.pd-add{display:flex;gap:8px;align-items:center}.pd-add input{border-style:dashed}
+.pcs{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.pc{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;line-height:1;padding:4px 8px;border-radius:7px;background:color-mix(in srgb,var(--c,#9B7BFF) 20%,transparent);color:color-mix(in srgb,var(--c,#9B7BFF) 55%,#fff);text-decoration:none;max-width:100%;overflow-wrap:anywhere}
+.pc svg{width:11px;height:11px}.pc-g{--c:#8A8F9E;color:var(--dim)}.pc-u{color:#C9B8FF;--c:#9B7BFF}
+.pill.pfb{flex:none!important;width:34px;min-width:34px;height:34px;padding:0!important;display:grid;place-items:center}.pfb svg{width:15px;height:15px}.pfb.on{background:rgba(155,123,255,.25);color:#fff;border-color:rgba(155,123,255,.6)}
+.pfa{display:flex;align-items:center;gap:8px;margin:8px 0 4px;font-size:12.5px;color:var(--dim)}.pfa .pc{font-size:12.5px;padding:6px 9px}.pfa em{font-style:normal;margin-left:auto}
 </style>
 </head>
 <body>
@@ -1678,6 +1691,67 @@ npView(){const P=this.npList(),p=this.npCur();
   return `<div class="np-new"><button class="np-nb" onclick="APP.npNew(0)"><span>${I.plus}</span><b>Новая страница</b></button><div class="np-tp">${this.NPT.slice(1).map((t,i)=>`<button onclick="APP.npNew(${i+1})">${t[0]}</button>`).join('')}</div></div>
   ${P.length>3?`<input class="jb-q np-q" placeholder="Поиск по страницам" value="${esc(this._npq||'')}" oninput="APP._npq=this.value;clearTimeout(APP._npqt);APP._npqt=setTimeout(()=>{APP.render();const e=document.querySelector('.np-q');if(e){e.focus();e.setSelectionRange(e.value.length,e.value.length)}},250)">`:''}
   ${L.length?`<div class="np-g">${L.map(card).join('')}</div>`:`<div class="vb-empty"><b>${q?'Ничего не нашлось':'Свои страницы'}</b><p>${q?'Попробуй другое слово.':'Планы, списки, конспекты, идеи. Пиши свободно: заголовки, списки, задачи с галочками. Начни строку с «- », «[] » или «# », и блок сам станет списком, задачей или заголовком.'}</p></div>`}`},
+/* свойства дел и привычек как в Notion */
+PCOL:['#9B7BFF','#5EE0EE','#F5B84B','#FF8FB1','#7BA7FF','#C9B8FF','#8A8F9E'],
+PTYPES:[['sel','Выбор'],['multi','Несколько'],['num','Число'],['text','Текст'],['date','Дата'],['check','Галочка'],['url','Ссылка']],
+PPRE:{k:[['Приоритет','sel',['Высокий','Средний','Низкий']],['Проект','sel',['Работа','Личное']],['Контекст','multi',['дом','офис','звонки','онлайн']],['Время, мин','num'],['Ссылка','url']],
+      h:[['Категория','sel',['Здоровье','Ум','Дух','Дело']],['Сложность','sel',['Лёгкая','Средняя','Сложная']],['Где','multi',['дом','зал','улица']],['Заметка','text']]},
+pxList(k){const P=this.S.props=this.S.props||{};return P[k]=P[k]||[]},
+pxItem(k,id){if(k==='h')return this._h&&this._h.id===id?this._h:this.S.habits.find(x=>x.id===id);return (this.S.tasks||[]).find(x=>x.id===id)},
+pxSet(k,id,pid,v){const x=this.pxItem(k,id);if(!x)return;x.pv=x.pv||{};const e=v===''||v==null||v===false||(Array.isArray(v)&&!v.length);if(e)delete x.pv[pid];else x.pv[pid]=v;x.t=Date.now();if(k==='k'||!(this._h&&this._h.id===id))this.save()},
+pxPick(k,id,pid,oi,el){const p=this.pxList(k).find(x=>x.id===pid),x=this.pxItem(k,id);if(!p||!x)return;const o=p.opts[oi].v,cur=(x.pv||{})[pid];
+  if(p.type==='multi'){const a=Array.isArray(cur)?[...cur]:[];const i=a.indexOf(o);i<0?a.push(o):a.splice(i,1);this.pxSet(k,id,pid,a);el.classList.toggle('on',i<0)}
+  else{const on=cur!==o;this.pxSet(k,id,pid,on?o:'');el.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('on'));if(on)el.classList.add('on')}this.buzz(5)},
+pxChk(k,id,pid,el){const x=this.pxItem(k,id),on=!((x.pv||{})[pid]);this.pxSet(k,id,pid,on);el.classList.toggle('on',on);el.innerHTML=on?I.ok:''},
+pxColor(p,v){const o=(p.opts||[]).find(z=>z.v===v);return o?this.PCOL[o.c%this.PCOL.length]:this.PCOL[6]},
+pxCtl(k,id,p){const x=this.pxItem(k,id),v=(x&&x.pv||{})[p.id],a=`'${k}','${id}','${p.id}'`;
+  if(p.type==='sel'||p.type==='multi'){const has=o=>p.type==='multi'?Array.isArray(v)&&v.includes(o):v===o;
+    return `<div class="pv-o">${(p.opts||[]).map((o,i)=>`<button class="${has(o.v)?'on':''}" style="--c:${this.PCOL[o.c%this.PCOL.length]}" onclick="APP.pxPick(${a},${i},this)">${esc(o.v)}</button>`).join('')||'<em>нет вариантов</em>'}</div>`}
+  if(p.type==='check')return `<button class="jf-c ${v?'on':''}" onclick="APP.pxChk(${a},this)">${v?I.ok:''}</button>`;
+  if(p.type==='num')return `<input class="pv-i pv-n" inputmode="decimal" value="${esc(v==null?'':v)}" placeholder="—" onchange="APP.pxSet(${a},this.value.replace(',','.').trim())">`;
+  if(p.type==='date')return `<input class="pv-i" type="date" value="${esc(v||'')}" onchange="APP.pxSet(${a},this.value)">`;
+  return `<input class="pv-i" ${p.type==='url'?'type="url" inputmode="url" placeholder="https://…"':'placeholder="Пусто"'} value="${esc(v||'')}" onchange="APP.pxSet(${a},this.value.trim())">`},
+pxBlock(k,id){const P=this.pxList(k);
+  const rows=P.map(p=>`<div class="pv-r ${p.type==='sel'||p.type==='multi'?'pv-wide':''}"><button class="pv-n0" onclick="APP.pxRet('${k}','${id}');APP.pxEdit('${k}','${p.id}')">${esc(p.name)}</button>${this.pxCtl(k,id,p)}</div>`).join('');
+  const pre=P.length?'':`<div class="jf-pre"><div>${this.PPRE[k].map((x,i)=>`<button onclick="APP.pxRet('${k}','${id}');APP.pxPreset('${k}',${i})">+ ${x[0]}</button>`).join('')}</div></div>`;
+  return `<div class="pv"><div class="pv-h"><span class="lbl">Свойства</span><button onclick="APP.pxRet('${k}','${id}');APP.pxEdit('${k}')">${I.plus}<span>Свойство</span></button></div>${rows}${pre}</div>`},
+pxRet(k,id){if(k==='h')this.hKeep();else{const x=this.pxItem('k',id);if(x&&$('kT')){x.title=$('kT').value.trim()||x.title;x.date=$('kD').value||x.date;x.tm=$('kM').value||'';this.save()}}this._pr={k,id}},
+pxBack(){const r=this._pr;this._pr=null;if(!r||!r.id)return this.close();if(r.k==='h')this.hForm();else this.taskEdit(r.id)},
+pxPreset(k,i){const [n,t,o]=this.PPRE[k][i];if(!this.pxList(k).some(p=>p.name===n))this.pxList(k).push({id:'p'+uid(),name:n,type:t,opts:(o||[]).map((v,j)=>({v,c:j}))});this.save();this.render();this.pxBack()},
+pxEdit(k,pid){const p=pid?this.pxList(k).find(x=>x.id===pid):null;this._pd=p?JSON.parse(JSON.stringify(p)):{id:'',name:'',type:'sel',opts:[]};this._pk=k;this.pxForm()},
+pxKeepD(){const d=this._pd;if($('pdN'))d.name=$('pdN').value;document.querySelectorAll('.pd-o input').forEach((e,i)=>{if(d.opts[i])d.opts[i].v=e.value})},
+pxForm(){const d=this._pd,k=this._pk,isNew=!d.id,L=this.pxList(k),i=L.findIndex(x=>x.id===d.id);
+  this.open(`<div class="row"><button class="ic" onclick="APP.pxBack()" aria-label="Назад">${I.l}</button><div class="h2 sp" style="font-size:17px">${isNew?'Новое свойство':'Свойство'}</div><button class="xcl" onclick="APP._pr=null;APP.close()" aria-label="Закрыть">${I.x}</button></div>
+  <div class="small mut" style="margin:2px 0 12px">Для всех ${k==='h'?'привычек':'дел'} сразу, как колонка в таблице Notion.</div>
+  <div class="f"><label class="lbl">Название</label><input id="pdN" value="${esc(d.name)}" placeholder="${k==='h'?'Категория, сложность…':'Приоритет, проект, контекст…'}"></div>
+  <label class="lbl">Тип</label><div class="fty">${this.PTYPES.map(([t,l])=>`<button class="${d.type===t?'on':''}" onclick="APP.pxKeepD();APP._pd.type='${t}';APP.pxForm()">${l}</button>`).join('')}</div>
+  ${d.type==='sel'||d.type==='multi'?`<label class="lbl">Варианты</label><div class="pd-o">${d.opts.map((o,j)=>`<div><button class="pd-c" style="--c:${this.PCOL[o.c%this.PCOL.length]}" onclick="APP.pxKeepD();APP._pd.opts[${j}].c=(APP._pd.opts[${j}].c+1)%${this.PCOL.length};APP.pxForm()" aria-label="Цвет"></button><input value="${esc(o.v)}"><button class="pd-x" onclick="APP.pxKeepD();APP._pd.opts.splice(${j},1);APP.pxForm()" aria-label="Удалить">${I.x}</button></div>`).join('')}
+    <form onsubmit="event.preventDefault();APP.pxKeepD();const v=this.q.value.trim();if(v&&!APP._pd.opts.some(o=>o.v===v))APP._pd.opts.push({v,c:APP._pd.opts.length%${this.PCOL.length}});APP.pxForm();setTimeout(()=>{const e=document.querySelector('.pd-add input');e&&e.focus()},40)" class="pd-add"><input name="q" placeholder="Новый вариант и Enter" autocomplete="off"><button class="ic" type="submit">${I.plus}</button></form></div><div class="small mut" style="margin:-4px 0 12px">Нажми на кружок, чтобы сменить цвет.</div>`:''}
+  ${!isNew&&L.length>1?`<div class="vbm"><button ${i?'':'disabled'} onclick="APP.pxKeepD();APP.pxMove(-1)">${I.l}<span>Выше</span></button><button ${i<L.length-1?'':'disabled'} onclick="APP.pxKeepD();APP.pxMove(1)">${I.r}<span>Ниже</span></button></div>`:''}
+  <div class="row"><button class="btn pr sp" onclick="APP.pxSave()">Сохранить</button>${isNew?'':`<button class="btn del" onclick="APP.pxDel()">Удалить</button>`}</div>`);
+  if(isNew&&!d.name)setTimeout(()=>{const e=$('pdN');e&&e.focus()},60)},
+pxMove(dir){const L=this.pxList(this._pk),i=L.findIndex(x=>x.id===this._pd.id),j=i+dir;if(i<0||j<0||j>=L.length)return;[L[i],L[j]]=[L[j],L[i]];this.save();this.render();this.pxForm()},
+pxSave(){this.pxKeepD();const d=this._pd,k=this._pk;d.name=(d.name||'').trim();if(!d.name)return this.toast('Назови свойство');d.opts=(d.type==='sel'||d.type==='multi')?d.opts.filter(o=>(o.v||'').trim()).map(o=>({v:o.v.trim(),c:o.c})):[];
+  if((d.type==='sel'||d.type==='multi')&&!d.opts.length)return this.toast('Добавь хотя бы один вариант');
+  const L=this.pxList(k);if(d.id){const i=L.findIndex(x=>x.id===d.id),old=L[i];if(old&&old.type!==d.type)this.pxWipe(k,d.id);L[i]=d}else{d.id='p'+uid();L.push(d)}
+  this.save();this.render();this.pxBack()},
+pxWipe(k,pid){(k==='h'?[...this.S.habits,this._h].filter(Boolean):this.S.tasks||[]).forEach(x=>{if(x.pv)delete x.pv[pid]})},
+pxDel(){if(!confirm('Удалить свойство «'+(this._pd.name||'')+'» у всех '+(this._pk==='h'?'привычек':'дел')+'?'))return;const k=this._pk,pid=this._pd.id;this.S.props[k]=this.pxList(k).filter(x=>x.id!==pid);this.pxWipe(k,pid);if(this._pf&&this._pf.pid===pid)this._pf=null;this.save();this.render();this.pxBack()},
+pxChips(k,x){const P=this.pxList(k),pv=x.pv||{};if(!P.length)return '';const out=[];
+  P.forEach(p=>{const v=pv[p.id];if(v==null||v===''||v===false)return;
+    if(p.type==='sel')out.push(`<span class="pc" style="--c:${this.pxColor(p,v)}">${esc(v)}</span>`);
+    else if(p.type==='multi')(v||[]).forEach(o=>out.push(`<span class="pc" style="--c:${this.pxColor(p,o)}">${esc(o)}</span>`));
+    else if(p.type==='check')out.push(`<span class="pc pc-g">${I.ok}${esc(p.name)}</span>`);
+    else if(p.type==='date')out.push(`<span class="pc pc-g">${esc(p.name)} · ${fd(v)}</span>`);
+    else if(p.type==='num')out.push(`<span class="pc pc-g">${esc(p.name)} ${esc(v)}</span>`);
+    else if(p.type==='url'){const u=/^https?:\/\//.test(v)?v:'https://'+v;out.push(`<a class="pc pc-g pc-u" href="${esc(u)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(p.name)} ↗</a>`)}
+    else out.push(`<span class="pc pc-g">${esc(String(v).slice(0,40))}</span>`)});
+  return out.length?`<div class="pcs">${out.join('')}</div>`:''},
+pxMatch(k,x){const f=this._pf;if(!f)return true;if(f.k!==k)return false;const v=(x.pv||{})[f.pid];return Array.isArray(v)?v.includes(f.v):v===f.v},
+pxFilterSheet(){const groups=[['k','Дела'],['h','Привычки']].map(([k,l])=>[k,l,this.pxList(k).filter(p=>(p.type==='sel'||p.type==='multi')&&p.opts.length)]).filter(g=>g[2].length);
+  this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Фильтр по свойствам</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+  ${groups.length?groups.map(([k,l,P])=>P.map(p=>`<div class="lbl" style="margin:12px 0 6px">${l} · ${esc(p.name)}</div><div class="pv-o">${p.opts.map(o=>{const on=this._pf&&this._pf.pid===p.id&&this._pf.v===o.v;return `<button class="${on?'on':''}" style="--c:${this.PCOL[o.c%this.PCOL.length]}" onclick='APP._pf=${on?'null':JSON.stringify({k,pid:p.id,v:o.v,n:o.v}).replace(/'/g,"&#39;")};APP.close();APP.render()'>${esc(o.v)}</button>`}).join('')}</div>`).join('')).join(''):`<div class="small mut" style="margin:8px 0 14px">Пока нечего фильтровать. Добавь делу или привычке свойство с вариантами, например «Приоритет» или «Проект».</div>`}
+  <div class="row" style="margin-top:16px">${this._pf?`<button class="btn gh sp" onclick="APP._pf=null;APP.close();APP.render()">Сбросить фильтр</button>`:''}<button class="btn gh sp" onclick="APP.pxRet('k','');APP.pxEdit('k')">${I.plus} Свойство для дел</button></div>`)},
 /* дневник-блокнот */
 jNote(d,v){clearTimeout(this._jnt);const st=$('jrSt');if(st)st.textContent='сохраняю…';this._jnt=setTimeout(()=>{const S=this.S;S.checkin=S.checkin||{};const c=S.checkin[d]=Object.assign({energy:0,sleep:'',win:'',top:'',note:''},S.checkin[d]||{});c.note=v;c.t=Date.now();this.save();const s2=$('jrSt');if(s2)s2.textContent='сохранено'},600)},
 jGrow(el){el.style.height='auto';el.style.height=Math.max(260,el.scrollHeight+4)+'px'},
@@ -2242,8 +2316,9 @@ vToday(){
   }else{
     const ord={m:0,d:1,e:2,'':3};const items=[...ts.map(t=>({k:'t',o:t,tod:t.tod||''})),...hs.map(x=>({k:'h',o:x,tod:x.tod||''}))].sort((a,b)=>ord[a.tod]-ord[b.tod]);
     const tf=this._todf||'',cnt=k=>items.filter(i=>i.tod===k).length,hasT=['m','d','e'].filter(k=>cnt(k)).length>1;
-    const all=[...tk.map(x=>({k:'k',o:x})),...(tf&&hasT?items.filter(i=>i.tod===tf||i.tod===''):items)];
-    h+=`<div class="sech"><b>${this.day===td?'Дела дня':WDF[pd(this.day).getDay()].charAt(0).toUpperCase()+WDF[pd(this.day).getDay()].slice(1)+', '+fd(this.day)}</b><span>${dp.done} из ${dp.n}</span><span class="sp"></span>${this.day!==td?`<button class="pill" onclick="APP.day=today();APP.render()">сегодня</button>`:''}<button class="pill" onclick="APP.dayMenu()">${I.ed||''}</button></div>${this.weekStrip()}`;
+    const all0=[...tk.map(x=>({k:'k',o:x})),...(tf&&hasT?items.filter(i=>i.tod===tf||i.tod===''):items)],all=this._pf?all0.filter(i=>this.pxMatch(i.k,i.o)):all0;
+    const hasPF=['k','h'].some(k=>this.pxList(k).some(p=>p.type==='sel'||p.type==='multi'));
+    h+=`<div class="sech"><b>${this.day===td?'Дела дня':WDF[pd(this.day).getDay()].charAt(0).toUpperCase()+WDF[pd(this.day).getDay()].slice(1)+', '+fd(this.day)}</b><span>${dp.done} из ${dp.n}</span><span class="sp"></span>${this.day!==td?`<button class="pill" onclick="APP.day=today();APP.render()">сегодня</button>`:''}${hasPF||this._pf?`<button class="pill pfb ${this._pf?'on':''}" onclick="APP.pxFilterSheet()" aria-label="Фильтр"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg></button>`:''}<button class="pill" onclick="APP.dayMenu()">${I.ed||''}</button></div>${this.weekStrip()}${this._pf?`<div class="pfa"><span>Фильтр:</span><button class="pc" style="--c:${(()=>{const pp=this.pxList(this._pf.k).find(z=>z.id===this._pf.pid);return pp?this.pxColor(pp,this._pf.v):'#9B7BFF'})()}" onclick="APP._pf=null;APP.render()">${esc(this._pf.v)} ${I.x}</button><em>${all.length} из ${all0.length}</em></div>`:''}`;
     if(hasT)h+=`<div class="todf">${[['','Все'],['m','Утро'],['d','День'],['e','Вечер']].map(([k,l])=>`<button class="${tf===k?'on':''}" onclick="APP._todf='${k}';APP.render()">${l}${k?`<i>${cnt(k)}</i>`:''}</button>`).join('')}</div>`;
     h+=this.rowsDone(all,w,'all')+`${this.qaBox('k',`APP.taskAdd(this.q.value,'${this.day}')`,'Например: созвон завтра в 15:00')}`;
   }
@@ -2273,7 +2348,7 @@ hRow(x){const d=this.day,on=this.hOn(x,d),[f,s,fr]=this.hFns(x),st=this.streak(f
   let left=`<button class="chk ${on?'on':''}" onclick="APP.hToggle('${x.id}','${d}')">${on?I.ok:''}</button>`,right='';
   if(k==='num'||k==='time'){const fr=!on&&v&&x.target?Math.min(.95,Math.max(.12,v/x.target)):0,un=esc(x.unit||(k==='time'?'мин':''));left=`<button class="chk ${on?'on':''} ${fr?'part':''}" ${fr?`style="--f:${fr.toFixed(2)}"`:''} onclick="APP.hSet('${x.id}','${d}',${on?0:(+x.target||+x.step||1)})">${on?I.ok:''}</button>`;right=`<div class="qv"><button class="qv-v" onclick="APP.hAsk('${x.id}','${d}')">${v||0}${x.target?'<i>/'+x.target+'</i>':''} ${un}</button><button class="qv-p" onclick="APP.hInc('${x.id}','${d}',${+x.step||1})" aria-label="Добавить">+${+x.step||1}</button></div>`}
   else if(k==='scale'){left=`<button class="chk ${on?'on':''}" onclick="APP.hAsk('${x.id}','${d}')">${on?v:''}</button>`;right=`<div class="sc5">${[1,2,3,4,5].map(n=>`<button class="${v>=n?'on':''}" onclick="APP.hSet('${x.id}','${d}',${v===n?0:n})"></button>`).join('')}</div>`}
-  return `<div class="tk ${on?'done':''} ${sk?'skip':''} ${this._pop===x.id?'pop':''}" data-lp="h:${x.id}">${left}<div class="t" onclick="APP.ieStart('h','${x.id}')">${this.nmE('h',x,1)}${meta?`<div class="meta">${meta}</div>`:''}</div>
+  return `<div class="tk ${on?'done':''} ${sk?'skip':''} ${this._pop===x.id?'pop':''}" data-lp="h:${x.id}">${left}<div class="t" onclick="APP.ieStart('h','${x.id}')">${this.nmE('h',x,1)}${meta?`<div class="meta">${meta}</div>`:''}${this.pxChips('h',x)}</div>
     ${right}${!on&&!sk&&this.mode!=='strict'&&k==='check'?`<button class="fzb" title="Пропустить в этот день" onclick="APP.setSkip('${x.id}','${d}',true)">${I.snow}</button>`:''}<span class="stk">${I.flame}${st||0}</span></div>`},
 dayMenu(){const d=this.day,fz=this.frozen(d);
   this.open(`<div class="row"><div class="h2 sp">${fd(d)}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="menu" style="margin-top:8px">
@@ -2318,7 +2393,7 @@ editFocus(w){const ws=this.S.weeks[w]||{};
 tasksFor(d){const td=today();return (this.S.tasks||[]).filter(x=>x.date===d||(!x.done&&x.date<d&&d===td)).sort((a,b)=>(a.done?1:0)-(b.done?1:0)||((a.tm||'99')<(b.tm||'99')?-1:(a.tm||'99')>(b.tm||'99')?1:0)||(a.t||0)-(b.t||0))},
 tasksBlock(tk){const d=this.day;
   let h=`<div class="todh"><span class="lbl">Задачи</span><span class="ln"></span></div><div class="tgrid">`;
-  tk.forEach(x=>{const over=x.date<d;h+=`<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}"><button class="chk ${x.done?'on':''}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${this.nmE('k',x,1)}${over?`<div class="meta">перенесено с ${fd(x.date)}</div>`:''}</div></div>`});
+  tk.forEach(x=>{const over=x.date<d;h+=`<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}"><button class="chk ${x.done?'on':''}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${this.nmE('k',x,1)}${over?`<div class="meta">перенесено с ${fd(x.date)}</div>`:''}${this.pxChips('k',x)}</div></div>`});
   h+='</div>';
   h+=`<form class="row" style="margin:6px 0 2px" onsubmit="event.preventDefault();APP.taskAdd(this.q.value,'${d}');this.q.value=''"><input name="q" placeholder="Новая задача на этот день" autocomplete="off" style="flex:1"><button class="ic" type="submit" aria-label="Добавить">${I.plus}</button></form>`;
   return h},
@@ -2330,6 +2405,7 @@ taskEdit(id){const x=this.S.tasks.find(t=>t.id===id);if(!x)return;
   <div class="f"><label class="lbl">Что сделать</label><input id="kT" value="${esc(x.title)}"></div>
   <div class="kqd">${[['Сегодня',today()],['Завтра',add(today(),1)],['Послезавтра',add(today(),2)],['Через неделю',add(today(),7)]].map(([l,v])=>`<button onclick="$('kD').value='${v}';document.querySelectorAll('.kqd button').forEach(b=>b.classList.remove('on'));this.classList.add('on')" class="${x.date===v?'on':''}">${l}</button>`).join('')}</div>
   <div class="f2"><div class="f"><label class="lbl">Дата</label><input id="kD" type="date" value="${x.date}"></div><div class="f"><label class="lbl">Время</label><input id="kM" type="time" value="${x.tm||''}"></div></div>
+  ${this.pxBlock('k',id)}
   <div class="row"><button class="btn pr sp" onclick="const x=APP.S.tasks.find(t=>t.id==='${id}');x.title=$('kT').value.trim()||x.title;x.date=$('kD').value||x.date;x.tm=$('kM').value||'';x.t=Date.now();APP.save();APP.close();APP.render()">Сохранить</button><button class="btn del" onclick="APP.taskDel('${id}')">Удалить</button></div>`)},
 /* выполнение дня по всем делам: тактики, привычки, задачи */
 dayAll(d){const w=this.S.goals.length&&d>=this.st&&d<=this.end()?this.weekOf(d):0;let n=0,done=0;
@@ -2413,7 +2489,7 @@ rowsDone(items,w,key){const tod=((this.S.pref||{}).group||'tod')==='tod';const o
   const nowM=this.day===today()?new Date().toTimeString().slice(0,5):null;let nl=false;const rr=i=>{let pre='';if(nowM&&!nl&&i.k==='k'&&i.o.tm&&i.o.tm>nowM&&open.some(z=>z.k==='k'&&z.o.tm)){nl=true;pre=`<div class="nowl"><span>сейчас ${nowM}</span></div>`}return pre+r(i)};
   return `<div class="tgrid">`+open.map(rr).join('')+'</div>'+(open.length?'':`<div class="tall">Всё на этот день сделано</div>`)+(done.length?`<button class="tdn" onclick="APP._showDone=!APP._showDone;APP.render()">${I.ok}<span>Сделано · ${done.length}</span><em>${this._showDone?'скрыть':'показать'}</em></button>${this._showDone?`<div class="tgrid tgd">${done.map(r).join('')}</div>`:''}`:'')},
 tAsk(id,d){const t=this.S.tactics.find(x=>x.id===id);if(!t)return;const cur=this.v(t,d);this.ask('Сколько сегодня',cur||'',v=>{this.setLog(id,d,Math.max(0,+String(v).replace(',','.')||0));this.render()},'number')},
-kRow(x){const d=this.day,over=x.date<d;return `<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}"><button class="chk ${x.done?'on':''}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${x.tm?`<span class="ktm">${x.tm}</span>`:''}${this.nmE('k',x,1)}${over?`<div class="meta kov">просрочено с ${fd(x.date)}</div>`:''}</div>${!x.done?`<button class="kmv" title="На завтра" onclick="APP.taskMove('${x.id}',add(APP.day,1))">${I.r}<span>завтра</span></button>`:''}<button class="kmn" onclick="APP.taskEdit('${x.id}')" aria-label="Изменить">⋯</button></div>`},
+kRow(x){const d=this.day,over=x.date<d;return `<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}"><button class="chk ${x.done?'on':''}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${x.tm?`<span class="ktm">${x.tm}</span>`:''}${this.nmE('k',x,1)}${over?`<div class="meta kov">просрочено с ${fd(x.date)}</div>`:''}${this.pxChips('k',x)}</div>${!x.done?`<button class="kmv" title="На завтра" onclick="APP.taskMove('${x.id}',add(APP.day,1))">${I.r}<span>завтра</span></button>`:''}<button class="kmn" onclick="APP.taskEdit('${x.id}')" aria-label="Изменить">⋯</button></div>`},
 tRow(t,w,showGoal){
   const d=this.day,val=this.v(t,d),wv=this.wVal(t,w),wt=this.wTarget(t,w),done=wv>=wt,sk=this.skipped(t.id,d)&&!this.frozen(d);
   let left='',right='',meta='';
@@ -2896,6 +2972,7 @@ hForm(){const x=this._h,order=(this.S.pref||{}).wk0==='sun'?[0,1,2,3,4,5,6]:[1,2
   <div class="f"><label class="lbl">Сфера жизни</label><select id="hA"><option value="">не выбрана</option>${AREAS.map(a=>`<option value="${a[0]}" ${x.area===a[0]?'selected':''}>${a[1]}</option>`).join('')}</select></div>
   <div class="f"><label class="lbl">Привязка: после чего делаю</label><input id="hW" value="${esc(x.when)}" placeholder="После утреннего кофе"></div>
   <div class="small dim">Привязка к тому, что уже делаешь каждый день, — самый надёжный способ закрепить привычку (Джеймс Клир).</div>
+  ${this.pxBlock('h',x.id)}
   <div class="row" style="margin-top:18px"><button class="btn pr sp" onclick="APP.hSave()">Сохранить</button>${this._hNew?'':`<button class="btn del" onclick="APP.hDel()">Удалить</button>`}</div>`)},
 hKeep(){if($('hT')){this._h.title=$('hT').value;if($('hA'))this._h.area=$('hA').value;this._h.when=$('hW').value;if($('hG'))this._h.target=+String($('hG').value).replace(',','.')||0;if($('hU'))this._h.unit=$('hU').value.trim();if($('hS'))this._h.step=+$('hS').value||5;if(this._h.kind==='time'){this._h.unit='мин';if(!this._h.step||this._h.step===1)this._h.step=5}if(this._h.kind==='num'&&!this._h.step)this._h.step=1}},
 hSave(){this.hKeep();const x=this._h;if(!x.title.trim())return this.toast('Назови привычку');if(!this.S.habits.some(h=>h.id===x.id)&&!this.canAddH(1)){this.close();return}if(!x.days.length)return this.toast('Выбери хотя бы один день');
