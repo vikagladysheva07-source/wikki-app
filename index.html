@@ -1299,6 +1299,11 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 .swhint{display:flex;align-items:center;gap:8px;padding:9px 12px;margin:0 0 12px;border-radius:12px;background:rgba(155,123,255,.1);border:1px solid rgba(155,123,255,.25);font-size:12.5px;color:#C9B8FF}.swhint span{flex:1}.swhint button{display:grid;color:var(--dim)}.swhint svg{width:13px;height:13px}
 .km-r{display:inline-flex;align-items:center;gap:4px;color:#C9B8FF}
 .krd{margin:-4px 0 12px}
+.ava-s{display:grid;place-items:center;width:100%;height:100%}.ava-s svg{width:62%;height:62%}
+@media(pointer:coarse){.tk .kmv{display:none}}
+.sech .pill:last-child,.sech .pfb{width:34px;min-width:34px;height:34px;padding:0!important;display:grid;place-items:center;flex:none}.sech .pill:last-child svg{width:15px;height:15px}
+.sech{align-items:center}
+.sech .pill{margin-top:0!important;margin-bottom:0!important;align-self:center}
 </style>
 </head>
 <body>
@@ -1805,10 +1810,10 @@ vPlans(){const v=['list','matrix'].includes(this._plv)?this._plv:'day';
 dzPlans(){const td=today(),dp=this.dayAll(td),pct=dp.n?Math.round(dp.p*100):0,ord={m:0,d:1,e:2,'':3},hr=new Date().getHours(),now=hr<12?'m':hr<18?'d':'e';
   const tk=this.tasksFor(td).filter(x=>!x.done).map(x=>({k:'k',o:x,tod:'',tm:x.tm||''}));
   const hs=this.S.habits.filter(x=>!x.archived&&this.hSched(x,td)&&!this.hOn(x,td)).map(x=>({k:'h',o:x,tod:x.tod||'',tm:''}));
-  const rank=i=>i.tm?0:i.tod===now?1:i.tod===''?2:3+ord[i.tod];
+  const rank=i=>i.k==='k'&&(i.o.date<td||(i.o.pr||0)===3)?-1:i.tm?0:i.k==='k'&&i.o.pr?1:i.tod===now?2:i.tod===''?3:4+ord[i.tod];
   const L=[...tk,...hs].sort((a,b)=>rank(a)-rank(b)||(a.tm||'99').localeCompare(b.tm||'99')),top=L.slice(0,3);
   const row=i=>{const x=i.o,chk=i.k==='k'?`APP.taskToggle('${x.id}')`:(x.kind||'check')==='check'?`APP.hToggle('${x.id}','${td}')`:`APP.go('plans')`;
-    const sub=i.k==='k'?(x.tm?x.tm:x.date<td?'перенесено':'задача'):(x.kind==='num'||x.kind==='time')?`${this.hVal(x,td)||0} / ${x.target||'—'} ${esc(x.unit||(x.kind==='time'?'мин':''))}`:x.kind==='scale'?'оценка 1–5':this.TOD[x.tod||''].toLowerCase();
+    const sub=i.k==='k'?[x.date<td?'просрочено':'',x.tm,x.pr?['','низкий','средний','высокий'][x.pr]+' приоритет':'',x.rep?this.kRepTxt(x.rep):''].filter(Boolean).join(' · ')||'задача':(x.kind==='num'||x.kind==='time')?`${this.hVal(x,td)||0} / ${x.target||'—'} ${esc(x.unit||(x.kind==='time'?'мин':''))}`:x.kind==='scale'?'оценка 1–5':this.TOD[x.tod||''].toLowerCase();
     return `<div class="dzp-r" ${i.k==='k'?`data-sw="k:${x.id}"`:(x.kind||'check')==='check'?`data-sw="h:${x.id}:${td}"`:''}><button class="chk ${i.k==='k'?'kp'+(x.pr||0):''}" onclick="${chk}" aria-label="Отметить"></button><button class="dzp-t" onclick="APP.go('plans')"><b>${esc(x.title)}</b><em>${sub}</em></button></div>`};
   return `<div class="card dzp"><div class="dz-ch"><span class="dz-ti">${I.plan}Планы</span><span class="sp"></span><span class="dzp-n"><b>${dp.done}</b> из ${dp.n}</span></div>
    <div class="dzp-bar"><i style="width:${pct}%"></i></div>
@@ -2399,7 +2404,7 @@ render(){
 },
 initial(){const n=(this.S.profile.name||(this.user&&this.user.email)||'').trim();return n?n[0].toUpperCase():'·'},
 top(){return `<div class="top"><span></span>
-  <button class="ava" onclick="APP.go('profile')" aria-label="Профиль">${(this.S.profile||{}).photo?`<img src="${this.S.profile.photo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:esc(this.initial())}</button></div>`},
+  <button class="ava" onclick="APP.go('profile')" aria-label="Профиль">${(this.S.profile||{}).photo?`<img src="${this.S.profile.photo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:this.initial()==='·'?`<span class="ava-s">${this.avaHtml()}</span>`:esc(this.initial())}</button></div>`},
 pl(n,a,b,c){n=Math.abs(n)%100;const m=n%10;if(n>10&&n<20)return c;if(m>1&&m<5)return b;if(m===1)return a;return c},
 dleft(d){const n=diff(today(),d);return n<0?`просрочено на ${-n} дн.`:n===0?'сегодня':`через ${n} дн.`},
 miniRing(v,size,col){const r=15,C=2*Math.PI*r,p=v==null?0:v/100,c=col||(v!=null&&v>=85?'#5EE0EE':'#9B6FE8');
@@ -2418,10 +2423,10 @@ ring(v,th,cap){const r=52,C=2*Math.PI*r,p=v==null?0:v/100,a=th/100*360-90,x=59+r
 
 /* ================= ГЛАВНОЕ ================= */
 vWelcome(){return `<div class="wl"><span class="wl-mark">${SHARK}</span><div class="wl-t">wikki.app</div><div class="wl-s">Привычки, цели и прогресс в одной системе. Начни с 2–3 привычек: первая отметка займёт минуту.</div>
-  <div class="wl-f"><div>${I.habit}<span>Трекер привычек: отметка в одно касание</span></div><div>${I.goal}<span>Программы: 12 недель, 75 Hard, 6 месяцев</span></div><div>${I.week}<span>Серии, уровень и прогресс за год</span></div></div>
+  <div class="wl-f"><div>${I.habit}<span>Трекер привычек: отметка в одно касание</span></div><div>${I.goal}<span>Программы: 12 недель, 75 Hard, 6 месяцев</span></div><div>${I.plan}<span>Планы: повторы, приоритеты, свайпы</span></div><div>${I.week}<span>Серии, уровень и прогресс за год</span></div></div>
   <button class="btn pr w" style="margin-top:22px;padding:15px" onclick="APP.seen();APP.track('start',null,'ever');APP._st=1;APP.sub='start';window.scrollTo(0,0);APP.render()">Начать бесплатно</button>
   <button class="btn gh w" style="margin-top:8px" onclick="APP.seen();APP.sub=null;APP.go('me')">У меня есть аккаунт</button>
-  <button class="btn gh w small" style="margin-top:2px;color:var(--dim)" onclick="APP.seen();APP.sub=null;APP.go('home')">Сначала посмотреть</button></div>`},
+  <button class="btn gh w small" style="margin-top:2px;color:#B8B0D6" onclick="APP.seen();APP.sub=null;APP.go('home')">Сначала посмотреть</button></div>`},
 seen(){this.S.pref=this.S.pref||{};this.S.pref.seen=1;this.save()},
 vToday(){
   const S=this.S,td=today();
@@ -3054,7 +3059,7 @@ vHome(){const S=this.S,td=today(),P=S.profile||{};
   let body='',chunk='';const flush=()=>{if(chunk){body+=`<div class="dz dz2">${chunk}</div>`;chunk=''}};
   this.dzOrder().forEach(([k,on])=>{if(!on||!WG[k])return;if(k==='today'){flush();body+=WG[k]}else chunk+=WG[k]});flush();
   const repC=this.inPrg()&&this.curWeek()>=12?`<button class="card pg-rep" onclick="APP.openSub('report')"><span>${I.trophy}</span><div class="sp"><b>Итоги цикла готовы</b><em>Цифры, победы и карточка для сторис</em></div>${I.r}</button>`:'';
-  return `<div class="dz-hd"><div class="h1">Дашборд</div><button class="dz-cfg" onclick="APP.dzSheet()">${I.gear}<span>Настроить</span></button></div>__S1__<div class="dz">${bFull&&innerWidth>=760?banner:bannerS}</div>${this.mitH()}${this.shMoment()}${this.ctxH()}${this.tipH()}${this.badDayWin()}${repC}${body}<button class="qfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${I.plus}</button>`},
+  return `<div class="dz-hd"><div class="h1">Дашборд</div><button class="dz-cfg" onclick="APP.dzSheet()">${I.gear}<span>Настроить</span></button></div>__S1__<div class="dz">${bFull&&innerWidth>=760?banner:bannerS}</div>${this.mitH()}${this.shMoment()}${this.ctxH()}${this.badDayWin()}${repC}${body}${this.tipH()}<button class="qfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${I.plus}</button>`},
 DZW:[['today','Планы','Три ближайших дела и прогресс дня'],['rings','Кольца активности','День, неделя и месяц'],['streak','Серии','Дни подряд, рекорд и лучшие привычки'],['rhythm','Ритм дня','Утро, день и вечер'],['wday','Дни недели','В какие дни ты сильнее'],['week','Неделя программы','Счёт недели, фокус и дни до разбора'],['progress','Общий прогресс','График с выбором периода'],['cons','Карта дней','Каждый день на тепловой карте'],['wkbars','Прогресс недели','Столбики по дням недели'],['wheel','Колесо баланса','Средний балл и слабая сфера месяца'],['fields','Мои поля','Шаги, вода, вес — всё, что добавишь сам'],['partner','Партнёр','Процент недели друг друга']],
 dzOrder(){const def=this.DZW.map(x=>[x[0],!['wheel','wkbars'].includes(x[0])]),pf=this.S.pref||{};let cur=(pf.dz||[]).filter(x=>this.DZW.some(w=>w[0]===x[0]));const mig=pf.dz&&pf.dzv!==2;def.forEach(d=>{if(!cur.some(x=>x[0]===d[0])){const pi=cur.findIndex(x=>x[0]==='partner');if(pi>=0&&pi===cur.length-1)cur.splice(pi,0,[d[0],d[1]]);else cur.push([d[0],d[1]])}});if(mig){const pi=cur.findIndex(x=>x[0]==='partner');if(pi>=0)cur.push(cur.splice(pi,1)[0]);pf.dz=cur.map(x=>[x[0],x[1]]);pf.dzv=2}return cur},
 dzSet(o){this.S.pref=this.S.pref||{};this.S.pref.dz=o;this.save();this.render();this.dzSheet()},
