@@ -1304,6 +1304,8 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 .sech .pill:last-child,.sech .pfb{width:34px;min-width:34px;height:34px;padding:0!important;display:grid;place-items:center;flex:none}.sech .pill:last-child svg{width:15px;height:15px}
 .sech{align-items:center}
 .sech .pill{margin-top:0!important;margin-bottom:0!important;align-self:center}
+.trk0{font-size:13px;color:var(--dim);padding:18px 4px;text-align:center;border:1px dashed var(--line);border-radius:12px;margin:4px 0}
+.jf0{border-bottom:0;padding-bottom:0}
 </style>
 </head>
 <body>
@@ -1652,7 +1654,8 @@ fInput(f,d){const v=this.fVal(d,f.id);
   return `<input class="jf-tx" value="${esc(v||'')}" placeholder="Напиши" onchange="APP.fSet('${d}','${f.id}',this.value.trim(),1)">`},
 fRows(d){const F=this.fList();
   const rows=F.map(f=>`<div class="jf-r jf-${f.type}"><button class="jf-n" onclick="APP.fEdit('${f.id}')">${esc(f.name)}</button>${this.fInput(f,d)}</div>`).join('');
-  const pre=F.length?'':`<div class="jf-pre"><span>Что ещё хочется отслеживать каждый день?</span><div>${this.FPRE.map((p,i)=>`<button onclick="APP.fPreset(${i})">+ ${p[0]}</button>`).join('')}</div></div>`;
+  if(!F.length&&!this._fpre)return `<div class="jf jf0"><button class="jf-add" onclick="APP._fpre=1;APP.render()">${I.plus}<span>Отслеживать своё: шаги, вода, вес…</span></button></div>`;
+  const pre=F.length?'':`<div class="jf-pre"><div>${this.FPRE.map((p,i)=>`<button onclick="APP.fPreset(${i})">+ ${p[0]}</button>`).join('')}</div></div>`;
   return `<div class="jf">${rows}${pre}<button class="jf-add" onclick="APP.fEdit()">${I.plus}<span>Своё поле</span></button></div>`},
 fPreset(i){const p=this.FPRE[i];if(this.fList().some(f=>f.name===p[0]))return;this.fList().push({id:'f'+uid(),name:p[0],type:p[1],unit:p[2]||''});this.save();this.render();this.toast('Поле «'+p[0]+'» добавлено')},
 fEdit(id){const f=id?this.fList().find(x=>x.id===id):{name:'',type:'num',unit:'',opts:[]};if(!f)return;const i=id?this.fList().indexOf(f):-1,n=this.fList().length;
@@ -2799,7 +2802,7 @@ pvHabits(){
   const base=this._gm||td.slice(0,7),[gy,gmo]=base.split('-').map(Number),pm=iso(new Date(gy,gmo-2,1)).slice(0,7),nm=iso(new Date(gy,gmo,1)).slice(0,7);
   if(!hs.length&&!tt.length)return `<div class="card st-empty"><b>Трекер пока пустой</b><span>Выбери 2–3 привычки — займёт минуту.</span><button class="btn pr w" onclick="APP._st=1;APP.sub='start';window.scrollTo(0,0);APP.render()">Выбрать привычки</button><button class="st-own" onclick="APP.editH(null)">Создать свою</button></div>`;
   let h=kpi+`<div class="tkm"><button class="ic" onclick="APP._gm='${pm}';APP.render()">${I.l}</button><b>${MONF[gmo-1]} ${gy}</b><button class="ic" onclick="APP._gm='${nm}';APP.render()">${I.r}</button><span class="sp"></span><button class="btn pr sm" onclick="APP.editH(null)">${I.plus} Привычка</button></div>`;
-  const tr2=trend;this._trendDays=tr2.length;this._series={main:tr2};this._trendHtml=this.areaChart(tr2,{h:window.innerWidth>=1024?96:72,labels:false,extend:false,col:'#9B7BFF'});this._trendAvg=avg30;this._noHead=true;
+  const tr2=trend;this._trendDays=tr2.length;this._series={main:tr2};const mkd=Object.keys(this.S.hlog||{}).filter(d=>Object.values(this.S.hlog[d]||{}).some(Boolean)).length;this._trendHtml=mkd<3?`<div class="trk0">Ещё ${3-mkd} ${this.pl(3-mkd,'день','дня','дней')} отметок, и здесь появится график</div>`:this.areaChart(tr2,{h:window.innerWidth>=1024?96:72,labels:false,extend:false,col:'#9B7BFF'});this._trendAvg=avg30;this._noHead=true;
   h+='__S2__'+(mode==='w'?this.weekGrid(rows):this.monthGrid(hs,tt));this._trendHtml='';this._noHead=false;
   const have=new Set(hs.map(x=>x.title));const lib=HABIT_LIB.filter(([t])=>!have.has(t));
   if(lib.length&&(!hs.length||this._libOpen))h+=this.hPicker(hs.length>0);
@@ -3053,7 +3056,7 @@ vHome(){const S=this.S,td=today(),P=S.profile||{};
   const strH=`<div class="card dz-c dz-sl"><div class="dz-ch"><span class="dz-ti">Серии</span></div>${sl.length?sl.map(x=>`<div class="dz-sr">${this.tile(x.r.o,x.r.k,x.r.k==='h'?null:this.gColor(x.r.o.goal))}<span class="sp">${esc(x.r.o.title)}</span><b>${I.flame}${x.st} ${this.pl(x.st,'день','дня','дней')}</b></div>`).join(''):'<div class="small mut">Отмечай привычки — здесь появятся серии.</div>'}<button class="dz-all" onclick="APP.go('tracker')">Все серии ${I.r}</button></div>`;
   const wkH=`<div class="card dz-c dz-wk"><div class="dz-ch"><span class="dz-ti">Прогресс недели</span><span class="sp"></span><span class="dz-sub">${ws.pct??'—'}${ws.pct!=null?'%':''}</span></div><div class="dz-wb"><div class="dz-wy">${[100,75,50,25,0].map(v=>`<span>${v}%</span>`).join('')}</div>${ws.days.map(x=>`<button class="${x.d===td?'td':''}" onclick="APP.goDay('${x.d}')"><span class="dz-bar"><i class="${x.p!=null&&x.p>=.8?'ok':''}" style="height:${x.p==null?0:Math.max(3,Math.round(x.p*100))}%"></i></span><em>${WD[pd(x.d).getDay()]}</em></button>`).join('')}</div></div>`;
   const Wv=S.wheel&&S.wheel[td.slice(0,7)]||{},wf=AREAS.filter(x=>Wv[x[0]]),wav=wf.length?(wf.reduce((a,x)=>a+ +Wv[x[0]],0)/wf.length).toFixed(1):null,wlo=wf.length?wf.slice().sort((a,b)=>Wv[a[0]]-Wv[b[0]])[0]:null;
-  const whlH=`<div class="card dz-c dz-whl"><div class="dz-ch"><span class="dz-ti">${I.goal}Колесо баланса</span></div>${wav?`<div class="dz-big"><b>${wav}</b><span>из 10</span></div><div class="dz-whb">${AREAS.map(x=>`<i style="height:${(+Wv[x[0]]||0)*10}%" class="${wlo&&x[0]===wlo[0]?'lo':''}" title="${x[1]}"></i>`).join('')}</div><div class="dz-whl-s">Слабее всего: ${wlo[1]}</div>`:`<div class="dz-pw0t">Оцени 8 сфер жизни, чтобы видеть баланс месяц к месяцу.</div>`}<button class="pill" style="margin-top:12px" onclick="APP._prv='balance';APP.go('progress')">${wav?'Открыть колесо':'Оценить сферы'} ${I.r}</button></div>`;
+  const whlH=`<div class="card dz-c dz-whl"><div class="dz-ch"><span class="dz-ti">${I.goal}Колесо баланса</span></div>${wav?`<div class="dz-big"><b>${wav}</b><span>из 10</span></div><div class="dz-whb">${AREAS.map(x=>`<i style="height:${(+Wv[x[0]]||0)*10}%" class="${wlo&&x[0]===wlo[0]?'lo':''}" title="${x[1]}"></i>`).join('')}</div><div class="dz-whl-s">Слабее всего: ${wlo[1]}</div>`:`<div class="dz-pw0t">Оцени сферы жизни, чтобы видеть баланс месяц к месяцу.</div>`}<button class="pill" style="margin-top:12px" onclick="APP._prv='balance';APP.go('progress')">${wav?'Открыть колесо':'Оценить сферы'} ${I.r}</button></div>`;
   const stk2=`<div class="card dz-c dz-stk2"><div class="dz-ch"><span class="dz-ti">${I.fire}Серии</span><span class="sp"></span><button class="shbtn" onclick="APP.shareStudio('streak')">${SI.share}<span>В сторис</span></button></div><div class="dz-s2"><div><b>${cur}</b><span>${this.pl(cur,'день','дня','дней')} подряд сейчас</span></div><div><b>${best}</b><span>рекорд</span></div></div>${sl.slice(0,3).map(x=>`<div class="dz-sr">${this.tile(x.r.o,x.r.k,x.r.k==='h'?null:this.gColor(x.r.o.goal))}<span class="sp">${esc(x.r.o.title)}</span><b>${I.flame}${x.st}</b></div>`).join('')}<button class="dz-all" onclick="APP.go('tracker')">Все серии ${I.r}</button></div>`;
   const WG={today:this.dzPlans(),rings:this.dzRings(),rhythm:this.dzRhythm(),wday:this.dzWday(),streak:stk2,week:progH,partner:this.partnerW(),fields:this.fieldsW(),progress:over,cons,wkbars:wkH,wheel:whlH};
   let body='',chunk='';const flush=()=>{if(chunk){body+=`<div class="dz dz2">${chunk}</div>`;chunk=''}};
@@ -3551,10 +3554,10 @@ async loadAcc(){if(!this.user||!this.sb)return;const k='tw-acc-'+this.user.id;tr
 canAddH(n){if(this.paid())return true;const c=this.S.habits.filter(h=>!h.archived).length;if(c+n<=this.FREE_H)return true;this.paySheet('habits');return false},
 price(){return this.lang()==='en'?{v:'$29'}:{v:'2 490 ₽'}},
 payBody(kind){const T={program:['Программы','Цель за 12 недель, а не за год','Готовая система: цели, ежедневные тактики, счёт недели и воскресный разбор. Ты точно знаешь, что делать сегодня.'],
-    progress:['Прогресс','Видно, как меняется жизнь','Колесо баланса по 10 сферам и год в пикселях. Через месяц ты увидишь разницу в цифрах, а не на ощущениях.'],
+    progress:['Прогресс','Видно, как меняется жизнь','Колесо баланса по сферам жизни и год в пикселях. Через месяц ты увидишь разницу в цифрах, а не на ощущениях.'],
     habits:['Привычки','Больше трёх привычек','В бесплатной версии 3 привычки. Полный доступ снимает ограничение и открывает всю систему.'],
     full:['Полный доступ','Вся система дисциплины','Программы, безлимит привычек, прогресс и разборы. Один раз и навсегда.']}[kind]||[],pr=this.price();
-  const F=[['target','Программы','12 недель, 75 Hard, Теория шести месяцев'],['check','Безлимит привычек','Сколько нужно, с любыми типами отметок'],['chart','Колесо и год','10 сфер жизни и каждый день года на одной картинке'],['spark','Разбор недели','Счёт, выводы и фокус на следующую неделю']];
+  const F=[['target','Программы','12 недель, 75 Hard, Теория шести месяцев'],['check','Безлимит привычек','Сколько нужно, с любыми типами отметок'],['chart','Колесо и год','Сферы жизни и каждый день года на одной картинке'],['spark','Разбор недели','Счёт, выводы и фокус на следующую неделю']];
   return `<div class="pw"><div class="pw-hero"><div class="pw-ey">${T[0]}</div><div class="pw-t">${T[1]}</div></div><div class="pw-s">${T[2]}</div>
   <div class="pw-f">${F.map(f=>`<div><span>${SI[f[0]]||I.ok}</span><b>${f[1]}</b><em>${f[2]}</em></div>`).join('')}</div>
   <div class="pw-p"><div><b>${pr.v}</b><span>один раз, навсегда</span></div><em>цена запуска</em></div>
