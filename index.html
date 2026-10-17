@@ -1319,6 +1319,21 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 .mr-l{padding:4px 14px!important}.mr-l button{display:flex;align-items:center;gap:12px;width:100%;padding:14px 0;color:var(--tx);font-size:14.5px;border-top:1px solid var(--line)}.mr-l button:first-child{border-top:0}.mr-l button span{flex:1;text-align:left}.mr-l button svg{width:17px;height:17px;color:#C9B8FF}.mr-l button svg:last-child{width:14px;height:14px;color:var(--dim)}
 @media(max-width:400px){.mr-lk{position:static;margin-top:4px}.nav .in.n5 button{font-size:9.5px}.nav .in.n5{padding:5px 4px}}
 .lgm{padding:0!important;background:none!important;overflow:hidden;box-shadow:0 10px 30px rgba(124,92,230,.35)}.lgm img{width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit}
+.pcab-t{display:inline-block;margin-top:6px;font-size:12px;font-weight:700;letter-spacing:.04em;color:#F5D58B;background:rgba(245,184,75,.12);border:1px solid rgba(245,184,75,.32);border-radius:99px;padding:4px 11px}
+.afr{box-shadow:0 0 0 2px #0A0A0F,0 0 0 4px #9B7BFF,0 0 18px rgba(155,123,255,.7)!important}
+.mr-c{font-style:normal;font-size:12px;color:var(--dim);flex:none!important}
+.rwh{display:flex;align-items:center;gap:16px;padding:18px!important;margin:0 0 10px!important}.rwh-n{flex:none;width:96px;height:96px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,rgba(155,123,255,.35),rgba(155,123,255,.06));border:1px solid rgba(155,123,255,.4)}.rwh-n b{font-size:30px;font-weight:800;line-height:1}.rwh-n span{font-size:10.5px;color:var(--dim);text-align:center;margin-top:3px;line-height:1.2;padding:0 8px}
+.rwh em{display:block;font-style:normal;font-size:12px;color:var(--dim)}.rwh .sp>b{display:block;font-size:20px;margin-top:2px}
+.rwn{padding:14px 16px!important;margin:0!important}.rwn-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.rwn-h span{font-size:12px;color:var(--dim)}.rwn-h b{font-size:14.5px}.rwn-b{height:6px;border-radius:3px;background:rgba(255,255,255,.07);margin:10px 0 6px;overflow:hidden}.rwn-b i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#9B7BFF,#5EE0EE)}.rwn-f{font-size:12px;color:var(--dim);text-align:right}
+.rwt{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.rwt-i{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px;border-radius:16px;background:var(--s1);border:1px solid var(--line);color:var(--tx)}.rwt-i.on{border-color:rgba(255,255,255,.5)}.rwt-i.lk{opacity:.45}
+.rwt-s{width:40px;height:40px;border-radius:12px;background:radial-gradient(circle at 35% 30%,#fff 0,var(--c) 38%,#0A0A0F 100%);box-shadow:0 0 14px color-mix(in srgb,var(--c) 45%,transparent)}.rwt-i b{font-size:12.5px}.rwt-i em{font-style:normal;font-size:10.5px;color:var(--dim)}
+.rwl{padding:2px 14px!important;margin:0!important}.rwl-r{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}.rwl-r:first-child{border-top:0}.rwl-r b{display:block;font-size:14.5px}.rwl-r em{display:block;font-style:normal;font-size:12px;color:var(--dim);line-height:1.4;margin-top:1px}.rwl-s{flex:none;font-size:11.5px;color:var(--dim);text-align:right}.rwl-r.got .rwl-s{color:#C9B8FF}
+.rwl-r:not(.got) b{color:var(--mut)}.rwl-off{opacity:.55}.rwl-a{display:inline-block;margin-top:5px;font-size:12px;color:#C9B8FF}
+.rw-ic{flex:none;width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--dim)}.rw-ic svg{width:19px;height:19px}.rw-ic.on{background:linear-gradient(145deg,rgba(245,184,75,.25),rgba(155,123,255,.18));border-color:rgba(245,184,75,.45);color:#F5C66B}
+.rw-sw{width:18px;height:18px;border-radius:6px;display:block;opacity:.5}.rw-ic.on .rw-sw{opacity:1;box-shadow:0 0 10px currentColor}
+.rwc{text-align:center;padding:6px 4px 4px}.rwc-g{display:flex;justify-content:center;margin:6px 0 12px}.rwc-g .rw-ic{width:76px;height:76px;border-radius:24px}.rwc-g .rw-ic svg{width:36px;height:36px}.rwc-g .rw-sw{width:34px;height:34px;border-radius:10px}
+.rwc-l{display:flex;flex-direction:column;gap:10px;margin:12px 0 18px}.rwc-l b{display:block;font-size:19px}.rwc-l em{display:block;font-style:normal;font-size:13px;color:var(--dim);margin-top:3px}
+@media(max-width:400px){.rwt{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -1916,10 +1931,67 @@ vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData()
   const lock=pd0?'':`<i class="mr-lk">Полный доступ</i>`;
   const T=[['program','Программа',I.goal,'Цели на 12 недель, тактики и разбор недели',1],['progress','Прогресс',I.chart,'Графики, колесо баланса и год в пикселях',1]];
   return `<div class="h1">Ещё</div>__S1____S2__
-  <button class="card mr-me" onclick="APP.go('profile')"><span class="mr-av">${this.avaHtml()}</span><div class="sp"><b>${esc(P.name||'Твой профиль')}</b><em>уровень ${D.lvl||1}${this.user?'':' · войди, чтобы сохранить прогресс'}</em></div>${I.r}</button>
+  <button class="card mr-me" onclick="APP.go('profile')"><span class="mr-av ${this.rwFrame()?'afr':''}">${this.avaHtml()}</span><div class="sp"><b>${esc(P.name||'Твой профиль')}</b><em>${this.rwTitle()?this.rwTitle()+' · ':''}уровень ${D.lvl||1}${this.user?'':' · войди, чтобы сохранить прогресс'}</em></div>${I.r}</button>
   ${pd0?'':`<button class="card mr-pay" onclick="APP.paySheet('program')"><span>${I.star}</span><div class="sp"><b>Полный доступ</b><em>Программы, прогресс, безлимит привычек и разбор недели</em></div>${I.r}</button>`}
   <div class="mr-g">${T.map(([k,l,ic,d,pay])=>`<button class="card mr-t" onclick="APP.go('${k}')"><span class="mr-i">${ic}</span><b>${l}</b><em>${d}</em>${pay?lock:''}</button>`).join('')}</div>
-  <div class="card mr-l"><button onclick="APP.go('me')">${I.gear}<span>Настройки</span>${I.r}</button><button onclick="APP.go('me');APP._sset='about';APP.render()">${I.spark||I.star}<span>О приложении</span>${I.r}</button><button onclick="APP.shareApp()">${SI.share}<span>Поделиться приложением</span>${I.r}</button></div>`},
+  <div class="card mr-l"><button onclick="APP._ct='rewards';APP.go('profile')">${I.trophy}<span>Награды</span><em class="mr-c">${Object.keys(this.S.rw||{}).length} из ${this.RW.length+this.RWX.length}</em>${I.r}</button><button onclick="APP.go('me')">${I.gear}<span>Настройки</span>${I.r}</button><button onclick="APP.go('me');APP._sset='about';APP.render()">${I.spark||I.star}<span>О приложении</span>${I.r}</button><button onclick="APP.shareApp()">${SI.share}<span>Поделиться приложением</span>${I.r}</button></div>`},
+/* темы оформления: перекрашиваем фирменный фиолетовый в цвет темы */
+THM:{cyan:{h:.515,s:1,n:'Циан',c:'#5EE0EE',rw:'d21'},gold:{h:.112,s:1,n:'Золото',c:'#F5B84B',rw:'d66'},obs:{h:.62,s:.13,n:'Обсидиан',c:'#9AA3B5',rw:'d180'}},
+thConv(r,g,b){const T=this.THM[(this.S.pref||{}).theme];if(!T)return null;const k=r+','+g+','+b,C=this._thc||(this._thc={});if(k in C)return C[k];
+  const R=r/255,G=g/255,B=b/255,mx=Math.max(R,G,B),mn=Math.min(R,G,B),l=(mx+mn)/2;let h=0,s=0;
+  if(mx!==mn){const d=mx-mn;s=l>.5?d/(2-mx-mn):d/(mx+mn);h=mx===R?(G-B)/d+(G<B?6:0):mx===G?(B-R)/d+2:(R-G)/d+4;h/=6}
+  if(!(h>.66&&h<.81&&s>.3))return C[k]=null;
+  const s2=Math.min(1,s*T.s),h2=T.h,q=l<.5?l*(1+s2):l+s2-l*s2,p=2*l-q,f=t=>{t=(t+1)%1;return t<1/6?p+(q-p)*6*t:t<.5?q:t<2/3?p+(q-p)*(2/3-t)*6:p};
+  return C[k]=[f(h2+1/3),f(h2),f(h2-1/3)].map(v=>Math.round(v*255))},
+thx(html){if(!this.THM[(this.S.pref||{}).theme]||!html)return html;
+  return html.replace(/#([0-9a-fA-F]{6})\b/g,(m,x)=>{const c=this.thConv(parseInt(x.slice(0,2),16),parseInt(x.slice(2,4),16),parseInt(x.slice(4),16));return c?'#'+c.map(v=>v.toString(16).padStart(2,'0')).join('').toUpperCase():m})
+    .replace(/(rgba?\()(\d+),(\s*)(\d+),(\s*)(\d+)/g,(m,a,r,s1,g,s2,b)=>{const c=this.thConv(+r,+g,+b);return c?a+c[0]+','+s1+c[1]+','+s2+c[2]:m})},
+thApply(){const st=[...document.querySelectorAll('style')];if(!this._css0)this._css0=st.map(x=>x.textContent);this._thc={};st.forEach((x,i)=>{if(this._css0[i]!=null)x.textContent=this.thx(this._css0[i])});document.documentElement.dataset.theme=(this.S.pref||{}).theme||''},
+thSet(t){if(t&&!(this.S.rw||{})[this.THM[t].rw])return this.toast('Эта тема ещё не открыта');this.S.pref=this.S.pref||{};this.S.pref.theme=t||'';this.save();this.thApply();this.close();this.render();this.buzz(10);this.toast(t?'Тема «'+this.THM[t].n+'» включена':'Тема «Глубина» включена')},
+/* награды */
+RW:[{id:'d1',d:1,n:'Первый шаг',t:'Первый день дисциплины'},
+  {id:'d7',d:7,n:'Держит слово',t:'Титул под именем',title:'Держит слово'},
+  {id:'d21',d:21,n:'Тема «Циан»',t:'Новое оформление всего приложения',theme:'cyan'},
+  {id:'d30',d:30,n:'Рамка аватара',t:'Светящаяся рамка вокруг фото'},
+  {id:'d66',d:66,n:'Железная воля',t:'Тема «Золото» и титул. За 66 дней привычка становится автоматической',theme:'gold',title:'Железная воля'},
+  {id:'d100',d:100,n:'100 дней дисциплины',t:'Знак сотни в профиле'},
+  {id:'d180',d:180,n:'Тема «Обсидиан»',t:'Строгое стальное оформление',theme:'obs'},
+  {id:'d365',d:365,n:'Легенда',t:'Титул и именной значок с акулой, отправим почтой',title:'Легенда'}],
+RWX:[{id:'phoenix',n:'Феникс',t:'Вернуться после трёх и больше дней перерыва и отметить три дня подряд'},{id:'wind',n:'Второе дыхание',t:'Снова дойти до семи дней подряд после срыва'}],
+rwCalc(){const td=today(),key=(this.S.t||0)+td;if(this._rwk===key)return this._rwv;
+  let d0=(this.S.pref||{}).d0||td;if(d0<add(td,-420))d0=add(td,-420);const act=[];
+  for(let d=d0;d<=td;d=add(d,1)){let ok=this.frozen(d);if(!ok){const a=this.dayAll(d);ok=a.n>0&&a.done>0&&a.p>=.5}act.push(ok)}
+  const n=act.filter(Boolean).length;let phoenix=false,wind=false,gap=0,run=0,runs=0;
+  for(let i=0;i<act.length;i++){if(act[i]){run++;if(run===1)runs++;if(gap>=3&&run>=3)phoenix=true;if(runs>1&&run>=7)wind=true}else{if(run>0)gap=0;gap++;run=0}}
+  return this._rwk=key,this._rwv={n,phoenix,wind}},
+rwCheck(){const R=this.rwCalc(),S=this.S;S.rw=S.rw||{};const fresh=[];
+  this.RW.forEach(r=>{if(R.n>=r.d&&!S.rw[r.id]){S.rw[r.id]=today();fresh.push(r)}});
+  this.RWX.forEach(r=>{if(R[r.id]&&!S.rw[r.id]){S.rw[r.id]=today();fresh.push(r)}});
+  if(fresh.length){this.save();setTimeout(()=>this.rwCelebrate(fresh),500)}},
+rwTitle(){const g=this.S.rw||{},t=this.RW.filter(r=>r.title&&g[r.id]).pop();return t?t.title:''},
+rwFrame(){return !!(this.S.rw||{}).d30&&(this.S.pref||{}).frame!==0},
+rwIco(r,on){const star='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg>';
+  const fin='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 19c3-1 6-4.5 7.5-14 2 4.5 4.5 9 8.5 14z"/></svg>';
+  const fire='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 5.5 5 11a5 5 0 01-10 0c0-2.5 1.2-4 2.2-5 .2 2 1 3 1.8 3.4C11 8.5 10.8 5.5 12 2z"/></svg>';
+  const ic=r.theme?`<i class="rw-sw" style="background:${this.THM[r.theme].c}"></i>`:r.id==='phoenix'?fire:r.id==='wind'?fin:star;
+  return `<span class="rw-ic ${on?'on':''}">${ic}</span>`},
+rwCelebrate(L){const th=[...L].reverse().find(r=>r.theme),top=[...L].reverse().find(r=>r.d)||L[L.length-1];
+  this.open(`<div class="rwc"><div class="rwc-g">${this.rwIco(top,1)}</div><div class="lbl" style="text-align:center">${L.length>1?'Новые награды':'Новая награда'}</div>
+   <div class="rwc-l">${L.map(r=>`<div><b>${r.n}</b><em>${r.t}</em></div>`).join('')}</div>
+   ${th?`<button class="btn pr w" onclick="APP.thSet('${th.theme}')">Включить тему «${this.THM[th.theme].n}»</button>`:''}
+   <button class="btn ${th?'gh':'pr'} w" style="margin-top:8px" onclick="APP.close();APP._ct='rewards';APP.go('profile')">Все награды</button></div>`);this.buzz(30)},
+cabRewards(){const R=this.rwCalc(),g=this.S.rw||{},nx=this.RW.find(r=>!g[r.id]),prev=[...this.RW].reverse().find(r=>g[r.id]),from=prev?prev.d:0,cur=(this.S.pref||{}).theme||'';
+  const pct=nx?Math.min(100,Math.round((R.n-from)/(nx.d-from)*100)):100,title=this.rwTitle();
+  const hero=`<div class="card rwh"><div class="rwh-n"><b>${R.n}</b><span>${this.pl(R.n,'день','дня','дней')} дисциплины</span></div><div class="sp"><em>${title?'Титул':'Титул откроется на 7-й день'}</em><b>${title||'—'}</b></div></div>
+   ${nx?`<div class="card rwn"><div class="rwn-h"><span>Следующая награда</span><b>${nx.n}</b></div><div class="rwn-b"><i style="width:${pct}%"></i></div><div class="rwn-f">ещё ${nx.d-R.n} ${this.pl(nx.d-R.n,'день','дня','дней')}</div></div>`:''}`;
+  const T=[['','Глубина','rgb(155 123 255)',null],...Object.entries(this.THM).map(([k,t])=>[k,t.n,t.c,t.rw])];
+  const themes=`<div class="pg-sh" style="margin:18px 2px 10px"><b>Темы оформления</b></div><div class="rwt">${T.map(([k,n,c,rw])=>{const r=rw&&this.RW.find(x=>x.id===rw),open=!rw||g[rw],on=cur===k;
+     return `<button class="rwt-i ${on?'on':''} ${open?'':'lk'}" onclick="${open?`APP.thSet('${k}')`:`APP.toast('Откроется через ${r.d-R.n>0?r.d-R.n:0} ${this.pl(Math.max(0,r.d-R.n),'день','дня','дней')}')`}"><span class="rwt-s" style="--c:${c}"></span><b>${n}</b><em>${on?'включена':open?'открыта':r.d+' дней'}</em></button>`}).join('')}</div>`;
+  const row=r=>{const got=g[r.id],left=r.d?Math.max(0,r.d-R.n):0;return `<div class="rwl-r ${got?'got':''}">${this.rwIco(r,got)}<div class="sp"><b>${r.n}</b><em>${r.t}</em>${got&&r.id==='d365'?`<a class="rwl-a" href="https://t.me/wikki_shark" target="_blank" rel="noopener">Написать, чтобы получить значок</a>`:''}</div><span class="rwl-s">${got?fd(got):r.d?(left?'через '+left+' дн.':''):'—'}</span></div>`};
+  const ladder=`<div class="pg-sh" style="margin:18px 2px 10px"><b>Путь</b><span>день засчитывается, если сделана хотя бы половина планов</span></div><div class="card rwl">${this.RW.map(row).join('')}</div>`;
+  const ret=`<div class="pg-sh" style="margin:18px 2px 10px"><b>За возвращение</b></div><div class="card rwl">${this.RWX.map(row).join('')}</div>`;
+  const fr=`<div class="pg-sh" style="margin:18px 2px 10px"><b>За друзей</b><span>появятся вместе с приглашениями</span></div><div class="card rwl rwl-off">${[{id:'guide',n:'Проводник',t:'Привести первого друга'},{id:'amb',n:'Амбассадор',t:'Привести десять друзей: ранний доступ и закрытый чат'}].map(row).join('')}</div>`;
+  return hero+themes+ladder+ret+fr+(this.rwFrame()||g.d30?`<button class="btn gh w" style="margin-top:14px" onclick="APP.S.pref.frame=APP.rwFrame()?0:1;APP.save();APP.render()">${this.rwFrame()?'Скрыть рамку аватара':'Показать рамку аватара'}</button>`:'')},
 /* дневник-блокнот */
 jNote(d,v){clearTimeout(this._jnt);const st=$('jrSt');if(st)st.textContent='сохраняю…';this._jnt=setTimeout(()=>{const S=this.S;S.checkin=S.checkin||{};const c=S.checkin[d]=Object.assign({energy:0,sleep:'',win:'',top:'',note:''},S.checkin[d]||{});c.note=v;c.t=Date.now();this.save();const s2=$('jrSt');if(s2)s2.textContent='сохранено'},600)},
 jGrow(el){el.style.height='auto';el.style.height=Math.max(260,el.scrollHeight+4)+'px'},
@@ -1948,7 +2020,7 @@ vJournal(){const jseg=`<div class="pseg">${[['day','День'],['pages','Стр�
     ${hist.length?hist.map(x=>{const e=C[x],t=(e.note||e.win||e.grat||e.block||e.top||'').split('\n')[0];return `<button class="jb-i" onclick="APP._jd='${x}';APP.render();window.scrollTo(0,0)"><em>${fd(x)}, ${WD[pd(x).getDay()]}</em><b>${esc(t.slice(0,90))}</b>${e.win&&e.win!==t?`<span>${I.star}${esc(e.win.slice(0,60))}</span>`:''}</button>`}).join(''):`<div class="small mut" style="padding:8px 4px">${q?'Ничего не нашлось':'Здесь появятся твои прошлые страницы.'}</div>`}</div></div>`;
   setTimeout(()=>{const e=$('jrN');if(e)this.jGrow(e)},0);
   return h},
-cabTabs(){const ct=['dream','ideal'].includes(this._ct)?'vision':(this._ct||'hero');return `<div class="pseg cabt">${[['hero','Герой'],['skills','Навыки'],['vision','Видение']].map(([k,l])=>`<button class="${ct===k?'on':''}" onclick="APP._ct='${k}';APP.render()">${l}</button>`).join('')}</div>`},
+cabTabs(){const ct=['dream','ideal'].includes(this._ct)?'vision':(this._ct||'hero');return `<div class="pseg cabt">${[['hero','Герой'],['rewards','Награды'],['skills','Навыки'],['vision','Видение']].map(([k,l])=>`<button class="${ct===k?'on':''}" onclick="APP._ct='${k}';APP.render()">${l}</button>`).join('')}</div>`},
 cabDream(){const V=this.S.vision||{text:'',items:[]},it=V.items||[];
   return `<div class="card drm-t"><em>Жизнь мечты</em><textarea placeholder="Опиши жизнь, к которой идёшь: где живёшь, чем занимаешься, кто рядом, как проходит день" onchange="APP.S.vision=APP.S.vision||{items:[]};APP.S.vision.text=this.value;APP.save();APP.toast('Сохранено')">${esc(V.text||'')}</textarea></div>
   <div class="drm-g">${it.map(x=>{const src=this.visSrc(x.id);return `<button class="drm-i" onclick="APP.dreamView('${x.id}')">${src?`<img src="${src}" alt="" loading="lazy">`:'<span class="drm-ld"></span>'}${x.cap?`<em>${esc(x.cap)}</em>`:''}</button>`}).join('')}
@@ -1978,7 +2050,7 @@ cabinet(){const S=this.S,P=S.profile||{},D=this.rpgData(),pct=Math.round((D.xp-D
   const head=`<div class="pcab ocean"><div class="pcab-in">
     <button class="pcab-ed" onclick="APP.editProfile()">${I.ed}<span>Редактировать</span></button><button class="pcab-ed pcab-sh" onclick="APP.shareStudio('hero')">${SI.share}<span>В сторис</span></button>
     <div class="pcab-av" style="--p:${pct}"><span>${this.avaHtml()}</span><em>${D.lvl}</em></div>
-    <div class="pcab-n">${esc(nm)}</div>${P.motto?`<div class="pcab-m">«${esc(P.motto)}»</div>`:''}
+    <div class="pcab-n">${esc(nm)}</div>${this.rwTitle()?`<div class="pcab-t">${this.rwTitle()}</div>`:''}${P.motto?`<div class="pcab-m">«${esc(P.motto)}»</div>`:''}
     <div class="pcab-ch"><span>Уровень ${D.lvl}</span><span class="${this.paid()?'gold':''}">${this.paid()?'Полный доступ':'Бесплатный тариф'}</span><span>${days} ${this.pl(days,'день','дня','дней')} с wikki.app</span></div></div></div>`;
   const goal=P.goalY?`<div class="card pcg"><em>Главная цель года</em><b>${esc(P.goalY)}</b></div>`:`<button class="card pcg pcg0" onclick="APP.editProfile()"><em>Главная цель года</em><b>Запиши, что должно случиться к концу года</b>${I.plus}</button>`;
   const k=(v,l)=>`<div><b>${v}</b><span>${l}</span></div>`;
@@ -1988,7 +2060,7 @@ cabinet(){const S=this.S,P=S.profile||{},D=this.rpgData(),pct=Math.round((D.xp-D
     <div class="pcx-q">${D.left>0?`Задание дня: осталось ${D.left} ${this.pl(D.left,'дело','дела','дел')} · до +${D.left*12} XP`:'Задание дня выполнено. Возвращайся завтра'}</div></div></div>`;
   const rest=this.rpg().replace(/<div class="card rph">[\s\S]*?(?=<div class="card rpk">)/,'');
   const links=`<div class="card ngrp pcl">${[['crown','#F5B84B','Полный доступ',this.paid()?'активен':'',"APP.go('me');APP._sset='premium';APP.render()"],['user','#22D3E0','Аккаунт и данные','',"APP.go('me')"],['share','#9B7BFF','Поделиться приложением','',"APP.shareApp()"]].map(([ic,c,l,v,a])=>`<button class="nrow" onclick="${a}"><span class="ni" style="color:${c}">${SI[ic]}</span><span class="sp">${l}</span>${v?`<span class="nval">${v}</span>`:''}${I.r}</button>`).join('')}</div>`;
-  const ct=this._ct||'hero';return head+this.cabTabs()+(ct==='skills'?this.cabSkills():['vision','dream','ideal'].includes(ct)?this.cabVision():goal+stats+hero+rest+links)},
+  const ct=this._ct||'hero';return head+this.cabTabs()+(ct==='rewards'?this.cabRewards():ct==='skills'?this.cabSkills():['vision','dream','ideal'].includes(ct)?this.cabVision():goal+stats+hero+rest+links)},
 dzRings(){const td=today(),a=this.dayAll(td),dP=a.n?a.p:0,wk=this.wkStat(this.monday(td)).pct,ms=td.slice(0,8)+'01';let s2=0,n2=0;for(let d=ms;d<=td;d=add(d,1)){const x=this.dayAll(d);if(x.n){s2+=x.p;n2++}}const mP=n2?s2/n2:0,wP=(wk||0)/100;
   const ring=(r,p,c)=>{const C=2*Math.PI*r;return `<circle cx="70" cy="70" r="${r}" fill="none" stroke="${c}" stroke-opacity=".16" stroke-width="11"/><circle cx="70" cy="70" r="${r}" fill="none" stroke="${c}" stroke-width="11" stroke-linecap="round" stroke-dasharray="${(C*Math.min(1,p)).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 70 70)" style="filter:drop-shadow(0 0 4px ${c})"/>`};
   return `<div class="card dz-c dz-rg"><div class="dz-ch"><span class="dz-ti">Кольца активности</span></div><div class="rg-w"><svg viewBox="0 0 140 140">${ring(58,dP,'#9B7BFF')}${ring(44,wP,'#5EE0EE')}${ring(30,mP,'#F5B84B')}</svg><div class="rg-l"><div><i style="background:#9B7BFF"></i><span>Сегодня</span><b>${Math.round(dP*100)}%</b></div><div><i style="background:#5EE0EE"></i><span>Неделя</span><b>${wk??0}%</b></div><div><i style="background:#F5B84B"></i><span>Месяц</span><b>${Math.round(mP*100)}%</b></div></div></div></div>`},
@@ -2393,7 +2465,7 @@ dash(html){const p=html.split('__S1__');if(p.length<2)return html;const head=p[0
   return `<div class="dhead">${head}</div><div class="dash"><div class="dtop">${top}</div><div class="dmain">${r2[0]}</div><div class="dbot">${r2[1]||''}</div></div>`},
 simple(){return !!((this.S.pref||{}).simple)},
 setSimple(v){this.S.pref=this.S.pref||{};this.S.pref.simple=!!v;this.save();if(v&&(this.tab==='habits'||this.tab==='goals'))this.tab='home';this.render()},
-render(){
+render(){const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_th){this._tha=_th;this.thApply()}
   AREAS=this.areaList();
   this._tix=Object.fromEntries(this.S.tactics.map(t=>[t.id,t]));
   let body;
@@ -2413,7 +2485,7 @@ render(){
   else if(this.sub==='deals')body=this.vDeals();
   else if(['program','progress'].includes(this.normTab(this.tab))&&!this.paid()){this.tab=this.normTab(this.tab);body=this.vPaywall(this.tab)}
   else{this.tab=this.normTab(this.tab);body={profile:this.vProfile,home:this.vHome,plans:this.vPlans,more:this.vMore,program:this.vProgram,progress:this.vProgress,tracker:this.vTracker,journal:this.vJournal,me:this.vMe}[this.tab].call(this)}
-  $('app').innerHTML=this.top()+this.dash(body);this.tr($('app'));
+  $('app').innerHTML=this.thx(this.top()+this.dash(body));this.tr($('app'));
   const simple=this.simple();
   const tabs=simple?[['home','Сегодня',I.dash],['plans','Планы',I.plan],['tracker','Привычки',I.habit],['me','Настройки',I.gear]]:[['home','Сегодня',I.dash],['plans','Планы',I.plan],['program','Программа',I.goal],['progress','Прогресс',I.chart],['tracker','Привычки',I.habit],['journal','Дневник',I.diary],['me','Настройки',I.gear]];
   const mtabs=simple?tabs:[['home','Сегодня',I.dash],['plans','Планы',I.plan],['tracker','Привычки',I.habit],['journal','Дневник',I.diary],['more','Ещё',I.more]],inMore=['more','program','progress','profile','me'].includes(this.tab);
@@ -2430,7 +2502,7 @@ render(){
 },
 initial(){const n=(this.S.profile.name||(this.user&&this.user.email)||'').trim();return n?n[0].toUpperCase():'·'},
 top(){return `<div class="top"><span></span>
-  <button class="ava" onclick="APP.go('profile')" aria-label="Профиль">${(this.S.profile||{}).photo?`<img src="${this.S.profile.photo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:this.initial()==='·'?`<span class="ava-s">${this.avaHtml()}</span>`:esc(this.initial())}</button></div>`},
+  <button class="ava ${this.rwFrame()?'afr':''}" onclick="APP.go('profile')" aria-label="Профиль">${(this.S.profile||{}).photo?`<img src="${this.S.profile.photo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:this.initial()==='·'?`<span class="ava-s">${this.avaHtml()}</span>`:esc(this.initial())}</button></div>`},
 pl(n,a,b,c){n=Math.abs(n)%100;const m=n%10;if(n>10&&n<20)return c;if(m>1&&m<5)return b;if(m===1)return a;return c},
 dleft(d){const n=diff(today(),d);return n<0?`просрочено на ${-n} дн.`:n===0?'сегодня':`через ${n} дн.`},
 miniRing(v,size,col){const r=15,C=2*Math.PI*r,p=v==null?0:v/100,c=col||(v!=null&&v>=85?'#5EE0EE':'#9B6FE8');
@@ -3040,7 +3112,7 @@ normTab(t){if(t==='habits'){const p=this._pv;if(p==='balance'||p==='year'){this.
 stripV(h){return h.replace(/<div class="lbl">[^<]*<\/div><div class="h1">[\s\S]*?<\/div>/,'').replace(/<div class="h1">[\s\S]*?<\/div>/,'').replace(/__S\d__/g,'')},
 catOf(o,k){const CAT={dumb:'str',steps:'str',swim:'str',food:'str',tree:'str',snow:'str',drop:'str',book:'int',chat:'int',list:'int',pen:'int',lotus:'spi',moon:'spi',sun:'spi',heart:'spi',ban:'spi',phone:'spi',brief:'biz',video:'biz',target:'biz',star:'biz'};const AC={health:'str',career:'biz',money:'biz',spirit:'spi',rel:'spi',love:'spi',home:'spi',travel:'str',fun:'spi',comm:'biz'};
   if(k==='t'){const g=this.goal(o.goal);if(g&&g.area&&AC[g.area])return AC[g.area]}const ic=o.ic||icoGuess(o.title)||(k==='t'?'target':'star');return CAT[ic]||'biz'},
-vHome(){const S=this.S,td=today(),P=S.profile||{};
+vHome(){if(!this._rwt||Date.now()-this._rwt>60000){this._rwt=Date.now();this.rwCheck()}const S=this.S,td=today(),P=S.profile||{};
   if(S.goals.length&&td>this.end()&&!this._skipFinal)return this.vFinal();
   const ok=d=>{if(this.frozen(d))return true;const a=this.dayAll(d);return a.n>0&&a.p>=.8};
   const cur=this.dayStreak();let best=0,run=0;for(let i=400;i>=0;i--){const d=add(td,-i);if(ok(d)){run++;best=Math.max(best,run)}else if(d<td)run=0}best=Math.max(best,cur);
@@ -3202,7 +3274,7 @@ setMetric(gid,mid,v){const m=this.goal(gid).metrics.find(x=>x.id===mid);m.cur=+S
 moveGoal(i){const g=this.S.goals;[g[i-1],g[i]]=[g[i],g[i-1]];this.save();this.render()},
 tDesc(t){if(t.dfrom&&t.dto)return `каждый день, ${fd(t.dfrom)} — ${fd(t.dto)}`;let x={check:`${t.target} дн. из 7`,num:`${t.per} ${t.unit||''} в день, ${t.days} дн./нед.`,count:`${t.target} раз в неделю`,ms:`веха до ${t.deadline?fd(t.deadline):'—'}`}[t.type];
   if(t.total)x+=` · итог ${t.total}`;if(t.tod)x+=' · '+this.TOD[t.tod].toLowerCase();if(t.mins)x+=` · таймер ${t.mins} мин`;if((+t.from||1)>1||+t.to)x+=` · недели ${t.from||1}–${t.to||this.W}`;if(t.active===false)x+=' · на паузе';return x},
-open(html){$('sheet').innerHTML=html;this.tr($('sheet'));$('modal').classList.add('on')},
+open(html){$('sheet').innerHTML=this.thx(html);this.tr($('sheet'));$('modal').classList.add('on')},
 close(){$('modal').classList.remove('on');this._hcal=0},
 gDone(g){if(g.done)return true;const ms=g.metrics||[];if(!ms.length)return false;return ms.every(m=>{const v=this.metricVal(m),s=+m.start||0,t=+m.target||0;return t>s?v>=t:t<s?v<=t:v===t})},
 gProg(g){const ms=g.metrics||[];if(g.done)return 1;if(ms.length){const ps=ms.map(m=>{const v=this.metricVal(m),s=+m.start||0,t=+m.target||0;return t===s?(v===t?1:0):Math.max(0,Math.min((v-s)/(t-s),1))});return ps.reduce((a,b)=>a+b,0)/ps.length}const a=this.avg(g.id);return a==null?0:a/100},
@@ -3768,6 +3840,7 @@ merge(a,b){
   m.wheel={};for(const src of [old.wheel||{},nw.wheel||{}])for(const mo in src){const x=src[mo],y=m.wheel[mo];if(!y||(x.t||0)>=(y.t||0))m.wheel[mo]=x}
   const dm=new Map();[...(a.deals||[]),...(b.deals||[])].forEach(d=>{if(m.del.includes(d.id))return;const p=dm.get(d.id);if(!p||(d.upd||0)>(p.upd||0))dm.set(d.id,d)});
   m.deals=[...dm.values()];
+  m.rw=Object.assign({},a.rw||{},b.rw||{});
   const pm=new Map();[...(a.pages||[]),...(b.pages||[])].forEach(x=>{if(m.del.includes(x.id))return;const q=pm.get(x.id);if(!q||(x.upd||0)>(q.upd||0))pm.set(x.id,x)});m.pages=[...pm.values()];
   m.fv={};for(const src of [old.fv||{},nw.fv||{}])for(const d in src)m.fv[d]=Object.assign({},m.fv[d]||{},src[d]);
   return m;
