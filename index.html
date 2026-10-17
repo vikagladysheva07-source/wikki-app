@@ -1477,7 +1477,7 @@ S:null,tab:'home',sub:null,day:today(),wk:null,
 sb:null,user:null,cloud:'off',
 
 fresh(){return {v:2,profile:{name:''},sprint:{title:'12 недель',start:nextMonday(),weeks:12,threshold:85,vision:'',partner:''},goals:[],tactics:[],habits:[],log:{},hlog:{},lt:{},weeks:{},deals:[],del:[],archive:[],skip:{},checkin:{},pref:{group:'tod'},tasks:[],t:0}},
-norm(s){const f=this.fresh();for(const k in f)if(s[k]==null)s[k]=f[k];const HL=s.hlog||{};(s.habits||[]).forEach(h=>{for(const d in HL){const v=HL[d]&&HL[d][h.id];if(v&&(!h.created||d<h.created))h.created=d}});const AM={travel:'fun',comm:'rel'};(s.goals||[]).forEach(g=>{if(AM[g.area])g.area=AM[g.area]});(s.archive||[]).forEach(x=>(x.goals||[]).forEach(g=>{if(AM[g.area])g.area=AM[g.area]}));return s},
+norm(s){const f=this.fresh();for(const k in f)if(s[k]==null)s[k]=f[k];if(!s.pref.d0){const ds=[...Object.keys(s.hlog||{}),...Object.keys(s.log||{}),...Object.keys(s.checkin||{}),...(s.habits||[]).map(h=>h.created).filter(Boolean),...(s.tasks||[]).map(x=>x.date).filter(Boolean)].filter(d=>/^\d{4}-\d\d-\d\d$/.test(d)).sort();s.pref.d0=ds[0]&&ds[0]<today()?ds[0]:today()}const HL=s.hlog||{};(s.habits||[]).forEach(h=>{for(const d in HL){const v=HL[d]&&HL[d][h.id];if(v&&(!h.created||d<h.created))h.created=d}});const AM={travel:'fun',comm:'rel'};(s.goals||[]).forEach(g=>{if(AM[g.area])g.area=AM[g.area]});(s.archive||[]).forEach(x=>(x.goals||[]).forEach(g=>{if(AM[g.area])g.area=AM[g.area]}));return s},
 load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.sprint)return this.norm(s)}catch(e){}return this.fresh()},
 save(){this._tix=Object.fromEntries(this.S.tactics.map(t=>[t.id,t]));this.S.t=Date.now();this.trackMarks();try{localStorage.setItem(KEY,JSON.stringify(this.S))}catch(e){}
   if(this.user){clearTimeout(this._pt);this._pt=setTimeout(()=>this.push(),1200)}},
@@ -2047,7 +2047,7 @@ mitText(){return (((this.S.checkin||{})[add(today(),-1)])||{}).top||''},
 mitDone(){return !!(((this.S.checkin||{})[today()])||{}).mitDone},
 mitSet(){this.ask('Главное дело сегодня',this.mitText(),v=>this.jSet(add(today(),-1),'top',(v||'').trim(),true))},
 mitTog(){const on=!this.mitDone();this.jSet(today(),'mitDone',on,true);if(on){this.burst(null,true);this.buzz([20,40,20])}},
-mitH(){const mt=this.mitText(),md=this.mitDone();
+mitH(){const mt=this.mitText(),md=this.mitDone();const PF=this.S.pref=this.S.pref||{};if(!PF.d0)PF.d0=today();const d0=PF.d0;if(!mt&&(pd(today())-pd(d0))/864e5<3)return '';
   return mt?`<div class="card mit ${md?'done':''}"><button class="mit-c" onclick="APP.mitTog()" aria-label="Готово">${md?I.ok:''}</button><div class="sp" onclick="APP.mitSet()"><em>Главное сегодня</em><b>${esc(mt)}</b></div></div>`
     :`<button class="card mit mit0" onclick="APP.mitSet()"><span class="mit-c"></span><span class="sp"><em>Главное сегодня</em><b>Назови одно дело, после которого день точно удался</b></span>${I.plus}</button>`},
 /* подсказка дня */
