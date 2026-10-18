@@ -1362,6 +1362,9 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 @media(max-width:380px){.chg{grid-template-columns:minmax(0,1fr)}.chc{flex-direction:row;align-items:center}.chc-h{flex-direction:row;align-items:center;flex:1}.chc em{display:none}.chc-b{width:60px}.dpn-r{display:none}}
 .pcl2{padding:16px!important;margin:0 0 12px!important}.pcl2-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.pcl2-h b{font-size:16px}.pcl2-h span{font-size:12.5px;color:var(--dim)}.pcl2 .rpbar{margin:10px 0 12px}
 .pcl2-q{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--mut);padding-top:12px;border-top:1px solid var(--line)}.pcl2-q span{width:30px;height:30px;flex:none;border-radius:10px;display:grid;place-items:center;background:rgba(155,123,255,.14);color:#C9B8FF}.pcl2-q span svg{width:15px;height:15px}
+.skc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.skc button{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 4px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--mut);font-size:12px}.skc button svg{width:18px;height:18px}.skc button.on{background:rgba(155,123,255,.2);border-color:rgba(155,123,255,.6);color:#fff}
+.skwk{padding:14px!important;margin:0 0 12px!important;border-color:rgba(245,184,75,.35)!important}.skwk-h{display:flex;align-items:center;gap:12px}.skwk-h>span{width:38px;height:38px;flex:none;border-radius:12px;display:grid;place-items:center;background:rgba(245,184,75,.14);color:#F5C66B}.skwk-h>span svg{width:18px;height:18px}.skwk-h b{display:block;font-size:14.5px}.skwk-h em{display:block;font-style:normal;font-size:12px;color:var(--dim);margin-top:1px}
+.skwk-b{display:flex;flex-direction:column;gap:6px;margin-top:12px}.skwk-b button{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;background:rgba(155,123,255,.1);border:1px solid rgba(155,123,255,.28);color:var(--tx);font-size:13.5px;text-align:left}.skwk-b svg{width:14px;height:14px;color:#C9B8FF;flex:none}.skwk .pill{margin-top:12px}
 </style>
 </head>
 <body>
@@ -1610,7 +1613,7 @@ weekStrip(){const td=today(),cur=this.day||td,m0=this.monday(cur),days=[0,1,2,3,
   return `<div class="wst"><button class="wst-n" onclick="APP.day=add(APP.day,-7);APP.render()" aria-label="Прошлая неделя">${I.l}</button>${days.map(d=>{const a=this.dayAll(d),p=a.n?a.p:0,kt=(this.S.tasks||[]).filter(x=>x.date===d&&!x.done).length;return `<button class="wst-d ${d===cur?'on':''} ${d===td?'td':''}" onclick="APP.day='${d}';APP.render()"><em>${WD[pd(d).getDay()]}</em><b>${pd(d).getDate()}</b><span class="wst-p"><i style="width:${d>td?0:Math.round(p*100)}%"></i></span>${kt?`<s>${kt}</s>`:''}</button>`}).join('')}<button class="wst-n" onclick="APP.day=add(APP.day,7);APP.render()" aria-label="Следующая неделя">${I.r}</button></div>`},
 /* личный кабинет */
 /* игровой кабинет: навыки, мечта, идеал */
-SKD:[['str','Сила','dumb','Тело и энергия','спорт, сон, вода, питание'],['int','Интеллект','book','Знания и навыки','чтение, обучение, языки, письмо'],['spi','Дух','lotus','Спокойствие и баланс','медитация, отдых, близкие, без телефона'],['biz','Дело','brief','Работа и деньги','тактики программы, задачи, контент'],['dis','Дисциплина','target','Закрытые дни','каждый день на 80%+ даёт +3 очка']],
+SKD:[['str','Сила','dumb','Тело и энергия','спорт, сон, вода, питание'],['int','Интеллект','book','Знания и навыки','чтение, обучение, языки, письмо'],['spi','Дух','lotus','Спокойствие и баланс','медитация, отдых, близкие, без телефона'],['biz','Дело','brief','Работа и деньги','задачи из Планов, работа, контент, деньги'],['dis','Дисциплина','target','Закрытые дни','каждый день на 80%+ даёт +3 очка']],
 PERK:{str:['Первый шаг','Утренний заряд','Выносливость','Атлет','Титан'],int:['Любопытство','Книжный червь','Острый ум','Эрудит','Мудрец'],spi:['Тишина','Ясность','Баланс','Внутренний стержень','Дзен'],biz:['Деловая хватка','Фокус на результат','Стратег','Предприниматель','Империя'],dis:['Слово держу','Режим','Самоконтроль','Несгибаемость','Легенда дисциплины']},
 PLV:[5,10,15,20,25],
 skillsData(){const D=this.rpgData(),pts=D.pts||{};return this.SKD.map(([k,n,ic,sub,how])=>{const L=(D.st.find(x=>x[0]===k)||[0,0,1])[2],p=pts[k]||0,p0=(L-1)**2/2,p1=L**2/2,fr=p1>p0?Math.max(0,Math.min(1,(p-p0)/(p1-p0))):0;return {k,n,ic,sub,how,L,p,fr,left:Math.max(1,Math.ceil(p1-p))}})},
@@ -1692,10 +1695,10 @@ cabSkills(){const SK=this.skillsData(),D=this.rpgData(),w7=D.pts7||{},sel=this._
   const detail=`<div class="card skd" style="--c:${COL[cur.k]}"><div class="skd-h"><span class="skd-i">${hIco(cur.ic)}</span><div class="sp"><b>${cur.n}</b><em>${cur.sub}</em></div><div class="skd-l"><b>${cur.L}</b><span>уровень</span></div></div>
     <div class="skd-bar"><i style="width:${Math.round(cur.fr*100)}%"></i></div><div class="skd-r"><span>до уровня ${cur.L+1}: ${cur.left} ${this.pl(cur.left,'отметка','отметки','отметок')}</span><b>${w7[cur.k]?'+'+w7[cur.k]+' за неделю':'за неделю пока 0'}</b></div>
     <div class="skd-how">Прокачивают: ${cur.how}</div>
-    <div class="skd-p">${this.PERK[cur.k].map((p,i)=>{const on=cur.L>=this.PLV[i];return `<div class="${on?'on':''}"><span>${on?I.star:'<i class="lk"></i>'}</span><b>${p}</b><em>${on?'открыто':'уровень '+this.PLV[i]}</em></div>`}).join('')}</div>
+    <div class="skd-p">${this.PERK[cur.k].map((p,i)=>{const on=cur.L>=this.PLV[i];return `<div class="${on?'on':''}"><span>${on?I.star:'<i class="lk"></i>'}</span><b>${p}</b><em>${on?'открыто':'уровень '+this.PLV[i]} · ${cur.k==='dis'?'+1 заморозка в месяц':'+10% опыта'}</em></div>`}).join('')}</div>
     ${nextP?`<div class="skd-n">Следующий перк «${this.PERK[cur.k][this.PLV.indexOf(nextP)]}» через ${nextP-cur.L} ${this.pl(nextP-cur.L,'уровень','уровня','уровней')}</div>`:`<div class="skd-n">Все перки навыка открыты</div>`}</div>`;
   const week=`<div class="card skw"><div class="pg-sh"><b>Прокачка за неделю</b><span>очки навыков</span></div>${SK.map(s=>{const v=w7[s.k]||0,mx=Math.max(1,...SK.map(x=>w7[x.k]||0));return `<div class="skw-r"><span style="color:${COL[s.k]}">${hIco(s.ic)}</span><em>${s.n}</em><div class="skw-b"><i style="width:${v/mx*100}%;background:${COL[s.k]}"></i></div><b>+${v}</b></div>`}).join('')}</div>`;
-  return `<div class="card sktree"><div class="sktw"><svg viewBox="-34 -28 408 400">${g}</svg>${labels}</div><div class="skhint">Нажми на характеристику, чтобы увидеть, что её качает</div></div>${detail}`},
+  return `<div class="card sktree"><div class="sktw"><svg viewBox="-34 -28 408 400">${g}</svg>${labels}</div><div class="skhint">Нажми на характеристику, чтобы увидеть, что её качает</div></div>${this.skWeak()}${detail}`},
 /* свои поля дня */
 FPRE:[['Шаги','num','шагов'],['Вода','num','л'],['Вес','num','кг'],['Тренировка','check'],['Чтение','num','стр'],['Расходы','num','₽'],['Стресс','scale'],['Без сахара','check']],
 fList(){return this.S.fields=this.S.fields||[]},
@@ -2072,6 +2075,19 @@ cabRewards(){this.chCheck();const R=this.rwCalc(),g=this.S.rw||{},m=R.n*this.M_D
   const col=`<div class="pg-sh" style="margin:20px 2px 10px"><b>Особые медали</b><span>за возвращение и испытания</span></div>${grid([...this.RWX,...this.RWC])}
    <div class="pg-sh" style="margin:20px 2px 10px"><b>За друзей</b><span>появятся вместе с приглашениями</span></div>${grid(this.RWF)}`;
   return hero+ch+mapH+col+(g.d30?`<button class="btn gh w" style="margin-top:16px" onclick="APP.S.pref.frame=APP.rwFrame()?0:1;APP.save();APP.render()">${this.rwFrame()?'Скрыть рамку аватара':'Показать рамку аватара'}</button>`:'')},
+/* характеристики: явный выбор, угадывание по названию, перки с пользой */
+SKO:[['str','Сила','dumb'],['int','Интеллект','book'],['spi','Дух','lotus'],['biz','Дело','brief']],
+skGuess(t){t=(t||'').toLowerCase();
+  if(/чит|чтен|книг|стр\.|страниц|учи|изуч|курс|язык|англ|урок|лекц|писат|пишу|текст|подкаст|обучен|знани|программир|код/.test(t))return 'int';
+  if(/медит|дыхан|благодар|дневник|молит|тишин|прогул|природ|семь|мам|пап|родн|друз|близк|отдых|соцсет|телефон|экран|алког|курени|сигар|настроен|любов|партн|йог/.test(t))return 'spi';
+  if(/спорт|трен|бег|зал|заряд|растяж|шаг|ходьб|плав|велос|вод|пить|сон|спать|подъ[её]м|отбой|еда|питан|сахар|овощ|фрукт|витамин|душ|холод|здоров|вес|калор|белок|кардио|пресс|отжим|присед/.test(t))return 'str';
+  if(/работ|проект|клиент|продаж|контент|пост|рилс|видео|деньг|финанс|бюджет|бизнес|звон|встреч|задач|план|отчёт|отчет/.test(t))return 'biz';
+  return ''},
+rpgMemo(){const k=(this.S.t||0)+today();if(this._rpk!==k){this._rpk=k;this._rpv=this.rpgData()}return this._rpv},
+perksOf(k){const D=this.rpgMemo(),L=(D.st.find(x=>x[0]===k)||[0,0,1])[2];return this.PLV.filter(l=>L>=l).length},
+skWeak(){const SK=this.skillsData().filter(x=>x.k!=='dis'),w=SK.slice().sort((a,b)=>a.L-b.L||a.p-b.p)[0],best=Math.max(...SK.map(x=>x.L));if(!w||best-w.L<3)return '';
+  const have=new Set(this.S.habits.map(h=>h.title)),sug=HABIT_LIB.map((x,i)=>[x,i]).filter(([x])=>!have.has(x[0])&&this.skGuess(x[0])===w.k).slice(0,2);
+  return `<div class="card skwk"><div class="skwk-h"><span>${hIco(w.ic)}</span><div class="sp"><b>${w.n} отстаёт</b><em>уровень ${w.L}, остальные выше. Прокачай баланс</em></div></div>${sug.length?`<div class="skwk-b">${sug.map(([x,i])=>`<button onclick="APP.addLib(${i})">${I.plus}<span>${esc(x[0])}</span></button>`).join('')}</div>`:`<button class="pill" onclick="APP.editH()">${I.plus} Привычка для ${w.n.toLowerCase()==='дух'?'духа':w.n.toLowerCase()==='сила'?'силы':w.n.toLowerCase()==='дело'?'дела':'интеллекта'}</button>`}</div>`},
 /* дневник-блокнот */
 jNote(d,v){clearTimeout(this._jnt);const st=$('jrSt');if(st)st.textContent='сохраняю…';this._jnt=setTimeout(()=>{const S=this.S;S.checkin=S.checkin||{};const c=S.checkin[d]=Object.assign({energy:0,sleep:'',win:'',top:'',note:''},S.checkin[d]||{});c.note=v;c.t=Date.now();this.save();const s2=$('jrSt');if(s2)s2.textContent='сохранено'},600)},
 jGrow(el){el.style.height='auto';el.style.height=Math.max(260,el.scrollHeight+4)+'px'},
@@ -2677,7 +2693,7 @@ dayMenu(){const d=this.day,fz=this.frozen(d);
    <button onclick="APP.close();APP.ciOpen('${d}')">${I.ed}<span>Чек-ин за этот день</span></button>
    <button onclick="APP.close();APP.setGroup(((APP.S.pref||{}).group||'tod')==='tod'?'goal':'tod')">${I.goal}<span>${((this.S.pref||{}).group||'tod')==='tod'?'Группировать по целям':'Группировать по времени суток'}</span></button>
    <button onclick="APP.close();APP.day=today();APP.render()">${I.week}<span>К сегодняшнему дню</span></button></div>`)},
-frzLimit(){const p=this.S.pref||{};return p.freezes==null?2:+p.freezes},
+frzLimit(){const p=this.S.pref||{};return (p.freezes==null?2:+p.freezes)+this.perksOf('dis')},
 frzUsed(d){const m=d.slice(0,7),K=this.S.skip||{};return Object.keys(K).filter(x=>x.slice(0,7)===m&&K[x].__all).length},
 frzLeft(d){return Math.max(0,this.frzLimit()-this.frzUsed(d))},
 freeze(d,on){this.snap();if(on&&this.mode==='strict')return this.toast('В строгой программе заморозок нет: пропуск — день 1 заново');if(on&&this.frzLeft(d)<=0)return this.toast(`Заморозки на ${MONF[pd(d).getMonth()].toLowerCase()} закончились: ${this.frzLimit()} из ${this.frzLimit()}`);
@@ -3132,13 +3148,13 @@ qaBox(k,act,ph){if(this._qa!==k)return `<button class="qadd" onclick="APP.qaOpen
 qaOpen(k){this._qa=k;this.render();setTimeout(()=>{const e=[...document.querySelectorAll('.qain')].find(x=>x.offsetParent);if(e)e.focus()},30)},
 rpgData(){const S=this.S,td=today();const CAT={dumb:'str',steps:'str',swim:'str',food:'str',tree:'str',snow:'str',drop:'str',book:'int',chat:'int',list:'int',pen:'int',lotus:'spi',moon:'spi',sun:'spi',heart:'spi',ban:'spi',phone:'spi',brief:'biz',video:'biz',target:'biz',star:'biz'};
   const AC={health:'str',career:'biz',money:'biz',spirit:'spi',rel:'spi',love:'spi',home:'spi',travel:'str',fun:'spi',comm:'biz'};
-  const cat=(o,k)=>{if(k==='t'){const g=this.goal(o.goal);if(g&&g.area&&AC[g.area])return AC[g.area]}const ic=o.ic||icoGuess(o.title)||(k==='t'?'target':'star');return CAT[ic]||'biz'};
+  const cat=(o,k)=>{if(k==='h'){if(o.sk)return o.sk;const gs=this.skGuess(o.title);if(gs)return gs}if(k==='t'){const g=this.goal(o.goal);if(g&&g.area&&AC[g.area])return AC[g.area]}const ic=o.ic||icoGuess(o.title)||(k==='t'?'target':'star');return CAT[ic]||'biz'};
   const keys=[...Object.keys(S.hlog||{}),...Object.keys(S.log||{})].filter(d=>/^\d{4}-\d\d-\d\d$/.test(d)).sort();let d=keys[0]||td;if(d<add(td,-400))d=add(td,-400);
   const pts={str:0,int:0,spi:0,biz:0,dis:0},pts7={str:0,int:0,spi:0,biz:0,dis:0},d7=add(td,-6);let xp=0,marks=0,closed=0;const wk={};const hs=S.habits.filter(x=>!x.archived),ts=S.tactics;
   for(;d<=td;d=add(d,1)){let dx=0;
-    hs.forEach(x=>{if(this.hOn(x,d)){dx+=10;marks++;const k=cat(x,'h');pts[k]++;if(d>=d7)pts7[k]++}});
-    ts.forEach(t=>{if(this.v(t,d)>0){dx+=15;marks++;const k=cat(t,'t');pts[k]++;if(d>=d7)pts7[k]++}});
-    (S.tasks||[]).forEach(x=>{if(x.done===d){dx+=5;marks++}});
+    const pb=k=>1+.1*this.PLV.filter(l=>Math.floor(Math.sqrt(pts[k]*2))+1>=l).length;hs.forEach(x=>{if(this.hOn(x,d)){const k=cat(x,'h');dx+=Math.round(10*pb(k));marks++;pts[k]++;if(d>=d7)pts7[k]++}});
+    ts.forEach(t=>{if(this.v(t,d)>0){const k=cat(t,'t');dx+=Math.round(15*pb(k));marks++;pts[k]++;if(d>=d7)pts7[k]++}});
+    (S.tasks||[]).forEach(x=>{if(x.done===d){dx+=5;marks++;pts.biz++;if(d>=d7)pts7.biz++}});
     const a=this.dayAll(d);if(a.n&&a.p>=.8){dx+=40;closed++;pts.dis+=3;if(d>=d7)pts7.dis+=3}
     xp+=dx;const m=this.monday(d);wk[m]=(wk[m]||0)+dx}
   const lvl=Math.floor(Math.sqrt(xp/100))+1,cur=100*(lvl-1)**2,nxt=100*lvl**2;
@@ -3283,12 +3299,12 @@ hForm(){const x=this._h,order=(this.S.pref||{}).wk0==='sun'?[0,1,2,3,4,5,6]:[1,2
   <div class="f"><label class="lbl">Формат</label><div class="seg">${Object.keys(HKIND).map(k=>`<button class="${(x.kind||'check')===k?'on':''}" onclick="APP.hKeep();APP._h.kind='${k}';APP.hForm()">${HKIND[k]}</button>`).join('')}</div></div>
   ${(x.kind==='num'||x.kind==='time')?`<div class="f2"><div class="f"><label class="lbl">Цель в день</label><input id="hG" inputmode="decimal" value="${x.target||''}" placeholder="${x.kind==='time'?'20':'2'}"></div><div class="f"><label class="lbl">${x.kind==='time'?'Шаг, мин':'Единица'}</label>${x.kind==='time'?`<input id="hS" inputmode="numeric" value="${x.step||5}">`:`<input id="hU" value="${esc(x.unit)}" placeholder="л, км, стр.">`}</div></div>`:''}
   ${x.kind==='scale'?`<div class="small dim">Оценка от 1 до 5: настроение, энергия, боль, качество сна. Считается выполненной при любой оценке.</div>`:''}
-  <div class="f"><label class="lbl">Сфера жизни</label><select id="hA"><option value="">не выбрана</option>${AREAS.map(a=>`<option value="${a[0]}" ${x.area===a[0]?'selected':''}>${a[1]}</option>`).join('')}</select></div>
+  <div class="f"><label class="lbl">Прокачивает</label><div class="skc">${APP.SKO.map(([k,n,ic])=>`<button class="${(x.sk||APP.skGuess(x.title)||'biz')===k?'on':''}" onclick="APP.hKeep();APP._h.sk='${k}';APP._h._skm=1;APP.hForm()">${hIco(ic)}<span>${n}</span></button>`).join('')}</div></div>
   <div class="f"><label class="lbl">Привязка: после чего делаю</label><input id="hW" value="${esc(x.when)}" placeholder="После утреннего кофе"></div>
   <div class="small dim">Привязка к тому, что уже делаешь каждый день, — самый надёжный способ закрепить привычку (Джеймс Клир).</div>
   <div class="row" style="margin-top:18px"><button class="btn pr sp" onclick="APP.hSave()">Сохранить</button>${this._hNew?'':`<button class="btn del" onclick="APP.hDel()">Удалить</button>`}</div>`)},
 hKeep(){if($('hT')){this._h.title=$('hT').value;if($('hA'))this._h.area=$('hA').value;this._h.when=$('hW').value;if($('hG'))this._h.target=+String($('hG').value).replace(',','.')||0;if($('hU'))this._h.unit=$('hU').value.trim();if($('hS'))this._h.step=+$('hS').value||5;if(this._h.kind==='time'){this._h.unit='мин';if(!this._h.step||this._h.step===1)this._h.step=5}if(this._h.kind==='num'&&!this._h.step)this._h.step=1}},
-hSave(){this.hKeep();const x=this._h;if(!x.title.trim())return this.toast('Назови привычку');if(!this.S.habits.some(h=>h.id===x.id)&&!this.canAddH(1)){this.close();return}if(!x.days.length)return this.toast('Выбери хотя бы один день');
+hSave(){this.hKeep();const x=this._h;if(!x._skm)x.sk=this.skGuess(x.title)||x.sk||'biz';delete x._skm;if(!x.title.trim())return this.toast('Назови привычку');if(!this.S.habits.some(h=>h.id===x.id)&&!this.canAddH(1)){this.close();return}if(!x.days.length)return this.toast('Выбери хотя бы один день');
   const i=this.S.habits.findIndex(h=>h.id===x.id);if(i<0)this.S.habits.push(x);else this.S.habits[i]=x;this.save();this.close();this.render()},
 hDel(){if(!confirm('Удалить привычку вместе с историей? Можно вместо этого отправить в архив.'))return;this.S.habits=this.S.habits.filter(h=>h.id!==this._h.id);this.save();this.close();this.render()},
 hPicker(more){const have=new Set(this.S.habits.map(x=>x.title)),sel=this._pick||(this._pick=new Set());const TOD={m:'утро',d:'день',e:'вечер'};
