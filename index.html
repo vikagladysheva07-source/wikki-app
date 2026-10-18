@@ -1541,7 +1541,7 @@ init(){
   if(tp){history.replaceState(null,'',location.pathname);this.applyTpl(tp)}
   this.day=this.clampDay(today());
   try{this.tab=sessionStorage.getItem('tw-tab')||'home'}catch(e){}
-  const qt=new URLSearchParams(location.search).get('tab');if(qt){this.tab=this.normTab(qt);history.replaceState(null,'',location.pathname+location.hash)}
+  const qpt=new URLSearchParams(location.search).get('pt');if(qpt){try{sessionStorage.setItem('tw-pt',qpt)}catch(e){}history.replaceState(null,'',location.pathname+location.hash)}try{this._ptc=sessionStorage.getItem('tw-pt')||null}catch(e){}const qt=new URLSearchParams(location.search).get('tab');if(qt){this.tab=this.normTab(qt);history.replaceState(null,'',location.pathname+location.hash)}
   if(navigator.serviceWorker)navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.tab)this.go(e.data.tab)});
   document.documentElement.lang=this.lang();
   if(this.lang()==='en')this.loadDict().then(()=>this.render());
@@ -1578,7 +1578,7 @@ vStart(){const st=this._st||1,sel=this._stp||(this._stp=new Set()),TOD={m:'ут�
   const td=today(),hs=this.S.habits.filter(h=>!h.archived),dn=hs.filter(h=>this.hOn(h,td)).length;
   return `<div class="stw"><div class="st-s">Шаг 2 из 2</div><div class="st-t">${dn?'Первая отметка есть':'Отметь то, что уже сделано сегодня'}</div><div class="st-d">${dn?'Так и работает система: одно касание в день — и через месяц видно, как ты меняешься.':'Даже если сделано одно дело — отметь его. Первая отметка запускает серию.'}</div>
     <div class="st-l">${hs.map(h=>{const on=this.hOn(h,td);return `<button class="st-i st-m ${on?'on':''}" onclick="APP.stMark('${h.id}')">${this.tile(h,'h')}<span class="sp"><b>${esc(h.title)}</b><em>${on?'сделано сегодня':'нажми, если уже сделано'}</em></span><span class="st-c">${on?I.ok:''}</span></button>`}).join('')}</div>
-    <div class="st-f"><button class="btn ${dn?'pr':'gh'} w" onclick="APP.stDone()">${dn?'Открыть дашборд':'Пока ничего не сделано — открыть дашборд'}</button></div></div>`},
+    <div class="st-f"><button class="btn ${dn?'pr':'gh'} w" onclick="APP.stDone()">${dn?'Открыть приложение':'Пока ничего не сделано — открыть приложение'}</button></div></div>`},
 stPick(i){const s=this._stp||(this._stp=new Set());if(s.has(i))s.delete(i);else{if(s.size>=3&&!this.paid())return this.toast('В бесплатной версии до 3 привычек');s.add(i)}this.buzz(6);this.render()},
 stOwn(){this.ask('Своя привычка','',v=>{v=(v||'').trim();if(!v)return;if(!this.canAddH(1))return;this.S.habits.push(H(v));this.save();this._st=2;this.render()})},
 stNext(){const s=this._stp||new Set();if(!s.size)return;if(!this.canAddH(s.size))return;[...s].sort((a,b)=>a-b).forEach(i=>{const [t,tod,,ex]=HABIT_LIB[i];if(!this.S.habits.some(h=>h.title===t))this.S.habits.push(H(t,Object.assign({tod},ex||{})))});this.save();this.track('onb_habits',{n:s.size},'ever');this._st=2;window.scrollTo(0,0);this.render()},
@@ -1967,7 +1967,7 @@ vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData()
   <button class="card mr-me" onclick="APP.go('profile')"><span class="mr-av ${this.rwFr()}">${this.avaHtml()}</span><div class="sp"><b>${esc(P.name||'Твой профиль')}</b><em>${this.rwTitle()?this.rwTitle()+' · ':''}уровень ${D.lvl||1}${this.user?'':' · войди, чтобы сохранить прогресс'}</em></div>${I.r}</button>
   ${pd0?'':`<button class="card mr-pay" onclick="APP.paySheet('program')"><span>${I.star}</span><div class="sp"><b>Полный доступ</b><em>Программы, прогресс, безлимит привычек и разбор недели</em></div>${I.r}</button>`}
   <div class="mr-g">${T.map(([k,l,ic,d,pay])=>`<button class="card mr-t" onclick="APP.go('${k}')"><span class="mr-i">${ic}</span><b>${l}</b><em>${d}</em>${pay?lock:''}</button>`).join('')}</div>
-  <div class="card mr-l"><button onclick="APP._ct='rewards';APP.go('profile')">${I.trophy}<span>Награды</span><em class="mr-c">${Object.keys(this.S.rw||{}).length} из ${this.RW.length+this.RWX.length+this.RWC.length}</em>${I.r}</button><button onclick="APP.go('me')">${I.gear}<span>Настройки</span>${I.r}</button><button onclick="APP.go('me');APP._sset='about';APP.render()">${I.spark||I.star}<span>О приложении</span>${I.r}</button><button onclick="APP.shareApp()">${SI.share}<span>Поделиться приложением</span>${I.r}</button></div>`},
+  <div class="card mr-l"><button onclick="APP._ct='rewards';APP.go('profile')">${I.trophy}<span>Награды</span><em class="mr-c">${Object.keys(this.S.rw||{}).length} из ${this.RW.length+this.RWX.length+this.RWC.length}</em>${I.r}</button><button onclick="APP.ptCreate()">${I.me}<span>Позвать партнёра</span>${I.r}</button><button onclick="APP.go('me')">${I.gear}<span>Настройки</span>${I.r}</button><button onclick="APP.go('me');APP._sset='about';APP.render()">${I.spark||I.star}<span>О приложении</span>${I.r}</button><button onclick="APP.shareApp()">${SI.share}<span>Поделиться приложением</span>${I.r}</button></div>`},
 /* темы оформления: перекрашиваем фирменный фиолетовый в цвет темы */
 THM:{},
 thConv(r,g,b){const T=this.THM[(this.S.pref||{}).theme];if(!T)return null;const k=r+','+g+','+b,C=this._thc||(this._thc={});if(k in C)return C[k];
@@ -2056,7 +2056,7 @@ rwOpen(id){const g=this.S.rw||{},R=this.rwCalc(),r=this.rwAll().find(x=>x.id===i
   <div class="rwo"><div class="rwo-m ${on?'on':''}">${this.medal(id,on,150,pr)}</div><span class="rwo-r" style="--c:${RA[1]}">${RA[0]}</span><b>${r.n}</b><p>${r.t}</p>
   <div class="rwo-s">${on?`Получена ${fd(on)}`:need}</div>
   ${on&&r.id==='d365'?`<a class="btn pr w" href="https://t.me/wikki_shark" target="_blank" rel="noopener">Получить значок</a>`:on?`<button class="btn gh w" onclick="APP.close();APP.shareStudio('hero')">${SI.share} Поделиться в сторис</button>`:''}</div>`)},
-rwCelebrate(L){const top=[...L].sort((a,b)=>(this.RWR[b.id]||1)-(this.RWR[a.id]||1))[0],RA=this.RAR[this.RWR[top.id]||1];
+rwCelebrate(L){this._celeb=today();const top=[...L].sort((a,b)=>(this.RWR[b.id]||1)-(this.RWR[a.id]||1))[0],RA=this.RAR[this.RWR[top.id]||1];
   this.open(`<div class="rwc"><div class="rwc-g"><div class="rwc-sh">${this.medal(top.id,1,150)}</div></div><span class="rwo-r" style="--c:${RA[1]}">${RA[0]}</span>
    <div class="lbl" style="text-align:center;margin-top:10px">${L.length>1?'Новые награды · '+L.length:'Новая награда'}</div>
    <div class="rwc-l">${L.map(r=>`<div><b>${r.n}</b><em>${r.t}</em></div>`).join('')}</div>
@@ -2098,6 +2098,9 @@ skHelp(){const R=(ic,b,t)=>`<div class="skh-r"><span>${ic}</span><div><b>${b}</b
   ${R(I.fire,'Закрыл день на 80% и выше','+3 к Дисциплине')}
   ${R(I.star,'Характеристика растёт','На уровнях 5, 10, 15, 20, 25 открываются перки: уровень растёт быстрее, а перки Дисциплины дают дни пропуска без потери серии')}</div>
   <div class="skh-n">Глубина и медали во вкладке «Награды» считаются отдельно: по дням, когда сделана хотя бы половина планов.</div>`)},
+ptOn(){this.S.pref=this.S.pref||{};this.S.pref.dz=this.dzOrder().map(x=>x[0]==='partner'?[x[0],true]:x);this.save()},
+ptAuto(){const c=this._ptc;if(!c||this._ptBusy)return;if(!this.user){if(!this._ptTold){this._ptTold=1;setTimeout(()=>this.toast('Войди или зарегистрируйся, и вы станете партнёрами'),900)}return}
+  this._ptBusy=1;this.grpRpc('tw_group_join',{p_code:c,p_me:this.S.profile.name||''}).then(async g=>{this._ptc=null;try{sessionStorage.removeItem('tw-pt')}catch(e){}this.ptOn();await this.grpLoad();await this.grpPush();await this.grpLoad();this.render();this.toast('Вы теперь партнёры: «'+((g&&g.name)||'Партнёры')+'»')}).catch(e=>{this._ptc=null;try{sessionStorage.removeItem('tw-pt')}catch(_){}this.toast(this.grpErr(e))}).finally(()=>{this._ptBusy=0})},
 /* дневник-блокнот */
 jNote(d,v){clearTimeout(this._jnt);const st=$('jrSt');if(st)st.textContent='сохраняю…';this._jnt=setTimeout(()=>{const S=this.S;S.checkin=S.checkin||{};const c=S.checkin[d]=Object.assign({energy:0,sleep:'',win:'',top:'',note:''},S.checkin[d]||{});c.note=v;c.t=Date.now();this.save();const s2=$('jrSt');if(s2)s2.textContent='сохранено'},600)},
 jGrow(el){el.style.height='auto';el.style.height=Math.max(260,el.scrollHeight+4)+'px'},
@@ -2119,7 +2122,7 @@ vJournal(){const jseg=`<div class="pseg">${[['day','День'],['pages','Стр�
     <textarea id="jrN" class="jb-note" placeholder="Пиши как в блокноте: мысли, события, идеи…" oninput="APP.jGrow(this);APP.jNote('${d}',this.value)">${esc(note)}</textarea>
     <div class="jb-st" id="jrSt">${c.t?'сохранено':''}</div>
     <div class="jb-k"><label><span>${I.star}Победа дня</span><input value="${esc(c.win||'')}" placeholder="Что сегодня продвинулось" onchange="APP.jSet('${d}','win',this.value.trim(),1)"></label>
-     <label><span>${I.target||I.goal}Главное на завтра</span><input value="${esc(c.top||'')}" placeholder="Одно дело — утром оно будет на дашборде" onchange="APP.jSet('${d}','top',this.value.trim(),1)"></label></div>
+     <label><span>${I.target||I.goal}Главное на завтра</span><input value="${esc(c.top||'')}" placeholder="Одно дело — утром оно будет на экране «Сегодня»" onchange="APP.jSet('${d}','top',this.value.trim(),1)"></label></div>
    </div>
    <div class="jb-side"><div class="jb-sh"><b>Прошлые страницы</b><input class="jb-q" placeholder="Поиск" value="${esc(this._jq||'')}" oninput="APP._jq=this.value;clearTimeout(APP._jqt);APP._jqt=setTimeout(()=>{APP.render();const e=document.querySelector('.jb-q');if(e){e.focus();e.setSelectionRange(e.value.length,e.value.length)}},250)"></div>
     ${hist.length?hist.map(x=>{const e=C[x],t=(e.note||e.win||e.grat||e.block||e.top||'').split('\n')[0];return `<button class="jb-i" onclick="APP._jd='${x}';APP.render();window.scrollTo(0,0)"><em>${fd(x)}, ${WD[pd(x).getDay()]}</em><b>${esc(t.slice(0,90))}</b>${e.win&&e.win!==t?`<span>${I.star}${esc(e.win.slice(0,60))}</span>`:''}</button>`}).join(''):`<div class="small mut" style="padding:8px 4px">${q?'Ничего не нашлось':'Здесь появятся твои прошлые страницы.'}</div>`}</div></div>`;
@@ -2206,7 +2209,7 @@ async shDraw(cv,kind,bg){const W=1080,H=1920,x=cv.getContext('2d');cv.width=W;cv
   if(kind==='hero'){x.fillStyle='rgba(124,92,230,.35)';x.beginPath();x.arc(cx,base-230,170,0,Math.PI*2);x.fill();x.strokeStyle=VI;x.lineWidth=10;x.stroke();x.fillStyle='#fff';x.font=F(800,150);x.fillText(String(D.lvl),cx,base-180);x.fillStyle=GO;x.font=F(700,56);x.fillText('уровень героя',cx,base+0);if(D.name){x.fillStyle='#fff';x.font=F(600,48);x.fillText(D.name,cx,base+70)}
     x.textAlign='left';D.st.forEach((s,i)=>{const Y=base+170+i*92,mx=Math.max(20,...D.st.map(z=>z[2]));x.fillStyle='rgba(255,255,255,.85)';x.font=F(600,40);x.fillText(s[1],cx-380,Y);x.fillStyle='rgba(255,255,255,.14)';x.fillRect(cx-60,Y-26,360,22);x.fillStyle=VI;x.fillRect(cx-60,Y-26,360*s[2]/mx,22);x.fillStyle='#fff';x.font=F(700,40);x.fillText(String(s[2]),cx+330,Y)});x.textAlign='center';yEnd=base+170+4*92+30}
   x.shadowBlur=sticker?16:0;x.fillStyle='rgba(255,255,255,.9)';x.font=F(800,44);const fy=sticker?Math.min(H-120,yEnd+120):H-150;x.fillText('wikki.app',cx,fy);x.fillStyle='rgba(255,255,255,.55)';x.font=F(500,30);x.fillText('система дисциплины и привычек',cx,fy+46)},
-shareStudio(kind,hid){if(kind)this._shH=hid||null;this._shK=kind||this._shK||'streak';this._shB=this._shB||'ocean';const K=[['streak','Серия'],['week','Неделя'],['day','День'],['hero','Герой']],B=[['sticker','Стикер'],['photo','Своё фото'],['ocean','Океан'],['dark','Тёмный']];
+shareStudio(kind,hid){if(kind)this._shH=hid||null;this._shK=kind||this._shK||'streak';this._shB=this._shB||'ocean';const K=[['streak','Серия'],['week','Неделя'],['day','День'],['hero','Персонаж']],B=[['sticker','Стикер'],['photo','Своё фото'],['ocean','Океан'],['dark','Тёмный']];
   this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Поделиться в сторис</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="shk">${K.map(([k,l])=>`<button class="${this._shK===k?'on':''}" onclick="APP._shK='${k}';APP.shareStudio()">${l}</button>`).join('')}</div>
   <div class="shp ${this._shB==='sticker'?'stk':''}"><canvas id="shCv"></canvas></div>
@@ -2219,7 +2222,7 @@ shCaption(){const k=this._shK,D=this.shData(k),u='https://vikagladysheva07-sourc
 async shGo(){const c=$('shCv');if(!c)return;this.track('share',{k:this._shK,b:this._shB},'day');const cap=this.shCaption();try{await navigator.clipboard.writeText(cap)}catch(e){}
   c.toBlob(async b=>{const f=new File([b],'wikki-'+this._shK+'.png',{type:'image/png'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:cap});return}}catch(e){if(e&&e.name==='AbortError')return}
     const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f.name;a.click();this.toast('Картинка сохранена, подпись скопирована')},'image/png')},
-shMoment(){const td=today(),pf=this.S.pref||{};if((pf.shSeen||'')===td)return '';const M=[7,21,30,66,100];const ds=this.dayStreak();let st=ds,t='дней подряд',hid='';this.S.habits.filter(h=>!h.archived).forEach(h=>{const n=this.softStreak(h).n;if(M.includes(n)&&this.hOn(h,td)&&n>=st){st=n;t='«'+h.title+'»';hid=h.id}});
+shMoment(){const td=today(),pf=this.S.pref||{};if((pf.shSeen||'')===td||this._celeb===td)return '';const M=[7,21,30,66,100];const ds=this.dayStreak();let st=ds,t='дней подряд',hid='';this.S.habits.filter(h=>!h.archived).forEach(h=>{const n=this.softStreak(h).n;if(M.includes(n)&&this.hOn(h,td)&&n>=st){st=n;t='«'+h.title+'»';hid=h.id}});
   const a=this.dayAll(td);let msg='',k='';if(M.includes(st)&&(st===ds||t.startsWith('«'))){msg=`Серия ${st} ${this.pl(st,'день','дня','дней')}${t.startsWith('«')?' · '+esc(t):''}! Покажи это в сторис`;k='streak'}else if(a.n&&a.done>=a.n){msg='День закрыт на 100%. Поделишься?';k='day'}
   if(!msg)return '';return `<div class="shpop"><button class="shpop-m" onclick="APP.setPref('shSeen','${td}');APP.shareStudio('${k}','${k==='streak'?hid:''}')"><span>${SI.share}</span><b>${msg.replace(/! Покажи это в сторис$/,'').replace(/\. Поделишься\?$/,'')}</b><em>В сторис</em></button><button class="shpop-x" onclick="APP.setPref('shSeen','${td}')" aria-label="Скрыть">${I.x}</button></div>`},
 mitText(){return (((this.S.checkin||{})[add(today(),-1)])||{}).top||''},
@@ -2260,8 +2263,8 @@ partnerW(){const head=`<div class="dz-ch"><span class="dz-ti">${I.chat||''}Па�
   const b=this.boards[g.code]||{members:[]},ms=(b.members||[]).slice().sort((a,c)=>(c.id===this.user.id)-(a.id===this.user.id));
   const rows=ms.map(x=>{const s=(x.scores||{})[m0]||{},v=s.score,me=x.id===this.user.id,nm=me?'Ты':(x.name||'Партнёр');return `<div class="ptr"><span class="pta ${me?'me':''}">${esc(nm.charAt(0).toUpperCase())}</span><div class="sp"><div class="ptr-h"><b>${esc(nm)}</b><span>${v!=null?v+'%':'—'}</span></div><div class="pex-bar"><i style="width:${v||0}%"></i></div></div></div>`}).join('');
   return `<div class="card dz-c dz-pt">${head}<div class="small mut" style="margin:-4px 0 10px">Процент этой недели</div>${rows}${ms.length<2?`<div class="pg-note">Пока никто не присоединился. Код: <b style="color:#7EE6EE;letter-spacing:.12em">${esc(g.code)}</b></div><button class="pill" style="margin-top:10px" onclick="APP.ptInvite('${g.code}')">Отправить приглашение ${I.r}</button>`:''}</div>`},
-async ptCreate(){try{const code=await this.grpRpc('tw_group_create',{p_name:'Партнёры',p_me:this.S.profile.name||''});await this.grpLoad();await this.grpPush();await this.grpLoad();this.render();this.ptInvite(code)}catch(e){this.toast(this.grpErr(e))}},
-ptInvite(code){const url='https://vikagladysheva07-source.github.io/wikki-app/',t=`Давай держать друг друга в тонусе в wikki.app. Мой код: ${code}. Открой ${url}, на дашборде в блоке «Партнёр» нажми «У меня есть код».`;if(navigator.share)navigator.share({text:t}).catch(()=>{});else this.copy(t)},
+async ptCreate(){if(!this.user){this.toast('Сначала войди в аккаунт');return this.go('me')}try{const code=await this.grpRpc('tw_group_create',{p_name:'Партнёры',p_me:this.S.profile.name||''});this.ptOn();await this.grpLoad();await this.grpPush();await this.grpLoad();this.render();this.ptInvite(code)}catch(e){this.toast(this.grpErr(e))}},
+ptInvite(code){const url='https://vikagladysheva07-source.github.io/wikki-app/?pt='+code,t=`Давай держать друг друга в тонусе в wikki.app: будем видеть процент недели друг друга. Открой ссылку и войди, мы станем партнёрами: ${url}`;if(navigator.share)navigator.share({text:t}).catch(()=>{});else this.copy(t)},
 ptJoin(){this.ask('Код партнёра','',async v=>{v=(v||'').trim();if(v.length<4)return this.toast('Введи код из 6 символов');try{const g=await this.grpRpc('tw_group_join',{p_code:v,p_me:this.S.profile.name||''});await this.grpLoad();await this.grpPush();await this.grpLoad();this.render();this.toast('Вы теперь партнёры: «'+g.name+'»')}catch(e){this.toast(this.grpErr(e))}})},
 inPrg(){const S=this.S,td=today();return S.goals.length>0&&td>=this.st&&td<=add(this.end(),7)},
 pgFrom(){return this.inPrg()?this.st:add(today(),-89)},
@@ -2321,7 +2324,7 @@ pgPattern(){const P=this._pat||(this._pat=this.pattern());let b;
 softStreak(h){let d=today(),n=0,miss=0,rest=false,lim=500;if(!this.hOn(h,d))d=add(d,-1);while(lim--&&d>=h.created){if(this.hSched(h,d)&&!this.frozen(d)){if(this.hOn(h,d)){n++;if(miss)rest=true;miss=0}else{miss++;if(miss>=2)break}}d=add(d,-1)}return {n,rest}},
 cons30(h){let a=0,b=0;for(let i=0;i<30;i++){const d=add(today(),-i);if(d<h.created)break;if(!this.hSched(h,d)||this.frozen(d))continue;if(i===0&&!this.hOn(h,d))continue;b++;if(this.hOn(h,d))a++}return {a,b,p:b?Math.round(a/b*100):null}},
 doneCount(h){let n=0,d=today(),lim=800;while(lim--&&d>=h.created){if(this.hOn(h,d))n++;d=add(d,-1)}return n},
-pgCons(){const hs=this.S.habits.filter(h=>!h.archived);if(!hs.length)return `<div class="card pg-s" id="pg-cons"><div class="pg-sh"><b>Постоянство</b></div><div class="pg-empty">Добавь привычки в трекере — здесь появится постоянство за 30 дней.</div></div>`;
+pgCons(){const hs=this.S.habits.filter(h=>!h.archived);if(!hs.length)return `<div class="card pg-s" id="pg-cons"><div class="pg-sh"><b>Постоянство</b></div><div class="pg-empty">Добавь привычки во вкладке «Привычки» — здесь появится постоянство за 30 дней.</div></div>`;
   let A=0,B=0;const rows=hs.map(h=>{const c=this.cons30(h),s=this.softStreak(h),dc=this.doneCount(h);A+=c.a;B+=c.b;const y=add(today(),-1),ret=this.hSched(h,y)&&!this.hOn(h,y)&&!this.frozen(y)&&!this.hOn(h,today());
     return `<div class="pcr"><div class="pcr-rg">${this.mRing((c.p||0)/100,c.p>=80?'#5EE0EE':c.p>=50?'#9B7BFF':'#F5B84B',48)}<b>${c.p??'—'}</b></div><div class="sp"><div class="pcr-h"><b>${esc(h.title)}</b></div><div class="pcr-m">${I.flame}${s.n} ${this.pl(s.n,'день','дня','дней')}${s.rest?' · <em>восстановлено</em>':''}${ret?' · <em class="rt">сегодня день возврата</em>':''}</div><div class="pcr-b"><i style="width:${Math.min(100,dc/66*100)}%"></i></div><div class="pcr-a">${dc>=66?'Автоматизм: 66+ выполнений':`До автоматизма: ${dc} из 66`}</div></div></div>`}).join('');
   const P=B?Math.round(A/B*100):null;
@@ -2340,7 +2343,7 @@ pgFocus(){const td=today(),m0=this.monday(td),g=(this.S.pref||{}).focusGoal||10,
   <div class="pg-note">Таймер в тактиках записывает минуты сам.</div></div>`},
 /* 4.6 колесо: действия по сферам */
 areaActs(k,mo){const S=this.S;let n=0;const gs=new Set(S.goals.filter(g=>g.area===k).map(g=>g.id));for(const d in S.log||{}){if(d.slice(0,7)!==mo)continue;for(const tid in S.log[d]){const t=this._tix&&this._tix[tid];if(t&&gs.has(t.goal)&&S.log[d][tid])n++}}
-  S.habits.filter(h=>h.area===k).forEach(h=>{for(const d in S.hlog||{})if(d.slice(0,7)===mo&&this.hOn(h,d))n++});return n},
+  const SA={str:'health',int:'career',spi:'spirit',biz:'career'};S.habits.filter(h=>(h.area||SA[h.sk||this.skGuess(h.title)])===k).forEach(h=>{for(const d in S.hlog||{})if(d.slice(0,7)===mo&&this.hOn(h,d))n++});return n},
 /* 4.7 итоги */
 repPeriod(){const td=today(),inP=this.S.goals.length>0&&td>=this.st;if(inP){const to=td<this.end()?td:this.end();return {inP,from:this.st,to,key:'p:'+this.st,title:(this.prog()?this.prog().name:(this.S.sprint.title||'Программа')),sub:fd(this.st)+' — '+fd(this.end())}}
   const from=td.slice(0,8)+'01';return {inP:false,from,to:td,key:'m:'+td.slice(0,7),title:MONF[+td.slice(5,7)-1],sub:'итоги месяца на '+fd(td)}},
@@ -2591,7 +2594,7 @@ render(){const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_
   else if(this.sub==='deals')body=this.vDeals();
   else if(['program','progress'].includes(this.normTab(this.tab))&&!this.paid()){this.tab=this.normTab(this.tab);body=this.vPaywall(this.tab)}
   else{this.tab=this.normTab(this.tab);body={profile:this.vProfile,home:this.vHome,plans:this.vPlans,more:this.vMore,program:this.vProgram,progress:this.vProgress,tracker:this.vTracker,journal:this.vJournal,me:this.vMe}[this.tab].call(this)}
-  $('app').innerHTML=this.thx(this.top()+this.dash(body));this.tr($('app'));
+  $('app').innerHTML=this.thx(this.top()+this.dash(body));if(this._ptc)this.ptAuto();this.tr($('app'));
   const simple=this.simple();
   const tabs=simple?[['home','Сегодня',I.dash],['plans','Планы',I.plan],['tracker','Привычки',I.habit],['me','Настройки',I.gear]]:[['home','Сегодня',I.dash],['plans','Планы',I.plan],['program','Программа',I.goal],['progress','Прогресс',I.chart],['tracker','Привычки',I.habit],['journal','Дневник',I.diary],['me','Настройки',I.gear]];
   const mtabs=simple?tabs:[['home','Сегодня',I.dash],['plans','Планы',I.plan],['tracker','Привычки',I.habit],['journal','Дневник',I.diary],['more','Ещё',I.more]],inMore=['more','program','progress','profile','me'].includes(this.tab);
@@ -2627,7 +2630,7 @@ ring(v,th,cap){const r=52,C=2*Math.PI*r,p=v==null?0:v/100,a=th/100*360-90,x=59+r
 
 /* ================= ГЛАВНОЕ ================= */
 vWelcome(){return `<div class="wl"><span class="wl-mark lgm"><img src="icon-512.png" alt="wikki.app"></span><div class="wl-t">wikki.app</div><div class="wl-s">Привычки, цели и прогресс в одной системе. Начни с 2–3 привычек: первая отметка займёт минуту.</div>
-  <div class="wl-f"><div>${I.habit}<span>Трекер привычек: отметка в одно касание</span></div><div>${I.goal}<span>Программы: 12 недель, 75 Hard, 6 месяцев</span></div><div>${I.plan}<span>Планы: повторы, приоритеты, свайпы</span></div><div>${I.week}<span>Серии, уровень и прогресс за год</span></div></div>
+  <div class="wl-f"><div>${I.habit}<span>Привычки: отметка в одно касание</span></div><div>${I.goal}<span>Программы: 12 недель, 75 Hard, 6 месяцев</span></div><div>${I.plan}<span>Планы: повторы, приоритеты, свайпы</span></div><div>${I.week}<span>Серии, уровень и прогресс за год</span></div></div>
   <button class="btn pr w" style="margin-top:22px;padding:15px" onclick="APP.seen();APP.track('start',null,'ever');APP._st=1;APP.sub='start';window.scrollTo(0,0);APP.render()">Начать бесплатно</button>
   <button class="btn gh w" style="margin-top:8px" onclick="APP.seen();APP.sub=null;APP.go('me')">У меня есть аккаунт</button>
   <button class="btn gh w small" style="margin-top:2px;color:#B8B0D6" onclick="APP.seen();APP.sub=null;APP.go('home')">Сначала посмотреть</button></div>`},
@@ -3205,7 +3208,7 @@ rpg(){const D=this.rpgData(),S=this.S,P=S.profile||{},nm=P.hero||(P.name||'').sp
 editProfile(){const P=this.S.profile||{};this._pa=P.ava||'shark';this.pForm()},
 pForm(){const P=this.S.profile||{},AV=['shark','dumb','book','lotus','brief','sun','moon','heart','star','target','tree','chat'];const v=id=>esc(($(id)||{}).value??'');
   const keep={n:$('pN')?$('pN').value:P.name||'',h:$('pH')?$('pH').value:P.hero||'',m:$('pM')?$('pM').value:P.motto||'',g:$('pG')?$('pG').value:P.goalY||''};
-  this.open(`<div class="row"><div class="h2 sp">Профиль героя</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+  this.open(`<div class="row"><div class="h2 sp">Профиль</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="pfp"><span class="pfp-a">${this.avaHtml()}</span><div class="sp"><label class="btn sm pfp-b">Загрузить фото<input type="file" accept="image/*" style="display:none" onchange="APP.photoPick(this)"></label>${(this.S.profile||{}).photo?`<button class="pfp-x" onclick="APP.photoDel()">Убрать фото</button>`:''}</div></div>
   <div class="f"><label class="lbl">${(this.S.profile||{}).photo?'Или иконка':'Или иконка'}</label><div class="icp av">${AV.map(k=>`<button class="${this._pa===k?'on':''}" onclick="APP._pa='${k}';APP.pForm()">${k==='shark'?SHARK:hIco(k)}</button>`).join('')}</div></div>
   <div class="f"><label class="lbl">Имя</label><input id="pN" value="${esc(keep.n)}" placeholder="Как тебя зовут"></div>
@@ -3642,7 +3645,7 @@ vMe(){
     ${on?`<button class="btn w nbtn" onclick="APP.pushTest()">Отправить тестовое уведомление</button>`:''}
     ${!this.user?'<div class="small mut" style="text-align:center;margin-top:10px">Войди в аккаунт, чтобы включить уведомления</div>':''}`};
   pages.look=()=>sec('Оформление',[
-    row(ic('dumb','#F5B84B'),'Режим',this.simple()?'Простой':'Полный',"APP.setSimple(!APP.simple())",this.simple()?'Дашборд, трекер и настройки':'Все разделы'),
+    row(ic('dumb','#F5B84B'),'Режим',this.simple()?'Простой':'Полный',"APP.setSimple(!APP.simple())",this.simple()?'Сегодня, планы, привычки и настройки':'Все разделы'),
     tog(ic('heart','#E65CA8'),'Вибрация при отметке',pr.haptics!==false,"APP.setPref('haptics',(APP.S.pref||{}).haptics===false)"),
     row(ic('moon','#56566A'),'Тема','тёмная')]);
   pages.data=()=>sec('Данные и приватность',[
@@ -3655,7 +3658,7 @@ vMe(){
     row(ic('chat','#4B7BE6'),'Написать в поддержку','',"window.open('https://t.me/wikki_shark','_blank')",'Ответим в Telegram'),
     row(ic('star','#F5B84B'),'Предложить идею','',"window.open('https://t.me/wikki_shark','_blank')"),
     row(ic('book','#7C5CE6'),'Метод','',"APP.methodSheet()",'Моран, 4DX, Гольвитцер, Эттинген, Клир')]);
-  pages.about=()=>{const F=[['dash','Дашборд на каждый день','Главное дело, дела по времени и подсказка из твоих же данных. Утром план, вечером закрыть день за минуту.'],['check','Трекер привычек','Отметка в одно касание, кольца прогресса и серии, которые не обнуляются от одного пропуска.'],['target','Программы','«12 недель», «75 Hard: Фокус» и «Теория шести месяцев». Цель, ежедневные действия и честный счёт недели.'],['chart','Прогресс','Что влияет на твои дни, часы фокуса, банк побед и итоги цикла с карточкой для сторис.'],['pen','Дневник','Страница на каждый день. Пишется как в блокноте, сохраняется сама.'],['user','Личный кабинет','Навыки растут от отметок, а рядом хранится твоё видение жизни мечты.']];
+  pages.about=()=>{const F=[['dash','Экран «Сегодня»','Главное дело, дела по времени и подсказка из твоих же данных. Утром план, вечером закрыть день за минуту.'],['check','Привычки','Отметка в одно касание, кольца прогресса и серии, которые не обнуляются от одного пропуска.'],['target','Программы','«12 недель», «75 Hard: Фокус» и «Теория шести месяцев». Цель, ежедневные действия и честный счёт недели.'],['chart','Прогресс','Что влияет на твои дни, часы фокуса, банк побед и итоги цикла с карточкой для сторис.'],['pen','Дневник','Страница на каждый день. Пишется как в блокноте, сохраняется сама.'],['user','Персонаж','Характеристики растут от отметок, а рядом хранится твоё видение жизни мечты.']];
     const IC={dash:I.dash,check:SI.check,target:SI.target,chart:SI.chart,pen:hIco('pen'),user:SI.user};
     const P=[['Честные цифры','Приложение показывает реальный процент выполнения. Никаких наград за то, что его просто открыли.'],['Один пропуск ничего не ломает','Серия рвётся только после двух пропусков подряд. Так легче вернуться, чем начинать с нуля.'],['Данные принадлежат тебе','Без рекламы и сторонних счётчиков. Выгрузить или удалить всё можно в пару касаний.'],['Покупка один раз','Без подписки и автосписаний. 14 дней на возврат, если не подошло.']];
     const M=['Брайан Моран','Джеймс Клир','Кэл Ньюпорт','Тереза Амабайл','Филиппа Лалли','Питер Гольвитцер','Габриэль Эттинген','4 дисциплины исполнения'];
