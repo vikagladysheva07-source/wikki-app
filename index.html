@@ -1360,6 +1360,8 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 @keyframes rwin{0%{transform:scale(.3) rotate(-12deg);opacity:0}100%{transform:none;opacity:1}}
 @keyframes rwsh{0%{opacity:1;transform:translateX(-60%)}100%{opacity:1;transform:translateX(60%)}}
 @media(max-width:380px){.chg{grid-template-columns:minmax(0,1fr)}.chc{flex-direction:row;align-items:center}.chc-h{flex-direction:row;align-items:center;flex:1}.chc em{display:none}.chc-b{width:60px}.dpn-r{display:none}}
+.pcl2{padding:16px!important;margin:0 0 12px!important}.pcl2-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.pcl2-h b{font-size:16px}.pcl2-h span{font-size:12.5px;color:var(--dim)}.pcl2 .rpbar{margin:10px 0 12px}
+.pcl2-q{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--mut);padding-top:12px;border-top:1px solid var(--line)}.pcl2-q span{width:30px;height:30px;flex:none;border-radius:10px;display:grid;place-items:center;background:rgba(155,123,255,.14);color:#C9B8FF}.pcl2-q span svg{width:15px;height:15px}
 </style>
 </head>
 <body>
@@ -1693,7 +1695,7 @@ cabSkills(){const SK=this.skillsData(),D=this.rpgData(),w7=D.pts7||{},sel=this._
     <div class="skd-p">${this.PERK[cur.k].map((p,i)=>{const on=cur.L>=this.PLV[i];return `<div class="${on?'on':''}"><span>${on?I.star:'<i class="lk"></i>'}</span><b>${p}</b><em>${on?'открыто':'уровень '+this.PLV[i]}</em></div>`}).join('')}</div>
     ${nextP?`<div class="skd-n">Следующий перк «${this.PERK[cur.k][this.PLV.indexOf(nextP)]}» через ${nextP-cur.L} ${this.pl(nextP-cur.L,'уровень','уровня','уровней')}</div>`:`<div class="skd-n">Все перки навыка открыты</div>`}</div>`;
   const week=`<div class="card skw"><div class="pg-sh"><b>Прокачка за неделю</b><span>очки навыков</span></div>${SK.map(s=>{const v=w7[s.k]||0,mx=Math.max(1,...SK.map(x=>w7[x.k]||0));return `<div class="skw-r"><span style="color:${COL[s.k]}">${hIco(s.ic)}</span><em>${s.n}</em><div class="skw-b"><i style="width:${v/mx*100}%;background:${COL[s.k]}"></i></div><b>+${v}</b></div>`}).join('')}</div>`;
-  return `<div class="card sktree"><div class="sktw"><svg viewBox="-34 -28 408 400">${g}</svg>${labels}</div><div class="skhint">Нажми на навык, чтобы увидеть перки</div></div>${detail}${week}`},
+  return `<div class="card sktree"><div class="sktw"><svg viewBox="-34 -28 408 400">${g}</svg>${labels}</div><div class="skhint">Нажми на характеристику, чтобы увидеть, что её качает</div></div>${detail}`},
 /* свои поля дня */
 FPRE:[['Шаги','num','шагов'],['Вода','num','л'],['Вес','num','кг'],['Тренировка','check'],['Чтение','num','стр'],['Расходы','num','₽'],['Стресс','scale'],['Без сахара','check']],
 fList(){return this.S.fields=this.S.fields||[]},
@@ -2097,7 +2099,7 @@ vJournal(){const jseg=`<div class="pseg">${[['day','День'],['pages','Стр�
     ${hist.length?hist.map(x=>{const e=C[x],t=(e.note||e.win||e.grat||e.block||e.top||'').split('\n')[0];return `<button class="jb-i" onclick="APP._jd='${x}';APP.render();window.scrollTo(0,0)"><em>${fd(x)}, ${WD[pd(x).getDay()]}</em><b>${esc(t.slice(0,90))}</b>${e.win&&e.win!==t?`<span>${I.star}${esc(e.win.slice(0,60))}</span>`:''}</button>`}).join(''):`<div class="small mut" style="padding:8px 4px">${q?'Ничего не нашлось':'Здесь появятся твои прошлые страницы.'}</div>`}</div></div>`;
   setTimeout(()=>{const e=$('jrN');if(e)this.jGrow(e)},0);
   return h},
-cabTabs(){const ct=['dream','ideal'].includes(this._ct)?'vision':(this._ct||'hero');return `<div class="pseg cabt">${[['hero','Герой'],['rewards','Награды'],['skills','Навыки'],['vision','Видение']].map(([k,l])=>`<button class="${ct===k?'on':''}" onclick="APP._ct='${k}';APP.render()">${l}</button>`).join('')}</div>`},
+cabTabs(){const ct=['dream','ideal'].includes(this._ct)?'vision':this._ct==='skills'?'hero':(this._ct||'hero');return `<div class="pseg cabt">${[['hero','Персонаж'],['rewards','Награды'],['vision','Видение']].map(([k,l])=>`<button class="${ct===k?'on':''}" onclick="APP._ct='${k}';APP.render()">${l}</button>`).join('')}</div>`},
 cabDream(){const V=this.S.vision||{text:'',items:[]},it=V.items||[];
   return `<div class="card drm-t"><em>Жизнь мечты</em><textarea placeholder="Опиши жизнь, к которой идёшь: где живёшь, чем занимаешься, кто рядом, как проходит день" onchange="APP.S.vision=APP.S.vision||{items:[]};APP.S.vision.text=this.value;APP.save();APP.toast('Сохранено')">${esc(V.text||'')}</textarea></div>
   <div class="drm-g">${it.map(x=>{const src=this.visSrc(x.id);return `<button class="drm-i" onclick="APP.dreamView('${x.id}')">${src?`<img src="${src}" alt="" loading="lazy">`:'<span class="drm-ld"></span>'}${x.cap?`<em>${esc(x.cap)}</em>`:''}</button>`}).join('')}
@@ -2137,7 +2139,9 @@ cabinet(){const S=this.S,P=S.profile||{},D=this.rpgData(),pct=Math.round((D.xp-D
     <div class="pcx-q">${D.left>0?`Задание дня: осталось ${D.left} ${this.pl(D.left,'дело','дела','дел')} · до +${D.left*12} XP`:'Задание дня выполнено. Возвращайся завтра'}</div></div></div>`;
   const rest=this.rpg().replace(/<div class="card rph">[\s\S]*?(?=<div class="card rpk">)/,'');
   const links=`<div class="card ngrp pcl">${[['crown','#F5B84B','Полный доступ',this.paid()?'активен':'',"APP.go('me');APP._sset='premium';APP.render()"],['user','#22D3E0','Аккаунт и данные','',"APP.go('me')"],['share','#9B7BFF','Поделиться приложением','',"APP.shareApp()"]].map(([ic,c,l,v,a])=>`<button class="nrow" onclick="${a}"><span class="ni" style="color:${c}">${SI[ic]}</span><span class="sp">${l}</span>${v?`<span class="nval">${v}</span>`:''}${I.r}</button>`).join('')}</div>`;
-  const ct=this._ct||'hero';return head+this.cabTabs()+(ct==='rewards'?this.cabRewards():ct==='skills'?this.cabSkills():['vision','dream','ideal'].includes(ct)?this.cabVision():goal+stats+hero+rest+links)},
+  const ct=this._ct||'hero';
+  const lvl=`<div class="card pcl2"><div class="pcl2-h"><b>Уровень ${D.lvl}</b><span>ещё ${D.nxt-D.xp} опыта до ${D.lvl+1}-го</span></div><div class="rpbar"><i style="width:${pct}%"></i></div><div class="pcl2-q">${D.left>0?`<span>${I.target||I.goal}</span>Задание дня: ещё ${D.left} ${this.pl(D.left,'дело','дела','дел')} · +${D.left*12} опыта`:`<span>${I.ok}</span>Задание дня выполнено, возвращайся завтра`}</div></div>`;
+  return head+this.cabTabs()+(ct==='rewards'?this.cabRewards():['vision','dream','ideal'].includes(ct)?this.cabVision():lvl+this.cabSkills()+goal)},
 dzRings(){const td=today(),a=this.dayAll(td),dP=a.n?a.p:0,wk=this.wkStat(this.monday(td)).pct,ms=td.slice(0,8)+'01';let s2=0,n2=0;for(let d=ms;d<=td;d=add(d,1)){const x=this.dayAll(d);if(x.n){s2+=x.p;n2++}}const mP=n2?s2/n2:0,wP=(wk||0)/100;
   const ring=(r,p,c)=>{const C=2*Math.PI*r;return `<circle cx="70" cy="70" r="${r}" fill="none" stroke="${c}" stroke-opacity=".16" stroke-width="11"/><circle cx="70" cy="70" r="${r}" fill="none" stroke="${c}" stroke-width="11" stroke-linecap="round" stroke-dasharray="${(C*Math.min(1,p)).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 70 70)" style="filter:drop-shadow(0 0 4px ${c})"/>`};
   return `<div class="card dz-c dz-rg"><div class="dz-ch"><span class="dz-ti">Кольца активности</span></div><div class="rg-w"><svg viewBox="0 0 140 140">${ring(58,dP,'#9B7BFF')}${ring(44,wP,'#5EE0EE')}${ring(30,mP,'#F5B84B')}</svg><div class="rg-l"><div><i style="background:#9B7BFF"></i><span>Сегодня</span><b>${Math.round(dP*100)}%</b></div><div><i style="background:#5EE0EE"></i><span>Неделя</span><b>${wk??0}%</b></div><div><i style="background:#F5B84B"></i><span>Месяц</span><b>${Math.round(mP*100)}%</b></div></div></div></div>`},
