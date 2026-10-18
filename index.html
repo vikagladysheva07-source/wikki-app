@@ -1368,6 +1368,14 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 .pcl2-i{width:24px;height:24px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;color:#C9B8FF;background:rgba(155,123,255,.14);border:1px solid rgba(155,123,255,.35);margin-left:4px}.pcl2-h span{flex:1;text-align:right}
 .skh{display:flex;flex-direction:column;gap:14px;margin:8px 0 16px}.skh-r{display:flex;gap:12px;align-items:flex-start}.skh-r>span{width:36px;height:36px;flex:none;border-radius:11px;display:grid;place-items:center;background:rgba(155,123,255,.14);color:#C9B8FF}.skh-r>span svg{width:17px;height:17px}.skh-r b{display:block;font-size:14.5px}.skh-r em{display:block;font-style:normal;font-size:13px;color:var(--mut);line-height:1.45;margin-top:2px}
 .skh-n{font-size:12.5px;color:var(--dim);line-height:1.45;padding-top:12px;border-top:1px solid var(--line)}
+.vb{gap:12px}
+.vb-g1 .vb-i{aspect-ratio:16/11}.vb-g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.vb-g2 .vb-i{aspect-ratio:3/4}.vb-g2.odd .vb-i:last-child{grid-column:1/-1;aspect-ratio:16/10}
+.vb-i{box-shadow:0 14px 34px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.06)}
+.vb-i img{width:100%;height:100%!important;object-fit:cover}
+.vb-i em{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 12px!important;background:linear-gradient(180deg,transparent,rgba(5,4,12,.85))!important;color:#fff!important;font-size:14px!important;font-weight:600;letter-spacing:.01em}
+.vb-t{position:relative;padding:14px 4px 14px 22px!important;font-size:19px!important;line-height:1.5!important;font-weight:600!important;letter-spacing:-.2px}
+.vb-t:before{content:"";position:absolute;left:4px;top:18px;bottom:18px;width:3px;border-radius:2px;background:linear-gradient(180deg,#C9B8FF,#7C5CE6)}
+.toast{white-space:normal!important;max-width:calc(100vw - 32px);width:max-content;text-align:center;line-height:1.35}
 </style>
 </head>
 <body>
@@ -1681,7 +1689,10 @@ async vbDel(id,quiet){if(!quiet&&!confirm('Удалить этот блок?'))r
 cabVision(){const B=this.vBlocks();
   const add=`<div class="vb-add"><button onclick="APP.vbAddText()">${I.plus} Текст</button><label>${I.plus} Картинка<input type="file" accept="image/*" multiple style="display:none" onchange="APP.vbAddImg(this)"></label></div>`;
   if(!B.length)return `<div class="vb-empty"><b>Моё видение</b><p>Слова и картинки о жизни, к которой идёшь, и о человеке, которым становишься. Добавляй что угодно — в любом порядке.</p></div>`+add;
-  return `<div class="vb">${B.map(b=>{if(b.type==='img'){const src=this.visSrc(b.id);return `<button class="vb-i" onclick="APP.vbEdit('${b.id}')">${src?`<img src="${src}" alt="" loading="lazy">`:'<span class="drm-ld"></span>'}${b.text?`<em>${esc(b.text)}</em>`:''}</button>`}return `<button class="vb-t" onclick="APP.vbEdit('${b.id}')">${esc(b.text).replace(/\n/g,'<br>')}</button>`}).join('')}</div>`+add+(!this.user&&B.some(x=>x.type==='img')?'<div class="pg-note">Войди в аккаунт, чтобы картинки были на всех устройствах.</div>':'')},
+  const im=b=>{const src=this.visSrc(b.id);return `<button class="vb-i" onclick="APP.vbEdit('${b.id}')">${src?`<img src="${src}" alt="" loading="lazy">`:'<span class="drm-ld"></span>'}${b.text?`<em>${esc(b.text)}</em>`:''}</button>`};
+  let out='',run=[];const flush=()=>{if(!run.length)return;out+=run.length===1?`<div class="vb-g1">${im(run[0])}</div>`:`<div class="vb-g2 ${run.length%2?'odd':''}">${run.map(im).join('')}</div>`;run=[]};
+  B.forEach(b=>{if(b.type==='img')run.push(b);else{flush();out+=`<button class="vb-t" onclick="APP.vbEdit('${b.id}')"><span>${esc(b.text).replace(/\n/g,'<br>')}</span></button>`}});flush();
+  return `<div class="vb">${out}</div>`+add+(!this.user&&B.some(x=>x.type==='img')?'<div class="pg-note">Войди в аккаунт, чтобы картинки были на всех устройствах.</div>':'')},
 cabSkills(){const SK=this.skillsData(),D=this.rpgData(),w7=D.pts7||{},sel=this._sks||SK[0].k,cur=SK.find(s=>s.k===sel)||SK[0],COL={str:'#FF8A65',int:'#5EE0EE',spi:'#B49CFF',biz:'#F5B84B',dis:'#7CF0A4'};
   const W=340,C=170,R0=40,STEP=19,n=SK.length;
   const P=(i,r)=>{const a=-Math.PI/2+i*2*Math.PI/n;return [C+r*Math.cos(a),C+r*Math.sin(a)]};
