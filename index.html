@@ -1376,6 +1376,18 @@ body.wlc .stw .st-d{color:rgba(225,238,248,.85);text-shadow:0 1px 12px rgba(0,0,
 .vb-t{position:relative;padding:14px 4px 14px 22px!important;font-size:19px!important;line-height:1.5!important;font-weight:600!important;letter-spacing:-.2px}
 .vb-t:before{content:"";position:absolute;left:4px;top:18px;bottom:18px;width:3px;border-radius:2px;background:linear-gradient(180deg,#C9B8FF,#7C5CE6)}
 .toast{white-space:normal!important;max-width:calc(100vw - 32px);width:max-content;text-align:center;line-height:1.35}
+.vbar{display:flex;align-items:center;gap:8px;margin:2px 0 14px}.vbar>button,.vbar>label{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--tx);padding:9px 14px;border-radius:99px;background:rgba(155,123,255,.12);border:1px solid rgba(155,123,255,.3);cursor:pointer}.vbar svg{width:14px;height:14px;color:#C9B8FF}
+.vbar .vbar-e{background:transparent;border-color:var(--line);color:var(--mut)}.vbar .vbar-e.on{background:#7C5CE6;border-color:#7C5CE6;color:#fff}
+.vb-t{cursor:text}.vb-t i{font-style:normal;color:var(--dim)}
+.vb-te{padding:10px 4px 10px 22px!important}.vb-te textarea{width:100%;background:transparent;border:0;outline:none;resize:none;color:#fff;font:inherit;font-size:19px;font-weight:600;line-height:1.5;padding:0;overflow:hidden}
+.vb-i{cursor:zoom-in}.vb-i.ed,.vb-t.ed{cursor:default;outline:1.5px dashed rgba(155,123,255,.45);outline-offset:3px}
+.vbc{position:absolute;top:8px;right:8px;display:flex;gap:6px;z-index:2}.vb-t .vbc{top:50%;transform:translateY(-50%)}.vbc button{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(12,10,22,.82);border:1px solid rgba(255,255,255,.14);color:#fff;backdrop-filter:blur(8px)}.vbc button svg{width:14px;height:14px}.vbc button:disabled{opacity:.3}.vbc .vbc-x{color:#FF9A9A}
+.vb-t.ed .vbc{position:static;transform:none;margin-top:10px;justify-content:flex-start}.vb-i .vbc{left:6px;right:6px;top:6px;justify-content:flex-end;gap:4px}.vb-i .vbc button{width:30px;height:30px}
+.vbv{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s}.vbv.on{opacity:1}.vbv-bg{position:absolute;inset:0;background:#040309}
+.vbv img{position:relative;max-width:100%;max-height:100%;object-fit:contain}.vbv-c{position:absolute;left:0;right:0;bottom:0;padding:60px 24px calc(28px + env(safe-area-inset-bottom));text-align:center;font-size:20px;font-weight:700;color:#fff;background:linear-gradient(180deg,transparent,rgba(4,3,10,.9))}
+.vbv-n{position:absolute;top:calc(18px + env(safe-area-inset-top));left:20px;font-size:13px;color:rgba(255,255,255,.6)}
+.vbv-x,.vbv-p,.vbv-f{position:absolute;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.15)}.vbv-x{top:calc(10px + env(safe-area-inset-top));right:14px}.vbv-p{left:12px;top:50%;transform:translateY(-50%)}.vbv-f{right:12px;top:50%;transform:translateY(-50%)}.vbv svg{width:18px;height:18px}
+@media(pointer:coarse){.vbv-p,.vbv-f{display:none}}
 </style>
 </head>
 <body>
@@ -1676,23 +1688,39 @@ vBlocks(){const V=this.S.vision=this.S.vision||{};if(!V.blocks){const b=[];const
     if(V.text)b.push({id:'b'+uid(),type:'text',text:V.text});if(Z.desc)b.push({id:'b'+uid(),type:'text',text:Z.desc});
     (V.items||[]).forEach(x=>b.push({id:x.id,type:'img',text:x.cap||''}));if(Z.day)b.push({id:'b'+uid(),type:'text',text:Z.day});V.blocks=b}
   return V.blocks},
-vbAddText(){this.ask('Новый текст','',v=>{v=(v||'').trim();if(!v)return;this.vBlocks().push({id:'b'+uid(),type:'text',text:v});this.save();this.render()},'textarea')},
-async vbAddImg(inp){const fs=[...(inp.files||[])];if(!fs.length)return;const B=this.vBlocks();for(const f of fs){if(B.filter(x=>x.type==='img').length>=12){this.toast('Максимум 12 картинок');break}const id='v'+uid();await this.visPut(f,id);B.push({id,type:'img',text:''})}this.save();this.render()},
+vbAddText(){this._vbe=false;const b={id:'b'+uid(),type:'text',text:''};this.vBlocks().push(b);this._vbt=b.id;this.render();setTimeout(()=>{const t=$('vbTA');if(t)t.scrollIntoView({block:'center'})},60)},
+async vbAddImg(inp){const fs=[...(inp.files||[])];if(!fs.length)return;const B=this.vBlocks();for(const f of fs){if(B.filter(x=>x.type==='img').length>=12){this.toast('Максимум 12 картинок');break}const id='v'+uid();await this.visPut(f,id);B.push({id,type:'img',text:''})}this.save();this.render();this.toast(fs.length>1?'Фото добавлены':'Фото добавлено')},
 vbEdit(id){const B=this.vBlocks(),i=B.findIndex(x=>x.id===id),b=B[i];if(!b)return;const src=b.type==='img'?this.visSrc(b.id):'';
   this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">${b.type==='img'?'Картинка':'Текст'}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   ${b.type==='img'?`${src?`<img class="dv-img" src="${src}" alt="">`:''}<div class="f"><label class="lbl">Подпись, если нужна</label><input id="vbT" value="${esc(b.text||'')}" placeholder="Например: дом у океана"></div>`:`<div class="f"><textarea id="vbT" style="min-height:160px">${esc(b.text||'')}</textarea></div>`}
   <div class="vbm"><button ${i?'':'disabled'} onclick="APP.vbMove('${id}',-1)">${I.l}<span>Выше</span></button><button ${i<B.length-1?'':'disabled'} onclick="APP.vbMove('${id}',1)">${I.r}<span>Ниже</span></button></div>
   <div class="row"><button class="btn pr sp" onclick="APP.vbSave('${id}',$('vbT').value)">Сохранить</button><button class="btn del" onclick="APP.vbDel('${id}')">Удалить</button></div>`)},
 vbSave(id,v){const b=this.vBlocks().find(x=>x.id===id);if(b){b.text=(v||'').trim();if(b.type==='text'&&!b.text)return this.vbDel(id,true)}this.save();this.close();this.render()},
-vbMove(id,d){const B=this.vBlocks(),i=B.findIndex(x=>x.id===id),j=i+d;if(i<0||j<0||j>=B.length)return;[B[i],B[j]]=[B[j],B[i]];this.save();this.render();this.vbEdit(id)},
+vbMove(id,d){const B=this.vBlocks(),i=B.findIndex(x=>x.id===id),j=i+d;if(i<0||j<0||j>=B.length)return;[B[i],B[j]]=[B[j],B[i]];this.save();this.render()},
 async vbDel(id,quiet){if(!quiet&&!confirm('Удалить этот блок?'))return;const V=this.S.vision;const b=V.blocks.find(x=>x.id===id);V.blocks=V.blocks.filter(x=>x.id!==id);if(V.items)V.items=V.items.filter(x=>x.id!==id);this.save();if(b&&b.type==='img')await this.visRemove(id);this.close();this.render()},
-cabVision(){const B=this.vBlocks();
-  const add=`<div class="vb-add"><button onclick="APP.vbAddText()">${I.plus} Текст</button><label>${I.plus} Картинка<input type="file" accept="image/*" multiple style="display:none" onchange="APP.vbAddImg(this)"></label></div>`;
-  if(!B.length)return `<div class="vb-empty"><b>Моё видение</b><p>Слова и картинки о жизни, к которой идёшь, и о человеке, которым становишься. Добавляй что угодно — в любом порядке.</p></div>`+add;
-  const im=b=>{const src=this.visSrc(b.id);return `<button class="vb-i" onclick="APP.vbEdit('${b.id}')">${src?`<img src="${src}" alt="" loading="lazy">`:'<span class="drm-ld"></span>'}${b.text?`<em>${esc(b.text)}</em>`:''}</button>`};
+cabVision(){const B=this.vBlocks(),ed=!!this._vbe;
+  const ico={up:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>',dn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>'};
+  const bar=`<div class="vbar"><button onclick="APP.vbAddText()">${I.plus}<span>Текст</span></button><label>${I.plus}<span>Фото</span><input type="file" accept="image/*" multiple style="display:none" onchange="APP.vbAddImg(this)"></label><span class="sp"></span>${B.length?`<button class="vbar-e ${ed?'on':''}" onclick="APP._vbe=!APP._vbe;APP._vbt=null;APP.render()">${ed?'Готово':'Изменить'}</button>`:''}</div>`;
+  if(!B.length)return bar+`<div class="vb-empty"><b>Моё видение</b><p>Слова и картинки о жизни, к которой идёшь, и о человеке, которым становишься. Начни с одной фразы или фото.</p></div>`;
+  const ctl=(b,i)=>ed?`<div class="vbc"><button ${i?'':'disabled'} onclick="event.stopPropagation();APP.vbMove('${b.id}',-1)" aria-label="Выше">${ico.up}</button><button ${i<B.length-1?'':'disabled'} onclick="event.stopPropagation();APP.vbMove('${b.id}',1)" aria-label="Ниже">${ico.dn}</button>${b.type==='img'?`<button onclick="event.stopPropagation();APP.vbCap('${b.id}')" aria-label="Подпись">${I.ed}</button>`:''}<button class="vbc-x" onclick="event.stopPropagation();APP.vbDel('${b.id}')" aria-label="Удалить">${I.x}</button></div>`:'';
+  const im=b=>{const src=this.visSrc(b.id),i=B.indexOf(b);return `<div class="vb-i ${ed?'ed':''}" onclick="${ed?'':`APP.vbView('${b.id}')`}">${src?`<img src="${src}" alt="" loading="lazy">`:'<span class="drm-ld"></span>'}${b.text?`<em>${esc(b.text)}</em>`:''}${ctl(b,i)}</div>`};
   let out='',run=[];const flush=()=>{if(!run.length)return;out+=run.length===1?`<div class="vb-g1">${im(run[0])}</div>`:`<div class="vb-g2 ${run.length%2?'odd':''}">${run.map(im).join('')}</div>`;run=[]};
-  B.forEach(b=>{if(b.type==='img')run.push(b);else{flush();out+=`<button class="vb-t" onclick="APP.vbEdit('${b.id}')"><span>${esc(b.text).replace(/\n/g,'<br>')}</span></button>`}});flush();
-  return `<div class="vb">${out}</div>`+add+(!this.user&&B.some(x=>x.type==='img')?'<div class="pg-note">Войди в аккаунт, чтобы картинки были на всех устройствах.</div>':'')},
+  B.forEach((b,i)=>{if(b.type==='img')return run.push(b);flush();
+    if(this._vbt===b.id&&!ed){out+=`<div class="vb-t vb-te"><textarea id="vbTA" rows="2" placeholder="Напиши, какой будет твоя жизнь" oninput="APP.vbType('${b.id}',this)" onblur="APP.vbDone('${b.id}')">${esc(b.text||'')}</textarea></div>`}
+    else out+=`<div class="vb-t ${ed?'ed':''}" onclick="${ed?'':`APP.vbTxt('${b.id}')`}"><span>${esc(b.text||'').replace(/\n/g,'<br>')||'<i>Пустой текст</i>'}</span>${ctl(b,i)}</div>`});flush();
+  if(this._vbt)setTimeout(()=>{const t=$('vbTA');if(t&&document.activeElement!==t){t.style.height='auto';t.style.height=t.scrollHeight+'px';t.focus();t.setSelectionRange(t.value.length,t.value.length)}},30);
+  return bar+`<div class="vb">${out}</div>`+(!this.user&&B.some(x=>x.type==='img')?'<div class="pg-note">Войди в аккаунт, чтобы картинки были на всех устройствах.</div>':'')},
+vbTxt(id){this._vbt=id;this.render()},
+vbType(id,el){el.style.height='auto';el.style.height=el.scrollHeight+'px';const b=this.vBlocks().find(x=>x.id===id);if(!b)return;b.text=el.value;clearTimeout(this._vbtt);this._vbtt=setTimeout(()=>this.save(),500)},
+vbDone(id){const B=this.vBlocks(),b=B.find(x=>x.id===id);this._vbt=null;if(b&&!(b.text||'').trim()){this.S.vision.blocks=B.filter(x=>x.id!==id)}else if(b)b.text=b.text.trim();this.save();setTimeout(()=>this.render(),0)},
+vbCap(id){const b=this.vBlocks().find(x=>x.id===id);if(!b)return;this.ask('Подпись к фото',b.text||'',v=>{b.text=(v||'').trim();this.save();this.render()})},
+vbView(id){const L=this.vBlocks().filter(x=>x.type==='img');let i=Math.max(0,L.findIndex(x=>x.id===id));const old=$('vbv');if(old)old.remove();
+  const w=document.createElement('div');w.id='vbv';w.className='vbv';document.body.appendChild(w);
+  const draw=()=>{const b=L[i];w.innerHTML=`<div class="vbv-bg"></div><img src="${this.visSrc(b.id)}" alt="">${b.text?`<div class="vbv-c">${esc(b.text)}</div>`:''}<div class="vbv-n">${i+1} / ${L.length}</div><button class="vbv-x" aria-label="Закрыть">${I.x}</button>${L.length>1?`<button class="vbv-p" aria-label="Назад">${I.l}</button><button class="vbv-f" aria-label="Дальше">${I.r}</button>`:''}`;
+    w.querySelector('.vbv-x').onclick=close;const p=w.querySelector('.vbv-p'),f=w.querySelector('.vbv-f');if(p){p.onclick=e=>{e.stopPropagation();go(-1)};f.onclick=e=>{e.stopPropagation();go(1)}}};
+  const go=d=>{i=(i+d+L.length)%L.length;draw()},close=()=>{w.remove();document.removeEventListener('keydown',key)},key=e=>{if(e.key==='Escape')close();if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)};
+  let sx=null;w.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});w.addEventListener('touchend',e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>50)go(dx<0?1:-1)},{passive:true});
+  document.addEventListener('keydown',key);draw();requestAnimationFrame(()=>w.classList.add('on'))},
 cabSkills(){const SK=this.skillsData(),D=this.rpgData(),w7=D.pts7||{},sel=this._sks||SK[0].k,cur=SK.find(s=>s.k===sel)||SK[0],COL={str:'#FF8A65',int:'#5EE0EE',spi:'#B49CFF',biz:'#F5B84B',dis:'#7CF0A4'};
   const W=340,C=170,R0=40,STEP=19,n=SK.length;
   const P=(i,r)=>{const a=-Math.PI/2+i*2*Math.PI/n;return [C+r*Math.cos(a),C+r*Math.sin(a)]};
