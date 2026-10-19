@@ -1415,6 +1415,10 @@ a.btn{text-decoration:none!important;display:flex;align-items:center;justify-con
 .plg.over .plg-h b,.plr-d.over,.kov{color:var(--mut)!important}
 .dzp-st{display:inline-grid;vertical-align:-2px;margin-right:5px;color:#C9B8FF}.dzp-st svg{width:13px;height:13px}
 @media(max-width:420px){.mpl-r{flex-wrap:wrap}.mpl-r .sp{flex:1 1 100%;margin-bottom:2px}}
+.ancc{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}.ancc button{font-size:12.5px;padding:7px 11px;border-radius:99px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--tx)}.ancc button.on{background:rgba(155,123,255,.24);border-color:rgba(155,123,255,.7)}
+.fsc,.wkr{padding:16px!important;margin:0 0 12px!important;border-color:rgba(155,123,255,.38)!important;background:linear-gradient(160deg,rgba(155,123,255,.13),rgba(155,123,255,.02))!important}.fsc-h{display:flex;align-items:center;justify-content:space-between}.fsc-h span{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C9B8FF}
+.fsc>b{display:block;font-size:22px;font-weight:800;margin-top:4px}.fsc>em,.wkr>em{display:block;font-style:normal;font-size:13px;color:var(--mut);line-height:1.45;margin-top:6px}.fsc-a{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.fsc-a .btn{flex:1 1 auto}
+.wkr-n{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 4px}.wkr-n div{padding:10px;border-radius:12px;background:rgba(255,255,255,.04)}.wkr-n b{display:block;font-size:22px;font-weight:800}.wkr-n b i{font-style:normal;font-size:12px;color:var(--dim)}.wkr-n span{display:block;font-size:11px;color:var(--dim);margin-top:2px;line-height:1.3}.wkr .btn{margin-top:12px}.wkr .btn svg{width:15px;height:15px;vertical-align:-2px;margin-right:4px}
 </style>
 </head>
 <body>
@@ -1982,7 +1986,7 @@ plRow(x,showDate){const td=today(),over=!x.done&&x.date<td,pr=x.pr||0;
   const when=showDate?(x.date===td?'Сегодня':x.date===add(td,1)?'Завтра':x.date===add(td,-1)?'Вчера':WD[pd(x.date).getDay()]+', '+fd(x.date)):'';
   return `<div class="plr ${x.done?'done':''}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${pr}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><button class="plr-t" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b>${this.kMeta(x)}</button><span class="plr-d ${over?'over':''}">${[x.tm,when].filter(Boolean).join(' · ')}</span></div>`},
 plAdd(){const s=this._plv==='matrix';return `<form class="pl-add" onsubmit="event.preventDefault();APP.taskAdd(this.q.value,today());this.q.value=''"><span>${I.plus}</span><input name="q" placeholder="${s?'Задача… !1 — срочно и важно':'Задача… завтра в 15:00 !1 #работа'}" autocomplete="off"></form>`},
-vPlanList(){const td=today(),T=(this.S.tasks||[]).filter(x=>!(this.S.del||[]).includes(x.id)),open=T.filter(x=>!x.done);
+vPlanList(){const td=today(),T=(this.S.tasks||[]).filter(x=>!x.drop&&!(this.S.del||[]).includes(x.id)),open=T.filter(x=>!x.done);
   const srt=(a,b)=>a.date.localeCompare(b.date)||(b.pr||0)-(a.pr||0)||(a.tm||'99').localeCompare(b.tm||'99');
   const G=[['over','С прошлых дней',x=>x.date<td],['td','Сегодня',x=>x.date===td],['tm','Завтра',x=>x.date===add(td,1)],['wk','Следующие 7 дней',x=>x.date>add(td,1)&&x.date<=add(td,7)],['lt','Позже',x=>x.date>add(td,7)]];
   let h=this.plAdd();
@@ -2179,7 +2183,7 @@ topSet(d,v,quiet){v=(v||'').trim();const S=this.S;S.checkin=S.checkin||{};const 
   this.save();if(!quiet){this.render();if(v)this.toast('Главное на завтра — в Планах со звёздочкой')}},
 dayOk(d){if(this.frozen(d))return true;const a=this.dayAll(d);return a.n>0&&a.p>=.8},
 dayBest(){const td=today();let best=0,run=0,miss=0;for(let i=400;i>=0;i--){const d=add(td,-i);if(this.dayOk(d)){if(!this.frozen(d))run++;miss=0;best=Math.max(best,run)}else if(d<td){miss++;if(miss>=2)run=0}}return Math.max(best,this.dayStreak())},
-mpLeft(){const td=today();return (this.S.tasks||[]).filter(x=>!x.done&&x.date<td)},
+mpLeft(){const td=today();return (this.S.tasks||[]).filter(x=>!x.done&&!x.drop&&x.date<td)},
 mpMove(id,n){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;x.date=add(today(),n);x.t=Date.now();this.save();this.render()},
 mpDone(){this.S.pref.mp=today();this.save();this.track('plan_morning',null,'day');this.render();this.toast('План на день готов')},
 mpH(){const td=today(),hr=this._hr??new Date().getHours(),pf=this.S.pref||{};if(hr<4||hr>=14||pf.mp===td)return '';
@@ -2197,6 +2201,27 @@ wbH(){const td=today(),pf=this.S.pref||{};if(pf.wb===td)return '';if(!pf.d0||(pd
   return `<div class="card wbk"><span class="wbk-i">${miss===1?I.ok:I.fire}</span><div class="sp"><b>${miss===1?'Вчера пропуск, серия на месте':'С возвращением'}</b><em>${miss===1?'Один пропуск её не обнуляет. Сделай сегодня хотя бы одно дело, и серия продолжится.':`Серия начнётся заново, а глубина и медали никуда не делись.${ph?' Отметь три дня подряд — получишь медаль «Феникс».':' Начни с одного дела.'}`}</em></div><button class="xcl" onclick="APP.setPref('wb','${td}')" aria-label="Скрыть">${I.x}</button></div>`},
 ovlH(){const td=today(),L=this.tasksFor(td).filter(x=>!x.done);if(L.length<=7)return '';return `<div class="ovl"><span class="sp">День плотный: ${L.length} ${this.pl(L.length,'задача','задачи','задач')}. Обычно успевают меньше, чем планируют.</span><button onclick="APP.plTrim()">Оставить 7</button></div>`},
 plTrim(){const td=today(),st=this.starList(td),L=this.tasksFor(td).filter(x=>!x.done).sort((a,b)=>(st.includes('k:'+b.id)?1:0)-(st.includes('k:'+a.id)?1:0)||(b.pr||0)-(a.pr||0)||(a.tm||'99').localeCompare(b.tm||'99'));const mv=L.slice(7);mv.forEach(x=>{x.date=add(td,1);x.t=Date.now()});this.save();this.render();this.toast(`На завтра: ${mv.length} ${this.pl(mv.length,'задача','задачи','задач')}`)},
+/* пакет 2: привязка «после чего», новая неделя, итог недели */
+ANC:[['wake','После пробуждения','m','07:00'],['coffee','После кофе','m','08:00'],['lunch','После обеда','d','13:30'],['work','После работы','e','18:30'],['dinner','После ужина','e','19:30'],['bed','Перед сном','e','22:00']],
+ancTimes(){const P=(this.S.pref||{}).push||{},A=P.anch||{};return Object.fromEntries(this.ANC.map(a=>[a[0],A[a[0]]===undefined?a[3]:A[a[0]]]))},
+ancPick(k){this.hKeep();const a=this.ANC.find(x=>x[0]===k),h=this._h;if(h.anc===k){h.anc='';h.when=''}else{h.anc=k;h.when=a[1];h.tod=a[2]}this.hForm()},
+ancSum(){const td=today(),out={};this.S.habits.filter(h=>!h.archived&&h.anc&&this.hSched(h,td)&&!this.hOn(h,td)).forEach(h=>{(out[h.anc]=out[h.anc]||[]).push(h.title)});return out},
+ancSet(k,v){const P=this.S.pref.push=this.S.pref.push||{};P.anch={...(P.anch||{}),[k]:v};this.pushSet('anch',P.anch)},
+fsDrop(){const lim=add(today(),-14);let n=0;(this.S.tasks||[]).forEach(x=>{if(!x.done&&!x.drop&&x.date<lim){x.drop=today();x.t=Date.now();n++}});this.save();this.track('fresh_drop',{n},'day');this.render();this.toast(n?`Отпущено ${n} ${this.pl(n,'старая задача','старые задачи','старых задач')}`:'Старых хвостов нет')},
+fsH(){const td=today(),dt=pd(td),mon=dt.getDay()===1,first=dt.getDate()===1,pf=this.S.pref||{};if(!(mon||first)||pf.fs===td)return '';if(!pf.d0||(pd(td)-pd(pf.d0))/864e5<7)return '';
+  const pm=this.monday(add(td,-7));let ok=0;for(let i=0;i<7;i++)if(this.dayOk(add(pm,i)))ok++;
+  const old=(this.S.tasks||[]).filter(x=>!x.done&&!x.drop&&x.date<add(td,-14)).length;
+  return `<div class="card fsc"><div class="fsc-h"><span>${first?'Новый месяц':'Новая неделя'}</span><button class="xcl" onclick="APP.setPref('fs','${td}')" aria-label="Скрыть">${I.x}</button></div><b>Чистый лист</b><em>Прошлая неделя: ${ok} из 7 дней. Эта начинается с нуля, и это лучший момент начать заново.</em>
+   <div class="fsc-a">${old?`<button class="btn gh" onclick="APP.fsDrop()">Отпустить старые задачи · ${old}</button>`:''}<button class="btn pr" onclick="APP.track('fresh_start',null,'day');APP.setPref('fs','${td}')">Начать ${first?'месяц':'неделю'}</button></div></div>`},
+wkSum(){const td=today(),m0=this.monday(td);let ok=0,n=0;for(let i=0;i<7;i++){const d=add(m0,i);if(d>td)break;n++;if(this.dayOk(d))ok++}const done=(this.S.tasks||[]).filter(x=>x.done&&x.done>=m0&&x.done<=td).length;let marks=0;for(let i=0;i<7;i++){const d=add(m0,i);marks+=Object.keys((this.S.hlog||{})[d]||{}).length}return {ok,n,done,marks,m0}},
+wkShare(){const W=this.wkSum(),url='https://vikagladysheva07-source.github.io/wikki-app/',t=`Моя неделя в wikki.app: ${W.ok} из 7 дней дисциплины, ${W.marks} ${this.pl(W.marks,'отметка','отметки','отметок')} привычек и ${W.done} ${this.pl(W.done,'дело','дела','дел')} сделано. Держи меня в тонусе на следующей неделе: ${url}`;
+  this.track('week_share',null,'day');this.S.pref.wr=W.m0;this.save();if(navigator.share)navigator.share({text:t}).catch(()=>{});else{this.copy(t);this.toast('Текст скопирован')}this.render()},
+wkH(){const td=today(),dt=pd(td),hr=this._hr??new Date().getHours(),pf=this.S.pref||{};if(!(dt.getDay()===0&&hr>=12))return '';const W=this.wkSum();if(pf.wr===W.m0||W.ok+W.done+W.marks===0)return '';
+  const pt=(this.groups||[]).length>0;
+  return `<div class="card wkr"><div class="fsc-h"><span>Итог недели</span><button class="xcl" onclick="APP.setPref('wr','${W.m0}')" aria-label="Скрыть">${I.x}</button></div>
+   <div class="wkr-n"><div><b>${W.ok}<i>/7</i></b><span>дней дисциплины</span></div><div><b>${W.marks}</b><span>отметок привычек</span></div><div><b>${W.done}</b><span>дел сделано</span></div></div>
+   <em>Отправь итог ${pt?'партнёру':'тому, кто тебя поддерживает'}. Когда кто-то ждёт твой отчёт, держать слово проще.</em>
+   <button class="btn pr w" onclick="APP.wkShare()">${SI.share} Отправить ${pt?'партнёру':'другу'}</button></div>`},
 /* дневник-блокнот */
 jNote(d,v){this.track('journal',null,'day');clearTimeout(this._jnt);const st=$('jrSt');if(st)st.textContent='сохраняю…';this._jnt=setTimeout(()=>{const S=this.S;S.checkin=S.checkin||{};const c=S.checkin[d]=Object.assign({energy:0,sleep:'',win:'',top:'',note:''},S.checkin[d]||{});c.note=v;c.t=Date.now();this.save();const s2=$('jrSt');if(s2)s2.textContent='сохранено'},600)},
 jGrow(el){el.style.height='auto';el.style.height=Math.max(260,el.scrollHeight+4)+'px'},
@@ -2838,7 +2863,7 @@ editFocus(w){const ws=this.S.weeks[w]||{};
   <button class="btn pr w" onclick="APP.setW(${w},'focus',$('qF').value.trim());APP.setW(${w},'plan',$('qP').value);APP.close();APP.render()">Сохранить</button>`);setTimeout(()=>$('qF')&&$('qF').focus(),50)},
 
 /* ---------- задачи дня (разовые дела) ---------- */
-tasksFor(d){const td=today();return (this.S.tasks||[]).filter(x=>x.date===d||(!x.done&&x.date<d&&d===td)).sort((a,b)=>(a.done?1:0)-(b.done?1:0)||(b.pr||0)-(a.pr||0)||((a.tm||'99')<(b.tm||'99')?-1:(a.tm||'99')>(b.tm||'99')?1:0)||(a.t||0)-(b.t||0))},
+tasksFor(d){const td=today();return (this.S.tasks||[]).filter(x=>!x.drop).filter(x=>x.date===d||(!x.done&&x.date<d&&d===td)).sort((a,b)=>(a.done?1:0)-(b.done?1:0)||(b.pr||0)-(a.pr||0)||((a.tm||'99')<(b.tm||'99')?-1:(a.tm||'99')>(b.tm||'99')?1:0)||(a.t||0)-(b.t||0))},
 tasksBlock(tk){const d=this.day;
   let h=`<div class="todh"><span class="lbl">Задачи</span><span class="ln"></span></div><div class="tgrid">`;
   tk.forEach(x=>{const over=x.date<d;h+=`<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${x.pr||0}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${this.nmE('k',x,1)}${over?`<div class="meta">перенесено с ${fd(x.date)}</div>`:''}</div></div>`});
@@ -3364,7 +3389,7 @@ vHome(){if(!this._rwt||Date.now()-this._rwt>60000){this._rwt=Date.now();this.rwC
   let body='',chunk='';const flush=()=>{if(chunk){body+=`<div class="dz dz2">${chunk}</div>`;chunk=''}};
   this.dzOrder().forEach(([k,on])=>{if(!on||!WG[k])return;if(k==='today'){flush();body+=WG[k]}else chunk+=WG[k]});flush();
   const repC=this.inPrg()&&this.curWeek()>=12?`<button class="card pg-rep" onclick="APP.openSub('report')"><span>${I.trophy}</span><div class="sp"><b>Итоги цикла готовы</b><em>Цифры, победы и карточка для сторис</em></div>${I.r}</button>`:'';
-  return `<div class="dz-hd"><div class="h1">Сегодня</div><button class="dz-cfg" onclick="APP.dzSheet()">${I.gear}<span>Настроить</span></button></div>__S1__<div class="dz">${bFull&&innerWidth>=760?banner:bannerS}</div>${this.mpH()}${this.wbH()}${this.shMoment()}${this.ctxH()}${this.badDayWin()}${repC}${body}${this.tipH()}<button class="qfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${I.plus}</button>`},
+  return `<div class="dz-hd"><div class="h1">Сегодня</div><button class="dz-cfg" onclick="APP.dzSheet()">${I.gear}<span>Настроить</span></button></div>__S1__<div class="dz">${bFull&&innerWidth>=760?banner:bannerS}</div>${(()=>{const f=this.fsH();return f+this.mpH()+(f?'':this.wbH())})()}${this.wkH()}${this.shMoment()}${this.ctxH()}${this.badDayWin()}${repC}${body}${this.tipH()}<button class="qfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${I.plus}</button>`},
 DZW:[['today','Планы','Три ближайших дела и прогресс дня'],['rings','Кольца активности','День, неделя и месяц'],['streak','Серии','Дни подряд, рекорд и лучшие привычки'],['rhythm','Ритм дня','Утро, день и вечер'],['wday','Дни недели','В какие дни ты сильнее'],['week','Неделя программы','Счёт недели, фокус и дни до разбора'],['progress','Общий прогресс','График с выбором периода'],['cons','Карта дней','Каждый день на тепловой карте'],['wkbars','Прогресс недели','Столбики по дням недели'],['wheel','Колесо баланса','Средний балл и слабая сфера месяца'],['partner','Партнёр','Процент недели друг друга']],
 dzOrder(){const pf=this.S.pref=this.S.pref||{};if(pf.dzv!==3){pf.dz=null;pf.dzv=3}const def=this.DZW.map(x=>[x[0],['today','rings','streak','cons'].includes(x[0])]);let cur=(pf.dz||[]).filter(x=>this.DZW.some(w=>w[0]===x[0]));const mig=false;def.forEach(d=>{if(!cur.some(x=>x[0]===d[0])){const pi=cur.findIndex(x=>x[0]==='partner');if(pi>=0&&pi===cur.length-1)cur.splice(pi,0,[d[0],d[1]]);else cur.push([d[0],d[1]])}});if(mig){const pi=cur.findIndex(x=>x[0]==='partner');if(pi>=0)cur.push(cur.splice(pi,1)[0]);pf.dz=cur.map(x=>[x[0],x[1]]);pf.dzv=2}return cur},
 dzSet(o){this.S.pref=this.S.pref||{};this.S.pref.dz=o;this.save();this.render();this.dzSheet()},
@@ -3411,8 +3436,8 @@ hForm(){const x=this._h,order=(this.S.pref||{}).wk0==='sun'?[0,1,2,3,4,5,6]:[1,2
   ${(x.kind==='num'||x.kind==='time')?`<div class="f2"><div class="f"><label class="lbl">Цель в день</label><input id="hG" inputmode="decimal" value="${x.target||''}" placeholder="${x.kind==='time'?'20':'2'}"></div><div class="f"><label class="lbl">${x.kind==='time'?'Шаг, мин':'Единица'}</label>${x.kind==='time'?`<input id="hS" inputmode="numeric" value="${x.step||5}">`:`<input id="hU" value="${esc(x.unit)}" placeholder="л, км, стр.">`}</div></div>`:''}
   ${x.kind==='scale'?`<div class="small dim">Оценка от 1 до 5: настроение, энергия, боль, качество сна. Считается выполненной при любой оценке.</div>`:''}
   <div class="f"><label class="lbl">Прокачивает</label><div class="skc">${APP.SKO.map(([k,n,ic])=>`<button class="${(x.sk||APP.skGuess(x.title)||'biz')===k?'on':''}" onclick="APP.hKeep();APP._h.sk='${k}';APP._h._skm=1;APP.hForm()">${hIco(ic)}<span>${n}</span></button>`).join('')}</div></div>
-  <div class="f"><label class="lbl">Привязка: после чего делаю</label><input id="hW" value="${esc(x.when)}" placeholder="После утреннего кофе"></div>
-  <div class="small dim">Привязка к тому, что уже делаешь каждый день, — самый надёжный способ закрепить привычку (Джеймс Клир).</div>
+  <div class="f"><label class="lbl">Когда делаю: после чего</label><div class="ancc">${APP.ANC.map(([k,l])=>`<button class="${x.anc===k?'on':''}" onclick="APP.ancPick('${k}')">${l}</button>`).join('')}</div><input id="hW" value="${esc(x.when)}" placeholder="Или своё: после утренней прогулки" oninput="APP._h.anc=''"></div>
+  <div class="small dim">Привязка к тому, что уже делаешь каждый день, закрепляет привычку надёжнее будильника. Если включены уведомления, напомним в это время.</div>
   <div class="row" style="margin-top:18px"><button class="btn pr sp" onclick="APP.hSave()">Сохранить</button>${this._hNew?'':`<button class="btn del" onclick="APP.hDel()">Удалить</button>`}</div>`)},
 hKeep(){if($('hT')){this._h.title=$('hT').value;if($('hA'))this._h.area=$('hA').value;this._h.when=$('hW').value;if($('hG'))this._h.target=+String($('hG').value).replace(',','.')||0;if($('hU'))this._h.unit=$('hU').value.trim();if($('hS'))this._h.step=+$('hS').value||5;if(this._h.kind==='time'){this._h.unit='мин';if(!this._h.step||this._h.step===1)this._h.step=5}if(this._h.kind==='num'&&!this._h.step)this._h.step=1}},
 hSave(){this.hKeep();const x=this._h;if(!x._skm)x.sk=this.skGuess(x.title)||x.sk||'biz';delete x._skm;if(!x.title.trim())return this.toast('Назови привычку');if(!this.S.habits.some(h=>h.id===x.id)&&!this.canAddH(1)){this.close();return}if(!x.days.length)return this.toast('Выбери хотя бы один день');
@@ -3739,7 +3764,8 @@ vMe(){
       tog(ic('moon','#7C5CE6'),'Вечер',!!pp.evening,"APP.pushSet('evening',APP.pushPrefs().evening?'':'21:00')",pp.evening?'Закрыть день в '+pp.evening:'Выключено'),
       pp.evening?row(ic('list','#7C5CE6'),'Время вечером',pp.evening,"APP.ask('Время вечером',APP.pushPrefs().evening,v=>v&&APP.pushSet('evening',v),'time')"):'',
       tog(ic('target','#5D27DB'),'Разбор недели',pp.review,"APP.pushSet('review',!APP.pushPrefs().review)",'Воскресенье, 18:00'),
-      tog(ic('lotus','#E65CA8'),'Колесо баланса',pp.wheel,"APP.pushSet('wheel',!APP.pushPrefs().wheel)",'1-е число месяца, 12:00')].join('')}</div>
+      tog(ic('lotus','#9B7BFF'),'Колесо баланса',pp.wheel,"APP.pushSet('wheel',!APP.pushPrefs().wheel)",'1-е число месяца, 12:00')].join('')}</div>
+    ${this.S.habits.some(h=>h.anc)?`<div class="lbl sec">Привязки привычек</div><div class="card sgrp"${dis}>${this.ANC.filter(a=>this.S.habits.some(h=>h.anc===a[0]&&!h.archived)).map(a=>row(ic('list','#9B7BFF'),a[1],this.ancTimes()[a[0]]||'выкл',`APP.ask('${a[1]}: время',APP.ancTimes()['${a[0]}'],v=>APP.ancSet('${a[0]}',v||''),'time')`,'Напомним про привычки, если они ещё не отмечены')).join('')}</div>`:''}
     ${on?`<button class="btn w nbtn" onclick="APP.pushTest()">Отправить тестовое уведомление</button>`:''}
     ${!this.user?'<div class="small mut" style="text-align:center;margin-top:10px">Войди в аккаунт, чтобы включить уведомления</div>':''}`};
   pages.look=()=>sec('Оформление',[
@@ -3880,7 +3906,7 @@ track(ev,props,once){try{if(!this.sb||location.hostname==='localhost')return;con
   this.sb.from('tw_events').insert({did:this.did(),uid:this.user?this.user.id:null,ev,props:props||{},d:today()}).then(()=>{},()=>{})}catch(e){}},
 trackMarks(){if(this._fmk)return;const S=this.S,has=o=>Object.values(o||{}).some(x=>x&&Object.keys(x).length);if(has(S.hlog)||has(S.log)){this._fmk=1;this.track('first_mark',null,'ever')}},
 VAPID:'BDAUrTsDVqNLfDpt0giGnSTzxis_9Rq393FySipLm5Za0yTPZUvxyUgAo8yn8tQvPalCzZTD8uj2hdj4Pn4IA_k',
-pushPrefs(){const P=(this.S.pref||{}).push||{};return{morning:P.morning===undefined?'07:30':P.morning,evening:P.evening===undefined?'21:00':P.evening,review:P.review!==false,wheel:P.wheel!==false}},
+pushPrefs(){const P=(this.S.pref||{}).push||{};return{morning:P.morning===undefined?'07:30':P.morning,evening:P.evening===undefined?'21:00':P.evening,review:P.review!==false,wheel:P.wheel!==false,anch:this.ancTimes()}},
 pushSupported(){return 'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window},
 isIOS(){return /iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)},
 isStandalone(){return navigator.standalone===true||matchMedia('(display-mode: standalone)').matches},
@@ -3901,7 +3927,7 @@ async pushOff(){try{const sub=await this.pushSub();if(sub){await this.sb.from('t
 async pushSet(k,v){this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPrefs(),on:!!this._pushOn,[k]:v};this.save();this.render();
   const sub=await this.pushSub();if(sub&&this.user)await this.sb.from('tw_push').update({prefs:this.pushPrefs(),lang:this.lang(),tz:Intl.DateTimeFormat().resolvedOptions().timeZone,updated_at:new Date().toISOString()}).eq('endpoint',sub.endpoint)},
 async pushTest(){try{const{data,error}=await this.sb.functions.invoke('tw-push',{body:{test:true}});if(error)throw error;const ok=(data.sent||[]).filter(x=>x>=200&&x<300).length;this.toast(ok?'Отправили. Уведомление придёт через пару секунд':'Не дошло. Выключи и включи уведомления заново')}catch(e){this.toast('Ошибка: '+this.errText(e))}},
-async pushSum(force){if(!this.user||!this.sb||!this._pushOn)return;const td=today(),a=this.dayAll(td),sm={date:td,n:a.n-a.done,st:this.dayStreak()},k=JSON.stringify(sm);if(!force&&k===this._pSum)return;this._pSum=k;
+async pushSum(force){if(!this.user||!this.sb||!this._pushOn)return;const td=today(),a=this.dayAll(td),sm={date:td,n:a.n-a.done,st:this.dayStreak(),an:this.ancSum()},k=JSON.stringify(sm);if(!force&&k===this._pSum)return;this._pSum=k;
   try{await this.sb.from('tw_push').update({sum:sm}).eq('user_id',this.user.id)}catch(e){}},
 async pushCheck(){const sub=this.pushSupported()?await this.pushSub():null,on=!!sub&&Notification.permission==='granted';if(on!==this._pushOn){this._pushOn=on;if(this.tab==='me')this.render()}},
 iosSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Уведомления на iPhone</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
