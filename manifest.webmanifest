@@ -1,7 +1,7 @@
 {
-  "name": "wikki.app",
-  "short_name": "wikki.app",
-  "description": "wikki.app — система дисциплины: программы, привычки, прогресс и дневник",
+  "name": "Volyo",
+  "short_name": "Volyo",
+  "description": "Volyo — от слова «воля». Система дисциплины: привычки, планы, прогресс и дневник",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

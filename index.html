@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>wikki.app</title>
+<title>Volyo</title>
 <meta name="theme-color" content="#07070D">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="wikki.app">
+<meta name="apple-mobile-web-app-title" content="Volyo">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -1421,6 +1421,7 @@ a.btn{text-decoration:none!important;display:flex;align-items:center;justify-con
 .wkr-n{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 4px}.wkr-n div{padding:10px;border-radius:12px;background:rgba(255,255,255,.04)}.wkr-n b{display:block;font-size:22px;font-weight:800}.wkr-n b i{font-style:normal;font-size:12px;color:var(--dim)}.wkr-n span{display:block;font-size:11px;color:var(--dim);margin-top:2px;line-height:1.3}.wkr .btn{margin-top:12px}.wkr .btn svg{width:15px;height:15px;vertical-align:-2px;margin-right:4px}
 /* единый ритм карточек на главной: без слипания */
 .dmain>.card,.dmain>.dz,.dmain>button.card,.dmain>.shpop+.card{margin-top:0!important;margin-bottom:14px!important}.dmain>.dz>.card{margin:0!important}.dmain>.dz.dz2{gap:14px}
+.wl-pr{font-size:13px;color:#C9B8FF;letter-spacing:.02em;margin:4px 0 2px}.ab-h .wl-pr{margin:2px 0 10px}
 </style>
 </head>
 <body>
@@ -2216,7 +2217,7 @@ fsH(){const td=today(),dt=pd(td),mon=dt.getDay()===1,first=dt.getDate()===1,pf=t
   return `<div class="card fsc"><div class="fsc-h"><span>${first?'Новый месяц':'Новая неделя'}</span><button class="xcl" onclick="APP.setPref('fs','${td}')" aria-label="Скрыть">${I.x}</button></div><b>Чистый лист</b><em>Прошлая неделя: ${ok} из 7 дней. Эта начинается с нуля, и это лучший момент начать заново.</em>
    <div class="fsc-a">${old?`<button class="btn gh" onclick="APP.fsDrop()">Отпустить старые задачи · ${old}</button>`:''}<button class="btn pr" onclick="APP.track('fresh_start',null,'day');APP.setPref('fs','${td}')">Начать ${first?'месяц':'неделю'}</button></div></div>`},
 wkSum(){const td=today(),m0=this.monday(td);let ok=0,n=0;for(let i=0;i<7;i++){const d=add(m0,i);if(d>td)break;n++;if(this.dayOk(d))ok++}const done=(this.S.tasks||[]).filter(x=>x.done&&x.done>=m0&&x.done<=td).length;let marks=0;for(let i=0;i<7;i++){const d=add(m0,i);marks+=Object.keys((this.S.hlog||{})[d]||{}).length}return {ok,n,done,marks,m0}},
-wkShare(){const W=this.wkSum(),url='https://vikagladysheva07-source.github.io/wikki-app/',t=`Моя неделя в wikki.app: ${W.ok} из 7 дней дисциплины, ${W.marks} ${this.pl(W.marks,'отметка','отметки','отметок')} привычек и ${W.done} ${this.pl(W.done,'дело','дела','дел')} сделано. Держи меня в тонусе на следующей неделе: ${url}`;
+wkShare(){const W=this.wkSum(),url='https://vikagladysheva07-source.github.io/wikki-app/',t=`Моя неделя в Volyo: ${W.ok} из 7 дней дисциплины, ${W.marks} ${this.pl(W.marks,'отметка','отметки','отметок')} привычек и ${W.done} ${this.pl(W.done,'дело','дела','дел')} сделано. Держи меня в тонусе на следующей неделе: ${url}`;
   this.track('week_share',null,'day');this.S.pref.wr=W.m0;this.save();if(navigator.share)navigator.share({text:t}).catch(()=>{});else{this.copy(t);this.toast('Текст скопирован')}this.render()},
 wkH(){const td=today(),dt=pd(td),hr=this._hr??new Date().getHours(),pf=this.S.pref||{};if(!(dt.getDay()===0&&hr>=12))return '';const W=this.wkSum();if(pf.wr===W.m0||W.ok+W.done+W.marks===0)return '';
   const pt=(this.groups||[]).length>0;
@@ -2282,7 +2283,7 @@ cabinet(){const S=this.S,P=S.profile||{},D=this.rpgData(),pct=Math.round((D.xp-D
     <button class="pcab-ed" onclick="APP.editProfile()">${I.ed}<span>Редактировать</span></button><button class="pcab-ed pcab-sh" onclick="APP.shareStudio('hero')">${SI.share}<span>В сторис</span></button>
     <div class="pcab-av" style="--p:${pct}"><span>${this.avaHtml()}</span><em>${D.lvl}</em></div>
     <div class="pcab-n">${esc(nm)}</div>${this.rwTitle()?`<div class="pcab-t">${this.rwTitle()}</div>`:''}${P.motto?`<div class="pcab-m">«${esc(P.motto)}»</div>`:''}
-    <div class="pcab-ch"><span>Уровень ${D.lvl}</span><span class="${this.paid()?'gold':''}">${this.paid()?'Полный доступ':'Бесплатный тариф'}</span><span>${days} ${this.pl(days,'день','дня','дней')} с wikki.app</span></div></div></div>`;
+    <div class="pcab-ch"><span>Уровень ${D.lvl}</span><span class="${this.paid()?'gold':''}">${this.paid()?'Полный доступ':'Бесплатный тариф'}</span><span>${days} ${this.pl(days,'день','дня','дней')} с Volyo</span></div></div></div>`;
   const goal=P.goalY?`<div class="card pcg"><em>Главная цель года</em><b>${esc(P.goalY)}</b></div>`:`<button class="card pcg pcg0" onclick="APP.editProfile()"><em>Главная цель года</em><b>Запиши, что должно случиться к концу года</b>${I.plus}</button>`;
   const k=(v,l)=>`<div><b>${v}</b><span>${l}</span></div>`;
   const stats=`<div class="pck">${k(active,'дней с отметками')}${k(D.marks,'всего отметок')}${k(best,'лучшая серия')}${k(wins,this.pl(wins,'победа','победы','побед'))}</div>`;
@@ -2331,7 +2332,7 @@ async shDraw(cv,kind,bg){const W=1080,H=1920,x=cv.getContext('2d');cv.width=W;cv
     x.textAlign='left';x.font=F(500,44);D.items.forEach((t,i)=>{const Y=base+240+i*76;x.fillStyle=CY;x.fillText('✓',cx-330,Y);x.fillStyle='#fff';x.fillText(t.length>28?t.slice(0,27)+'…':t,cx-270,Y)});x.textAlign='center';yEnd=base+240+Math.max(0,D.items.length-1)*76+30}
   if(kind==='hero'){x.fillStyle='rgba(124,92,230,.35)';x.beginPath();x.arc(cx,base-230,170,0,Math.PI*2);x.fill();x.strokeStyle=VI;x.lineWidth=10;x.stroke();x.fillStyle='#fff';x.font=F(800,150);x.fillText(String(D.lvl),cx,base-180);x.fillStyle=GO;x.font=F(700,56);x.fillText('уровень героя',cx,base+0);if(D.name){x.fillStyle='#fff';x.font=F(600,48);x.fillText(D.name,cx,base+70)}
     x.textAlign='left';D.st.forEach((s,i)=>{const Y=base+170+i*92,mx=Math.max(20,...D.st.map(z=>z[2]));x.fillStyle='rgba(255,255,255,.85)';x.font=F(600,40);x.fillText(s[1],cx-380,Y);x.fillStyle='rgba(255,255,255,.14)';x.fillRect(cx-60,Y-26,360,22);x.fillStyle=VI;x.fillRect(cx-60,Y-26,360*s[2]/mx,22);x.fillStyle='#fff';x.font=F(700,40);x.fillText(String(s[2]),cx+330,Y)});x.textAlign='center';yEnd=base+170+4*92+30}
-  x.shadowBlur=sticker?16:0;x.fillStyle='rgba(255,255,255,.9)';x.font=F(800,44);const fy=sticker?Math.min(H-120,yEnd+120):H-150;x.fillText('wikki.app',cx,fy);x.fillStyle='rgba(255,255,255,.55)';x.font=F(500,30);x.fillText('система дисциплины и привычек',cx,fy+46)},
+  x.shadowBlur=sticker?16:0;x.fillStyle='rgba(255,255,255,.9)';x.font=F(800,44);const fy=sticker?Math.min(H-120,yEnd+120):H-150;x.fillText('Volyo',cx,fy);x.fillStyle='rgba(255,255,255,.55)';x.font=F(500,30);x.fillText('система дисциплины и привычек',cx,fy+46)},
 shareStudio(kind,hid){if(kind)this._shH=hid||null;this._shK=kind||this._shK||'streak';this._shB=this._shB||'ocean';const K=[['streak','Серия'],['week','Неделя'],['day','День'],['hero','Персонаж']],B=[['sticker','Стикер'],['photo','Своё фото'],['ocean','Океан'],['dark','Тёмный']];
   this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Поделиться в сторис</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="shk">${K.map(([k,l])=>`<button class="${this._shK===k?'on':''}" onclick="APP._shK='${k}';APP.shareStudio()">${l}</button>`).join('')}</div>
@@ -2341,7 +2342,7 @@ shareStudio(kind,hid){if(kind)this._shH=hid||null;this._shK=kind||this._shK||'st
   <button class="btn pr w" onclick="APP.shGo()">Поделиться</button>`);
   setTimeout(()=>{const c=$('shCv');if(c)this.shDraw(c,this._shK,this._shB==='photo'&&!this._shPhoto?'ocean':this._shB)},20)},
 shPhoto(inp){const f=inp.files&&inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{this._shPhoto=r.result;this._shB='photo';this.shareStudio()};r.readAsDataURL(f)},
-shCaption(){const k=this._shK,D=this.shData(k),u='https://vikagladysheva07-source.github.io/wikki-app/';const t=k==='streak'?`${D.n} ${this.pl(D.n,'день','дня','дней')} подряд в wikki.app`:k==='week'?`Неделя на ${D.pct}% в wikki.app`:k==='day'?`День закрыт в wikki.app`:`Уровень ${D.lvl} в wikki.app`;return t+'. Присоединяйся: '+u},
+shCaption(){const k=this._shK,D=this.shData(k),u='https://vikagladysheva07-source.github.io/wikki-app/';const t=k==='streak'?`${D.n} ${this.pl(D.n,'день','дня','дней')} подряд в Volyo`:k==='week'?`Неделя на ${D.pct}% в Volyo`:k==='day'?`День закрыт в Volyo`:`Уровень ${D.lvl} в Volyo`;return t+'. Присоединяйся: '+u},
 async shGo(){const c=$('shCv');if(!c)return;this.track('share',{k:this._shK,b:this._shB},'day');const cap=this.shCaption();try{await navigator.clipboard.writeText(cap)}catch(e){}
   c.toBlob(async b=>{const f=new File([b],'wikki-'+this._shK+'.png',{type:'image/png'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:cap});return}}catch(e){if(e&&e.name==='AbortError')return}
     const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f.name;a.click();this.toast('Картинка сохранена, подпись скопирована')},'image/png')},
@@ -2387,7 +2388,7 @@ partnerW(){const head=`<div class="dz-ch"><span class="dz-ti">${I.chat||''}Па�
   const rows=ms.map(x=>{const s=(x.scores||{})[m0]||{},v=s.score,me=x.id===this.user.id,nm=me?'Ты':(x.name||'Партнёр');return `<div class="ptr"><span class="pta ${me?'me':''}">${esc(nm.charAt(0).toUpperCase())}</span><div class="sp"><div class="ptr-h"><b>${esc(nm)}</b><span>${v!=null?v+'%':'—'}</span></div><div class="pex-bar"><i style="width:${v||0}%"></i></div></div></div>`}).join('');
   return `<div class="card dz-c dz-pt">${head}<div class="small mut" style="margin:-4px 0 10px">Процент этой недели</div>${rows}${ms.length<2?`<div class="pg-note">Пока никто не присоединился. Код: <b style="color:#A181EB;letter-spacing:.12em">${esc(g.code)}</b></div><button class="pill" style="margin-top:10px" onclick="APP.ptInvite('${g.code}')">Отправить приглашение ${I.r}</button>`:''}</div>`},
 async ptCreate(){if(!this.user){this.toast('Сначала войди в аккаунт');return this.go('me')}try{const code=await this.grpRpc('tw_group_create',{p_name:'Партнёры',p_me:this.S.profile.name||''});this.ptOn();await this.grpLoad();await this.grpPush();await this.grpLoad();this.render();this.ptInvite(code)}catch(e){this.toast(this.grpErr(e))}},
-ptInvite(code){const url='https://vikagladysheva07-source.github.io/wikki-app/?pt='+code,t=`Давай держать друг друга в тонусе в wikki.app: будем видеть процент недели друг друга. Открой ссылку и войди, мы станем партнёрами: ${url}`;if(navigator.share)navigator.share({text:t}).catch(()=>{});else this.copy(t)},
+ptInvite(code){const url='https://vikagladysheva07-source.github.io/wikki-app/?pt='+code,t=`Давай держать друг друга в тонусе в Volyo: будем видеть процент недели друг друга. Открой ссылку и войди, мы станем партнёрами: ${url}`;if(navigator.share)navigator.share({text:t}).catch(()=>{});else this.copy(t)},
 ptJoin(){this.ask('Код партнёра','',async v=>{v=(v||'').trim();if(v.length<4)return this.toast('Введи код из 6 символов');try{const g=await this.grpRpc('tw_group_join',{p_code:v,p_me:this.S.profile.name||''});await this.grpLoad();await this.grpPush();await this.grpLoad();this.render();this.toast('Вы теперь партнёры: «'+g.name+'»')}catch(e){this.toast(this.grpErr(e))}})},
 inPrg(){const S=this.S,td=today();return S.goals.length>0&&td>=this.st&&td<=add(this.end(),7)},
 pgFrom(){return this.inPrg()?this.st:add(today(),-89)},
@@ -2498,7 +2499,7 @@ async repShare(){const D=this.repData(),R=D.R,c=document.createElement('canvas')
   x.fillStyle='#A181EB';x.font='600 40px "DM Sans",sans-serif';x.fillText('ИТОГИ · '+R.sub.toUpperCase(),90,300);x.fillStyle='#fff';x.font='800 110px "DM Sans",sans-serif';x.fillText(R.title,90,430);
   const st=[[(D.avg??0)+'%','в среднем выполнено'],[String(D.fh).replace('.',',')+' ч','часов фокуса'],[String(D.best),'лучшая серия, дней'],[String(D.wins.length),'побед записано']];
   st.forEach(([v,l],i)=>{const cx=90+(i%2)*470,cy=640+Math.floor(i/2)*400;x.fillStyle='rgba(255,255,255,.07)';x.beginPath();x.roundRect?x.roundRect(cx,cy,430,340,36):x.rect(cx,cy,430,340);x.fill();x.fillStyle='#fff';x.font='800 120px "DM Sans",sans-serif';x.fillText(v,cx+40,cy+170);x.fillStyle='rgba(232,226,247,.75)';x.font='500 38px "DM Sans",sans-serif';x.fillText(l,cx+40,cy+250)});
-  x.fillStyle='#C9B8FF';x.font='700 48px "DM Sans",sans-serif';x.fillText('wikki.app',90,1780);x.fillStyle='rgba(232,226,247,.6)';x.font='400 34px "DM Sans",sans-serif';x.fillText('система дисциплины и привычек',90,1830);
+  x.fillStyle='#C9B8FF';x.font='700 48px "DM Sans",sans-serif';x.fillText('Volyo',90,1780);x.fillStyle='rgba(232,226,247,.6)';x.font='400 34px "DM Sans",sans-serif';x.fillText('система дисциплины и привычек',90,1830);
   c.toBlob(async b=>{const f=new File([b],'wikki-itogi.png',{type:'image/png'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Мои итоги'});return}}catch(e){if(e&&e.name==='AbortError')return}const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='wikki-itogi.png';a.click();this.toast('Карточка сохранена')},'image/png')},
 /* обзор прогресса */
 mRing(p,c,sz){sz=sz||44;const r=sz/2-5,C=2*Math.PI*r;return `<svg width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}" class="mring"><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${c}" stroke-opacity=".16" stroke-width="5"/><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(C*Math.max(0,Math.min(1,p))).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 ${sz/2} ${sz/2})"/></svg>`},
@@ -2726,7 +2727,7 @@ render(){const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_
   const P=this.prog();
   const ttl=this.sub==='programs'?'Программы':this.sub==='deals'?'Воронка':this.sub==='onboard'?'Старт':{home:'Сегодня',habits:'Прогресс',goals:(P?P.name:'Программа'),week:'Неделя',me:'Профиль'}[this.tab];
   const Pp=this.S.profile||{};
-  $('snav').innerHTML=`<div class="sb-brand"><span class="sn-mark lgm"><img src="icon-512.png" alt="wikki.app"></span><div><b>wikki.app</b><span>дисциплина · рост</span></div></div>
+  $('snav').innerHTML=`<div class="sb-brand"><span class="sn-mark lgm"><img src="icon-512.png" alt="Volyo"></span><div><b>Volyo</b><span>от слова «воля»</span></div></div>
    <div class="sb-nav">${(simple?tabs:[...tabs.slice(0,-1),['profile','Профиль',I.me],tabs[tabs.length-1]]).map(([k,l,ic])=>`<button class="${this.tab===k&&!this.sub?'on':''}" onclick="APP.go('${k}')">${ic}<span>${({journal:'Дневник рефлексии'})[k]||l}</span></button>`).join('')}</div>
    <div class="sb-q">«${esc(Pp.motto||'Дисциплина — это выбор между тем, чего хочешь сейчас, и тем, чего хочешь больше всего.')}»<i></i></div>
    <button class="sb-me" onclick="APP.go('profile')"><span class="ava">${(this.S.profile||{}).photo?`<img src="${this.S.profile.photo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:esc(this.initial())}</span><span class="sp"><b>${esc(Pp.hero||Pp.name||'Гость')}</b><span>Профиль героя</span></span></button>`;
@@ -2752,7 +2753,7 @@ ring(v,th,cap){const r=52,C=2*Math.PI*r,p=v==null?0:v/100,a=th/100*360-90,x=59+r
    <circle cx="${x}" cy="${y}" r="3.5" fill="var(--tx)"/></svg><div class="v"><div><b>${v??'—'}${v!=null?'%':''}</b><span>${cap||'ЦЕЛЬ '+th}</span></div></div></div>`},
 
 /* ================= ГЛАВНОЕ ================= */
-vWelcome(){return `<div class="wl"><span class="wl-mark lgm"><img src="icon-512.png" alt="wikki.app"></span><div class="wl-t">wikki.app</div><div class="wl-s">Привычки, цели и прогресс в одной системе. Начни с 2–3 привычек: первая отметка займёт минуту.</div>
+vWelcome(){return `<div class="wl"><span class="wl-mark lgm"><img src="icon-512.png" alt="Volyo"></span><div class="wl-t">Volyo</div><div class="wl-pr">от слова «воля»</div><div class="wl-s">Привычки, цели и прогресс в одной системе. Начни с 2–3 привычек: первая отметка займёт минуту.</div>
   <div class="wl-f"><div>${I.habit}<span>Привычки: отметка в одно касание</span></div><div>${I.goal}<span>Программы: 12 недель, 75 Hard, 6 месяцев</span></div><div>${I.plan}<span>Планы: повторы, приоритеты, свайпы</span></div><div>${I.week}<span>Серии, уровень и прогресс за год</span></div></div>
   <button class="btn pr w" style="margin-top:22px;padding:15px" onclick="APP.seen();APP.track('start',null,'ever');APP._st=1;APP.sub='start';window.scrollTo(0,0);APP.render()">Начать бесплатно</button>
   <button class="btn gh w" style="margin-top:8px" onclick="APP.seen();APP.sub=null;APP.go('me')">У меня есть аккаунт</button>
@@ -3725,7 +3726,7 @@ vMe(){
   if(!this.user&&!this._sset){
     let m=this._am||'in';if(m==='link')m='in';
     h+=`<div class="sttl">Настройки</div>
-    <div class="card auth"><span class="au-mark lgm"><img src="icon-512.png" alt="wikki.app"></span><div class="au-t">${m==='up'?'Создай аккаунт':m==='reset'?'Новый пароль':'С возвращением'}</div><div class="au-s">${m==='up'?'Система в облаке: телефон и компьютер видят одно и то же.':m==='reset'?'Придумай новый пароль, не короче 8 символов.':'Войди, чтобы продолжить с того же места на любом устройстве.'}</div>
+    <div class="card auth"><span class="au-mark lgm"><img src="icon-512.png" alt="Volyo"></span><div class="au-t">${m==='up'?'Создай аккаунт':m==='reset'?'Новый пароль':'С возвращением'}</div><div class="au-s">${m==='up'?'Система в облаке: телефон и компьютер видят одно и то же.':m==='reset'?'Придумай новый пароль, не короче 8 символов.':'Войди, чтобы продолжить с того же места на любом устройстве.'}</div>
      ${m==='reset'?'':`<div class="pseg au-seg"><button class="${m==='in'?'on':''}" onclick="APP._am='in';APP._amsg='';APP.render()">Вход</button><button class="${m==='up'?'on':''}" onclick="APP._am='up';APP._amsg='';APP.render()">Регистрация</button></div>`}
      ${m==='up'?`<div class="f"><label class="lbl">Имя</label><input id="aN" autocomplete="name" value="${esc(S.profile.name)}" placeholder="Как тебя зовут"></div>`:''}
      ${m!=='reset'?`<div class="f"><label class="lbl">Почта</label><input id="aE" type="email" autocomplete="email" inputmode="email" placeholder="name@mail.com"></div>`:''}
@@ -3788,15 +3789,15 @@ vMe(){
     const IC={dash:I.dash,check:SI.check,target:SI.target,chart:SI.chart,pen:hIco('pen'),user:SI.user};
     const P=[['Честные цифры','Приложение показывает реальный процент выполнения. Никаких наград за то, что его просто открыли.'],['Один пропуск ничего не ломает','Серия рвётся только после двух пропусков подряд. Так легче вернуться, чем начинать с нуля.'],['Данные принадлежат тебе','Без рекламы и сторонних счётчиков. Выгрузить или удалить всё можно в пару касаний.'],['Покупка один раз','Без подписки и автосписаний. 14 дней на возврат, если не подошло.']];
     const M=['Брайан Моран','Джеймс Клир','Кэл Ньюпорт','Тереза Амабайл','Филиппа Лалли','Питер Гольвитцер','Габриэль Эттинген','4 дисциплины исполнения'];
-    return `<div class="ab-h ocean"><div class="ab-hi"><span class="ab-l lgm"><img src="icon-512.png" alt="wikki.app"></span><b>wikki.app</b><p>Система, которая помогает держать слово, данное себе</p></div></div>
+    return `<div class="ab-h ocean"><div class="ab-hi"><span class="ab-l lgm"><img src="icon-512.png" alt="Volyo"></span><b>Volyo</b><div class="wl-pr">от слова «воля»</div><p>Система, которая помогает держать слово, данное себе</p></div></div>
     <div class="ab-s"><p class="ab-lead">Большинство людей знает, что им делать. Сложнее делать это каждый день, когда первый запал прошёл, а результата ещё не видно. Мы собрали в одном месте всё, что для этого нужно: план дня, привычки, цели на 12 недель, дневник и честные цифры о том, как идут дела.</p>
     <p class="ab-lead">Приложение не требует силы воли каждую минуту. Оно напоминает о главном, показывает, что уже получилось, и подсказывает, где ты теряешь силы.</p></div>
     <div class="ab-t">Что внутри</div><div class="ab-f">${F.map(([i,t,d])=>`<div><span>${IC[i]}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>
     <div class="ab-t">На чём построено</div><div class="card ab-m"><p>Мы не придумывали метод с нуля. В основе исследования и системы, которые годами проверяли на тысячах людей.</p><div class="ab-ch">${M.map(x=>`<span>${x}</span>`).join('')}</div><button class="pill" onclick="APP.methodSheet()">Подробнее о методе ${I.r}</button></div>
     <div class="ab-t">Наши принципы</div><div class="ab-p">${P.map(([t,d],i)=>`<div><em>0${i+1}</em><b>${t}</b><p>${d}</p></div>`).join('')}</div>
-    <div class="card ab-w"><span class="ab-wl lgm"><img src="icon-512.png" alt="wikki.app"></span><div class="sp"><b>Сделано в WIKKI.OCEAN</b><p>Мы строим системы роста для людей и компаний. wikki.app — наш первый продукт для каждого дня.</p></div></div>
+    <div class="card ab-w"><span class="ab-wl lgm"><img src="icon-512.png" alt="Volyo"></span><div class="sp"><b>Сделано в WIKKI.OCEAN</b><p>Мы строим системы роста для людей и компаний. Volyo — наш первый продукт для каждого дня.</p></div></div>
     <div class="card sgrp">${[['Политика конфиденциальности',"window.open('./legal/privacy.html'+(APP.lang()==='en'?'#en':''),'_blank')"],['Условия использования',"window.open('./legal/terms.html'+(APP.lang()==='en'?'#en':''),'_blank')"],['Написать нам в Telegram',"window.open('https://t.me/wikki_shark','_blank')"]].map(([l,a])=>`<button class="srow" onclick="${a}"><div class="sp"><div>${l}</div></div>${I.r}</button>`).join('')}</div>
-    <div class="sver">wikki.app · версия 1.0</div>`};
+    <div class="sver">Volyo · версия 1.0</div>`};
   pages.integ=()=>sec('Интеграции',[
     row(ic('moon','#7C5CE6'),'Календарь телефона','',"APP.exportIcs()",'Утро, день, вечер, чек-ин и разбор недели в твоём календаре'),
     row(ic('heart','#56566A'),'Apple Здоровье','скоро',null,'Шаги и сон отмечаются сами'),
@@ -3828,7 +3829,7 @@ vMe(){
   h+=grp([nr('help','#804FF1','Помощь и обратная связь','',go('help')),nr('star','#804FF1','Оценить приложение',(S.pref||{}).rate?'★'.repeat((S.pref||{}).rate):'',"APP.rateSheet()"),nr('spark','#804FF1','Что нового','',"APP.newsSheet()"),nr('share','#804FF1','Поделиться приложением','',"APP.shareApp()"),nr('info','#804FF1','О приложении','v1.0',go('about'))]);
   h+=grp([nr('doc','#9A9AAE','Правовое','',go('legal'))]);
   if(this.user)h+=`<button class="card nout" onclick="APP.logout()">Выйти</button>`;
-  h+=`<div class="sver">wikki.app · WIKKI.OCEAN</div>`;
+  h+=`<div class="sver">Volyo by WIKKI.OCEAN</div>`;
   return h;
 },
 setPref(k,v){this.S.pref=this.S.pref||{};this.S.pref[k]=v;this.save();this.render()},
@@ -3837,10 +3838,10 @@ toggleVac(){const P=this.S.pref=this.S.pref||{};P.vacs=P.vacs||[];const v=this.v
 hashPin(x){let h=5381;for(const c of String(x))h=((h<<5)+h+c.charCodeAt(0))|0;return 'p'+(h>>>0).toString(36)},
 pinSet(){const a=prompt('Придумай код из 4 цифр');if(!a)return;if(!/^\d{4}$/.test(a))return this.toast('Нужно 4 цифры');const b=prompt('Повтори код');if(a!==b)return this.toast('Коды не совпали');this.setPref('pin',this.hashPin(a));try{sessionStorage.setItem('tw-unlock','1')}catch(e){}this.toast('Код установлен')},
 pinOff(){const a=prompt('Введи текущий код');if(a==null)return;if(this.hashPin(a)!==(this.S.pref||{}).pin)return this.toast('Неверный код');this.setPref('pin',null);this.toast('Код выключен')},
-vLock(){return `<div class="lock"><span class="au-mark lgm"><img src="icon-512.png" alt="wikki.app"></span><div class="au-t">Введи код</div><input id="pinIn" class="pinin" type="password" inputmode="numeric" maxlength="4" autocomplete="off" oninput="if(this.value.length===4)APP.unlock(this.value)"><div class="small" id="pinMsg" style="color:var(--pb);margin-top:10px"></div><button class="au-fg" onclick="APP.pinForgot()">Забыли код?</button></div>`},
+vLock(){return `<div class="lock"><span class="au-mark lgm"><img src="icon-512.png" alt="Volyo"></span><div class="au-t">Введи код</div><input id="pinIn" class="pinin" type="password" inputmode="numeric" maxlength="4" autocomplete="off" oninput="if(this.value.length===4)APP.unlock(this.value)"><div class="small" id="pinMsg" style="color:var(--pb);margin-top:10px"></div><button class="au-fg" onclick="APP.pinForgot()">Забыли код?</button></div>`},
 unlock(v){if(this.hashPin(v)===(this.S.pref||{}).pin){try{sessionStorage.setItem('tw-unlock','1')}catch(e){}this._unl=1;this.render()}else{const m=$('pinMsg');if(m)m.textContent='Неверный код';const i=$('pinIn');if(i)i.value=''}},
 pinForgot(){if(!confirm('Сбросить код? Данные останутся. Чтобы защитить их снова, поставь новый код в настройках.'))return;this.S.pref.pin=null;this.save();this._unl=1;this.render()},
-shareApp(){const url='https://vikagladysheva07-source.github.io/wikki-app/',t='wikki.app — система дисциплины и привычек';if(navigator.share)navigator.share({title:t,url}).catch(()=>{});else this.copy(url)},
+shareApp(){const url='https://vikagladysheva07-source.github.io/wikki-app/',t='Volyo — система дисциплины и привычек';if(navigator.share)navigator.share({title:t,url}).catch(()=>{});else this.copy(url)},
 async deleteMe(){if(!this.user||!this.sb)return;if(!confirm('Удалить аккаунт навсегда? Все данные в облаке будут стёрты, отменить это нельзя.'))return;if(prompt('Чтобы подтвердить, напиши: УДАЛИТЬ')!=='УДАЛИТЬ')return;
   try{try{const{data:fl}=await this.sb.storage.from('vision').list(this.user.id,{limit:100});if(fl&&fl.length)await this.sb.storage.from('vision').remove(fl.map(f=>this.user.id+'/'+f.name))}catch(e){}const{error}=await this.sb.rpc('tw_delete_me');if(error)throw error;await this.sb.auth.signOut();localStorage.removeItem(KEY);location.reload()}catch(e){this.toast('Не получилось удалить: '+this.errText(e))}},
 exportIcs(){const S=this.S,st=this.st,en=this.end(),u=d=>d.replace(/-/g,''),esc2=t=>String(t).replace(/([,;\\])/g,'\\$1').replace(/\n/g,'\\n');
@@ -3853,7 +3854,7 @@ exportIcs(){const S=this.S,st=this.st,en=this.end(),u=d=>d.replace(/-/g,''),esc2
   add_('checkin','Вечерний чек-ин · 60 секунд','Энергия, сон, победа дня, главное на завтра',st<today()?today():st,'2130','FREQ=DAILY');
   const sun=(()=>{let d=st<today()?today():st;while(pd(d).getDay()!==0)d=add(d,1);return d})();
   add_('review','Разбор недели · 15 минут','Счёт недели, что сработало, что мешало, обещание на неделю. Отчёт партнёру.',sun,'1900','FREQ=WEEKLY;BYDAY=SU');
-  const ics='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//wikki.app//RU\r\nCALSCALE:GREGORIAN\r\n'+ev.join('\r\n')+'\r\nEND:VCALENDAR\r\n';
+  const ics='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Volyo//RU\r\nCALSCALE:GREGORIAN\r\n'+ev.join('\r\n')+'\r\nEND:VCALENDAR\r\n';
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='12-weeks.ics';a.click();this.toast('Файл календаря сохранён — открой его на телефоне')},
 historySheet(){const A=this.S.archive||[];
   this.open(`<div class="row"><div class="h2 sp">Прошлые программы</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
@@ -3867,7 +3868,7 @@ ask(label,cur,cb,type){const t=type||'text';this._askCb=cb;
   <div class="f">${t==='textarea'?`<textarea id="askV" style="min-height:120px">${esc(cur||'')}</textarea>`:`<input id="askV" type="${t}" value="${esc(cur==null?'':cur)}" ${t==='number'?'inputmode="numeric"':''}>`}</div>
   <button class="btn pr w" onclick="const v=$('askV').value;APP.close();APP._askCb&&APP._askCb(v)">Сохранить</button>`);setTimeout(()=>{const e=$('askV');if(e){e.focus();if(e.select)e.select()}},60)},
 async pwReset(){if(!this.user||!this.sb)return;try{const{error}=await this.sb.auth.resetPasswordForEmail(this.user.email,{redirectTo:location.origin+location.pathname});if(error)throw error;this.toast('Письмо для смены пароля отправлено')}catch(e){this.toast(this.errText(e))}},
-rateSheet(){const r=(this.S.pref||{}).rate||0;this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Как тебе wikki.app?</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+rateSheet(){const r=(this.S.pref||{}).rate||0;this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Как тебе Volyo?</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin:4px 0 18px">Оценка помогает понять, что улучшать в первую очередь.</div>
   <div class="rstars">${[1,2,3,4,5].map(i=>`<button class="${i<=r?'on':''}" onclick="APP.rateSet(${i})" aria-label="${i}">${SI.star}</button>`).join('')}</div><div id="rMsg"></div>`)},
 rateSet(n){this.S.pref=this.S.pref||{};this.S.pref.rate=n;this.save();document.querySelectorAll('.rstars button').forEach((b,i)=>b.classList.toggle('on',i<n));this.buzz&&this.buzz();
@@ -3934,7 +3935,7 @@ async pushSum(force){if(!this.user||!this.sb||!this._pushOn)return;const td=toda
 async pushCheck(){const sub=this.pushSupported()?await this.pushSub():null,on=!!sub&&Notification.permission==='granted';if(on!==this._pushOn){this._pushOn=on;if(this.tab==='me')this.render()}},
 iosSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Уведомления на iPhone</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin:4px 0 16px">iPhone присылает уведомления только приложениям с экрана «Домой». Это займёт 10 секунд.</div>
-  <div class="ios-st">${['Открой wikki.app в Safari','Нажми «Поделиться» внизу экрана','Выбери «На экран "Домой"»','Открой приложение с иконки и включи уведомления здесь'].map((t,i)=>`<div><span>${i+1}</span>${t}</div>`).join('')}</div>
+  <div class="ios-st">${['Открой Volyo в Safari','Нажми «Поделиться» внизу экрана','Выбери «На экран "Домой"»','Открой приложение с иконки и включи уведомления здесь'].map((t,i)=>`<div><span>${i+1}</span>${t}</div>`).join('')}</div>
   <button class="btn pr w" style="margin-top:16px" onclick="APP.close()">Понятно</button>`)},
 methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">На чём построена система</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin-top:10px;line-height:1.55">Каркас — «12 недель в году» Брайана Морана: тактики вместо результатов, недельный счёт, планка 85%, еженедельный разбор, 13-я неделя на итоги.<br><br>Разделение действий и результата — «4 дисциплины исполнения». Банк побед — исследование Терезы Амабайл о малых победах. «Не пропускай дважды» и 66 дней до автоматизма — Джеймс Клир и Филиппа Лалли. Часы фокуса — Кэл Ньюпорт, «Глубокая работа». Партнёр и итоги для сторис — мета-анализ Харкин (2016): когда о прогрессе знают другие, цели достигаются чаще. «Если — то» — Питер Гольвитцер. WOOP — Габриэль Эттинген. Привычки и «не пропускай дважды» — Джеймс Клир. Отчёт партнёру — исследование Гейл Мэтьюз. Строгие программы — по правилам их авторов.</div>`)},
