@@ -1,7 +1,7 @@
 {
   "name": "VOLYO",
   "short_name": "VOLYO",
-  "description": "VOLYO — от слова «воля». Система дисциплины: привычки, планы, прогресс и дневник",
+  "description": "VOLYO — система дисциплины: привычки, планы, прогресс и дневник",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
