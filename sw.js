@@ -1,5 +1,5 @@
-// Volyo · офлайн-кэш. Страница — мгновенно из кэша, свежая версия в фоне; остальное — кэш первым.
-const V='tw-v131';
+// VOLYO · офлайн-кэш. Страница — мгновенно из кэша, свежая версия в фоне; остальное — кэш первым.
+const V='tw-v132';
 const CORE=['./','./index.html','./manifest.webmanifest','./icon-180.png','./icon-512.png','./ocean.jpg','./shark.svg','./favicon.png','./icon-192.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
@@ -18,6 +18,6 @@ self.addEventListener('fetch',e=>{
 });
 // пуш-уведомления: {title, body, tab}
 self.addEventListener('push',e=>{let d={};try{d=e.data?e.data.json():{}}catch(_){d={body:e.data&&e.data.text()}}
-  e.waitUntil(self.registration.showNotification(d.title||'Volyo',{body:d.body||'',icon:'./icon-512.png',badge:'./icon-180.png',tag:d.tab||'tw',renotify:true,data:{tab:d.tab||'home'}}))});
+  e.waitUntil(self.registration.showNotification(d.title||'VOLYO',{body:d.body||'',icon:'./icon-512.png',badge:'./icon-180.png',tag:d.tab||'tw',renotify:true,data:{tab:d.tab||'home'}}))});
 self.addEventListener('notificationclick',e=>{e.notification.close();const tab=(e.notification.data||{}).tab||'home',url=new URL('./?tab='+tab,self.registration.scope).href;
   e.waitUntil(self.clients.matchAll({type:'window',includeUncontrolled:true}).then(ws=>{for(const w of ws){if('focus' in w){w.postMessage({tab});return w.focus()}}return self.clients.openWindow(url)}))});
