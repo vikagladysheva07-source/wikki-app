@@ -1318,6 +1318,7 @@ body.wlc .stw .st-d{color:rgba(232,226,247,.85);text-shadow:0 1px 12px rgba(0,0,
 .mr-lk{position:absolute;top:14px;right:12px;font-style:normal;font-size:10px;font-weight:700;color:#804FF1;background:rgba(128,79,241,.12);border:1px solid rgba(128,79,241,.3);border-radius:99px;padding:3px 7px}
 .mr-l{padding:4px 14px!important}.mr-l button{display:flex;align-items:center;gap:12px;width:100%;padding:14px 0;color:var(--tx);font-size:14.5px;border-top:1px solid var(--line)}.mr-l button:first-child{border-top:0}.mr-l button span{flex:1;text-align:left}.mr-l button svg{width:17px;height:17px;color:#C9B8FF}.mr-l button svg:last-child{width:14px;height:14px;color:var(--dim)}
 @media(max-width:400px){.mr-lk{position:static;margin-top:4px}.nav .in.n5 button{font-size:9.5px}.nav .in.n5{padding:5px 4px}}
+.sb-wm{flex-direction:column;align-items:flex-start;gap:9px}.sb-wm .wm{width:128px;height:auto;display:block}.wl-wm{display:block;width:min(250px,66vw);height:auto;margin:4px auto 24px}.ab-wm{display:block;width:210px;max-width:70%;height:auto;margin:4px auto 4px}.au-wm{display:block;width:150px;height:auto;margin:0 auto 20px}
 .lgm{padding:0!important;background:none!important;overflow:hidden;box-shadow:0 10px 30px rgba(124,92,230,.35)}.lgm img{width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit}
 .pcab-t{display:inline-block;margin-top:6px;font-size:12px;font-weight:700;letter-spacing:.04em;color:#AC8EF2;background:rgba(128,79,241,.12);border:1px solid rgba(128,79,241,.32);border-radius:99px;padding:4px 11px}
 .afr{box-shadow:0 0 0 2px #0A0A0F,0 0 0 4px #9B7BFF,0 0 18px rgba(155,123,255,.7)!important}
@@ -2727,7 +2728,7 @@ render(){const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_
   const P=this.prog();
   const ttl=this.sub==='programs'?'Программы':this.sub==='deals'?'Воронка':this.sub==='onboard'?'Старт':{home:'Сегодня',habits:'Прогресс',goals:(P?P.name:'Программа'),week:'Неделя',me:'Профиль'}[this.tab];
   const Pp=this.S.profile||{};
-  $('snav').innerHTML=`<div class="sb-brand"><span class="sn-mark lgm"><img src="icon-512.png" alt="VOLYO"></span><div><b>VOLYO</b><span>by WIKKI.OCEAN</span></div></div>
+  $('snav').innerHTML=`<div class="sb-brand sb-wm"><img class="wm" src="logo-volyo.png" alt="VOLYO"><span>by WIKKI.OCEAN</span></div>
    <div class="sb-nav">${(simple?tabs:[...tabs.slice(0,-1),['profile','Профиль',I.me],tabs[tabs.length-1]]).map(([k,l,ic])=>`<button class="${this.tab===k&&!this.sub?'on':''}" onclick="APP.go('${k}')">${ic}<span>${({journal:'Дневник рефлексии'})[k]||l}</span></button>`).join('')}</div>
    <div class="sb-q">«${esc(Pp.motto||'Дисциплина — это выбор между тем, чего хочешь сейчас, и тем, чего хочешь больше всего.')}»<i></i></div>
    <button class="sb-me" onclick="APP.go('profile')"><span class="ava">${(this.S.profile||{}).photo?`<img src="${this.S.profile.photo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:esc(this.initial())}</span><span class="sp"><b>${esc(Pp.hero||Pp.name||'Гость')}</b><span>Профиль героя</span></span></button>`;
@@ -2753,7 +2754,7 @@ ring(v,th,cap){const r=52,C=2*Math.PI*r,p=v==null?0:v/100,a=th/100*360-90,x=59+r
    <circle cx="${x}" cy="${y}" r="3.5" fill="var(--tx)"/></svg><div class="v"><div><b>${v??'—'}${v!=null?'%':''}</b><span>${cap||'ЦЕЛЬ '+th}</span></div></div></div>`},
 
 /* ================= ГЛАВНОЕ ================= */
-vWelcome(){return `<div class="wl"><span class="wl-mark lgm"><img src="icon-512.png" alt="VOLYO"></span><div class="wl-t">VOLYO</div><div class="wl-s">Привычки, цели и прогресс в одной системе. Начни с 2–3 привычек: первая отметка займёт минуту.</div>
+vWelcome(){return `<div class="wl"><img class="wl-wm" src="logo-volyo.png" alt="VOLYO"><div class="wl-s">Привычки, цели и прогресс в одной системе. Начни с 2–3 привычек: первая отметка займёт минуту.</div>
   <div class="wl-f"><div>${I.habit}<span>Привычки: отметка в одно касание</span></div><div>${I.goal}<span>Программы: 12 недель, 75 Hard, 6 месяцев</span></div><div>${I.plan}<span>Планы: повторы, приоритеты, свайпы</span></div><div>${I.week}<span>Серии, уровень и прогресс за год</span></div></div>
   <button class="btn pr w" style="margin-top:22px;padding:15px" onclick="APP.seen();APP.track('start',null,'ever');APP._st=1;APP.sub='start';window.scrollTo(0,0);APP.render()">Начать бесплатно</button>
   <button class="btn gh w" style="margin-top:8px" onclick="APP.seen();APP.sub=null;APP.go('me')">У меня есть аккаунт</button>
@@ -3726,7 +3727,7 @@ vMe(){
   if(!this.user&&!this._sset){
     let m=this._am||'in';if(m==='link')m='in';
     h+=`<div class="sttl">Настройки</div>
-    <div class="card auth"><span class="au-mark lgm"><img src="icon-512.png" alt="VOLYO"></span><div class="au-t">${m==='up'?'Создай аккаунт':m==='reset'?'Новый пароль':'С возвращением'}</div><div class="au-s">${m==='up'?'Система в облаке: телефон и компьютер видят одно и то же.':m==='reset'?'Придумай новый пароль, не короче 8 символов.':'Войди, чтобы продолжить с того же места на любом устройстве.'}</div>
+    <div class="card auth"><img class="au-wm" src="logo-volyo.png" alt="VOLYO"><div class="au-t">${m==='up'?'Создай аккаунт':m==='reset'?'Новый пароль':'С возвращением'}</div><div class="au-s">${m==='up'?'Система в облаке: телефон и компьютер видят одно и то же.':m==='reset'?'Придумай новый пароль, не короче 8 символов.':'Войди, чтобы продолжить с того же места на любом устройстве.'}</div>
      ${m==='reset'?'':`<div class="pseg au-seg"><button class="${m==='in'?'on':''}" onclick="APP._am='in';APP._amsg='';APP.render()">Вход</button><button class="${m==='up'?'on':''}" onclick="APP._am='up';APP._amsg='';APP.render()">Регистрация</button></div>`}
      ${m==='up'?`<div class="f"><label class="lbl">Имя</label><input id="aN" autocomplete="name" value="${esc(S.profile.name)}" placeholder="Как тебя зовут"></div>`:''}
      ${m!=='reset'?`<div class="f"><label class="lbl">Почта</label><input id="aE" type="email" autocomplete="email" inputmode="email" placeholder="name@mail.com"></div>`:''}
@@ -3789,7 +3790,7 @@ vMe(){
     const IC={dash:I.dash,check:SI.check,target:SI.target,chart:SI.chart,pen:hIco('pen'),user:SI.user};
     const P=[['Честные цифры','Приложение показывает реальный процент выполнения. Никаких наград за то, что его просто открыли.'],['Один пропуск ничего не ломает','Серия рвётся только после двух пропусков подряд. Так легче вернуться, чем начинать с нуля.'],['Данные принадлежат тебе','Без рекламы и сторонних счётчиков. Выгрузить или удалить всё можно в пару касаний.'],['Покупка один раз','Без подписки и автосписаний. 14 дней на возврат, если не подошло.']];
     const M=['Брайан Моран','Джеймс Клир','Кэл Ньюпорт','Тереза Амабайл','Филиппа Лалли','Питер Гольвитцер','Габриэль Эттинген','4 дисциплины исполнения'];
-    return `<div class="ab-h ocean"><div class="ab-hi"><span class="ab-l lgm"><img src="icon-512.png" alt="VOLYO"></span><b>VOLYO</b><p>Система, которая помогает держать слово, данное себе</p></div></div>
+    return `<div class="ab-h ocean"><div class="ab-hi"><img class="ab-wm" src="logo-volyo.png" alt="VOLYO"><p>Система, которая помогает держать слово, данное себе</p></div></div>
     <div class="ab-s"><p class="ab-lead">Большинство людей знает, что им делать. Сложнее делать это каждый день, когда первый запал прошёл, а результата ещё не видно. Мы собрали в одном месте всё, что для этого нужно: план дня, привычки, цели на 12 недель, дневник и честные цифры о том, как идут дела.</p>
     <p class="ab-lead">Приложение не требует силы воли каждую минуту. Оно напоминает о главном, показывает, что уже получилось, и подсказывает, где ты теряешь силы.</p></div>
     <div class="ab-t">Что внутри</div><div class="ab-f">${F.map(([i,t,d])=>`<div><span>${IC[i]}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>
@@ -3838,7 +3839,7 @@ toggleVac(){const P=this.S.pref=this.S.pref||{};P.vacs=P.vacs||[];const v=this.v
 hashPin(x){let h=5381;for(const c of String(x))h=((h<<5)+h+c.charCodeAt(0))|0;return 'p'+(h>>>0).toString(36)},
 pinSet(){const a=prompt('Придумай код из 4 цифр');if(!a)return;if(!/^\d{4}$/.test(a))return this.toast('Нужно 4 цифры');const b=prompt('Повтори код');if(a!==b)return this.toast('Коды не совпали');this.setPref('pin',this.hashPin(a));try{sessionStorage.setItem('tw-unlock','1')}catch(e){}this.toast('Код установлен')},
 pinOff(){const a=prompt('Введи текущий код');if(a==null)return;if(this.hashPin(a)!==(this.S.pref||{}).pin)return this.toast('Неверный код');this.setPref('pin',null);this.toast('Код выключен')},
-vLock(){return `<div class="lock"><span class="au-mark lgm"><img src="icon-512.png" alt="VOLYO"></span><div class="au-t">Введи код</div><input id="pinIn" class="pinin" type="password" inputmode="numeric" maxlength="4" autocomplete="off" oninput="if(this.value.length===4)APP.unlock(this.value)"><div class="small" id="pinMsg" style="color:var(--pb);margin-top:10px"></div><button class="au-fg" onclick="APP.pinForgot()">Забыли код?</button></div>`},
+vLock(){return `<div class="lock"><img class="au-wm" src="logo-volyo.png" alt="VOLYO"><div class="au-t">Введи код</div><input id="pinIn" class="pinin" type="password" inputmode="numeric" maxlength="4" autocomplete="off" oninput="if(this.value.length===4)APP.unlock(this.value)"><div class="small" id="pinMsg" style="color:var(--pb);margin-top:10px"></div><button class="au-fg" onclick="APP.pinForgot()">Забыли код?</button></div>`},
 unlock(v){if(this.hashPin(v)===(this.S.pref||{}).pin){try{sessionStorage.setItem('tw-unlock','1')}catch(e){}this._unl=1;this.render()}else{const m=$('pinMsg');if(m)m.textContent='Неверный код';const i=$('pinIn');if(i)i.value=''}},
 pinForgot(){if(!confirm('Сбросить код? Данные останутся. Чтобы защитить их снова, поставь новый код в настройках.'))return;this.S.pref.pin=null;this.save();this._unl=1;this.render()},
 shareApp(){const url='https://vikagladysheva07-source.github.io/wikki-app/',t='VOLYO — система дисциплины и привычек';if(navigator.share)navigator.share({title:t,url}).catch(()=>{});else this.copy(url)},
