@@ -1320,8 +1320,44 @@ body.wlc .stw .st-d{color:rgba(232,226,247,.85);text-shadow:0 1px 12px rgba(0,0,
 @media(max-width:400px){.mr-lk{position:static;margin-top:4px}.nav .in.n5 button{font-size:9.5px}.nav .in.n5{padding:5px 4px}}
 .sb-wm{flex-direction:column;align-items:flex-start;gap:9px}.sb-wm .wm{width:128px;height:auto;display:block}.wl-wm{display:block;width:min(250px,66vw);height:auto;margin:4px auto 24px}.ab-wm{display:block;width:210px;max-width:70%;height:auto;margin:4px auto 4px}.au-wm{display:block;width:150px;height:auto;margin:0 auto 20px}
 /* премиальный стиль под логотип */
-.h1{margin-bottom:20px!important}
+.h1{margin-bottom:20px!important;margin-top:18px!important;font-weight:300!important;text-transform:none!important;letter-spacing:-.02em!important;font-size:31px!important;line-height:1.15!important;color:#F2EDE2!important;-webkit-text-fill-color:#F2EDE2!important}
 .dz-hd{align-items:center!important;margin-bottom:20px}.dz-hd .h1{margin-bottom:0!important}
+/* ===== v139: структура как у премиальных приложений ===== */
+.top.tpx{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;padding:4px 0 6px}
+.tp-wm{height:22px;width:auto;justify-self:center;display:block}
+.tp-ic{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;justify-self:end;color:rgba(242,237,226,.85);background:radial-gradient(120% 140% at 50% -20%,rgba(255,255,255,.14),rgba(255,255,255,.03) 60%);box-shadow:inset 0 1px 0 rgba(255,255,255,.18);border:0}
+.tp-ic svg{width:19px;height:19px}
+.hh{position:relative;margin:6px -16px 0;padding:26px 16px 22px;min-height:190px;overflow:hidden}
+.hh-ph{position:absolute;inset:0;background:url(ocean-w.jpg) right center/cover no-repeat;opacity:.55;-webkit-mask-image:linear-gradient(90deg,transparent 15%,#000 75%),linear-gradient(0deg,transparent,#000 40%);mask-image:linear-gradient(90deg,transparent 15%,#000 75%);mask-composite:intersect}
+.hh-ph::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--bg,#0A0A0F),transparent 55%)}
+.hh-in{position:relative}
+.hh-g{font-size:15px;color:rgba(242,237,226,.62)}
+.hh-t{font-size:31px;font-weight:300;line-height:1.15;letter-spacing:-.02em;color:#F2EDE2;margin-top:8px}
+.hh-m{display:flex;align-items:center;gap:12px;margin-top:18px;max-width:300px}
+.hh-bar{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden}.hh-bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#C4A4FF,#9B6FE8);box-shadow:0 0 10px rgba(155,111,232,.7)}
+.hh-m span{font-family:var(--mono);font-size:11.5px;color:rgba(242,237,226,.55);white-space:nowrap}
+.hh-cta{width:100%;display:flex;align-items:center;gap:14px;height:60px;padding:0 18px 0 8px;margin:4px 0 0;border-radius:18px;border:0;cursor:pointer;color:#fff;font:inherit;font-size:16px;font-weight:600;text-align:left;
+ background:radial-gradient(120% 160% at 30% -40%,rgba(196,164,255,.55),rgba(124,92,230,.35) 45%,rgba(90,60,190,.30));box-shadow:inset 0 1.5px 1px rgba(255,255,255,.45),inset 0 -2px 8px rgba(0,0,0,.25),0 14px 34px rgba(91,47,190,.35)}
+.hh-cta>svg:last-child{width:18px;height:18px;opacity:.8}
+.hh-ci{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}.hh-ci svg{width:21px;height:21px}
+.hh-tl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0 6px}
+.hh-tl button{position:relative;aspect-ratio:1/1.02;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;border-radius:18px;border:1px solid rgba(255,255,255,.07);cursor:pointer;font:inherit;color:rgba(242,237,226,.9);
+ background:radial-gradient(120% 120% at 50% -20%,rgba(255,255,255,.08),rgba(255,255,255,.015) 55%),#121119;box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 10px 24px rgba(0,0,0,.3)}
+.hh-ti svg{width:25px;height:25px;color:#B49CFF}
+.hh-tl b{font-size:11.5px;font-weight:500;letter-spacing:.01em}
+.hh-bd{position:absolute;top:7px;right:7px;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:#8B62EA;color:#fff;font-style:normal;font-size:10.5px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 2px #0A0A0F}
+.sec-h{display:flex;align-items:center;justify-content:space-between;margin:22px 2px 2px}
+.sec-h span{font-size:17px;font-weight:600;color:#F2EDE2}
+.sec-h button{background:none;border:0;color:rgba(242,237,226,.55);font:inherit;font-size:13.5px;display:flex;align-items:center;gap:2px;cursor:pointer;padding:6px 0}.sec-h button svg{width:15px;height:15px}
+/* нижнее меню: 4 вкладки + плюс */
+.nav .in.n5 button.on{background:none!important;color:#C9B8FF!important}
+.nav .in.n5 button.on svg{color:#B49CFF;filter:drop-shadow(0 0 8px rgba(155,111,232,.6))}
+.nav .in.n5 .nfab{flex:0 0 58px!important;width:58px;height:58px;min-height:0!important;align-self:center;margin:-26px 4px 0;border-radius:50%!important;padding:0!important;color:#fff!important;display:grid!important;place-items:center;
+ background:radial-gradient(120% 140% at 35% -10%,#CDB6FF,#9B6FE8 45%,#6A3FD0)!important;box-shadow:inset 0 2px 1px rgba(255,255,255,.5),0 0 0 5px #0A0A0F,0 12px 28px rgba(91,47,190,.55)!important}
+.nav .in.n5 .nfab svg{width:26px!important;height:26px!important}
+@media(max-width:1023px){.qfab{display:none!important}}
+@media(min-width:760px){.hh-tl button{aspect-ratio:auto;height:104px}}
+@media(min-width:1024px){.top.tpx .tp-wm,.top.tpx .tp-ic{display:none}.hh{margin:0;border-radius:24px}}
 /* жидкое стекло для карточек (без размытия — бережём Safari) */
 .card{background:radial-gradient(120% 120% at 50% -20%,rgba(255,255,255,.075),rgba(255,255,255,.015) 55%),#121119;border:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.13),inset 0 -1px 3px rgba(255,255,255,.03),0 10px 26px rgba(0,0,0,.28)}
 body.wlw{background:radial-gradient(110% 60% at 50% 28%,rgba(46,28,104,.30),transparent 62%),linear-gradient(180deg,rgba(2,3,8,.38),rgba(2,3,8,.58) 50%,rgba(2,3,6,.94) 82%),url(ocean-2.jpg) center top/cover no-repeat,#020306;background-attachment:fixed}
@@ -2054,7 +2090,7 @@ initSwipe(){const app=$('app');let el=null,sx=0,sy=0,dx=0,on=false;
 /* вкладка «Ещё» */
 vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData():{lvl:1};
   const lock=pd0?'':`<i class="mr-lk">Полный доступ</i>`;
-  const T=[['program','Программа',I.goal,'Цели на 12 недель, тактики и разбор недели',1],['progress','Прогресс',I.chart,'Графики, колесо баланса и год в пикселях',1]];
+  const T=[['journal','Дневник',I.diary,'Записи дня, рефлексия и победы',0],['program','Программа',I.goal,'Цели на 12 недель, тактики и разбор недели',1],['progress','Прогресс',I.chart,'Графики, колесо баланса и год в пикселях',1]];
   return `<div class="h1">Ещё</div>__S1____S2__
   <button class="card mr-me" onclick="APP.go('profile')"><span class="mr-av ${this.rwFr()}">${this.avaHtml()}</span><div class="sp"><b>${esc(P.name||'Твой профиль')}</b><em>${this.rwTitle()?this.rwTitle()+' · ':''}уровень ${D.lvl||1}${this.user?'':' · войди, чтобы сохранить прогресс'}</em></div>${I.r}</button>
   ${pd0?'':`<button class="card mr-pay" onclick="APP.paySheet('program')"><span>${I.star}</span><div class="sp"><b>Полный доступ</b><em>Программы, прогресс, безлимит привычек и разбор недели</em></div>${I.r}</button>`}
@@ -2740,9 +2776,9 @@ render(){const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_
   $('app').innerHTML=this.thx(this.top()+this.dash(body));if(this._ptc)this.ptAuto();this.tr($('app'));
   const simple=this.simple();
   const tabs=simple?[['home','Сегодня',I.dash],['plans','Планы',I.plan],['tracker','Привычки',I.habit],['me','Настройки',I.gear]]:[['home','Сегодня',I.dash],['plans','Планы',I.plan],['program','Программа',I.goal],['progress','Прогресс',I.chart],['tracker','Привычки',I.habit],['journal','Дневник',I.diary],['me','Настройки',I.gear]];
-  const mtabs=simple?tabs:[['home','Сегодня',I.dash],['plans','Планы',I.plan],['tracker','Привычки',I.habit],['journal','Дневник',I.diary],['more','Ещё',I.more]],inMore=['more','program','progress','profile','me'].includes(this.tab);
+  const mtabs=simple?tabs:[['home','Сегодня',I.dash],['plans','Планы',I.plan],['+','',''],['tracker','Привычки',I.habit],['more','Ещё',I.more]],inMore=['more','program','progress','profile','me','journal'].includes(this.tab);
   this._pop=null;
-  $('nav').innerHTML='<div class="in n5">'+mtabs.map(([k,l,ic])=>`<button class="${this.tab===k||(k==='more'&&inMore)||(simple&&k==='me'&&inMore)?'on':''}" onclick="APP.go('${k}')">${ic}<span>${l}</span></button>`).join('')+'</div>';
+  $('nav').innerHTML='<div class="in n5">'+mtabs.map(([k,l,ic])=>k==='+'?`<button class="nfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${I.plus}</button>`:`<button class="${this.tab===k||(k==='more'&&inMore)||(simple&&k==='me'&&inMore)?'on':''}" onclick="APP.go('${k}')">${ic}<span>${l}</span></button>`).join('')+'</div>';
   const P=this.prog();
   const ttl=this.sub==='programs'?'Программы':this.sub==='deals'?'Воронка':this.sub==='onboard'?'Старт':{home:'Сегодня',habits:'Прогресс',goals:(P?P.name:'Программа'),week:'Неделя',me:'Профиль'}[this.tab];
   const Pp=this.S.profile||{};
@@ -2753,8 +2789,7 @@ render(){const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_
   this.tr($('nav'));this.tr($('snav'));
 },
 initial(){const n=(this.S.profile.name||(this.user&&this.user.email)||'').trim();return n?n[0].toUpperCase():'·'},
-top(){return `<div class="top"><span></span>
-  <button class="ava ${this.rwFr()}" onclick="APP.go('profile')" aria-label="Профиль">${(this.S.profile||{}).photo?`<img src="${this.S.profile.photo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:this.initial()==='·'?`<span class="ava-s">${this.avaHtml()}</span>`:esc(this.initial())}</button></div>`},
+top(){return `<div class="top tpx"><button class="ava ${this.rwFr()}" onclick="APP.go('profile')" aria-label="Профиль">${(this.S.profile||{}).photo?`<img src="${this.S.profile.photo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:this.initial()==='·'?`<span class="ava-s">${this.avaHtml()}</span>`:esc(this.initial())}</button><img class="tp-wm" src="logo-volyo.png" alt="VOLYO"><button class="tp-ic" onclick="APP.go('me')" aria-label="Настройки">${I.gear}</button></div>`},
 pl(n,a,b,c){n=Math.abs(n)%100;const m=n%10;if(n>10&&n<20)return c;if(m>1&&m<5)return b;if(m===1)return a;return c},
 dleft(d){const n=diff(today(),d);return n<0?`просрочено на ${-n} дн.`:n===0?'сегодня':`через ${n} дн.`},
 miniRing(v,size,col){const r=15,C=2*Math.PI*r,p=v==null?0:v/100,c=col||(v!=null&&v>=85?'#8B62EA':'#9B6FE8');
@@ -3366,6 +3401,17 @@ normTab(t){if(t==='habits'){const p=this._pv;if(p==='balance'||p==='year'){this.
 stripV(h){return h.replace(/<div class="lbl">[^<]*<\/div><div class="h1">[\s\S]*?<\/div>/,'').replace(/<div class="h1">[\s\S]*?<\/div>/,'').replace(/__S\d__/g,'')},
 catOf(o,k){const CAT={dumb:'str',steps:'str',swim:'str',food:'str',tree:'str',snow:'str',drop:'str',book:'int',chat:'int',list:'int',pen:'int',lotus:'spi',moon:'spi',sun:'spi',heart:'spi',ban:'spi',phone:'spi',brief:'biz',video:'biz',target:'biz',star:'biz'};const AC={health:'str',career:'biz',money:'biz',spirit:'spi',rel:'spi',love:'spi',home:'spi',travel:'str',fun:'spi',comm:'biz'};
   if(k==='t'){const g=this.goal(o.goal);if(g&&g.area&&AC[g.area])return AC[g.area]}const ic=o.ic||icoGuess(o.title)||(k==='t'?'target':'star');return CAT[ic]||'biz'},
+homeHero(dpT){const td=today(),P=this.S.profile||{},nm=(P.name||'').split(' ')[0],h=new Date().getHours();
+  const gr=h<5?'Доброй ночи':h<12?'Доброе утро':h<18?'Добрый день':'Добрый вечер';
+  const left=Math.max(0,dpT.n-dpT.done),pct=dpT.n?Math.round(dpT.p*100):0,closed=dpT.n&&!left;
+  const head=!dpT.n?'Начни день<br>с одного дела':closed?'День закрыт.<br>Слово сдержано':`${left} ${this.pl(left,'дело','дела','дел')} до<br>закрытого дня`;
+  let hb=0,tb=0;try{hb=this.S.habits.filter(x=>!x.archived&&this.hSched(x,td)&&!this.hOn(x,td)).length}catch(e){}try{tb=this.tasksFor(td).filter(x=>!x.done).length}catch(e){}
+  const cta=!dpT.n?['Добавить привычку',I.plus,"APP.editH()"]:closed?['Записать день в дневник',I.diary,"APP._jd=today();APP.go('journal')"]:hb?['Отметить привычки',I.habit,"APP.go('tracker')"]:['Открыть планы',I.plan,"APP.go('plans')"];
+  const tl=[['tracker','Привычки',I.habit,hb],['plans','Планы',I.plan,tb],['journal','Дневник',I.diary,0],['progress','Прогресс',I.chart,0]];
+  return `<div class="hh"><div class="hh-ph"></div><div class="hh-in"><div class="hh-g">${gr}${nm?', '+esc(nm):''}</div><div class="hh-t">${head}</div>
+   <div class="hh-m"><div class="hh-bar"><i style="width:${pct}%"></i></div><span>${dpT.done} из ${dpT.n} · ${pct}%</span></div></div></div>
+   <button class="hh-cta" onclick="${cta[2]}"><span class="hh-ci">${cta[1]}</span><span class="sp">${cta[0]}</span>${I.r}</button>
+   <div class="hh-tl">${tl.map(([k,l,ic,b])=>`<button onclick="APP.go('${k}')">${b?`<i class="hh-bd">${b}</i>`:''}<span class="hh-ti">${ic}</span><b>${l}</b></button>`).join('')}</div>`},
 vHome(){if(!this._rwt||Date.now()-this._rwt>60000){this._rwt=Date.now();this.rwCheck()}const S=this.S,td=today(),P=S.profile||{};
   if(S.goals.length&&td>this.end()&&!this._skipFinal)return this.vFinal();
   const ok=d=>{if(this.frozen(d))return true;const a=this.dayAll(d);return a.n>0&&a.p>=.8};
@@ -3411,7 +3457,7 @@ vHome(){if(!this._rwt||Date.now()-this._rwt>60000){this._rwt=Date.now();this.rwC
   let body='',chunk='';const flush=()=>{if(chunk){body+=`<div class="dz dz2">${chunk}</div>`;chunk=''}};
   this.dzOrder().forEach(([k,on])=>{if(!on||!WG[k])return;if(k==='today'){flush();body+=WG[k]}else chunk+=WG[k]});flush();
   const repC=this.inPrg()&&this.curWeek()>=12?`<button class="card pg-rep" onclick="APP.openSub('report')"><span>${I.trophy}</span><div class="sp"><b>Итоги цикла готовы</b><em>Цифры, победы и карточка для сторис</em></div>${I.r}</button>`:'';
-  return `<div class="dz-hd"><div class="h1">Сегодня</div><button class="dz-cfg" onclick="APP.dzSheet()">${I.gear}<span>Настроить</span></button></div>__S1__<div class="dz">${bFull&&innerWidth>=760?banner:bannerS}</div>${(()=>{const f=this.fsH();return f+this.mpH()+(f?'':this.wbH())})()}${this.wkH()}${this.shMoment()}${this.ctxH()}${this.badDayWin()}${repC}${body}${this.tipH()}<button class="qfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${I.plus}</button>`},
+  return `${this.homeHero(dpT)}__S1__<div class="sec-h"><span>Твой день</span><button onclick="APP.dzSheet()">Настроить ${I.r}</button></div>${(()=>{const f=this.fsH();return f+this.mpH()+(f?'':this.wbH())})()}${this.wkH()}${this.shMoment()}${this.ctxH()}${this.badDayWin()}${repC}${body}${this.tipH()}<button class="qfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${I.plus}</button>`},
 DZW:[['today','Планы','Три ближайших дела и прогресс дня'],['rings','Кольца активности','День, неделя и месяц'],['streak','Серии','Дни подряд, рекорд и лучшие привычки'],['rhythm','Ритм дня','Утро, день и вечер'],['wday','Дни недели','В какие дни ты сильнее'],['week','Неделя программы','Счёт недели, фокус и дни до разбора'],['progress','Общий прогресс','График с выбором периода'],['cons','Карта дней','Каждый день на тепловой карте'],['wkbars','Прогресс недели','Столбики по дням недели'],['wheel','Колесо баланса','Средний балл и слабая сфера месяца'],['partner','Партнёр','Процент недели друг друга']],
 dzOrder(){const pf=this.S.pref=this.S.pref||{};if(pf.dzv!==3){pf.dz=null;pf.dzv=3}const def=this.DZW.map(x=>[x[0],['today','rings','streak','cons'].includes(x[0])]);let cur=(pf.dz||[]).filter(x=>this.DZW.some(w=>w[0]===x[0]));const mig=false;def.forEach(d=>{if(!cur.some(x=>x[0]===d[0])){const pi=cur.findIndex(x=>x[0]==='partner');if(pi>=0&&pi===cur.length-1)cur.splice(pi,0,[d[0],d[1]]);else cur.push([d[0],d[1]])}});if(mig){const pi=cur.findIndex(x=>x[0]==='partner');if(pi>=0)cur.push(cur.splice(pi,1)[0]);pf.dz=cur.map(x=>[x[0],x[1]]);pf.dzv=2}return cur},
 dzSet(o){this.S.pref=this.S.pref||{};this.S.pref.dz=o;this.save();this.render();this.dzSheet()},
