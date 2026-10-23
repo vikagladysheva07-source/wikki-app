@@ -1548,6 +1548,54 @@ input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{b
 .dz-s2 b,.dz-big b{font-size:22px!important;font-weight:600!important}.dz-s2 b i{font-size:14px!important}.dz-rg b,.dz-rl b{font-size:16px!important;font-weight:600!important}
 /* функция «три главных» убрана */
 .tmain,.tmain-0,.tmain-h,.kst{display:none!important}
+/* ===== v150: Дневник — день ===== */
+.jx{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+.jx-main{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;min-width:0}
+.jx-hd{display:flex;align-items:center;gap:12px;padding:2px 4px 0}.jx-hd .sp{flex:1;min-width:0}
+.jx-hd b{display:block;font-size:20px;font-weight:600;letter-spacing:-.01em;color:#F4F1EC;line-height:1.2}.jx-hd span{font-size:13px;color:#9C9AA3}
+.jx-pill{font:inherit;font-size:13px;font-weight:500;color:#E9E5DE;padding:9px 16px;border-radius:99px;cursor:pointer;background:linear-gradient(155deg,rgba(255,255,255,.16),rgba(255,255,255,.06) 60%,rgba(155,111,232,.10));border:1px solid rgba(255,255,255,.18);border-top-color:rgba(255,255,255,.30)}
+.jx-wk{margin:0}.jx-wk .wst-d{padding:9px 0 8px;gap:3px}.jx-wk .wst-d b{font-size:15px;font-weight:600}
+.jx-wk .wst-d.on{background:linear-gradient(155deg,rgba(255,255,255,.16),rgba(255,255,255,.06) 60%,rgba(155,111,232,.12))!important;border-color:rgba(160,123,255,.5)!important;box-shadow:0 0 14px rgba(124,77,235,.2)!important}
+.jx-wk .wst-d:disabled{opacity:.3}.jx-wk .wst-d.td em{color:#C9B8FF}
+.jx-dot{display:block;width:5px;height:5px;border-radius:50%;background:transparent}.jx-dot.on{background:#A07BFF}
+.jx-card{background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.035) 45%,rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.11);border-top-color:rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 8px 20px rgba(0,0,0,.3);border-radius:16px;padding:16px}
+.jx-r{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}.jx-r+.jx-r{border-top:1px solid rgba(255,255,255,.07)}
+.jx-r>span{font-size:14.5px;color:#E9E5DE}
+.jx-dots{display:flex;gap:6px}.jx-dots button{width:26px;height:26px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);padding:0;cursor:pointer}
+.jx-dots button.on{background:linear-gradient(180deg,#B79BFF,#7C4DEB);border-color:transparent;box-shadow:0 0 10px rgba(139,92,246,.45)}
+.jx-sl{display:flex;align-items:center;gap:10px}.jx-sl input{width:76px;height:42px;text-align:center;padding:0 10px!important}.jx-sl em{font-style:normal;font-size:13px;color:#9C9AA3}
+.jx-pr{display:flex;gap:8px;overflow-x:auto;margin:0 -16px 14px;padding:0 16px;scrollbar-width:none}.jx-pr::-webkit-scrollbar{display:none}
+.jx-pr button{flex:none;font:inherit;font-size:13px;padding:9px 14px;border-radius:99px;white-space:nowrap;cursor:pointer;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#D9CCFF}
+.jx-note{width:100%;min-height:190px;resize:none;border:0!important;outline:none;padding:0!important;font-size:16px;line-height:1.65;color:#F4F1EC;background:transparent!important;box-shadow:none!important}
+.jx-st{font-size:12px;color:#7F7C87;text-align:right;height:16px;margin-top:8px}
+.jx-k{display:grid;gap:16px}.jx-k label{display:block}
+.jx-k label>span{display:flex;align-items:center;gap:8px;font-size:14px;color:#D9CCFF;margin-bottom:8px}.jx-k label>span svg{width:16px;height:16px;color:#A07BFF}
+.jx-k input{height:48px;padding:0 16px!important;font-size:15px}
+.jx-h{font-size:12.5px;color:#7F7C87;margin:-6px 2px 0}
+.jx-side{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-content:start;min-width:0}
+.jx-sh{display:flex;align-items:baseline;gap:8px;padding:0 4px;margin-top:8px}.jx-sh b{font-size:16px;font-weight:600;color:#F4F1EC}.jx-sh span{font-size:12.5px;color:#9C9AA3}
+.jx-q{height:46px;padding:0 16px!important;border-radius:14px!important;font-size:14.5px}
+.jx-i{background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.035) 45%,rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.11);border-top-color:rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 8px 20px rgba(0,0,0,.3);display:block;width:100%;text-align:left;padding:14px 16px;border-radius:14px;color:inherit;font:inherit;cursor:pointer}
+.jx-i em{display:block;font-style:normal;font-size:12px;color:#9C9AA3;margin-bottom:6px}
+.jx-i b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:14.5px;font-weight:500;line-height:1.4;color:#F4F1EC}
+.jx-i span{display:flex;align-items:center;gap:6px;font-size:13px;color:#B79BFF;margin-top:8px}.jx-i span svg{width:13px;height:13px}
+.jx-e{font-size:13.5px;color:#9C9AA3;padding:10px 4px}
+.jx-more{font:inherit;font-size:14px;color:#D9CCFF;padding:13px;border-radius:14px;cursor:pointer;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+@media(min-width:900px){.jx{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start}.jx-side{position:sticky;top:20px}}
+/* ===== v150: единые размеры и подписи ===== */
+.dv-m b{font-size:40px!important;font-weight:600!important;letter-spacing:-.02em!important}
+.dv-m b+*,.dv-m b small,.dv-m b i{font-size:16px!important}
+.rc b{font-size:26px!important;font-weight:600!important}
+.dz-all,.pill,.lbl,.dv-top>span,.kg span,.dz-cr span{text-transform:none!important;letter-spacing:0!important}
+.dv-top>span,.lbl,.kg span,.dz-cr span{font-size:12.5px!important}
+.lbl{color:#C9C5BE!important;margin-bottom:6px}
+.pill{font-size:12.5px!important;padding:8px 14px!important}
+.dz-all{font-size:13px!important}
+/* плитки главной: подписи не прижаты к краям */
+.hx-tl{gap:8px!important}
+.hx-tl button{padding:0 6px!important}
+.hx-tl b{font-size:11px!important;letter-spacing:0!important}
+@media(max-width:340px){.hx-tl{grid-template-columns:repeat(2,minmax(0,1fr))!important}.hx-tl button{height:60px!important;flex-direction:row!important;justify-content:flex-start!important;padding:0 16px!important;gap:12px!important}.hx-tl b{font-size:13px!important}}
 /* заголовки групп и разделов внутри экранов */
 .plg-h b,.h2{font-size:15px!important;font-weight:500!important;text-transform:none!important;letter-spacing:0!important;color:#F4F1EC!important}
 @media(max-width:1023px){.qfab{display:none!important}}
@@ -2086,7 +2134,7 @@ NPT:[['Пустая',[]],['Цели на квартал',[['h','Главная �
 npList(){return this.S.pages=this.S.pages||[]},
 npCur(){return this.npList().find(x=>x.id===this._pg)},
 npNew(i){const T=this.NPT[i||0],p={id:'p'+uid(),title:i?T[0]:'',blocks:(T[1].length?T[1]:[['p','']]).map(([t,v])=>({id:'k'+uid(),t,v})),upd:Date.now()};this.npList().unshift(p);this.save();this.close();this._jv='pages';this._pg=p.id;this.render();window.scrollTo(0,0);setTimeout(()=>{const e=document.querySelector(i?'.np-t':'.np-title');if(e)e.focus()},60)},
-npTouch(){const p=this.npCur();if(!p)return;p.upd=Date.now();const st=$('npSt');if(st)st.textContent='сохраняю…';clearTimeout(this._npt);this._npt=setTimeout(()=>{this.save();const s2=$('npSt');if(s2)s2.textContent='сохранено'},500)},
+npTouch(){const p=this.npCur();if(!p)return;p.upd=Date.now();const st=$('npSt');if(st)st.textContent='Сохраняю…';clearTimeout(this._npt);this._npt=setTimeout(()=>{this.save();const s2=$('npSt');if(s2)s2.textContent='Сохранено'},500)},
 npTitle(v){const p=this.npCur();if(p){p.title=v;this.npTouch()}},
 npGrow(el){el.style.height='auto';el.style.height=el.scrollHeight+'px'},
 npFocus(id,pos){setTimeout(()=>{const e=document.querySelector(`.np-t[data-id="${id}"]`);if(!e)return;e.focus();const n=pos==null?e.value.length:pos;e.setSelectionRange(n,n)},30)},
@@ -2516,30 +2564,45 @@ wkH(){const td=today(),dt=pd(td),hr=this._hr??new Date().getHours(),pf=this.S.pr
    <em>Отправь итог ${pt?'партнёру':'тому, кто тебя поддерживает'}. Когда кто-то ждёт твой отчёт, держать слово проще.</em>
    <button class="btn pr w" onclick="APP.wkShare()">${SI.share} Отправить ${pt?'партнёру':'другу'}</button></div>`},
 /* дневник-блокнот */
-jNote(d,v){this.track('journal',null,'day');clearTimeout(this._jnt);const st=$('jrSt');if(st)st.textContent='сохраняю…';this._jnt=setTimeout(()=>{const S=this.S;S.checkin=S.checkin||{};const c=S.checkin[d]=Object.assign({energy:0,sleep:'',win:'',top:'',note:''},S.checkin[d]||{});c.note=v;c.t=Date.now();this.save();const s2=$('jrSt');if(s2)s2.textContent='сохранено'},600)},
-jGrow(el){el.style.height='auto';el.style.height=Math.max(260,el.scrollHeight+4)+'px'},
+jNote(d,v){this.track('journal',null,'day');clearTimeout(this._jnt);const st=$('jrSt');if(st)st.textContent='Сохраняю…';this._jnt=setTimeout(()=>{const S=this.S;S.checkin=S.checkin||{};const c=S.checkin[d]=Object.assign({energy:0,sleep:'',win:'',top:'',note:''},S.checkin[d]||{});c.note=v;c.t=Date.now();this.save();const s2=$('jrSt');if(s2)s2.textContent='Сохранено'},600)},
+jGrow(el){el.style.height='auto';el.style.height=Math.max(190,el.scrollHeight+4)+'px'},
 jPrompt(d,txt){const el=$('jrN');if(!el)return;const pre=el.value&&!el.value.endsWith('\n')?'\n\n':'';el.value+=pre+txt+'\n';this.jGrow(el);el.focus();el.setSelectionRange(el.value.length,el.value.length);this.jNote(d,el.value)},
 vJournal(){const jseg=`<div class="pseg">${[['day','День'],['pages','Страницы']].map(([k,l])=>`<button class="${(this._jv||'day')===k?'on':''}" onclick="APP._jv='${k}';APP._pg=null;APP.render()">${l}</button>`).join('')}</div>`;
   if(this._jv==='pages')return `<div class="h1">Дневник</div>${jseg}__S1____S2__`+this.npView();
   const S=this.S,td=today(),d=this._jd&&this._jd<=td?this._jd:td,C=S.checkin||{},c=C[d]||{},dd=pd(d);
-  const dots=(k,v)=>`<div class="jb-d">${[1,2,3,4,5].map(n=>`<button class="${(+v||0)>=n?'on':''}" onclick="APP.jSet('${d}','${k}',${(+v||0)===n?0:n},1)"></button>`).join('')}</div>`;
+  const dots=(k,v)=>`<div class="jx-dots">${[1,2,3,4,5].map(n=>`<button class="${(+v||0)>=n?'on':''}" onclick="APP.jSet('${d}','${k}',${(+v||0)===n?0:n},1)"aria-label="${n}"></button>`).join('')}</div>`;
   const legacy=[c.block?'Что мешало: '+c.block:'',c.grat?'Благодарность: '+c.grat:''].filter(Boolean).join('\n\n');
   const note=(c.note||'')+(legacy&&!(c.note||'').includes(legacy)?((c.note?'\n\n':'')+legacy):'');
   const prompts=[['Благодарность','Благодарность за сегодня: '],['Что мешало','Что мешало сегодня: '],['Инсайт','Главный вывод дня: '],['Эмоции','Что я чувствую: ']];
   const q=(this._jq||'').trim().toLowerCase();
   const hist=Object.keys(C).filter(x=>x<=td&&x!==d&&(C[x].win||C[x].note||C[x].grat||C[x].block||C[x].top)).sort().reverse().filter(x=>!q||[C[x].note,C[x].win,C[x].top,C[x].grat,C[x].block].join(' ').toLowerCase().includes(q)).slice(0,30);
-  let h=`<div class="h1">Дневник</div>${jseg}__S1____S2__<div class="jb">
-   <div class="jb-page">
-    <div class="jb-top"><button class="ic" onclick="APP._jd=add('${d}',-1);APP.render()">${I.l}</button><div class="sp"><b>${WDF[dd.getDay()].charAt(0).toUpperCase()+WDF[dd.getDay()].slice(1)}</b><span>${dd.getDate()} ${['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'][dd.getMonth()]} ${dd.getFullYear()}</span></div>${d!==td?`<button class="pill" onclick="APP._jd=null;APP.render()">сегодня</button>`:''}<button class="ic" ${d>=td?'disabled style="opacity:.3"':''} onclick="APP._jd=add('${d}',1);APP.render()">${I.r}</button></div>
-    <div class="jb-m"><div><span>Настроение</span>${dots('mood',c.mood)}</div><div><span>Энергия</span>${dots('energy',c.energy)}</div><div><span>Сон</span><input inputmode="decimal" value="${esc(c.sleep||'')}" placeholder="ч" onchange="APP.jSet('${d}','sleep',this.value.replace(',','.'))"></div></div>
-    <div class="jb-pr">${prompts.map(([l,t])=>`<button onclick="APP.jPrompt('${d}','${t}')">+ ${l}</button>`).join('')}</div>
-    <textarea id="jrN" class="jb-note" placeholder="Пиши как в блокноте: мысли, события, идеи…" oninput="APP.jGrow(this);APP.jNote('${d}',this.value)">${esc(note)}</textarea>
-    <div class="jb-st" id="jrSt">${c.t?'сохранено':''}</div>
-    <div class="jb-k"><label><span>${I.star}Победа дня</span><input value="${esc(c.win||'')}" placeholder="Что сегодня продвинулось" onchange="APP.jSet('${d}','win',this.value.trim(),1)"></label>
-     <label><span>${I.target||I.goal}Главное на завтра</span><input value="${esc(c.top||'')}" placeholder="Одно дело — утром оно будет на экране «Сегодня»" onchange="APP.topSet('${d}',this.value)"></label></div>
+  const m0=this.monday(d),wk=[0,1,2,3,4,5,6].map(i=>add(m0,i)),has=x=>{const e=C[x]||{};return !!(e.win||e.note||e.grat||e.block||e.top||e.mood||e.energy)};
+  const MN=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  const showAll=!!this._jall||!!q,list=showAll?hist:hist.slice(0,5);
+  let h=`<div class="h1">Дневник</div>${jseg}__S1____S2__<div class="jx">
+   <div class="jx-main">
+    <div class="jx-hd"><div class="sp"><b>${WDF[dd.getDay()].charAt(0).toUpperCase()+WDF[dd.getDay()].slice(1)}</b><span>${dd.getDate()} ${MN[dd.getMonth()]} ${dd.getFullYear()}</span></div>${d!==td?`<button class="jx-pill" onclick="APP._jd=null;APP.render()">Сегодня</button>`:''}</div>
+    <div class="wst jx-wk"><button class="wst-n" onclick="APP._jd=add('${d}',-7);APP.render()" aria-label="Неделей раньше">${I.l}</button>${wk.map(x=>`<button class="wst-d ${x===d?'on':''} ${x===td?'td':''}" ${x>td?'disabled':''} onclick="APP._jd='${x}';APP.render()"><em>${WD[pd(x).getDay()]}</em><b>${+x.slice(8)}</b><i class="jx-dot ${has(x)?'on':''}"></i></button>`).join('')}<button class="wst-n" ${add(d,7)>td&&wk[6]>=td?'disabled style="opacity:.3"':''} onclick="APP._jd=add('${d}',7)>'${td}'?null:add('${d}',7);APP.render()" aria-label="Неделей позже">${I.r}</button></div>
+    <div class="jx-card jx-state">
+     <div class="jx-r"><span>Настроение</span>${dots('mood',c.mood)}</div>
+     <div class="jx-r"><span>Энергия</span>${dots('energy',c.energy)}</div>
+     <div class="jx-r"><span>Сон</span><label class="jx-sl"><input inputmode="decimal" value="${esc(c.sleep||'')}" placeholder="0" onchange="APP.jSet('${d}','sleep',this.value.replace(',','.'))"><em>часов</em></label></div>
+    </div>
+    <div class="jx-card jx-write">
+     <div class="jx-pr">${prompts.map(([l,t])=>`<button onclick="APP.jPrompt('${d}','${t}')">+ ${l}</button>`).join('')}</div>
+     <textarea id="jrN" class="jx-note" placeholder="Что было сегодня? Мысли, события, идеи…" oninput="APP.jGrow(this);APP.jNote('${d}',this.value)">${esc(note)}</textarea>
+     <div class="jx-st" id="jrSt">${c.t?'Сохранено':''}</div>
+    </div>
+    <div class="jx-card jx-k">
+     <label><span>${I.star}Победа дня</span><input value="${esc(c.win||'')}" placeholder="Что сегодня получилось" onchange="APP.jSet('${d}','win',this.value.trim(),1)"></label>
+     <label><span>${I.target||I.goal}Главное на завтра</span><input value="${esc(c.top||'')}" placeholder="Одно дело на завтра" onchange="APP.topSet('${d}',this.value)"></label>
+     <p class="jx-h">Это дело появится в Планах на следующий день</p>
+    </div>
    </div>
-   <div class="jb-side"><div class="jb-sh"><b>Прошлые страницы</b><input class="jb-q" placeholder="Поиск" value="${esc(this._jq||'')}" oninput="APP._jq=this.value;clearTimeout(APP._jqt);APP._jqt=setTimeout(()=>{APP.render();const e=document.querySelector('.jb-q');if(e){e.focus();e.setSelectionRange(e.value.length,e.value.length)}},250)"></div>
-    ${hist.length?hist.map(x=>{const e=C[x],t=(e.note||e.win||e.grat||e.block||e.top||'').split('\n')[0];return `<button class="jb-i" onclick="APP._jd='${x}';APP.render();window.scrollTo(0,0)"><em>${fd(x)}, ${WD[pd(x).getDay()]}</em><b>${esc(t.slice(0,90))}</b>${e.win&&e.win!==t?`<span>${I.star}${esc(e.win.slice(0,60))}</span>`:''}</button>`}).join(''):`<div class="small mut" style="padding:8px 4px">${q?'Ничего не нашлось':'Здесь появятся твои прошлые страницы.'}</div>`}</div></div>`;
+   <div class="jx-side"><div class="jx-sh"><b>Прошлые записи</b>${hist.length?`<span>${hist.length}</span>`:''}</div>
+    <input class="jx-q" placeholder="Поиск по записям" value="${esc(this._jq||'')}" oninput="APP._jq=this.value;clearTimeout(APP._jqt);APP._jqt=setTimeout(()=>{APP.render();const e=document.querySelector('.jx-q');if(e){e.focus();e.setSelectionRange(e.value.length,e.value.length)}},250)">
+    ${list.length?list.map(x=>{const e=C[x],t=(e.note||e.win||e.grat||e.block||e.top||'').split('\n')[0];return `<button class="jx-i" onclick="APP._jd='${x}';APP.render();window.scrollTo(0,0)"><em>${fd(x)}, ${WD[pd(x).getDay()]}</em><b>${esc(t.slice(0,140))}</b>${e.win&&e.win!==t?`<span>${I.star}${esc(e.win.slice(0,60))}</span>`:''}</button>`}).join(''):`<div class="jx-e">${q?'Ничего не нашлось':'Здесь появятся твои прошлые записи.'}</div>`}
+    ${!showAll&&hist.length>5?`<button class="jx-more" onclick="APP._jall=1;APP.render()">Показать все · ${hist.length}</button>`:''}</div></div>`;
   setTimeout(()=>{const e=$('jrN');if(e)this.jGrow(e)},0);
   return h},
 cabTabs(){const ct=['dream','ideal'].includes(this._ct)?'vision':this._ct==='skills'?'hero':(this._ct||'hero');return `<div class="pseg cabt">${[['hero','Персонаж'],['rewards','Награды'],['vision','Видение']].map(([k,l])=>`<button class="${ct===k?'on':''}" onclick="APP._ct='${k}';APP.render()">${l}</button>`).join('')}</div>`},
