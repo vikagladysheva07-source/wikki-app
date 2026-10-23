@@ -1474,6 +1474,54 @@ body.wlc .stw .st-d{color:rgba(232,226,247,.85);text-shadow:0 1px 12px rgba(0,0,
 .card.mpl::before,.card.dtip::before,.card.mr-pay::before,.card.tkx::before,.card.dz-c::before{display:none!important}
 .wbk-i,.mr-i,.hti,.shbtn,.qx,.mr-pay>span:first-child{background:#1C1C20!important;border:1px solid rgba(255,255,255,.08)!important;box-shadow:none!important}
 .wbk-i svg,.mr-i svg,.hti svg,.mr-pay>span:first-child svg{color:#A07BFF}
+/* ===== v145: единая дизайн-система по главной ===== */
+:root{--mono:'Manrope',system-ui,sans-serif}
+.card,.card.mpl,.card.dtip,.card.mr-pay,.card.tkx,.card.dz-c,.card.dzp,.tk,.hcard,.tdn,.jb-page,.jb-m,.jb-note,.jb-q,.jb-i,.dv,.ppc,.pwi,.ppi,.pcr,.swhint,.plr{background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.035) 45%,rgba(255,255,255,.015))!important;border:1px solid rgba(255,255,255,.11)!important;border-top-color:rgba(255,255,255,.18)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 8px 20px rgba(0,0,0,.3)!important;border-radius:16px!important}
+.card::before,.tk::before,.hb::before{display:none!important}
+/* светлое стекло для главных действий (как «Отметить день») */
+.btn.pr,.hm-cta,.pseg button.on,.wst-d.on,.dz-all,.qadd{background:linear-gradient(155deg,rgba(255,255,255,.16),rgba(255,255,255,.06) 60%,rgba(155,111,232,.10))!important;border:1px solid rgba(255,255,255,.18)!important;border-top-color:rgba(255,255,255,.30)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 18px rgba(124,77,235,.16),0 8px 20px rgba(0,0,0,.3)!important;color:#fff!important}
+.btn.pr svg,.qadd svg{color:#B79BFF}
+/* второстепенные кнопки */
+.btn:not(.pr),.pill,.qx,.hx-plus{background:rgba(255,255,255,.05)!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:none!important;color:#E9E5DE!important}
+/* переключатели */
+.pseg{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:14px!important;padding:4px!important;box-shadow:none!important}
+.pseg button{border-radius:11px!important;font-size:13.5px!important;font-weight:500!important;min-height:38px}
+/* строки задач и привычек как на главной */
+.tk{min-height:58px;padding:10px 12px 10px 14px!important;gap:12px!important;margin:8px 0!important}
+.tk .chk,.plr .chk{width:26px!important;height:26px!important;min-width:26px;border-radius:50%!important;border:1.6px solid rgba(255,255,255,.35)!important;background:none!important;box-shadow:none!important}
+.chk.on,.tk.dn .chk,.tk.done .chk{background:linear-gradient(180deg,#9B6DFA,#6A3BD9)!important;border-color:transparent!important;box-shadow:0 0 12px rgba(139,92,246,.5)!important}
+.tk .t b,.plr-t b{font-size:14px!important;font-weight:500!important}
+.tk .meta,.tk .meta *,.plr-t .km,.plr-d{font-size:12px!important;font-family:inherit!important;letter-spacing:0!important}
+.qm{border:0!important;text-decoration:none!important;padding:0!important}
+.qx{border-radius:10px!important;font-size:12.5px!important;padding:5px 10px!important;min-height:0!important}
+.kst svg{width:15px!important;height:15px!important;opacity:.55}
+.swhint{font-size:12.5px!important;padding:10px 14px!important;color:#C9C5BE!important}
+/* лента дат */
+.wst-d{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.09)!important;box-shadow:none!important}
+.wst-d b{font-size:15px!important;font-weight:600!important}
+/* поля ввода */
+input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:12px!important;font-family:inherit!important}
+/* без «коробки в коробке» */
+.card:has(>.hcards){background:none!important;border:0!important;box-shadow:none!important;padding:0!important}
+.card:has(>.hcards)>.trc{background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.035) 45%,rgba(255,255,255,.015))!important;border:1px solid rgba(255,255,255,.11)!important;border-top-color:rgba(255,255,255,.18)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 8px 20px rgba(0,0,0,.3)!important;border-radius:16px!important;padding:14px!important}
+.hcards{display:flex!important;flex-direction:column;gap:10px!important;margin-top:10px}.hcards .hcard{margin:0!important}
+.jb-m,.jb-q,.jb-note{background:rgba(255,255,255,.03)!important;border:1px solid rgba(255,255,255,.07)!important;border-top-color:rgba(255,255,255,.07)!important;box-shadow:none!important}
+/* размер текста: без огромных цифр и заголовков */
+.pph2-t{font-size:19px!important;font-weight:600!important;line-height:1.25!important}
+.ppc-n{font-size:20px!important;font-weight:600!important}
+.pgt b{font-size:20px!important;font-weight:600!important}
+.pex-n{font-size:30px!important;font-weight:600!important}
+.tkx-r b{font-size:24px!important;font-weight:600!important}
+.tkx b,.tkx .fl{font-size:18px!important;font-weight:600!important}
+.skd-l b{font-size:22px!important;font-weight:600!important}
+.sp>b{font-weight:600}
+.jb-page .sp>b,.jb-h b{font-size:17px!important;font-weight:600!important}
+.au-t{font-size:19px!important;font-weight:600!important}
+[class*="-n"]>b,[class*="dz-big"] b{font-weight:600}
+/* выбранные варианты в формах: стекло с фиолетовой обводкой вместо заливки */
+.seg button.on,#modal button.on,.sheet button.on,#modal .on:not(svg),.sheet .on:not(svg){background:linear-gradient(155deg,rgba(255,255,255,.16),rgba(255,255,255,.06) 60%,rgba(155,111,232,.12))!important;border:1px solid rgba(160,123,255,.45)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 14px rgba(124,77,235,.18)!important;color:#fff!important}
+/* заголовки групп и разделов внутри экранов */
+.plg-h b,.h2{font-size:15px!important;font-weight:500!important;text-transform:none!important;letter-spacing:0!important;color:#F4F1EC!important}
 @media(max-width:1023px){.qfab{display:none!important}}
 @media(min-width:1024px){.top.tpx{display:none}.hmx{margin:0;padding:28px 24px 26px;border-radius:24px;overflow:hidden}}
 /* карточки по макету */
@@ -3620,7 +3668,7 @@ dzSheet(){const o=this.dzOrder();this.open(`<div class="row"><div class="h2 sp" 
   <div class="small mut" style="margin:4px 0 14px">Включи нужные блоки и расставь их в удобном порядке.</div>
   <div class="dzl">${o.map(([k,on],i)=>{const w=this.DZW.find(x=>x[0]===k);return `<div class="dzr ${on?'':'off'}"><button class="dzr-t" onclick="APP.dzTog('${k}')"><span class="tgl ${on?'on':''}"><i></i></span><span class="sp"><b>${w[1]}</b><em>${w[2]}</em></span></button><div class="dzr-m"><button ${i?'':'disabled'} onclick="APP.dzMove(${i},-1)" aria-label="Выше">${I.l}</button><button ${i<o.length-1?'':'disabled'} onclick="APP.dzMove(${i},1)" aria-label="Ниже">${I.r}</button></div></div>`}).join('')}</div>
   <button class="btn gh w" style="margin-top:12px" onclick="APP.S.pref.dz=null;APP.save();APP.render();APP.dzSheet()">Вернуть как было</button>`)},
-vProfile(){return `<div class="h1">Профиль</div>__S1____S2__`+this.cabinet()},
+vProfile(){return `<div class="h1">Персонаж</div>__S1____S2__`+this.cabinet()},
 vProgram(){const pv=this._pgv==='week'?'week':'goals';
   const seg=`<div class="pseg">${[['goals','Цели'],['week','Неделя']].map(([k,l])=>`<button class="${pv===k?'on':''}" onclick="APP._pgv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
   const body=pv==='week'?this.stripV(this.vWeek()):this.stripV(this.vGoals());
