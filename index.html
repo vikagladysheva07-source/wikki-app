@@ -1520,6 +1520,31 @@ input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{b
 [class*="-n"]>b,[class*="dz-big"] b{font-weight:600}
 /* выбранные варианты в формах: стекло с фиолетовой обводкой вместо заливки */
 .seg button.on,#modal button.on,.sheet button.on,#modal .on:not(svg),.sheet .on:not(svg){background:linear-gradient(155deg,rgba(255,255,255,.16),rgba(255,255,255,.06) 60%,rgba(155,111,232,.12))!important;border:1px solid rgba(160,123,255,.45)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 14px rgba(124,77,235,.18)!important;color:#fff!important}
+/* ===== v146: Планы — неделя и месяц ===== */
+.pw-nav{display:flex;align-items:center;gap:12px;margin:4px 0 14px}.pw-nav .sp{flex:1;text-align:center}.pw-nav b{display:block;font-size:16px;font-weight:600;color:#F4F1EC}.pw-nav em{font-style:normal;font-size:12px;color:#9C9AA3}
+.pw-nav .tp-c svg{width:18px!important;height:18px!important}
+.pw-sum{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.pw-sum>div,.pw-day,.pm{background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.035) 45%,rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.11);border-top-color:rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 8px 20px rgba(0,0,0,.3);border-radius:14px}
+.pw-sum>div{padding:12px;display:flex;flex-direction:column;gap:3px}.pw-sum b{font-size:18px;font-weight:600;color:#F4F1EC}.pw-sum em{font-style:normal;font-size:11px;color:#9C9AA3}
+.pw-day{padding:10px 12px;margin-bottom:10px}
+.pw-day.td{border-color:rgba(160,123,255,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 16px rgba(124,77,235,.15),0 8px 20px rgba(0,0,0,.3)}
+.pw-day.past{opacity:.75}
+.pw-dh{display:flex;align-items:center;gap:12px}
+.pw-dt{background:none;border:0;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer;min-width:118px}.pw-dt b{display:block;font-size:14.5px;font-weight:600;color:#F4F1EC}.pw-dt em{font-style:normal;font-size:12px;color:#9C9AA3}
+.pw-day.td .pw-dt b{color:#C9B8FF}
+.pw-bar{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}.pw-bar i{display:block;height:100%;background:linear-gradient(90deg,#C4A4FF,#8B5CF6)}
+.pw-add{width:32px;height:32px;border-radius:10px;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#C9B8FF;cursor:pointer;padding:0}.pw-add svg{width:16px;height:16px}
+.pw-l{margin-top:8px}.pw-l .plr{margin:6px 0!important;padding:8px 10px!important;box-shadow:none!important;background:rgba(255,255,255,.03)!important;border:1px solid rgba(255,255,255,.07)!important}
+.pm{padding:12px}
+.pm-w,.pm-g{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.pm-w span{text-align:center;font-size:10.5px;color:#7F7C87;padding-bottom:6px}
+.pm-c{aspect-ratio:1;border-radius:10px;position:relative;display:grid;place-items:center;background:linear-gradient(155deg,rgba(255,255,255,.06),rgba(255,255,255,.01)),rgba(139,92,246,var(--p,0.03));border:1px solid rgba(255,255,255,.07);border-top-color:rgba(255,255,255,.12);font:inherit;color:#E9E5DE;cursor:pointer;padding:0}
+.pm-c.em{background:none;border:0;cursor:default}
+.pm-c b{font-size:13px;font-weight:500}.pm-c.fu{opacity:.55}
+.pm-c.td{border:1.5px solid rgba(196,164,255,.85);box-shadow:0 0 12px rgba(139,92,246,.4)}
+.pm-c i{position:absolute;right:4px;top:3px;font-style:normal;font-size:9px;font-weight:700;color:#C9B8FF}
+.pm-e{font-size:13px;color:#9C9AA3;padding:12px 2px}
+.pm-l .plr{background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.03))!important;border:1px solid rgba(255,255,255,.11)!important}
 /* заголовки групп и разделов внутри экранов */
 .plg-h b,.h2{font-size:15px!important;font-weight:500!important;text-transform:none!important;letter-spacing:0!important;color:#F4F1EC!important}
 @media(max-width:1023px){.qfab{display:none!important}}
@@ -2173,12 +2198,41 @@ pxFilterSheet(){const groups=[['k','Дела'],['h','Привычки']].map(([k
   ${groups.length?groups.map(([k,l,P])=>P.map(p=>`<div class="lbl" style="margin:12px 0 6px">${l} · ${esc(p.name)}</div><div class="pv-o">${p.opts.map(o=>{const on=this._pf&&this._pf.pid===p.id&&this._pf.v===o.v;return `<button class="${on?'on':''}" style="--c:${this.PCOL[o.c%this.PCOL.length]}" onclick='APP._pf=${on?'null':JSON.stringify({k,pid:p.id,v:o.v,n:o.v}).replace(/'/g,"&#39;")};APP.close();APP.render()'>${esc(o.v)}</button>`}).join('')}</div>`).join('')).join(''):`<div class="small mut" style="margin:8px 0 14px">Пока нечего фильтровать. Добавь делу или привычке свойство с вариантами, например «Приоритет» или «Проект».</div>`}
   <div class="row" style="margin-top:16px">${this._pf?`<button class="btn gh sp" onclick="APP._pf=null;APP.close();APP.render()">Сбросить фильтр</button>`:''}<button class="btn gh sp" onclick="APP.pxRet('k','');APP.pxEdit('k')">${I.plus} Свойство для дел</button></div>`)},
 /* вкладка «Планы» и компактный блок на дашборде */
-vPlans(){const v=this._plv==='list'?'list':'day';
-  const seg=`<div class="pseg">${[['day','День'],['list','Все задачи']].map(([k,l])=>`<button class="${v===k?'on':''}" onclick="APP._plv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
+vPlans(){const v=['list','week','month'].includes(this._plv)?this._plv:'day';
+  const seg=`<div class="pseg">${[['day','День'],['week','Неделя'],['month','Месяц']].map(([k,l])=>`<button class="${v===k?'on':''}" onclick="APP._plv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
   const hint=matchMedia('(pointer:coarse)').matches&&!(this.S.pref||{}).swh?`<div class="swhint"><span>Свайп вправо — готово, влево — на завтра</span><button onclick="APP.setPref('swh',1)" aria-label="Скрыть">${I.x}</button></div>`:'';
   if(v==='list')return `<div class="h1">Планы</div>${seg}__S1____S2__`+hint+this.vPlanList();
+  if(v==='week')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vPlanWeek();
+  if(v==='month')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vPlanMonth();
   if(v==='matrix')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vMatrix();
   this._noBoard=true;let t=this.vToday();this._noBoard=false;return `<div class="h1">Планы</div>${seg}__S1____S2__`+hint+this.stripV(t)},
+plOpenDay(d){this.day=d;this._plv='day';window.scrollTo(0,0);this.render()},
+plAddOn(d,lab){this.ask('Дело на '+lab,'',v=>{if(v){this.taskAdd(v,d);this.render()}})},
+vPlanWeek(){const td=today(),off=this._plw||0,m0=add(this.monday(td),off*7),WD7=['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'];
+  const T=(this.S.tasks||[]).filter(x=>!x.drop&&!(this.S.del||[]).includes(x.id));
+  const days=[0,1,2,3,4,5,6].map(i=>add(m0,i));
+  let sp=0,sn=0;days.forEach(d=>{if(d<=td){const a=this.dayAll(d);if(a.n){sp+=a.p;sn++}}});
+  const avg=sn?Math.round(sp/sn*100):0,dn=T.filter(x=>x.done&&days.includes(x.date)).length,all=T.filter(x=>days.includes(x.date)).length;
+  const lab=d=>{const x=pd(d);return x.getDate()+' '+['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'][x.getMonth()]};
+  let h=`<div class="pw-nav"><button class="tp-c" onclick="APP._plw=${off-1};APP.render()" aria-label="Прошлая неделя"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><div class="sp"><b>${off===0?'Эта неделя':off===1?'Следующая неделя':off===-1?'Прошлая неделя':'Неделя'}</b><em>${lab(days[0])} — ${lab(days[6])}</em></div><button class="tp-c" onclick="APP._plw=${off+1};APP.render()" aria-label="Следующая неделя"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
+   <div class="pw-sum"><div><b>${avg}%</b><em>выполнение</em></div><div><b>${dn}/${all}</b><em>дел закрыто</em></div><div><b>${days.filter(d=>d<=td&&this.dayOk&&this.dayOk(d)).length}/7</b><em>хороших дней</em></div></div>`;
+  days.forEach((d,i)=>{const L=T.filter(x=>x.date===d).sort((a,b)=>(!!a.done-!!b.done)||(a.tm||'99').localeCompare(b.tm||'99')),a=d<=td?this.dayAll(d):null,pct=a&&a.n?Math.round(a.p*100):null;
+    h+=`<div class="pw-day ${d===td?'td':''} ${d<td?'past':''}"><div class="pw-dh"><button class="pw-dt" onclick="APP.plOpenDay('${d}')"><b>${WD7[i]}</b><em>${lab(d)}${pct!=null?' · '+pct+'%':''}</em></button>${pct!=null?`<span class="pw-bar"><i style="width:${pct}%"></i></span>`:'<span class="sp"></span>'}<button class="pw-add" onclick="APP.plAddOn('${d}','${WD7[i].toLowerCase()}')" aria-label="Добавить дело">${MI.plus}</button></div>
+     ${L.length?`<div class="pw-l">${L.map(x=>this.plRow(x,false)).join('')}</div>`:''}</div>`});
+  return h},
+vPlanMonth(){const td=today(),off=this._plm||0,b=new Date(+td.slice(0,4),+td.slice(5,7)-1+off,1),y=b.getFullYear(),mo=b.getMonth(),first=iso(b),last=iso(new Date(y,mo+1,0));
+  const T=(this.S.tasks||[]).filter(x=>!x.drop&&!(this.S.del||[]).includes(x.id)&&x.date>=first&&x.date<=last);
+  const lead=(b.getDay()+6)%7;let cells='';for(let i=0;i<lead;i++)cells+='<span class="pm-c em"></span>';
+  let sp=0,sn=0,good=0;
+  for(let d=first;d<=last;d=add(d,1)){const a=d<=td?this.dayAll(d):null,p=a&&a.n?a.p:null,nt=T.filter(x=>x.date===d&&!x.done).length;
+    if(p!=null){sp+=p;sn++;if(p>=.8)good++}
+    cells+=`<button class="pm-c ${d===td?'td':''} ${d>td?'fu':''}" onclick="APP.plOpenDay('${d}')" style="${p!=null?`--p:${(p*.30+.03).toFixed(2)}`:''}"><b>${+d.slice(8)}</b>${nt?`<i>${nt}</i>`:''}</button>`}
+  const avg=sn?Math.round(sp/sn*100):0,open=T.filter(x=>!x.done&&x.date>=td).sort((a,c)=>a.date.localeCompare(c.date)||(a.tm||'99').localeCompare(c.tm||'99'));
+  return `<div class="pw-nav"><button class="tp-c" onclick="APP._plm=${off-1};APP.render()" aria-label="Прошлый месяц"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><div class="sp"><b>${MONF[mo]} ${y}</b><em>${off===0?'этот месяц':''}</em></div><button class="tp-c" onclick="APP._plm=${off+1};APP.render()" aria-label="Следующий месяц"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
+   <div class="pw-sum"><div><b>${avg}%</b><em>выполнение</em></div><div><b>${good}</b><em>хороших дней</em></div><div><b>${T.filter(x=>x.done).length}/${T.length}</b><em>дел закрыто</em></div></div>
+   <div class="pm"><div class="pm-w">${['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].map(x=>`<span>${x}</span>`).join('')}</div><div class="pm-g">${cells}</div></div>
+   <div class="hx-sec"><b>Дела в этом месяце <i>${open.length}</i></b></div>
+   ${open.length?`<div class="pw-l pm-l">${open.slice(0,12).map(x=>this.plRow(x,true)).join('')}</div>`:`<div class="pm-e">Дел с датой в этом месяце нет. Нажми на день, чтобы спланировать.</div>`}`},
 dzPlans(){const td=today(),dp=this.dayAll(td),pct=dp.n?Math.round(dp.p*100):0,ord={m:0,d:1,e:2,'':3},hr=new Date().getHours(),now=hr<12?'m':hr<18?'d':'e';
   const tk=this.tasksFor(td).filter(x=>!x.done).map(x=>({k:'k',o:x,tod:'',tm:x.tm||''}));
   const hs=this.S.habits.filter(x=>!x.archived&&this.hSched(x,td)&&!this.hOn(x,td)).map(x=>({k:'h',o:x,tod:x.tod||'',tm:''}));
