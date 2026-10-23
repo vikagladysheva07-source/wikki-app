@@ -2330,8 +2330,7 @@ vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData()
   return `<div class="h1">Профиль</div>__S1____S2__
   <button class="card mr-me" onclick="APP.go('profile')"><span class="mr-av ${this.rwFr()}">${this.avaHtml()}</span><div class="sp"><b>${esc(P.name||'Твой профиль')}</b><em>${this.rwTitle()?this.rwTitle()+' · ':''}уровень ${D.lvl||1}${this.user?'':' · войди, чтобы сохранить прогресс'}</em></div>${I.r}</button>
   ${pd0?'':`<button class="card mr-pay" onclick="APP.paySheet('program')"><span>${I.star}</span><div class="sp"><b>Полный доступ</b><em>Программы, прогресс, безлимит привычек и разбор недели</em></div>${I.r}</button>`}
-  <div class="mr-g">${T.map(([k,l,ic,d,pay])=>`<button class="card mr-t" onclick="APP.go('${k}')"><span class="mr-i">${ic}</span><b>${l}</b><em>${d}</em>${pay?lock:''}</button>`).join('')}</div>
-  <div class="card mr-l"><button onclick="APP._ct='rewards';APP.go('profile')">${I.trophy}<span>Награды</span><em class="mr-c">${Object.keys(this.S.rw||{}).length} из ${this.RW.length+this.RWX.length+this.RWC.length}</em>${I.r}</button><button onclick="APP.ptCreate()">${I.me}<span>Позвать партнёра</span>${I.r}</button><button onclick="APP.go('me')">${I.gear}<span>Настройки</span>${I.r}</button><button onclick="APP.go('me');APP._sset='about';APP.render()">${I.spark||I.star}<span>О приложении</span>${I.r}</button><button onclick="APP.shareApp()">${SI.share}<span>Поделиться приложением</span>${I.r}</button></div>`},
+  <div class="card mr-l"><button onclick="APP.ptCreate()">${I.me}<span>Позвать партнёра</span>${I.r}</button><button onclick="APP.go('me')">${I.gear}<span>Настройки</span>${I.r}</button><button onclick="APP.go('me');APP._sset='about';APP.render()">${I.spark||I.star}<span>О приложении</span>${I.r}</button><button onclick="APP.shareApp()">${SI.share}<span>Поделиться приложением</span>${I.r}</button></div>`},
 /* темы оформления: перекрашиваем фирменный фиолетовый в цвет темы */
 THM:{},
 thConv(r,g,b){const T=this.THM[(this.S.pref||{}).theme];if(!T)return null;const k=r+','+g+','+b,C=this._thc||(this._thc={});if(k in C)return C[k];
@@ -3012,9 +3011,9 @@ render(){const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_
   $('app').innerHTML=this.thx(this.top()+this.dash(body));if(this._ptc)this.ptAuto();this.tr($('app'));
   const simple=this.simple();
   const tabs=simple?[['home','Сегодня',I.dash],['plans','Планы',I.plan],['tracker','Привычки',I.habit],['me','Настройки',I.gear]]:[['home','Сегодня',I.dash],['plans','Планы',I.plan],['program','Программа',I.goal],['progress','Прогресс',I.chart],['tracker','Привычки',I.habit],['journal','Дневник',I.diary],['me','Настройки',I.gear]];
-  const mtabs=simple?tabs:[['home','Сегодня',MI.home],['plans','Планы',MI.plan],['+','',''],['tracker','Привычки',MI.hab],['more','Профиль',MI.user]],inMore=['more','program','progress','profile','me','journal'].includes(this.tab);
+  const mtabs=simple?tabs:[['home','Сегодня',MI.home],['plans','Планы',MI.plan],['+','',''],['tracker','Привычки',MI.hab],['more','Профиль',MI.user]],inMore=['more','profile','me'].includes(this.tab),fromHome=['journal','program','progress'].includes(this.tab);
   this._pop=null;
-  $('nav').innerHTML='<div class="in n5">'+mtabs.map(([k,l,ic])=>k==='+'?`<button class="nfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${MI.plus}</button>`:`<button class="${this.tab===k||(k==='more'&&inMore)||(simple&&k==='me'&&inMore)?'on':''}" onclick="APP.go('${k}')">${ic}<span>${l}</span></button>`).join('')+'</div>';
+  $('nav').innerHTML='<div class="in n5">'+mtabs.map(([k,l,ic])=>k==='+'?`<button class="nfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${MI.plus}</button>`:`<button class="${this.tab===k||(k==='more'&&inMore)||(k==='home'&&fromHome)||(simple&&k==='me'&&inMore)?'on':''}" onclick="APP.go('${k}')">${ic}<span>${l}</span></button>`).join('')+'</div>';
   const P=this.prog();
   const ttl=this.sub==='programs'?'Программы':this.sub==='deals'?'Воронка':this.sub==='onboard'?'Старт':{home:'Сегодня',habits:'Прогресс',goals:(P?P.name:'Программа'),week:'Неделя',me:'Профиль'}[this.tab];
   const Pp=this.S.profile||{};
