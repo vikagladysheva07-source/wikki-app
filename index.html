@@ -1546,6 +1546,8 @@ input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{b
 .pm-e{font-size:13px;color:#9C9AA3;padding:12px 2px}
 .pm-l .plr{background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.03))!important;border:1px solid rgba(255,255,255,.11)!important}
 .dz-s2 b,.dz-big b{font-size:22px!important;font-weight:600!important}.dz-s2 b i{font-size:14px!important}.dz-rg b,.dz-rl b{font-size:16px!important;font-weight:600!important}
+/* функция «три главных» убрана */
+.tmain,.tmain-0,.tmain-h,.kst{display:none!important}
 /* заголовки групп и разделов внутри экранов */
 .plg-h b,.h2{font-size:15px!important;font-weight:500!important;text-transform:none!important;letter-spacing:0!important;color:#F4F1EC!important}
 @media(max-width:1023px){.qfab{display:none!important}}
@@ -2478,7 +2480,7 @@ dayBest(){const td=today();let best=0,run=0,miss=0;for(let i=400;i>=0;i--){const
 mpLeft(){const td=today();return (this.S.tasks||[]).filter(x=>!x.done&&!x.drop&&x.date<td)},
 mpMove(id,n){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;x.date=add(today(),n);x.t=Date.now();this.save();this.render()},
 mpDone(){this.S.pref.mp=today();this.save();this.track('plan_morning',null,'day');this.render();this.toast('План на день готов')},
-mpH(){const td=today(),hr=this._hr??new Date().getHours(),pf=this.S.pref||{};if(hr<4||hr>=14||pf.mp===td)return '';
+mpH(){return '';const td=today(),hr=this._hr??new Date().getHours(),pf=this.S.pref||{};if(hr<4||hr>=14||pf.mp===td)return '';
   const left=this.mpLeft(),st=this.starList(td);
   const items=[...this.tasksFor(td).filter(x=>!x.done&&x.date===td).map(x=>['k',x]),...this.S.habits.filter(x=>!x.archived&&this.hSched(x,td)&&!this.hOn(x,td)).map(x=>['h',x])];
   if(!left.length&&!items.length)return '';
