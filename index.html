@@ -1545,6 +1545,7 @@ input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{b
 .pm-c i{position:absolute;right:4px;top:3px;font-style:normal;font-size:9px;font-weight:700;color:#C9B8FF}
 .pm-e{font-size:13px;color:#9C9AA3;padding:12px 2px}
 .pm-l .plr{background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.03))!important;border:1px solid rgba(255,255,255,.11)!important}
+.dz-s2 b,.dz-big b{font-size:22px!important;font-weight:600!important}.dz-s2 b i{font-size:14px!important}.dz-rg b,.dz-rl b{font-size:16px!important;font-weight:600!important}
 /* заголовки групп и разделов внутри экранов */
 .plg-h b,.h2{font-size:15px!important;font-weight:500!important;text-transform:none!important;letter-spacing:0!important;color:#F4F1EC!important}
 @media(max-width:1023px){.qfab{display:none!important}}
@@ -2205,7 +2206,7 @@ vPlans(){const v=['list','week','month'].includes(this._plv)?this._plv:'day';
   if(v==='week')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vPlanWeek();
   if(v==='month')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vPlanMonth();
   if(v==='matrix')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vMatrix();
-  this._noBoard=true;let t=this.vToday();this._noBoard=false;return `<div class="h1">Планы</div>${seg}__S1____S2__`+hint+this.stripV(t)},
+  this._noBoard=true;let t=this.vToday();this._noBoard=false;let mp='';try{mp=this.day===today()?this.mpH():''}catch(e){}return `<div class="h1">Планы</div>${seg}__S1____S2__`+mp+hint+this.stripV(t)},
 plOpenDay(d){this.day=d;this._plv='day';window.scrollTo(0,0);this.render()},
 plAddOn(d,lab){this.ask('Дело на '+lab,'',v=>{if(v){this.taskAdd(v,d);this.render()}})},
 vPlanWeek(){const td=today(),off=this._plw||0,m0=add(this.monday(td),off*7),WD7=['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'];
@@ -3637,7 +3638,7 @@ catOf(o,k){const CAT={dumb:'str',steps:'str',swim:'str',food:'str',tree:'str',sn
 homeHero(dpT){const td=today(),P=this.S.profile||{},nm=(P.name||'').split(' ')[0];
   const closed=dpT.n&&dpT.done>=dpT.n;
   let mpOn=false;try{mpOn=!!this.mpH()}catch(e){}
-  const cta=mpOn?['Собрать план дня',"APP.go('home');APP._stats=1;APP.render()"]:!dpT.n?['Добавить привычку',"APP.editH()"]:closed?['Записать день',"APP._jd=today();APP.go('journal')"]:['Отметить день',"APP.go('tracker')"];
+  const cta=mpOn?['Собрать план дня',"APP._plv='day';APP.go('plans')"]:!dpT.n?['Добавить привычку',"APP.editH()"]:closed?['Записать день',"APP._jd=today();APP.go('journal')"]:['Отметить день',"APP.go('tracker')"];
   const TR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></svg>';
   const TG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3"/></svg>';
   const tl=[['Дневник',MI.diary,"APP._jd=today();APP.go('journal')"],['Прогресс',MI.prog,"APP.go('home');APP._stats=1;APP.render()"],['Программа',TG,"APP.go('program')"],['Награды',TR,"APP._ct='rewards';APP.go('profile')"]];
@@ -3709,11 +3710,11 @@ vHome(){if(!this._rwt||Date.now()-this._rwt>60000){this._rwt=Date.now();this.rwC
   const stk2=`<div class="card dz-c dz-stk2"><div class="dz-ch"><span class="dz-ti">${I.fire}Серии</span><span class="sp"></span><button class="shbtn" onclick="APP.shareStudio('streak')">${SI.share}<span>В сторис</span></button></div><div class="dz-s2"><div><b>${wkOk}<i>/${wkN}</i></b><span>${this.pl(wkOk,'день','дня','дней')} на этой неделе</span></div><div><b>${cur}</b><span>в серии · рекорд ${best}</span></div></div><div class="dz-s2n">Один пропуск серию не обнуляет, два подряд — да</div>${sl.slice(0,3).map(x=>`<div class="dz-sr">${this.tile(x.r.o,x.r.k,x.r.k==='h'?null:this.gColor(x.r.o.goal))}<span class="sp">${esc(x.r.o.title)}</span><b>${I.flame}${x.st}</b></div>`).join('')}<button class="dz-all" onclick="APP.go('tracker')">Все серии ${I.r}</button></div>`;
   const WG={today:this.dzPlans(),rings:this.dzRings(),rhythm:this.dzRhythm(),wday:this.dzWday(),streak:stk2,week:progH,partner:this.partnerW(),progress:over,cons,wkbars:wkH,wheel:whlH};
   let body='',chunk='';const flush=()=>{if(chunk){body+=`<div class="dz dz2">${chunk}</div>`;chunk=''}};
-  this.dzOrder().forEach(([k,on])=>{if(!on||!WG[k])return;if(k==='today'){flush();body+=WG[k]}else chunk+=WG[k]});flush();
+  this.dzOrder().forEach(([k,on])=>{if(!on||!WG[k]||k==='today'||k==='partner')return;chunk+=WG[k]});flush();
   const repC=this.inPrg()&&this.curWeek()>=12?`<button class="card pg-rep" onclick="APP.openSub('report')"><span>${I.trophy}</span><div class="sp"><b>Итоги цикла готовы</b><em>Цифры, победы и карточка для сторис</em></div>${I.r}</button>`:'';
   if(!this._stats)return `${this.homeHero(dpT)}__S1__`;
-  return `<div class="stx-h"><button class="tp-c" onclick="APP.go('home')" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><div class="h1">Статистика дня</div></div>__S1__<div class="hm-sec"><b>Твой день</b><button onclick="APP.dzSheet()">Настроить${MI.chev}</button></div>${(()=>{const f=this.fsH();return f+this.mpH()+(f?'':this.wbH())})()}${this.wkH()}${this.shMoment()}${this.ctxH()}${this.badDayWin()}${repC}${body}${this.tipH()}<button class="qfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${I.plus}</button>`},
-DZW:[['today','Планы','Три ближайших дела и прогресс дня'],['rings','Кольца активности','День, неделя и месяц'],['streak','Серии','Дни подряд, рекорд и лучшие привычки'],['rhythm','Ритм дня','Утро, день и вечер'],['wday','Дни недели','В какие дни ты сильнее'],['week','Неделя программы','Счёт недели, фокус и дни до разбора'],['progress','Общий прогресс','График с выбором периода'],['cons','Карта дней','Каждый день на тепловой карте'],['wkbars','Прогресс недели','Столбики по дням недели'],['wheel','Колесо баланса','Средний балл и слабая сфера месяца'],['partner','Партнёр','Процент недели друг друга']],
+  return `<div class="stx-h"><button class="tp-c" onclick="APP.go('home')" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><div class="h1">Прогресс</div></div>__S1__<div class="hm-sec"><b>Аналитика</b><button onclick="APP.dzSheet()">Настроить${MI.chev}</button></div>${repC}${body}<button class="qfab" onclick="APP.qMenu()" aria-label="Быстро добавить">${I.plus}</button>`},
+DZW:[['rings','Кольца активности','День, неделя и месяц'],['streak','Серии','Дни подряд, рекорд и лучшие привычки'],['rhythm','Ритм дня','Утро, день и вечер'],['wday','Дни недели','В какие дни ты сильнее'],['week','Неделя программы','Счёт недели, фокус и дни до разбора'],['progress','Общий прогресс','График с выбором периода'],['cons','Карта дней','Каждый день на тепловой карте'],['wkbars','Прогресс недели','Столбики по дням недели'],['wheel','Колесо баланса','Средний балл и слабая сфера месяца']],
 dzOrder(){const pf=this.S.pref=this.S.pref||{};if(pf.dzv!==3){pf.dz=null;pf.dzv=3}const def=this.DZW.map(x=>[x[0],['today','rings','streak','cons'].includes(x[0])]);let cur=(pf.dz||[]).filter(x=>this.DZW.some(w=>w[0]===x[0]));const mig=false;def.forEach(d=>{if(!cur.some(x=>x[0]===d[0])){const pi=cur.findIndex(x=>x[0]==='partner');if(pi>=0&&pi===cur.length-1)cur.splice(pi,0,[d[0],d[1]]);else cur.push([d[0],d[1]])}});if(mig){const pi=cur.findIndex(x=>x[0]==='partner');if(pi>=0)cur.push(cur.splice(pi,1)[0]);pf.dz=cur.map(x=>[x[0],x[1]]);pf.dzv=2}return cur},
 dzSet(o){this.S.pref=this.S.pref||{};this.S.pref.dz=o;this.save();this.render();this.dzSheet()},
 dzTog(k){this.dzSet(this.dzOrder().map(x=>x[0]===k?[x[0],!x[1]]:x))},
