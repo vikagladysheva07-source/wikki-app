@@ -1381,6 +1381,49 @@ body.wlc .stw .st-d{color:rgba(232,226,247,.85);text-shadow:0 1px 12px rgba(0,0,
 .nav .in.n5 button{min-width:0;font-size:11.5px!important;padding:6px 0!important}
 .nav .in.n5 button span{overflow:hidden;text-overflow:ellipsis}
 .nav .in.n5 .nfab{margin:-36px auto 0!important}
+/* ===== v143: система размеров по референсу (экран 390) ===== */
+.tp-c{width:40px!important;height:40px!important}.tp-c svg{width:19px!important;height:19px!important}.tp-dot{top:8px!important;right:9px!important;width:7px!important;height:7px!important}
+.tp-wm{height:19px!important}
+.hm-hi{font-size:18px!important;color:#C9C2B8!important}
+.hm-ht{font-size:29px!important;line-height:1.22!important;font-weight:500!important;margin-top:6px!important}
+.hm-cta{height:52px!important;min-width:0!important;width:258px!important;max-width:100%;border-radius:13px!important;font-size:15.5px!important;margin-top:22px!important;gap:12px!important}
+.hm-cta svg{width:20px!important;height:20px!important}.hm-cta svg:last-child{width:16px!important;height:16px!important}
+.hm-tl{gap:10px!important;margin-top:24px!important}
+.hm-tl button{height:90px!important;border-radius:15px!important;gap:10px!important}
+.hm-tl svg{width:28px!important;height:28px!important}
+.hm-tl b{font-size:12px!important}
+.hm-bd{width:21px!important;height:21px!important;font-size:11px!important;top:-6px!important;right:-5px!important}
+.hm-sec{margin:24px 2px 0!important}.hm-sec b{font-size:16px!important;font-weight:500!important}.hm-sec button{font-size:13px!important}.hm-sec button svg{width:14px!important;height:14px!important}
+.hm-card{border-radius:16px!important;margin-top:12px!important;padding:13px!important}
+.hm-th{width:68px!important;height:68px!important;border-radius:12px!important}
+.hm-nh svg{width:18px!important;height:18px!important}.hm-nh b{font-size:15.5px!important}
+.hm-chip{font-size:11.5px!important;padding:4px 10px!important}
+.hm-nd{font-size:13px!important;margin-top:6px!important}.hm-nm{font-size:12.5px!important;margin-top:8px!important}.hm-nm svg{width:15px!important;height:15px!important}
+.hm-promo{min-height:118px!important;padding:16px 16px!important}
+.hm-pt{font-size:16.5px!important}.hm-pd{font-size:13px!important;margin-top:5px!important}
+.hm-pb{font-size:12.5px!important;padding:7px 12px!important;border-radius:10px!important;margin-top:12px!important}
+.hm-pct{width:46px!important;height:46px!important;font-size:13px!important;right:16px!important;top:16px!important}
+/* меню */
+.nav .in.n5 button{font-size:11px!important;gap:5px!important;min-height:46px!important}
+.nav .in.n5 button svg{width:23px!important;height:23px!important}
+.nav .in.n5{grid-template-columns:repeat(2,minmax(0,1fr)) 68px repeat(2,minmax(0,1fr))!important;padding:10px 8px calc(12px + env(safe-area-inset-bottom))!important;border-radius:26px 26px 0 0!important}
+.nav .in.n5 .nfab{flex:0 0 54px!important;width:54px!important;height:54px!important;margin:-30px auto 0!important}
+.nav .in.n5 .nfab svg{width:24px!important;height:24px!important}
+/* заголовки вкладок — сдержанные */
+.h1{font-size:24px!important;font-weight:500!important;margin-top:16px!important;margin-bottom:16px!important}
+/* карточки */
+.card{border-radius:16px!important}
+/* «Ещё»: аккуратный список вместо огромных плиток */
+.mr-g{grid-template-columns:1fr!important;gap:10px!important}
+.mr-t{display:grid!important;grid-template-columns:40px minmax(0,1fr);column-gap:14px;row-gap:2px;align-items:center;min-height:0!important;padding:13px 14px!important}
+.mr-t .mr-i{grid-row:1/span 2;margin:0!important;width:40px;height:40px}
+.mr-t b{font-size:15px;font-weight:500}.mr-t em{font-size:12.5px;line-height:1.35}
+.mr-t .mr-lk{grid-column:2;justify-self:start;margin-top:4px}
+.mr-me,.mr-pay{padding:13px 14px!important}
+/* Планы: лента дат */
+.wst-d{padding:6px 0 5px!important;border-radius:12px!important}.wst-d b{font-size:16px!important}
+/* Профиль */
+.pcab-n{font-size:21px!important;font-weight:600!important;margin-top:12px!important}
 /* тёмное стекло с фиолетовой подсветкой вместо сплошного фиолетового */
 .btn.pr,.hm-cta,.pseg button.on,.wst-d.on,.dz-all{background:linear-gradient(180deg,rgba(36,30,54,.96),rgba(16,14,24,.96))!important;border:1px solid rgba(160,123,255,.38)!important;color:#fff!important;
  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),inset 0 -1px 0 rgba(160,123,255,.55),0 0 20px rgba(124,77,235,.20),0 8px 22px rgba(0,0,0,.35)!important}
@@ -2142,7 +2185,7 @@ initSwipe(){const app=$('app');let el=null,sx=0,sy=0,dx=0,on=false;
 vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData():{lvl:1};
   const lock=pd0?'':`<i class="mr-lk">Полный доступ</i>`;
   const T=[['journal','Дневник',I.diary,'Записи дня, рефлексия и победы',0],['program','Программа',I.goal,'Цели на 12 недель, тактики и разбор недели',1],['progress','Прогресс',I.chart,'Графики, колесо баланса и год в пикселях',1]];
-  return `<div class="h1">Ещё</div>__S1____S2__
+  return `<div class="h1">Профиль</div>__S1____S2__
   <button class="card mr-me" onclick="APP.go('profile')"><span class="mr-av ${this.rwFr()}">${this.avaHtml()}</span><div class="sp"><b>${esc(P.name||'Твой профиль')}</b><em>${this.rwTitle()?this.rwTitle()+' · ':''}уровень ${D.lvl||1}${this.user?'':' · войди, чтобы сохранить прогресс'}</em></div>${I.r}</button>
   ${pd0?'':`<button class="card mr-pay" onclick="APP.paySheet('program')"><span>${I.star}</span><div class="sp"><b>Полный доступ</b><em>Программы, прогресс, безлимит привычек и разбор недели</em></div>${I.r}</button>`}
   <div class="mr-g">${T.map(([k,l,ic,d,pay])=>`<button class="card mr-t" onclick="APP.go('${k}')"><span class="mr-i">${ic}</span><b>${l}</b><em>${d}</em>${pay?lock:''}</button>`).join('')}</div>
