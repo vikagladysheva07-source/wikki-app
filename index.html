@@ -1900,7 +1900,9 @@ undo(){const z=this._snap;if(!z)return;const S=this.S;S.log=JSON.parse(z.log);S.
   for(const k in S.lt)S.lt[k]=Date.now();this._snap=null;this.save();this.render();this.toast('Отменено')},
 
 init(){
+  let firstRun=false;try{firstRun=!localStorage.getItem(KEY)}catch(e){}
   this.S=this.load();
+  {const ql=new URLSearchParams(location.search).get('lang');this.S.pref=this.S.pref||{};if(ql==='en'||ql==='ru'){this.S.pref.lang=ql;history.replaceState(null,'',location.pathname+location.hash)}else if(firstRun&&!this.S.pref.lang){const L=((navigator.languages&&navigator.languages[0])||navigator.language||'en').toLowerCase();if(!/^(ru|uk|be|kk|ky|tg|uz|az|hy|ka|tt|ba|ce|cv)/.test(L))this.S.pref.lang='en'}}
   const h=new URLSearchParams(location.hash.slice(1)),tp=h.get('tpl');
   if(tp){history.replaceState(null,'',location.pathname);this.applyTpl(tp)}
   this.day=this.clampDay(today());
@@ -1950,25 +1952,31 @@ stMark(id){const h=this.S.habits.find(x=>x.id===id);if(!h)return;const k=h.kind|
 stDone(){this._st=null;this._stp=null;this.sub=null;this.track('onb_done',null,'ever');this.go('home')},
 /* планирование: разбор фразы, время, полоса недели */
 parseTask(text,base){let t=' '+String(text||'').trim()+' ',d=base||this.day||today(),tm='',hit='';const td=today();
-  const WDN=[['воскресенье','вс'],['понедельник','пн'],['вторник','вт'],['среду','среда','ср'],['четверг','чт'],['пятницу','пятница','пт'],['субботу','суббота','сб']];
+  const WDN=[['воскресенье','вс','sunday','sun'],['понедельник','пн','monday','mon'],['вторник','вт','tuesday','tue'],['среду','среда','ср','wednesday','wed'],['четверг','чт','thursday','thu'],['пятницу','пятница','пт','friday','fri'],['субботу','суббота','сб','saturday','sat']];
   const MON=['янв','фев','мар','апр','ма','июн','июл','авг','сен','окт','ноя','дек'];
   const cut=re=>{const m=t.match(re);if(m){t=t.replace(m[0],' ');return m}return null};
   let m,rp=null;
-  if(cut(/\s(каждый день|ежедневно)\s/i))rp={f:'d'};
-  else if(cut(/\s(по будням)\s/i))rp={f:'wd'};
+  if(cut(/\s(каждый день|ежедневно|every day|daily)\s/i))rp={f:'d'};
+  else if(cut(/\s(по будням|weekdays|every weekday)\s/i))rp={f:'wd'};
+  else if((m=cut(/\severy\s(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s/i))){const wi=['sunday','monday','tuesday','wednesday','thursday','friday','saturday'].indexOf(m[1].toLowerCase());rp={f:'w',days:[wi]};let x=td;while(pd(x).getDay()!==wi)x=add(x,1);d=x;hit=WDF[wi]}
   else if((m=cut(/\sкажд(?:ый|ую|ое)\s(понедельник|вторник|среду|четверг|пятницу|субботу|воскресенье)\s/i))){const wi=['воскресенье','понедельник','вторник','среду','четверг','пятницу','субботу'].indexOf(m[1].toLowerCase());rp={f:'w',days:[wi]};let x=td;while(pd(x).getDay()!==wi)x=add(x,1);d=x;hit=WDF[wi]}
-  else if(cut(/\s(каждую неделю|еженедельно)\s/i))rp={f:'w'};
-  else if(cut(/\s(каждый месяц|ежемесячно)\s/i))rp={f:'m'};
-  else if(cut(/\s(каждый год|ежегодно)\s/i))rp={f:'y'};
-  if(cut(/\s(сегодня)\s/i)){d=td;hit='сегодня'}
-  else if(cut(/\s(послезавтра)\s/i)){d=add(td,2);hit='послезавтра'}
-  else if(cut(/\s(завтра)\s/i)){d=add(td,1);hit='завтра'}
+  else if(cut(/\s(каждую неделю|еженедельно|every week|weekly)\s/i))rp={f:'w'};
+  else if(cut(/\s(каждый месяц|ежемесячно|every month|monthly)\s/i))rp={f:'m'};
+  else if(cut(/\s(каждый год|ежегодно|every year|yearly|annually)\s/i))rp={f:'y'};
+  if(cut(/\s(сегодня|today)\s/i)){d=td;hit='сегодня'}
+  else if(cut(/\s(послезавтра|day after tomorrow)\s/i)){d=add(td,2);hit='послезавтра'}
+  else if(cut(/\s(завтра|tomorrow)\s/i)){d=add(td,1);hit='завтра'}
+  else if((m=cut(/\sin\s(\d{1,2})\s*days?\s/i))){d=add(td,+m[1]);hit='через '+m[1]+' дн.'}
+  else if((m=cut(/\s(in a week|next week)\s/i))){d=add(td,7);hit='через неделю'}
   else if((m=cut(/\sчерез\s(\d{1,2})\s*(дн[ейя]+|день)\s/i))){d=add(td,+m[1]);hit='через '+m[1]+' дн.'}
   else if((m=cut(/\sчерез\s(неделю)\s/i))){d=add(td,7);hit='через неделю'}
   else if((m=cut(/\s(\d{1,2})[.\/](\d{1,2})(?:[.\/](\d{2,4}))?\s/))){const y=m[3]?(m[3].length===2?'20'+m[3]:m[3]):td.slice(0,4);let c=y+'-'+pad(+m[2])+'-'+pad(+m[1]);if(!m[3]&&c<td)c=(+y+1)+c.slice(4);d=c;hit=fd(c)}
   else if((m=cut(/\s(\d{1,2})\s(янв|фев|мар|апр|мая|май|июн|июл|авг|сен|окт|ноя|дек)[а-я]*\s/i))){const mi=MON.findIndex(x=>m[2].toLowerCase().startsWith(x));let c=td.slice(0,4)+'-'+pad(mi+1)+'-'+pad(+m[1]);if(c<td)c=(+td.slice(0,4)+1)+c.slice(4);d=c;hit=fd(c)}
-  else{for(let i=0;i<7;i++){const re=new RegExp('\\s(?:в|во)?\\s?('+WDN[i].join('|')+')\\s','i');if(cut(re)){let x=add(td,1);while(pd(x).getDay()!==i)x=add(x,1);d=x;hit=WDF[i];break}}}
-  if((m=cut(/\s(?:в\s)?([01]?\d|2[0-3])[:.]([0-5]\d)\s/))){tm=pad(+m[1])+':'+m[2]}
+  else if((m=cut(/\s(?:on\s)?(\d{1,2})(?:st|nd|rd|th)?\s(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s/i))||(m=cut(/\s(?:on\s)?(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s(\d{1,2})(?:st|nd|rd|th)?\s/i))){const EM=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];const dd=/^\d/.test(m[1])?+m[1]:+m[2],mn=(/^\d/.test(m[1])?m[2]:m[1]).toLowerCase().slice(0,3);let c=td.slice(0,4)+'-'+pad(EM.indexOf(mn)+1)+'-'+pad(dd);if(c<td)c=(+td.slice(0,4)+1)+c.slice(4);d=c;hit=fd(c)}
+  else{for(let i=0;i<7;i++){const re=new RegExp('\\s(?:в|во|on)?\\s?('+WDN[i].join('|')+')\\s','i');if(cut(re)){let x=add(td,1);while(pd(x).getDay()!==i)x=add(x,1);d=x;hit=WDF[i];break}}}
+  if((m=cut(/\s(?:в\s|at\s)?([01]?\d|2[0-3])[:.]([0-5]\d)\s?(am|pm)?\s/i))){let hh=+m[1];if(m[3]){const pm=m[3].toLowerCase()==='pm';if(pm&&hh<12)hh+=12;if(!pm&&hh===12)hh=0}tm=pad(hh)+':'+m[2]}
+  else if((m=cut(/\s(?:at\s)?(1[0-2]|0?[1-9])\s?(am|pm)\s/i))){let hh=+m[1];const pm=m[2].toLowerCase()==='pm';if(pm&&hh<12)hh+=12;if(!pm&&hh===12)hh=0;tm=pad(hh)+':00'}
+  else if((m=cut(/\sat\s([01]?\d|2[0-3])\s/i))){tm=pad(+m[1])+':00'}
   else if((m=cut(/\sв\s([01]?\d|2[0-3])(?:\s?ч(?:ас[а-я]*)?)?\s/i))){tm=pad(+m[1])+':00'}
   let pr=0;if((m=cut(/\s!([1-3])\s/))){pr=4-(+m[1])}else if((m=cut(/\s(!{1,3})\s/))){pr=m[1].length}
   const tags=[];let g;while((g=t.match(/\s#([\p{L}][\p{L}\d_-]*)/u))){tags.push(g[1].toLowerCase());t=t.replace(g[0],' ')}
@@ -1980,7 +1988,7 @@ weekStrip(){const td=today(),cur=this.day||td,m0=this.monday(cur),days=[0,1,2,3,
   return `<div class="wst"><button class="wst-n" onclick="APP.day=add(APP.day,-7);APP.render()" aria-label="Прошлая неделя">${I.l}</button>${days.map(d=>{const a=this.dayAll(d),p=a.n?a.p:0,kt=(this.S.tasks||[]).filter(x=>x.date===d&&!x.done).length;return `<button class="wst-d ${d===cur?'on':''} ${d===td?'td':''}" onclick="APP.day='${d}';APP.render()"><em>${WD[pd(d).getDay()]}</em><b>${pd(d).getDate()}</b><span class="wst-p"><i style="width:${d>td?0:Math.round(p*100)}%"></i></span>${kt?`<s>${kt}</s>`:''}</button>`}).join('')}<button class="wst-n" onclick="APP.day=add(APP.day,7);APP.render()" aria-label="Следующая неделя">${I.r}</button></div>`},
 /* личный кабинет */
 /* игровой кабинет: навыки, мечта, идеал */
-SKD:[['str','Сила','dumb','Тело и энергия','спорт, сон, вода, питание'],['int','Интеллект','book','Знания и навыки','чтение, обучение, языки, письмо'],['spi','Дух','lotus','Спокойствие и баланс','медитация, отдых, близкие, без телефона'],['biz','Дело','brief','Работа и деньги','задачи из Планов, работа, контент, деньги'],['dis','Дисциплина','target','Закрытые дни','дни, закрытые на 80% и выше']],
+SKD:[['str','Сила','dumb','Тело и энергия','спорт, сон, вода, питание'],['int','Интеллект','book','Знания и навыки','чтение, обучение, языки, письмо'],['spi','Дух','lotus','Спокойствие и баланс','медитация, отдых, близкие, без телефона'],['biz','Дело\u200b','brief','Работа и деньги','задачи из Планов, работа, контент, деньги'],['dis','Дисциплина','target','Закрытые дни','дни, закрытые на 80% и выше']],
 PERK:{str:['Первый шаг','Утренний заряд','Выносливость','Атлет','Титан'],int:['Любопытство','Книжный червь','Острый ум','Эрудит','Мудрец'],spi:['Тишина','Ясность','Баланс','Внутренний стержень','Дзен'],biz:['Деловая хватка','Фокус на результат','Стратег','Предприниматель','Империя'],dis:['Слово держу','Режим','Самоконтроль','Несгибаемость','Легенда дисциплины']},
 PLV:[5,10,15,20,25],
 skillsData(){const D=this.rpgData(),pts=D.pts||{};return this.SKD.map(([k,n,ic,sub,how])=>{const L=(D.st.find(x=>x[0]===k)||[0,0,1])[2],p=pts[k]||0,p0=(L-1)**2/2,p1=L**2/2,fr=p1>p0?Math.max(0,Math.min(1,(p-p0)/(p1-p0))):0;return {k,n,ic,sub,how,L,p,fr,left:Math.max(1,Math.ceil(p1-p))}})},
@@ -2490,7 +2498,7 @@ cabRewards(){this.chCheck();const R=this.rwCalc(),g=this.S.rw||{},m=R.n*this.M_D
    <div class="pg-sh" style="margin:20px 2px 10px"><b>За друзей</b><span>появятся вместе с приглашениями</span></div>${grid(this.RWF)}`;
   return hero+ch+mapH+col+(g.d30?`<button class="btn gh w" style="margin-top:16px" onclick="APP.S.pref.frame=APP.rwFrame()?0:1;APP.save();APP.render()">${this.rwFrame()?'Скрыть рамку аватара':'Показать рамку аватара'}</button>`:'')},
 /* характеристики: явный выбор, угадывание по названию, перки с пользой */
-SKO:[['str','Сила','dumb'],['int','Интеллект','book'],['spi','Дух','lotus'],['biz','Дело','brief']],
+SKO:[['str','Сила','dumb'],['int','Интеллект','book'],['spi','Дух','lotus'],['biz','Дело\u200b','brief']],
 skGuess(t){t=(t||'').toLowerCase();
   if(/чит|чтен|книг|стр\.|страниц|учи|изуч|курс|язык|англ|урок|лекц|писат|пишу|текст|подкаст|обучен|знани|программир|код/.test(t))return 'int';
   if(/медит|дыхан|благодар|дневник|молит|тишин|прогул|природ|семь|мам|пап|родн|друз|близк|отдых|соцсет|телефон|экран|алког|курени|сигар|настроен|любов|партн|йог/.test(t))return 'spi';
@@ -2555,7 +2563,7 @@ fsH(){const td=today(),dt=pd(td),mon=dt.getDay()===1,first=dt.getDate()===1,pf=t
   return `<div class="card fsc"><div class="fsc-h"><span>${first?'Новый месяц':'Новая неделя'}</span><button class="xcl" onclick="APP.setPref('fs','${td}')" aria-label="Скрыть">${I.x}</button></div><b>Чистый лист</b><em>Прошлая неделя: ${ok} из 7 дней. Эта начинается с нуля, и это лучший момент начать заново.</em>
    <div class="fsc-a">${old?`<button class="btn gh" onclick="APP.fsDrop()">Отпустить старые задачи · ${old}</button>`:''}<button class="btn pr" onclick="APP.track('fresh_start',null,'day');APP.setPref('fs','${td}')">Начать ${first?'месяц':'неделю'}</button></div></div>`},
 wkSum(){const td=today(),m0=this.monday(td);let ok=0,n=0;for(let i=0;i<7;i++){const d=add(m0,i);if(d>td)break;n++;if(this.dayOk(d))ok++}const done=(this.S.tasks||[]).filter(x=>x.done&&x.done>=m0&&x.done<=td).length;let marks=0;for(let i=0;i<7;i++){const d=add(m0,i);marks+=Object.keys((this.S.hlog||{})[d]||{}).length}return {ok,n,done,marks,m0}},
-wkShare(){const W=this.wkSum(),url='https://vikagladysheva07-source.github.io/wikki-app/',t=`Моя неделя в VOLYO: ${W.ok} из 7 дней дисциплины, ${W.marks} ${this.pl(W.marks,'отметка','отметки','отметок')} привычек и ${W.done} ${this.pl(W.done,'дело','дела','дел')} сделано. Держи меня в тонусе на следующей неделе: ${url}`;
+wkShare(){const W=this.wkSum(),url='https://vikagladysheva07-source.github.io/wikki-app/',t=this.lang()==='en'?`My week in VOLYO: ${W.ok} of 7 days of discipline, ${W.marks} habit check-ins and ${W.done} tasks done. Keep me on track next week: ${url}`:`Моя неделя в VOLYO: ${W.ok} из 7 дней дисциплины, ${W.marks} ${this.pl(W.marks,'отметка','отметки','отметок')} привычек и ${W.done} ${this.pl(W.done,'дело','дела','дел')} сделано. Держи меня в тонусе на следующей неделе: ${url}`;
   this.track('week_share',null,'day');this.S.pref.wr=W.m0;this.save();if(navigator.share)navigator.share({text:t}).catch(()=>{});else{this.copy(t);this.toast('Текст скопирован')}this.render()},
 wkH(){const td=today(),dt=pd(td),hr=this._hr??new Date().getHours(),pf=this.S.pref||{};if(!(dt.getDay()===0&&hr>=12))return '';const W=this.wkSum();if(pf.wr===W.m0||W.ok+W.done+W.marks===0)return '';
   const pt=(this.groups||[]).length>0;
@@ -2676,16 +2684,16 @@ async shDraw(cv,kind,bg){const W=1080,H=1920,x=cv.getContext('2d');cv.width=W;cv
   x.shadowColor=sticker?'rgba(0,0,0,.55)':'transparent';x.shadowBlur=sticker?24:0;x.textAlign='center';
   const cx=W/2,base=sticker?760:1120,D=this.shData(kind),VI='#B49CFF',GO='#804FF1',CY='#8B62EA';let yEnd=base;
   const ring=(cy,r,p,col,lw)=>{x.lineCap='round';x.lineWidth=lw;x.strokeStyle='rgba(255,255,255,.18)';x.beginPath();x.arc(cx,cy,r,0,Math.PI*2);x.stroke();x.strokeStyle=col;x.beginPath();x.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.max(.001,Math.min(1,p)));x.stroke()};
-  if(kind==='streak'){x.fillStyle='#fff';x.font=F(800,300);x.fillText(String(D.n),cx,base);x.fillStyle=GO;x.font=F(700,64);x.fillText(this.pl(D.n,'день подряд','дня подряд','дней подряд'),cx,base+100);x.fillStyle='rgba(255,255,255,.85)';x.font=F(500,46);x.fillText(D.t.length>34?D.t.slice(0,33)+'…':D.t,cx,base+172);
+  if(kind==='streak'){x.fillStyle='#fff';x.font=F(800,300);x.fillText(String(D.n),cx,base);x.fillStyle=GO;x.font=F(700,64);x.fillText(APP.tt(this.pl(D.n,'день подряд','дня подряд','дней подряд')),cx,base+100);x.fillStyle='rgba(255,255,255,.85)';x.font=F(500,46);x.fillText(D.t.length>34?D.t.slice(0,33)+'…':D.t,cx,base+172);
     const sz=64,gap=18,cols=10,gx=cx-(cols*sz+(cols-1)*gap)/2,gy=base+250;D.days.forEach((on,i)=>{const c=i%cols,r=Math.floor(i/cols),X=gx+c*(sz+gap)+sz/2,Y=gy+r*(sz+gap)+sz/2;x.beginPath();x.arc(X,Y,sz/2,0,Math.PI*2);x.fillStyle=on?VI:'rgba(255,255,255,.14)';x.fill()});yEnd=gy+3*(sz+gap)}
-  if(kind==='week'){ring(base-160,200,D.pct/100,VI,34);x.fillStyle='#fff';x.font=F(800,150);x.fillText(D.pct+'%',cx,base-110);x.fillStyle='rgba(255,255,255,.8)';x.font=F(600,44);x.fillText('неделя дисциплины',cx,base+130);
+  if(kind==='week'){ring(base-160,200,D.pct/100,VI,34);x.fillStyle='#fff';x.font=F(800,150);x.fillText(D.pct+'%',cx,base-110);x.fillStyle='rgba(255,255,255,.8)';x.font=F(600,44);x.fillText(APP.tt('неделя дисциплины'),cx,base+130);
     const bw=86,gap=26,bx=cx-(7*bw+6*gap)/2,bh=260,by=base+200;['пн','вт','ср','чт','пт','сб','вс'].forEach((l,i)=>{const p=D.days[i]||0,X=bx+i*(bw+gap);x.fillStyle='rgba(255,255,255,.12)';x.fillRect(X,by,bw,bh);x.fillStyle=p>=.8?CY:VI;x.fillRect(X,by+bh*(1-p),bw,bh*p);x.fillStyle='rgba(255,255,255,.75)';x.font=F(500,34);x.fillText(l,X+bw/2,by+bh+52)});
-    if(D.win){x.fillStyle=GO;x.font=F(600,40);x.fillText('Победа недели',cx,by+bh+140);x.fillStyle='#fff';x.font=F(500,44);x.fillText(D.win.length>36?D.win.slice(0,35)+'…':D.win,cx,by+bh+200)}yEnd=by+bh+(D.win?210:70)}
-  if(kind==='day'){ring(base-150,190,D.p,D.p>=1?CY:VI,34);x.fillStyle='#fff';x.font=F(800,130);x.fillText(Math.round(D.p*100)+'%',cx,base-105);x.fillStyle=D.p>=1?CY:'rgba(255,255,255,.85)';x.font=F(700,60);x.fillText(D.p>=1?'День закрыт':'Сделано '+D.done+' из '+D.n,cx,base+130);
+    if(D.win){x.fillStyle=GO;x.font=F(600,40);x.fillText(APP.tt('Победа недели'),cx,by+bh+140);x.fillStyle='#fff';x.font=F(500,44);x.fillText(D.win.length>36?D.win.slice(0,35)+'…':D.win,cx,by+bh+200)}yEnd=by+bh+(D.win?210:70)}
+  if(kind==='day'){ring(base-150,190,D.p,D.p>=1?CY:VI,34);x.fillStyle='#fff';x.font=F(800,130);x.fillText(Math.round(D.p*100)+'%',cx,base-105);x.fillStyle=D.p>=1?CY:'rgba(255,255,255,.85)';x.font=F(700,60);x.fillText(APP.tt(D.p>=1?'День закрыт':'Сделано '+D.done+' из '+D.n),cx,base+130);
     x.textAlign='left';x.font=F(500,44);D.items.forEach((t,i)=>{const Y=base+240+i*76;x.fillStyle=CY;x.fillText('✓',cx-330,Y);x.fillStyle='#fff';x.fillText(t.length>28?t.slice(0,27)+'…':t,cx-270,Y)});x.textAlign='center';yEnd=base+240+Math.max(0,D.items.length-1)*76+30}
-  if(kind==='hero'){x.fillStyle='rgba(124,92,230,.35)';x.beginPath();x.arc(cx,base-230,170,0,Math.PI*2);x.fill();x.strokeStyle=VI;x.lineWidth=10;x.stroke();x.fillStyle='#fff';x.font=F(800,150);x.fillText(String(D.lvl),cx,base-180);x.fillStyle=GO;x.font=F(700,56);x.fillText('уровень героя',cx,base+0);if(D.name){x.fillStyle='#fff';x.font=F(600,48);x.fillText(D.name,cx,base+70)}
+  if(kind==='hero'){x.fillStyle='rgba(124,92,230,.35)';x.beginPath();x.arc(cx,base-230,170,0,Math.PI*2);x.fill();x.strokeStyle=VI;x.lineWidth=10;x.stroke();x.fillStyle='#fff';x.font=F(800,150);x.fillText(String(D.lvl),cx,base-180);x.fillStyle=GO;x.font=F(700,56);x.fillText(APP.tt('уровень героя'),cx,base+0);if(D.name){x.fillStyle='#fff';x.font=F(600,48);x.fillText(D.name,cx,base+70)}
     x.textAlign='left';D.st.forEach((s,i)=>{const Y=base+170+i*92,mx=Math.max(20,...D.st.map(z=>z[2]));x.fillStyle='rgba(255,255,255,.85)';x.font=F(600,40);x.fillText(s[1],cx-380,Y);x.fillStyle='rgba(255,255,255,.14)';x.fillRect(cx-60,Y-26,360,22);x.fillStyle=VI;x.fillRect(cx-60,Y-26,360*s[2]/mx,22);x.fillStyle='#fff';x.font=F(700,40);x.fillText(String(s[2]),cx+330,Y)});x.textAlign='center';yEnd=base+170+4*92+30}
-  x.shadowBlur=sticker?16:0;x.fillStyle='rgba(255,255,255,.9)';x.font=F(800,44);const fy=sticker?Math.min(H-120,yEnd+120):H-150;x.fillText('VOLYO',cx,fy);x.fillStyle='rgba(255,255,255,.55)';x.font=F(500,30);x.fillText('система дисциплины и привычек',cx,fy+46)},
+  x.shadowBlur=sticker?16:0;x.fillStyle='rgba(255,255,255,.9)';x.font=F(800,44);const fy=sticker?Math.min(H-120,yEnd+120):H-150;x.fillText('VOLYO',cx,fy);x.fillStyle='rgba(255,255,255,.55)';x.font=F(500,30);x.fillText(APP.tt('система дисциплины и привычек'),cx,fy+46)},
 shareStudio(kind,hid){if(kind)this._shH=hid||null;this._shK=kind||this._shK||'streak';this._shB=this._shB||'ocean';const K=[['streak','Серия'],['week','Неделя'],['day','День'],['hero','Персонаж']],B=[['sticker','Стикер'],['photo','Своё фото'],['ocean','Океан'],['dark','Тёмный']];
   this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Поделиться в сторис</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="shk">${K.map(([k,l])=>`<button class="${this._shK===k?'on':''}" onclick="APP._shK='${k}';APP.shareStudio()">${l}</button>`).join('')}</div>
@@ -2695,7 +2703,7 @@ shareStudio(kind,hid){if(kind)this._shH=hid||null;this._shK=kind||this._shK||'st
   <button class="btn pr w" onclick="APP.shGo()">Поделиться</button>`);
   setTimeout(()=>{const c=$('shCv');if(c)this.shDraw(c,this._shK,this._shB==='photo'&&!this._shPhoto?'ocean':this._shB)},20)},
 shPhoto(inp){const f=inp.files&&inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{this._shPhoto=r.result;this._shB='photo';this.shareStudio()};r.readAsDataURL(f)},
-shCaption(){const k=this._shK,D=this.shData(k),u='https://vikagladysheva07-source.github.io/wikki-app/';const t=k==='streak'?`${D.n} ${this.pl(D.n,'день','дня','дней')} подряд в VOLYO`:k==='week'?`Неделя на ${D.pct}% в VOLYO`:k==='day'?`День закрыт в VOLYO`:`Уровень ${D.lvl} в VOLYO`;return t+'. Присоединяйся: '+u},
+shCaption(){const k=this._shK,D=this.shData(k),u='https://vikagladysheva07-source.github.io/wikki-app/';const en=this.lang()==='en';const t=k==='streak'?(en?`${D.n}-day streak in VOLYO`:`${D.n} ${this.pl(D.n,'день','дня','дней')} подряд в VOLYO`):k==='week'?(en?`A ${D.pct}% week in VOLYO`:`Неделя на ${D.pct}% в VOLYO`):k==='day'?(en?`Day closed in VOLYO`:`День закрыт в VOLYO`):(en?`Level ${D.lvl} in VOLYO`:`Уровень ${D.lvl} в VOLYO`);return t+(en?'. Join me: ':'. Присоединяйся: ')+u},
 async shGo(){const c=$('shCv');if(!c)return;this.track('share',{k:this._shK,b:this._shB},'day');const cap=this.shCaption();try{await navigator.clipboard.writeText(cap)}catch(e){}
   c.toBlob(async b=>{const f=new File([b],'wikki-'+this._shK+'.png',{type:'image/png'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:cap});return}}catch(e){if(e&&e.name==='AbortError')return}
     const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f.name;a.click();this.toast('Картинка сохранена, подпись скопирована')},'image/png')},
@@ -2741,7 +2749,7 @@ partnerW(){const head=`<div class="dz-ch"><span class="dz-ti">${I.chat||''}Па�
   const rows=ms.map(x=>{const s=(x.scores||{})[m0]||{},v=s.score,me=x.id===this.user.id,nm=me?'Ты':(x.name||'Партнёр');return `<div class="ptr"><span class="pta ${me?'me':''}">${esc(nm.charAt(0).toUpperCase())}</span><div class="sp"><div class="ptr-h"><b>${esc(nm)}</b><span>${v!=null?v+'%':'—'}</span></div><div class="pex-bar"><i style="width:${v||0}%"></i></div></div></div>`}).join('');
   return `<div class="card dz-c dz-pt">${head}<div class="small mut" style="margin:-4px 0 10px">Процент этой недели</div>${rows}${ms.length<2?`<div class="pg-note">Пока никто не присоединился. Код: <b style="color:#A181EB;letter-spacing:.12em">${esc(g.code)}</b></div><button class="pill" style="margin-top:10px" onclick="APP.ptInvite('${g.code}')">Отправить приглашение ${I.r}</button>`:''}</div>`},
 async ptCreate(){if(!this.user){this.toast('Сначала войди в аккаунт');return this.go('me')}try{const code=await this.grpRpc('tw_group_create',{p_name:'Партнёры',p_me:this.S.profile.name||''});this.ptOn();await this.grpLoad();await this.grpPush();await this.grpLoad();this.render();this.ptInvite(code)}catch(e){this.toast(this.grpErr(e))}},
-ptInvite(code){const url='https://vikagladysheva07-source.github.io/wikki-app/?pt='+code,t=`Давай держать друг друга в тонусе в VOLYO: будем видеть процент недели друг друга. Открой ссылку и войди, мы станем партнёрами: ${url}`;if(navigator.share)navigator.share({text:t}).catch(()=>{});else this.copy(t)},
+ptInvite(code){const url='https://vikagladysheva07-source.github.io/wikki-app/?pt='+code,t=this.lang()==='en'?`Let’s keep each other on track in VOLYO: we’ll see each other’s weekly percentage. Open the link and sign in, and we’ll become partners: ${url}`:`Давай держать друг друга в тонусе в VOLYO: будем видеть процент недели друг друга. Открой ссылку и войди, мы станем партнёрами: ${url}`;if(navigator.share)navigator.share({text:t}).catch(()=>{});else this.copy(t)},
 ptJoin(){this.ask('Код партнёра','',async v=>{v=(v||'').trim();if(v.length<4)return this.toast('Введи код из 6 символов');try{const g=await this.grpRpc('tw_group_join',{p_code:v,p_me:this.S.profile.name||''});await this.grpLoad();await this.grpPush();await this.grpLoad();this.render();this.toast('Вы теперь партнёры: «'+g.name+'»')}catch(e){this.toast(this.grpErr(e))}})},
 inPrg(){const S=this.S,td=today();return S.goals.length>0&&td>=this.st&&td<=add(this.end(),7)},
 pgFrom(){return this.inPrg()?this.st:add(today(),-89)},
@@ -2849,11 +2857,11 @@ vReport(){const D=this.repData(),R=D.R,S=this.S,r=(S.reports||{})[R.key]||{keep:
 async repShare(){const D=this.repData(),R=D.R,c=document.createElement('canvas');c.width=1080;c.height=1920;const x=c.getContext('2d');
   await new Promise(res=>{const im=new Image();im.onload=()=>{const s=Math.max(1080/im.width,1920/im.height),w=im.width*s,h=im.height*s;x.drawImage(im,(1080-w)/2,(1920-h)/2,w,h);res()};im.onerror=res;im.src='ocean.jpg'});
   const g=x.createLinearGradient(0,0,0,1920);g.addColorStop(0,'rgba(2,5,12,.55)');g.addColorStop(.5,'rgba(2,5,12,.82)');g.addColorStop(1,'rgba(2,5,12,.96)');x.fillStyle=g;x.fillRect(0,0,1080,1920);
-  x.fillStyle='#A181EB';x.font='600 40px "DM Sans",sans-serif';x.fillText('ИТОГИ · '+R.sub.toUpperCase(),90,300);x.fillStyle='#fff';x.font='800 110px "DM Sans",sans-serif';x.fillText(R.title,90,430);
+  x.fillStyle='#A181EB';x.font='600 40px "DM Sans",sans-serif';x.fillText(APP.tt('Итоги · '+R.sub).toUpperCase(),90,300);x.fillStyle='#fff';x.font='800 110px "DM Sans",sans-serif';x.fillText(R.title,90,430);
   const st=[[(D.avg??0)+'%','в среднем выполнено'],[String(D.fh).replace('.',',')+' ч','часов фокуса'],[String(D.best),'лучшая серия, дней'],[String(D.wins.length),'побед записано']];
   st.forEach(([v,l],i)=>{const cx=90+(i%2)*470,cy=640+Math.floor(i/2)*400;x.fillStyle='rgba(255,255,255,.07)';x.beginPath();x.roundRect?x.roundRect(cx,cy,430,340,36):x.rect(cx,cy,430,340);x.fill();x.fillStyle='#fff';x.font='800 120px "DM Sans",sans-serif';x.fillText(v,cx+40,cy+170);x.fillStyle='rgba(232,226,247,.75)';x.font='500 38px "DM Sans",sans-serif';x.fillText(l,cx+40,cy+250)});
-  x.fillStyle='#C9B8FF';x.font='700 48px "DM Sans",sans-serif';x.fillText('VOLYO',90,1780);x.fillStyle='rgba(232,226,247,.6)';x.font='400 34px "DM Sans",sans-serif';x.fillText('система дисциплины и привычек',90,1830);
-  c.toBlob(async b=>{const f=new File([b],'wikki-itogi.png',{type:'image/png'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Мои итоги'});return}}catch(e){if(e&&e.name==='AbortError')return}const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='wikki-itogi.png';a.click();this.toast('Карточка сохранена')},'image/png')},
+  x.fillStyle='#C9B8FF';x.font='700 48px "DM Sans",sans-serif';x.fillText('VOLYO',90,1780);x.fillStyle='rgba(232,226,247,.6)';x.font='400 34px "DM Sans",sans-serif';x.fillText(APP.tt('система дисциплины и привычек'),90,1830);
+  c.toBlob(async b=>{const f=new File([b],'wikki-itogi.png',{type:'image/png'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:APP.tt('Мои итоги')});return}}catch(e){if(e&&e.name==='AbortError')return}const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='wikki-itogi.png';a.click();this.toast('Карточка сохранена')},'image/png')},
 /* обзор прогресса */
 mRing(p,c,sz){sz=sz||44;const r=sz/2-5,C=2*Math.PI*r;return `<svg width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}" class="mring"><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${c}" stroke-opacity=".16" stroke-width="5"/><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(C*Math.max(0,Math.min(1,p))).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 ${sz/2} ${sz/2})"/></svg>`},
 winWeeks(n){const td=today(),m0=this.monday(td),w=this.winsAll(),out=[];for(let k=n-1;k>=0;k--){const m=add(m0,-7*k),e=add(m,6);out.push({m,c:w.filter(x=>x.d>=m&&x.d<=e).length})}return out},
@@ -3557,7 +3565,7 @@ wheelCopy(from,to){const S=this.S;S.wheel=S.wheel||{};S.wheel[to]=Object.assign(
 pvYear(){const td=today(),y=+(this._yy||td.slice(0,4)),mode=this._ym||'done',C=this.S.checkin||{};
   const col=d=>{if(d>td)return 'fu';if(mode==='mood'){const c=C[d];const e=c&&+c.energy;return e?'e'+e:'n'}const a=this.dayAll(d);if(!a.n)return 'n';const p=a.p;return p>=.8?'p4':p>=.5?'p3':p>0?'p2':'p1'};
   let closed=0,tracked=0;const mon=Array.from({length:12},()=>({a:0,b:0}));
-  let grid=`<div class="ypx"><span></span>${['Я','Ф','М','А','М','И','И','А','С','О','Н','Д'].map(x=>`<span class="yh">${x}</span>`).join('')}`;
+  let grid=`<div class="ypx"><span></span>${(this.lang()==='en'?['J','F','M','A','M','J','J','A','S','O','N','D']:['Я','Ф','М','А','М','И','И','А','С','О','Н','Д']).map(x=>`<span class="yh">${x}</span>`).join('')}`;
   for(let d=1;d<=31;d++){grid+=`<span class="yd">${d}</span>`;for(let mi=0;mi<12;mi++){const dim=new Date(y,mi+1,0).getDate();if(d>dim){grid+='<i class="x"></i>';continue}const ds=y+'-'+pad(mi+1)+'-'+pad(d),c=col(ds);
     if(mode!=='mood'&&ds<=td){const a=this.dayAll(ds);if(a.n){tracked++;mon[mi].b++;mon[mi].a+=a.p;if(a.p>=.8)closed++}}
     grid+=`<i class="${c} ${ds===td?'td':''}" ${ds<=td?`onclick="APP.goDay('${ds}')"`:''} title="${fd(ds)}"></i>`}}
@@ -3657,7 +3665,7 @@ rpgData(){const S=this.S,td=today();const CAT={dumb:'str',steps:'str',swim:'str'
   const ach=[['Первый шаг','Первая отметка',marks>0,'star'],['Неделя без пропусков','Серия 7 дней',hBest>=7||this.dayStreak()>=7,'heart'],['Месяц силы','Серия 30 дней',hBest>=30,'dumb'],['Сотня','100 отметок',marks>=100,'target'],['Закрытый день','День на 80%+',closed>0,'sun'],['Неделя на 85%','Счёт недели взят',wk85,'list'],['Цель взята','Достигнута цель',S.goals.some(g=>this.gDone(g)),'brief'],['Баланс','Колесо заполнено',wheel,'lotus'],['Уровень 10','Достигни 10 уровня',lvl>=10,'book'],['Тысяча','1000 отметок',marks>=1000,'snow']];
   const weeks=[];const m0=this.monday(td);for(let i=7;i>=0;i--){const w=add(m0,-7*i);weeks.push({w,x:wk[w]||0})}
   const dp=this.dayAll(td),left=dp.n-dp.done;
-  return {pts,pts7,xp,lvl,cur,nxt,R,st:[['str','Сила',stat('str')],['int','Интеллект',stat('int')],['spi','Дух',stat('spi')],['biz','Дело',stat('biz')],['dis','Дисциплина',stat('dis')]],ach,weeks,marks,closed,left,todayXp:wk[m0]||0}},
+  return {pts,pts7,xp,lvl,cur,nxt,R,st:[['str','Сила',stat('str')],['int','Интеллект',stat('int')],['spi','Дух',stat('spi')],['biz','Дело\u200b',stat('biz')],['dis','Дисциплина',stat('dis')]],ach,weeks,marks,closed,left,todayXp:wk[m0]||0}},
 rpg(){const D=this.rpgData(),S=this.S,P=S.profile||{},nm=P.hero||(P.name||'').split(' ')[0]||'Герой',pct=Math.round((D.xp-D.cur)/(D.nxt-D.cur)*100);
   const icoS={str:'dumb',int:'book',spi:'lotus',biz:'brief',dis:'target'},st=D.st,mx=Math.max(10,...st.map(x=>x[2]));
   const ava=P.ava&&P.ava!=='shark'?`<span class="rpic">${hIco(P.ava)}</span>`:SHARK;
@@ -4071,24 +4079,24 @@ async shareWeek(w){const S=this.S,ds=this.wDays(w),sc=this.score(w),P=this.prog(
   const glow=(cx,cy,r,col)=>{const g=x.createRadialGradient(cx,cy,0,cx,cy,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(0,0,1080,1920)};
   glow(900,200,700,'rgba(91,47,190,.45)');glow(100,1500,600,'rgba(43,4,136,.28)');
   const card=(y,hh)=>{x.save();x.fillStyle='rgba(22,20,34,.72)';x.strokeStyle='rgba(255,255,255,.12)';x.lineWidth=2;x.beginPath();x.roundRect(80,y,920,hh,44);x.fill();x.stroke();x.restore()};
-  x.fillStyle='rgba(229,222,246,.6)';x.font='500 30px "DM Mono",monospace';x.textAlign='left';x.fillText((P?P.name.toUpperCase():'12 НЕДЕЛЬ')+'  ·  '+fd(ds[0]).toUpperCase()+' — '+fd(ds[6]).toUpperCase(),100,190);
-  x.fillStyle='#F2EDE2';x.font='900 128px "DM Sans",sans-serif';x.fillText(this.mode==='strict'?'ДЕНЬ '+this.strictRun():'НЕДЕЛЯ '+w,96,330);
-  x.fillStyle='rgba(229,222,246,.55)';x.font='500 40px "DM Sans",sans-serif';x.fillText(this.mode==='strict'?'подряд из '+this.sprintDays():'из '+this.W,100,400);
+  x.fillStyle='rgba(229,222,246,.6)';x.font='500 30px "DM Mono",monospace';x.textAlign='left';x.fillText((P?P.name.toUpperCase():APP.tt('12 недель').toUpperCase())+'  ·  '+APP.tt(fd(ds[0])).toUpperCase()+' — '+APP.tt(fd(ds[6])).toUpperCase(),100,190);
+  x.fillStyle='#F2EDE2';x.font='900 128px "DM Sans",sans-serif';x.fillText(APP.tt(this.mode==='strict'?'День '+this.strictRun():'Неделя '+w).toUpperCase(),96,330);
+  x.fillStyle='rgba(229,222,246,.55)';x.font='500 40px "DM Sans",sans-serif';x.fillText(APP.tt(this.mode==='strict'?'подряд из '+this.sprintDays():'из '+this.W),100,400);
   card(470,620);
   const cx=540,cy=780,R=220;x.lineWidth=36;x.lineCap='round';x.strokeStyle='rgba(0,0,0,.5)';x.beginPath();x.arc(cx,cy,R,0,Math.PI*2);x.stroke();
   const pct=this.mode==='score'?(sc??0):Math.round(this.dayAll(today()).p*100),ok=pct>=(+S.sprint.threshold||85);
   const grd=x.createLinearGradient(cx-R,cy-R,cx+R,cy+R);grd.addColorStop(0,ok?'#A482F2':'#C4A4FF');grd.addColorStop(1,ok?'#3504A7':'#5B2FBE');
   x.shadowColor=ok?'rgba(66,5,207,.8)':'rgba(155,111,232,.8)';x.shadowBlur=40;x.strokeStyle=grd;x.beginPath();x.arc(cx,cy,R,-Math.PI/2,-Math.PI/2+Math.PI*2*pct/100);x.stroke();x.shadowBlur=0;
   x.fillStyle='#F2EDE2';x.textAlign='center';x.font='900 150px "DM Sans",sans-serif';x.fillText(pct+'%',cx,cy+50);
-  x.fillStyle='rgba(229,222,246,.6)';x.font='500 28px "DM Mono",monospace';x.fillText(this.mode==='score'?'СЧЁТ НЕДЕЛИ · ПЛАНКА '+(S.sprint.threshold||85):'ВЫПОЛНЕНИЕ ДНЯ',cx,cy+120);
+  x.fillStyle='rgba(229,222,246,.6)';x.font='500 28px "DM Mono",monospace';x.fillText(APP.tt(this.mode==='score'?'Счёт недели · планка '+(S.sprint.threshold||85):'Выполнение дня').toUpperCase(),cx,cy+120);
   const gs=S.goals.filter(g=>!g.mini).slice(0,3);let y=1150;
   gs.forEach(g=>{card(y,170);x.textAlign='left';x.fillStyle=g.color;x.beginPath();x.arc(140,y+85,14,0,Math.PI*2);x.fill();
     x.fillStyle='#F2EDE2';x.font='700 44px "DM Sans",sans-serif';let t=g.title;while(x.measureText(t).width>560)t=t.slice(0,-2);x.fillText(t,190,y+100);
     const gsc=this.score(w,g.id);x.textAlign='right';x.font='900 56px "DM Sans",sans-serif';x.fillStyle=gsc!=null&&gsc>=(+S.sprint.threshold||85)?'#8B62EA':'#C4A4FF';x.fillText(gsc==null?'—':gsc+'%',960,y+105);y+=200});
-  x.textAlign='left';x.fillStyle='rgba(229,222,246,.5)';x.font='500 30px "DM Mono",monospace';x.fillText('WIKKI.APP  ·  СИСТЕМА ДИСЦИПЛИНЫ',100,1800);
+  x.textAlign='left';x.fillStyle='rgba(229,222,246,.5)';x.font='500 30px "DM Mono",monospace';x.fillText('VOLYO  ·  '+APP.tt('система дисциплины').toUpperCase(),100,1800);
   x.fillStyle='rgba(229,222,246,.35)';x.font='400 26px "DM Mono",monospace';x.fillText(location.host+location.pathname.replace(/\/$/,''),100,1850);
   const blob=await new Promise(r=>c.toBlob(r,'image/png'));const file=new File([blob],`week-${w}.png`,{type:'image/png'});
-  if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:'Неделя '+w});return}catch(e){if(e.name==='AbortError')return}}
+  if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:APP.tt('Неделя '+w)});return}catch(e){if(e.name==='AbortError')return}}
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=file.name;a.click();this.toast('Карточка сохранена')},
 async copyReport(w){const r=this.report(w);try{await navigator.clipboard.writeText(r);this.toast('Отчёт скопирован')}catch(e){this.open(`<div class="lbl">Отчёт</div><textarea style="min-height:260px;margin-top:10px">${esc(r)}</textarea><button class="btn" style="margin-top:12px" onclick="APP.close()">Закрыть</button>`)}},
 
@@ -4192,7 +4200,7 @@ vMe(){
     row(ic('book','#9A9AAE'),'Политика конфиденциальности','',"window.open('./legal/privacy.html'+(APP.lang()==='en'?'#en':''),'_blank')"),
     row(ic('list','#9A9AAE'),'Условия использования','',"window.open('./legal/terms.html'+(APP.lang()==='en'?'#en':''),'_blank')")]);
   const pdata=pages.data;pages.data=()=>pdata()+`<div class="sdanger"><button class="srow warn" onclick="APP.wipe()"><div class="sp">Начать с нуля</div></button>${this.user?`<button class="srow warn" onclick="APP.deleteMe()"><div class="sp">Удалить аккаунт</div></button>`:''}</div>`;
-  pages.lang=()=>`<div class="card sgrp">${[['ru','Русский'],['en','English']].map(([k,n])=>`<button class="srow" onclick="APP.setLang('${k}');APP._sset='lang';APP.render()"><div class="sp"><div>${n}</div></div>${lang===k?`<span class="lck">${I.ok}</span>`:''}</button>`).join('')}</div>`;
+  pages.lang=()=>`<div class="card sgrp">${[['ru','Русский'],['en','English']].map(([k,n])=>`<button class="srow" onclick="APP.setLang('${k}');APP._sset='lang';APP.render()"><div class="sp"><div data-nt>${n}</div></div>${lang===k?`<span class="lck">${I.ok}</span>`:''}</button>`).join('')}</div>`;
   pages.stats=()=>{const m=this._adm||{},dl=m.daily||[],mx=Math.max(1,...dl.map(x=>x.dau)),pc=(a,b)=>b?Math.round(100*a/b)+'%':'—';
     const k=(t,v,s)=>`<div class="ak"><span>${t}</span><b>${v==null?'—':v}</b>${s?`<em>${s}</em>`:''}</div>`;
     return `<div class="akp">${k('Устройства',m.devices,'всего открывали')}${k('Аккаунты',m.users,pc(m.users,m.devices)+' от устройств')}${k('Первая отметка',m.activated,pc(m.activated,m.devices)+' активация')}${k('Пуши',m.push,'подписок')}${k('Возврат на 2-й день',m.d1==null?null:m.d1+'%',m.c1?'из '+m.c1+' устройств':'мало данных')}${k('Возврат через неделю',m.d7==null?null:m.d7+'%',m.c7?'из '+m.c7+' устройств':'мало данных')}${k('Видели оплату',m.pw_view,'')}${k('Нажали купить',m.pw_click,pc(m.pw_click,m.pw_view))}</div>
@@ -4209,7 +4217,7 @@ vMe(){
     h+=`<button class="nme" onclick="APP.go('profile')"><span class="nme-av">${av}</span><span class="sp"><b>${esc(Pp.name||Pp.hero||'Без имени')}</b><span class="nme-ch"><em class="lv">Ур. ${R.lvl}</em><em class="ac">${SI.medal}${na} ${this.pl(na,'достижение','достижения','достижений')}</em></span></span>${I.r}</button>`}
   if(this._adm)h+=grp([nr('chart','#5D27DB','Аналитика',(this._adm.users||0)+' акк.',go('stats'))]);
   h+=grp([nr('crown','rgb(201 162 39)','Полный доступ',this.paid()?(this._acc.until?'до '+fd(this._acc.until):'активен'):'',go('premium'))]);
-  h+=grp([nr('target','#9B7BFF','Программа',P?esc(P.name):'',go('program')),nr('cal','#9B7BFF','День и неделя','',go('day')),nr('bell','#9B7BFF','Уведомления','',go('notif')),...(lang==='en'?[nr('globe','#9B7BFF','Язык','English',go('lang'))]:[]),nr('brush','#9B7BFF','Оформление','',go('look'))]);
+  h+=grp([nr('target','#9B7BFF','Программа',P?esc(P.name):'',go('program')),nr('cal','#9B7BFF','День и неделя','',go('day')),nr('bell','#9B7BFF','Уведомления','',go('notif')),nr('globe','#9B7BFF','Язык',lang==='en'?'English':'Русский',go('lang')),nr('brush','#9B7BFF','Оформление','',go('look'))]);
   h+=grp([...(this.user?[nr('user','#5D27DB','Аккаунт','',go('account'))]:[]),nr('lock','#5D27DB','Данные и приватность','',go('data')),nr('plug','#5D27DB','Интеграции','',go('integ'))]);
   h+=grp([nr('help','#804FF1','Помощь и обратная связь','',go('help')),nr('star','#804FF1','Оценить приложение',(S.pref||{}).rate?'★'.repeat((S.pref||{}).rate):'',"APP.rateSheet()"),nr('spark','#804FF1','Что нового','',"APP.newsSheet()"),nr('share','#804FF1','Поделиться приложением','',"APP.shareApp()"),nr('info','#804FF1','О приложении','v1.0',go('about'))]);
   h+=grp([nr('doc','#9A9AAE','Правовое','',go('legal'))]);
@@ -4226,8 +4234,8 @@ pinOff(){const a=prompt('Введи текущий код');if(a==null)return;if
 vLock(){return `<div class="lock"><img class="au-wm" src="logo-volyo.png" alt="VOLYO"><div class="au-t">Введи код</div><input id="pinIn" class="pinin" type="password" inputmode="numeric" maxlength="4" autocomplete="off" oninput="if(this.value.length===4)APP.unlock(this.value)"><div class="small" id="pinMsg" style="color:var(--pb);margin-top:10px"></div><button class="au-fg" onclick="APP.pinForgot()">Забыли код?</button></div>`},
 unlock(v){if(this.hashPin(v)===(this.S.pref||{}).pin){try{sessionStorage.setItem('tw-unlock','1')}catch(e){}this._unl=1;this.render()}else{const m=$('pinMsg');if(m)m.textContent='Неверный код';const i=$('pinIn');if(i)i.value=''}},
 pinForgot(){if(!confirm('Сбросить код? Данные останутся. Чтобы защитить их снова, поставь новый код в настройках.'))return;this.S.pref.pin=null;this.save();this._unl=1;this.render()},
-shareApp(){const url='https://vikagladysheva07-source.github.io/wikki-app/',t='VOLYO — система дисциплины и привычек';if(navigator.share)navigator.share({title:t,url}).catch(()=>{});else this.copy(url)},
-async deleteMe(){if(!this.user||!this.sb)return;if(!confirm('Удалить аккаунт навсегда? Все данные в облаке будут стёрты, отменить это нельзя.'))return;if(prompt('Чтобы подтвердить, напиши: УДАЛИТЬ')!=='УДАЛИТЬ')return;
+shareApp(){const url='https://vikagladysheva07-source.github.io/wikki-app/',t=this.tt('VOLYO — система дисциплины и привычек');if(navigator.share)navigator.share({title:t,url}).catch(()=>{});else this.copy(url)},
+async deleteMe(){if(!this.user||!this.sb)return;if(!confirm('Удалить аккаунт навсегда? Все данные в облаке будут стёрты, отменить это нельзя.'))return;{const a=(prompt('Чтобы подтвердить, напиши: УДАЛИТЬ')||'').trim().toUpperCase();if(a!=='УДАЛИТЬ'&&a!=='DELETE')return}
   try{try{const{data:fl}=await this.sb.storage.from('vision').list(this.user.id,{limit:100});if(fl&&fl.length)await this.sb.storage.from('vision').remove(fl.map(f=>this.user.id+'/'+f.name))}catch(e){}const{error}=await this.sb.rpc('tw_delete_me');if(error)throw error;await this.sb.auth.signOut();localStorage.removeItem(KEY);location.reload()}catch(e){this.toast('Не получилось удалить: '+this.errText(e))}},
 exportIcs(){const S=this.S,st=this.st,en=this.end(),u=d=>d.replace(/-/g,''),esc2=t=>String(t).replace(/([,;\\])/g,'\\$1').replace(/\n/g,'\\n');
   const now=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',until=u(en)+'T235959';
@@ -4325,15 +4333,19 @@ iosSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px"
 methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">На чём построена система</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin-top:10px;line-height:1.55">Каркас — «12 недель в году» Брайана Морана: тактики вместо результатов, недельный счёт, планка 85%, еженедельный разбор, 13-я неделя на итоги.<br><br>Разделение действий и результата — «4 дисциплины исполнения». Банк побед — исследование Терезы Амабайл о малых победах. «Не пропускай дважды» и 66 дней до автоматизма — Джеймс Клир и Филиппа Лалли. Часы фокуса — Кэл Ньюпорт, «Глубокая работа». Партнёр и итоги для сторис — мета-анализ Харкин (2016): когда о прогрессе знают другие, цели достигаются чаще. «Если — то» — Питер Гольвитцер. WOOP — Габриэль Эттинген. Привычки и «не пропускай дважды» — Джеймс Клир. Отчёт партнёру — исследование Гейл Мэтьюз. Строгие программы — по правилам их авторов.</div>`)},
 lang(){return ((this.S.pref||{}).lang)||'ru'},
+tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict)return;try{const r=await fetch('i18n-en.json?v=1');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}},
+async loadDict(){if(this._dict)return;try{const r=await fetch('i18n-en.json?v=151');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;const D=this._dict||I18N_BASE;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
     const lo=k.toLowerCase();if(D[lo]!==undefined){const v=D[lo];return k[0]===k[0].toUpperCase()&&k[0]!==k[0].toLowerCase()?v[0].toUpperCase()+v.slice(1):v}
     const cap=k[0].toUpperCase()+k.slice(1);if(D[cap]!==undefined){const v=D[cap];return k[0]===k[0].toLowerCase()?v[0].toLowerCase()+v.slice(1):v}return null};
+  const tpl=k=>{if(!/\d/.test(k))return null;const nums=[];const tp=k.replace(/\d+(?:[ \u00a0]\d{3})*(?:[.,]\d+)?/g,m=>{nums.push(m.replace(/[ \u00a0](\d{3})/g,',$1').replace(/^\d{5,}$/,z=>z.replace(/\B(?=(\d{3})+(?!\d))/g,',')));return '{#}'});let v=D[tp];if(v==null){const lo=tp.toLowerCase();v=D[lo]}if(v==null)return null;let i=0;return v.replace(/\{(\d)\}/g,(_,d)=>nums[d-1]??'').replace(/\{#\}/g,()=>nums[i++]??'')};
+  if(this._wkD!==D){const esc2=x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');this._wk=Object.keys(D).filter(k=>k.includes('{*}')).map(k=>({re:new RegExp('^'+k.split(/(\{\*\}|\{#\})/).map(p=>p==='{*}'?'([\\s\\S]+?)':p==='{#}'?'(\\d+(?:[ \\u00a0]\\d{3})*(?:[.,]\\d+)?)':esc2(p)).join('')+'$'),v:D[k]}));this._wkD=D}
+  const wild=k=>{for(const w of this._wk){const m=k.match(w.re);if(m){let i=0;const cv=c=>{c=c??'';return /[А-ЯЁа-яё]/.test(c)?(look(c.trim())??fix(c)):c};return w.v.replace(/\{(\d)\}/g,(_,d)=>cv(m[d])).replace(/\{(?:\*|#)\}/g,()=>cv(m[++i]))}}return null};
   const fix=str=>{const t=str.trim();if(!t)return str;const lead=str.slice(0,str.length-str.trimStart().length),tail=str.slice(str.trimEnd().length);
-    const w=look(t);if(w!=null)return lead+w+tail;
+    const w=look(t)??tpl(t)??wild(t);if(w!=null)return lead+w+tail;
     if(t.includes(' · ')){return lead+t.split(' · ').map(pp=>look(pp)??fixRuns(pp)).join(' · ')+tail}
     if(t.includes('. ')){const parts=t.split('. ');const res=parts.map(pp=>look(pp)??fixRuns(pp));return lead+res.join('. ')+tail}
     return fixRuns(str)};
@@ -4346,8 +4358,10 @@ tr(root){if(this.lang()!=='en'||!root)return;const D=this._dict||I18N_BASE;
     if(out==null){const v=tryK(t[0].toUpperCase()+t.slice(1));if(v!=null)out=v[0].toLowerCase()+v.slice(1)}
     if(out==null&&/\s/.test(t)){const parts=t.split(/(\s+[·—]\s+|,\s+|\s+)/);let any=false;const res=parts.map(pp=>{if(/^(\s+[·—]\s+|,\s+|\s+)$/.test(pp)||!/[А-ЯЁа-яё]/.test(pp))return pp;const v=tryK(pp)??tryK(pp.toLowerCase())??tryK(pp.replace(/[.:,!?]+$/,''));if(v!=null){any=true;return v}return pp}).join('');if(any)out=res}
     return out==null?run:lead+out+tail});
-  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const nodes=[];let n;while(n=w.nextNode())if(/[А-ЯЁа-яё]/.test(n.nodeValue))nodes.push(n);
-  nodes.forEach(nd=>{nd.nodeValue=fix(nd.nodeValue)});
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const nodes=[];let n;while(n=w.nextNode())if(/[А-ЯЁа-яё]/.test(n.nodeValue)&&!(n.parentElement&&n.parentElement.closest('[data-nt]')))nodes.push(n);
+  const PLW={day:'days',week:'weeks',task:'tasks',habit:'habits','check-in':'check-ins',entry:'entries',level:'levels',reward:'rewards',goal:'goals',action:'actions',minute:'minutes',hour:'hours',month:'months',question:'questions',line:'lines',image:'images',device:'devices',medal:'medals',win:'wins',step:'steps',page:'pages',year:'years',repetition:'repetitions'};
+  const enPl=x=>x.replace(/(^|[^\w.,-])(\d[\d,]*)( )(day|week|task|habit|check-in|entry|level|reward|goal|action|minute|hour|month|question|line|image|device|medal|win|step|page|year|repetition)(?![\w-])/g,(m,pre,n,sp,w)=>n==='1'?m:pre+n+sp+PLW[w]);
+  nodes.forEach(nd=>{nd.nodeValue=enPl(fix(nd.nodeValue))});
   root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(el=>{['placeholder','title','aria-label'].forEach(at=>{const v=el.getAttribute(at);if(v&&/[А-ЯЁа-яё]/.test(v))el.setAttribute(at,fix(v))})})},
 copy(s){navigator.clipboard.writeText(s).then(()=>this.toast('Скопировано'),()=>this.open(`<div class="lbl">Скопируй вручную</div><textarea style="min-height:140px;margin-top:10px" onclick="this.select()">${esc(s)}</textarea><button class="btn" style="margin-top:12px" onclick="APP.close()">Закрыть</button>`))},
 exportData(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(this.S,null,2)],{type:'application/json'}));a.download='12-weeks-'+today()+'.json';a.click()},
@@ -4487,6 +4501,7 @@ async applyTpl(s){let t;try{t=await this.b64d(s)}catch(e){return this.toast('С�
   const have=new Set(this.S.habits.map(h=>h.title));(t.habits||[]).forEach(h=>{if(!have.has(h.title))this.S.habits.push(H(h.title,{id:h.id||'h'+uid(),days:h.days||[0,1,2,3,4,5,6],when:h.when||'',tod:h.tod||''}))});
   this.S.weeks=Object.assign({},t.weeks||{},this.S.weeks);this.day=this.clampDay(today());this.save();this.tab='home';this.render();this.toast('Шаблон установлен')}
 };
+(()=>{const _c=window.confirm.bind(window),_p=window.prompt.bind(window);window.confirm=m=>_c(APP.tt(m));window.prompt=(m,d)=>_p(APP.tt(m),d)})();
 APP.init();
 </script>
 </body>

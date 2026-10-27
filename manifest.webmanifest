@@ -1,7 +1,7 @@
 {
   "name": "VOLYO",
   "short_name": "VOLYO",
-  "description": "VOLYO — система дисциплины: привычки, планы, прогресс и дневник",
+  "description": "VOLYO: a system for discipline. Habits, plans, progress and a diary.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
