@@ -3095,7 +3095,7 @@ render(){const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_
   this.tr($('nav'));this.tr($('snav'));
 },
 initial(){const n=(this.S.profile.name||(this.user&&this.user.email)||'').trim();return n?n[0].toUpperCase():'·'},
-top(){const ph=(this.S.profile||{}).photo;return `<div class="top tpx"><button class="tp-c ${this.rwFr()}" onclick="APP.go('profile')" aria-label="Профиль">${ph?`<img src="${ph}" alt="">`:MI.user}</button><img class="tp-wm" src="logo-volyo.png" alt="VOLYO"><button class="tp-c" onclick="APP.go('me')" aria-label="Напоминания">${MI.bell}<i class="tp-dot"></i></button></div>`},
+top(){const ph=(this.S.profile||{}).photo;return `<div class="top tpx"><button class="tp-c ${this.rwFr()}" onclick="APP.go('more')" aria-label="Профиль">${ph?`<img src="${ph}" alt="">`:MI.user}</button><img class="tp-wm" src="logo-volyo.png" alt="VOLYO"><button class="tp-c" onclick="APP.go('me');APP._sset='notif';APP.render()" aria-label="Напоминания">${MI.bell}${this._pushOn||!this.pushSupported()?'':'<i class="tp-dot"></i>'}</button></div>`},
 pl(n,a,b,c){n=Math.abs(n)%100;const m=n%10;if(n>10&&n<20)return c;if(m>1&&m<5)return b;if(m===1)return a;return c},
 dleft(d){const n=diff(today(),d);return n<0?`просрочено на ${-n} дн.`:n===0?'сегодня':`через ${n} дн.`},
 miniRing(v,size,col){const r=15,C=2*Math.PI*r,p=v==null?0:v/100,c=col||(v!=null&&v>=85?'#8B62EA':'#9B6FE8');
@@ -4325,7 +4325,7 @@ async pushSet(k,v){this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPre
 async pushTest(){try{const{data,error}=await this.sb.functions.invoke('tw-push',{body:{test:true}});if(error)throw error;const ok=(data.sent||[]).filter(x=>x>=200&&x<300).length;this.toast(ok?'Отправили. Уведомление придёт через пару секунд':'Не дошло. Выключи и включи уведомления заново')}catch(e){this.toast('Ошибка: '+this.errText(e))}},
 async pushSum(force){if(!this.user||!this.sb||!this._pushOn)return;const td=today(),a=this.dayAll(td),sm={date:td,n:a.n-a.done,st:this.dayStreak(),an:this.ancSum()},k=JSON.stringify(sm);if(!force&&k===this._pSum)return;this._pSum=k;
   try{await this.sb.from('tw_push').update({sum:sm}).eq('user_id',this.user.id)}catch(e){}},
-async pushCheck(){const sub=this.pushSupported()?await this.pushSub():null,on=!!sub&&Notification.permission==='granted';if(on!==this._pushOn){this._pushOn=on;if(this.tab==='me')this.render()}},
+async pushCheck(){const sub=this.pushSupported()?await this.pushSub():null,on=!!sub&&Notification.permission==='granted';if(on!==this._pushOn){this._pushOn=on;this.render()}},
 iosSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Уведомления на iPhone</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin:4px 0 16px">iPhone присылает уведомления только приложениям с экрана «Домой». Это займёт 10 секунд.</div>
   <div class="ios-st">${['Открой VOLYO в Safari','Нажми «Поделиться» внизу экрана','Выбери «На экран "Домой"»','Открой приложение с иконки и включи уведомления здесь'].map((t,i)=>`<div><span>${i+1}</span>${t}</div>`).join('')}</div>
