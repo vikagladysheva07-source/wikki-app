@@ -2011,6 +2011,18 @@ div.dsec-t{display:flex;align-items:baseline;gap:10px;margin:14px 4px 10px;paddi
 .gx path[stroke="#B79BFF"]{filter:none}
 
 .gx-d.up{color:#C4A4FF!important}.gx-d.dn{color:#8E8A98!important}
+
+/* Прогресс: плитки без наложений */
+.pgt{display:flex!important;flex-direction:column;align-items:flex-start;gap:8px;padding:16px 14px!important;min-width:0}
+.pgt span{font-size:11.5px!important;letter-spacing:.04em!important}
+.pgt-r{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%}
+.pgt-v{position:static!important;flex:none;display:grid;place-items:center}
+.pgt-wb{width:46px!important;height:26px!important}.pgt-wb i{background:linear-gradient(180deg,#C4A4FF,#5B2FBE)!important}
+.pgt-ar{width:32px!important;height:32px!important}.pgt .mring{width:38px;height:38px}
+
+/* Прогресс: отступы внутри карточек */
+.pcr{padding:14px 16px!important}
+.ppw b{display:block}.ppw i{display:block;font-style:normal;font-size:13px;color:#C4A4FF;margin-top:3px}
 </style>
 </head>
 <body>
@@ -3188,7 +3200,7 @@ pgPattern(){const P=this._pat||(this._pat=this.pattern());let b;
   if(P.n<14)b=`<div class="pg-empty">Соберём твой паттерн через ${14-P.n} ${this.pl(14-P.n,'день','дня','дней')} отметок. Чем больше привычек и чек-инов, тем точнее связи.</div><div class="pex-bar" style="margin-top:10px"><i style="width:${P.n/14*100}%"></i></div>`;
   else if(!P.f.length)b=`<div class="pg-empty">Сильных связей пока нет. Продолжай отмечать: пересчитываем каждый раз, когда открываешь раздел.</div>`;
   else{const mx=Math.max(...P.f.slice(0,6).map(f=>Math.abs(f.d)));b=`<div class="ppi">${this.patTxt(P.f[0])}</div><div class="dvb">${P.f.slice(0,6).map(f=>`<div class="dvb-r"><span class="dvb-n">${esc(f.name)}</span><div class="dvb-t"><div class="dvb-l">${f.d<0?`<i style="width:${Math.abs(f.d)/mx*100}%"></i>`:''}</div><div class="dvb-c"></div><div class="dvb-rr">${f.d>0?`<i style="width:${f.d/mx*100}%"></i>`:''}</div></div><b class="${f.d>0?'up':'dn'}">${f.d>0?'+':''}${f.d}%</b></div>`).join('')}<div class="dvb-lg"><span></span><div><span>← мешает</span><span>помогает →</span></div><span></span></div></div>`}
-  const wd=P.wd?`<div class="ppw"><div><span>Лучший день недели</span><b>${WDF[P.wd.best.k]} · ${P.wd.best.v}%</b></div><div><span>Самый слабый</span><b>${WDF[P.wd.worst.k]} · ${P.wd.worst.v}%</b></div></div>`:'';
+  const wd=P.wd?`<div class="ppw"><div><span>Лучший день недели</span><b>${WDF[P.wd.best.k]}</b><i>${P.wd.best.v}%</i></div><div><span>Самый слабый</span><b>${WDF[P.wd.worst.k]}</b><i>${P.wd.worst.v}%</i></div></div>`:'';
   return `<div class="card pg-s" id="pg-pat"><div class="pg-sh"><b>Что влияет на твои дни</b><span>за 60 дней</span></div>${b}${wd}<div class="pg-note">Это связь в твоих данных, а не доказанная причина.</div></div>`},
 /* 4.4 постоянство */
 softStreak(h){let d=today(),n=0,miss=0,rest=false,lim=500;if(!this.hOn(h,d))d=add(d,-1);while(lim--&&d>=h.created){if(this.hSched(h,d)&&!this.frozen(d)){if(this.hOn(h,d)){n++;if(miss)rest=true;miss=0}else{miss++;if(miss>=2)break}}d=add(d,-1)}return {n,rest}},
@@ -3248,10 +3260,10 @@ async repShare(){const D=this.repData(),R=D.R,c=document.createElement('canvas')
   x.fillStyle='#C9B8FF';x.font='700 48px "DM Sans",sans-serif';x.fillText('VOLYO',90,1780);x.fillStyle='rgba(232,226,247,.6)';x.font='400 34px "DM Sans",sans-serif';x.fillText(APP.tt('система дисциплины и привычек'),90,1830);
   c.toBlob(async b=>{const f=new File([b],'wikki-itogi.png',{type:'image/png'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:APP.tt('Мои итоги')});return}}catch(e){if(e&&e.name==='AbortError')return}const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='wikki-itogi.png';a.click();this.toast('Карточка сохранена')},'image/png')},
 /* обзор прогресса */
-mRing(p,c,sz){sz=sz||44;const r=sz/2-5,C=2*Math.PI*r;return `<svg width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}" class="mring"><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${c}" stroke-opacity=".16" stroke-width="5"/><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(C*Math.max(0,Math.min(1,p))).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 ${sz/2} ${sz/2})"/></svg>`},
+mRing(p,c,sz){sz=sz||44;const r=sz/2-5,C=2*Math.PI*r,id='mg'+(this._mg=(this._mg||0)+1);return `<svg width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}" class="mring"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B2FBE"/><stop offset=".55" stop-color="#9B6FE8"/><stop offset="1" stop-color="#C4A4FF"/></linearGradient></defs><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="5"/><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="url(#${id})" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(C*Math.max(0,Math.min(1,p))).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 ${sz/2} ${sz/2})"/></svg>`},
 winWeeks(n){const td=today(),m0=this.monday(td),w=this.winsAll(),out=[];for(let k=n-1;k>=0;k--){const m=add(m0,-7*k),e=add(m,6);out.push({m,c:w.filter(x=>x.d>=m&&x.d<=e).length})}return out},
 pvOver(){this._pat=null;const x=this.execData(),hs=this.S.habits.filter(h=>!h.archived);let A=0,B=0;hs.forEach(h=>{const c=this.cons30(h);A+=c.a;B+=c.b});const cp=B?Math.round(A/B*100):null,P=this._pat=this.pattern(),wn=this.winsAll().filter(w=>w.d>=this.pgFrom()).length;
-  const t=(id,lab,val,sub,viz)=>`<button class="pgt" onclick="document.getElementById('${id}').scrollIntoView({behavior:'smooth',block:'start'})"><div class="pgt-v">${viz||''}</div><span>${lab}</span><b>${val}</b><em>${sub}</em></button>`;
+  const t=(id,lab,val,sub,viz)=>`<button class="pgt" onclick="document.getElementById('${id}').scrollIntoView({behavior:'smooth',block:'start'})"><span>${lab}</span><div class="pgt-r"><b>${val}</b><div class="pgt-v">${viz||''}</div></div><em>${sub}</em></button>`;
   const ww=this.winWeeks(8),wmx=Math.max(1,...ww.map(x=>x.c));
   const ptv=P.n<14?'—':P.f.length?(P.f[0].d>0?'+':'')+P.f[0].d+'%':'—',pts=P.n<14?`через ${14-P.n} дн.`:P.f.length?esc(P.f[0].name):'связей пока нет';
   const R=this.repPeriod();
@@ -3923,7 +3935,8 @@ pvTasks(){const S=this.S,td=today();const m0=add(this.monday(td),7*(this._tw||0)
   return h},
 copyTasks(from,to){(this.S.tasks||[]).filter(x=>x.date===from).forEach(x=>this.S.tasks.push({id:'k'+uid(),title:x.title,date:to,done:'',t:Date.now()}));this.save();this.render();this.toast('Задачи скопированы')},
 /* ---------- Инсайты ---------- */
-pvBalance(){const S=this.S,td=today(),cur=td.slice(0,7),mo=this._wm||cur,[y,m]=mo.split('-').map(Number);
+pvBalance(){if(!this.S.areaQ)return this.sqIntro();AREAS=this.areaList();return this.sqNote()+this.pcRadar()+`<button class="sv-whl" onclick="APP.tab='plans';APP._plv='spheres';APP.render()">${I.goal||''}<span>Сферы жизни<em>Привычки, цели и дела по сферам</em></span>${MI.chev}</button>`},
+pvBalanceOld(){const S=this.S,td=today(),cur=td.slice(0,7),mo=this._wm||cur,[y,m]=mo.split('-').map(Number);
   const pm=iso(new Date(y,m-2,1)).slice(0,7),nm=iso(new Date(y,m,1)).slice(0,7),W=S.wheel||{},A=W[mo]||{},B=W[pm]||{};
   const SHT={health:'Здоровье',career:'Карьера',money:'Финансы',rel:'Близкие',love:'Любовь',spirit:'Рост',fun:'Отдых',home:'Окружение'},SH=AREAS.map(a=>{const d=AREAS0.find(x=>x[0]===a[0]);return d&&d[1]===a[1]?SHT[a[0]]:(a[1].length>13?a[1].slice(0,12)+'…':a[1])});
   const n=AREAS.length,R=112,C=170,pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/n,r=R*v/10;return [C+r*Math.cos(a),C+r*Math.sin(a)]};
@@ -4104,7 +4117,7 @@ vSpheres(){if(!this.S.areaQ)return this.sqIntro();AREAS=this.areaList();const L=
    <div class="sv-l">${L.map(row).join('')}</div>
    ${un.length?`<button class="sp-un" onclick="APP.sphFreeOpen()">${un.length} ${this.pl(un.length,'привычка','привычки','привычек')} без сферы. Привязать${MI.chev}</button>`:''}
    ${L.length<12?`<button class="sv-add" onclick="APP.areaAdd()">${I.plus} Добавить сферу</button>`:''}
-   <button class="sv-whl" onclick="APP._prv='balance';APP.go('progress')">${I.goal||''}<span>Колесо баланса<em>Оцени сферы раз в месяц</em></span>${MI.chev}</button>`},
+   `},
 pcWeek(days,td,m0){const A=days.map(d=>this.dayAll(d)),WL=['пн','вт','ср','чт','пт','сб','вс'],f=v=>v.toFixed(1);
   const avgOf=ds=>{let s2=0,k=0;ds.forEach(d=>{if(d<=td){const a=this.dayAll(d);if(a.n){s2+=a.p;k++}}});return k?Math.round(s2/k*100):null};
   const cur=avgOf(days),prev=avgOf([0,1,2,3,4,5,6].map(i=>add(m0,i-7))),dl=cur!=null&&prev!=null?cur-prev:null;
