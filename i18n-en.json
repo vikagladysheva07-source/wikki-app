@@ -2228,5 +2228,13 @@
 "Не сегодня":"Not today",
 "Открыть день":"Open day",
 "На этот день ничего не запланировано.":"Nothing is planned for this day.",
-"Пока мало данных: график появится после двух дней с отметками.":"Not enough data yet: the chart appears after two days with check-ins."
+"Пока мало данных: график появится после двух дней с отметками.":"Not enough data yet: the chart appears after two days with check-ins.",
+"+ подзадача":"+ subtask",
+"Новая подзадача":"New subtask",
+"Подзадача":"Subtask",
+"Подзадача: напиши и нажми Enter":"Subtask: type and press Enter",
+"Описание":"Description",
+"Ещё: повтор, сфера, заметка":"More: repeat, area, note",
+"Удалить задачу":"Delete task",
+"ещё {#}":"{#} more"
 }
