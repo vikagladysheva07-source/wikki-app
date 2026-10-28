@@ -2313,5 +2313,11 @@
 "Добавлено в коллекцию": "Added to your collection",
 "Пока тихо": "All quiet",
 "Здесь появятся награды и итоги испытаний. Напоминания настраиваются через шестерёнку.": "Rewards and challenge results will appear here. Reminders are set with the gear icon.",
-"Ранее": "Earlier"
+"Ранее": "Earlier",
+"Оценка {#}, а привычек и дел нет. С чего начнём?": "Rated {#}, but there are no habits or tasks. Where do we start?",
+"Оценка {#}, а за {#} недели выполнено {#}%. Попробуй упростить привычки.": "Rated {#}, but over {#} weeks only {#}% was done. Try simplifying your habits.",
+"просело: {*}": "lagging: {*}",
+"Сейчас {#}% · оценка {#}": "Now {#}% · rating {#}",
+"Сейчас {#}% · оценка {#}, было {#}": "Now {#}% · rating {#}, was {#}",
+"Привычки, цели и дела по сферам": "Habits, goals and tasks by area"
 }
