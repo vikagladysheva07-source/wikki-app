@@ -1967,6 +1967,8 @@ button.dsec svg{width:15px;height:15px;color:#8E8A9C;transition:transform .2s}bu
 button.dsec{background:none!important;border:0!important;border-top:1px solid rgba(255,255,255,.09)!important;border-radius:0!important;margin:0!important;padding:16px 4px!important;box-shadow:none!important}
 button.dsec:last-of-type{border-bottom:1px solid rgba(255,255,255,.09)!important}
 .dsec-b{margin:0 0 10px}
+
+div.dsec-t{display:flex;align-items:baseline;gap:10px;margin:14px 4px 10px;padding:0}div.dsec-t b{font-size:15px;font-weight:700;color:#F4F1EC}div.dsec-t span{font-size:12.5px;color:#8E8A9C}
 </style>
 </head>
 <body>
@@ -3471,7 +3473,7 @@ vToday(){
     if(allS.length)h+=`<div class="tmain"><div class="tmain-h">${this.STAR}<b>Главное</b><span>${allS.filter(i=>this.isDone(i)).length} из ${allS.length}</span></div>${allS.map(i=>i.k==='k'?this.kRow(i.o):i.k==='h'?this.hRow(i.o):this.tRow(i.o,w,true)).join('')}</div>`;
     else if(this.day===td&&(tk.length+items.length)>3)h+=`<div class="tmain-0">${this.STAR}<span>Отметь звёздочкой до трёх главных дел дня</span></div>`;
     if(onPl){const na=all.length+allS.length,nd=all.filter(i=>this.isDone(i)).length+allS.filter(i=>this.isDone(i)).length;
-      h+=this.rowsDone(all,w,'all');const body=h.slice(hT);h=h.slice(0,hT)+(na?this.dsec('t','Задачи',nd+' из '+na,body):'')+this.plHabits(hs)}
+      h+=this.rowsDone(all,w,'all');const body=h.slice(hT);h=h.slice(0,hT)+(na?`<div class="dsec dsec-t"><b>Задачи</b><span>${nd} из ${na}</span></div><div class="dsec-b">${body}</div>`:'')+this.plHabits(hs)}
     else h+=this.rowsDone(all,w,'all')+`${this.qaBox('k',`APP.taskAdd(this.q.value,'${this.day}')`,'Например: созвон завтра в 15:00')}`;
   }
   return h;
