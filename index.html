@@ -1995,6 +1995,15 @@ div.dsec-t{display:flex;align-items:baseline;gap:10px;margin:14px 4px 10px;paddi
 
 .sq-t{flex-direction:column;align-items:flex-start!important;gap:10px!important;padding:14px 12px!important}
 .sq-t b{white-space:nowrap}
+
+.sq-l{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.sq-l div{display:flex;gap:12px;align-items:baseline;padding:10px 12px;border-radius:12px;font-size:13px;color:#8E8A9C;border:1px solid transparent}
+.sq-l b{flex:none;width:42px;font-weight:700;color:#A9A4B8}
+.sq-l div.on{background:rgba(155,123,255,.12);border-color:rgba(176,148,255,.4);color:#E4DCFF}
+.sq-n2{margin:14px 0 4px;padding:16px;border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1)}
+.sq-n2 b{display:block;font-size:15px;font-weight:700;color:#F4F1EC}.sq-n2 p{margin:6px 0 12px;font-size:13.5px;line-height:1.45;color:#A9A4B8}
+
+.sq-l div{font-size:12.5px!important;gap:10px!important;padding:10px 10px!important}.sq-l b{width:38px!important}.sq-l span{text-wrap:nowrap}
 </style>
 </head>
 <body>
@@ -2206,8 +2215,16 @@ areaDel(i){const a=this.areasGet();if(a.length<=3)return this.toast('Миним�
 areaAdd(){const a=this.areasGet();if(a.length>=12)return this.toast('Максимум 12 сфер');this.ask('Название сферы','',v=>{v=(v||'').trim();if(!v)return;a.push({k:'c'+uid(),n:v.slice(0,40),i:'star'});this.areasSave(a)})},
 areaIco(i){const a=this.areasGet();this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Иконка: ${esc(a[i].n)}</div><button class="xcl" onclick="APP.areaSheet()" aria-label="Назад">${I.x}</button></div><div class="aicg">${ICO_KEYS.map(k=>`<button onclick="APP.areaIcoSet(${i},'${k}')">${hIco(k)}</button>`).join('')}</div>`)},
 areaIcoSet(i,k){const a=this.areasGet();a[i].i=k;this.areasSave(a)},
+SQL:{health:['Усталость, спорта нет','По-разному, режима нет','Сон, энергия, спорт в порядке'],career:['Нет ясности, не радует','Работа есть, роста нет','Растёшь, результаты видны'],money:['Деньги тревожат','Хватает, накоплений нет','Доход растёт, есть запас'],rel:['Почти нет общения','Общение случайное','Близкие рядом, время есть'],love:['Одиночество или конфликты','Есть, но без глубины','Тепло и доверие'],spirit:['Топчусь на месте','Учусь от случая к случаю','Есть план, расту'],fun:['Нет времени на себя','Отдых урывками','Делаю то, что люблю'],home:['Хаос и неудобно','Терпимо, но не нравится','Порядок и уют']},
 SQH:{health:'сон, энергия, спорт, самочувствие',career:'работа, дело, рост, результаты',money:'доходы, накопления, спокойствие с деньгами',rel:'семья, друзья, общение',love:'отношения с партнёром, близость',spirit:'обучение, привычки, развитие себя',fun:'отдых, хобби, удовольствие',home:'порядок, быт, среда вокруг'},
 sqIco(k){const a=[...AREAS0,...this.areaList()].find(x=>x[0]===k);return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${a?a[2]:''}</svg>`},
+sqNote(){const S=this.S,old=S.areaQ&&Date.now()-S.areaQ>28*864e5&&!(S.areaSnz&&Date.now()-S.areaSnz<7*864e5);
+  if(old)return `<div class="sq-n2"><b>Прошёл месяц</b><p>Оценим сферы заново? Увидишь, что изменилось.</p><div class="row" style="gap:10px"><button class="btn pr w" onclick="APP.sqStart()">Оценить</button><button class="btn gh w" onclick="APP.S.areaSnz=Date.now();APP.save();APP.render()">Позже</button></div></div>`;
+  const L=this.areaList(),St=L.map(a=>({a,st:this.sphSt(a[0])})).filter(x=>x.st.lv>=6);let g=null;
+  const none=St.filter(x=>!x.st.hs.length&&!x.st.ks.length&&!x.st.gs.length).sort((x,y)=>y.st.lv-x.st.lv)[0];
+  if(none)g={a:none.a,t:`Оценка ${none.st.lv}, а привычек и дел нет. С чего начнём?`,b:'Добавить привычку',f:`APP.editHA('${none.a[0]}')`};
+  else{const z=St.filter(x=>x.st.e8>=7&&x.st.a8!=null&&x.st.lv/10-x.st.a8>=.3).sort((x,y)=>(y.st.lv/10-y.st.a8)-(x.st.lv/10-x.st.a8))[0];if(z)g={a:z.a,t:`Оценка ${z.st.lv}, а за 4 недели выполнено ${Math.round(z.st.a8*100)}%. Попробуй упростить привычки.`,b:'Открыть сферу',f:`APP.sphOpen('${z.a[0]}')`}}
+  return g?`<div class="sq-n2"><b>${esc(g.a[1])}</b><p>${g.t}</p><button class="btn gh w" onclick="${g.f}">${g.b}</button></div>`:''},
 sqIntro(){return `<div class="sq-in"><div class="sq-ring"><svg viewBox="0 0 120 120">${[0,1,2,3,4,5,6,7].map(i=>{const t0=-Math.PI/2+i*Math.PI/4+.05,t1=t0+Math.PI/4-.1,P=(r,t)=>[(60+r*Math.cos(t)).toFixed(1),(60+r*Math.sin(t)).toFixed(1)],a=P(52,t0),b=P(52,t1),c=P(20,t1),d=P(20,t0);return `<path d="M${a}A52 52 0 0 1 ${b}L${c}A20 20 0 0 0 ${d}Z" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)" stroke-dasharray="3 3"/>`}).join('')}</svg></div><b>Оцени свою жизнь по сферам</b><p>Ответь на несколько вопросов, и мы построим колесо баланса. Дальше оно будет меняться по твоим привычкам и делам.</p><button class="btn pr w" onclick="APP.sqStart()">Начать</button></div>`},
 sqStart(){const cur=this.areasGet(),opts=[...AREAS0.map(a=>({k:a[0],n:a[1]})),...cur.filter(x=>!AREAS0.some(a=>a[0]===x.k))];
   this._sq={st:'pick',opts,sel:this.S.areas&&this.S.areas.length?cur.map(x=>x.k):opts.map(o=>o.k),lv:Object.assign({},this.S.areaLvl||{}),i:0};this.sqRender()},
@@ -2216,7 +2233,7 @@ sqNext(){const q=this._sq;q.sel=q.opts.map(o=>o.k).filter(k=>q.sel.includes(k));
 sqBack(){const q=this._sq;if(q.i>0)q.i--;else q.st='pick';this.sqRender()},
 sqSet(v){const q=this._sq;q.lv[q.sel[q.i]]=v;if(q.i<q.sel.length-1){q.i++;this.sqRender()}else this.sqDone()},
 sqDone(){const q=this._sq,cur=this.areasGet();this.S.areas=q.sel.map(k=>cur.find(x=>x.k===k)||{k,n:(q.opts.find(o=>o.k===k)||{}).n||k});
-  const lv={};q.sel.forEach(k=>lv[k]=q.lv[k]||5);this.S.areaLvl=lv;this.S.areaQ=Date.now();this.save();this.close();this._plv='spheres';this.render()},
+  const lv={};q.sel.forEach(k=>lv[k]=q.lv[k]||5);if(this.S.areaLvl&&Object.keys(this.S.areaLvl).length)this.S.areaPrev=this.S.areaLvl;this.S.areaLvl=lv;this.S.areaSnz=0;this.S.areaQ=Date.now();this.save();this.close();this._plv='spheres';this.render()},
 sqRender(){const q=this._sq;
   if(q.st==='pick')return this.open(`<div class="row"><div class="h2 sp" style="font-size:18px">Какие сферы есть в твоей жизни?</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="small mut" style="margin:6px 0 14px">Отметь нужные. От 3 до 8.</div>
    <div class="sq-g">${q.opts.map(o=>`<button class="sq-t ${q.sel.includes(o.k)?'on':''}" onclick="APP.sqTog('${o.k}')"><span>${this.sqIco(o.k)}</span><b>${esc(o.n)}</b></button>`).join('')}</div>
@@ -2224,7 +2241,7 @@ sqRender(){const q=this._sq;
   const k=q.sel[q.i],o=q.opts.find(x=>x.k===k)||{n:k},v=q.lv[k];
   this.open(`<div class="row"><div class="sq-p sp">${q.sel.map((_,j)=>`<i class="${j<=q.i?'on':''}"></i>`).join('')}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
    <div class="sq-h"><span class="sp-i">${this.sqIco(k)}</span><b>${esc(o.n)}</b></div><div class="sq-q">Как у тебя сейчас с этим?</div>${this.SQH[k]?`<div class="sq-hint">${this.SQH[k]}</div>`:''}
-   <div class="sq-n">${[1,2,3,4,5,6,7,8,9,10].map(n=>`<button class="${v===n?'on':''}" onclick="APP.sqSet(${n})">${n}</button>`).join('')}</div><div class="sq-e"><span>совсем плохо</span><span>отлично</span></div>
+   <div class="sq-n">${[1,2,3,4,5,6,7,8,9,10].map(n=>`<button class="${v===n?'on':''}" onclick="APP.sqSet(${n})">${n}</button>`).join('')}</div>${this.SQL[k]?`<div class="sq-l">${[['1–3',0],['4–7',1],['8–10',2]].map(([r,j])=>`<div class="${v&&(j===0?v<=3:j===1?v>3&&v<8:v>=8)?'on':''}"><b>${r}</b><span>${this.SQL[k][j]}</span></div>`).join('')}</div>`:'<div class="sq-e"><span>совсем плохо</span><span>отлично</span></div>'}
    <button class="btn gh w" style="margin-top:18px" onclick="APP.sqBack()">Назад</button>`)},
 areaSheet(){const a=this.areasGet();AREAS=this.areaList();
   this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Сферы колеса</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
@@ -4072,11 +4089,11 @@ normTab(t){if(t==='habits'){const p=this._pv;if(p==='balance'||p==='year'){this.
 stripV(h){return h.replace(/<div class="lbl">[^<]*<\/div><div class="h1">[\s\S]*?<\/div>/,'').replace(/<div class="h1">[\s\S]*?<\/div>/,'').replace(/__S\d__/g,'')},
 catOf(o,k){const CAT={dumb:'str',steps:'str',swim:'str',food:'str',tree:'str',snow:'str',drop:'str',book:'int',chat:'int',list:'int',pen:'int',lotus:'spi',moon:'spi',sun:'spi',heart:'spi',ban:'spi',phone:'spi',brief:'biz',video:'biz',target:'biz',star:'biz'};const AC={health:'str',career:'biz',money:'biz',spirit:'spi',rel:'spi',love:'spi',home:'spi',travel:'str',fun:'spi',comm:'biz'};
   if(k==='t'){const g=this.goal(o.goal);if(g&&g.area&&AC[g.area])return AC[g.area]}const ic=o.ic||icoGuess(o.title)||(k==='t'?'target':'star');return CAT[ic]||'biz'},
-vSpheres(){if(!this.S.areaQ)return this.sqIntro();AREAS=this.areaList();const L=AREAS,un=this.sphFree();
+vSpheres(){if(!this.S.areaQ)return this.sqIntro();AREAS=this.areaList();const L=AREAS,un=this.sphFree();const nx=this.sqNote();
   const row=a=>{const st=this.sphSt(a[0]),em=!st.hs.length&&!st.gs.length&&!st.ks.length,pc=st.p==null?0:Math.round(st.p*100);
     const meta=em?'Добавить привычку, цель или дело':[st.hs.length?st.hs.length+' '+this.pl(st.hs.length,'привычка','привычки','привычек'):'',st.gs.length?st.gs.length+' '+this.pl(st.gs.length,'цель','цели','целей'):'',st.ks.length?st.ks.length+' '+this.pl(st.ks.length,'дело','дела','дел'):''].filter(Boolean).map(x=>`<span>${x}</span>`).join('<span> · </span>');
     return `<button class="sv-r ${em?'em':''}" onclick="APP.sphOpen('${a[0]}')"><span class="sp-i sv-i">${aIco(a[0])}</span><span class="sv-m"><b>${esc(a[1])}</b><em>${meta}</em><span class="sp-b"><i style="width:${st.p==null?0:Math.max(pc,5)}%"></i></span></span><span class="sv-p">${st.p==null?'':pc+'%'}</span>${MI.chev}</button>`};
-  return this.pcRadar()+`<div class="sv-h"><div><b>Сферы жизни</b><em>Куда уходит твоя неделя</em></div><button onclick="APP.areaSheet()">Изменить</button></div>
+  return nx+this.pcRadar()+`<div class="sv-h"><div><b>Сферы жизни</b><em>Куда уходит твоя неделя</em></div><button onclick="APP.areaSheet()">Изменить</button></div>
    <div class="sv-l">${L.map(row).join('')}</div>
    ${un.length?`<button class="sp-un" onclick="APP.sphFreeOpen()">${un.length} ${this.pl(un.length,'привычка','привычки','привычек')} без сферы. Привязать${MI.chev}</button>`:''}
    ${L.length<12?`<button class="sv-add" onclick="APP.areaAdd()">${I.plus} Добавить сферу</button>`:''}
@@ -4106,19 +4123,21 @@ pcRadar(){AREAS=this.areaList();const L=AREAS,n=L.length;if(n<3)return '';
     const txt=ln.map((t,k)=>{const idx=low2?k:ln.length-1-k,r=low2?R+19+k*12:R+14+(ln.length-1-k)*12+0,id=`pa${i}_${k}`;paths+=`<path id="${id}" d="${ar(low2?R+22+k*12:R+14+(ln.length-1-k)*12,low2)}" fill="none"/>`;return `<text font-size="12.5" font-weight="700" letter-spacing=".5" fill="${p>0?'#B4AEC6':'#6E6A7C'}"><textPath href="#${id}" startOffset="50%" text-anchor="middle">${esc(t)}</textPath></text>`}).join('');
     const [ix,iy]=pol(r0+(R-r0)*.5,tm);
     return `<g onclick="APP.sphOpen('${a[0]}')" style="cursor:pointer"><path d="${sec(t0+.03,t1-.03,r0+4,R-4)}" fill="rgba(255,255,255,.045)" stroke="rgba(255,255,255,.045)" stroke-width="8" stroke-linejoin="round"/>${St[i].p==null?`<path d="${sec(t0+.03,t1-.03,r0+4,R-4)}" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1" stroke-dasharray="3 4"/>`:''}${p>0?`<path d="${sec(t0+.04,t1-.04,r0+6,Math.max(rf-4,r0+9))}" fill="url(#pb${i})" stroke="${c[0]}" stroke-opacity=".55" stroke-width="6" stroke-linejoin="round"/>`:''}<g transform="translate(${f(ix-12)} ${f(iy-12)})" fill="none" stroke="${p>.45?'#fff':'#7C7790'}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" opacity=".9">${a[2]}</g>${txt}</g>`}).join('');
-  return `<div class="gx gx-w3"><div class="gx-h"><b>Баланс недели</b>${has&&V[low]<.5?`<span class="gx-d">просело: ${esc(L[low][1].split(/[\s,]/)[0])}</span>`:'<span class="gx-d">выполнение по сферам</span>'}</div><svg class="gx-s" viewBox="0 0 400 400"><defs>${gd}${paths}<radialGradient id="whc" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#241A44"/><stop offset="1" stop-color="#07060C"/></radialGradient></defs>${body}<circle cx="${cx}" cy="${cy}" r="${r0-6}" fill="#9B7BFF" opacity=".18"/><circle cx="${cx}" cy="${cy}" r="${r0-8}" fill="url(#whc)" stroke="rgba(255,255,255,.16)"/><text x="${cx}" y="${cy+8}" text-anchor="middle" fill="#fff" font-size="${avg==null?20:24}" font-weight="700">${avg==null?'—':avg+'%'}</text></svg>${has?'':'<div class="gx-e">Отмечай привычки и дела в сферах, и здесь заполнится колесо недели.</div>'}</div>`},
+  return `<div class="gx gx-w3"><div class="gx-h"><b>Колесо баланса</b>${has&&V[low]<.5?`<span class="gx-d">просело: ${esc(L[low][1].split(/[\s,]/)[0])}</span>`:'<span class="gx-d">выполнение по сферам</span>'}</div><svg class="gx-s" viewBox="0 0 400 400"><defs>${gd}${paths}<radialGradient id="whc" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#241A44"/><stop offset="1" stop-color="#07060C"/></radialGradient></defs>${body}<circle cx="${cx}" cy="${cy}" r="${r0-6}" fill="#9B7BFF" opacity=".18"/><circle cx="${cx}" cy="${cy}" r="${r0-8}" fill="url(#whc)" stroke="rgba(255,255,255,.16)"/><text x="${cx}" y="${cy+8}" text-anchor="middle" fill="#fff" font-size="${avg==null?20:24}" font-weight="700">${avg==null?'—':avg+'%'}</text></svg>${has?'':'<div class="gx-e">Отмечай привычки и дела в сферах, и здесь заполнится колесо недели.</div>'}</div>`},
 sphSt(k){const S=this.S,td=today(),SA={str:'health',int:'career',spi:'spirit',biz:'career'};
   const hs=S.habits.filter(h=>!h.archived&&(h.area||SA[h.sk||this.skGuess(h.title)])===k),gs=(S.goals||[]).filter(g=>g.area===k&&!g.done),ks=(S.tasks||[]).filter(t=>!t.drop&&!t.done&&t.area===k);
   const m0=this.monday(td);let ex=0,dn=0;for(let i=0;i<7;i++){const d=add(m0,i);if(d>td)break;hs.forEach(h=>{if(this.hSched(h,d)){ex++;if(this.hOn(h,d))dn++}})}(S.tasks||[]).filter(t=>!t.drop&&t.area===k&&t.date>=m0&&t.date<=td).forEach(t=>{ex++;if(t.done)dn++});
-  const lv=(S.areaLvl||{})[k],base=lv?lv/10:null,act=ex?dn/ex:null,w=ex/(ex+6);
-  return {hs,gs,ks,ex,dn,base,p:base==null?act:act==null?base:base*(1-w)+act*w}},
+  const lv=(S.areaLvl||{})[k],base=lv?lv/10:null,act=ex?dn/ex:null;
+  let e8=0,d8=0;for(let i=0;i<28;i++){const d=add(td,-i);hs.forEach(h=>{if(this.hSched(h,d)){e8++;if(this.hOn(h,d))d8++}})}(S.tasks||[]).filter(t=>!t.drop&&t.area===k&&t.date>=add(td,-27)&&t.date<=td).forEach(t=>{e8++;if(t.done)d8++});
+  const a8=e8?d8/e8:null,dq=S.areaQ?Math.max(0,(Date.now()-S.areaQ)/864e5):0,w=Math.min(1,dq/28)*(e8/(e8+6));
+  return {hs,gs,ks,ex,dn,e8,a8,base,lv,p:base==null?act:a8==null?base:base*(1-w)+a8*w}},
 sphFree(){const ks=new Set(this.areaList().map(a=>a[0])),SA={str:'health',int:'career',spi:'spirit',biz:'career'};return this.S.habits.filter(h=>!h.archived&&!ks.has(h.area||SA[h.sk||this.skGuess(h.title)]))},
 sphFreeOpen(){const un=this.sphFree();this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Привычки без сферы</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="small mut" style="margin:6px 0 12px">Нажми на привычку и выбери сферу.</div><div class="hx-list">${un.map(h=>`<div class="hx-row"><button class="hx-rt" onclick="APP.close();APP.editH('${h.id}')"><b>${esc(h.title)}</b><em>Выбрать сферу</em></button></div>`).join('')}</div>`)},
 sphOpen(k){AREAS=this.areaList();const a=AREAS.find(x=>x[0]===k);if(!a)return;const st=this.sphSt(k),td=today(),pc=st.p==null?null:Math.round(st.p*100);
   const hr=st.hs.map(h=>{const sc=this.hSched(h,td),on=this.hOn(h,td);return `<div class="hx-row ${on?'done':''}"><button class="hx-ck" ${sc?`onclick="APP.hToggle('${h.id}','${td}');APP.sphOpen('${k}');APP.render()"`:'disabled style="opacity:.35"'} aria-label="Отметить">${on?I.ok:''}</button><button class="hx-rt" onclick="APP.close();APP.editH('${h.id}')"><b>${esc(h.title)}</b><em>${sc?'Сегодня':'Не сегодня'}</em></button></div>`}).join('');
   const gr=st.gs.map(g=>{const pr=Math.round(this.gProg(g)*100);return `<div class="hx-row"><span class="hx-ck" style="border-style:dashed;background:none"></span><button class="hx-rt" onclick="APP.close();APP.editGoal('${g.id}')"><b>${esc(g.title||'Цель')}</b><em>Цель · ${pr}%</em></button></div>`}).join('');
   const kr=st.ks.map(x=>`<div class="hx-row"><button class="hx-ck" onclick="APP.taskToggle('${x.id}');APP.sphOpen('${k}')" aria-label="Отметить"></button><button class="hx-rt" onclick="APP.close();APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b><em>${x.date===td?'Сегодня':fd(x.date)}${x.tm?' · '+x.tm:''}</em></button></div>`).join('');
-  this.open(`<div class="row"><span class="sp-i" style="width:34px;height:34px;margin-right:10px">${aIco(k)}</span><div class="sp"><div class="h2" style="font-size:17px">${esc(a[1])}</div><div class="small mut">${pc==null?'Пока без привычек на этой неделе':'Эта неделя: '+pc+'%'}</div></div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+  this.open(`<div class="row"><span class="sp-i" style="width:34px;height:34px;margin-right:10px">${aIco(k)}</span><div class="sp"><div class="h2" style="font-size:17px">${esc(a[1])}</div><div class="small mut">${pc==null?'Пока без привычек на этой неделе':'Сейчас '+pc+'%'+(st.lv?' · оценка '+st.lv+((this.S.areaPrev||{})[k]&&this.S.areaPrev[k]!==st.lv?', было '+this.S.areaPrev[k]:''):'')}</div></div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
    ${st.hs.length?`<div class="hx-sec" style="margin-top:16px"><b>Привычки</b></div><div class="hx-list">${hr}</div>`:''}${st.gs.length?`<div class="hx-sec" style="margin-top:16px"><b>Цели</b></div><div class="hx-list">${gr}</div>`:''}${st.ks.length?`<div class="hx-sec" style="margin-top:16px"><b>Дела</b></div><div class="hx-list">${kr}</div>`:''}
    ${!st.hs.length&&!st.gs.length&&!st.ks.length?`<div class="hx-empty" style="margin-top:16px;cursor:default">В этой сфере пока пусто. Добавь первую привычку, цель или дело.</div>`:''}
    <div class="row" style="gap:10px;margin-top:16px"><button class="btn w" onclick="APP.close();APP.editHA('${k}')">Привычка</button><button class="btn gh w" onclick="APP.close();APP.editGoal(null,'${k}')">Цель</button><button class="btn gh w" onclick="APP.close();APP.ask('Новое дело','',v=>{if(v)APP.taskAdd(v,today(),0,'${k}')})">Дело</button></div>`)},
@@ -4753,7 +4772,7 @@ methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17
 lang(){return ((this.S.pref||{}).lang)||'ru'},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict)return;try{const r=await fetch('i18n-en.json?v=166');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}},
+async loadDict(){if(this._dict)return;try{const r=await fetch('i18n-en.json?v=167');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;const D=this._dict||I18N_BASE;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
