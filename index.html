@@ -1923,6 +1923,14 @@ a.btn{text-decoration:none!important;display:flex;align-items:center;justify-con
 .sech b{white-space:nowrap}
 
 .mc-d{height:39px!important;padding:2px 0!important}.mc-d b{width:28px!important;height:28px!important;font-size:13.5px!important}.mc{padding:8px 6px 6px!important}
+
+/* главная: две кнопки */
+.hx-tl{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.hx-tl button{height:56px!important;flex-direction:row!important;justify-content:flex-start!important;padding:0 18px!important;gap:12px!important}
+.hx-tl svg{width:22px!important;height:22px!important}.hx-tl b{font-size:14px!important}
+/* профиль: компактный «Полный доступ» */
+.mr-pay{padding:12px 16px!important;min-height:0!important}
+.tkm{justify-content:flex-end}
 </style>
 </head>
 <body>
@@ -2635,7 +2643,7 @@ vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData()
   const T=[['journal','Дневник',I.diary,'Записи дня, рефлексия и победы',0],['program','Программа',I.goal,'Цели на 12 недель, тактики и разбор недели',1],['progress','Прогресс',I.chart,'Графики, колесо баланса и год в пикселях',1]];
   return `<div class="h1">Профиль</div>__S1____S2__
   <button class="card mr-me" onclick="APP.go('profile')"><span class="mr-av ${this.rwFr()}">${this.avaHtml()}</span><div class="sp"><b>${esc(P.name||'Твой профиль')}</b><em>${this.rwTitle()?this.rwTitle()+' · ':''}уровень ${D.lvl||1}${this.user?'':' · войди, чтобы сохранить прогресс'}</em></div>${I.r}</button>
-  ${pd0?'':`<button class="card mr-pay" onclick="APP.paySheet('program')"><span>${I.star}</span><div class="sp"><b>Полный доступ</b><em>Программы, прогресс, безлимит привычек и разбор недели</em></div>${I.r}</button>`}
+  ${pd0?'':`<button class="card mr-pay" onclick="APP.paySheet('program')"><span>${I.star}</span><div class="sp"><b>Полный доступ</b></div>${I.r}</button>`}
   <div class="card mr-l"><button onclick="APP.ptCreate()">${I.me}<span>Позвать партнёра</span>${I.r}</button><button onclick="APP.go('me')">${I.gear}<span>Настройки</span>${I.r}</button><button onclick="APP.go('me');APP._sset='about';APP.render()">${I.spark||I.star}<span>О приложении</span>${I.r}</button><button onclick="APP.shareApp()">${SI.share}<span>Поделиться приложением</span>${I.r}</button></div>`},
 /* темы оформления: перекрашиваем фирменный фиолетовый в цвет темы */
 THM:{},
@@ -3418,7 +3426,7 @@ vToday(){
     if(hasT)h+=`<div class="todf">${[['','Все'],['m','Утро'],['d','День'],['e','Вечер']].map(([k,l])=>`<button class="${tf===k?'on':''}" onclick="APP._todf='${k}';APP.render()">${l}${k?`<i>${cnt(k)}</i>`:''}</button>`).join('')}</div>`;
     if(allS.length)h+=`<div class="tmain"><div class="tmain-h">${this.STAR}<b>Главное</b><span>${allS.filter(i=>this.isDone(i)).length} из ${allS.length}</span></div>${allS.map(i=>i.k==='k'?this.kRow(i.o):i.k==='h'?this.hRow(i.o):this.tRow(i.o,w,true)).join('')}</div>`;
     else if(this.day===td&&(tk.length+items.length)>3)h+=`<div class="tmain-0">${this.STAR}<span>Отметь звёздочкой до трёх главных дел дня</span></div>`;
-    h+=this.rowsDone(all,w,'all')+`${this.qaBox('k',`APP.taskAdd(this.q.value,'${this.day}')`,'Например: созвон завтра в 15:00')}`;
+    h+=this.rowsDone(all,w,'all')+(onPl?'':`${this.qaBox('k',`APP.taskAdd(this.q.value,'${this.day}')`,'Например: созвон завтра в 15:00')}`);
   }
   return h;
 },
@@ -3750,11 +3758,11 @@ pvHabits(){
   const mode='d';
   const stx=hs.map(x=>{const[f,sc,fr]=this.hFns(x);return {c:this.streak(f,sc,fr),b:this.best(f,sc,fr)}}),curS=Math.max(0,...stx.map(x=>x.c)),bestS=Math.max(0,...stx.map(x=>x.b)),tp=schToday?Math.round(doneToday/schToday*100):0;
   const perfect=trend.filter(t=>t.d<=td&&t.p!=null&&t.p>=1).length;
-  const kpi=hs.length?`<div class="card tkx"><button class="shbtn tkx-sh" onclick="APP.shareStudio('streak')" aria-label="Поделиться">${SI.share}</button><div class="tkx-r" style="--p:${tp}"><b>${doneToday}<i>/${schToday}</i></b><span>${tp>=100&&schToday?'день закрыт':'сегодня'}</span></div><div class="tkx-g"><div><b class="fl">${I.flame}${curS}</b><span>серия, ${this.pl(curS,'день','дня','дней')}</span></div><div><b>${bestS}</b><span>рекорд</span></div><div><b>${avg30??'—'}<i>${avg30!=null?'%':''}</i></b><span>среднее за месяц</span></div><div><b>${perfect}</b><span>${this.pl(perfect,'идеальный день','идеальных дня','идеальных дней')}</span></div></div></div>`:'';
+  const kpi=hs.length?`<div class="card tkx"><div class="tkx-r" style="--p:${tp}"><b>${doneToday}<i>/${schToday}</i></b><span>${tp>=100&&schToday?'день закрыт':'сегодня'}</span></div><div class="tkx-g"><div><b class="fl">${I.flame}${curS}</b><span>серия, ${this.pl(curS,'день','дня','дней')}</span></div></div></div>`:'';
   const base=this._gm||td.slice(0,7),[gy,gmo]=base.split('-').map(Number),pm=iso(new Date(gy,gmo-2,1)).slice(0,7),nm=iso(new Date(gy,gmo,1)).slice(0,7);
   if(!hs.length&&!tt.length)return `<div class="card st-empty"><b>Трекер пока пустой</b><span>Выбери 2–3 привычки — займёт минуту.</span><button class="btn pr w" onclick="APP._st=1;APP.sub='start';window.scrollTo(0,0);APP.render()">Выбрать привычки</button><button class="st-own" onclick="APP.editH(null)">Создать свою</button></div>`;
-  let h=kpi+`<div class="tkm"><button class="ic" onclick="APP._gm='${pm}';APP.render()">${I.l}</button><b>${MONF[gmo-1]} ${gy}</b><button class="ic" onclick="APP._gm='${nm}';APP.render()">${I.r}</button><span class="sp"></span><button class="btn pr sm" onclick="APP.editH(null)">${I.plus} Привычка</button></div>`;
-  const tr2=trend;this._trendDays=tr2.length;this._series={main:tr2};const mkd=Object.keys(this.S.hlog||{}).filter(d=>Object.values(this.S.hlog[d]||{}).some(Boolean)).length;this._trendHtml=mkd<3?`<div class="trk0">Ещё ${3-mkd} ${this.pl(3-mkd,'день','дня','дней')} отметок, и здесь появится график</div>`:this.areaChart(tr2,{h:window.innerWidth>=1024?96:72,labels:false,extend:false,col:'#9B7BFF'});this._trendAvg=avg30;this._noHead=true;
+  let h=kpi+`<div class="tkm"><span class="sp"></span><button class="btn pr sm" onclick="APP.editH(null)">${I.plus} Привычка</button></div>`;
+  const tr2=trend;this._trendDays=tr2.length;this._series={main:tr2};const mkd=Object.keys(this.S.hlog||{}).filter(d=>Object.values(this.S.hlog[d]||{}).some(Boolean)).length;this._trendHtml='';this._trendAvg=avg30;this._noHead=true;
   h+='__S2__'+(mode==='w'?this.weekGrid(rows):this.monthGrid(hs,tt));this._trendHtml='';this._noHead=false;
   const have=new Set(hs.map(x=>x.title));const lib=HABIT_LIB.filter(([t])=>!have.has(t));
   if(lib.length&&(!hs.length||this._libOpen))h+=this.hPicker(hs.length>0);
@@ -3885,7 +3893,7 @@ monthGrid(hs,tt){
     const tg=+r.o.target||0,fr=vv&&!on?(kk==='scale'?1:tg?Math.min(.95,Math.max(.12,vv/tg)):.5):0,ttl=vv?` title="${vv}${r.o.unit?' '+esc(r.o.unit):''}${tg&&kk!=='scale'?' из '+tg:''}"`:'';
     const inner=on?I.ok2:(vv?'':(num?`<s>${pd(d).getDate()}</s>`:''));
     return `<button class="mgc ${on?'on':''} ${fz&&!on?'fz':''} ${!sc&&!on&&!fz?'x':''} ${d===td?'td':''} ${fr?'part':''} ${fut?'fut':''}"${fr?` style="--f:${fr.toFixed(2)}"`:''}${ttl} ${fut||r.k==='t'&&d<this.st?'disabled':`onclick="${tog}"`}>${inner}</button>`};
-  const stats=r=>{const[f2,s2,fr2]=r.k==='h'?this.hFns(r.o):this.tFns(r.o);const rt=this.rate(f2,s2,fr2,30);const sk=this.streak(f2,s2,fr2);return `<b>${rt==null?'—':rt+'%'}</b><span class="fl ${sk>=66?'t4':sk>=30?'t3':sk>=7?'t2':''}">${I.flame}${sk}</span><span class="st">${I.star}${this.best(f2,s2,fr2)}</span>`};
+  const stats=r=>{const[f2,s2,fr2]=r.k==='h'?this.hFns(r.o):this.tFns(r.o);const rt=this.rate(f2,s2,fr2,30);const sk=this.streak(f2,s2,fr2);return `<span class="fl ${sk>=66?'t4':sk>=30?'t3':sk>=7?'t2':''}">${I.flame}${sk}</span>`};
   const edit=r=>r.k==='h'?`APP.editH('${r.o.id}')`:`APP.editT('${r.o.id}')`;
   const addForm=`${this.qaBox('h','APP.hQuick(this.q.value)','Название привычки')}`;
   let h=`<div class="card" style="padding:14px 12px">${this._noHead?'':`<div class="row"><button class="ic" onclick="APP._gm='${pm}';APP.render()">${I.l}</button><div class="sp" style="text-align:center"><b>${MONF[mo-1]} ${y}</b></div><button class="ic" onclick="APP._gm='${nm}';APP.render()">${I.r}</button></div>`}
@@ -4015,7 +4023,7 @@ homeHero(dpT){const td=today(),P=this.S.profile||{},nm=(P.name||'').split(' ')[0
   const cta=mpOn?['Собрать план дня',"APP._plv='day';APP.go('plans')"]:!dpT.n?['Добавить привычку',"APP.editH()"]:closed?['Записать день',"APP._jd=today();APP.go('journal')"]:['Отметить день',"APP.go('tracker')"];
   const TR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></svg>';
   const TG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3"/></svg>';
-  const tl=[['Дневник',MI.diary,"APP._jd=today();APP.go('journal')"],['Прогресс',MI.prog,"APP.go('home');APP._stats=1;APP.render()"],['Программа',TG,"APP.go('program')"],['Награды',TR,"APP._ct='rewards';APP.go('profile')"]];
+  const tl=[['Дневник',MI.diary,"APP._jd=today();APP.go('journal')"],['Прогресс',MI.prog,"APP.go('home');APP._stats=1;APP.render()"]];
   // список на сегодня
   const TOD={m:'Утро',d:'День',e:'Вечер'},ord={m:0,d:1,e:2,'':3};
   let H=[],K=[];try{H=this.S.habits.filter(x=>!x.archived&&this.hSched(x,td))}catch(e){}try{K=(this.S.tasks||[]).filter(x=>!x.drop&&x.date===td&&!(this.S.del||[]).includes(x.id))}catch(e){}
