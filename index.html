@@ -2023,6 +2023,10 @@ div.dsec-t{display:flex;align-items:baseline;gap:10px;margin:14px 4px 10px;paddi
 /* Прогресс: отступы внутри карточек */
 .pcr{padding:14px 16px!important}
 .ppw b{display:block}.ppw i{display:block;font-style:normal;font-size:13px;color:#C4A4FF;margin-top:3px}
+
+/* Год: колонки по месяцам */
+.ym-big{display:flex;align-items:baseline;gap:8px;margin:16px 4px 8px}.ym-big b{font-size:34px;font-weight:700}.ym-big span{font-size:13px;color:#8E8A98}
+.ym-s{display:block;width:100%;height:auto}
 </style>
 </head>
 <body>
@@ -3964,25 +3968,23 @@ pvBalanceOld(){const S=this.S,td=today(),cur=td.slice(0,7),mo=this._wm||cur,[y,m
   return h},
 setWheel(mo,k,v){const S=this.S;S.wheel=S.wheel||{};S.wheel[mo]=Object.assign({},S.wheel[mo]||{});if(v)S.wheel[mo][k]=v;else delete S.wheel[mo][k];S.wheel[mo].t=Date.now();this.save();this.buzz(6);this.render()},
 wheelCopy(from,to){const S=this.S;S.wheel=S.wheel||{};S.wheel[to]=Object.assign({},S.wheel[from]||{},{t:Date.now()});this.save();this.render();this.toast('Скопировано, поправь, что изменилось')},
-pvYear(){const td=today(),y=+(this._yy||td.slice(0,4)),mode=this._ym||'done',C=this.S.checkin||{};
-  const col=d=>{if(d>td)return 'fu';if(mode==='mood'){const c=C[d];const e=c&&+c.energy;return e?'e'+e:'n'}const a=this.dayAll(d);if(!a.n)return 'n';const p=a.p;return p>=.8?'p4':p>=.5?'p3':p>0?'p2':'p1'};
-  let closed=0,tracked=0;const mon=Array.from({length:12},()=>({a:0,b:0}));
-  let grid=`<div class="ypx"><span></span>${(this.lang()==='en'?['J','F','M','A','M','J','J','A','S','O','N','D']:['Я','Ф','М','А','М','И','И','А','С','О','Н','Д']).map(x=>`<span class="yh">${x}</span>`).join('')}`;
-  for(let d=1;d<=31;d++){grid+=`<span class="yd">${d}</span>`;for(let mi=0;mi<12;mi++){const dim=new Date(y,mi+1,0).getDate();if(d>dim){grid+='<i class="x"></i>';continue}const ds=y+'-'+pad(mi+1)+'-'+pad(d),c=col(ds);
-    if(mode!=='mood'&&ds<=td){const a=this.dayAll(ds);if(a.n){tracked++;mon[mi].b++;mon[mi].a+=a.p;if(a.p>=.8)closed++}}
-    grid+=`<i class="${c} ${ds===td?'td':''}" ${ds<=td?`onclick="APP.goDay('${ds}')"`:''} title="${fd(ds)}"></i>`}}
-  grid+=`</div>`;
-  const j1=y+'-01-01',g0=this.monday(j1),dec=y+'-12-31';let gh=`<div class="ygh"><div class="ygm"><span></span>`;const wks=[];for(let d=g0;d<=dec;d=add(d,7))wks.push(d);
-  wks.forEach(w=>{const lastD=add(w,6),m1=lastD.slice(0,4)==String(y)&&+lastD.slice(8)<=7;gh+=`<span>${m1?MONF[+lastD.slice(5,7)-1].slice(0,3):''}</span>`});gh+=`</div><div class="ygg" style="--w:${wks.length}">`;
-  ((this.S.pref||{}).wk0==='sun'?['вс','','вт','','чт','','сб']:['пн','','ср','','пт','','']).forEach((lab,r)=>{gh+=`<span class="ygl">${lab}</span>`;wks.forEach(w=>{const ds=add(w,r);if(ds.slice(0,4)!=String(y)){gh+='<i class="x"></i>';return}gh+=`<i class="${col(ds)} ${ds===td?'td':''}" ${ds<=td?`onclick="APP.goDay('${ds}')"`:''} title="${fd(ds)}"></i>`})});
-  gh+=`</div></div>`;gh=gh.replace('<div class="ygm">',`<div class="ygm" style="--w:${wks.length}">`);grid+=gh;
-  const bm=mon.map((x,i)=>({i,v:x.b?x.a/x.b:null})).filter(x=>x.v!=null).sort((a,b)=>b.v-a.v)[0];
-  const leg=mode==='mood'?`<span><i class="e1"></i>1</span><span><i class="e2"></i>2</span><span><i class="e3"></i>3</span><span><i class="e4"></i>4</span><span><i class="e5"></i>5</span>`:`<span><i class="p1"></i>0%</span><span><i class="p2"></i>до 50</span><span><i class="p3"></i>до 80</span><span><i class="p4"></i>80+</span>`;
+pvYear(){const td=today(),y=+(this._yy||td.slice(0,4)),mode=this._ym||'done',C=this.S.checkin||{},f=v=>v.toFixed(1);
+  let closed=0,tracked=0;const mon=Array.from({length:12},()=>({a:0,b:0,e:0,k:0}));
+  for(let mi=0;mi<12;mi++){const dim=new Date(y,mi+1,0).getDate();for(let d=1;d<=dim;d++){const ds=y+'-'+pad(mi+1)+'-'+pad(d);if(ds>td)break;const a=this.dayAll(ds);if(a.n){tracked++;mon[mi].b++;mon[mi].a+=a.p;if(a.p>=.8)closed++}const c=C[ds],e=c&&+c.energy;if(e){mon[mi].k++;mon[mi].e+=e/5}}}
+  const val=mon.map(x=>mode==='mood'?(x.k?x.e/x.k:null):(x.b?x.a/x.b:null));
+  const curM=y===+td.slice(0,4)?+td.slice(5,7)-1:11;let sel=this._ymo;if(sel==null||sel<0||sel>11||(this._ymy!==y)){sel=val[curM]!=null?curM:val.reduce((q,v,i)=>v!=null?i:q,curM);this._ymo=sel;this._ymy=y}
+  const L=this.lang()==='en'?['J','F','M','A','M','J','J','A','S','O','N','D']:['Я','Ф','М','А','М','И','И','А','С','О','Н','Д'];
+  let cols='<defs><linearGradient id="yg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#5B2FBE"/><stop offset=".6" stop-color="#9B6FE8"/><stop offset="1" stop-color="#C4A4FF"/></linearGradient></defs>';
+  val.forEach((v,i)=>{const x=6+i*26.5,h=118,y0=134,on=i===sel,fut=y===+td.slice(0,4)&&i>curM;
+    cols+=`<g onclick="APP._ymo=${i};APP.render()" style="cursor:pointer"><rect x="${x-3}" y="8" width="25" height="150" fill="transparent"/><rect x="${x}" y="${y0-h}" width="19" height="${h}" rx="9.5" fill="rgba(255,255,255,${fut?.03:.06})" ${on?'stroke="#C4A4FF" stroke-opacity=".7" stroke-width="1.5"':''}/>${v?`<rect x="${x}" y="${f(y0-h*v)}" width="19" height="${f(Math.max(h*v,10))}" rx="9.5" fill="url(#yg)"/>`:''}<text x="${x+9.5}" y="152" text-anchor="middle" fill="${on?'#fff':'#8E8A98'}" font-size="12" font-weight="${on?700:600}">${L[i]}</text></g>`});
+  const bm=val.map((v,i)=>({i,v})).filter(x=>x.v!=null).sort((a,b)=>b.v-a.v)[0];
+  const sv=val[sel],opn=`APP.day='${y===+td.slice(0,4)&&sel===curM?td:y+'-'+pad(sel+1)+'-01'}';APP._plv='month';APP.go('plans')`;
   return `<div class="yr"><div class="card"><div class="row"><button class="ic" onclick="APP._yy=${y-1};APP.render()">${I.l}</button><div class="sp" style="text-align:center"><b>${y}</b></div><button class="ic" ${y>=+td.slice(0,4)?'disabled style="opacity:.3"':''} onclick="APP._yy=${y+1};APP.render()">${I.r}</button></div>
    <div class="pseg mini" style="margin:14px 0 0"><button class="${mode==='done'?'on':''}" onclick="APP._ym='done';APP.render()">Выполнение</button><button class="${mode==='mood'?'on':''}" onclick="APP._ym='mood';APP.render()">Энергия</button></div>
-   ${grid}<div class="yleg">${leg}</div></div>
-   <div class="card"><div class="kg ykg" style="margin-top:0"><div><b>${closed}</b><span>закрытых дней</span></div><div><b>${tracked}</b><span>дней с отметками</span></div><div><b>${tracked?Math.round(closed/tracked*100)+'%':'—'}</b><span>доля закрытых</span></div><div><b>${bm?MONF[bm.i]:'—'}</b><span>лучший месяц</span></div></div>
-   <div class="small mut" style="margin-top:14px">Каждая клетка — один день. Закрытый день — выполнено 80% дел и больше. Тап по клетке открывает этот день.</div></div></div>`},
+   <div class="ym-big"><b>${sv==null?'—':Math.round(sv*100)+'%'}</b><span>${MONF[sel].toLowerCase()}</span></div>
+   <svg class="ym-s" viewBox="0 0 330 160">${cols}</svg>
+   <button class="btn gh w" style="margin-top:12px" onclick="${opn}">Открыть месяц</button></div>
+   <div class="card"><div class="kg ykg" style="margin-top:0"><div><b>${closed}</b><span>закрытых дней</span></div><div><b>${tracked}</b><span>дней с отметками</span></div><div><b>${tracked?Math.round(closed/tracked*100)+'%':'—'}</b><span>доля закрытых</span></div><div><b>${bm&&mode!=='mood'?MONF[bm.i]:'—'}</b><span>лучший месяц</span></div></div></div></div>`},
 pvInsights(compact){const td=today(),rng=this._irng||30,scope=this._iscope||'all';
   let series=[];for(let i=rng-1;i>=0;i--){const d=add(td,-i);series.push({d,p:this.progDay(d,scope)})}series=this.trimLead(series,2);
   const v=series.map(x=>x.p).filter(x=>x!=null),avg=v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length*100):null;
@@ -4794,7 +4796,7 @@ methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17
 lang(){return ((this.S.pref||{}).lang)||'ru'},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict)return;try{const r=await fetch('i18n-en.json?v=167');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}},
+async loadDict(){if(this._dict)return;try{const r=await fetch('i18n-en.json?v=168');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;const D=this._dict||I18N_BASE;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
