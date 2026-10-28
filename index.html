@@ -2062,6 +2062,20 @@ body.dw #app,body.dw #nav,body.dw #snav,body.dw #sheet{visibility:hidden}
 .ib-t{flex:1;min-width:0;display:flex;flex-direction:column}.ib-t b{font-size:14.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ib-t em{font-style:normal;font-size:12.5px;color:#8E8A98;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ib-r time{font-size:12px;color:#8E8A98;flex:none}
 .ib-e{display:flex;flex-direction:column;align-items:center;text-align:center;padding:90px 32px 0}.ib-e span{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.05);color:#8E8A98}.ib-e span svg{width:28px;height:28px}.ib-e b{margin-top:16px;font-size:17px;color:#F4F1EC}.ib-e p{margin:8px 0 0;font-size:14px;line-height:1.5;color:#8E8A98;text-wrap:balance}
+
+/* Прогресс: колонки и круги в палитре WIKKI (согласовано) */
+.pex{gap:6px!important}
+.pex-b b{display:none!important}
+.pex-b span{max-width:20px;margin:0 auto;height:118px!important;border-radius:10px!important;background:rgba(255,255,255,.06)!important}
+.pex-b span s{display:none!important}
+.pex-b span i,.pex-b span i.ok{border-radius:10px!important;background:linear-gradient(0deg,#5B2FBE,#9B6FE8 60%,#C4A4FF)!important}
+.pex-b.cur span{outline:1.5px solid rgba(196,164,255,.75)!important;outline-offset:0}
+.pex-b em{visibility:hidden;font-size:11.5px!important}.pex-b:first-child em,.pex-b.cur em{visibility:visible}
+.pex-bar i,.pcr-b i{background:linear-gradient(90deg,#5B2FBE,#9B6FE8,#C4A4FF)!important}
+.pfb{gap:8px!important}.pfb span{max-width:22px;margin:0 auto;height:78px!important;border-radius:11px!important;background:rgba(255,255,255,.06)!important}
+.pfb span i{border-radius:11px!important;background:linear-gradient(0deg,#5B2FBE,#9B6FE8 60%,#C4A4FF)!important}
+.wws{gap:5px!important}.wws i{border-radius:50%!important;color:#fff!important;background:rgba(155,111,232,var(--a))!important;box-shadow:inset 0 0 0 1px rgba(196,164,255,.18)!important;font-size:11px!important}
+.wws>div:has(i[style*="--a:0"]) i{background:rgba(255,255,255,.05)!important;box-shadow:none!important}
 </style>
 </head>
 <body>
