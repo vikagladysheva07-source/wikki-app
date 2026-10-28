@@ -2205,7 +2205,7 @@ norm(s){const f=this.fresh();for(const k in f)if(s[k]==null)s[k]=f[k];if(!s.pref
 load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.sprint)return this.norm(s)}catch(e){}return this.fresh()},
 save(){this._tix=Object.fromEntries(this.S.tactics.map(t=>[t.id,t]));this.S.t=Date.now();this.trackMarks();try{localStorage.setItem(KEY,JSON.stringify(this.S))}catch(e){}
   if(this.user){clearTimeout(this._pt);this._pt=setTimeout(()=>this.push(),1200)}},
-toast(m,undo){const t=$('toast');t.innerHTML=esc(m)+(undo?` <button class="tundo" onclick="APP.undo()">Отменить</button>`:'');this.tr(t);t.classList.toggle('act',!!undo);t.classList.add('on');clearTimeout(this._tt);this._tt=setTimeout(()=>t.classList.remove('on'),undo?4500:2000)},
+toast(m,undo,act){const t=$('toast');t.innerHTML=esc(m)+(undo?` <button class="tundo" onclick="APP.undo()">Отменить</button>`:'')+(act?` <button class="tundo" onclick="${act[1]}">${act[0]}</button>`:'');this.tr(t);t.classList.toggle('act',!!(undo||act));t.classList.add('on');clearTimeout(this._tt);this._tt=setTimeout(()=>t.classList.remove('on'),act?6000:undo?4500:2000)},
 snap(){const S=this.S;this._snap={log:JSON.stringify(S.log),hlog:JSON.stringify(S.hlog),skip:JSON.stringify(S.skip||{}),tasks:JSON.stringify(S.tasks||[]),lt:JSON.stringify(S.lt||{})}},
 undo(){const z=this._snap;if(!z)return;const S=this.S;S.log=JSON.parse(z.log);S.hlog=JSON.parse(z.hlog);S.skip=JSON.parse(z.skip);S.tasks=JSON.parse(z.tasks);S.lt=JSON.parse(z.lt);
   for(const k in S.lt)S.lt[k]=Date.now();this._snap=null;this.save();this.render();this.toast('Отменено')},
@@ -2867,11 +2867,8 @@ rwOpen(id){const g=this.S.rw||{},R=this.rwCalc(),r=this.rwAll().find(x=>x.id===i
   <div class="rwo"><div class="rwo-m ${on?'on':''}">${this.medal(id,on,150,pr)}</div><span class="rwo-r" style="--c:${RA[1]}">${RA[0]}</span><b>${r.n}</b><p>${r.t}</p>
   <div class="rwo-s">${on?`Получена ${fd(on)}`:need}</div>
   ${on&&r.id==='d365'?`<a class="btn pr w" href="https://t.me/wikki_shark" target="_blank" rel="noopener">Получить значок</a>`:on?`<button class="btn gh w" onclick="APP.close();APP.shareStudio('hero')">${SI.share} Поделиться в сторис</button>`:''}</div>`)},
-rwCelebrate(L){this._celeb=today();const top=[...L].sort((a,b)=>(this.RWR[b.id]||1)-(this.RWR[a.id]||1))[0],RA=this.RAR[this.RWR[top.id]||1];
-  this.open(`<div class="rwc"><div class="rwc-g"><div class="rwc-sh">${this.medal(top.id,1,150)}</div></div><span class="rwo-r" style="--c:${RA[1]}">${RA[0]}</span>
-   <div class="lbl" style="text-align:center;margin-top:10px">${L.length>1?'Новые награды · '+L.length:'Новая награда'}</div>
-   <div class="rwc-l">${L.map(r=>`<div><b>${r.n}</b><em>${r.t}</em></div>`).join('')}</div>
-   <button class="btn pr w" onclick="APP.close();APP._ct='rewards';APP.go('profile')">Открыть коллекцию</button></div>`);this.buzz([20,40,20,60])},
+rwCelebrate(L){this._celeb=today();const top=[...L].sort((a,b)=>(this.RWR[b.id]||1)-(this.RWR[a.id]||1))[0];
+  this.toast(L.length>1?'Новые награды · '+L.length:'Новая награда · '+top.n,false,['Смотреть',"APP._ct='rewards';APP.go('profile')"]);this.buzz([20,40,20,60])},
 cabRewards(){this.chCheck();const R=this.rwCalc(),g=this.S.rw||{},m=R.n*this.M_DAY,Z=this.depthZone(m),nx=this.RW.find(r=>!g[r.id]),all=this.rwAll().filter(r=>r.grp!=='fr'),got=all.filter(r=>g[r.id]).length,title=this.rwTitle();
   const nxm=nx?nx.d*this.M_DAY:m,prevD=([...this.RW].reverse().find(r=>g[r.id])||{d:0}).d*this.M_DAY,pct=nx?Math.max(3,Math.round((m-prevD)/(nxm-prevD)*100)):100;
   const dark=Math.min(1,m/4000),cpct=Math.round(got/all.length*100);
@@ -4798,7 +4795,7 @@ methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17
 lang(){return ((this.S.pref||{}).lang)||'ru'},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=168');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=169');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
