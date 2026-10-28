@@ -2488,7 +2488,7 @@ pxFilterSheet(){const groups=[['k','Дела'],['h','Привычки']].map(([k
 /* вкладка «Планы» и компактный блок на дашборде */
 vPlans(){const v=['list','week','month','spheres'].includes(this._plv)?this._plv:'day';
   const seg=`<div class="pseg">${[['day','День'],['week','Неделя'],['month','Месяц'],['spheres','Сферы']].map(([k,l])=>`<button class="${v===k?'on':''}" onclick="APP._plv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
-  const hint=matchMedia('(pointer:coarse)').matches&&!(this.S.pref||{}).swh?`<div class="swhint"><span>Свайп вправо — готово, влево — на завтра</span><button onclick="APP.setPref('swh',1)" aria-label="Скрыть">${I.x}</button></div>`:'';
+  const hint='';
   if(v==='list')return `<div class="h1">Планы</div>${seg}__S1____S2__`+hint+this.vPlanList();
   if(v==='week')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vPlanWeek();
   if(v==='month')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vPlanMonth();
