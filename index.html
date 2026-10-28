@@ -1986,6 +1986,15 @@ div.dsec-t{display:flex;align-items:baseline;gap:10px;margin:14px 4px 10px;paddi
 .sq-n button{height:52px;border-radius:14px;font-size:17px;font-weight:600;color:#E9E5DE;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
 .sq-n button.on{background:rgba(155,123,255,.22);border-color:rgba(176,148,255,.7);color:#fff}
 .sq-e{display:flex;justify-content:space-between;margin-top:10px;font-size:12px;color:#8E8A9C}
+
+/* без висячих слов на телефоне */
+.sq-t{padding:12px 10px!important;gap:8px!important}.sq-t span{width:26px!important;height:26px!important;border-radius:9px!important}.sq-t span svg{width:16px!important;height:16px!important}
+.sq-t b{font-size:12.5px!important;text-wrap:balance}
+.sv-m b,.sq-in p,.sq-h b,.sec b,.h2,.gx-h b,.dc-d b,.dsec b,.hx-rt b,.card b{text-wrap:balance}
+.sq-in p,.small,.mut,.sv-m em{text-wrap:pretty}
+
+.sq-t{flex-direction:column;align-items:flex-start!important;gap:10px!important;padding:14px 12px!important}
+.sq-t b{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -2208,7 +2217,7 @@ sqSet(v){const q=this._sq;q.lv[q.sel[q.i]]=v;if(q.i<q.sel.length-1){q.i++;this.s
 sqDone(){const q=this._sq,cur=this.areasGet();this.S.areas=q.sel.map(k=>cur.find(x=>x.k===k)||{k,n:(q.opts.find(o=>o.k===k)||{}).n||k});
   const lv={};q.sel.forEach(k=>lv[k]=q.lv[k]||5);this.S.areaLvl=lv;this.S.areaQ=Date.now();this.save();this.close();this._plv='spheres';this.render()},
 sqRender(){const q=this._sq;
-  if(q.st==='pick')return this.open(`<div class="row"><div class="h2 sp" style="font-size:18px">Какие сферы есть в твоей жизни?</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="small mut" style="margin:6px 0 14px">Отметь те, которые хочешь развивать. От 3 до 8.</div>
+  if(q.st==='pick')return this.open(`<div class="row"><div class="h2 sp" style="font-size:18px">Какие сферы есть в твоей жизни?</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="small mut" style="margin:6px 0 14px">Отметь нужные. От 3 до 8.</div>
    <div class="sq-g">${q.opts.map(o=>`<button class="sq-t ${q.sel.includes(o.k)?'on':''}" onclick="APP.sqTog('${o.k}')"><span>${this.sqIco(o.k)}</span><b>${esc(o.n)}</b></button>`).join('')}</div>
    <button class="btn pr w" style="margin-top:16px" ${q.sel.length<3?'disabled':''} onclick="APP.sqNext()">Дальше</button>`);
   const k=q.sel[q.i],o=q.opts.find(x=>x.k===k)||{n:k},v=q.lv[k];
@@ -3431,7 +3440,7 @@ render(){const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_
   else if(this.sub==='deals')body=this.vDeals();
   else if(['program','progress'].includes(this.normTab(this.tab))&&!this.paid()){this.tab=this.normTab(this.tab);body=this.vPaywall(this.tab)}
   else{this.tab=this.normTab(this.tab);body={profile:this.vProfile,home:this.vHome,plans:this.vPlans,more:this.vMore,program:this.vProgram,progress:this.vProgress,tracker:this.vTracker,journal:this.vJournal,me:this.vMe}[this.tab].call(this)}
-  $('app').innerHTML=this.thx(this.top()+this.dash(body));if(this._ptc)this.ptAuto();this.tr($('app'));
+  $('app').innerHTML=this.thx(this.top()+this.dash(body));if(this._ptc)this.ptAuto();this.tr($('app'));this.fit($('app'));
   const simple=this.simple();
   const tabs=simple?[['home','Сегодня',I.dash],['plans','Планы',I.plan],['tracker','Привычки',I.habit],['me','Настройки',I.gear]]:[['home','Сегодня',I.dash],['plans','Планы',I.plan],['program','Программа',I.goal],['progress','Прогресс',I.chart],['tracker','Привычки',I.habit],['journal','Дневник',I.diary],['me','Настройки',I.gear]];
   const mtabs=simple?tabs:[['home','Сегодня',MI.home],['plans','Планы',MI.plan],['+','',''],['tracker','Привычки',MI.hab],['more','Профиль',MI.user]],inMore=['more','profile','me'].includes(this.tab),fromHome=['journal','program','progress'].includes(this.tab);
@@ -4308,7 +4317,8 @@ setMetric(gid,mid,v){const m=this.goal(gid).metrics.find(x=>x.id===mid);m.cur=+S
 moveGoal(i){const g=this.S.goals;[g[i-1],g[i]]=[g[i],g[i-1]];this.save();this.render()},
 tDesc(t){if(t.dfrom&&t.dto)return `каждый день, ${fd(t.dfrom)} — ${fd(t.dto)}`;let x={check:`${t.target} дн. из 7`,num:`${t.per} ${t.unit||''} в день, ${t.days} дн./нед.`,count:`${t.target} раз в неделю`,ms:`веха до ${t.deadline?fd(t.deadline):'—'}`}[t.type];
   if(t.total)x+=` · итог ${t.total}`;if(t.tod)x+=' · '+this.TOD[t.tod].toLowerCase();if(t.mins)x+=` · таймер ${t.mins} мин`;if((+t.from||1)>1||+t.to)x+=` · недели ${t.from||1}–${t.to||this.W}`;if(t.active===false)x+=' · на паузе';return x},
-open(html){$('sheet').innerHTML=this.thx(html);this.tr($('sheet'));$('modal').classList.add('on')},
+open(html){$('sheet').innerHTML=this.thx(html);this.tr($('sheet'));$('modal').classList.add('on');this.fit($('sheet'))},
+fit(root){try{root.querySelectorAll('.sq-t b,.sv-m>b,.sq-in>b,.sq-h b,.hx-rt>b,.dsec>b,.dc-d>b').forEach(el=>{el.style.fontSize='';if(!el.offsetParent)return;const cs=getComputedStyle(el);let fs=parseFloat(cs.fontSize);const lh=parseFloat(cs.lineHeight)||fs*1.3,min=Math.max(10.5,fs*.72);while((el.scrollHeight>lh*1.45||el.scrollWidth>el.clientWidth+1)&&fs>min){fs-=.5;el.style.fontSize=fs+'px'}})}catch(e){}},
 close(){$('modal').classList.remove('on');this._hcal=0},
 gDone(g){if(g.done)return true;const ms=g.metrics||[];if(!ms.length)return false;return ms.every(m=>{const v=this.metricVal(m),s=+m.start||0,t=+m.target||0;return t>s?v>=t:t<s?v<=t:v===t})},
 gProg(g){const ms=g.metrics||[];if(g.done)return 1;if(ms.length){const ps=ms.map(m=>{const v=this.metricVal(m),s=+m.start||0,t=+m.target||0;return t===s?(v===t?1:0):Math.max(0,Math.min((v-s)/(t-s),1))});return ps.reduce((a,b)=>a+b,0)/ps.length}const a=this.avg(g.id);return a==null?0:a/100},
@@ -4742,7 +4752,7 @@ methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17
 lang(){return ((this.S.pref||{}).lang)||'ru'},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict)return;try{const r=await fetch('i18n-en.json?v=164');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}},
+async loadDict(){if(this._dict)return;try{const r=await fetch('i18n-en.json?v=165');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;const D=this._dict||I18N_BASE;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
