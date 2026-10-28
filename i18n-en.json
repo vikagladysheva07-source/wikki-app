@@ -2240,5 +2240,21 @@
 "выполнено": "done",
 "Прошлый день": "Previous day",
 "Следующий день": "Next day",
-"Твой день": "Your day"
+"Твой день": "Your day",
+"Оцени свою жизнь по сферам": "Rate your life by area",
+"Ответь на несколько вопросов, и мы построим колесо баланса. Дальше оно будет меняться по твоим привычкам и делам.": "Answer a few questions and we'll build your balance wheel. After that it changes with your habits and tasks.",
+"Какие сферы есть в твоей жизни?": "Which areas are part of your life?",
+"Отметь те, которые хочешь развивать. От 3 до 8.": "Pick the ones you want to develop. From 3 to 8.",
+"Как у тебя сейчас с этим?": "How is it going right now?",
+"совсем плохо": "very poor",
+"отлично": "excellent",
+"Оценить сферы заново": "Rate areas again",
+"сон, энергия, спорт, самочувствие": "sleep, energy, sport, wellbeing",
+"работа, дело, рост, результаты": "work, business, growth, results",
+"доходы, накопления, спокойствие с деньгами": "income, savings, peace of mind about money",
+"семья, друзья, общение": "family, friends, social life",
+"отношения с партнёром, близость": "relationship with a partner, closeness",
+"обучение, привычки, развитие себя": "learning, habits, self-development",
+"отдых, хобби, удовольствие": "rest, hobbies, joy",
+"порядок, быт, среда вокруг": "order, home life, surroundings"
 }

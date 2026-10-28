@@ -1,6 +1,6 @@
 // VOLYO · офлайн-кэш. Страница — мгновенно из кэша, свежая версия в фоне; остальное — кэш первым.
-const V='tw-v177';
-const CORE=['./','./index.html','./manifest.webmanifest','./icon-180.png','./icon-512.png','./ocean.jpg','./shark.svg','./favicon.png','./icon-192.png','./logo-volyo.png','./i18n-en.json?v=163'];
+const V='tw-v178';
+const CORE=['./','./index.html','./manifest.webmanifest','./icon-180.png','./icon-512.png','./ocean.jpg','./shark.svg','./favicon.png','./icon-192.png','./logo-volyo.png','./i18n-en.json?v=164'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
