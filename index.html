@@ -2504,7 +2504,7 @@ vPlanWeek(){const td=today(),off=this._plw||0,m0=add(this.monday(td),off*7),WD7=
   const avg=sn?Math.round(sp/sn*100):0,dn=T.filter(x=>x.done&&days.includes(x.date)).length,all=T.filter(x=>days.includes(x.date)).length;
   const lab=d=>{const x=pd(d);return x.getDate()+' '+['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'][x.getMonth()]};
   let h=`<div class="pw-nav"><button class="tp-c" onclick="APP._plw=${off-1};APP.render()" aria-label="Прошлая неделя"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><div class="sp"><b>${off===0?'Эта неделя':off===1?'Следующая неделя':off===-1?'Прошлая неделя':'Неделя'}</b><em>${lab(days[0])} — ${lab(days[6])}</em></div><button class="tp-c" onclick="APP._plw=${off+1};APP.render()" aria-label="Следующая неделя"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
-   <div class="pw-sum"><div><b>${avg}%</b><em>выполнение</em></div><div><b>${dn}/${all}</b><em>дел закрыто</em></div><div><b>${days.filter(d=>d<=td&&this.dayOk&&this.dayOk(d)).length}/7</b><em>хороших дней</em></div></div>${this.pcWeek(days,td,m0)}`;
+   ${this.pcWeek(days,td,m0)}`;
   days.forEach((d,i)=>{const L=T.filter(x=>x.date===d).sort((a,b)=>(!!a.done-!!b.done)||(a.tm||'99').localeCompare(b.tm||'99')),a=d<=td?this.dayAll(d):null,pct=a&&a.n?Math.round(a.p*100):null;
     h+=`<div class="pw-day ${d===td?'td':''} ${d<td?'past':''}"><div class="pw-dh"><button class="pw-dt" onclick="APP.plOpenDay('${d}')"><b>${WD7[i]}</b><em>${lab(d)}${pct!=null?' · '+pct+'%':''}</em></button>${pct!=null?`<span class="pw-bar"><i style="width:${pct}%"></i></span>`:'<span class="sp"></span>'}<button class="pw-add" onclick="APP.plAddOn('${d}','${WD7[i].toLowerCase()}')" aria-label="Добавить дело">${MI.plus}</button></div>
      ${L.length?`<div class="pw-l">${L.map(x=>this.plRow(x,false)).join('')}</div>`:''}</div>`});
@@ -2542,7 +2542,7 @@ kFlag(n,sz){return `<svg width="${sz||14}" height="${sz||14}" viewBox="0 0 24 24
 kKeep(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x||!$('kT'))return x;x.title=$('kT').value.trim()||x.title;x.date=$('kD').value||x.date;x.tm=$('kM').value||'';if($('kN'))x.note=$('kN').value;if($('kG'))x.tags=$('kG').value.split(/[,\s]+/).map(v=>v.replace(/^#/,'').trim()).filter(Boolean).slice(0,8);x.t=Date.now();this.save();return x},
 kArea(id,k){const x=this.kKeep(id);if(!x)return;if(k)x.area=k;else delete x.area;this.save();this.taskEditR(id)},
 kPr(id,n){const x=this.kKeep(id);if(!x)return;x.pr=n;this.save();this.taskEditR(id)},
-ksbH(x){const sb=x.sub||[];if(!sb.length&&!x._ksa)return '';return `<div class="ksb">${sb.slice(0,8).map(z=>`<button class="ksb-r ${z.d?'on':''}" onclick="event.stopPropagation();APP.kSubT('${x.id}','${z.id}')"><i></i><span>${esc(z.t)}</span></button>`).join('')}${sb.length>8?`<span class="ksb-m">ещё ${sb.length-8}</span>`:''}<button class="ksb-a" onclick="event.stopPropagation();APP.kSubQ('${x.id}')">+ подзадача</button></div>`},
+ksbH(x){const sb=x.sub||[];if(!sb.length&&!x._ksa)return '';return `<div class="ksb">${sb.slice(0,8).map(z=>`<button class="ksb-r ${z.d?'on':''}" onclick="event.stopPropagation();APP.kSubT('${x.id}','${z.id}')"><i></i><span>${esc(z.t)}</span></button>`).join('')}${sb.length>8?`<span class="ksb-m">ещё ${sb.length-8}</span>`:''}</div>`},
 kSubT(id,sid){const x=(this.S.tasks||[]).find(t=>t.id===id),s=x&&(x.sub||[]).find(z=>z.id===sid);if(!s)return;s.d=s.d?0:1;if(s.d)this.buzz(6);x.t=Date.now();this.save();this.render()},
 kSubQ(id){this.ask('Новая подзадача','',v=>{v=(v||'').trim();if(!v)return;const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;x.sub=x.sub||[];x.sub.push({id:'s'+uid(),t:v.slice(0,120),d:0});x.t=Date.now();this.save();this.render()})},
 kSubAdd(id,v){v=(v||'').trim();if(!v)return;const x=this.kKeep(id);x.sub=x.sub||[];x.sub.push({id:'s'+uid(),t:v,d:0});this.save();this.taskEditR(id);setTimeout(()=>{const e=$('kSn');e&&e.focus()},40)},
@@ -2866,7 +2866,6 @@ vJournal(){const jseg=`<div class="pseg">${[['day','День'],['pages','Стр�
     <div class="jx-card jx-k">
      <label><span>${I.star}Победа дня</span><input value="${esc(c.win||'')}" placeholder="Что сегодня получилось" onchange="APP.jSet('${d}','win',this.value.trim(),1)"></label>
      <label><span>${I.target||I.goal}Главное на завтра</span><input value="${esc(c.top||'')}" placeholder="Одно дело на завтра" onchange="APP.topSet('${d}',this.value)"></label>
-     <p class="jx-h">Это дело появится в Планах на следующий день</p>
     </div>
    </div>
    <div class="jx-side"><div class="jx-sh"><b>Прошлые записи</b>${hist.length?`<span>${hist.length}</span>`:''}</div>
@@ -4021,11 +4020,11 @@ homeHero(dpT){const td=today(),P=this.S.profile||{},nm=(P.name||'').split(' ')[0
   const TOD={m:'Утро',d:'День',e:'Вечер'},ord={m:0,d:1,e:2,'':3};
   let H=[],K=[];try{H=this.S.habits.filter(x=>!x.archived&&this.hSched(x,td))}catch(e){}try{K=(this.S.tasks||[]).filter(x=>!x.drop&&x.date===td&&!(this.S.del||[]).includes(x.id))}catch(e){}
   const rows=[...H.map(h=>{const on=this.hOn(h,td),v=this.hVal?this.hVal(h,td):0,num=h.kind==='time'||h.kind==='num';
-      return {done:on,o:ord[h.tod||'']??3,html:`<div class="hx-row ${on?'done':''}"><button class="hx-ck" onclick="APP.hToggle('${h.id}','${td}');APP.render()" aria-label="Отметить">${on?I.ok:''}</button><button class="hx-rt" onclick="APP.go('tracker')"><b>${esc(h.title)}</b><em>${[TOD[h.tod]||'',num?`${+v||0} из ${h.target||''} ${h.unit||''}`.trim():''].filter(Boolean).join(' · ')||'Привычка'}</em></button>${num&&!on?`<button class="hx-plus" onclick="APP.hInc('${h.id}','${td}',${+h.step||1});APP.render()">+${+h.step||1}</button>`:''}</div>`}}),
-    ...K.map(x=>({done:!!x.done,o:x.tm?-1:1.5,tm:x.tm||'',html:`<div class="hx-row ${x.done?'done':''}"><button class="hx-ck" onclick="APP.taskToggle('${x.id}');APP.render()" aria-label="Отметить">${x.done?I.ok:''}</button><button class="hx-rt" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b><em>${x.tm?x.tm+' · дело':'Дело'}</em></button>${x.tm&&!x.done?`<span class="hx-tag">${x.tm}</span>`:''}</div>`}))]
+      return {done:on,o:ord[h.tod||'']??3,html:`<div class="hx-row ${on?'done':''}"><button class="hx-ck" onclick="APP.hToggle('${h.id}','${td}');APP.render()" aria-label="Отметить">${on?I.ok:''}</button><button class="hx-rt" onclick="APP.go('tracker')"><b>${esc(h.title)}</b>${num?`<em>${(+v||0)+' из '+(h.target||'')+' '+(h.unit||'')}</em>`:''}</button>${num&&!on?`<button class="hx-plus" onclick="APP.hInc('${h.id}','${td}',${+h.step||1});APP.render()">+${+h.step||1}</button>`:''}</div>`}}),
+    ...K.map(x=>({done:!!x.done,o:x.tm?-1:1.5,tm:x.tm||'',html:`<div class="hx-row ${x.done?'done':''}"><button class="hx-ck" onclick="APP.taskToggle('${x.id}');APP.render()" aria-label="Отметить">${x.done?I.ok:''}</button><button class="hx-rt" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b></button>${x.tm&&!x.done?`<span class="hx-tag">${x.tm}</span>`:''}</div>`}))]
     .sort((a,b)=>(a.done-b.done)||(a.o-b.o)||(a.tm||'').localeCompare(b.tm||''));
   const nD=rows.filter(r=>r.done).length;
-  const list=rows.length?`<div class="hx-sec"><b>На сегодня <i>${nD} из ${rows.length}</i></b><button onclick="APP.go('plans')">Все дела${MI.chev}</button></div><div class="hx-list">${rows.slice(0,5).map(r=>r.html).join('')}</div>`
+  const list=rows.length?`<div class="hx-sec"><b>На сегодня</b><button onclick="APP.go('plans')">Все дела${MI.chev}</button></div><div class="hx-list">${rows.slice(0,5).map(r=>r.html).join('')}</div>`
     :`<div class="hx-sec"><b>На сегодня</b></div><button class="hx-empty" onclick="APP.qMenu()">Пока пусто. Добавь первую привычку или дело ${MI.chev}</button>`;
   // дашборд
   const pct=dpT.n?Math.round(dpT.p*100):0,C=2*Math.PI*27;
@@ -4037,8 +4036,8 @@ homeHero(dpT){const td=today(),P=this.S.profile||{},nm=(P.name||'').split(' ')[0
   const dash=`<div class="hx-sec"><b>Прогресс</b><button onclick="APP.go('home');APP._stats=1;APP.render()">Подробнее${MI.chev}</button></div>
    <div class="hx-dash"><div class="hx-dt"><div class="hx-kpi"><div><b>${stk}</b><em>${this.pl(stk,'день','дня','дней')} серия</em></div><div><b>${wok}/7</b><em>неделя</em></div><div><b>${mavg}%</b><em>за месяц</em></div></div></div>
    <div class="hx-week">${bars}</div></div>`;
-  const ttl=!dpT.n?'Новый день':closed?'День закрыт':`${dpT.done} из ${dpT.n}`,sub=!dpT.n?'Добавь первую привычку':closed?'Всё отмечено. Запиши итоги':'отмечено сегодня';
-  return `<div class="hmx hmz"><div class="hm-ph"></div><div class="hm-in hz"><div class="hz-l"><div class="hm-hi">Привет${nm?', '+esc(nm):''}</div><div class="hz-t">${ttl}</div><div class="hz-s">${sub}</div></div>
+  const ttl=!dpT.n?'Новый день':closed?'День закрыт':`${dpT.done} из ${dpT.n}`,sub=!dpT.n?'Добавь первую привычку':closed?'Всё отмечено. Запиши итоги':'';
+  return `<div class="hmx hmz"><div class="hm-ph"></div><div class="hm-in hz"><div class="hz-l"><div class="hm-hi">Привет${nm?', '+esc(nm):''}</div><div class="hz-t">${ttl}</div>${sub?`<div class="hz-s">${sub}</div>`:''}</div>
    <div class="hx-ring"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" stroke="rgba(255,255,255,.12)" stroke-width="5" fill="none"/><circle cx="32" cy="32" r="27" stroke="url(#hxg)" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="${(C*pct/100).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 32 32)"/><defs><linearGradient id="hxg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D2BEFF"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs></svg><b>${pct}%</b></div></div>
    <button class="hx-cta" onclick="${cta[1]}">${MI.cal}<span>${cta[0]}</span>${MI.chev}</button></div>
    <div class="hx-tl">${tl.map(([l,ic,go])=>`<button onclick="${go}">${ic}<b>${l}</b></button>`).join('')}</div>
