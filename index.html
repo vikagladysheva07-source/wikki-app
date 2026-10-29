@@ -2720,7 +2720,7 @@ vPlans(){const v=['list','week','month','spheres'].includes(this._plv)?this._plv
   if(v==='matrix')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vMatrix();
   this._noBoard=true;let t=this.vToday();this._noBoard=false;let mp='';try{mp=this.day===today()?this.mpH():''}catch(e){}return `<div class="h1">Планы</div>${seg}__S1____S2__`+mp+hint+this.stripV(t)},
 plOpenDay(d){this.day=d;this._plv='day';window.scrollTo(0,0);this.render()},
-plAddOn(d,lab){this.ask('Дело на '+lab,'',v=>{if(v){this.taskAdd(v,d);this.render()}})},
+plAddOn(d,lab){this.taskNew(d)},
 vPlanWeek(){const td=today(),off=this._plw||0,m0=add(this.monday(td),off*7),WD7=['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'];
   const T=(this.S.tasks||[]).filter(x=>!x.drop&&!(this.S.del||[]).includes(x.id));
   const days=[0,1,2,3,4,5,6].map(i=>add(m0,i));
@@ -3237,7 +3237,7 @@ ctxH(){const td=today(),hr=this._hr??new Date().getHours(),c=((this.S.checkin||{
       <input class="cld-i" placeholder="Главное дело на завтра" value="${esc(c.top||'')}" onchange="APP.topSet('${td}',this.value)"></div>`}
   return ''},
 /* быстрые действия */
-qMenu(){const it=[['Дело на сегодня','list',"APP.close();APP.ask('Новое дело на сегодня','',v=>{APP.taskAdd(v);APP.render()})"],['Привычка','check',"APP.close();APP.editH()"],['Победа дня','star',"APP.close();APP.winAdd()"],['30 минут фокуса','target',"APP.close();APP.focusAdd(30)"],['Запись в дневник','pen',"APP.close();APP._jd=today();APP.go('journal')"]];
+qMenu(){const it=[['Дело на сегодня','list',"APP.close();APP.taskNew(today())"],['Привычка','check',"APP.close();APP.editH()"],['Победа дня','star',"APP.close();APP.winAdd()"],['30 минут фокуса','target',"APP.close();APP.focusAdd(30)"],['Запись в дневник','pen',"APP.close();APP._jd=today();APP.go('journal')"]];
   this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Быстро добавить</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="qml">${it.map(([t,ic,a])=>`<button onclick="${a}"><span>${SI[ic]||hIco(ic)}</span>${t}</button>`).join('')}</div>`)},
 /* партнёр по ответственности */
 partnerW(){const head=`<div class="dz-ch"><span class="dz-ti">${I.chat||''}Партнёр</span></div>`;
@@ -3734,7 +3734,7 @@ tasksBlock(tk){const d=this.day;
   let h=`<div class="todh"><span class="lbl">Задачи</span><span class="ln"></span></div><div class="tgrid">`;
   tk.forEach(x=>{const over=x.date<d;h+=`<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${x.pr||0}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${this.nmE('k',x,1)}${over?`<div class="meta">перенесено с ${fd(x.date)}</div>`:''}</div></div>`});
   h+='</div>';
-  h+=`<form class="row" style="margin:6px 0 2px" onsubmit="event.preventDefault();APP.taskAdd(this.q.value,'${d}');this.q.value=''"><input name="q" placeholder="Новая задача на этот день" autocomplete="off" style="flex:1"><button class="ic" type="submit" aria-label="Добавить">${I.plus}</button></form>`;
+  h+=`<button class="dsec-0" style="margin:6px 0 2px" onclick="APP.taskNew('${d}')">+ Новая задача на этот день</button>`;
   return h},
 taskNew(d){const dd=d||this.day||today();this._tn={title:'',date:dd,tm:'',rep:'',pr:0,sub:[],area:'',panel:'',cal:dd.slice(0,7)};this.ntRender();setTimeout(()=>{const e=$('nT');e&&e.focus()},150)},
 ntKeep(){const q=this._tn;if(q&&$('nT'))q.title=$('nT').value},
@@ -4937,7 +4937,7 @@ methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17
 lang(){return ((this.S.pref||{}).lang)||'ru'},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=175');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=176');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
