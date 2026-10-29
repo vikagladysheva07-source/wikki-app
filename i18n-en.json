@@ -2324,5 +2324,10 @@
 "Что нужно сделать": "What needs to be done",
 "Другая дата": "Another date",
 "Добавить задачу": "Add task",
-"На этот день задач нет. Добавить?": "No tasks for this day. Add one?"
+"На этот день задач нет. Добавить?": "No tasks for this day. Add one?",
+"Что нужно сделать?": "What needs to be done?",
+"Сбросить": "Reset",
+"Каждый день": "Every day",
+"Отмена": "Cancel",
+"Готово": "Done"
 }

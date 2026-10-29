@@ -2087,6 +2087,30 @@ body.dw #app,body.dw #nav,body.dw #snav,body.dw #sheet{visibility:hidden}
 .nt-pr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:4px 0 10px}
 .nt-pr button{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 4px;border-radius:14px;font-size:12px;color:#B9B3C8;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
 .nt-pr button svg{color:var(--c)}.nt-pr button.on{color:#F4F1EC;background:rgba(155,123,255,.16);border-color:rgba(176,148,255,.55)}
+
+/* быстрое добавление задачи (как в TickTick) */
+.nt-in{display:block;width:100%;background:none!important;border:0!important;box-shadow:none!important;padding:6px 2px 14px!important;font-size:20px;font-weight:500;color:#F4F1EC}
+.nt-in::placeholder{color:#6E6A7C}
+.nt-pn{margin:0 0 12px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}.nt-pn .te-cl{margin:0}.nt-pn .kqd{margin:0}
+.nt-tb{display:flex;align-items:center;gap:6px}
+.nt-ch{display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:99px;font-size:14px;font-weight:600;color:#C4A4FF;background:rgba(155,111,232,.14);border:1px solid rgba(176,148,255,.35);flex:none;max-width:48%}.nt-ch svg{width:18px;height:18px;flex:none}.nt-ch span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nt-ib{position:relative;width:40px;height:40px;flex:none;border-radius:50%;display:grid;place-items:center;color:#9C9AA3}.nt-ib svg{width:20px;height:20px}.nt-ib.on{color:var(--c,#C4A4FF);background:rgba(255,255,255,.06)}
+.nt-ib i{position:absolute;top:2px;right:0;min-width:16px;height:16px;border-radius:8px;padding:0 4px;font-style:normal;font-size:10px;font-weight:700;line-height:16px;text-align:center;color:#fff;background:#7B4FE0}
+.nt-go{width:44px;height:44px;flex:none;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#9B6FE8,#5B2FBE);box-shadow:0 0 16px rgba(155,111,232,.45)}.nt-go svg{width:20px;height:20px}
+/* календарь выбора даты */
+.ct-h{display:flex;align-items:center}.ct-b{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#E9E5DE;background:rgba(255,255,255,.08)}.ct-b svg{width:20px;height:20px}.ct-b.ok{background:linear-gradient(135deg,#9B6FE8,#5B2FBE);color:#fff;box-shadow:0 0 16px rgba(155,111,232,.45)}
+.ct-q{display:flex;gap:8px;margin:14px 0 6px;flex-wrap:wrap}.ct-q button{font-size:13px;padding:7px 13px;border-radius:99px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#E9E5DE}.ct-q button.on{background:rgba(155,111,232,.2);border-color:rgba(176,148,255,.6);color:#fff}
+.ct-m{display:flex;align-items:center;justify-content:space-between;margin:14px 0 6px}.ct-m b{font-size:17px;font-weight:700;color:#F4F1EC}.ct-m button{width:36px;height:36px;display:grid;place-items:center;color:#9C9AA3}.ct-m svg{width:18px;height:18px}
+.ct-g{display:grid;grid-template-columns:repeat(7,1fr);row-gap:4px;text-align:center}.ct-g em{font-style:normal;font-size:12px;color:#6E6A7C;padding:8px 0}
+.ct-d{width:42px;height:42px;margin:0 auto;border-radius:50%;font-size:16px;font-weight:500;color:#E9E5DE}.ct-d.td{box-shadow:inset 0 0 0 1.5px rgba(196,164,255,.6)}.ct-d.on{background:linear-gradient(135deg,#9B6FE8,#5B2FBE);color:#fff;box-shadow:0 0 14px rgba(155,111,232,.5)}
+.ct-r{margin:14px 0 0;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);overflow:hidden}
+.ct-r label{display:flex;align-items:center;gap:12px;padding:14px 16px;position:relative}.ct-r label+label{border-top:1px solid rgba(255,255,255,.07)}
+.ct-i{width:24px;color:#8E8A98}.ct-i svg{width:22px;height:22px}.ct-r b{flex:1;font-size:15px;font-weight:500;color:#F4F1EC}
+.ct-r input,.ct-r select{width:auto!important;min-width:0;background:none!important;border:0!important;box-shadow:none!important;color:#C4A4FF!important;font:inherit;font-size:15px;font-weight:600;text-align:right;padding:0!important}
+.ct-c{display:block;width:100%;margin:12px 0 0;padding:14px;font-size:15px;font-weight:600;color:#F26D6D}
+
+.sheet input.nt-in:not([type=checkbox]){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:6px 2px 14px!important;font-size:20px}
+.sheet .ct-r input:not([type=checkbox]),.sheet .ct-r select{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;width:auto!important}
 </style>
 </head>
 <body>
@@ -3712,28 +3736,49 @@ tasksBlock(tk){const d=this.day;
   h+='</div>';
   h+=`<form class="row" style="margin:6px 0 2px" onsubmit="event.preventDefault();APP.taskAdd(this.q.value,'${d}');this.q.value=''"><input name="q" placeholder="Новая задача на этот день" autocomplete="off" style="flex:1"><button class="ic" type="submit" aria-label="Добавить">${I.plus}</button></form>`;
   return h},
-taskNew(d){this._tn={title:'',date:d||this.day||today(),tm:'',pr:0,sub:[],area:'',more:false};this.ntRender();setTimeout(()=>{const e=$('nT');e&&e.focus()},120)},
-ntKeep(){const q=this._tn;if(!q)return;if($('nT'))q.title=$('nT').value;if($('nD')&&$('nD').value)q.date=$('nD').value;if($('nM'))q.tm=$('nM').value||''},
-ntSet(k,v){this.ntKeep();this._tn[k]=v;this.ntRender();if(k==='date')setTimeout(()=>{},0)},
+taskNew(d){const dd=d||this.day||today();this._tn={title:'',date:dd,tm:'',rep:'',pr:0,sub:[],area:'',panel:'',cal:dd.slice(0,7)};this.ntRender();setTimeout(()=>{const e=$('nT');e&&e.focus()},150)},
+ntKeep(){const q=this._tn;if(q&&$('nT'))q.title=$('nT').value},
+ntSet(k,v){this.ntKeep();this._tn[k]=v;this.ntRender()},
+ntPick(k,v){this.ntKeep();const q=this._tn;q[k]=v;q.panel='';this.ntRender()},
+ntPanel(k){this.ntKeep();const q=this._tn;q.panel=q.panel===k?'':k;this.ntRender();if(q.panel==='sub')setTimeout(()=>{const e=$('nS');e&&e.focus()},60)},
 ntSub(v){v=(v||'').trim();if(!v)return;this.ntKeep();this._tn.sub.push(v);this.ntRender();setTimeout(()=>{const e=$('nS');e&&e.focus()},60)},
 ntSubDel(i){this.ntKeep();this._tn.sub.splice(i,1);this.ntRender()},
+ntDateTxt(){const q=this._tn,td=today();return (q.date===td?'Сегодня':q.date===add(td,1)?'Завтра':WD[pd(q.date).getDay()]+', '+fd(q.date))+(q.tm?' · '+q.tm:'')},
 ntSave(){this.ntKeep();const q=this._tn;if(!q.title.trim()){const e=$('nT');e&&e.focus();return}
   const P=this.parseTask(q.title,q.date),o={id:'k'+uid(),title:P.title,date:P.date,tm:q.tm||P.tm||'',done:'',t:Date.now()},pr=q.pr||P.pr||0;
-  if(pr)o.pr=pr;if(q.area)o.area=q.area;if(P.tags.length)o.tags=P.tags;if(P.rep)o.rep=P.rep;if(q.sub.length)o.sub=q.sub.map(t=>({id:'s'+uid(),t,d:0}));
+  if(pr)o.pr=pr;if(q.area)o.area=q.area;if(P.tags.length)o.tags=P.tags;
+  if(q.rep){o.rep={f:q.rep};if(q.rep==='w')o.rep.days=[pd(o.date).getDay()];if(q.rep==='m')o.rep.dom=+o.date.slice(8)}else if(P.rep)o.rep=P.rep;
+  if(q.sub.length)o.sub=q.sub.map(t=>({id:'s'+uid(),t,d:0}));
   this.S.tasks=this.S.tasks||[];this.S.tasks.push(o);this.track('task_add',null,'day');this.save();this.close();this.render();this.buzz(8);
   const tdd=today(),w=o.date===tdd?'сегодня':o.date===add(tdd,1)?'завтра':WD[pd(o.date).getDay()]+', '+fd(o.date);this.toast('Задача на '+w+(o.tm?' в '+o.tm:''))},
-ntRender(){const q=this._tn,td=today(),ch=[['Сегодня',td],['Завтра',add(td,1)],['Через неделю',add(td,7)]];
-  this.open(`<div class="te-h"><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button><span class="sp"></span><div class="h2" style="font-size:16px">Новая задача</div><span class="sp"></span><span style="width:40px"></span></div>
-  <input id="nT" class="te-t" value="${esc(q.title)}" placeholder="Что нужно сделать" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();const e=$('nS');e&&e.focus()}">
-  <label class="lbl">Дедлайн</label>
-  <div class="kqd">${ch.map(([l,v])=>`<button class="${q.date===v?'on':''}" onclick="APP.ntSet('date','${v}')">${l}</button>`).join('')}<label class="nt-d ${ch.some(c=>c[1]===q.date)?'':'on'}"><span>${ch.some(c=>c[1]===q.date)?'Другая дата':fd(q.date)}</span><input id="nD" type="date" value="${q.date}" onchange="APP.ntSet('date',this.value)"></label></div>
-  <div class="nt-t"><span>Время</span><input id="nM" class="k-tm" type="time" value="${q.tm}" onchange="APP.ntKeep()" aria-label="Время">${q.tm?`<button class="nt-x" onclick="APP.ntSet('tm','')" aria-label="Убрать время">${I.x}</button>`:''}</div>
-  <label class="lbl">Приоритет</label>
-  <div class="nt-pr">${[0,1,2,3].map(n=>`<button class="${q.pr===n?'on':''}" style="--c:${n?this.PRC[n]:'#9C9AA3'}" onclick="APP.ntSet('pr',${n})">${this.kFlag(n,16)}<span>${this.PRN[n].replace('Без приоритета','Нет')}</span></button>`).join('')}</div>
-  <label class="lbl">Подзадачи</label>
-  <div class="te-cl">${q.sub.map((t,i)=>`<div class="te-r"><span class="te-c"></span><input value="${esc(t)}" onchange="APP._tn.sub[${i}]=this.value.trim()||APP._tn.sub[${i}]"><button class="nt-x" onclick="APP.ntSubDel(${i})" aria-label="Убрать">${I.x}</button></div>`).join('')}
-   <div class="te-r te-new"><span class="te-c"></span><input id="nS" placeholder="Подзадача: напиши и нажми Enter" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();APP.ntSub(this.value)}"></div></div>
-  <button class="btn pr w" style="margin-top:18px" onclick="APP.ntSave()">Добавить задачу</button>`)},
+ntRender(){const q=this._tn,pr=q.pr,ar=this.areaList();let pn='';
+  if(q.panel==='pr')pn=`<div class="nt-pr">${[0,1,2,3].map(n=>`<button class="${pr===n?'on':''}" style="--c:${n?this.PRC[n]:'#9C9AA3'}" onclick="APP.ntPick('pr',${n})">${this.kFlag(n,16)}<span>${this.PRN[n].replace('Без приоритета','Нет')}</span></button>`).join('')}</div>`;
+  else if(q.panel==='sub')pn=`<div class="te-cl">${q.sub.map((t,i)=>`<div class="te-r"><span class="te-c"></span><input value="${esc(t)}" onchange="APP._tn.sub[${i}]=this.value.trim()||APP._tn.sub[${i}]"><button class="nt-x" onclick="APP.ntSubDel(${i})" aria-label="Убрать">${I.x}</button></div>`).join('')}<div class="te-r te-new"><span class="te-c"></span><input id="nS" placeholder="Подзадача: напиши и нажми Enter" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();APP.ntSub(this.value)}"></div></div>`;
+  else if(q.panel==='area')pn=`<div class="kqd">${[['','Нет'],...ar.map(a=>[a[0],a[1]])].map(([k,l])=>`<button class="${q.area===k?'on':''}" onclick="APP.ntPick('area','${k}')">${esc(l)}</button>`).join('')}</div>`;
+  this.open(`<input id="nT" class="nt-in" value="${esc(q.title)}" placeholder="Что нужно сделать?" autocomplete="off" enterkeyhint="done" onkeydown="if(event.key==='Enter'){event.preventDefault();APP.ntSave()}">
+  ${pn?`<div class="nt-pn">${pn}</div>`:''}
+  <div class="nt-tb"><button class="nt-ch on" onclick="APP.ntCal()">${I.week}<span>${esc(this.ntDateTxt())}</span></button>
+   <button class="nt-ib ${pr?'on':''}" style="--c:${pr?this.PRC[pr]:'#9C9AA3'}" onclick="APP.ntPanel('pr')" aria-label="Приоритет">${this.kFlag(pr,20)}</button>
+   <button class="nt-ib ${q.sub.length||q.panel==='sub'?'on':''}" onclick="APP.ntPanel('sub')" aria-label="Подзадачи"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h11M10 12h11M10 18h11M3 6l1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg>${q.sub.length?`<i>${q.sub.length}</i>`:''}</button>
+   <button class="nt-ib ${q.area||q.panel==='area'?'on':''}" onclick="APP.ntPanel('area')" aria-label="Сфера">${I.goal}</button>
+   <span class="sp"></span><button class="nt-go" onclick="APP.ntSave()" aria-label="Добавить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div>`)},
+ntCal(m){this.ntKeep();const q=this._tn;if(!q._bak)q._bak={date:q.date,tm:q.tm,rep:q.rep};if(m)q.cal=m;else q.cal=q.date.slice(0,7);this.ntCalR()},
+ntCalPick(d){const q=this._tn;q.date=d;q.cal=d.slice(0,7);this.ntCalR()},
+ntCalMove(n){const q=this._tn,[y,m]=q.cal.split('-').map(Number),dt=new Date(y,m-1+n,1);q.cal=dt.getFullYear()+'-'+pad(dt.getMonth()+1);this.ntCalR()},
+ntCalOk(){const q=this._tn;if($('nM'))q.tm=$('nM').value||'';if($('nR'))q.rep=$('nR').value||'';delete q._bak;this.ntRender()},
+ntCalX(){const q=this._tn;if(q._bak){q.date=q._bak.date;q.tm=q._bak.tm;q.rep=q._bak.rep;delete q._bak}this.ntRender()},
+ntCalClear(){const q=this._tn;q.date=today();q.tm='';q.rep='';q.cal=q.date.slice(0,7);this.ntCalR()},
+ntCalR(){const q=this._tn,td=today(),[y,m]=q.cal.split('-').map(Number),sun=(this.S.pref||{}).wk0==='sun',first=new Date(y,m-1,1),off=sun?first.getDay():(first.getDay()+6)%7,dim=new Date(y,m,0).getDate();
+  const wl=sun?[0,1,2,3,4,5,6]:[1,2,3,4,5,6,0];let cells='';for(let i=0;i<off;i++)cells+='<span></span>';
+  for(let d=1;d<=dim;d++){const ds=y+'-'+pad(m)+'-'+pad(d);cells+=`<button class="ct-d ${ds===q.date?'on':''} ${ds===td?'td':''}" onclick="APP.ntCalPick('${ds}')">${d}</button>`}
+  const rp=[['','Нет'],['d','Каждый день'],['wd','По будням'],['w','Каждую неделю'],['m','Каждый месяц'],['y','Каждый год']];
+  this.open(`<div class="ct-h"><button class="ct-b" onclick="APP.ntCalX()" aria-label="Отмена">${I.x}</button><span class="sp"></span><button class="ct-b ok" onclick="APP.ntCalOk()" aria-label="Готово">${I.ok}</button></div>
+  <div class="ct-q">${[['Сегодня',td],['Завтра',add(td,1)],['Через неделю',add(td,7)]].map(([l,v])=>`<button class="${q.date===v?'on':''}" onclick="APP.ntCalPick('${v}')">${l}</button>`).join('')}</div>
+  <div class="ct-m"><button onclick="APP.ntCalMove(-1)" aria-label="Назад">${I.l}</button><b>${MONF[m-1]}${y!==+td.slice(0,4)?' '+y:''}</b><button onclick="APP.ntCalMove(1)" aria-label="Вперёд">${I.r}</button></div>
+  <div class="ct-g">${wl.map(d=>`<em>${WD[d]}</em>`).join('')}${cells}</div>
+  <div class="ct-r"><label><span class="ct-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>Время</b><input id="nM" type="time" value="${q.tm}" aria-label="Время"></label>
+   <label><span class="ct-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3"/></svg></span><b>Повтор</b><select id="nR">${rp.map(([f,l])=>`<option value="${f}" ${q.rep===f?'selected':''}>${l}</option>`).join('')}</select></label></div>
+  <button class="ct-c" onclick="APP.ntCalClear()">Сбросить</button>`)},
 taskAdd(title,d,pr0,area){title=(title||'').trim();if(!title)return;this.track('task_add',null,'day');const P=this.parseTask(title,d||today());this.S.tasks=this.S.tasks||[];const o={id:'k'+uid(),title:P.title,date:P.date,tm:P.tm||'',done:'',t:Date.now()};const pr=P.pr||pr0||0;if(pr)o.pr=pr;if(area)o.area=area;if(P.tags.length)o.tags=P.tags;if(P.rep)o.rep=P.rep;this.S.tasks.push(o);this.save();this.render();this.buzz(8);if(P.hit||P.tm){const tdd=today(),w=P.date===tdd?'сегодня':P.date===add(tdd,1)?'завтра':WD[pd(P.date).getDay()]+', '+fd(P.date);this.toast('Задача на '+w+(P.tm?' в '+P.tm:''))}},
 taskToggle(id){const x=this.S.tasks.find(t=>t.id===id);if(!x)return;if(!x.done)this.track('task_done',null,'day');this.snap();x.done=x.done?'':today();x.t=Date.now();let nxt='';
   if(x.done&&x.rep&&!x.nx){const n=JSON.parse(JSON.stringify(x));n.id='k'+uid();n.date=this.kNext(x);n.done='';n.t=Date.now();delete n.nx;(n.sub||[]).forEach(z=>z.d=0);this.S.tasks.push(n);x.nx=n.id;delete x.rep;nxt=n.date}
@@ -4892,7 +4937,7 @@ methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17
 lang(){return ((this.S.pref||{}).lang)||'ru'},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=174');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=175');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
