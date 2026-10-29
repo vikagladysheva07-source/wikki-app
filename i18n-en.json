@@ -2319,5 +2319,10 @@
 "просело: {*}": "lagging: {*}",
 "Сейчас {#}% · оценка {#}": "Now {#}% · rating {#}",
 "Сейчас {#}% · оценка {#}, было {#}": "Now {#}% · rating {#}, was {#}",
-"Привычки, цели и дела по сферам": "Habits, goals and tasks by area"
+"Привычки, цели и дела по сферам": "Habits, goals and tasks by area",
+"Новая задача": "New task",
+"Что нужно сделать": "What needs to be done",
+"Другая дата": "Another date",
+"Добавить задачу": "Add task",
+"На этот день задач нет. Добавить?": "No tasks for this day. Add one?"
 }
