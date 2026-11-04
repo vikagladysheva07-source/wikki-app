@@ -2103,6 +2103,7 @@ body.dw #app,body.dw #nav,body.dw #snav,body.dw #sheet{visibility:hidden}
 .ct-m{display:flex;align-items:center;justify-content:space-between;margin:14px 0 6px}.ct-m b{font-size:17px;font-weight:700;color:#F4F1EC}.ct-m button{width:36px;height:36px;display:grid;place-items:center;color:#9C9AA3}.ct-m svg{width:18px;height:18px}
 .ct-g{display:grid;grid-template-columns:repeat(7,1fr);row-gap:4px;text-align:center}.ct-g em{font-style:normal;font-size:12px;color:#6E6A7C;padding:8px 0}
 .ct-d{width:42px;height:42px;margin:0 auto;border-radius:50%;font-size:16px;font-weight:500;color:#E9E5DE}.ct-d.td{box-shadow:inset 0 0 0 1.5px rgba(196,164,255,.6)}.ct-d.on{background:linear-gradient(135deg,#9B6FE8,#5B2FBE);color:#fff;box-shadow:0 0 14px rgba(155,111,232,.5)}
+.k-dash{color:#8E8A98;margin:0 2px}
 .ct-r{margin:14px 0 0;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);overflow:hidden}
 .ct-r label{display:flex;align-items:center;gap:12px;padding:14px 16px;position:relative}.ct-r label+label{border-top:1px solid rgba(255,255,255,.07)}
 .ct-i{width:24px;color:#8E8A98}.ct-i svg{width:22px;height:22px}.ct-r b{flex:1;font-size:15px;font-weight:500;color:#F4F1EC}
@@ -2428,7 +2429,8 @@ parseTask(text,base){let t=' '+String(text||'').trim()+' ',d=base||this.day||tod
   const tags=[];let g;while((g=t.match(/\s#([\p{L}][\p{L}\d_-]*)/u))){tags.push(g[1].toLowerCase());t=t.replace(g[0],' ')}
   if(rp){if(rp.f==='w'&&!rp.days)rp.days=[pd(d).getDay()];if(rp.f==='m')rp.dom=+d.slice(8)}
   const title=t.replace(/\s+/g,' ').trim();return {title:title||String(text).trim(),date:d,tm,hit,pr,tags,rep:rp}},
-taskWhen(x){return (x.tm?x.tm:'')},
+tmR(x){return x.tm?x.tm+(x.tm2&&x.tm2>x.tm?'–'+x.tm2:''):''},
+taskWhen(x){return this.tmR(x)},
 taskMove(id,d){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;x.date=d;x.t=Date.now();this.save();this.close();this.render();this.toast(d===add(today(),1)?'Перенесено на завтра':'Перенесено на '+fd(d))},
 plHead(dp){const td=today(),d=this.day,dd=pd(d),C=2*Math.PI*46,p=dp.n?dp.p:0,pc=Math.round(p*100);
   const ttl=d===td?'Сегодня':d===add(td,-1)?'Вчера':d===add(td,1)?'Завтра':WDF[dd.getDay()].charAt(0).toUpperCase()+WDF[dd.getDay()].slice(1);
@@ -2672,7 +2674,7 @@ pxBlock(k,id){const P=this.pxList(k);
   const rows=P.map(p=>`<div class="pv-r ${p.type==='sel'||p.type==='multi'?'pv-wide':''}"><button class="pv-n0" onclick="APP.pxRet('${k}','${id}');APP.pxEdit('${k}','${p.id}')">${esc(p.name)}</button>${this.pxCtl(k,id,p)}</div>`).join('');
   const pre=P.length?'':`<div class="jf-pre"><div>${this.PPRE[k].map((x,i)=>`<button onclick="APP.pxRet('${k}','${id}');APP.pxPreset('${k}',${i})">+ ${x[0]}</button>`).join('')}</div></div>`;
   return `<div class="pv"><div class="pv-h"><span class="lbl">Свойства</span><button onclick="APP.pxRet('${k}','${id}');APP.pxEdit('${k}')">${I.plus}<span>Свойство</span></button></div>${rows}${pre}</div>`},
-pxRet(k,id){if(k==='h')this.hKeep();else{const x=this.pxItem('k',id);if(x&&$('kT')){x.title=$('kT').value.trim()||x.title;x.date=$('kD').value||x.date;x.tm=$('kM').value||'';this.save()}}this._pr={k,id}},
+pxRet(k,id){if(k==='h')this.hKeep();else{const x=this.pxItem('k',id);if(x&&$('kT')){x.title=$('kT').value.trim()||x.title;x.date=$('kD').value||x.date;x.tm=$('kM').value||'';x.tm2=x.tm&&$('kM2')?$('kM2').value||'':'';this.save()}}this._pr={k,id}},
 pxBack(){const r=this._pr;this._pr=null;if(!r||!r.id)return this.close();if(r.k==='h')this.hForm();else this.taskEdit(r.id)},
 pxPreset(k,i){const [n,t,o]=this.PPRE[k][i];if(!this.pxList(k).some(p=>p.name===n))this.pxList(k).push({id:'p'+uid(),name:n,type:t,opts:(o||[]).map((v,j)=>({v,c:j}))});this.save();this.render();this.pxBack()},
 pxEdit(k,pid){const p=pid?this.pxList(k).find(x=>x.id===pid):null;this._pd=p?JSON.parse(JSON.stringify(p)):{id:'',name:'',type:'sel',opts:[]};this._pk=k;this.pxForm()},
@@ -2754,7 +2756,7 @@ dzPlans(){const td=today(),dp=this.dayAll(td),pct=dp.n?Math.round(dp.p*100):0,or
   const rank=i=>i.k==='k'&&(i.o.date<td||(i.o.pr||0)===3)?-1:i.tm?0:i.k==='k'&&i.o.pr?1:i.tod===now?2:i.tod===''?3:4+ord[i.tod];
   const stD=new Set(this.starList(td)),L=[...tk,...hs].sort((a,b)=>(stD.has(b.k+':'+b.o.id)?1:0)-(stD.has(a.k+':'+a.o.id)?1:0)||rank(a)-rank(b)||(a.tm||'99').localeCompare(b.tm||'99')),top=L.slice(0,3);
   const row=i=>{const x=i.o,chk=i.k==='k'?`APP.taskToggle('${x.id}')`:(x.kind||'check')==='check'?`APP.hToggle('${x.id}','${td}')`:`APP.go('plans')`;
-    const sub=i.k==='k'?[x.date<td?'с прошлых дней':'',x.tm,x.pr?['','низкий','средний','высокий'][x.pr]+' приоритет':'',x.rep?this.kRepTxt(x.rep):''].filter(Boolean).join(' · ')||'задача':(x.kind==='num'||x.kind==='time')?`${this.hVal(x,td)||0} / ${x.target||'—'} ${esc(x.unit||(x.kind==='time'?'мин':''))}`:x.kind==='scale'?'оценка 1–5':this.TOD[x.tod||''].toLowerCase();
+    const sub=i.k==='k'?[x.date<td?'с прошлых дней':'',APP.tmR(x),x.pr?['','низкий','средний','высокий'][x.pr]+' приоритет':'',x.rep?this.kRepTxt(x.rep):''].filter(Boolean).join(' · ')||'задача':(x.kind==='num'||x.kind==='time')?`${this.hVal(x,td)||0} / ${x.target||'—'} ${esc(x.unit||(x.kind==='time'?'мин':''))}`:x.kind==='scale'?'оценка 1–5':this.TOD[x.tod||''].toLowerCase();
     return `<div class="dzp-r" ${i.k==='k'?`data-sw="k:${x.id}"`:(x.kind||'check')==='check'?`data-sw="h:${x.id}:${td}"`:''}><button class="chk ${i.k==='k'?'kp'+(x.pr||0):''}" onclick="${chk}" aria-label="Отметить"></button><button class="dzp-t" onclick="APP.go('plans')"><b>${this.starList(td).includes(i.k+':'+x.id)?`<i class="dzp-st">${this.STAR}</i>`:''}${esc(x.title)}</b><em>${sub}</em></button></div>`};
   return `<div class="card dzp"><div class="dz-ch"><span class="dz-ti">${I.plan}Планы</span><span class="sp"></span><span class="dzp-n"><b>${dp.done}</b> из ${dp.n}</span></div>
    <div class="dzp-bar"><i style="width:${pct}%"></i></div>
@@ -2763,7 +2765,7 @@ dzPlans(){const td=today(),dp=this.dayAll(td),pct=dp.n?Math.round(dp.p*100):0,or
 /* задачи в стиле TickTick: приоритет, теги, подзадачи, список по датам, матрица */
 PRC:['', 'rgb(107 79 216)','rgb(168 139 255)','rgb(237 230 255)'],PRN:['Без приоритета','Низкий','Средний','Высокий'],
 kFlag(n,sz){return `<svg width="${sz||14}" height="${sz||14}" viewBox="0 0 24 24" fill="${n?this.PRC[n]:'none'}" stroke="${n?this.PRC[n]:'currentColor'}" stroke-width="2" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>`},
-kKeep(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x||!$('kT'))return x;x.title=$('kT').value.trim()||x.title;x.date=$('kD').value||x.date;x.tm=$('kM').value||'';if($('kN'))x.note=$('kN').value;if($('kG'))x.tags=$('kG').value.split(/[,\s]+/).map(v=>v.replace(/^#/,'').trim()).filter(Boolean).slice(0,8);x.t=Date.now();this.save();return x},
+kKeep(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x||!$('kT'))return x;x.title=$('kT').value.trim()||x.title;x.date=$('kD').value||x.date;x.tm=$('kM').value||'';x.tm2=x.tm&&$('kM2')?$('kM2').value||'':'';if(x.tm2&&x.tm2<=x.tm)x.tm2='';if($('kN'))x.note=$('kN').value;if($('kG'))x.tags=$('kG').value.split(/[,\s]+/).map(v=>v.replace(/^#/,'').trim()).filter(Boolean).slice(0,8);x.t=Date.now();this.save();return x},
 kArea(id,k){const x=this.kKeep(id);if(!x)return;if(k)x.area=k;else delete x.area;this.save();this.taskEditR(id)},
 kPr(id,n){const x=this.kKeep(id);if(!x)return;x.pr=n;this.save();this.taskEditR(id)},
 ksbH(x){const sb=x.sub||[];if(!sb.length&&!x._ksa)return '';return `<div class="ksb">${sb.slice(0,8).map(z=>`<button class="ksb-r ${z.d?'on':''}" onclick="event.stopPropagation();APP.kSubT('${x.id}','${z.id}')"><i></i><span>${esc(z.t)}</span></button>`).join('')}${sb.length>8?`<span class="ksb-m">ещё ${sb.length-8}</span>`:''}</div>`},
@@ -2783,7 +2785,7 @@ kMenu(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;const td=to
    <button onclick="APP.close();APP.kSubQ('${id}')">${I.plus}<span>Подзадача</span></button>
    <button onclick="APP.close();APP.taskEdit('${id}')">${I.ed}<span>Изменить</span></button>
    <button class="warn" onclick="APP.taskDel('${id}')">${I.x}<span>Удалить</span></button></div>`)},
-kDateTxt(x){const td=today(),l=x.date===td?'Сегодня':x.date===add(td,1)?'Завтра':x.date===add(td,-1)?'Вчера':WD[pd(x.date).getDay()];return l+', '+fd(x.date)+(x.tm?', '+x.tm:'')+(x.rep?' ↻':'')},
+kDateTxt(x){const td=today(),l=x.date===td?'Сегодня':x.date===add(td,1)?'Завтра':x.date===add(td,-1)?'Вчера':WD[pd(x.date).getDay()];return l+', '+fd(x.date)+(x.tm?', '+this.tmR(x):'')+(x.rep?' ↻':'')},
 kDateT(id){this.kKeep(id);this._kdp=!this._kdp;this.taskEditR(id)},
 kPrC(id){const x=this.kKeep(id);if(!x)return;x.pr=((x.pr||0)+1)%4;this.buzz(6);this.save();this.taskEditR(id)},
 kAuto(id){clearTimeout(this._kat);this._kat=setTimeout(()=>{this.kKeep(id)},350)},
@@ -2791,7 +2793,7 @@ kSubKey(e,id,sid,el){if(e.key==='Enter'){e.preventDefault();this.kSubSet(id,sid,
 taskEditR(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;const pr=x.pr||0,sb=x.sub||[],more=!!this._kmore,dp=!!this._kdp;
   this.open(`<div class="te-h"><button class="xcl" onclick="APP.kKeep('${id}');APP.close();APP.render()" aria-label="Закрыть">${I.x}</button><span class="sp"></span><button class="te-b te-fl" style="--c:${pr?this.PRC[pr]:'#9C9AA3'}" onclick="APP.kPrC('${id}')" aria-label="Приоритет">${this.kFlag(pr,19)}</button><button class="te-b ${more?'on':''}" onclick="APP.kMore('${id}')" aria-label="Ещё">⋯</button></div>
   <button class="te-dt" onclick="APP.kDateT('${id}')">${this.kDateTxt(x)}</button>
-  <div class="te-dp" ${dp?'':'hidden'}><div class="kqd kqd-c">${[['Сегодня',today()],['Завтра',add(today(),1)],['Неделя',add(today(),7)]].map(([l,v])=>`<button onclick="$('kD').value='${v}';APP.kAuto('${id}');document.querySelectorAll('.kqd-c button').forEach(b=>b.classList.remove('on'));this.classList.add('on')" class="${x.date===v?'on':''}">${l}</button>`).join('')}<input id="kM" class="k-tm" type="time" value="${x.tm||''}" onchange="APP.kAuto('${id}')" aria-label="Время"></div><div class="f" style="margin:8px 0 0"><input id="kD" type="date" value="${x.date}" onchange="APP.kAuto('${id}')"></div></div>
+  <div class="te-dp" ${dp?'':'hidden'}><div class="kqd kqd-c">${[['Сегодня',today()],['Завтра',add(today(),1)],['Неделя',add(today(),7)]].map(([l,v])=>`<button onclick="$('kD').value='${v}';APP.kAuto('${id}');document.querySelectorAll('.kqd-c button').forEach(b=>b.classList.remove('on'));this.classList.add('on')" class="${x.date===v?'on':''}">${l}</button>`).join('')}<input id="kM" class="k-tm" type="time" value="${x.tm||''}" onchange="APP.kAuto('${id}')" aria-label="Время"><span class="k-dash">–</span><input id="kM2" class="k-tm" type="time" value="${x.tm2||''}" onchange="APP.kAuto('${id}')" aria-label="Время окончания"></div><div class="f" style="margin:8px 0 0"><input id="kD" type="date" value="${x.date}" onchange="APP.kAuto('${id}')"></div></div>
   <input id="kT" class="te-t" value="${esc(x.title)}" placeholder="Что сделать" oninput="APP.kAuto('${id}')">
   <textarea id="kN" class="te-n" placeholder="Описание" oninput="APP.kAuto('${id}')">${esc(x.note||'')}</textarea>
   <div class="te-cl">${sb.map(z=>`<div class="te-r ${z.d?'on':''}"><button class="te-c ${z.d?'on':''}" onclick="APP.kSubTog('${id}','${z.id}')" aria-label="Отметить">${z.d?I.ok:''}</button><input value="${esc(z.t)}" onchange="APP.kSubSet('${id}','${z.id}',this.value)" onkeydown="APP.kSubKey(event,'${id}','${z.id}',this)"></div>`).join('')}
@@ -2808,7 +2810,7 @@ taskEditR(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;const p
 plBulk(){const td=today();let n=0;(this.S.tasks||[]).forEach(x=>{if(!x.done&&x.date<td){x.date=td;x.t=Date.now();n++}});this.save();this.render();this.toast(`На сегодня: ${n} ${this.pl(n,'задача','задачи','задач')}`)},
 plRow(x,showDate){const td=today(),over=!x.done&&x.date<td,pr=x.pr||0;
   const when=showDate?(x.date===td?'Сегодня':x.date===add(td,1)?'Завтра':x.date===add(td,-1)?'Вчера':WD[pd(x.date).getDay()]+', '+fd(x.date)):'';
-  const row=`<div class="plr ${x.done?'done':''}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${pr}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><button class="plr-t" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b>${this.kMeta(x)}</button><span class="plr-d ${over?'over':''}">${[x.tm,when].filter(Boolean).join(' · ')}</span></div>`;const sb=this.ksbH(x);return sb?`<div class="plr-w">${row}${sb}</div>`:row},
+  const row=`<div class="plr ${x.done?'done':''}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${pr}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><button class="plr-t" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b>${this.kMeta(x)}</button><span class="plr-d ${over?'over':''}">${[APP.tmR(x),when].filter(Boolean).join(' · ')}</span></div>`;const sb=this.ksbH(x);return sb?`<div class="plr-w">${row}${sb}</div>`:row},
 plAdd(){const s=this._plv==='matrix';return `<form class="pl-add" onsubmit="event.preventDefault();APP.taskAdd(this.q.value,today());this.q.value=''"><span>${I.plus}</span><input name="q" placeholder="${s?'Задача… !1 — срочно и важно':'Задача… завтра в 15:00 !1 #работа'}" autocomplete="off"></form>`},
 vPlanList(){const td=today(),T=(this.S.tasks||[]).filter(x=>!x.drop&&!(this.S.del||[]).includes(x.id)),open=T.filter(x=>!x.done);
   const srt=(a,b)=>a.date.localeCompare(b.date)||(b.pr||0)-(a.pr||0)||(a.tm||'99').localeCompare(b.tm||'99');
@@ -3743,14 +3745,14 @@ ntPick(k,v){this.ntKeep();const q=this._tn;q[k]=v;q.panel='';this.ntRender()},
 ntPanel(k){this.ntKeep();const q=this._tn;q.panel=q.panel===k?'':k;this.ntRender();if(q.panel==='sub')setTimeout(()=>{const e=$('nS');e&&e.focus()},60)},
 ntSub(v){v=(v||'').trim();if(!v)return;this.ntKeep();this._tn.sub.push(v);this.ntRender();setTimeout(()=>{const e=$('nS');e&&e.focus()},60)},
 ntSubDel(i){this.ntKeep();this._tn.sub.splice(i,1);this.ntRender()},
-ntDateTxt(){const q=this._tn,td=today();return (q.date===td?'Сегодня':q.date===add(td,1)?'Завтра':WD[pd(q.date).getDay()]+', '+fd(q.date))+(q.tm?' · '+q.tm:'')},
+ntDateTxt(){const q=this._tn,td=today();return (q.date===td?'Сегодня':q.date===add(td,1)?'Завтра':WD[pd(q.date).getDay()]+', '+fd(q.date))+(q.tm?' · '+(q.tm2&&q.tm2>q.tm?q.tm+'–'+q.tm2:q.tm):'')},
 ntSave(){this.ntKeep();const q=this._tn;if(!q.title.trim()){const e=$('nT');e&&e.focus();return}
-  const P=this.parseTask(q.title,q.date),o={id:'k'+uid(),title:P.title,date:P.date,tm:q.tm||P.tm||'',done:'',t:Date.now()},pr=q.pr||P.pr||0;
+  const P=this.parseTask(q.title,q.date),o={id:'k'+uid(),title:P.title,date:P.date,tm:q.tm||P.tm||'',done:'',t:Date.now()},pr=q.pr||P.pr||0;if(q.tm&&q.tm2&&q.tm2>q.tm)o.tm2=q.tm2;
   if(pr)o.pr=pr;if(q.area)o.area=q.area;if(P.tags.length)o.tags=P.tags;
   if(q.rep){o.rep={f:q.rep};if(q.rep==='w')o.rep.days=[pd(o.date).getDay()];if(q.rep==='m')o.rep.dom=+o.date.slice(8)}else if(P.rep)o.rep=P.rep;
   if(q.sub.length)o.sub=q.sub.map(t=>({id:'s'+uid(),t,d:0}));
   this.S.tasks=this.S.tasks||[];this.S.tasks.push(o);this.track('task_add',null,'day');this.save();this.close();this.render();this.buzz(8);
-  const tdd=today(),w=o.date===tdd?'сегодня':o.date===add(tdd,1)?'завтра':WD[pd(o.date).getDay()]+', '+fd(o.date);this.toast('Задача на '+w+(o.tm?' в '+o.tm:''))},
+  const tdd=today(),w=o.date===tdd?'сегодня':o.date===add(tdd,1)?'завтра':WD[pd(o.date).getDay()]+', '+fd(o.date);this.toast('Задача на '+w+(o.tm?' в '+this.tmR(o):''))},
 ntRender(){const q=this._tn,pr=q.pr,ar=this.areaList();let pn='';
   if(q.panel==='pr')pn=`<div class="nt-pr">${[0,1,2,3].map(n=>`<button class="${pr===n?'on':''}" style="--c:${n?this.PRC[n]:'#9C9AA3'}" onclick="APP.ntPick('pr',${n})">${this.kFlag(n,16)}<span>${this.PRN[n].replace('Без приоритета','Нет')}</span></button>`).join('')}</div>`;
   else if(q.panel==='sub')pn=`<div class="te-cl">${q.sub.map((t,i)=>`<div class="te-r"><span class="te-c"></span><input value="${esc(t)}" onchange="APP._tn.sub[${i}]=this.value.trim()||APP._tn.sub[${i}]"><button class="nt-x" onclick="APP.ntSubDel(${i})" aria-label="Убрать">${I.x}</button></div>`).join('')}<div class="te-r te-new"><span class="te-c"></span><input id="nS" placeholder="Подзадача: напиши и нажми Enter" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();APP.ntSub(this.value)}"></div></div>`;
@@ -3762,12 +3764,13 @@ ntRender(){const q=this._tn,pr=q.pr,ar=this.areaList();let pn='';
    <button class="nt-ib ${q.sub.length||q.panel==='sub'?'on':''}" onclick="APP.ntPanel('sub')" aria-label="Подзадачи"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h11M10 12h11M10 18h11M3 6l1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg>${q.sub.length?`<i>${q.sub.length}</i>`:''}</button>
    <button class="nt-ib ${q.area||q.panel==='area'?'on':''}" onclick="APP.ntPanel('area')" aria-label="Сфера">${I.goal}</button>
    <span class="sp"></span><button class="nt-go" onclick="APP.ntSave()" aria-label="Добавить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div>`)},
-ntCal(m){this.ntKeep();const q=this._tn;if(!q._bak)q._bak={date:q.date,tm:q.tm,rep:q.rep};if(m)q.cal=m;else q.cal=q.date.slice(0,7);this.ntCalR()},
+ntCal(m){this.ntKeep();const q=this._tn;if(!q._bak)q._bak={date:q.date,tm:q.tm,tm2:q.tm2,rep:q.rep};if(m)q.cal=m;else q.cal=q.date.slice(0,7);this.ntCalR()},
 ntCalPick(d){const q=this._tn;q.date=d;q.cal=d.slice(0,7);this.ntCalR()},
 ntCalMove(n){const q=this._tn,[y,m]=q.cal.split('-').map(Number),dt=new Date(y,m-1+n,1);q.cal=dt.getFullYear()+'-'+pad(dt.getMonth()+1);this.ntCalR()},
-ntCalOk(){const q=this._tn;if($('nM'))q.tm=$('nM').value||'';if($('nR'))q.rep=$('nR').value||'';delete q._bak;this.ntRender()},
-ntCalX(){const q=this._tn;if(q._bak){q.date=q._bak.date;q.tm=q._bak.tm;q.rep=q._bak.rep;delete q._bak}this.ntRender()},
-ntCalClear(){const q=this._tn;q.date=today();q.tm='';q.rep='';q.cal=q.date.slice(0,7);this.ntCalR()},
+ntKeepTm(){const q=this._tn;if(q.tm2&&q.tm2<=q.tm)q.tm2=''},
+ntCalOk(){const q=this._tn;if($('nM'))q.tm=$('nM').value||'';if(!q.tm)q.tm2='';else if($('nM2'))q.tm2=$('nM2').value||'';if($('nR'))q.rep=$('nR').value||'';delete q._bak;this.ntRender()},
+ntCalX(){const q=this._tn;if(q._bak){q.date=q._bak.date;q.tm=q._bak.tm;q.tm2=q._bak.tm2;q.rep=q._bak.rep;delete q._bak}this.ntRender()},
+ntCalClear(){const q=this._tn;q.date=today();q.tm='';q.tm2='';q.rep='';q.cal=q.date.slice(0,7);this.ntCalR()},
 ntCalR(){const q=this._tn,td=today(),[y,m]=q.cal.split('-').map(Number),sun=(this.S.pref||{}).wk0==='sun',first=new Date(y,m-1,1),off=sun?first.getDay():(first.getDay()+6)%7,dim=new Date(y,m,0).getDate();
   const wl=sun?[0,1,2,3,4,5,6]:[1,2,3,4,5,6,0];let cells='';for(let i=0;i<off;i++)cells+='<span></span>';
   for(let d=1;d<=dim;d++){const ds=y+'-'+pad(m)+'-'+pad(d);cells+=`<button class="ct-d ${ds===q.date?'on':''} ${ds===td?'td':''}" onclick="APP.ntCalPick('${ds}')">${d}</button>`}
@@ -3776,7 +3779,8 @@ ntCalR(){const q=this._tn,td=today(),[y,m]=q.cal.split('-').map(Number),sun=(thi
   <div class="ct-q">${[['Сегодня',td],['Завтра',add(td,1)],['Через неделю',add(td,7)]].map(([l,v])=>`<button class="${q.date===v?'on':''}" onclick="APP.ntCalPick('${v}')">${l}</button>`).join('')}</div>
   <div class="ct-m"><button onclick="APP.ntCalMove(-1)" aria-label="Назад">${I.l}</button><b>${MONF[m-1]}${y!==+td.slice(0,4)?' '+y:''}</b><button onclick="APP.ntCalMove(1)" aria-label="Вперёд">${I.r}</button></div>
   <div class="ct-g">${wl.map(d=>`<em>${WD[d]}</em>`).join('')}${cells}</div>
-  <div class="ct-r"><label><span class="ct-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>Время</b><input id="nM" type="time" value="${q.tm}" aria-label="Время"></label>
+  <div class="ct-r"><label><span class="ct-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>Время</b><input id="nM" type="time" value="${q.tm}" aria-label="Время" onchange="APP._tn.tm=this.value;if(!this.value)APP._tn.tm2='';APP.ntKeepTm();APP.ntCalR()"></label>
+   ${q.tm?`<label><span class="ct-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><b>До</b><input id="nM2" type="time" value="${q.tm2||''}" min="${q.tm}" aria-label="Время окончания" onchange="APP._tn.tm2=this.value"></label>`:''}
    <label><span class="ct-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3"/></svg></span><b>Повтор</b><select id="nR">${rp.map(([f,l])=>`<option value="${f}" ${q.rep===f?'selected':''}>${l}</option>`).join('')}</select></label></div>
   <button class="ct-c" onclick="APP.ntCalClear()">Сбросить</button>`)},
 taskAdd(title,d,pr0,area){title=(title||'').trim();if(!title)return;this.track('task_add',null,'day');const P=this.parseTask(title,d||today());this.S.tasks=this.S.tasks||[];const o={id:'k'+uid(),title:P.title,date:P.date,tm:P.tm||'',done:'',t:Date.now()};const pr=P.pr||pr0||0;if(pr)o.pr=pr;if(area)o.area=area;if(P.tags.length)o.tags=P.tags;if(P.rep)o.rep=P.rep;this.S.tasks.push(o);this.save();this.render();this.buzz(8);if(P.hit||P.tm){const tdd=today(),w=P.date===tdd?'сегодня':P.date===add(tdd,1)?'завтра':WD[pd(P.date).getDay()]+', '+fd(P.date);this.toast('Задача на '+w+(P.tm?' в '+P.tm:''))}},
@@ -3866,7 +3870,7 @@ rowsDone(items,w,key){const tod=((this.S.pref||{}).group||'tod')==='tod';const o
   const nowM=null;let nl=false;const rr=i=>{let pre='';if(nowM&&!nl&&i.k==='k'&&i.o.tm&&i.o.tm>nowM&&open.some(z=>z.k==='k'&&z.o.tm)){nl=true;pre=`<div class="nowl"><span>сейчас ${nowM}</span></div>`}return pre+r(i)};
   return `<div class="tgrid">`+open.map(rr).join('')+'</div>'+(open.length?'':`<div class="tall">Всё на этот день сделано</div>`)+(done.length?`<button class="tdn" onclick="APP._showDone=!APP._showDone;APP.render()">${I.ok}<span>Сделано · ${done.length}</span><em>${this._showDone?'скрыть':'показать'}</em></button>${this._showDone?`<div class="tgrid tgd">${done.map(r).join('')}</div>`:''}`:'')},
 tAsk(id,d){const t=this.S.tactics.find(x=>x.id===id);if(!t)return;const cur=this.v(t,d);this.ask('Сколько сегодня',cur||'',v=>{this.setLog(id,d,Math.max(0,+String(v).replace(',','.')||0));this.render()},'number')},
-kRow(x){const d=this.day,over=x.date<d;return `<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${x.pr||0}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${x.tm?`<span class="ktm">${x.tm}</span>`:''}${this.nmE('k',x,1)}${over?`<div class="meta kov">с ${fd(x.date)}</div>`:''}${this.kMeta(x)}${this.ksbH(x)}</div>${this.starBtn(d,'k:'+x.id)}<button class="kmn" onclick="APP.kMenu('${x.id}')" aria-label="Меню">⋯</button></div>`},
+kRow(x){const d=this.day,over=x.date<d;return `<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${x.pr||0}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${x.tm?`<span class="ktm">${APP.tmR(x)}</span>`:''}${this.nmE('k',x,1)}${over?`<div class="meta kov">с ${fd(x.date)}</div>`:''}${this.kMeta(x)}${this.ksbH(x)}</div>${this.starBtn(d,'k:'+x.id)}<button class="kmn" onclick="APP.kMenu('${x.id}')" aria-label="Меню">⋯</button></div>`},
 tRow(t,w,showGoal){
   const d=this.day,val=this.v(t,d),wv=this.wVal(t,w),wt=this.wTarget(t,w),done=wv>=wt,sk=this.skipped(t.id,d)&&!this.frozen(d);
   let left='',right='',meta='';
@@ -4301,7 +4305,7 @@ sphFreeOpen(){const un=this.sphFree();this.open(`<div class="row"><div class="h2
 sphOpen(k){AREAS=this.areaList();const a=AREAS.find(x=>x[0]===k);if(!a)return;const st=this.sphSt(k),td=today(),pc=st.p==null?null:Math.round(st.p*100);
   const hr=st.hs.map(h=>{const sc=this.hSched(h,td),on=this.hOn(h,td);return `<div class="hx-row ${on?'done':''}"><button class="hx-ck" ${sc?`onclick="APP.hToggle('${h.id}','${td}');APP.sphOpen('${k}');APP.render()"`:'disabled style="opacity:.35"'} aria-label="Отметить">${on?I.ok:''}</button><button class="hx-rt" onclick="APP.close();APP.editH('${h.id}')"><b>${esc(h.title)}</b><em>${sc?'Сегодня':'Не сегодня'}</em></button></div>`}).join('');
   const gr=st.gs.map(g=>{const pr=Math.round(this.gProg(g)*100);return `<div class="hx-row"><span class="hx-ck" style="border-style:dashed;background:none"></span><button class="hx-rt" onclick="APP.close();APP.editGoal('${g.id}')"><b>${esc(g.title||'Цель')}</b><em>Цель · ${pr}%</em></button></div>`}).join('');
-  const kr=st.ks.map(x=>`<div class="hx-row"><button class="hx-ck" onclick="APP.taskToggle('${x.id}');APP.sphOpen('${k}')" aria-label="Отметить"></button><button class="hx-rt" onclick="APP.close();APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b><em>${x.date===td?'Сегодня':fd(x.date)}${x.tm?' · '+x.tm:''}</em></button></div>`).join('');
+  const kr=st.ks.map(x=>`<div class="hx-row"><button class="hx-ck" onclick="APP.taskToggle('${x.id}');APP.sphOpen('${k}')" aria-label="Отметить"></button><button class="hx-rt" onclick="APP.close();APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b><em>${x.date===td?'Сегодня':fd(x.date)}${x.tm?' · '+APP.tmR(x):''}</em></button></div>`).join('');
   this.open(`<div class="row"><span class="sp-i" style="width:34px;height:34px;margin-right:10px">${aIco(k)}</span><div class="sp"><div class="h2" style="font-size:17px">${esc(a[1])}</div><div class="small mut">${pc==null?'Пока без привычек на этой неделе':'Сейчас '+pc+'%'+(st.lv?' · оценка '+st.lv+((this.S.areaPrev||{})[k]&&this.S.areaPrev[k]!==st.lv?', было '+this.S.areaPrev[k]:''):'')}</div></div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
    ${st.hs.length?`<div class="hx-sec" style="margin-top:16px"><b>Привычки</b></div><div class="hx-list">${hr}</div>`:''}${st.gs.length?`<div class="hx-sec" style="margin-top:16px"><b>Цели</b></div><div class="hx-list">${gr}</div>`:''}${st.ks.length?`<div class="hx-sec" style="margin-top:16px"><b>Дела</b></div><div class="hx-list">${kr}</div>`:''}
    ${!st.hs.length&&!st.gs.length&&!st.ks.length?`<div class="hx-empty" style="margin-top:16px;cursor:default">В этой сфере пока пусто. Добавь первую привычку, цель или дело.</div>`:''}
@@ -4319,7 +4323,7 @@ homeHero(dpT){const td=today(),P=this.S.profile||{},nm=(P.name||'').split(' ')[0
   let H=[],K=[];try{H=this.S.habits.filter(x=>!x.archived&&this.hSched(x,td))}catch(e){}try{K=(this.S.tasks||[]).filter(x=>!x.drop&&x.date===td&&!(this.S.del||[]).includes(x.id))}catch(e){}
   const rows=[...H.map(h=>{const on=this.hOn(h,td),v=this.hVal?this.hVal(h,td):0,num=h.kind==='time'||h.kind==='num';
       return {done:on,o:ord[h.tod||'']??3,html:`<div class="hx-row ${on?'done':''}"><button class="hx-ck" onclick="APP.hToggle('${h.id}','${td}');APP.render()" aria-label="Отметить">${on?I.ok:''}</button><button class="hx-rt" onclick="APP.go('tracker')"><b>${esc(h.title)}</b>${num?`<em>${(+v||0)+' из '+(h.target||'')+' '+(h.unit||'')}</em>`:''}</button>${num&&!on?`<button class="hx-plus" onclick="APP.hInc('${h.id}','${td}',${+h.step||1});APP.render()">+${+h.step||1}</button>`:''}</div>`}}),
-    ...K.map(x=>({done:!!x.done,o:x.tm?-1:1.5,tm:x.tm||'',html:`<div class="hx-row ${x.done?'done':''}"><button class="hx-ck" onclick="APP.taskToggle('${x.id}');APP.render()" aria-label="Отметить">${x.done?I.ok:''}</button><button class="hx-rt" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b></button>${x.tm&&!x.done?`<span class="hx-tag">${x.tm}</span>`:''}</div>`}))]
+    ...K.map(x=>({done:!!x.done,o:x.tm?-1:1.5,tm:x.tm||'',html:`<div class="hx-row ${x.done?'done':''}"><button class="hx-ck" onclick="APP.taskToggle('${x.id}');APP.render()" aria-label="Отметить">${x.done?I.ok:''}</button><button class="hx-rt" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b></button>${x.tm&&!x.done?`<span class="hx-tag">${APP.tmR(x)}</span>`:''}</div>`}))]
     .sort((a,b)=>(a.done-b.done)||(a.o-b.o)||(a.tm||'').localeCompare(b.tm||''));
   const nD=rows.filter(r=>r.done).length;
   const list=rows.length?`<div class="hx-sec"><b>На сегодня</b><button onclick="APP.go('plans')">Все дела${MI.chev}</button></div><div class="hx-list">${rows.slice(0,5).map(r=>r.html).join('')}</div>`
@@ -4937,7 +4941,7 @@ methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17
 lang(){return ((this.S.pref||{}).lang)||'ru'},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=176');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=177');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
