@@ -2413,5 +2413,17 @@
 "Послание дня": "Message of the day",
 "Нажми, чтобы открыть": "Tap to open",
 "Скачать": "Download",
-"Ещё послание": "Another message"
+"Ещё послание": "Another message",
+"Фокус": "Focus",
+"Без задачи": "No task",
+"своё": "custom",
+"Завершить": "Finish",
+"минут фокуса": "minutes of focus",
+"Ещё раз": "Again",
+"пауза": "paused",
+"Открыть ›": "Open ›",
+"Идёт фокус ·": "Focus in progress ·",
+"Меньше минуты не записываем": "Under a minute is not logged",
+"Пауза": "Pause",
+"Идёт фокус": "Focus in progress"
 }

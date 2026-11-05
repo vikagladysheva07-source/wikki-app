@@ -2324,6 +2324,64 @@ body.dw #app,body.dw #nav,body.dw #snav,body.dw #sheet{visibility:hidden}
 .hrcta{position:sticky;bottom:calc(76px + env(safe-area-inset-bottom));display:flex;gap:8px;padding-top:12px;margin-top:6px;background:linear-gradient(180deg,transparent,rgba(12,11,18,.96) 30%)}
 .hrcta .btn{flex:1}.hrcta .btn.sp{flex:2}
 body:has(.hrp) .nav .pfab{display:none!important}
+/* ГАЛОЧКИ: прозрачное стекло, белая отметка, минимальная подсветка (финальный слой, везде одинаково) */
+.chk.on,.tk .chk.on,.tchk.on,.hx-row.done .hx-ck,.te-c.on,.ksb-r.on i,.hd-dt i.on,.mgc.on,.mit.done .mit-c,.hb .days i.on,.st-i.on .st-c,.ck.on,.sc5 button.on{
+ background:linear-gradient(155deg,rgba(176,140,245,.46),rgba(106,63,208,.22))!important;
+ border:1px solid rgba(196,164,255,.55)!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 0 7px rgba(155,111,232,.22)!important;
+ color:#fff!important;
+ -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.chk.on svg,.tchk.on svg,.hx-ck svg,.te-c.on svg,.mgc.on svg,.mit-c svg{color:#fff!important;stroke:#fff!important}
+.chk.on.part,.chk.part{box-shadow:none!important}
+.hd-dt i.on:after,.ck.on:after{border-color:#fff!important}
+.hd-dt i.on{border-color:rgba(196,164,255,.55)!important}
+.tk.done .chk.on{opacity:.9}
+.ct-b.ok,.nt-go{background:linear-gradient(155deg,rgba(176,140,245,.46),rgba(106,63,208,.22))!important;border:1px solid rgba(196,164,255,.55)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 0 7px rgba(155,111,232,.22)!important;color:#fff!important}
+.ct-b.ok svg,.nt-go svg{stroke:#fff!important;color:#fff!important}
+/* фокус-таймер */
+.fto{position:fixed;inset:0;z-index:320;background:#05050A;color:#F4F1EC;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:max(22px,env(safe-area-inset-top)) 22px max(22px,env(safe-area-inset-bottom));container-type:inline-size}
+.fto-x{position:absolute;top:max(18px,env(safe-area-inset-top));right:18px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);border:0;color:#fff;font-size:22px;cursor:pointer}
+.fto-st{width:100%;max-width:420px;margin-top:auto}.fto-st h3{margin:0 0 20px;font-size:28px;font-weight:300;letter-spacing:-.02em;text-align:center}
+.fto-dur{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.fto-dur button{height:64px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font:inherit;cursor:pointer}
+.fto-dur b{font-size:22px;font-weight:300}.fto-dur span{font-size:10.5px;color:#8E8A98}.fto-dur .on{background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(155,111,232,.3));border-color:rgba(196,164,255,.55)}
+.fto-own{display:none;align-items:center;justify-content:center;gap:14px;margin-top:12px}.fto-own.on{display:flex}.fto-own em{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);cursor:pointer;font-style:normal;font-size:20px}.fto-own b{min-width:76px;text-align:center;font-size:17px;font-weight:500}
+.fto-wh{margin:18px 0 22px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}.fto-wh::-webkit-scrollbar{display:none}.fto-wh span{flex:none;padding:8px 14px;border-radius:99px;font-size:12.5px;color:#C9C4D4;border:1px solid rgba(255,255,255,.14);cursor:pointer;white-space:nowrap}.fto-wh span.on{color:#fff;background:linear-gradient(120deg,rgba(255,255,255,.14),rgba(155,111,232,.28));border-color:rgba(255,255,255,.22)}
+.fto-go{width:100%;height:54px;border-radius:99px;font:inherit;font-weight:600;font-size:16px;color:#fff;background:linear-gradient(155deg,rgba(255,255,255,.2),rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.25);cursor:pointer}
+.fto-run{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding-bottom:16vh}
+.fto-ring{position:relative;width:min(292px,78vw);aspect-ratio:1/1;container-type:inline-size}.fto-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.fto-tm{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}.fto-tm b{font-size:26cqw;font-weight:200;letter-spacing:-.045em;line-height:1;transition:opacity .2s;font-variant-numeric:tabular-nums}.fto-tm span{margin-top:12px;font-size:13px;color:#8E8A98;max-width:190px;text-align:center;line-height:1.3;min-height:17px}
+.fto-run.paused .fto-tm b{opacity:.45}
+.fto-ctl{position:absolute;left:0;right:0;bottom:max(40px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:14px}
+.fto-pb{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;cursor:pointer;background:linear-gradient(155deg,rgba(255,255,255,.18),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.24)}
+.fto-pb i{display:block;width:20px;height:22px;border-left:5px solid #fff;border-right:5px solid #fff}
+.fto-run.paused .fto-pb i{width:0;height:0;border:0;border-left:19px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.fto-end{background:none;border:0;color:#8E8A98;font:inherit;font-size:13.5px;padding:10px;cursor:pointer}
+.fto-fin{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+.fto-big{font-size:110px;font-weight:200;letter-spacing:-.05em;line-height:1}.fto-u{font-size:14px;color:#8E8A98;margin-top:8px}.fto-tot{font-size:13px;color:#8F8A9C;margin-top:34px}
+.fto-bt{position:absolute;left:0;right:0;bottom:max(14px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:4px;max-width:420px;margin:0 auto}
+.ft-pill{display:flex;align-items:center;justify-content:space-between;width:100%;margin:12px 0 0;padding:12px 18px;border-radius:99px;font:inherit;font-size:13.5px;color:#F4F1EC;cursor:pointer;background:linear-gradient(120deg,rgba(155,111,232,.32),rgba(60,30,130,.2));border:1px solid rgba(196,164,255,.4)}.ft-pill span:last-child{color:#E3D6FF}.ft-pill b{font-weight:600;font-variant-numeric:tabular-nums}
+/* ВЕБ: планы, диаграммы в разумном размере */
+@media(min-width:1024px){
+ .dcard{display:flex!important;align-items:center;justify-content:space-between;gap:20px;padding:14px 24px!important;min-height:0!important;margin:0 0 12px!important}
+ .dcard .dc-t{order:1;flex:1;margin:0!important}
+ .dcard .dc-r{order:2;width:84px!important;height:84px!important;flex:none;margin:0!important}
+ .dcard .dc-r svg{width:84px!important;height:84px!important}.dcard .dc-r b{font-size:20px!important}
+ .tgrid{display:block!important;columns:2;column-gap:12px}.tgrid>*{break-inside:avoid;margin:0 0 8px!important}
+ .dmain:has(>.pw-nav){display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:14px 20px;align-items:start}
+ .dmain:has(>.pw-nav)>.pw-nav{grid-column:1/-1;margin:0}
+ .dmain:has(>.pw-nav)>.gx{grid-column:1;margin:0}
+ .dmain:has(>.pw-nav)>.pw-day{grid-column:2;margin:0}
+ .dmain:has(>.pw-nav)>.gx:nth-child(2){grid-row:2/span 7}
+ .dmain:has(>.pw-nav)>.mc{grid-column:1;grid-row:2;margin:0}
+ .dmain:has(>.pw-nav)>.pm-ag{grid-column:2;grid-row:2/span 2;margin:0}
+ .dmain:has(>.pw-nav)>.mc~.gx{grid-row:3}
+ .gx-s{max-height:260px}
+ .gx{max-width:520px}
+ .sq-in .btn.w{max-width:360px;margin-left:auto;margin-right:auto;display:block}
+ .ym-s{display:block;max-width:680px;margin:0 auto}
+ .hcards{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.hcards>.qadd{grid-column:1/-1}
+ .hcards .hcard{margin:0!important}
+}
 </style>
 </head>
 <body>
@@ -3455,7 +3513,7 @@ ctxH(){const td=today(),hr=this._hr??new Date().getHours(),c=((this.S.checkin||{
       <input class="cld-i" placeholder="Главное дело на завтра" value="${esc(c.top||'')}" onchange="APP.topSet('${td}',this.value)"></div>`}
   return ''},
 /* быстрые действия */
-qMenu(){const it=[['Дело на сегодня','list',"APP.close();APP.taskNew(today())"],['Привычка','check',"APP.close();APP.editH()"],['Победа дня','star',"APP.close();APP.winAdd()"],['30 минут фокуса','target',"APP.close();APP.focusAdd(30)"],['Запись в дневник','pen',"APP.close();APP._jd=today();APP.go('journal')"]];
+qMenu(){const it=[['Дело на сегодня','list',"APP.close();APP.taskNew(today())"],['Привычка','check',"APP.close();APP.editH()"],['Победа дня','star',"APP.close();APP.winAdd()"],['Фокус','target',"APP.close();APP.focusOpen()"],['Запись в дневник','pen',"APP.close();APP._jd=today();APP.go('journal')"]];
   this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Быстро добавить</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="qml">${it.map(([t,ic,a])=>`<button onclick="${a}"><span>${SI[ic]||hIco(ic)}</span>${t}</button>`).join('')}</div>`)},
 /* партнёр по ответственности */
 partnerW(){const head=`<div class="dz-ch"><span class="dz-ti">${I.chat||''}Партнёр</span></div>`;
@@ -3681,6 +3739,7 @@ initMobile(){
   app.addEventListener('contextmenu',e=>{if(e.target.closest('[data-lp]'))e.preventDefault()});
   this.initDrag();
   const tm=this.loadTm();if(tm){this.tm=tm;this.tmTick()}
+  this.ftResume()
 },
 
 /* ---------- время спринта ---------- */
@@ -4580,6 +4639,41 @@ msgClose(){const o=$('msgOv');o&&o.remove()},
 msgBlob(){return new Promise(r=>{const cv=$('msgCv');cv?cv.toBlob(r,'image/png'):r(null)})},
 async msgDl(){const b=await this.msgBlob();if(!b)return;this.track('msg_dl',null,'day');const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='volyo-poslanie.png';document.body.appendChild(a);a.click();setTimeout(()=>{a.remove();URL.revokeObjectURL(a.href)},500)},
 async msgShare(){const b=await this.msgBlob();if(!b)return;const f=new File([b],'volyo-poslanie.png',{type:'image/png'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){this.track('msg_share',null,'day');await navigator.share({files:[f]})}else this.msgDl()}catch(e){}},
+ftGet(){try{return JSON.parse(localStorage.getItem('tw-ft')||'null')}catch(e){return null}},
+ftSet(o){try{o?localStorage.setItem('tw-ft',JSON.stringify(o)):localStorage.removeItem('tw-ft')}catch(e){}},
+ftLeft(f){return f.paused?f.paused:Math.max(0,f.end-Date.now())},
+ftFmt(ms){const s=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(s/60);return String(m).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},
+ftMinTxt(m){return m>=60?Math.floor(m/60)+'ч'+(m%60?' '+(m%60)+'м':''):m+'м'},
+ftPill(){const f=this.ftGet();if(!f||f.done)return '';return `<button class="ft-pill" onclick="APP.focusOpen()"><span>Идёт фокус · <b class="ftp-t">${this.ftFmt(this.ftLeft(f))}</b></span><span>Открыть ›</span></button>`},
+ftOv(){let o=$('ftOv');if(!o){o=document.createElement('div');o.id='ftOv';o.className='fto';document.body.appendChild(o)}return o},
+ftHide(){const o=$('ftOv');o&&o.remove();this.render()},
+ftWake(on){try{if(on){if(navigator.wakeLock&&!this._ftwl)navigator.wakeLock.request('screen').then(l=>{this._ftwl=l;l.addEventListener('release',()=>{this._ftwl=null})}).catch(()=>{})}else if(this._ftwl){this._ftwl.release();this._ftwl=null}}catch(e){}},
+focusOpen(){const f=this.ftGet();if(f&&f.done)this.ftShow('fin');else if(f)this.ftShow('run');else this.ftShow('start')},
+ftShow(mode){const o=this.ftOv();clearInterval(this._ftt);
+  if(mode==='start'){let d=+(localStorage.getItem('tw-ftd')||25);this._ftd=d;this._ftw=this._ftw||'';const T=(this.tasksFor?this.tasksFor(today()):[]).filter(x=>!x.done).slice(0,8);this._ftT=T;
+    const own=![25,50,90].includes(d)||this._fto;
+    o.innerHTML=`<button class="fto-x" onclick="APP.ftHide()" aria-label="Закрыть">×</button><div class="fto-st"><h3>Фокус</h3><div class="fto-dur" id="ftDur">${[25,50,90].map(m=>`<button class="${d===m?'on':''}" onclick="APP.ftDur(${m})"><b>${m}</b><span>мин</span></button>`).join('')}<button class="${[25,50,90].includes(d)?'':'on'}" onclick="APP.ftOwn()"><b>…</b><span>своё</span></button></div><div class="fto-own ${own?'on':''}" id="ftOwn"><em onclick="APP.ftStep(-5)">−</em><b id="ftOwnV">${d} мин</b><em onclick="APP.ftStep(5)">+</em></div><div class="fto-wh" id="ftWh"><span class="${this._ftw?'':'on'}" onclick="APP.ftTask(-1)">Без задачи</span>${T.map((x,i)=>`<span class="${this._ftw===x.title?'on':''}" onclick="APP.ftTask(${i})">${esc(x.title)}</span>`).join('')}</div><button class="fto-go" onclick="APP.ftStart()">Начать</button></div>`}
+  else if(mode==='run'){const f=this.ftGet();if(!f)return this.ftShow('start');
+    o.innerHTML=`<button class="fto-x" onclick="APP.ftHide()" aria-label="Свернуть">×</button><div class="fto-run ${f.paused?'paused':''}" id="ftRun"><div class="fto-ring"><svg viewBox="0 0 292 292"><circle cx="146" cy="146" r="140" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="3"/><circle id="ftArc" cx="146" cy="146" r="140" fill="none" stroke="#E3D6FF" stroke-width="3" stroke-linecap="round" stroke-dasharray="879.6" stroke-dashoffset="0"/></svg><div class="fto-tm"><b id="ftClk"></b><span id="ftLab">${f.paused?'пауза':esc(f.label||'')}</span></div></div><div class="fto-ctl"><button class="fto-pb" onclick="APP.ftPause()" aria-label="Пауза"><i></i></button><button class="fto-end" onclick="APP.ftEnd()">Завершить</button></div></div>`;
+    this.ftWake(true);this.ftTick();this._ftt=setInterval(()=>this.ftTick(),250)}
+  else{const f=this.ftGet(),m=f&&f.m||0,tot=this.focusOf(today());
+    o.innerHTML=`<div class="fto-fin"><div class="fto-big">${m}</div><div class="fto-u">минут фокуса</div><div class="fto-tot">Сегодня всего ${this.ftMinTxt(tot)}</div><div class="fto-bt"><button class="fto-go" onclick="APP.ftDone()">Готово</button><button class="fto-end" onclick="APP.ftAgain()">Ещё раз</button></div></div>`}
+  try{this.tr(o)}catch(e){}},
+ftDur(m){this._ftd=m;this._fto=false;localStorage.setItem('tw-ftd',m);this.ftShow('start')},
+ftOwn(){this._fto=true;this.ftShow('start')},
+ftStep(k){let d=Math.max(5,Math.min(180,(this._ftd||25)+k));this._ftd=d;localStorage.setItem('tw-ftd',d);const e=$('ftOwnV');e&&(e.textContent=d+' мин');document.querySelectorAll('#ftDur button').forEach((b,i)=>b.classList.toggle('on',i<3?[25,50,90][i]===d:![25,50,90].includes(d)))},
+ftTask(i){this._ftw=i<0?'':(this._ftT[i]||{}).title||'';document.querySelectorAll('#ftWh span').forEach((s,j)=>s.classList.toggle('on',j===i+1))},
+ftStart(){const d=this._ftd||25,total=d*60000;this.ftSet({end:Date.now()+total,total,paused:0,label:this._ftw||''});this.track('focus_start',{m:d},'day');this.ftShow('run')},
+ftPause(){const f=this.ftGet();if(!f||f.done)return;if(f.paused){f.end=Date.now()+f.paused;f.paused=0}else{f.paused=Math.max(1,f.end-Date.now())}this.ftSet(f);this.buzz(6);const r=$('ftRun');if(r)r.classList.toggle('paused',!!f.paused);const l=$('ftLab');if(l){l.textContent=f.paused?'пауза':(f.label||'');try{this.tr(l)}catch(e){}}this.ftTick()},
+ftTick(){const f=this.ftGet();if(!f){clearInterval(this._ftt);return}if(f.done)return;const left=this.ftLeft(f);const c=$('ftClk');if(c)c.textContent=this.ftFmt(left);const a=$('ftArc');if(a)a.style.strokeDashoffset=(879.6*(1-Math.max(0,left)/f.total)).toFixed(1);document.querySelectorAll('.ftp-t').forEach(e=>e.textContent=this.ftFmt(left));if(!f.paused&&left<=0)this.ftFinish(true)},
+ftEnd(){this.ftFinish(false)},
+ftFinish(auto){const f=this.ftGet();if(!f||f.done)return;clearInterval(this._ftt);const left=this.ftLeft(f),m=auto?Math.round(f.total/60000):Math.round((f.total-left)/60000);this.ftWake(false);
+  if(m<1){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.toast('Меньше минуты не записываем');this.render();return}
+  this.ftSet({done:true,m});this.focusAdd(m,today(),null,true);this.track('focus_done',{m},'day');try{navigator.vibrate&&navigator.vibrate([60,40,60])}catch(e){}this.buzz(12);this.ftShow('fin')},
+ftDone(){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.render()},
+ftAgain(){this.ftSet(null);this.ftShow('start');setTimeout(()=>this.ftStart(),0)},
+ftResume(){const f=this.ftGet();if(!f)return;if(f.done){this.ftShow('fin');return}if(!f.paused&&f.end<=Date.now()){this.ftFinish(true);return}this._ftt=setInterval(()=>this.ftTick(),1000);this.ftWake(true);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){const g=this.ftGet();if(g&&!g.done){if(!g.paused&&g.end<=Date.now())this.ftFinish(true);else this.ftWake(true)}}})},
 homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
   const ST=(S.pref||{}).wk0==='sun';
   // --- показатели
@@ -4591,8 +4685,8 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const sc=o.inS?o.sc:null,prgPct=sc!=null?sc:o.mavg,prgLbl=sc!=null?'Счёт недели программы':'Выполнение за месяц';
   const IC={fl:'<path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 01-10 0c0-2 1-3 2-4 .5 1.5 1 2 2 2 0-3-1-5 1-8z"/>',ck:'<circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.3l2.6 2.6 5-5.4"/>',gl:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>',tm:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/>'};
   const sv=k=>`<svg viewBox="0 0 24 24">${IC[k]}</svg>`;
-  const kp=(ic,n,l,d,bar)=>`<div class="hd-c hd-k"><div class="hd-kr"><span class="hd-ib">${sv(ic)}</span><svg class="hd-ol" viewBox="0 0 24 24">${IC[ic]}</svg></div><div><div class="hd-n">${n}</div><div class="hd-l">${l}</div></div>${bar!=null?`<div class="hd-bar"><i style="width:${Math.min(100,Math.max(0,bar))}%"></i></div>`:`<div class="hd-d">${d}</div>`}</div>`;
-  const kpis=`<div class="hd-kp">${kp('fl',o.stk,'Дней серия',`лучшая серия: ${best}`)}${kp('ck',hDone+'/'+H.length,'Привычки сегодня',dTxt)}${kp('gl',prgPct+'%',prgLbl,'',prgPct)}${kp('tm',fm?fmt(fm):'0м','Фокус сегодня',`за неделю: ${fmt(fw)}`)}</div>`;
+  const kp=(ic,n,l,d,bar,go)=>`<div class="hd-c hd-k" ${go?`onclick="${go}" style="cursor:pointer"`:''}><div class="hd-kr"><span class="hd-ib">${sv(ic)}</span><svg class="hd-ol" viewBox="0 0 24 24">${IC[ic]}</svg></div><div><div class="hd-n">${n}</div><div class="hd-l">${l}</div></div>${bar!=null?`<div class="hd-bar"><i style="width:${Math.min(100,Math.max(0,bar))}%"></i></div>`:`<div class="hd-d">${d}</div>`}</div>`;
+  const kpis=`<div class="hd-kp">${kp('fl',o.stk,'Дней серия',`лучшая серия: ${best}`)}${kp('ck',hDone+'/'+H.length,'Привычки сегодня',dTxt)}${kp('gl',prgPct+'%',prgLbl,'',prgPct)}${kp('tm',fm?fmt(fm):'0м','Фокус сегодня',`за неделю: ${fmt(fw)}`,null,'APP.focusOpen()')}</div>`;
   // --- график динамики
   const R=this._dr||30,vals=[];for(let i=R-1;i>=0;i--){const d=add(td,-i),a=this.dayAll(d);vals.push(a.n?Math.round(a.p*100):null)}
   const sm=R>=30?vals.map((x,i)=>{if(x==null)return null;const w=[vals[i-1],x,vals[i+1]].filter(q=>q!=null);return Math.round(w.reduce((s,q)=>s+q,0)/w.length)}):vals;
@@ -4624,7 +4718,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const jr=`<div class="hd-c"><div class="hd-h"><b>Дневник</b><span onclick="APP._jd=today();APP.go('journal')" style="cursor:pointer">Все записи</span></div>${ents.length?ents.map(e=>`<div class="hd-jr" onclick="APP._jd='${e.d}';APP.go('journal')"><span class="hd-jd">${fd(e.d)}</span><div><b>${e.t}</b><span>${esc(e.x.length>90?e.x.slice(0,90)+'…':e.x)}</span></div></div>`).join(''):`<button class="hd-add" onclick="APP._jd=today();APP.go('journal')">+ Записать день</button>`}</div>`;
   const rad=this.pcRadar();
   const msgC=this.msgCard();
-  return {desk:`${kpis}<div class="hd-g1">${dyn}${foc}</div><div class="hd-g2">${hab}${goals}</div><div class="hd-g3">${jr}<div class="hd-rd">${rad}</div>${msgC}</div>`,a:`${kpis}${msgC}`,b:`${dyn}${hab}${goals}`}},
+  return {desk:`${this.ftPill()}${kpis}<div class="hd-g1">${dyn}${foc}</div><div class="hd-g2">${hab}${goals}</div><div class="hd-g3">${jr}<div class="hd-rd">${rad}</div>${msgC}</div>`,a:`${this.ftPill()}${kpis}${msgC}`,b:`${dyn}${hab}${goals}`}},
 dynHover(e,el){const v=JSON.parse(el.dataset.v),n=v.length;if(n<2)return;const r=el.getBoundingClientRect();let i=e?Math.round((e.clientX-r.left)/r.width*(n-1)):n-1;i=Math.max(0,Math.min(n-1,i));
   if(v[i]==null){let k=1;while(k<n&&v[i-k]==null&&v[i+k]==null)k++;i=v[i-k]!=null?i-k:i+k;if(v[i]==null)return}
   if(!e){i=n-1;while(i>0&&v[i]==null)i--}
@@ -5337,7 +5431,7 @@ methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17
 lang(){return ((this.S.pref||{}).lang)||'ru'},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=183');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=184');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
