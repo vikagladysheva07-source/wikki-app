@@ -2366,7 +2366,7 @@ body:has(.hrp) .nav .pfab{display:none!important}
  .dcard .dc-t{order:1;flex:1;margin:0!important}
  .dcard .dc-r{order:2;width:84px!important;height:84px!important;flex:none;margin:0!important}
  .dcard .dc-r svg{width:84px!important;height:84px!important}.dcard .dc-r b{font-size:20px!important}
- .tgrid{display:block!important;columns:2;column-gap:12px}.tgrid>*{break-inside:avoid;margin:0 0 8px!important}
+ .tgrid{display:flex!important;flex-direction:column;gap:8px}.tgrid>*{margin:0!important}
  .dmain:has(>.pw-nav){display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:14px 20px;align-items:start}
  .dmain:has(>.pw-nav)>.pw-nav{grid-column:1/-1;margin:0}
  .dmain:has(>.pw-nav)>.gx{grid-column:1;margin:0}
@@ -2381,6 +2381,59 @@ body:has(.hrp) .nav .pfab{display:none!important}
  .ym-s{display:block;max-width:680px;margin:0 auto}
  .hcards{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.hcards>.qadd{grid-column:1/-1}
  .hcards .hcard{margin:0!important}
+}
+/* описание задачи на карточке, ручка перетаскивания */
+.knote{margin-top:4px;font-size:12.5px;line-height:1.4;color:#A8A3B5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;white-space:normal;overflow-wrap:anywhere;text-align:left}
+.plr.done .knote,.tk.done .knote{opacity:.55}
+.kgrip{width:36px!important;height:44px!important;margin-left:-6px!important;color:#8E8A9C!important}.kgrip svg{width:18px!important;height:18px!important}
+.kgrip:active{color:#fff!important}
+.tk.dragging,.plr.dragging{opacity:1!important;transform:scale(1.02)!important;box-shadow:0 14px 34px rgba(0,0,0,.55),0 0 0 1px rgba(196,164,255,.45)!important;position:relative;z-index:6;background:linear-gradient(155deg,rgba(60,48,96,.96),rgba(26,22,44,.96))!important}
+/* подзадачи и клавиатура */
+.sheet{max-height:min(92vh,calc(var(--vvh,100vh) - 16px))!important}
+.te-cl{max-height:calc(var(--vvh,100vh)*.4);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.te-r .nt-x{flex:none;margin-top:5px;width:30px;height:30px;display:grid;place-items:center;background:none;border:0;color:#7A7688}
+.te-r .nt-x svg{width:14px;height:14px}
+.te-new input{padding:9px 0!important}
+/* профиль */
+.pf-w{display:block}.pf-b{margin-top:6px}
+.pf-me{width:100%;text-align:left;padding:16px!important;display:block;font:inherit;color:inherit}
+.pf-top{display:flex;gap:14px;align-items:center}.pf-top .mr-av{flex:none}
+.pf-who{flex:1;min-width:0;display:block}.pf-who b{display:block;font-size:19px;font-weight:600;line-height:1.2;color:#F4F1EC}.pf-who em{display:block;font-style:normal;font-size:12.5px;color:#9C9AA3;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pf-chip{display:inline-block;margin-top:8px;padding:4px 11px;border-radius:99px;font-size:11.5px;color:#E3D6FF;background:rgba(155,111,232,.2);border:1px solid rgba(155,111,232,.4)}
+.pf-ch{color:#6C6878;font-size:20px;line-height:1;flex:none}
+.pf-st{display:grid;grid-template-columns:repeat(3,1fr);margin-top:16px;border-top:1px solid rgba(255,255,255,.09);padding-top:14px}.pf-st>span{text-align:center}.pf-st b{display:block;font-size:22px;font-weight:300;letter-spacing:-.02em;color:#F4F1EC}.pf-st em{font-style:normal;font-size:11px;color:#8E8A98}
+.pf-tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.pf-tile{text-align:left;padding:14px;border-radius:20px;font:inherit;color:inherit;cursor:pointer;background:linear-gradient(155deg,rgba(255,255,255,.075),rgba(255,255,255,.022));border:1px solid rgba(255,255,255,.09)}
+.pf-ib{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:rgba(155,111,232,.2);border:1px solid rgba(155,111,232,.35);flex:none}.pf-ib svg{width:18px;height:18px;stroke:#E0D2FF;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.pf-tile b{display:block;font-size:14px;font-weight:600;margin-top:10px;color:#F4F1EC}.pf-tile>span:last-child{font-size:11.5px;color:#8E8A98}
+.pf-g{margin-top:14px;border-radius:22px;overflow:hidden;background:linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09)}
+.pf-r{display:flex;align-items:center;gap:13px;width:100%;padding:13px 14px;border:0;border-top:1px solid rgba(255,255,255,.08);background:none;font:inherit;font-size:14.5px;color:#F4F1EC;text-align:left;cursor:pointer}.pf-r:first-child{border-top:0}
+.pf-r .pf-ib{width:32px;height:32px;border-radius:10px}.pf-r .pf-ib svg{width:16px;height:16px}.pf-t{flex:1}.pf-v{font-size:12.5px;color:#8E8A98}
+.pf-r.out{color:#E8A0AC}.pf-r.out .pf-ib{background:rgba(230,100,120,.12);border-color:rgba(230,100,120,.3)}.pf-r.out .pf-ib svg{stroke:#F0A8B4}
+@media(min-width:1024px){.pf-w{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:18px;align-items:start;max-width:980px}.pf-b{margin-top:0}.pf-g:first-child{margin-top:0}}
+.ins h3{margin:0 0 4px;font-size:22px;font-weight:600}.ins-t{font-size:13px;color:#B9B4C4;line-height:1.45;margin-bottom:14px}
+.ins-s{display:flex;gap:13px;align-items:flex-start;padding:11px 0;border-top:1px solid rgba(255,255,255,.08)}.ins-s:first-of-type{border-top:0}
+.ins-n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:600;background:rgba(155,111,232,.22);border:1px solid rgba(155,111,232,.45);flex:none}
+.ins-s b{display:block;font-size:14.5px;font-weight:600}.ins-s div>span{font-size:12.5px;color:#8E8A98;line-height:1.4;display:block}
+.ins-sh{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;vertical-align:-7px;background:rgba(255,255,255,.1)}.ins-sh svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ins-note{margin:12px 0 14px;padding:12px 14px;border-radius:16px;font-size:12px;line-height:1.45;color:#B9B4C4;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09)}.ins-note b{color:#fff}
+/* диаграммы в разумном размере на планшете и узком окне (560–1023) */
+@media(min-width:560px) and (max-width:1023px){
+ .gx{max-width:480px;margin-left:auto;margin-right:auto}
+ .gx-s{max-height:300px}
+ .gx-w3{max-width:420px}
+ .ym-s{display:block;max-width:560px;margin:0 auto}
+ .dcard{padding:14px 20px!important;min-height:0!important}
+}
+/* колесо баланса: крупнее и читаемее, список сфер рядом */
+.gx-w3 .gx-s{max-height:none!important}
+.gx-w3{margin-left:auto;margin-right:auto}
+@media(min-width:560px){.gx-w3{max-width:440px!important}}
+@media(min-width:1024px){
+ .dmain:has(>.sv-l){display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:0 22px;align-items:start}
+ .dmain:has(>.sv-l)>.gx-w3{grid-column:1;grid-row:1/span 3;margin:0;position:sticky;top:20px}
+ .dmain:has(>.sv-l)>.sv-h,.dmain:has(>.sv-l)>.sv-l,.dmain:has(>.sv-l)>.sv-add{grid-column:2}
+ .dmain:has(>.sv-l)>.sv-h{margin-top:0}
 }
 </style>
 </head>
@@ -2599,13 +2652,7 @@ areaIcoSet(i,k){const a=this.areasGet();a[i].i=k;this.areasSave(a)},
 SQL:{health:['Усталость, спорта нет','По-разному, режима нет','Сон, энергия, спорт в порядке'],career:['Нет ясности, не радует','Работа есть, роста нет','Растёшь, результаты видны'],money:['Деньги тревожат','Хватает, накоплений нет','Доход растёт, есть запас'],rel:['Почти нет общения','Общение случайное','Близкие рядом, время есть'],love:['Одиночество или конфликты','Есть, но без глубины','Тепло и доверие'],spirit:['Топчусь на месте','Учусь от случая к случаю','Есть план, расту'],fun:['Нет времени на себя','Отдых урывками','Делаю то, что люблю'],home:['Хаос и неудобно','Терпимо, но не нравится','Порядок и уют']},
 SQH:{health:'сон, энергия, спорт, самочувствие',career:'работа, дело, рост, результаты',money:'доходы, накопления, спокойствие с деньгами',rel:'семья, друзья, общение',love:'отношения с партнёром, близость',spirit:'обучение, привычки, развитие себя',fun:'отдых, хобби, удовольствие',home:'порядок, быт, среда вокруг'},
 sqIco(k){const a=[...AREAS0,...this.areaList()].find(x=>x[0]===k);return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${a?a[2]:''}</svg>`},
-sqNote(){const S=this.S,old=S.areaQ&&Date.now()-S.areaQ>28*864e5&&!(S.areaSnz&&Date.now()-S.areaSnz<7*864e5);
-  if(old)return `<div class="sq-n2"><b>Прошёл месяц</b><p>Оценим сферы заново? Увидишь, что изменилось.</p><div class="row" style="gap:10px"><button class="btn pr w" onclick="APP.sqStart()">Оценить</button><button class="btn gh w" onclick="APP.S.areaSnz=Date.now();APP.save();APP.render()">Позже</button></div></div>`;
-  const L=this.areaList(),St=L.map(a=>({a,st:this.sphSt(a[0])})).filter(x=>x.st.lv>=6);let g=null;
-  const none=St.filter(x=>!x.st.hs.length&&!x.st.ks.length&&!x.st.gs.length).sort((x,y)=>y.st.lv-x.st.lv)[0];
-  if(none)g={a:none.a,t:`Оценка ${none.st.lv}, а привычек и дел нет. С чего начнём?`,b:'Добавить привычку',f:`APP.editHA('${none.a[0]}')`};
-  else{const z=St.filter(x=>x.st.e8>=7&&x.st.a8!=null&&x.st.lv/10-x.st.a8>=.3).sort((x,y)=>(y.st.lv/10-y.st.a8)-(x.st.lv/10-x.st.a8))[0];if(z)g={a:z.a,t:`Оценка ${z.st.lv}, а за 4 недели выполнено ${Math.round(z.st.a8*100)}%. Попробуй упростить привычки.`,b:'Открыть сферу',f:`APP.sphOpen('${z.a[0]}')`}}
-  return g?`<div class="sq-n2"><b>${esc(g.a[1])}</b><p>${g.t}</p><button class="btn gh w" onclick="${g.f}">${g.b}</button></div>`:''},
+sqNote(){return ''},
 sqIntro(){return `<div class="sq-in"><div class="sq-ring"><svg viewBox="0 0 120 120">${[0,1,2,3,4,5,6,7].map(i=>{const t0=-Math.PI/2+i*Math.PI/4+.05,t1=t0+Math.PI/4-.1,P=(r,t)=>[(60+r*Math.cos(t)).toFixed(1),(60+r*Math.sin(t)).toFixed(1)],a=P(52,t0),b=P(52,t1),c=P(20,t1),d=P(20,t0);return `<path d="M${a}A52 52 0 0 1 ${b}L${c}A20 20 0 0 0 ${d}Z" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)" stroke-dasharray="3 3"/>`}).join('')}</svg></div><b>Оцени свою жизнь по сферам</b><p>Ответь на несколько вопросов, и мы построим колесо баланса. Дальше оно будет меняться по твоим привычкам и делам.</p><button class="btn pr w" onclick="APP.sqStart()">Начать</button></div>`},
 sqStart(){const cur=this.areasGet(),opts=[...AREAS0.map(a=>({k:a[0],n:a[1]})),...cur.filter(x=>!AREAS0.some(a=>a[0]===x.k))];
   this._sq={st:'pick',opts,sel:this.S.areas&&this.S.areas.length?cur.map(x=>x.k):opts.map(o=>o.k),lv:Object.assign({},this.S.areaLvl||{}),i:0};this.sqRender()},
@@ -3044,13 +3091,17 @@ kPr(id,n){const x=this.kKeep(id);if(!x)return;x.pr=n;this.save();this.taskEditR(
 ksbH(x){const sb=x.sub||[];if(!sb.length&&!x._ksa)return '';return `<div class="ksb">${sb.slice(0,8).map(z=>`<button class="ksb-r ${z.d?'on':''}" onclick="event.stopPropagation();APP.kSubT('${x.id}','${z.id}')"><i></i><span>${esc(z.t)}</span></button>`).join('')}${sb.length>8?`<span class="ksb-m">ещё ${sb.length-8}</span>`:''}</div>`},
 kSubT(id,sid){const x=(this.S.tasks||[]).find(t=>t.id===id),s=x&&(x.sub||[]).find(z=>z.id===sid);if(!s)return;s.d=s.d?0:1;if(s.d)this.buzz(6);x.t=Date.now();this.save();this.render()},
 kSubQ(id){this.ask('Новая подзадача','',v=>{v=(v||'').trim();if(!v)return;const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;x.sub=x.sub||[];x.sub.push({id:'s'+uid(),t:v.slice(0,120),d:0});x.t=Date.now();this.save();this.render()})},
-kSubAdd(id,v){v=(v||'').trim();if(!v)return;const x=this.kKeep(id);x.sub=x.sub||[];x.sub.push({id:'s'+uid(),t:v,d:0});this.save();this.taskEditR(id);setTimeout(()=>{const e=$('kSn');e&&e.focus()},40)},
-kSubTog(id,sid){const x=this.kKeep(id),s=x&&(x.sub||[]).find(z=>z.id===sid);if(!s)return;s.d=s.d?0:1;if(s.d)this.buzz(6);this.save();this.taskEditR(id)},
+kSubRow(id,z){return `<button class="te-c ${z.d?'on':''}" onclick="APP.kSubTog('${id}','${z.id}')" aria-label="Отметить">${z.d?I.ok:''}</button><textarea rows="1" enterkeyhint="next" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'" onchange="APP.kSubSet('${id}','${z.id}',this.value)" onkeydown="APP.kSubKey(event,'${id}','${z.id}',this)">${esc(z.t)}</textarea><button class="nt-x" onclick="APP.kSubDel('${id}','${z.id}')" aria-label="Убрать">${I.x}</button>`},
+subFit(){document.querySelectorAll('#sheet .te-r textarea').forEach(t=>{t.style.height='auto';t.style.height=t.scrollHeight+'px'})},
+subPaste(e,kind,id){const t=(e.clipboardData||window.clipboardData).getData('text')||'';if(!/\n/.test(t.trim()))return;e.preventDefault();t.split(/\n+/).map(s=>s.replace(/^\s*(?:[-•*]|\d+[.)])\s*/,'').trim()).filter(Boolean).forEach(s=>kind==='k'?this.kSubAdd(id,s):this.ntSub(s))},
+kSubAdd(id,v){v=(v||'').trim();if(!v)return;const x=this.kKeep(id);if(!x)return;x.sub=x.sub||[];const z={id:'s'+uid(),t:v.slice(0,300),d:0};x.sub.push(z);x.t=Date.now();this.save();const nw=$('kSn');if(!nw||!nw.closest('.te-r')){this.taskEditR(id);return}
+  const row=document.createElement('div');row.className='te-r';row.dataset.sid=z.id;row.innerHTML=this.kSubRow(id,z);nw.closest('.te-r').before(row);nw.value='';nw.focus();this.subFit();try{nw.scrollIntoView({block:'nearest'})}catch(e){}},
+kSubTog(id,sid){const x=(this.S.tasks||[]).find(t=>t.id===id),s=x&&(x.sub||[]).find(z=>z.id===sid);if(!s)return;this.kKeep(id);s.d=s.d?0:1;if(s.d)this.buzz(6);x.t=Date.now();this.save();const row=document.querySelector(`#sheet [data-sid="${sid}"]`);if(!row){this.taskEditR(id);return}row.classList.toggle('on',!!s.d);const b=row.querySelector('.te-c');b.classList.toggle('on',!!s.d);b.innerHTML=s.d?I.ok:''},
+kSubDel(id,sid){const x=this.kKeep(id);if(!x)return;x.sub=(x.sub||[]).filter(z=>z.id!==sid);x.t=Date.now();this.save();const row=document.querySelector(`#sheet [data-sid="${sid}"]`);if(!row){this.taskEditR(id);return}const prev=row.previousElementSibling;row.remove();const f=(prev&&prev.querySelector('textarea'))||$('kSn');f&&f.focus()},
 kSubSet(id,sid,v){const x=(this.S.tasks||[]).find(t=>t.id===id),s=x&&(x.sub||[]).find(z=>z.id===sid);if(!s)return;s.t=v.trim()||s.t;x.t=Date.now();this.save()},
-kSubDel(id,sid){const x=this.kKeep(id);x.sub=(x.sub||[]).filter(z=>z.id!==sid);this.save();this.taskEditR(id)},
 GRIP:'<button class="kgrip" aria-label="Перетащить" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><circle cx="9" cy="6" r="1.7"/><circle cx="15" cy="6" r="1.7"/><circle cx="9" cy="12" r="1.7"/><circle cx="15" cy="12" r="1.7"/><circle cx="9" cy="18" r="1.7"/><circle cx="15" cy="18" r="1.7"/></svg></button>',
-kMeta(x){const td=today(),out=[];if(x.rep)out.push(`<span class="km-r"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 01-3 3H3"/></svg>${this.kRepTxt(x.rep)}</span>`);if(x.area){const ar=this.areaList().find(z=>z[0]===x.area);if(ar)out.push(`<span class="km-a">${esc(ar[1])}</span>`)}if(x.note)out.push(`<span class="km-n" title="Есть заметка"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 6h14M5 12h14M5 18h9"/></svg></span>`);
-  (x.tags||[]).forEach(g=>out.push(`<span class="km-t">#${esc(g)}</span>`));return out.length?`<div class="kmeta">${out.join('')}</div>`:''},
+kMeta(x){const td=today(),out=[];if(x.rep)out.push(`<span class="km-r"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 01-3 3H3"/></svg>${this.kRepTxt(x.rep)}</span>`);if(x.area){const ar=this.areaList().find(z=>z[0]===x.area);if(ar)out.push(`<span class="km-a">${esc(ar[1])}</span>`)}
+  (x.tags||[]).forEach(g=>out.push(`<span class="km-t">#${esc(g)}</span>`));return (x.note&&x.note.trim()?`<div class="knote">${esc(x.note.trim())}</div>`:'')+(out.length?`<div class="kmeta">${out.join('')}</div>`:'')},
 taskEdit(id){this._kmore=false;this._kdp=false;this.taskEditR(id)},
 kMore(id){this.kKeep(id);this._kmore=!this._kmore;this.taskEditR(id)},
 kMenu(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;const td=today(),L=[['Сегодня',td],['Завтра',add(td,1)],['Через неделю',add(td,7)]].filter(([l,v])=>v!==x.date);
@@ -3070,8 +3121,8 @@ taskEditR(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;const p
   <div class="te-dp" ${dp?'':'hidden'}><div class="kqd kqd-c">${[['Сегодня',today()],['Завтра',add(today(),1)],['Неделя',add(today(),7)]].map(([l,v])=>`<button onclick="$('kD').value='${v}';APP.kAuto('${id}');document.querySelectorAll('.kqd-c button').forEach(b=>b.classList.remove('on'));this.classList.add('on')" class="${x.date===v?'on':''}">${l}</button>`).join('')}<input id="kM" class="k-tm" type="time" value="${x.tm||''}" onchange="APP.kAuto('${id}')" aria-label="Время"><span class="k-dash">–</span><input id="kM2" class="k-tm" type="time" value="${x.tm2||''}" onchange="APP.kAuto('${id}')" aria-label="Время окончания"></div><div class="f" style="margin:8px 0 0"><input id="kD" type="date" value="${x.date}" onchange="APP.kAuto('${id}')"></div></div>
   <input id="kT" class="te-t" value="${esc(x.title)}" placeholder="Что сделать" oninput="APP.kAuto('${id}')">
   <textarea id="kN" class="te-n" placeholder="Описание" oninput="APP.kAuto('${id}')">${esc(x.note||'')}</textarea>
-  <div class="te-cl">${sb.map(z=>`<div class="te-r ${z.d?'on':''}"><button class="te-c ${z.d?'on':''}" onclick="APP.kSubTog('${id}','${z.id}')" aria-label="Отметить">${z.d?I.ok:''}</button><textarea rows="1" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'" onchange="APP.kSubSet('${id}','${z.id}',this.value)" onkeydown="APP.kSubKey(event,'${id}','${z.id}',this)">${esc(z.t)}</textarea></div>`).join('')}
-   <div class="te-r te-new"><span class="te-c"></span><input id="kSn" placeholder="Подзадача: напиши и нажми Enter" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();APP.kSubAdd('${id}',this.value)}"></div></div>
+  <div class="te-cl">${sb.map(z=>`<div class="te-r ${z.d?'on':''}" data-sid="${z.id}">${this.kSubRow(id,z)}</div>`).join('')}
+   <div class="te-r te-new"><span class="te-c"></span><input id="kSn" placeholder="Новая подзадача: Enter добавляет" autocomplete="off" enterkeyhint="next" onkeydown="if(event.key==='Enter'){event.preventDefault();APP.kSubAdd('${id}',this.value)}" onpaste="APP.subPaste(event,'k','${id}')"></div></div>
   <div class="k-more" ${more?'':'hidden'}>
    <label class="lbl">Повтор</label>
    <div class="kqd krep">${[['','Нет'],['d','Каждый день'],['wd','По будням'],['w','Каждую неделю'],['m','Каждый месяц'],['y','Каждый год']].map(([f,l])=>`<button class="${((x.rep&&x.rep.f)||'')===f?'on':''}" onclick="APP.kRep('${id}','${f}')">${l}</button>`).join('')}</div>
@@ -3130,13 +3181,32 @@ initSwipe(){const app=$('app');let el=null,sx=0,sy=0,dx=0,on=false;
   app.addEventListener('touchend',end,{passive:true});app.addEventListener('touchcancel',end,{passive:true});
   app.addEventListener('click',e=>{if(this._swing&&Date.now()-this._swing<350){e.stopPropagation();e.preventDefault()}},true)},
 /* вкладка «Ещё» */
-vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData():{lvl:1};
-  const lock=pd0?'':`<i class="mr-lk">Полный доступ</i>`;
-  const T=[['journal','Дневник',I.diary,'Записи дня, рефлексия и победы',0],['program','Программа',I.goal,'Цели на 12 недель, тактики и разбор недели',1],['progress','Прогресс',I.chart,'Графики, колесо баланса и год в пикселях',1]];
+vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData():{lvl:1},S=this.S;
+  const dif=this.pl,tl=this.rwTitle();
+  let marks=0;try{for(const d in (S.hlog||{}))for(const k in S.hlog[d])if(S.hlog[d][k])marks++;marks+=(S.tasks||[]).filter(x=>x.done).length}catch(e){}
+  let st=0;try{st=this.dayStreak()}catch(e){}
+  let since=0;try{const c=this.user&&this.user.created_at?Date.parse(this.user.created_at):0;const ks=Object.keys(S.hlog||{}).sort();const f=c||(ks.length?Date.parse(ks[0]):0);since=f?Math.max(1,Math.round((Date.now()-f)/864e5)):1}catch(e){}
+  const em=this.user?esc(this.user.email||''):'';
+  const chip=pd0?`<span class="pf-chip">Полный доступ${this._acc&&this._acc.until?' до '+fd(this._acc.until):''}</span>`:(this.user?'':`<span class="pf-chip">Войди, чтобы сохранить прогресс</span>`);
+  const IC={phone:'<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/>',bell:'<path d="M6 17V11a6 6 0 0112 0v6l1.5 2h-15zM10 21h4"/>',globe:'<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3.5 3 13.5 0 17M12 3.5c-3 3.5-3 13.5 0 17"/>',down:'<path d="M12 4v11M7.5 11L12 15.5 16.5 11M5 20h14"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1.2l2-1.5-2-3.4-2.3.9a7 7 0 00-2-1.2L14 3h-4l-.6 2.6a7 7 0 00-2 1.2l-2.3-.9-2 3.4 2 1.5A7 7 0 005 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.3-.9a7 7 0 002 1.2L10 21h4l.6-2.6a7 7 0 002-1.2l2.3.9 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/>',crown:'<path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/>',users:'<circle cx="9" cy="8.5" r="3.3"/><path d="M3 20c.7-3.2 3-4.8 6-4.8s5.3 1.6 6 4.8M16 5.5a3.2 3.2 0 010 6M18 15.5c1.8.7 2.8 2.2 3 4.5"/>',help:'<circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.6A2.5 2.5 0 1112 12.5v1M12 16.5v.01"/>',info:'<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8v.01"/>',share:'<path d="M12 15V4M8 8l4-4 4 4M5 12v7a1 1 0 001 1h12a1 1 0 001-1v-7"/>',out:'<path d="M15 4h3a2 2 0 012 2v12a2 2 0 01-2 2h-3M10 8l-4 4 4 4M6 12h11"/>'};
+  const sv=k=>`<svg viewBox="0 0 24 24">${IC[k]}</svg>`;
+  const tile=(ic,t,s,act)=>`<button class="pf-tile" onclick="${act}"><span class="pf-ib">${sv(ic)}</span><b>${t}</b><span>${s}</span></button>`;
+  const row=(ic,t,v,act,cls)=>`<button class="pf-r ${cls||''}" onclick="${act}"><span class="pf-ib">${sv(ic)}</span><span class="pf-t">${t}</span>${v?`<span class="pf-v">${v}</span>`:''}<span class="pf-ch">›</span></button>`;
+  const lang=this.lang()==='en'?'English':'Русский',pp=(()=>{try{return this._pushOn?'Включены':'Выключены'}catch(e){return ''}})();
+  const g1=[row('gear','Настройки','',"APP.go('me')"),pd0?row('crown','Полный доступ',this._acc&&this._acc.until?'до '+fd(this._acc.until):'активен',"APP.go('me');APP._sset='premium';APP.render()"):row('crown','Полный доступ','открыть',"APP.paySheet('program')"),row('users','Позвать партнёра','',"APP.ptCreate()")];
+  const g2=[row('help','Помощь и обратная связь','',"APP.go('me');APP._sset='help';APP.render()"),row('info','О приложении','',"APP.go('me');APP._sset='about';APP.render()"),row('share','Поделиться приложением','',"APP.shareApp()")];
+  if(this.user)g2.push(row('out','Выйти из аккаунта','',"APP.logout()",'out'));
   return `<div class="h1">Профиль</div>__S1____S2__
-  <button class="card mr-me" onclick="APP.go('profile')"><span class="mr-av ${this.rwFr()}">${this.avaHtml()}</span><div class="sp"><b>${esc(P.name||'Твой профиль')}</b><em>${this.rwTitle()?this.rwTitle()+' · ':''}уровень ${D.lvl||1}${this.user?'':' · войди, чтобы сохранить прогресс'}</em></div>${I.r}</button>
-  ${pd0?'':`<button class="card mr-pay" onclick="APP.paySheet('program')"><span>${I.star}</span><div class="sp"><b>Полный доступ</b></div>${I.r}</button>`}
-  <div class="card mr-l"><button onclick="APP.ptCreate()">${I.me}<span>Позвать партнёра</span>${I.r}</button><button onclick="APP.go('me')">${I.gear}<span>Настройки</span>${I.r}</button><button onclick="APP.go('me');APP._sset='about';APP.render()">${I.spark||I.star}<span>О приложении</span>${I.r}</button><button onclick="APP.shareApp()">${SI.share}<span>Поделиться приложением</span>${I.r}</button></div>`},
+  <div class="pf-w"><div class="pf-a"><button class="card pf-me" onclick="APP.go('profile')"><span class="pf-top"><span class="mr-av ${this.rwFr()}">${this.avaHtml()}</span><span class="pf-who"><b>${esc(P.name||'Твой профиль')}</b><em>${tl?tl+' · ':''}уровень ${D.lvl||1}</em>${em?`<em>${em}</em>`:''}${chip}</span><span class="pf-ch">›</span></span>
+   <span class="pf-st"><span><b>${st}</b><em>${this.pl(st,'день','дня','дней')} серия</em></span><span><b>${marks}</b><em>${this.pl(marks,'отметка','отметки','отметок')}</em></span><span><b>${since}</b><em>${this.pl(since,'день','дня','дней')} с нами</em></span></span></button>
+   <div class="pf-tiles">${tile('phone','На экран «Домой»','Установить приложение',"APP.installSheet()")}${tile('bell','Напоминания',pp,"APP.go('me');APP._sset='notif';APP.render()")}${tile('globe','Язык',lang,"APP.go('me');APP._sset='lang';APP.render()")}${tile('down','Мои данные','Выгрузить и защитить',"APP.go('me');APP._sset='data';APP.render()")}</div></div>
+  <div class="pf-b"><div class="pf-g">${g1.join('')}</div><div class="pf-g">${g2.join('')}</div></div></div>`},
+installSheet(){const ua=navigator.userAgent||'',ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),standalone=window.navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
+  if(standalone){this.toast('Приложение уже установлено');return}
+  const safari=ios&&!/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
+  const shi='<span class="ins-sh"><svg viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4M5 12v7a1 1 0 001 1h12a1 1 0 001-1v-7"/></svg></span>';
+  const steps=ios?[['Открой VOLYO в Safari',safari?'Ты уже в нём, всё хорошо.':'Сейчас ты не в Safari. Скопируй адрес и открой его в Safari: из других браузеров на iPhone установка не работает.'],['Нажми «Поделиться» '+shi,'Кнопка внизу экрана Safari: квадрат со стрелкой вверх.'],['Выбери «На экран Домой»','Пролистай список вниз, найди этот пункт и нажми «Добавить».']]:[['Открой меню браузера','Три точки в правом верхнем углу Chrome.'],['Выбери «Установить приложение»','Или «Добавить на главный экран».'],['Подтверди','Иконка появится среди приложений.']];
+  this.open(`<div class="ins"><h3>Установи VOLYO${ios?' на iPhone':''}</h3><div class="ins-t">Тогда приложение откроется с иконки на экране, без адресной строки, как обычное.</div>${steps.map((s,i)=>`<div class="ins-s"><span class="ins-n">${i+1}</span><div><b>${s[0]}</b><span>${s[1]}</span></div></div>`).join('')}<div class="ins-note"><b>Про виджеты.</b> Apple не разрешает виджеты для приложений, добавленных с сайта. Они возможны только в приложении из App Store.</div><button class="btn pr w" onclick="APP.close()">Понятно</button></div>`)},
 /* темы оформления: перекрашиваем фирменный фиолетовый в цвет темы */
 THM:{},
 thConv(r,g,b){const T=this.THM[(this.S.pref||{}).theme];if(!T)return null;const k=r+','+g+','+b,C=this._thc||(this._thc={});if(k in C)return C[k];
@@ -3739,7 +3809,7 @@ initMobile(){
   app.addEventListener('contextmenu',e=>{if(e.target.closest('[data-lp]'))e.preventDefault()});
   this.initDrag();
   const tm=this.loadTm();if(tm){this.tm=tm;this.tmTick()}
-  this.ftResume()
+  this.ftResume();this.initKb()
 },
 
 /* ---------- время спринта ---------- */
@@ -4029,8 +4099,6 @@ ntKeep(){const q=this._tn;if(q&&$('nT'))q.title=$('nT').value},
 ntSet(k,v){this.ntKeep();this._tn[k]=v;this.ntRender()},
 ntPick(k,v){this.ntKeep();const q=this._tn;q[k]=v;q.panel='';this.ntRender()},
 ntPanel(k){this.ntKeep();const q=this._tn;q.panel=q.panel===k?'':k;this.ntRender();if(q.panel==='sub')setTimeout(()=>{const e=$('nS');e&&e.focus()},60)},
-ntSub(v){v=(v||'').trim();if(!v)return;this.ntKeep();this._tn.sub.push(v);this.ntRender();setTimeout(()=>{const e=$('nS');e&&e.focus()},60)},
-ntSubDel(i){this.ntKeep();this._tn.sub.splice(i,1);this.ntRender()},
 ntDateTxt(){const q=this._tn,td=today();return (q.date===td?'Сегодня':q.date===add(td,1)?'Завтра':WD[pd(q.date).getDay()]+', '+fd(q.date))+(q.tm?' · '+(q.tm2&&q.tm2>q.tm?q.tm+'–'+q.tm2:q.tm):'')},
 ntSave(){this.ntKeep();const q=this._tn;if(!q.title.trim()){const e=$('nT');e&&e.focus();return}
   const P=this.parseTask(q.title,q.date),o={id:'k'+uid(),title:P.title,date:P.date,tm:q.tm||P.tm||'',done:'',t:Date.now()},pr=q.pr||P.pr||0;if(q.tm&&q.tm2&&q.tm2>q.tm)o.tm2=q.tm2;
@@ -4041,7 +4109,7 @@ ntSave(){this.ntKeep();const q=this._tn;if(!q.title.trim()){const e=$('nT');e&&e
   const tdd=today(),w=o.date===tdd?'сегодня':o.date===add(tdd,1)?'завтра':WD[pd(o.date).getDay()]+', '+fd(o.date);this.toast('Задача на '+w+(o.tm?' в '+this.tmR(o):''))},
 ntRender(){const q=this._tn,pr=q.pr,ar=this.areaList();let pn='';
   if(q.panel==='pr')pn=`<div class="nt-pr">${[0,1,2,3].map(n=>`<button class="${pr===n?'on':''}" style="--c:${n?this.PRC[n]:'#9C9AA3'}" onclick="APP.ntPick('pr',${n})">${this.kFlag(n,16)}<span>${this.PRN[n].replace('Без приоритета','Нет')}</span></button>`).join('')}</div>`;
-  else if(q.panel==='sub')pn=`<div class="te-cl">${q.sub.map((t,i)=>`<div class="te-r"><span class="te-c"></span><input value="${esc(t)}" onchange="APP._tn.sub[${i}]=this.value.trim()||APP._tn.sub[${i}]"><button class="nt-x" onclick="APP.ntSubDel(${i})" aria-label="Убрать">${I.x}</button></div>`).join('')}<div class="te-r te-new"><span class="te-c"></span><input id="nS" placeholder="Подзадача: напиши и нажми Enter" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();APP.ntSub(this.value)}"></div></div>`;
+  else if(q.panel==='sub')pn=`<div class="te-cl">${q.sub.map((t,i)=>this.ntRow(i,t)).join('')}<div class="te-r te-new"><span class="te-c"></span><input id="nS" placeholder="Новая подзадача: Enter добавляет" autocomplete="off" enterkeyhint="next" onkeydown="if(event.key==='Enter'){event.preventDefault();APP.ntSub(this.value)}" onpaste="APP.subPaste(event,'n')"></div></div>`;
   else if(q.panel==='area')pn=`<div class="kqd">${[['','Нет'],...ar.map(a=>[a[0],a[1]])].map(([k,l])=>`<button class="${q.area===k?'on':''}" onclick="APP.ntPick('area','${k}')">${esc(l)}</button>`).join('')}</div>`;
   this.open(`<input id="nT" class="nt-in" value="${esc(q.title)}" placeholder="Что нужно сделать?" autocomplete="off" enterkeyhint="done" onkeydown="if(event.key==='Enter'){event.preventDefault();APP.ntSave()}">
   ${pn?`<div class="nt-pn">${pn}</div>`:''}
@@ -4049,10 +4117,16 @@ ntRender(){const q=this._tn,pr=q.pr,ar=this.areaList();let pn='';
    <button class="nt-ib ${pr?'on':''}" style="--c:${pr?this.PRC[pr]:'#9C9AA3'}" onclick="APP.ntPanel('pr')" aria-label="Приоритет">${this.kFlag(pr,20)}</button>
    <button class="nt-ib ${q.sub.length||q.panel==='sub'?'on':''}" onclick="APP.ntPanel('sub')" aria-label="Подзадачи"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h11M10 12h11M10 18h11M3 6l1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg>${q.sub.length?`<i>${q.sub.length}</i>`:''}</button>
    <button class="nt-ib ${q.area||q.panel==='area'?'on':''}" onclick="APP.ntPanel('area')" aria-label="Сфера">${I.goal}</button>
-   <span class="sp"></span><button class="nt-go" onclick="APP.ntSave()" aria-label="Добавить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div>`)},
+   <span class="sp"></span><button class="nt-go" onclick="APP.ntSave()" aria-label="Добавить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div>`);setTimeout(()=>this.subFit(),30)},
 ntCal(m){this.ntKeep();const q=this._tn;if(!q._bak)q._bak={date:q.date,tm:q.tm,tm2:q.tm2,rep:q.rep};if(m)q.cal=m;else q.cal=q.date.slice(0,7);this.ntCalR()},
 ntCalPick(d){const q=this._tn;q.date=d;q.cal=d.slice(0,7);this.ntCalR()},
 ntCalMove(n){const q=this._tn,[y,m]=q.cal.split('-').map(Number),dt=new Date(y,m-1+n,1);q.cal=dt.getFullYear()+'-'+pad(dt.getMonth()+1);this.ntCalR()},
+ntRow(i,t){return `<div class="te-r" data-i="${i}"><span class="te-c"></span><textarea rows="1" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'" onchange="APP.ntSubSet(${i},this.value)">${esc(t)}</textarea><button class="nt-x" onclick="APP.ntSubDel(${i})" aria-label="Убрать">${I.x}</button></div>`},
+ntSubSet(i,v){v=(v||'').trim();if(v&&this._tn)this._tn.sub[i]=v},
+ntSub(v){v=(v||'').trim();if(!v)return;this.ntKeep();const q=this._tn;q.sub.push(v.slice(0,300));const nw=$('nS');if(!nw||q.panel!=='sub'||!nw.closest('.te-r')){this.ntRender();return}
+  const row=document.createElement('div');row.innerHTML=this.ntRow(q.sub.length-1,v.slice(0,300));nw.closest('.te-r').before(row.firstElementChild);nw.value='';nw.focus();this.subFit();
+  const b=document.querySelectorAll('.nt-tb .nt-ib')[1];if(b){b.classList.add('on');let c=b.querySelector('i');if(!c){c=document.createElement('i');b.appendChild(c)}c.textContent=q.sub.length}try{nw.scrollIntoView({block:'nearest'})}catch(e){}},
+ntSubDel(i){this.ntKeep();this._tn.sub.splice(i,1);this.ntRender();if(this._tn.panel==='sub')setTimeout(()=>{const e=$('nS');e&&e.focus()},60)},
 ntKeepTm(){const q=this._tn;if(q.tm2&&q.tm2<=q.tm)q.tm2=''},
 ntToSync(){const q=this._tn,r=$('ntTo'),m2=$('nM2');if(r)r.hidden=!q.tm;if(m2){m2.min=q.tm||'';if(!q.tm2)m2.value=''}},
 ntCalOk(){const q=this._tn;if($('nM'))q.tm=$('nM').value||'';if(!q.tm)q.tm2='';else if($('nM2'))q.tm2=$('nM2').value||'';if($('nR'))q.rep=$('nR').value||'';delete q._bak;this.ntRender()},
@@ -4135,7 +4209,7 @@ pace(actual,target,start){const td=today(),total=this.W*7,el=Math.max(0,Math.min
 
 /* ---------- перетаскивание ---------- */
 initDrag(){const app=$('app');let drag=null,kd=null;
-  app.addEventListener('pointerdown',e=>{const kg=e.target.closest('.kgrip');if(kg){const item=kg.closest('.tk,.plr'),box=item&&item.parentElement;if(!box)return;e.preventDefault();try{kg.setPointerCapture(e.pointerId)}catch(_){}kd={item,box};item.classList.add('dragging');return}const hnd=e.target.closest('.drag');if(!hnd)return;const item=hnd.closest('.list-item,.hb'),list=item&&item.closest('.rl');if(!list)return;
+  app.addEventListener('pointerdown',e=>{const kg=e.target.closest('.kgrip');if(kg){const item=kg.closest('.tk,.plr'),box=item&&item.parentElement;if(!box)return;e.preventDefault();try{kg.setPointerCapture(e.pointerId)}catch(_){}kd={item,box};item.classList.add('dragging');try{this.buzz(10)}catch(_){}return}const hnd=e.target.closest('.drag');if(!hnd)return;const item=hnd.closest('.list-item,.hb'),list=item&&item.closest('.rl');if(!list)return;
     e.preventDefault();hnd.setPointerCapture(e.pointerId);drag={item,list,y:e.clientY};item.classList.add('dragging')});
   app.addEventListener('pointermove',e=>{if(kd){const sib=[...kd.box.children].filter(s=>s!==kd.item&&s.matches('[data-sw^="k:"]'));for(const s of sib){const r=s.getBoundingClientRect(),mid=r.top+r.height/2,rel=s.compareDocumentPosition(kd.item);if(e.clientY<mid&&(rel&Node.DOCUMENT_POSITION_FOLLOWING)){kd.box.insertBefore(kd.item,s);break}if(e.clientY>mid&&(rel&Node.DOCUMENT_POSITION_PRECEDING)){kd.box.insertBefore(kd.item,s.nextSibling);break}}if(e.clientY<80)window.scrollBy(0,-14);else if(e.clientY>innerHeight-110)window.scrollBy(0,14);return}if(!drag)return;const sib=[...drag.list.querySelectorAll(':scope > .list-item, :scope > .hb')];
     for(const s of sib){if(s===drag.item)continue;const r=s.getBoundingClientRect();
@@ -4674,6 +4748,7 @@ ftDone(){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.render()},
 ftAgain(){this.ftSet(null);this.ftShow('start');setTimeout(()=>this.ftStart(),0)},
 ftResume(){const f=this.ftGet();if(!f)return;if(f.done){this.ftShow('fin');return}if(!f.paused&&f.end<=Date.now()){this.ftFinish(true);return}this._ftt=setInterval(()=>this.ftTick(),1000);this.ftWake(true);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden){const g=this.ftGet();if(g&&!g.done){if(!g.paused&&g.end<=Date.now())this.ftFinish(true);else this.ftWake(true)}}})},
+initKb(){const vv=window.visualViewport;if(!vv)return;const f=()=>{const kb=Math.max(0,Math.round(window.innerHeight-vv.height-vv.offsetTop));const m=$('modal');if(m){m.style.bottom=kb+'px';m.style.setProperty('--vvh',Math.round(vv.height)+'px')}};vv.addEventListener('resize',f);vv.addEventListener('scroll',f);f()},
 homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
   const ST=(S.pref||{}).wk0==='sun';
   // --- показатели
@@ -5398,7 +5473,7 @@ track(ev,props,once){try{if(!this.sb||location.hostname==='localhost')return;con
   this.sb.from('tw_events').insert({did:this.did(),uid:this.user?this.user.id:null,ev,props:props||{},d:today()}).then(()=>{},()=>{})}catch(e){}},
 trackMarks(){if(this._fmk)return;const S=this.S,has=o=>Object.values(o||{}).some(x=>x&&Object.keys(x).length);if(has(S.hlog)||has(S.log)){this._fmk=1;this.track('first_mark',null,'ever')}},
 VAPID:'BDAUrTsDVqNLfDpt0giGnSTzxis_9Rq393FySipLm5Za0yTPZUvxyUgAo8yn8tQvPalCzZTD8uj2hdj4Pn4IA_k',
-pushPrefs(){const P=(this.S.pref||{}).push||{};return{morning:P.morning===undefined?'07:30':P.morning,evening:P.evening===undefined?'21:00':P.evening,review:P.review!==false,wheel:P.wheel!==false,anch:this.ancTimes()}},
+pushPrefs(){const P=(this.S.pref||{}).push||{};return{morning:P.morning===undefined?'07:30':P.morning,evening:P.evening===undefined?'21:00':P.evening,review:P.review!==false,wheel:P.wheel===true,anch:this.ancTimes()}},
 pushSupported(){return 'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window},
 isIOS(){return /iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)},
 isStandalone(){return navigator.standalone===true||matchMedia('(display-mode: standalone)').matches},
@@ -5421,7 +5496,8 @@ async pushSet(k,v){this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPre
 async pushTest(){try{const{data,error}=await this.sb.functions.invoke('tw-push',{body:{test:true}});if(error)throw error;const ok=(data.sent||[]).filter(x=>x>=200&&x<300).length;this.toast(ok?'Отправили. Уведомление придёт через пару секунд':'Не дошло. Выключи и включи уведомления заново')}catch(e){this.toast('Ошибка: '+this.errText(e))}},
 async pushSum(force){if(!this.user||!this.sb||!this._pushOn)return;const td=today(),a=this.dayAll(td),sm={date:td,n:a.n-a.done,st:this.dayStreak(),an:this.ancSum()},k=JSON.stringify(sm);if(!force&&k===this._pSum)return;this._pSum=k;
   try{await this.sb.from('tw_push').update({sum:sm}).eq('user_id',this.user.id)}catch(e){}},
-async pushCheck(){const sub=this.pushSupported()?await this.pushSub():null,on=!!sub&&Notification.permission==='granted';if(on!==this._pushOn){this._pushOn=on;this.render()}},
+async pushCheck(){const sub=this.pushSupported()?await this.pushSub():null,on=!!sub&&Notification.permission==='granted';if(on!==this._pushOn){this._pushOn=on;this.render()}
+  if(sub&&this.user&&!(this.S.pref||{}).nw1){this.S.pref=this.S.pref||{};this.S.pref.nw1=1;this.S.pref.push={...this.pushPrefs(),on:true,wheel:false};this.save();try{await this.sb.from('tw_push').update({prefs:this.pushPrefs(),updated_at:new Date().toISOString()}).eq('endpoint',sub.endpoint)}catch(e){}}},
 iosSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Уведомления на iPhone</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin:4px 0 16px">iPhone присылает уведомления только приложениям с экрана «Домой». Это займёт 10 секунд.</div>
   <div class="ios-st">${['Открой VOLYO в Safari','Нажми «Поделиться» внизу экрана','Выбери «На экран "Домой"»','Открой приложение с иконки и включи уведомления здесь'].map((t,i)=>`<div><span>${i+1}</span>${t}</div>`).join('')}</div>
@@ -5431,7 +5507,7 @@ methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17
 lang(){return ((this.S.pref||{}).lang)||'ru'},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=184');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=185');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
