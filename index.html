@@ -2378,6 +2378,118 @@ body.dw #app,body.dw #nav,body.dw #snav,body.dw #sheet{visibility:hidden}
 .hrcta{position:sticky;bottom:calc(76px + env(safe-area-inset-bottom));display:flex;gap:8px;padding-top:12px;margin-top:6px;background:linear-gradient(180deg,transparent,rgba(12,11,18,.96) 30%)}
 .hrcta .btn{flex:1}.hrcta .btn.sp{flex:2}
 body:has(.hrp) .nav .pfab{display:none!important}
+
+/* v2: главная на телефоне — кольца, ближайшее дело, строка ввода */
+.hz-dt{display:none}
+@media(max-width:1023px){
+ .hz-gr{display:none}.hz-dt{display:inline;letter-spacing:.14em;text-transform:uppercase;font-size:11.5px;color:#A8A1B8}
+ .hmz .hx-ring,.hmz .hx-cta{display:none!important}
+ .hmm-a .hd-kp{display:none!important}
+ .hr-c{display:flex;align-items:center;gap:18px;padding:18px;border-radius:24px;margin:4px 0 12px;position:relative;background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+ .hr-c:before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(140deg,rgba(196,164,255,.5),rgba(196,164,255,0) 35%,rgba(196,164,255,0) 70%,rgba(155,111,232,.35));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+ .hr-r{width:118px;height:118px;flex:none;padding:0;border:0;background:none}.hr-svg{width:118px;height:118px;display:block}
+ .hr-l{flex:1;display:grid;gap:9px;min-width:0}
+ .hr-l button{display:flex;align-items:center;gap:10px;font:inherit;font-size:13.5px;color:#A49DB5;background:none;border:0;padding:1px 0;text-align:left;min-height:24px}
+ .hr-l button i{width:8px;height:8px;border-radius:50%;flex:none}
+ .hr-l button b{margin-left:auto;color:#F4F1EA;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+ .hr-s{display:flex;align-items:center;gap:6px;font-size:12px;color:#A49DB5;padding-top:9px;border-top:1px solid rgba(255,255,255,.08)}.hr-s b{color:#F4F1EA;font-weight:600}.hr-s svg{width:14px;height:14px;color:#C4A4FF;flex:none}
+ .hn-c{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;margin:0 0 12px;border-radius:22px;text-align:left;font:inherit;color:#F4F1EA;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09)}
+ .hn-t{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em;flex:none}
+ .hn-c .sp{min-width:0}.hn-c .sp b{display:block;font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hn-c .sp em{display:block;font-style:normal;font-size:12px;color:#A49DB5;margin-top:2px}
+ .hn-b{width:4px;height:36px;border-radius:4px;background:linear-gradient(#C4A4FF,#6A3FD0);flex:none}
+ .qbar{position:fixed;left:14px;right:14px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:41;display:flex;align-items:center;gap:6px;padding:6px 6px 6px 6px;border-radius:99px;background:rgba(22,18,34,.8);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 18px 40px rgba(0,0,0,.55)}
+ .qbar-t{flex:1;min-width:0;text-align:left;font:inherit;font-size:14px;color:#9A94AB;background:none;border:0;padding:0 0 0 12px;height:42px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .qbar-m,.qbar-p{width:42px!important;height:42px!important;min-height:0!important;padding:0!important;flex:none!important;border-radius:50%!important;display:grid!important;place-items:center;color:#fff!important}
+ .qbar-m{background:linear-gradient(155deg,rgba(196,164,255,.38),rgba(106,63,208,.25))!important;border:1px solid rgba(196,164,255,.5)!important}
+ .qbar-p{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.12)!important;color:#D9C8FF!important}
+ .qbar svg{width:19px;height:19px;fill:none;stroke:currentColor}
+ body:has(.qbar) .main,body:has(.qbar) #app{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
+ body:has(.qbar) .toast{bottom:calc(140px + env(safe-area-inset-bottom))}
+ body:has(#modal.on) .qbar{display:none}
+}
+@media(min-width:1024px){.qbar{display:none!important}}
+/* шторка быстрого ввода */
+.qa-w{display:grid;gap:12px;padding-bottom:6px}
+.qa-h{display:flex;align-items:center;gap:12px;min-height:56px}
+.qa-mic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;flex:none;color:#fff;background:linear-gradient(155deg,rgba(196,164,255,.38),rgba(106,63,208,.25));border:1px solid rgba(196,164,255,.5);transition:box-shadow .3s}
+.qa-mic svg{width:22px;height:22px}
+.qa-mic.on{box-shadow:0 0 0 8px rgba(155,111,232,.14),0 0 0 18px rgba(155,111,232,.07);animation:qaPulse 1.6s ease-in-out infinite}
+@keyframes qaPulse{50%{box-shadow:0 0 0 12px rgba(155,111,232,.1),0 0 0 24px rgba(155,111,232,.04)}}
+.qa-wv{display:none;align-items:center;gap:3px;height:34px;flex:1}.qa-wv.on{display:flex}
+.qa-wv i{flex:1;height:var(--h);border-radius:3px;background:linear-gradient(#C4A4FF,#6A3FD0);opacity:.85;animation:qaWv .9s ease-in-out var(--d) infinite alternate;transform-origin:center}
+@keyframes qaWv{from{transform:scaleY(.25)}to{transform:scaleY(1)}}
+.qa-st{font-size:13px;color:#9A94AB}.qa-wv.on~.qa-st{display:none}
+.qa-in{width:100%;min-height:64px;resize:none;font:inherit;font-size:17px;line-height:1.45;color:#F4F1EA;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:14px 16px;outline:none}
+.qa-in:focus{border-color:rgba(196,164,255,.45)}
+.qa-p{display:grid;gap:8px}.qa-p:empty{display:none}
+.qa-lb{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9A94AB;margin-top:2px}
+.qa-c{padding:13px 14px;border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09)}
+.qa-c>b{font-size:15px;font-weight:600}
+.qa-ch{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.qa-ch span{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);color:#DCD6EA}
+.qa-ch span svg{width:13px;height:13px;fill:none;stroke:#C4A4FF;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.qa-ch span.tg{color:#7FD6E6;border-color:rgba(127,214,230,.2);background:rgba(127,214,230,.07)}
+.qa-go{height:50px;border-radius:99px;font:inherit;font-weight:600;font-size:15px;color:#fff;background:linear-gradient(155deg,rgba(255,255,255,.16),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.2)}
+.qa-go:disabled{opacity:.4}
+.qa-man{font:inherit;font-size:13px;color:#9A94AB;background:none;border:0;padding:6px}
+#sheet .qa-wv,#sheet .qa-wv.on{border:0!important;box-shadow:none!important;background:none!important;padding:0!important;border-radius:0!important}#sheet .qa-in{max-height:30vh}
+
+/* v2: день по часам */
+.dtl-sw{display:inline-flex;padding:3px;border-radius:99px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);margin:2px 0 12px}
+.dtl-sw button{font:inherit;font-size:12.5px;padding:6px 14px;border-radius:99px;color:#9A94AB;background:none;border:0;min-height:0}
+.dtl-sw button.on{background:rgba(255,255,255,.12);color:#F4F1EA}
+.dtl-wk{display:flex;align-items:center;gap:2px;margin-bottom:14px}
+.dtl-wk>button{flex:1;display:grid;justify-items:center;gap:5px;padding:8px 0;border-radius:16px;font:inherit;color:#9A94AB;background:none;border:1px solid transparent;min-height:0}
+.dtl-wk>button em{font-style:normal;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em}.dtl-wk>button b{font-size:16px;font-weight:600;color:#F4F1EA}
+.dtl-wk>button i{width:4px;height:4px;border-radius:50%;background:#9B6FE8}.dtl-wk>button i.o{opacity:0}
+.dtl-wk>button.on{background:linear-gradient(160deg,rgba(196,164,255,.25),rgba(106,63,208,.12));border-color:rgba(196,164,255,.4)}
+.dtl-wk>button.td:not(.on) b{color:#C4A4FF}
+.dtl-wk .dtl-ar{flex:none;width:28px;padding:0;height:40px;display:grid;place-items:center}.dtl-ar svg{width:16px;height:16px}
+.dtl-d{display:flex;align-items:baseline;gap:10px;margin:0 0 12px}.dtl-d b{font-size:20px;font-weight:600}.dtl-d span{font-size:13px;color:#9A94AB}
+.dtl-un{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;align-items:center}
+.dtl-ul{width:100%;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9A94AB;margin-bottom:2px}
+.dtl-un>button{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:13px;padding:7px 12px 7px 8px;border-radius:99px;color:#F4F1EA;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);min-height:0}
+.dtl-un>button.dn{color:#6E6880;text-decoration:line-through}
+.dtl-un .ck{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.28);display:grid;place-items:center;flex:none}
+.dtl-un .ck.on{background:linear-gradient(155deg,rgba(176,140,245,.46),rgba(106,63,208,.22));border-color:rgba(196,164,255,.55)}.dtl-un .ck svg{width:10px;height:10px}
+.dtl-g{position:relative;margin-bottom:20px}
+.dtl-h{position:absolute;left:0;right:0;display:block;text-align:left;font:inherit;background:none;border:0;padding:0;min-height:0;border-radius:0}
+.dtl-h span{position:absolute;left:0;top:-7px;font-size:11px;color:#6E6880;font-variant-numeric:tabular-nums}
+.dtl-h:before{content:"";position:absolute;left:46px;right:0;top:0;height:1px;background:rgba(255,255,255,.06)}
+.dtl-ev{position:absolute;z-index:1;text-align:left;font:inherit;padding:7px 10px;border-radius:14px;overflow:hidden;color:#F4F1EA;background:linear-gradient(160deg,rgba(155,111,232,.28),rgba(106,63,208,.1));border:1px solid rgba(196,164,255,.3);min-height:0;display:block}
+.dtl-ev{display:flex!important;flex-direction:column;justify-content:flex-start;align-items:stretch}
+.dtl-ev b{display:block;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dtl-ev em{display:block;font-style:normal;font-size:11.5px;color:#CFC5E8;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dtl-ev.dn{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}.dtl-ev.dn b{color:#8A849B;text-decoration:line-through}
+.dtl-now{position:absolute;left:40px;right:0;height:2px;background:#C4A4FF;box-shadow:0 0 10px #C4A4FF;z-index:2;pointer-events:none}
+.dtl-now:before{content:"";position:absolute;left:-5px;top:-4px;width:10px;height:10px;border-radius:50%;background:#C4A4FF}
+
+/* v2: обратный отсчёт */
+.cd-hs{display:flex;justify-content:space-between;align-items:baseline;margin:6px 0 10px}.cd-hs b{font-size:15px;font-weight:600}
+.cd-hs button{display:inline-flex;align-items:center;gap:2px;font:inherit;font-size:13px;color:#9A94AB;background:none;border:0;padding:0;min-height:0}.cd-hs button svg{width:14px;height:14px}
+.cd-row{display:flex;gap:8px;overflow-x:auto;margin:0 -16px 14px;padding:0 16px 2px;scrollbar-width:none}.cd-row::-webkit-scrollbar{display:none}
+.cd-ch{flex:none;min-width:116px;max-width:170px;text-align:left;font:inherit;color:#F4F1EA;padding:11px 14px;border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);min-height:0}
+.cd-ch b{display:block;font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.cd-ch b small{font-size:12px;color:#9A94AB;font-weight:500;margin-left:4px}
+.cd-ch span{display:block;font-size:12px;color:#9A94AB;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.cd-ch.cd-add{min-width:54px;display:grid;place-items:center;color:#D9C8FF}.cd-ch.cd-add svg{width:20px;height:20px}
+.cd-hero{position:relative;display:block;width:100%;text-align:center;font:inherit;color:#F4F1EA;padding:22px 18px 20px;margin:6px 0 14px;border-radius:26px;background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1)}
+.cd-hero:before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(140deg,rgba(196,164,255,.5),rgba(196,164,255,0) 35%,rgba(196,164,255,0) 70%,rgba(155,111,232,.35));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.cd-hr{position:relative;width:180px;height:180px;margin:0 auto}.cd-rg{width:180px;height:180px}
+.cd-hn{position:absolute;inset:0;display:grid;place-content:center;justify-items:center}
+.cd-hn b{font-size:56px;font-weight:300;letter-spacing:-.03em;line-height:1}.cd-hn span{font-size:11.5px;color:#9A94AB;letter-spacing:.12em;text-transform:uppercase;margin-top:6px}
+.cd-ht{font-size:18px;font-weight:600;margin-top:12px}.cd-hs2{font-size:13px;color:#9A94AB;margin-top:4px}
+.cd-l{display:grid;gap:8px}
+.cd-r{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:#F4F1EA;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);min-height:0}
+.cd-ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none;color:#C4A4FF;background:rgba(155,111,232,.14);border:1px solid rgba(196,164,255,.22)}.cd-ic svg{width:18px;height:18px}
+.cd-r .sp{min-width:0}.cd-r .sp b{display:block;font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cd-r .sp em{display:block;font-style:normal;font-size:12px;color:#9A94AB;margin-top:2px}
+.cd-d{text-align:right;flex:none}.cd-d b{display:block;font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.cd-d em{display:block;font-style:normal;font-size:11px;color:#9A94AB}.cd-d.ps b{color:#9A94AB}
+.cd-new{margin-top:14px;width:100%;display:flex;align-items:center;justify-content:center;gap:6px}.cd-new svg{width:16px;height:16px}
+.cd-f{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:14px}
+.cd-f input{font:inherit;color:#F4F1EA;background:none;border:0;color-scheme:dark;text-align:right}
+.cd-icp{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.cd-icp button{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;color:#9A94AB;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);min-height:0;padding:0}
+.cd-icp button.on{color:#fff;background:linear-gradient(160deg,rgba(196,164,255,.25),rgba(106,63,208,.12));border-color:rgba(196,164,255,.45)}.cd-icp svg{width:20px;height:20px}
+.cd-save{width:100%}.cd-del{display:block;margin:12px auto 0;font:inherit;font-size:13px;color:#E57373;background:none;border:0}
 /* ГАЛОЧКИ: прозрачное стекло, белая отметка, минимальная подсветка (финальный слой, везде одинаково) */
 .chk.on,.tk .chk.on,.tchk.on,.hx-row.done .hx-ck,.te-c.on,.ksb-r.on i,.hd-dt i.on,.mgc.on,.mit.done .mit-c,.hb .days i.on,.st-i.on .st-c,.ck.on,.sc5 button.on{
  background:linear-gradient(155deg,rgba(176,140,245,.46),rgba(106,63,208,.22))!important;
@@ -3094,7 +3206,33 @@ vPlans(){const v=['list','week','month','spheres'].includes(this._plv)?this._plv
   if(v==='month')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vPlanMonth();
   if(v==='spheres')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vSpheres();
   if(v==='matrix')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vMatrix();
-  this._noBoard=true;let t=this.vToday();this._noBoard=false;let mp='';try{mp=this.day===today()?this.mpH():''}catch(e){}return `<div class="h1">Планы</div>${seg}__S1____S2__`+mp+hint+this.stripV(t)},
+  const tlOn=!!(this.S.pref||{}).dayTl,tsw=`<div class="dtl-sw"><button class="${tlOn?'':'on'}" onclick="APP.dtlSet(0)">Список</button><button class="${tlOn?'on':''}" onclick="APP.dtlSet(1)">По часам</button></div>`;
+  if(tlOn)return `<div class="h1">Планы</div>${seg}__S1____S2__`+tsw+this.vDayTl(this.day||today());
+  this._noBoard=true;let t=this.vToday();this._noBoard=false;let mp='';try{mp=this.day===today()?this.mpH():''}catch(e){}return `<div class="h1">Планы</div>${seg}__S1____S2__`+tsw+mp+hint+this.stripV(t)},
+dtlSet(v){this.S.pref=this.S.pref||{};this.S.pref.dayTl=!!v;this.save();this.render()},
+dtlGo(n){this.day=add(this.day||today(),n);this.render()},
+dtlNew(h){this.taskNew(this.day||today());if(h!=null&&this._tn){this._tn.tm=pad(h)+':00';this.ntRender()}},
+vDayTl(d){const td=today(),now=new Date(),WL=this.wdl?this.wdl():['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+  const K=(this.S.tasks||[]).filter(x=>!x.drop&&x.date===d&&!(this.S.del||[]).includes(x.id));
+  const T=K.filter(x=>x.tm).sort((a,b)=>a.tm.localeCompare(b.tm)),U=K.filter(x=>!x.tm);
+  const mn=t=>{const[h,m]=t.split(':').map(Number);return h*60+m};
+  let h0=7,h1=22;T.forEach(x=>{h0=Math.min(h0,Math.floor(mn(x.tm)/60));h1=Math.max(h1,Math.ceil(mn(x.tm2&&x.tm2>x.tm?x.tm2:x.tm)/60)+1)});h1=Math.min(24,h1);
+  const PX=56,top=m=>(m-h0*60)/60*PX;
+  // недельная полоска
+  const m0=this.monday(d),wk=[0,1,2,3,4,5,6].map(i=>add(m0,i));
+  const strip=`<div class="dtl-wk"><button class="dtl-ar" onclick="APP.dtlGo(-7)" aria-label="Назад">${I.l}</button>${wk.map((x,i)=>{const has=(this.S.tasks||[]).some(t=>!t.drop&&t.date===x&&!(this.S.del||[]).includes(t.id));return `<button class="${x===d?'on':''} ${x===td?'td':''}" onclick="APP.day='${x}';APP.render()"><em>${WL[i]}</em><b>${+x.slice(8)}</b><i class="${has?'':'o'}"></i></button>`}).join('')}<button class="dtl-ar" onclick="APP.dtlGo(7)" aria-label="Вперёд">${I.r}</button></div>`;
+  // раскладка пересечений по колонкам
+  const ev=T.map(x=>{const a=mn(x.tm),b=x.tm2&&x.tm2>x.tm?mn(x.tm2):a+45;return {x,a,b:Math.max(b,a+30),c:0,n:1}});
+  for(let i=0;i<ev.length;i++){const used=ev.filter((e,j)=>j<i&&e.b>ev[i].a).map(e=>e.c);let c=0;while(used.includes(c))c++;ev[i].c=c}
+  ev.forEach(e=>{const g=ev.filter(o=>o.a<e.b&&o.b>e.a);e.n=Math.max(...g.map(o=>o.c))+1});
+  let hrs='';for(let h=h0;h<h1;h++)hrs+=`<button class="dtl-h" style="top:${(h-h0)*PX}px;height:${PX}px" onclick="APP.dtlNew(${h})" aria-label="Добавить на ${pad(h)}:00"><span>${pad(h)}:00</span></button>`;
+  const evs=ev.map(e=>{const x=e.x,ar=x.area?(this.areaList().find(a=>a[0]===x.area)||[])[1]:'',ht=Math.max(28,top(e.b)-top(e.a)-4);
+    return `<button class="dtl-ev ${x.done?'dn':''}" style="top:${top(e.a)+2}px;height:${ht}px;left:calc(52px + (100% - 52px) * ${e.c}/${e.n});width:calc((100% - 52px) / ${e.n} - 4px)" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b>${ht>40?`<em>${this.tmR(x)}${ar?' · '+esc(ar):''}</em>`:''}</button>`}).join('');
+  let nl='';if(d===td){const nm=now.getHours()*60+now.getMinutes();if(nm>=h0*60&&nm<=h1*60)nl=`<i class="dtl-now" style="top:${top(nm)}px"></i>`}
+  const un=U.length?`<div class="dtl-un"><div class="dtl-ul">Без времени</div>${U.map(x=>`<button class="${x.done?'dn':''}" onclick="APP.taskEdit('${x.id}')"><span class="ck ${x.done?'on':''}" onclick="event.stopPropagation();APP.taskToggle('${x.id}')">${x.done?I.ok:''}</span>${esc(x.title)}</button>`).join('')}</div>`:'';
+  const ttl=d===td?'Сегодня':d===add(td,1)?'Завтра':d===add(td,-1)?'Вчера':'';const ds=WDF[pd(d).getDay()];
+  if(this._dtlS!==d){this._dtlS=d;setTimeout(()=>{const t=document.querySelector('.dtl-now')||document.querySelector('.dtl-ev');if(t){const r=t.getBoundingClientRect();if(r.top>window.innerHeight*.6||r.top<0)window.scrollBy({top:r.top-window.innerHeight*.35,behavior:'smooth'})}},120)}
+  return `${strip}<div class="dtl-d"><b>${ttl||ds.charAt(0).toUpperCase()+ds.slice(1)}</b><span>${fd(d)}${ttl?', '+ds:''}</span></div>${un}<div class="dtl-g" style="height:${(h1-h0)*PX}px">${hrs}${evs}${nl}</div>`},
 plOpenDay(d){this.day=d;this._plv='day';window.scrollTo(0,0);this.render()},
 plAddOn(d,lab){this.taskNew(d)},
 vPlanWeek(){const td=today(),off=this._plw||0,m0=add(this.monday(td),off*7),WD7=['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'];
@@ -3637,8 +3775,8 @@ ctxH(){const td=today(),hr=this._hr??new Date().getHours(),c=((this.S.checkin||{
       <input class="cld-i" placeholder="Главное дело на завтра" value="${esc(c.top||'')}" onchange="APP.topSet('${td}',this.value)"></div>`}
   return ''},
 /* быстрые действия */
-qMenu(){const it=[['Дело на сегодня','list',"APP.close();APP.taskNew(today())"],['Привычка','check',"APP.close();APP.editH()"],['Победа дня','star',"APP.close();APP.winAdd()"],['Фокус','target',"APP.close();APP.focusOpen()"],['Запись в дневник','pen',"APP.close();APP._jd=today();APP.go('journal')"]];
-  this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Быстро добавить</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="qml">${it.map(([t,ic,a])=>`<button onclick="${a}"><span>${SI[ic]||hIco(ic)}</span>${t}</button>`).join('')}</div>`)},
+qMenu(){const it=[['Дело на сегодня','list',"APP.close();APP.taskNew(today())"],['Привычка','check',"APP.close();APP.editH()"],['Победа дня','star',"APP.close();APP.winAdd()"],['Фокус','target',"APP.close();APP.focusOpen()"],['Обратный отсчёт','cdflag',"APP.close();APP.cdEdit()"],['Запись в дневник','pen',"APP.close();APP._jd=today();APP.go('journal')"]];
+  this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Быстро добавить</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="qml">${it.map(([t,ic,a])=>`<button onclick="${a}"><span>${ic==='cdflag'?this.cdIco('flag'):SI[ic]||hIco(ic)}</span>${t}</button>`).join('')}</div>`)},
 /* партнёр по ответственности */
 partnerW(){const head=`<div class="dz-ch"><span class="dz-ti">${I.chat||''}Партнёр</span></div>`;
   if(!this.user)return `<div class="card dz-c dz-pt">${head}<div class="dz-pw0t">Войди в аккаунт, чтобы видеть прогресс друг друга.</div><button class="pill" onclick="APP.go('me')">Войти ${I.r}</button></div>`;
@@ -3987,7 +4125,7 @@ render(){const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_
   const mtabs=simple?[['home','Сегодня'],['plans','Планы'],['tracker','Привычки'],['me','Настройки']]:[['home','Сегодня'],['plans','Планы'],['tracker','Привычки'],['progress','Прогресс'],['more','Профиль']],inMore=['more','profile','me'].includes(this.tab),fromHome=['journal','program'].includes(this.tab);
   this._pop=null;
   const canAdd=!this.sub&&['home','plans','tracker'].includes(this.tab);
-  $('nav').innerHTML=(canAdd?`<button class="pfab" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button>`:'')+'<div class="in nv5">'+mtabs.map(([k,l])=>`<button class="${this.tab===k||(k==='more'&&inMore)||(k==='home'&&fromHome)||(simple&&k==='me'&&inMore)?'on':''}" onclick="APP.go('${k}')" aria-label="${l}">${NI[k]}</button>`).join('')+'</div>';
+  $('nav').innerHTML=(canAdd?(this.tab==='home'?`<div class="qbar"><button class="qbar-t" onclick="APP.qaOpen()">${this.lang()==='en'?'Say or type a task':'Скажи или напиши задачу'}</button><button class="qbar-m" onclick="APP.qaOpen(1)" aria-label="Голосом">${this.QA_MIC}</button><button class="qbar-p" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button></div>`:`<button class="pfab" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button>`):'')+'<div class="in nv5">'+mtabs.map(([k,l])=>`<button class="${this.tab===k||(k==='more'&&inMore)||(k==='home'&&fromHome)||(simple&&k==='me'&&inMore)?'on':''}" onclick="APP.go('${k}')" aria-label="${l}">${NI[k]}</button>`).join('')+'</div>';
   const P=this.prog();
   const ttl=this.sub==='programs'?'Программы':this.sub==='deals'?'Воронка':this.sub==='onboard'?'Старт':{home:'Сегодня',habits:'Прогресс',goals:(P?P.name:'Программа'),week:'Неделя',me:'Профиль'}[this.tab];
   const Pp=this.S.profile||{};
@@ -4824,6 +4962,101 @@ ftAgain(){this.ftSet(null);this.ftShow('start');setTimeout(()=>this.ftStart(),0)
 ftResume(){const f=this.ftGet();if(!f)return;if(f.done){this.ftShow('fin');return}if(!f.paused&&f.end<=Date.now()){this.ftFinish(true);return}this._ftt=setInterval(()=>this.ftTick(),1000);this.ftWake(true);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden){const g=this.ftGet();if(g&&!g.done){if(!g.paused&&g.end<=Date.now())this.ftFinish(true);else this.ftWake(true)}}})},
 initKb(){const vv=window.visualViewport;if(!vv)return;const f=()=>{const kb=Math.max(0,Math.round(window.innerHeight-vv.height-vv.offsetTop));const m=$('modal');if(m){m.style.bottom=kb+'px';m.style.setProperty('--vvh',Math.round(vv.height)+'px')}};vv.addEventListener('resize',f);vv.addEventListener('scroll',f);f()},
+CD_IC:{flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',plane:'<path d="M3 15l18-8-5 13-4-5z"/>',heart:'<path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/>',book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',gift:'<rect x="3.5" y="9" width="17" height="11" rx="2"/><path d="M12 9v11M3.5 13h17M12 9c-2-4-6-4-6-1.5S10 9 12 9c2 0 6 1 6-1.5S14 5 12 9"/>',star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',trophy:'<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/>',run:'<circle cx="14" cy="4.5" r="1.8"/><path d="M8 21l3-6 3 2v4M6 12l3-4 4 1 3 4h3"/>'},
+cdIco(k){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${this.CD_IC[k]||this.CD_IC.flag}</svg>`},
+cdDays(d){return Math.round((pd(d)-pd(today()))/864e5)},
+cdList(){const L=(this.S.events||[]).filter(x=>!(this.S.del||[]).includes(x.id));const td=today();return L.slice().sort((a,b)=>{const fa=a.date>=td,fb=b.date>=td;if(fa!==fb)return fa?-1:1;return fa?a.date.localeCompare(b.date):b.date.localeCompare(a.date)})},
+cdN(n,past){const a=Math.abs(n);return past?this.pl(a,'день прошёл','дня прошло','дней прошло'):this.pl(a,'день','дня','дней')},
+cdChips(){const td=today(),L=this.cdList().filter(x=>x.date>=td).slice(0,3);if(!L.length)return '';
+  return `<div class="cd-hs"><b>Обратный отсчёт</b><button onclick="APP.cdOpen()">Все${MI.chev}</button></div><div class="cd-row">${L.map(x=>{const n=this.cdDays(x.date);return `<button class="cd-ch" onclick="APP.cdOpen('${x.id}')"><b>${n===0?'Сегодня':n}${n?`<small>${this.pl(n,'день','дня','дней')}</small>`:''}</b><span>${esc(x.title)}</span></button>`}).join('')}<button class="cd-ch cd-add" onclick="APP.cdEdit()" aria-label="Добавить дату">${MI.plus}</button></div>`},
+cdOpen(id){const td=today(),L=this.cdList();if(!L.length){this.cdEdit();return}
+  const hero=(id&&L.find(x=>x.id===id))||L.find(x=>x.date>=td)||L[0];const n=this.cdDays(hero.date),past=n<0;
+  const st=hero.start&&hero.start<hero.date?hero.start:add(hero.date,-30),tot=Math.max(1,this.cdDays(hero.date)-this.cdDays(st)),gone=Math.min(1,Math.max(0,(tot-Math.max(0,n))/tot));
+  const R=54,C=2*Math.PI*R,ds=WDF[pd(hero.date).getDay()];
+  const ring=`<svg viewBox="0 0 120 120" class="cd-rg"><defs><linearGradient id="cdg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDE3FF"/><stop offset="1" stop-color="#9B6FE8"/></linearGradient></defs><circle cx="60" cy="60" r="${R}" stroke="rgba(255,255,255,.07)" stroke-width="3" fill="none"/>${gone>0?`<circle cx="60" cy="60" r="${R}" stroke="url(#cdg)" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="${(C*gone).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 60 60)"/>`:''}</svg>`;
+  const rest=L.filter(x=>x.id!==hero.id);
+  this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Обратный отсчёт</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+   <button class="cd-hero" onclick="APP.cdEdit('${hero.id}')"><div class="cd-hr">${ring}<div class="cd-hn"><b>${n===0?'0':Math.abs(n)}</b><span>${n===0?'сегодня':this.cdN(n,past)}</span></div></div><div class="cd-ht">${esc(hero.title)}</div><div class="cd-hs2">${fd(hero.date)}, ${ds}${!past&&n>0?' · пройдено '+Math.round(gone*100)+'%':''}</div></button>
+   ${rest.length?`<div class="cd-l">${rest.map(x=>{const k=this.cdDays(x.date),ps=k<0;return `<button class="cd-r" onclick="APP.cdOpen('${x.id}')"><span class="cd-ic">${this.cdIco(x.ic)}</span><span class="sp"><b>${esc(x.title)}</b><em>${fd(x.date)}</em></span><span class="cd-d ${ps?'ps':''}"><b>${k===0?'0':Math.abs(k)}</b><em>${k===0?'сегодня':this.cdN(k,ps)}</em></span></button>`}).join('')}</div>`:''}
+   <button class="btn cd-new" onclick="APP.cdEdit()">${MI.plus} Добавить дату</button>`)},
+cdEdit(id){const x=id?(this.S.events||[]).find(e=>e.id===id):null;this._cd={id:id||'',ic:x?x.ic||'flag':'flag'};const td=today();
+  this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">${x?'Изменить дату':'Новая дата'}</div><button class="xcl" onclick="${x?`APP.cdOpen('${x.id}')`:'APP.close()'}" aria-label="Закрыть">${I.x}</button></div>
+   <input id="cdT" class="nt-in" placeholder="Например: запуск курса" value="${x?esc(x.title):''}" autocomplete="off" maxlength="80">
+   <label class="cd-f"><span>Дата</span><input id="cdD" type="date" value="${x?x.date:add(td,30)}"></label>
+   <div class="cd-icp">${Object.keys(this.CD_IC).map(k=>`<button class="${this._cd.ic===k?'on':''}" onclick="APP._cd.ic='${k}';this.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));this.classList.add('on')" aria-label="${k}">${this.cdIco(k)}</button>`).join('')}</div>
+   <button class="btn cd-save" onclick="APP.cdSave()">Сохранить</button>${x?`<button class="cd-del" onclick="APP.cdDel('${x.id}')">Удалить</button>`:''}`);
+  if(!x)setTimeout(()=>{const e=$('cdT');e&&e.focus()},150)},
+cdSave(){const t=($('cdT')||{}).value||'',d=($('cdD')||{}).value||'';if(!t.trim()){$('cdT').focus();return}if(!d){$('cdD').focus();return}
+  const q=this._cd||{};this.S.events=this.S.events||[];let x=q.id?this.S.events.find(e=>e.id===q.id):null;
+  if(x){x.title=t.trim();x.date=d;x.ic=q.ic;x.upd=Date.now()}else{x={id:'e'+uid(),title:t.trim(),date:d,ic:q.ic,start:today(),upd:Date.now()};this.S.events.push(x);this.track('cd_add',null,'day')}
+  this.save();this.render();this.buzz(8);this.cdOpen(x.id)},
+cdDel(id){this.S.del=[...(this.S.del||[]),id];this.S.events=(this.S.events||[]).filter(e=>e.id!==id);this.save();this.render();if((this.S.events||[]).length)this.cdOpen();else this.close()},
+QA_MIC:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
+homeRings(o){const td=today(),H=o.H||[],hD=H.filter(x=>this.hOn(x,td)).length;
+  let K=[];try{K=(this.S.tasks||[]).filter(x=>!x.drop&&x.date===td&&!(this.S.del||[]).includes(x.id))}catch(e){}const kD=K.filter(x=>x.done).length;
+  const fm=this.focusOf(td),fg=Math.max(15,Math.round((+(this.S.pref||{}).focusGoal||10)*60/7));
+  const fmt=m=>m>=60?Math.floor(m/60)+' ч'+(m%60?' '+(m%60)+' мин':''):m+' мин';
+  const R=[[52,K.length?kD/K.length:0,'hrg1'],[38,H.length?hD/H.length:0,'hrg2'],[24,Math.min(1,fm/fg),'hrg3']];
+  const svg=`<svg class="hr-svg" viewBox="0 0 120 120"><defs><linearGradient id="hrg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDE3FF"/><stop offset="1" stop-color="#B79BFF"/></linearGradient><linearGradient id="hrg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B796F5"/><stop offset="1" stop-color="#7E55DA"/></linearGradient><linearGradient id="hrg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7B5CE0"/><stop offset="1" stop-color="#4A2BA8"/></linearGradient></defs>${R.map(([r,v,g])=>{const C=2*Math.PI*r;return `<circle cx="60" cy="60" r="${r}" stroke="rgba(255,255,255,.07)" stroke-width="10" fill="none"/>${v>0?`<circle cx="60" cy="60" r="${r}" stroke="url(#${g})" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${(C*Math.max(v,.02)).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 60 60)"/>`:''}`}).join('')}</svg>`;
+  const stk=o.stk||0;
+  return `<div class="hr-c"><button class="hr-r" onclick="APP._prv='over';APP.go('progress')" aria-label="Прогресс">${svg}</button><div class="hr-l">
+   <button onclick="APP.go('plans')"><i style="background:#D9C8FF"></i>Дела<b>${kD}/${K.length}</b></button>
+   <button onclick="APP.go('tracker')"><i style="background:#9B6FE8"></i>Привычки<b>${hD}/${H.length}</b></button>
+   <button onclick="APP.focusOpen()"><i style="background:#6A3FD0"></i>Фокус<b>${fmt(fm)}</b></button>
+   <div class="hr-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-9z"/></svg>Серия <b>${stk} ${this.pl(stk,'день','дня','дней')}</b></div></div></div>`},
+homeNext(){const td=today(),now=new Date(),nm=pad(now.getHours())+':'+pad(now.getMinutes());
+  const K=(this.S.tasks||[]).filter(x=>!x.drop&&!x.done&&x.date===td&&x.tm&&(x.tm2||x.tm)>=nm&&!(this.S.del||[]).includes(x.id)).sort((a,b)=>a.tm.localeCompare(b.tm));
+  if(!K.length)return '';const x=K[0],[h,m]=x.tm.split(':').map(Number),dm=h*60+m-(now.getHours()*60+now.getMinutes());
+  const when=dm<=0?'Идёт сейчас':dm<60?'Через '+dm+' '+this.pl(dm,'минуту','минуты','минут'):'Через '+Math.floor(dm/60)+' ч'+(dm%60?' '+dm%60+' мин':'');
+  const ar=x.area?(this.areaList().find(a=>a[0]===x.area)||[])[1]:'';
+  return `<button class="hn-c" onclick="APP.taskEdit('${x.id}')"><b class="hn-t">${x.tm}</b><span class="sp"><b>${esc(x.title)}</b><em>${when}${ar?' · '+esc(ar):''}</em></span><i class="hn-b"></i></button>`},
+// ---- быстрое добавление: фраза → задачи
+qaParse(text){const out=[];const AR=this.areaList();
+  const segs=String(text||'').replace(/\r/g,'').split(/(?<=[.!?;])\s+|\n+|,?\s+(?:и ещё|а ещё|а также|ещё|плюс|and also)\s+/i).map(x=>x.trim()).filter(Boolean);
+  segs.forEach(sg=>{let t=' '+sg.replace(/[.!?;]+$/,'')+' ',rem=null,area='',m,dl=false;
+    if((m=t.match(/[\s,]+(?:и\s)?напомн(?:и|ить)(?:\s(?:мне|об этом))?\s(?:за\s)?(\d{1,3}|час|полчаса)\s*(мин[а-я]*|час[а-я]*|ч)?(?:\sдо)?(?=[\s,])/i))){const n=m[1]==='час'?60:m[1]==='полчаса'?30:+m[1];rem=/^ч/i.test(m[2]||'')?n*60:n;t=t.replace(m[0],' ')}
+    else if((m=t.match(/[\s,]+(?:и\s)?напомн(?:и|ить)(?:\sмне)?(?=[\s,])/i))){rem=0;t=t.replace(m[0],' ')}
+    if((m=t.match(/\sдо\s([01]?\d|2[0-3])[:.]([0-5]\d)(?=[\s,])/))){t=t.replace(m[0],' в '+m[1]+':'+m[2]+' ');dl=true}
+    if((m=t.match(/\s(?:через|in)\s(\d{1,3}|час|полчаса|an hour)\s*(мин[а-я]*|час[а-я]*|ч|min[a-z]*|hours?)?(?=[\s,])/i))&&!/дн|day|недел|week/i.test(m[0])){const n=/^(час|an hour)$/i.test(m[1])?60:m[1]==='полчаса'?30:+m[1],mins=/^(ч|h)/i.test(m[2]||'')?n*60:n,dt=new Date(Date.now()+mins*60000);if(mins>0&&mins<24*60){t=t.replace(m[0],' '+(iso(dt)!==today()?'завтра ':'')+'в '+pad(dt.getHours())+':'+pad(dt.getMinutes())+' ');if(rem==null)rem=0}}
+    const SYN={career:['работ','карьер','бизнес','work','career'],money:['финанс','деньг','money','finance'],health:['здоров','спорт','health'],rel:['семь','family'],love:['отношени','love'],spirit:['саморазв','учёб','учеб','обучени','study'],fun:['хобби','отдых','hobby'],home:['окружени','быт','home']};
+    const rx=x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    for(const a of AR){const nm=String(a[1]||'').toLowerCase();const own=nm.length>=3?[nm.length>5?nm.slice(0,nm.length-2):nm.slice(0,Math.max(3,nm.length-1))]:[];const all=[...own,...(SYN[a[0]]||[])];let hit=null;
+      for(const st of all){const e2=rx(st);const r1=new RegExp('[\\s,]+(?:это|сфера|по|для|в сферу|в сфере|про|тег)\\s+'+e2+'[\\p{L}]*(?=[\\s,]|$)','iu'),r2=new RegExp((own.includes(st)?'[\\s,]+':',\\s*')+e2+'[\\p{L}]*\\s*$','iu');if((hit=t.match(r1))||(hit=t.match(r2)))break}
+      if(hit){area=a[0];t=t.replace(hit[0],' ');break}}
+    t=t.replace(/[\s,]+это\s*$/i,' ').replace(/^\s*(?:и|а|ну|так|ещё|также|потом)\s+/i,' ').replace(/^\s*(?:мне\s)?(?:надо|нужно|не забыть|запиши|добавь(?: задачу)?)\s+/i,' ');
+    const P=this.parseTask(t.replace(/,(\s)/g,'$1').trim(),today());let ti=P.title.replace(/^[,\s-]+|[,\s-]+$/g,'').replace(/\s{2,}/g,' ');
+    if(!ti)return;ti=ti.charAt(0).toUpperCase()+ti.slice(1);out.push(Object.assign({},P,{title:ti,rem,area,dl}))});
+  return out},
+qaOpen(mic){this._qa={t:''};const en=this.lang()==='en';
+  this.open(`<div class="qa-w"><div class="qa-h"><button class="qa-mic" id="qaMic" onclick="APP.qaMic()" aria-label="Голосом">${this.QA_MIC}</button><div class="qa-wv" id="qaWv">${Array.from({length:26},(_,i)=>`<i style="--d:${(i*0.07).toFixed(2)}s;--h:${(30+Math.abs(Math.sin(i*.9))*70).toFixed(0)}%"></i>`).join('')}</div><span class="qa-st" id="qaSt">${en?'Tap the mic or type':'Нажми на микрофон или напиши'}</span></div>
+   <textarea id="qaT" class="qa-in" rows="2" placeholder="${en?'Call with a client tomorrow at 9, remind 10 minutes before, work':'Завтра в 9 созвон с клиентом, напомни за 10 минут, работа'}" oninput="APP.qaUpd()" enterkeyhint="done" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();APP.qaSave()}"></textarea>
+   <div id="qaP" class="qa-p"></div>
+   <button class="qa-go" id="qaGo" onclick="APP.qaSave()" disabled>${en?'Add':'Добавить'}</button>
+   <button class="qa-man" onclick="APP.qaManual()">${en?'Add manually':'Заполнить вручную'}</button></div>`);
+  setTimeout(()=>{if(mic)this.qaMic();else{const e=$('qaT');e&&e.focus()}},180)},
+qaUpd(){const e=$('qaT'),P=$('qaP'),G=$('qaGo');if(!e||!P)return;e.style.height='auto';e.style.height=Math.min(e.scrollHeight+2,window.innerHeight*.3)+'px';const L=this.qaParse(e.value);this._qa.L=L;const td=today(),en=this.lang()==='en';
+  const dTx=d=>d===td?(en?'Today':'Сегодня'):d===add(td,1)?(en?'Tomorrow':'Завтра'):WD[pd(d).getDay()]+', '+fd(d);
+  const ic={d:'<svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17"/></svg>',t:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg>',b:'<svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"/></svg>',r:'<svg viewBox="0 0 24 24"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15"/></svg>'};
+  const rpN={d:'Каждый день',wd:'По будням',w:'Каждую неделю',m:'Каждый месяц',y:'Каждый год'};
+  P.innerHTML=L.length?`<div class="qa-lb">${L.length>1?(en?'Will add':'Добавлю')+' '+L.length:(en?'Will add':'Добавлю')}</div>`+L.map(x=>{const ar=x.area?(this.areaList().find(a=>a[0]===x.area)||[])[1]:'';
+    return `<div class="qa-c"><b>${esc(x.title)}</b><div class="qa-ch"><span>${ic.d}${dTx(x.date)}</span>${x.tm?`<span>${ic.t}${x.dl?(en?'by ':'до '):''}${x.tm}</span>`:''}${x.rem!=null?`<span>${ic.b}${x.rem?(en?x.rem+' min before':'за '+(x.rem>=60&&x.rem%60===0?x.rem/60+' ч':x.rem+' мин')):(en?'remind':'напомнить')}</span>`:''}${x.rep?`<span>${ic.r}${rpN[x.rep.f]||''}</span>`:''}${ar?`<span class="tg">${esc(ar)}</span>`:''}</div></div>`}).join(''):'';
+  if(G){G.disabled=!L.length;G.textContent=L.length>1?(en?'Add '+L.length+' tasks':'Добавить '+L.length+' '+this.pl(L.length,'задачу','задачи','задач')):(en?'Add':'Добавить')}},
+qaSave(){this.qaStop();const e=$('qaT');if(!e)return;const L=this.qaParse(e.value);if(!L.length){e.focus();return}this.S.tasks=this.S.tasks||[];
+  L.forEach(P=>{const o={id:'k'+uid(),title:P.title,date:P.date,tm:P.tm||'',done:'',t:Date.now()};if(P.pr)o.pr=P.pr;if(P.area)o.area=P.area;if(P.tags&&P.tags.length)o.tags=P.tags;if(P.rep)o.rep=P.rep;if(P.rem!=null&&o.tm)o.rem=P.rem;this.S.tasks.push(o);this.track('task_add',null,'day')});
+  this.track('qa_add',null,'day');this.save();this.close();this.render();this.buzz(10);
+  const td=today(),x=L[0],w=x.date===td?'сегодня':x.date===add(td,1)?'завтра':WD[pd(x.date).getDay()]+', '+fd(x.date);
+  this.toast(L.length>1?'Добавлено '+L.length+' '+this.pl(L.length,'задача','задачи','задач'):'Задача на '+w+(x.tm?' в '+x.tm:''))},
+qaManual(){const e=$('qaT'),v=e?e.value:'';this.qaStop();this.taskNew();setTimeout(()=>{const n=$('nT');if(n&&v){n.value=v.split(/\n/)[0];this._tn.title=n.value}},200)},
+qaMic(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition,en=this.lang()==='en',st=$('qaSt'),w=$('qaWv'),mb=$('qaMic'),e=$('qaT');
+  if(this._qr){this.qaStop();return}
+  if(!SR){if(e){e.focus()}if(st)st.textContent=en?'Use the mic on your keyboard':'Нажми микрофон на клавиатуре и говори';return}
+  let r;try{r=new SR()}catch(x){if(st)st.textContent=en?'Use the mic on your keyboard':'Нажми микрофон на клавиатуре и говори';e&&e.focus();return}
+  r.lang=en?'en-US':'ru-RU';r.interimResults=true;r.continuous=true;const base=e&&e.value?e.value.trim()+' ':'';let fin='';
+  r.onresult=ev=>{let it='';for(let i=ev.resultIndex;i<ev.results.length;i++){const tx=ev.results[i][0].transcript;if(ev.results[i].isFinal)fin+=tx+' ';else it+=tx}if(e){e.value=(base+fin+it).replace(/\s+/g,' ');e.style.height='auto';e.style.height=e.scrollHeight+'px'}this.qaUpd()};
+  r.onerror=ev=>{if(st)st.textContent=ev.error==='not-allowed'?(en?'Microphone access denied':'Нет доступа к микрофону'):(en?'Could not hear. Try again':'Не расслышала. Попробуй ещё раз');this.qaStop(true)};
+  r.onend=()=>{this.qaStop(true)};
+  try{r.start()}catch(x){return}this._qr=r;this.buzz(8);if(w)w.classList.add('on');if(mb)mb.classList.add('on');if(st)st.textContent=en?'Listening…':'Слушаю…'},
+qaStop(quiet){const r=this._qr;this._qr=null;if(r){try{r.stop()}catch(e){}}const w=$('qaWv'),mb=$('qaMic'),st=$('qaSt');if(w)w.classList.remove('on');if(mb)mb.classList.remove('on');if(st&&!quiet)st.textContent='';if(st&&quiet&&/Слушаю|Listening/.test(st.textContent))st.textContent=this.lang()==='en'?'Tap the mic to continue':'Нажми на микрофон, чтобы продолжить'},
 homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
   const ST=(S.pref||{}).wk0==='sun';
   // --- показатели
@@ -4868,7 +5101,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const jr=`<div class="hd-c"><div class="hd-h"><b>Дневник</b><span onclick="APP._jd=today();APP.go('journal')" style="cursor:pointer">Все записи</span></div>${ents.length?ents.map(e=>`<div class="hd-jr" onclick="APP._jd='${e.d}';APP.go('journal')"><span class="hd-jd">${fd(e.d)}</span><div><b>${e.t}</b><span>${esc(e.x.length>90?e.x.slice(0,90)+'…':e.x)}</span></div></div>`).join(''):`<button class="hd-add" onclick="APP._jd=today();APP.go('journal')">+ Записать день</button>`}</div>`;
   const rad=this.pcRadar();
   const msgC=this.msgCard();
-  return {desk:`${this.ftPill()}${kpis}<div class="hd-g1">${dyn}${foc}</div><div class="hd-g2">${hab}${goals}</div><div class="hd-g3">${jr}<div class="hd-rd">${rad}</div>${msgC}</div>`,a:`${this.ftPill()}${kpis}${msgC}`,b:`${dyn}${hab}${goals}`}},
+  return {desk:`${this.ftPill()}${kpis}<div class="hd-g1">${dyn}${foc}</div><div class="hd-g2">${hab}${goals}</div><div class="hd-g3">${jr}<div class="hd-rd">${rad}</div>${msgC}</div>`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}${msgC}`,b:`${dyn}${hab}${goals}`}},
 dynHover(e,el){const v=JSON.parse(el.dataset.v),n=v.length;if(n<2)return;const r=el.getBoundingClientRect();let i=e?Math.round((e.clientX-r.left)/r.width*(n-1)):n-1;i=Math.max(0,Math.min(n-1,i));
   if(v[i]==null){let k=1;while(k<n&&v[i-k]==null&&v[i+k]==null)k++;i=v[i-k]!=null?i-k:i+k;if(v[i]==null)return}
   if(!e){i=n-1;while(i>0&&v[i]==null)i--}
@@ -4919,7 +5152,7 @@ homeHero(dpT){const td=today(),P=this.S.profile||{},nm=(P.name||'').split(' ')[0
   let _dIn=false,_dW=0,_dSc=null;try{_dIn=this.S.goals.length>0&&td>=this.st&&td<=this.end();_dW=_dIn?this.weekOf(td):0;_dSc=_dIn?this.score(_dW):null}catch(e){}
   let _D={desk:'',a:'',b:''};try{_D=this.homeDesk({H,rows,stk,mavg,inS:_dIn,sc:_dSc,w:_dW})}catch(e){console.error(e)}
   const ttl=!dpT.n?'Новый день':closed?'День закрыт':'Твой день',sub=!dpT.n?'Добавь первую привычку':closed?'Всё отмечено. Запиши итоги':'';
-  return `<div class="hmw"><div class="hmx hmz"><div class="hm-ph"></div><div class="hm-in hz"><div class="hz-l"><div class="hm-hi">Привет${nm?', '+esc(nm):''}</div><div class="hz-t">${ttl}</div>${sub?`<div class="hz-s">${sub}</div>`:''}</div>
+  return `<div class="hmw"><div class="hmx hmz"><div class="hm-ph"></div><div class="hm-in hz"><div class="hz-l"><div class="hm-hi"><span class="hz-gr">Привет${nm?', '+esc(nm):''}</span><span class="hz-dt">${(()=>{const w=WDF[pd(td).getDay()];return w.charAt(0).toUpperCase()+w.slice(1)+', '+fd(td)})()}</span></div><div class="hz-t">${ttl}</div>${sub?`<div class="hz-s">${sub}</div>`:''}</div>
    <div class="hx-ring"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" stroke="rgba(255,255,255,.12)" stroke-width="5" fill="none"/><circle cx="32" cy="32" r="27" stroke="url(#hxg)" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="${(C*pct/100).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 32 32)"/><defs><linearGradient id="hxg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D2BEFF"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs></svg><b>${pct}%</b></div></div>
    <button class="hx-cta" onclick="${cta[1]}">${MI.cal}<span>${cta[0]}</span>${MI.chev}</button></div>
    <div class="hmm hmm-a">${_D.a}</div><div class="hm-c1">${tl.length?`<div class="hx-tl">${tl.map(([l,ic,go])=>`<button onclick="${go}">${ic}<b>${l}</b></button>`).join('')}</div>`:''}
@@ -5721,6 +5954,7 @@ merge(a,b){
   m.wheel={};for(const src of [old.wheel||{},nw.wheel||{}])for(const mo in src){const x=src[mo],y=m.wheel[mo];if(!y||(x.t||0)>=(y.t||0))m.wheel[mo]=x}
   const dm=new Map();[...(a.deals||[]),...(b.deals||[])].forEach(d=>{if(m.del.includes(d.id))return;const p=dm.get(d.id);if(!p||(d.upd||0)>(p.upd||0))dm.set(d.id,d)});
   m.deals=[...dm.values()];
+  const em=new Map();[...(a.events||[]),...(b.events||[])].forEach(x=>{if(m.del.includes(x.id))return;const q=em.get(x.id);if(!q||(x.upd||0)>(q.upd||0))em.set(x.id,x)});m.events=[...em.values()];
   m.rw=Object.assign({},a.rw||{},b.rw||{});
   m.chl={};for(const src of [a.chl||{},b.chl||{}])for(const w in src)m.chl[w]=[...new Set([...(m.chl[w]||[]),...src[w]])];
   const pm=new Map();[...(a.pages||[]),...(b.pages||[])].forEach(x=>{if(m.del.includes(x.id))return;const q=pm.get(x.id);if(!q||(x.upd||0)>(q.upd||0))pm.set(x.id,x)});m.pages=[...pm.values()];
