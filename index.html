@@ -3032,6 +3032,22 @@ html body .g57 polygon{fill:rgba(255,255,255,.03);stroke:rgba(255,255,255,.16);s
 html body .g57 polygon.on{fill:url(#g57l);stroke:rgba(255,255,255,.9);filter:drop-shadow(0 0 3px rgba(232,223,255,.35))}
 html body .g57 text{fill:#9A96A6;font-family:Manrope,system-ui,sans-serif;font-size:10.5px}
 html body .skh-in{font-size:14px;line-height:1.5;color:rgba(242,237,226,.78);margin:2px 0 12px}
+/* РАНГИ ОГРАНКИ (17.11) */
+html body .fc-tt b.fc-rk{display:block;font-size:20px;font-weight:600;color:#F2EDE2;letter-spacing:-.01em}
+html body .fc-tt em{display:block;font-style:normal;font-size:13px;color:#9A96A6;margin-top:2px}
+html body .fcr-h{font-size:14px;color:#9A96A6;margin:18px 2px 8px}
+html body .fcr{display:grid;gap:0}
+html body .fcr-r{display:grid;grid-template-columns:14px 26px 1fr;column-gap:10px;align-items:start;padding:9px 0;position:relative}
+html body .fcr-r i{width:9px;height:9px;border-radius:50%;margin-top:5px;border:1px solid rgba(255,255,255,.25);background:transparent}
+html body .fcr-r.done i{background:#C9C6D2;border-color:#fff}
+html body .fcr-r.cur i{background:#fff;border-color:#fff;box-shadow:0 0 0 4px rgba(196,164,255,.18),0 0 10px rgba(232,223,255,.6)}
+html body .fcr-r:not(:last-child):before{content:"";position:absolute;left:4px;top:22px;bottom:-6px;width:1px;background:rgba(255,255,255,.12)}
+html body .fcr-r.done:before{background:rgba(232,223,255,.5)!important}
+html body .fcr-n{font-size:12px;color:#7E7A8C;margin-top:2px;font-variant-numeric:tabular-nums}
+html body .fcr-r b{display:block;font-size:14.5px;font-weight:600;color:rgba(242,237,226,.55)}
+html body .fcr-r.done b,html body .fcr-r.cur b{color:#F2EDE2}
+html body .fcr-r em{display:block;font-style:normal;font-size:12.5px;color:#7E7A8C;line-height:1.4}
+html body .fcr-r.cur em{color:#9A96A6}
 </style>
 </head>
 <body>
@@ -3456,7 +3472,7 @@ cabFacets(){const SK=this.skillsData(),D=this.rpgData(),w7=D.pts7||{},pct=D.nxt>
   let sug=[];if(grow){const have=new Set(this.S.habits.map(h=>h.title));sug=HABIT_LIB.map((x,i)=>[x,i]).filter(([x])=>!have.has(x[0])&&this.skGuess(x[0])===grow).slice(0,2)}
   const R=D.R||[1,'E','Новичок'];
   const F57=this.fc57();
-    const top=`<div class="fc-top">${this.pvSmoke()}<div class="fc-tt"><em>Огранено ${F57.n} из 57 граней</em></div>${this.pvGem(D.st||[])}<div class="fc-xp"><div><i style="width:${Math.round(F57.n/57*100)}%"></i></div><span>${F57.n<57?'Следующая грань: '+esc((F57.L.filter(f=>!f.on).sort((a,b)=>(a.v/a.n>b.v/b.n?-1:1))[0]||{}).t||''):'Камень огранён полностью'}</span></div><button class="fc-help" onclick="APP.skHelp()">Как растёт огранка</button></div>
+    const top=`<div class="fc-top">${this.pvSmoke()}<div class="fc-tt"><b class="fc-rk">${this.fcRank(F57.n)}</b><em>${this.FCR[this.fcRankI(F57.n)][2]} · огранено ${F57.n} из 57</em></div>${this.pvGem(this.fcSt())}<div class="fc-xp"><div><i style="width:${Math.round(F57.n/57*100)}%"></i></div><span>${F57.n<57?(()=>{const nx=this.FCR[this.fcRankI(F57.n)+1],d=nx[0]-F57.n;return `До ранга «${nx[1]}» ${d} ${this.pl(d,'грань','грани','граней')}`})():'Камень огранён полностью'}</span></div><button class="fc-help" onclick="APP.skHelp()">Как растёт огранка</button></div>
     <div class="fc-map"><div class="fc-mh"><b>Карта огранки</b><em>Корона — то, что видно: результаты. Павильон — опора, которую не видно, но именно она даёт камню свет.</em></div>${this.fcGrid()}</div>`;
   const cards=SK.map(s=>{const F=this.FAC[s.k]||['','',''],w=w7[s.k]||0,np=this.PLV.find(l=>s.L<l),pn=np?this.PERK[s.k][this.PLV.indexOf(np)]:'';
     return `<div class="fc-c ${grow===s.k?'gr':''}"><div class="fc-h"><span class="fc-i">${sv(F[2])}</span><span class="fc-n"><b>${s.n}</b><em>${F[0]}</em></span><span class="fc-l"><b>${F57.L.filter(f=>f.k===s.k&&f.on).length}</b><em>из ${F57.L.filter(f=>f.k===s.k).length}</em></span></div>
@@ -3905,7 +3921,7 @@ vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData()
   const g1=[row('gear','Настройки','',"APP.go('me')"),pd0?row('crown','Полный доступ',this._acc&&this._acc.until?'до '+fd(this._acc.until):'активен',"APP.go('me');APP._sset='premium';APP.render()"):row('crown','Полный доступ','открыть',"APP.paySheet('program')"),row('users','Позвать партнёра','',"APP.ptCreate()")];
   const g2=[row('help','Помощь и обратная связь','',"APP.go('me');APP._sset='help';APP.render()"),row('info','О приложении','',"APP.go('me');APP._sset='about';APP.render()"),row('share','Поделиться приложением','',"APP.shareApp()")];
   if(this.user)g2.push(row('out','Выйти из аккаунта','',"APP.logout()",'out'));
-  const xpP=D.nxt>D.cur?Math.max(0,Math.min(1,((D.xp||0)-D.cur)/(D.nxt-D.cur))):0,RC=2*Math.PI*45,toN=Math.max(0,(D.nxt||100)-(D.xp||0));
+  const xpP=this.fc57().n/57,RC=2*Math.PI*45,toN=Math.max(0,(D.nxt||100)-(D.xp||0));
   const SIC={str:'<path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12"/>',int:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',spi:'<path d="M12 21c-4-3-7-6-7-10a7 7 0 0 1 14 0c0 4-3 7-7 10z"/>',biz:'<rect x="3.5" y="7" width="17" height="12" rx="2"/><path d="M9 7V5h6v2"/>',dis:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>'};
   const sts=(D.st||[]).map(([k,n,l])=>`<span class="pv-s" title="${esc(n)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${SIC[k]||SIC.dis}</svg><b>${l}</b></span>`).join('');
   const R=D.R||[1,'E','Новичок'];
@@ -3919,12 +3935,12 @@ vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData()
   const g3=[row('crown','Полный доступ',pd0?(this._acc&&this._acc.until?'до '+fd(this._acc.until):'активен'):'открыть',pd0?"APP.go('me');APP._sset='premium';APP.render()":"APP.paySheet('program')"),row('users','Позвать партнёра','',"APP.ptCreate()")];
   return `<div class="pv-hd"><div class="h1">Профиль</div></div>__S1____S2__
   <div class="pf-w"><div class="pf-a">
-   <div class="pv-hero"><button class="pv-av" onclick="APP._ct='hero';APP.go('profile')" aria-label="Персонаж"><svg class="pv-ring" viewBox="0 0 96 96"><defs><linearGradient id="pvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDE3FF"/><stop offset="1" stop-color="#9B6FE8"/></linearGradient></defs><circle cx="48" cy="48" r="45" stroke="rgba(255,255,255,.08)" stroke-width="3" fill="none"/>${xpP>0?`<circle cx="48" cy="48" r="45" stroke="url(#pvg)" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="${(RC*xpP).toFixed(1)} ${RC.toFixed(1)}" transform="rotate(-90 48 48)"/>`:''}</svg><span class="mr-av ${this.rwFr()}">${this.avaHtml()}</span><span class="pv-lv">Ур. ${D.lvl||1}</span></button>
-    <div class="pv-nm" onclick="APP._ct='hero';APP.go('profile')">${esc(P.name||'Твой профиль')}</div><div class="pv-ti">${tl?esc(tl):esc(R[2])}${chip?' · Полный доступ':''}</div><div class="pv-xp">Огранено ${this.fc57().n} из 57 граней</div><div class="pv-duo"><button class="pv-d pv-gem" onclick="APP._ct='hero';APP.go('profile')">${this.pvSmoke()}<span class="pv-dt"><b>Огранка</b><em>${this.fc57().n} из 57 граней · растут от привычек и дел</em></span>${this.pvGem(D.st||[])}<span class="pv-go">Открыть огранку<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></button></div></div>
+   <div class="pv-hero"><button class="pv-av" onclick="APP._ct='hero';APP.go('profile')" aria-label="Персонаж"><svg class="pv-ring" viewBox="0 0 96 96"><defs><linearGradient id="pvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDE3FF"/><stop offset="1" stop-color="#9B6FE8"/></linearGradient></defs><circle cx="48" cy="48" r="45" stroke="rgba(255,255,255,.08)" stroke-width="3" fill="none"/>${xpP>0?`<circle cx="48" cy="48" r="45" stroke="url(#pvg)" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="${(RC*xpP).toFixed(1)} ${RC.toFixed(1)}" transform="rotate(-90 48 48)"/>`:''}</svg><span class="mr-av ${this.rwFr()}">${this.avaHtml()}</span><span class="pv-lv">${this.fc57().n}/57</span></button>
+    <div class="pv-nm" onclick="APP._ct='hero';APP.go('profile')">${esc(P.name||'Твой профиль')}</div><div class="pv-ti">${tl?esc(tl):esc(this.fcRank())}${chip?' · Полный доступ':''}</div><div class="pv-xp">Огранено ${this.fc57().n} из 57 граней</div><div class="pv-duo"><button class="pv-d pv-gem" onclick="APP._ct='hero';APP.go('profile')">${this.pvSmoke()}<span class="pv-dt"><b>Огранка</b><em>${this.fc57().n} из 57 граней · растут от привычек и дел</em></span>${this.pvGem(this.fcSt())}<span class="pv-go">Открыть огранку<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></button></div></div>
    
    
   </div>
-  <div class="pf-b"><div class="pf-lb">Приложение</div><div class="pf-g pf-g0">${row('gear','Настройки','',"APP.go('me')")}${row('sun','Видение','',"APP._ct='vision';APP.go('profile')")}${row('phone','На экран «Домой»','Установить',"APP.installSheet()")}${row('bell','Напоминания',pp,"APP.go('me');APP._sset='notif';APP.render()")}${row('globe','Язык',lang,"APP.go('me');APP._sset='lang';APP.render()")}${row('down','Мои данные','Выгрузить',"APP.go('me');APP._sset='data';APP.render()")}</div><div class="pf-lb">Доступ</div><div class="pf-g">${g3.join('')}</div><div class="pf-lb">Поддержка</div><div class="pf-g">${g2.join('')}</div></div></div>`},
+  <div class="pf-b"><div class="pf-g pf-g0">${row('gear','Настройки','',"APP.go('me')")}${row('target','Видение','',"APP._ct='vision';APP.go('profile')")}${row('users','Позвать партнёра','',"APP.ptCreate()")}</div></div></div></div>`},
 installSheet(){const ua=navigator.userAgent||'',ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),standalone=window.navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
   if(standalone){this.toast('Приложение уже установлено');return}
   const safari=ios&&!/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
@@ -4070,20 +4086,25 @@ skWeak(){const SK=this.skillsData().filter(x=>x.k!=='dis'),w=SK.slice().sort((a,
   return `<div class="card skwk"><div class="skwk-h"><span>${hIco(w.ic)}</span><div class="sp"><b>${w.n}: простор для роста</b><em>Эта грань только начинает сиять. Одна привычка в день, и она догонит остальные</em></div></div>${sug.length?`<div class="skwk-b">${sug.map(([x,i])=>`<button onclick="APP.addLib(${i})">${I.plus}<span>${esc(x[0])}</span></button>`).join('')}</div>`:`<button class="pill" onclick="APP.editH()">${I.plus} Привычка для ${w.n.toLowerCase()==='дух'?'духа':w.n.toLowerCase()==='сила'?'силы':w.n.toLowerCase()==='дело'?'дела':'интеллекта'}</button>`}</div>`},
 /* ОГРАНКА 57: 33 грани короны (результаты) + 24 грани павильона (опора) */
   FC57S:{str:'Сила',int:'Интеллект',spi:'Дух',biz:'Дело',dis:'Дисциплина'},
+  FCR:[[0,'Скрытый алмаз','Всё нужное уже есть внутри'],[1,'Первая искра','Первый шаг сделан'],[3,'Пробуждение','Новые привычки начинают жить'],[6,'Ритм','Действия складываются в ритм'],[10,'Форма','Появляются очертания нового себя'],[15,'Первые грани','Свет впервые ловится гранями'],[21,'Характер','Тебя уже не сбить с пути'],[28,'Опора','Держит то, чего не видно другим'],[35,'Чистота','Лишнее ушло, осталось главное'],[42,'Сияние','Перемены заметны со стороны'],[50,'Огонь','Твой свет вдохновляет других'],[57,'Бриллиант','Все 57 граней, путь пройден']],
+  hSide(h){if(h.sk)return h.sk;const g=this.skGuess(h.title);if(g)return g;const C={dumb:'str',steps:'str',swim:'str',food:'str',tree:'str',snow:'str',drop:'str',book:'int',chat:'int',list:'int',pen:'int',lotus:'spi',moon:'spi',sun:'spi',heart:'spi',ban:'spi',phone:'spi'};return C[h.ico||icoGuess(h.title)]||'biz'},
+  fcSt(){const F=this.fc57();return [['str','Сила'],['int','Интеллект'],['spi','Дух'],['biz','Дело\u200b'],['dis','Дисциплина']].map(([k,n])=>[k,n,1+F.L.filter(f=>f.k===k&&f.on).length])},
+  fcRankI(n){n=n==null?this.fc57().n:n;let i=0;this.FCR.forEach((r,k)=>{if(n>=r[0])i=k});return i},
+  fcRank(n){return this.FCR[this.fcRankI(n)][1]},
   fc57Defs(){if(this._f57d)return this._f57d;const D=[],a=(id,k,p,c,n,u,t)=>D.push({id,k,p,c,n,u,t});
-    [['str','силы'],['int','интеллекта'],['spi','духа']].forEach(([k,w])=>[1,10,30,60,100,200,365].forEach(n=>a(k+'m'+n,k,'c','m_'+k,n,'отм',`${n} ${this.pl(n,'отметка','отметки','отметок')} ${w}`)));
+    [['str','силы'],['int','интеллекта'],['spi','духа']].forEach(([k,w])=>[1,10,30,60,100,200,300].forEach(n=>a(k+'m'+n,k,'c','m_'+k,n,'отм',`${n} ${this.pl(n,'отметка','отметки','отметок')} ${w}`)));
     [1,10,50,100,250,500].forEach(n=>a('bt'+n,'biz','c','tasks',n,'',`${n} ${this.pl(n,'дело','дела','дел')} закрыто`));
     [3,7,14,30,60,100].forEach(n=>a('ds'+n,'dis','c','streak',n,'',`Серия ${n} ${this.pl(n,'день','дня','дней')}`));
-    [7,21,66,100].forEach(n=>a('sh'+n,'str','p','hbest',n,'',`Одна привычка ${n} ${this.pl(n,'день','дня','дней')} подряд`));
+    [7,21,66,100].forEach(n=>a('sh'+n,'str','p','hbest',n,'',`Привычка тела ${n} ${this.pl(n,'день','дня','дней')} подряд`));
     [1,4,12,26].forEach(n=>a('ir'+n,'int','p','reviews',n,'',`${n} ${this.pl(n,'разбор','разбора','разборов')} недели`));
     [1,10,30,100].forEach(n=>a('sj'+n,'spi','p','journal',n,'',`${n} ${this.pl(n,'запись','записи','записей')} в дневнике`));
     [1,7,30,100].forEach(n=>a('bc'+n,'biz','p','closed',n,'',`${n} ${this.pl(n,'день','дня','дней')} закрыто на 80%`));
-    [10,100].forEach(n=>a('bf'+n,'biz','p','focus',n,'',`${n} ${this.pl(n,'час','часа','часов')} фокуса`));
-    [1,4,12].forEach(n=>a('dw'+n,'dis','p','strongw',n,'',`${n} ${this.pl(n,'сильная неделя','сильные недели','сильных недель')}`));
-    [1,5,20].forEach(n=>a('dc'+n,'dis','p','back',n,'',`${n} ${this.pl(n,'возврат','возврата','возвратов')} после пропуска`));
+    [10,50].forEach(n=>a('bf'+n,'biz','p','focus',n,'',`${n} ${this.pl(n,'час','часа','часов')} фокуса`));
+    [1,4,12,26].forEach(n=>a('dw'+n,'dis','p','strongw',n,'',`${n} ${this.pl(n,'сильная неделя','сильные недели','сильных недель')}`));
+    [1,3].forEach(n=>a('dc'+n,'dis','p','back',n,'',`${n} ${this.pl(n,'возврат','возврата','возвратов')} после пропуска`));
     return this._f57d=D},
   fc57(){const k=(this.S.t||0)+today();if(this._f57k===k)return this._f57v;const S=this.S,td=today(),R=this.rpgMemo(),P=R.pts||{};
-    const hs=S.habits.filter(x=>!x.archived);let hbest=0;try{hbest=Math.max(0,...hs.map(x=>{const[f,s_,fr]=this.hFns(x);return this.best(f,s_,fr||add(td,-400))}))}catch(e){}
+    const hs=S.habits.filter(x=>!x.archived&&this.hSide(x)==='str');let hbest=0;try{hbest=Math.max(0,...hs.map(x=>{const[f,s_,fr]=this.hFns(x);return this.best(f,s_,fr||add(td,-400))}))}catch(e){}
     let focus=0;Object.values(S.focus||{}).forEach(f=>focus+=(+f.m||0));
     const keys=Object.keys(S.hlog||{}).concat(Object.keys(S.log||{})).filter(d=>/^\d{4}-\d\d-\d\d$/.test(d)).sort();let d0=keys[0]||td;if(d0<add(td,-400))d0=add(td,-400);
     let back=0,prevOk=null,seen=false;const wk={};for(let d=d0;d<=td;d=add(d,1)){const ok=this.dayOk(d);if(ok){if(seen&&prevOk===false)back++;seen=true;const m=this.monday(d);wk[m]=(wk[m]||0)+1}prevOk=d<td?ok:prevOk}
@@ -4105,7 +4126,8 @@ skWeak(){const SK=this.skillsData().filter(x=>x.k!=='dis'),w=SK.slice().sort((a,
 skHelp(){const R=(ic,b,t)=>`<div class="skh-r"><span>${ic}</span><div><b>${b}</b><em>${t}</em></div></div>`;
   const F=this.fc57();this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Как растёт огранка</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
    <div class="skh-in">В классическом бриллианте 57 граней: 33 сверху и 24 снизу. Огранено ${F.n} из 57.</div>
-   <div class="skh">${R(I.ok,'Корона, 33 грани','То, что видно: отметки привычек, закрытые дела и серии дней.')}${R(I.ok,'Павильон, 24 грани','То, что не видно: разборы недели, записи в дневнике, сильные недели и возвраты после пропуска. Сияние камню дают именно нижние грани.')}${R(I.ok,'Каждая грань — рубеж','Грань огранивается один раз и остаётся навсегда. Пропуск её не стирает.')}${R(I.ok,'Пять сторон','Грани распределены между Силой, Интеллектом, Духом, Делом и Дисциплиной.')}</div>`)},
+   <div class="skh">${R(I.ok,'Корона, 33 грани','То, что видно: отметки привычек, закрытые дела и серии дней.')}${R(I.ok,'Павильон, 24 грани','То, что не видно: разборы недели, записи в дневнике, сильные недели и возвраты после пропуска. Сияние камню дают именно нижние грани.')}${R(I.ok,'Каждая грань — рубеж','Грань огранивается один раз и остаётся навсегда. Пропуск её не стирает.')}${R(I.ok,'Пять сторон','Грани распределены между Силой, Интеллектом, Духом, Делом и Дисциплиной.')}</div>
+   <div class="fcr-h">Путь камня</div><div class="fcr">${this.FCR.map((r,k)=>{const ci=this.fcRankI(F.n);return `<div class="fcr-r ${k<ci?'done':k===ci?'cur':''}"><i></i><span class="fcr-n">${r[0]}</span><div><b>${r[1]}${k===ci?' · ты здесь':''}</b><em>${r[2]}</em></div></div>`}).join('')}</div>`)},
 ptOn(){this.S.pref=this.S.pref||{};this.S.pref.dz=this.dzOrder().map(x=>x[0]==='partner'?[x[0],true]:x);this.save()},
 ptAuto(){const c=this._ptc;if(!c||this._ptBusy)return;if(!this.user){if(!this._ptTold){this._ptTold=1;setTimeout(()=>this.toast('Войди или зарегистрируйся, и вы станете партнёрами'),900)}return}
   this._ptBusy=1;this.grpRpc('tw_group_join',{p_code:c,p_me:this.S.profile.name||''}).then(async g=>{this._ptc=null;try{sessionStorage.removeItem('tw-pt')}catch(e){}this.ptOn();await this.grpLoad();await this.grpPush();await this.grpLoad();this.render();this.toast('Вы теперь партнёры: «'+((g&&g.name)||'Партнёры')+'»')}).catch(e=>{this._ptc=null;try{sessionStorage.removeItem('tw-pt')}catch(_){}this.toast(this.grpErr(e))}).finally(()=>{this._ptBusy=0})},
@@ -4809,7 +4831,7 @@ dayMenu(){const d=this.day,fz=this.frozen(d);
    <button onclick="APP.close();APP.ciOpen('${d}')">${I.ed}<span>Чек-ин за этот день</span></button>
    <button onclick="APP.close();APP.setGroup(((APP.S.pref||{}).group||'tod')==='tod'?'goal':'tod')">${I.goal}<span>${((this.S.pref||{}).group||'tod')==='tod'?'Группировать по целям':'Группировать по времени суток'}</span></button>
    <button onclick="APP.close();APP.day=today();APP.render()">${I.week}<span>К сегодняшнему дню</span></button></div>`)},
-frzLimit(){const p=this.S.pref||{};return (p.freezes==null?2:+p.freezes)+this.perksOf('dis')},
+frzLimit(){const p=this.S.pref||{};return p.freezes==null?2:+p.freezes},
 frzUsed(d){const m=d.slice(0,7),K=this.S.skip||{};return Object.keys(K).filter(x=>x.slice(0,7)===m&&K[x].__all).length},
 frzLeft(d){return Math.max(0,this.frzLimit()-this.frzUsed(d))},
 freeze(d,on){if(on&&!this.paid())return this.paySheet('streak');this.snap();if(on&&this.mode==='strict')return this.toast('В строгой программе заморозок нет: пропуск — день 1 заново');if(on&&this.frzLeft(d)<=0)return this.toast(`Заморозки на ${MONF[pd(d).getMonth()].toLowerCase()} закончились: ${this.frzLimit()} из ${this.frzLimit()}`);
@@ -6278,13 +6300,13 @@ vMe(){
   const cur=this._sset&&pages[this._sset]?this._sset:null;
   if(cur){h+=`<div class="sbk"><button class="sbk-b" onclick="APP._sset=null;APP.render();window.scrollTo(0,0)" aria-label="Назад">${I.l}</button><b>${TT[cur]}</b><span></span></div>`+pages[cur]().replace(/<div class="lbl sec">[^<]*<\/div>/,'');return h}
   const go=k=>`APP._sset='${k}';APP.render();window.scrollTo(0,0)`;
-  const nr=(k,c,label,val,act)=>`<button class="nrow" onclick="${act}"><span class="ni" style="color:${c}">${SI[k]}</span><span class="sp">${label}</span>${val?`<span class="nval">${val}</span>`:''}${I.r}</button>`;
+  const nr=(k,c,label,val,act)=>`<button class="nrow" onclick="${act}"><span class="ni" style="color:${c}">${SI[k]||k}</span><span class="sp">${label}</span>${val?`<span class="nval">${val}</span>`:''}${I.r}</button>`;
   const grp=rows=>`<div class="card ngrp">${rows.join('')}</div>`;
   if(this.user){const Pp=S.profile||{},av=Pp.ava&&Pp.ava!=='shark'?hIco(Pp.ava):SHARK,R=this.rpgData(),na=R.ach.filter(x=>x[2]).length;
-    h+=`<button class="nme" onclick="APP.go('profile')"><span class="nme-av">${av}</span><span class="sp"><b>${esc(Pp.name||Pp.hero||'Без имени')}</b><span class="nme-ch"><em class="lv">Ур. ${R.lvl}</em><em class="ac">${SI.medal}${na} ${this.pl(na,'достижение','достижения','достижений')}</em></span></span>${I.r}</button>`}
+    h+=`<button class="nme" onclick="APP.go('profile')"><span class="nme-av">${av}</span><span class="sp"><b>${esc(Pp.name||Pp.hero||'Без имени')}</b><span class="nme-ch"><em class="lv">${this.fcRank()}</em><em class="ac">${SI.medal}${this.fc57().n} из 57 граней</em></span></span>${I.r}</button>`}
   if(this._adm)h+=grp([nr('chart','#5D27DB','Аналитика',(this._adm.accounts||0)+' акк.',go('stats'))]);
   h+=grp([nr('crown','rgb(201 162 39)','Полный доступ',this.paid()?(this._acc.until?'до '+fd(this._acc.until):'активен'):'',go('premium'))]);
-  h+=grp([nr('target','#9B6FE8','Программа',P?esc(P.name):'',go('program')),nr('cal','#9B6FE8','День и неделя','',go('day')),nr('bell','#9B6FE8','Уведомления','',go('notif')),nr('globe','#9B6FE8','Язык',lang==='en'?'English':'Русский',go('lang')),nr('brush','#9B6FE8','Оформление','',go('look'))]);
+  h+=grp([nr('target','#9B6FE8','Программа',P?esc(P.name):'',go('program')),nr('cal','#9B6FE8','День и неделя','',go('day')),nr('bell','#9B6FE8','Уведомления','',go('notif')),nr('globe','#9B6FE8','Язык',lang==='en'?'English':'Русский',go('lang')),nr('brush','#9B6FE8','Оформление','',go('look')),nr('<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>','#9B6FE8','На экран «Домой»','',"APP.installSheet()")]);
   h+=grp([...(this.user?[nr('user','#5D27DB','Аккаунт','',go('account'))]:[]),nr('lock','#5D27DB','Данные и приватность','',go('data')),nr('plug','#5D27DB','Интеграции','',go('integ'))]);
   h+=grp([nr('help','#9B6FE8','Помощь и обратная связь','',go('help')),nr('star','#9B6FE8','Оценить приложение',(S.pref||{}).rate?'★'.repeat((S.pref||{}).rate):'',"APP.rateSheet()"),nr('spark','#9B6FE8','Что нового','',"APP.newsSheet()"),nr('share','#9B6FE8','Поделиться приложением','',"APP.shareApp()"),nr('info','#9B6FE8','О приложении','v1.0',go('about'))]);
   h+=grp([nr('doc','#9A9AAE','Правовое','',go('legal'))]);
