@@ -2918,6 +2918,29 @@ html body .ib-e{align-items:flex-start!important;padding:40px 8px 0!important}
 html body .vb-empty{margin:24px 0 0!important}
 html body .mgn em{text-wrap:balance}
 html body .hx-empty>svg:last-child{margin-left:auto}
+/* БЕСПЛАТНЫЙ ПРОГРЕСС: простым языком (16.11) */
+html body .pg-hk{font-size:13.5px;color:#9A94AB}
+html body .pg-hv{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:4px 0 2px}
+html body .pg-hv b{font-size:34px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+html body .pg-hv span{font-size:13.5px;color:#C4A4FF}
+html body .pg-hs{font-size:14px;color:rgba(242,237,226,.75);margin-bottom:14px}
+html body .pg-k .card i{display:block;font-style:normal;font-size:12px;color:#7E7A8C;margin-top:4px}
+html body .pg-k .card b{font-size:21px}
+html body .pg-l2{display:grid;gap:0}
+html body .pg-l2>div{display:flex;gap:14px;align-items:center;padding:12px 0;border-top:1px solid rgba(255,255,255,.07)}
+html body .pg-mv{flex:none;width:48px;height:32px;display:block}
+html body .pg-mv svg{width:48px;height:32px;display:block}
+html body .pg-l2 b{display:block;font-size:15px;font-weight:600;line-height:1.3}
+html body .pg-l2 em{display:block;font-style:normal;font-size:13px;color:#9A94AB;line-height:1.4;margin-top:2px}
+html body .pg-ut{font-size:19px}
+html body .pg-us{font-size:14px}
+@media(min-width:1024px){
+ html body .dmain:has(>.pg-hero){display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px;align-items:stretch}
+ html body .dmain:has(>.pg-hero)>*:not(.pg-hero):not(.pg-k){grid-column:1/-1}
+ html body .dmain:has(>.pg-hero)>.pg-hero,html body .dmain:has(>.pg-hero)>.pg-k{margin:0!important}
+ html body .dmain:has(>.pg-hero)>.pg-k{grid-auto-rows:1fr}
+ html body .pg-l2{grid-template-columns:1fr 1fr;column-gap:28px}
+}
 </style>
 </head>
 <body>
@@ -4658,14 +4681,14 @@ hRow(x){const d=this.day,on=this.hOn(x,d),[f,s,fr]=this.hFns(x),st=this.streak(f
     ${right}${!on&&!sk&&this.mode!=='strict'&&k==='check'?`<button class="fzb" title="Пропустить в этот день" onclick="APP.setSkip('${x.id}','${d}',true)">${I.snow}</button>`:''}<span class="stk">${I.flame}${st||0}</span>${this.starBtn(d,'h:'+x.id)}</div>`},
 dayMenu(){const d=this.day,fz=this.frozen(d);
   this.open(`<div class="row"><div class="h2 sp">${fd(d)}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="menu" style="margin-top:8px">
-   <button onclick="APP.close();APP.freeze('${d}',${!fz})">${I.habit}<span>${fz?'Разморозить день':'Заморозить день'}<br><span class="small mut">Болезнь, перелёт, форс-мажор: серии не рвутся, счёт недели считается без этого дня. Осталось в этом месяце: ${this.frzLeft(d)} из ${this.frzLimit()}</span></span></button>
+   <button onclick="APP.close();APP.freeze('${d}',${!fz})">${I.habit}<span>${fz?'Разморозить день':'Заморозить день'}<br><span class="small mut">Болезнь, перелёт, форс-мажор: серии не рвутся, счёт недели считается без этого дня. ${APP.paid()?'':'В полном доступе.'}${APP.paid()?`Осталось в этом месяце: ${this.frzLeft(d)} из ${this.frzLimit()}`:''}</span></span></button>
    <button onclick="APP.close();APP.ciOpen('${d}')">${I.ed}<span>Чек-ин за этот день</span></button>
    <button onclick="APP.close();APP.setGroup(((APP.S.pref||{}).group||'tod')==='tod'?'goal':'tod')">${I.goal}<span>${((this.S.pref||{}).group||'tod')==='tod'?'Группировать по целям':'Группировать по времени суток'}</span></button>
    <button onclick="APP.close();APP.day=today();APP.render()">${I.week}<span>К сегодняшнему дню</span></button></div>`)},
 frzLimit(){const p=this.S.pref||{};return (p.freezes==null?2:+p.freezes)+this.perksOf('dis')},
 frzUsed(d){const m=d.slice(0,7),K=this.S.skip||{};return Object.keys(K).filter(x=>x.slice(0,7)===m&&K[x].__all).length},
 frzLeft(d){return Math.max(0,this.frzLimit()-this.frzUsed(d))},
-freeze(d,on){this.snap();if(on&&this.mode==='strict')return this.toast('В строгой программе заморозок нет: пропуск — день 1 заново');if(on&&this.frzLeft(d)<=0)return this.toast(`Заморозки на ${MONF[pd(d).getMonth()].toLowerCase()} закончились: ${this.frzLimit()} из ${this.frzLimit()}`);
+freeze(d,on){if(on&&!this.paid())return this.paySheet('streak');this.snap();if(on&&this.mode==='strict')return this.toast('В строгой программе заморозок нет: пропуск — день 1 заново');if(on&&this.frzLeft(d)<=0)return this.toast(`Заморозки на ${MONF[pd(d).getMonth()].toLowerCase()} закончились: ${this.frzLimit()} из ${this.frzLimit()}`);
   const K=this.S.skip=this.S.skip||{};this.stamp('S|'+d+'|__all');K[d]=K[d]||{};if(on)K[d].__all=true;else delete K[d].__all;if(!Object.keys(K[d]).length)delete K[d];this.save();this.render();this.toast(on?'День заморожен':'День разморожен',true)},
 lpMenu(k,id){const d=this.day;if(k==='k')return this.kMenu(id);const o=k==='t'?this.S.tactics.find(x=>x.id===id):this.S.habits.find(x=>x.id===id);if(!o)return;
   const sk=this.skipped(id,d)&&!this.frozen(d);
@@ -6133,7 +6156,7 @@ vMe(){
 },
 setPref(k,v){this.S.pref=this.S.pref||{};this.S.pref[k]=v;this.save();this.render()},
 vacOn(){const v=((this.S.pref||{}).vacs||[]).slice(-1)[0];return v&&!v.to?v:null},
-toggleVac(){const P=this.S.pref=this.S.pref||{};P.vacs=P.vacs||[];const v=this.vacOn(),td=today();if(v){v.to=add(td,-1);if(v.to<v.from)P.vacs.pop();this.toast('С возвращением! Отпуск выключен')}else{P.vacs.push({from:td,to:null});this.toast('Отпуск включён: серии не рвутся')}this.save();this.render()},
+toggleVac(){const P=this.S.pref=this.S.pref||{};P.vacs=P.vacs||[];const v=this.vacOn(),td=today();if(!v&&!this.paid())return this.paySheet('streak');if(v){v.to=add(td,-1);if(v.to<v.from)P.vacs.pop();this.toast('С возвращением! Отпуск выключен')}else{P.vacs.push({from:td,to:null});this.toast('Отпуск включён: серии не рвутся')}this.save();this.render()},
 hashPin(x){let h=5381;for(const c of String(x))h=((h<<5)+h+c.charCodeAt(0))|0;return 'p'+(h>>>0).toString(36)},
 pinSet(){const a=prompt('Придумай код из 4 цифр');if(!a)return;if(!/^\d{4}$/.test(a))return this.toast('Нужно 4 цифры');const b=prompt('Повтори код');if(a!==b)return this.toast('Коды не совпали');this.setPref('pin',this.hashPin(a));try{sessionStorage.setItem('tw-unlock','1')}catch(e){}this.toast('Код установлен')},
 pinOff(){const a=prompt('Введи текущий код');if(a==null)return;if(this.hashPin(a)!==(this.S.pref||{}).pin)return this.toast('Неверный код');this.setPref('pin',null);this.toast('Код выключен')},
@@ -6143,7 +6166,7 @@ pinForgot(){if(!confirm('Сбросить код? Данные останутс�
 shareApp(){const url='https://vikagladysheva07-source.github.io/wikki-app/',t=this.tt('VOLYO — система дисциплины и привычек');if(navigator.share)navigator.share({title:t,url}).catch(()=>{});else this.copy(url)},
 async deleteMe(){if(!this.user||!this.sb)return;if(!confirm('Удалить аккаунт навсегда? Все данные в облаке будут стёрты, отменить это нельзя.'))return;{const a=(prompt('Чтобы подтвердить, напиши: УДАЛИТЬ')||'').trim().toUpperCase();if(a!=='УДАЛИТЬ'&&a!=='DELETE')return}
   try{try{const{data:fl}=await this.sb.storage.from('vision').list(this.user.id,{limit:100});if(fl&&fl.length)await this.sb.storage.from('vision').remove(fl.map(f=>this.user.id+'/'+f.name))}catch(e){}const{error}=await this.sb.rpc('tw_delete_me');if(error)throw error;await this.sb.auth.signOut();localStorage.removeItem(KEY);location.reload()}catch(e){this.toast('Не получилось удалить: '+this.errText(e))}},
-exportIcs(){const S=this.S,st=this.st,en=this.end(),u=d=>d.replace(/-/g,''),esc2=t=>String(t).replace(/([,;\\])/g,'\\$1').replace(/\n/g,'\\n');
+exportIcs(){if(!this.paid())return this.paySheet('calendar');const S=this.S,st=this.st,en=this.end(),u=d=>d.replace(/-/g,''),esc2=t=>String(t).replace(/([,;\\])/g,'\\$1').replace(/\n/g,'\\n');
   const now=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',until=u(en)+'T235959';
   let ev=[];const add_=(uid_,title,desc,date,hm,rr)=>ev.push(`BEGIN:VEVENT\r\nUID:${uid_}@12weeks\r\nDTSTAMP:${now}\r\nDTSTART:${u(date)}T${hm}00\r\nDURATION:PT15M\r\n${rr?'RRULE:'+rr+';UNTIL='+until+'\r\n':''}SUMMARY:${esc2(title)}\r\nDESCRIPTION:${esc2(desc)}\r\nBEGIN:VALARM\r\nTRIGGER:PT0M\r\nACTION:DISPLAY\r\nDESCRIPTION:${esc2(title)}\r\nEND:VALARM\r\nEND:VEVENT`);
   const by=k=>S.tactics.filter(t=>t.active!==false&&t.type!=='ms'&&(t.tod||'')===k).map(t=>'• '+t.title+(t.when?' — '+t.when:''));
@@ -6201,12 +6224,15 @@ async loadAcc(){if(!this.user||!this.sb)return;const k='tw-acc-'+this.user.id;tr
 canAddH(n){if(this.paid())return true;const c=this.S.habits.filter(h=>!h.archived).length;if(c+n<=this.FREE_H)return true;this.paySheet('habits');return false},
 price(){return this.lang()==='en'?{v:'$29'}:{v:'2 490 ₽'}},
 payBody(kind,page){const T={program:['Программы','Цель за 12 недель','Готовый план на 12 недель: цели, действия на каждый день, счёт недели и воскресный разбор. Каждое утро понятно, что делать.'],
-    progress:['Прогресс','Видно, как меняется жизнь','Колесо баланса, год в пикселях и графики за месяцы. Через месяц разница видна в цифрах.'],
+    progress:['Прогресс','Видно, как ты меняешься','Графики за месяцы, весь год на одной странице и где в жизни перекос. Через месяц разница видна в цифрах.'],
     voice:['Голосовой ввод','Задачи голосом','Скажи «завтра в 9 созвон», и задача появится с датой и временем. Голосовой ввод входит в полный доступ.'],
+    streak:['Защита серии','Серия не сгорит из-за болезни или отпуска','При болезни, перелёте или форс-мажоре заморозь день или включи режим отпуска. Серия и счёт недели сохранятся.'],
+    calendar:['Календарь','Дела и напоминания в календаре телефона','Утро, день, вечер и итоги недели появятся в твоём календаре рядом с остальными встречами.'],
+    groups:['Группы','Держаться вместе проще','Группа до 5 человек: каждый видит процент недели друг друга. Одного партнёра можно позвать бесплатно.'],
     habits:['Привычки','Сколько угодно привычек','В бесплатной версии три привычки. В полном доступе ограничений нет.'],
     full:['Полный доступ','Вся система VOLYO','Программы, безлимит привычек, весь прогресс и разборы недели. Платишь один раз.']}[kind]||['Полный доступ','Вся система VOLYO',''],pr=this.price(),en=this.lang()==='en';
   const ok='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',no='<i class="pwc-no"></i>';
-  const C=[['Задачи',ok,ok],['Привычки','3','без ограничений'],['Прогресс','неделя','месяцы и год'],['Программы',no,ok],['Задачи голосом',no,ok],['Колесо баланса',no,ok],['Разбор недели',no,ok]];
+  const C=[['Задачи',ok,ok],['Привычки','3','без ограничений'],['Прогресс','неделя','месяцы и год'],['Программы',no,ok],['Задачи голосом',no,ok],['Защита серии',no,ok],['Группы',no,ok],['Колесо баланса',no,ok],['Разбор недели',no,ok]];
   const day=!en&&/\d/.test(pr.v)?Math.round(parseInt(pr.v.replace(/\D/g,''),10)/365):0;
   return `<div class="pw pw2"><div class="pw-ey2">${T[0]}</div><div class="pw-t pw-tp">${T[1]}</div><div class="pw-s">${T[2]}</div>
   <div class="pwc"><div class="pwc-h"><span></span><span>Бесплатно</span><span class="pwc-f">Полный</span></div>${C.map(r=>`<div class="pwc-r"><b>${r[0]}</b><span>${r[1]}</span><span class="pwc-f">${r[2]}</span></div>`).join('')}</div>
@@ -6214,19 +6240,28 @@ payBody(kind,page){const T={program:['Программы','Цель за 12 не
   <button class="btn pr w pw-go" onclick="APP.buy()">Открыть полный доступ</button>
   <div class="pw-g"><span>${I.ok}Без подписки</span><span>${I.ok}14 дней на возврат</span><span>${I.ok}Все обновления</span></div>
   <button class="pw-code" onclick="APP.codeAsk()">У меня есть код доступа</button></div>`},
-vProgFree(){const td=today(),m0=this.monday(td),WL=this.wdl?this.wdl():['пн','вт','ср','чт','пт','сб','вс'];
-  const days=[0,1,2,3,4,5,6].map(i=>add(m0,i));let sp=0,sn=0;
-  const bars=days.map((d,i)=>{const a=d<=td?this.dayAll(d):null;if(a&&a.n){sp+=a.p;sn++}const h=a&&a.n?Math.max(6,Math.round(a.p*100)):0;return `<div class="pg-b ${d===td?'td':''} ${d>td?'fu':''}"><span><i style="height:${h}%"></i></span><em>${WL[i]}</em></div>`}).join('');
-  const wk=sn?Math.round(sp/sn*100):0;let stk=0,best=0;try{stk=this.dayStreak();best=this.dayBest()}catch(e){}
+vProgFree(){const td=today(),WD=['вс','пн','вт','ср','чт','пт','сб'],WF=['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+  const avg=(a,b)=>{let sp=0,sn=0,dn=0,nn=0;for(let i=a;i<=b;i++){const d=add(td,-i),x=this.dayAll(d);if(x.n){sp+=x.p;sn++;dn+=x.done;nn+=x.n}}return {p:sn?Math.round(sp/sn*100):null,dn,nn}};
+  const cur=avg(0,6),prv=avg(7,13),wk=cur.p==null?0:cur.p;
+  let cmp='';if(cur.p!=null&&prv.p!=null){const df=cur.p-prv.p;cmp=df>=3?`на ${df}% лучше прошлой недели`:df<=-3?`на ${-df}% ниже прошлой недели`:'как на прошлой неделе'}
+  const days=[6,5,4,3,2,1,0].map(i=>add(td,-i));
+  const bars=days.map(d=>{const a=this.dayAll(d),h=a.n?Math.max(6,Math.round(a.p*100)):0;return `<div class="pg-b ${d===td?'td':''}"><span><i style="height:${h}%"></i></span><em>${d===td?'сег':WD[pd(d).getDay()]}</em></div>`}).join('');
+  let stk=0,best=0;try{stk=this.dayStreak();best=this.dayBest()}catch(e){}
   let kd=0;const d30=add(td,-29);(this.S.tasks||[]).forEach(x=>{if(x.done&&x.done>=d30&&x.done<=td)kd++});
   let fw=0;for(let i=0;i<7;i++)fw+=this.focusOf(add(td,-i));const fmt=m=>m>=60?Math.floor(m/60)+' ч'+(m%60?' '+m%60+' мин':''):m+' мин';
-  const lock='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
-  const L=[['Колесо баланса','Как меняются сферы жизни месяц к месяцу'],['Год в пикселях','Каждый день года на одной картинке'],['Графики и серии','Динамика за 30 и 90 дней, серии привычек'],['Разбор недели','Счёт, выводы и фокус на следующую неделю']];
+  const ws=[0,0,0,0,0,0,0],wn=[0,0,0,0,0,0,0];for(let i=0;i<28;i++){const d=add(td,-i),x=this.dayAll(d);if(x.n){const k=pd(d).getDay();ws[k]+=x.p;wn[k]++}}
+  let bw=-1,bv=-1;ws.forEach((v,k)=>{if(wn[k]){const a=v/wn[k];if(a>bv){bv=a;bw=k}}});
+  const mini={
+   line:'<svg viewBox="0 0 48 32" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 29h42" stroke="rgba(255,255,255,.14)"/><path d="M4 24l8-5 7 3 8-9 7 4 10-11" stroke="#C4A4FF" stroke-width="1.8"/><circle cx="44" cy="6" r="2.2" fill="#C4A4FF"/></svg>',
+   year:'<svg viewBox="0 0 48 32">'+Array.from({length:40},(_,k)=>{const x=2+(k%10)*4.6,y=3+Math.floor(k/10)*7,o=[.9,.35,.6,.15,.8,.5,.25,.95,.45,.7][(k*7)%10];return `<rect x="${x.toFixed(1)}" y="${y}" width="3.6" height="5" rx="1" fill="rgba(196,164,255,${o})"/>`}).join('')+'</svg>',
+   wheel:'<svg viewBox="0 0 48 32" fill="none"><circle cx="24" cy="16" r="14.5" stroke="rgba(255,255,255,.12)" stroke-dasharray="2 2"/><path d="M24.2 13.0L24.8 3.0A13 13 0 0 1 34.8 8.8L26.5 14.3Z" fill="rgba(196,164,255,0.95)"/><path d="M26.7 14.7L30.3 12.9A7 7 0 0 1 30.3 19.1L26.7 17.3Z" fill="rgba(196,164,255,0.4)"/><path d="M26.5 17.7L33.2 22.1A11 11 0 0 1 24.7 27.0L24.2 19.0Z" fill="rgba(196,164,255,0.75)"/><path d="M23.8 19.0L23.7 21.0A5 5 0 0 1 19.8 18.8L21.5 17.7Z" fill="rgba(196,164,255,0.25)"/><path d="M21.3 17.3L13.3 21.4A12 12 0 0 1 13.3 10.6L21.3 14.7Z" fill="rgba(196,164,255,0.85)"/><path d="M21.5 14.3L17.3 11.6A8 8 0 0 1 23.5 8.0L23.8 13.0Z" fill="rgba(196,164,255,0.55)"/></svg>',
+   week:'<svg viewBox="0 0 48 32" fill="none" stroke-linecap="round"><path d="M6 8l2 2 4-4" stroke="#C4A4FF" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 8h26" stroke="rgba(255,255,255,.35)" stroke-width="2"/><path d="M6 17l2 2 4-4" stroke="#C4A4FF" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 17h20" stroke="rgba(255,255,255,.35)" stroke-width="2"/><circle cx="9" cy="26" r="3" stroke="rgba(255,255,255,.3)" stroke-width="1.4"/><path d="M16 26h23" stroke="rgba(255,255,255,.2)" stroke-width="2"/></svg>'};
+  const L=[['line','Как ты меняешься месяц за месяцем','График за 30 и 90 дней: результат растёт или проседает'],['year','Весь год на одной странице','Каждый день как клеточка. Сразу видно, где был ритм, а где пауза'],['wheel','Где в жизни перекос','Работа, здоровье, отношения, деньги: что растёт, а что забыто'],['week','Итоги каждой недели','Что получилось и на чём сфокусироваться дальше']];
   return `<div class="h1">Прогресс</div>
-   <div class="card pg-c"><div class="pg-h"><b>Эта неделя</b><span>${wk}%</span></div><div class="pg-w">${bars}</div></div>
-   <div class="pg-k"><div class="card"><b>${stk}</b><em>${this.pl(stk,'день','дня','дней')} серия</em></div><div class="card"><b>${best}</b><em>рекорд серии</em></div><div class="card"><b>${kd}</b><em>${this.pl(kd,'дело','дела','дел')} за 30 дней</em></div><div class="card"><b>${fmt(fw)}</b><em>фокус за неделю</em></div></div>
-   <div class="card pg-up"><div class="pg-ut">Хочешь видеть больше?</div><div class="pg-us">В полном доступе весь прогресс за месяцы и год.</div>
-    <div class="pg-l">${L.map(([a,b])=>`<div><span>${lock}</span><b>${a}</b><em>${b}</em></div>`).join('')}</div>
+   <div class="card pg-c pg-hero"><div class="pg-hk">Последние 7 дней</div><div class="pg-hv"><b>${wk}%</b>${cmp?`<span>${cmp}</span>`:''}</div><div class="pg-hs">${cur.nn?`Сделано ${cur.dn} из ${cur.nn} дел и привычек`:'Отмечай дела и привычки, и здесь появится твой ритм'}</div><div class="pg-w">${bars}</div></div>
+   <div class="pg-k"><div class="card"><b>${stk}</b><em>${this.pl(stk,'день','дня','дней')} подряд</em><i>рекорд: ${best}</i></div><div class="card"><b>${bw<0?'—':WF[bw]}</b><em>${bw<0?'самый сильный день появится позже':'твой самый сильный день'}</em></div><div class="card"><b>${kd}</b><em>${this.pl(kd,'дело','дела','дел')} закрыто за месяц</em></div><div class="card"><b>${fmt(fw)}</b><em>в фокусе за неделю</em></div></div>
+   <div class="card pg-up"><div class="pg-ut">Увидеть свой путь целиком</div><div class="pg-us">Сейчас видно 7 дней. В полном доступе вся история и подсказки, что менять.</div>
+    <div class="pg-l2">${L.map(([k,a,b])=>`<div><span class="pg-mv">${mini[k]}</span><div><b>${a}</b><em>${b}</em></div></div>`).join('')}</div>
     <button class="btn w pg-go" onclick="APP.paySheet('progress')">Открыть полный доступ</button></div>`},
 vPaywall(kind){if(kind==='progress')return this.vProgFree();this.track('paywall',{kind},'day');return `<div class="h1">${kind==='progress'?'Прогресс':'Программа'}</div>`+this.payBody(kind,1)},
 paySheet(kind){this.track('paywall',{kind},'day');this.open(`<div class="row"><span class="sp"></span><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>`+this.payBody(kind))},
@@ -6363,9 +6398,9 @@ async grpRpc(fn,args){const{data,error}=await this.sb.rpc(fn,args||{});if(error)
 grpErr(e){const m=String(e&&e.message||e);return /not_found/.test(m)?'Группы с таким кодом нет':/full/.test(m)?'В группе уже 12 человек':/limit/.test(m)?'Можно создать не больше 5 групп':/auth|JWT/.test(m)?'Нужно войти в аккаунт':'Ошибка: '+m.slice(0,60)},
 async grpLoad(){if(!this.user||!this.sb)return;try{this.groups=await this.grpRpc('tw_my_groups')||[];for(const g of this.groups)this.boards[g.code]=await this.grpRpc('tw_group_board',{p_code:g.code});if(['week','home'].includes(this.tab)&&!(document.activeElement&&/INPUT|TEXTAREA/.test(document.activeElement.tagName)))this.render()}catch(e){}},
 async grpPush(){if(!this.user||!this.sb||!this.groups.length)return;const sc=this.myScores();for(const g of this.groups){try{await this.grpRpc('tw_group_score',{p_code:g.code,p_me:this.S.profile.name||'',p_scores:sc})}catch(e){}}},
-async grpCreate(){const n=($('grN')||{}).value||'';if(!n.trim())return this.toast('Назови группу');
+async grpCreate(){if(!this.paid())return this.paySheet('groups');const n=($('grN')||{}).value||'';if(!n.trim())return this.toast('Назови группу');
   try{const code=await this.grpRpc('tw_group_create',{p_name:n.trim(),p_me:this.S.profile.name||''});await this.grpLoad();await this.grpPush();await this.grpLoad();this.toast('Группа создана: '+code)}catch(e){this.toast(this.grpErr(e))}},
-async grpJoin(){const c=(($('grC')||{}).value||'').trim();if(c.length<4)return this.toast('Введи код из 6 символов');
+async grpJoin(){if(!this.paid())return this.paySheet('groups');const c=(($('grC')||{}).value||'').trim();if(c.length<4)return this.toast('Введи код из 6 символов');
   try{const g=await this.grpRpc('tw_group_join',{p_code:c,p_me:this.S.profile.name||''});await this.grpLoad();await this.grpPush();await this.grpLoad();this.toast('Ты в группе «'+g.name+'»')}catch(e){this.toast(this.grpErr(e))}},
 async grpLeave(code){if(!confirm('Выйти из группы?'))return;try{await this.grpRpc('tw_group_leave',{p_code:code});delete this.boards[code];await this.grpLoad();this.render()}catch(e){this.toast(this.grpErr(e))}},
 groupCard(){
