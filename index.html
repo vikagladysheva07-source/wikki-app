@@ -6665,10 +6665,18 @@ vProgFree(){const td=today(),WD=['вс','пн','вт','ср','чт','пт','сб
     <button class="btn w pg-go" onclick="APP.paySheet('progress')">Открыть полный доступ</button></div>`},
 vPaywall(kind){if(kind==='progress')return this.vProgFree();this.track('paywall',{kind},'day');return `<div class="h1">${kind==='progress'?'Прогресс':'Программа'}</div>`+this.payBody(kind,1)},
 paySheet(kind){this.track('paywall',{kind},'day');this.open(`<div class="row"><span class="sp"></span><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>`+this.payBody(kind))},
-buy(){this.track('buy_click',null,'day');this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Оплата скоро откроется</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+/* Оплата через Продамус. PAY_URL — адрес платёжной страницы магазина, пустой = оплата ещё не включена */
+PAY_URL:'https://wikkiocean.payform.ru',PAY_RUB:2490,
+buy(){this.track('buy_click',null,'day');if(this.PAY_URL)return this.payGo();this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Оплата скоро откроется</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin:6px 0 16px;line-height:1.55">Оплата картой скоро заработает. Напиши в Telegram, и доступ откроется по цене запуска сразу после запуска оплаты.</div>
   <button class="btn pr w" onclick="window.open('https://t.me/wikki_shark','_blank')">Написать в Telegram</button>
   <button class="btn gh w" style="margin-top:8px" onclick="APP.codeAsk()">У меня есть код</button>`)},
+payGo(){if(!this.user){this.close();this._amsg='Войди или создай аккаунт, чтобы открыть полный доступ';this._am='up';this.sub=null;return this.go('me')}
+  const u=this.user,q=new URLSearchParams({do:'pay','products[0][name]':'VOLYO — полный доступ навсегда','products[0][price]':String(this.PAY_RUB),'products[0][quantity]':'1',order_id:'vl-'+u.id+'-'+Date.now().toString(36),_param_uid:u.id,customer_email:u.email||'',urlReturn:location.origin+'/',urlSuccess:location.origin+'/?paid=1'});
+  const url=this.PAY_URL.replace(/\/?$/,'/')+'?'+q.toString();try{localStorage.setItem('tw-paywait',String(Date.now()))}catch(e){}this.close();
+  const w=window.open(url,'_blank');if(!w)location.href=url;this.payWatch()},
+payWatch(){let t0=0;try{t0=+localStorage.getItem('tw-paywait')||0}catch(e){}if(!t0||Date.now()-t0>3600e3||this._pw)return;let n=0;
+  this._pw=setInterval(async()=>{n++;if(this.user)await this.loadAcc();if(this.paid()){clearInterval(this._pw);this._pw=0;try{localStorage.removeItem('tw-paywait')}catch(e){}this.track('purchase_ok',null,'ever');this.sub=null;this.render();this.toast('Полный доступ открыт навсегда');this.buzz&&this.buzz(14)}else if(n>60){clearInterval(this._pw);this._pw=0}},4000)},
 codeAsk(){if(!this.user){this.close();this._amsg='Войди или создай аккаунт, чтобы активировать код';this._am='up';this.sub=null;return this.go('me')}
   this.ask('Код доступа','',v=>this.redeem(v))},
 async redeem(c){c=(c||'').trim();if(!c)return;try{const{data,error}=await this.sb.rpc('tw_redeem',{c});if(error)throw error;if(!data.ok)return this.toast(data.err||'Код не подошёл');
@@ -6895,6 +6903,7 @@ APP.backStep=function(){try{
   if(this.tab==='me'&&this._sset){this._sset='';this.render();window.scrollTo(0,0);return true}
   if(this.tab!=='home'){this.go('home');return true}
 }catch(e){}return false};
+try{const qp=new URLSearchParams(location.search);if(qp.get('paid')==='1'){history.replaceState(null,'',location.pathname+location.hash);try{localStorage.setItem('tw-paywait',String(Date.now()))}catch(e){}setTimeout(()=>APP.toast('Проверяю оплату…'),800)}APP.payWatch();document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')APP.payWatch()})}catch(e){}
 try{if(!(history.state&&history.state.vb))history.pushState({vb:1},'');window.addEventListener('popstate',()=>{if(APP.backStep())history.pushState({vb:1},'')})}catch(e){}
 </script>
 </body>
