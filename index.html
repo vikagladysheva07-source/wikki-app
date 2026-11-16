@@ -2884,6 +2884,23 @@ body.bgph .card:has(> .hcards),body .card:has(> .hcards){background:none!importa
 /* ГЛУБИНА ПЛАШЕК (16.11) */
 html body.bgph .hd-c,html body.bgph .hr-c,html body.bgph .hd-rd .gx,html body.bgph .msg3,html body.bgph .card,html body.bgph .gx,html body.bgph .sv-r{position:relative;background:radial-gradient(110% 90% at 0% 0%,rgba(255,255,255,.13),transparent 50%),radial-gradient(80% 60% at 100% 0%,rgba(196,164,255,.06),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015) 60%,rgba(0,0,0,.18)),rgba(12,10,22,.45)!important;border:1px solid rgba(255,255,255,.08)!important;border-top-color:rgba(255,255,255,.26)!important;border-bottom-color:rgba(0,0,0,.45)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -20px 34px -20px rgba(0,0,0,.7),0 1px 2px rgba(0,0,0,.35),0 8px 16px -6px rgba(0,0,0,.45),0 28px 56px -18px rgba(0,0,0,.7)!important;transition:transform .2s ease,box-shadow .2s ease}
 @media(hover:hover){html body.bgph .hd-c:hover,html body.bgph .hr-c:hover,html body.bgph .hd-rd .gx:hover,html body.bgph .msg3:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 -14px 28px -18px rgba(0,0,0,.55),0 2px 4px rgba(0,0,0,.35),0 14px 24px -8px rgba(0,0,0,.5),0 36px 70px -20px rgba(0,0,0,.75),0 0 0 1px rgba(196,164,255,.10)!important}}
+/* РАСКЛАДКА ГЛАВНОЙ В ВЕБЕ (16.11) */
+@media(min-width:1024px){
+ .hd-r1{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;align-items:stretch!important}
+ .hd-r1b{display:flex;flex-direction:column;gap:10px;min-width:0}
+ .hd-r1b>.hd-c{margin:0!important;flex:1}
+ .hd-g1{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)!important}
+ .hd-g1 .msg3{min-height:0;height:100%}
+ .hd-g2{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)!important;align-items:stretch}
+ .hd-g2.one,.hd-g3.one{grid-template-columns:minmax(0,1fr)!important}
+ .hd-g3.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+ .hd-g1>*,.hd-g2>*,.hd-g3>*{margin:0!important}
+ .hd-rd .gx-w3{max-width:none!important;height:100%}
+ .hd-rd .gx-s{max-width:300px;margin:0 auto;display:block}
+}
+/* ЛОГОТИП: лёгкий объём (16.11) */
+html body .wl-wm,html body .au-wm,html body .ab2-wm{filter:drop-shadow(0 2px 3px rgba(0,0,0,.45)) drop-shadow(0 8px 18px rgba(0,0,0,.35))}
+html body .tp-wm,html body img.wm,html body .sb-wm img{filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.5)) drop-shadow(0 4px 10px rgba(0,0,0,.35))}
 </style>
 </head>
 <body>
@@ -5497,7 +5514,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const foc=`<div class="hd-c hd-f"><div class="hd-h"><b>Фокус дня</b><span>${nD} из ${nAll}</span></div>${nAll?`<div class="hd-fl">${o.rows.slice(0,4).map(r=>r.html).join('')}</div>`:`<button class="hd-add" onclick="APP.qMenu()">+ Добавить первое дело или привычку</button>`}${nAll?`<button class="hd-add" onclick="APP.qMenu()">+ Добавить дело</button>`:''}</div>`;
   // --- трекер привычек
   const wdays=this.rgDays(rgH).slice(0,62);
-  const HS=S.habits.filter(x=>!x.archived).slice(0,4);
+  const HS=S.habits.filter(x=>!x.archived).slice(0,6);
   const hrow=x=>{const[f,s_,fr]=this.hFns(x),sk=this.streak(f,s_,fr);return `<div class="hd-nm"><span class="hd-mi">${hIco(x.ico||'star')}</span><span>${esc(x.title)}</span></div>${wdays.map(d=>{const fut=d>td,on=this.hOn(x,d),sch=this.hSched(x,d);return `<div class="hd-dt"><i class="${on?'on':fut?'f':sch?'':'x'}" ${fut?'':`onclick="APP.hToggle('${x.id}','${d}');APP.render()"`}></i></div>`}).join('')}<div class="hd-st">${sk}</div>`};
   const wl=ST?['Вс',...W7.slice(0,6)]:W7;
   const hab=`<div class="hd-c"><div class="hd-h"><b>Трекер привычек</b>${this.rgBtn('hab',rgH)}</div>${HS.length?`<div class="hd-ht" style="--n:${wdays.length}"><div class="hd-hh">Привычка</div>${wdays.map(d=>`<div class="hd-hh ${d===td?'td':''}">${wdays.length<=7?['Вс','Пн','Вт','Ср','Чт','Пт','Сб'][pd(d).getDay()]:(wdays.length<=16||pd(d).getDay()===1?+d.slice(8):'')}</div>`).join('')}<div class="hd-hh"></div>${HS.map(hrow).join('')}</div>`:`<button class="hd-add" onclick="APP.editH()">+ Добавить первую привычку</button>`}</div>`;
@@ -5510,7 +5527,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const jr=`<div class="hd-c"><div class="hd-h"><b>Дневник</b><span onclick="APP._jd=today();APP.go('journal')" style="cursor:pointer">Все записи</span></div>${ents.length?ents.map(e=>`<div class="hd-jr" onclick="APP._jd='${e.d}';APP.go('journal')"><span class="hd-jd">${fd(e.d)}</span><div><b>${e.t}</b><span>${esc(e.x.length>90?e.x.slice(0,90)+'…':e.x)}</span></div></div>`).join(''):`<button class="hd-add" onclick="APP._jd=today();APP.go('journal')">+ Записать день</button>`}</div>`;
   const rad=this.pcRadar();
   const msgC=this.msgCard();
-  return {desk:`${this.ftPill()}<div class="hd-r1">${this.homeRings(o)}<div class="hd-r1b">${this.homeNext()}${this.cdChips?this.cdChips():''}</div></div><div class="hd-g1">${dyn}${foc}</div><div class="hd-g2${gs.length&&o.inS?'':' one'}">${hab}${gs.length&&o.inS?goals:''}</div><div class="hd-g3${rad?'':' two'}">${jr}${rad?`<div class="hd-rd">${rad}</div>`:''}${msgC}</div>`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`${msgC}${dyn}${hab}${goals}`}},
+  return {desk:`${this.ftPill()}<div class="hd-r1">${this.homeRings(o)}<div class="hd-r1b">${this.homeNext()}${this.cdChips?this.cdChips():''}${foc}</div></div><div class="hd-g1">${dyn}${msgC}</div><div class="hd-g2${rad?'':' one'}">${hab}${rad?`<div class="hd-rd">${rad}</div>`:''}</div><div class="hd-g3 ${gs.length&&o.inS?'two':'one'}">${jr}${gs.length&&o.inS?goals:''}</div>`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`${msgC}${dyn}${hab}${goals}`}},
 dynHover(e,el){const v=JSON.parse(el.dataset.v),n=v.length;if(n<2)return;const r=el.getBoundingClientRect();let i=e?Math.round((e.clientX-r.left)/r.width*(n-1)):n-1;i=Math.max(0,Math.min(n-1,i));
   if(v[i]==null){let k=1;while(k<n&&v[i-k]==null&&v[i+k]==null)k++;i=v[i-k]!=null?i-k:i+k;if(v[i]==null)return}
   if(!e){i=n-1;while(i>0&&v[i]==null)i--}
