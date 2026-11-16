@@ -2397,8 +2397,8 @@ body:has(.hrp) .nav .pfab{display:none!important}
  .hn-t{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em;flex:none}
  .hn-c .sp{min-width:0}.hn-c .sp b{display:block;font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hn-c .sp em{display:block;font-style:normal;font-size:12px;color:#A49DB5;margin-top:2px}
  .hn-b{width:4px;height:36px;border-radius:4px;background:linear-gradient(#C4A4FF,#6A3FD0);flex:none}
- .qbar{position:fixed;left:14px;right:14px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:41;display:flex;align-items:center;gap:6px;padding:6px 6px 6px 6px;border-radius:99px;background:rgba(22,18,34,.8);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 18px 40px rgba(0,0,0,.55)}
- .qbar-t{flex:1;min-width:0;text-align:left;font:inherit;font-size:14px;color:#9A94AB;background:none;border:0;padding:0 0 0 12px;height:42px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .qbar{position:fixed;left:14px;right:14px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:41;display:flex;align-items:center;gap:6px;padding:6px 6px 6px 6px;border-radius:99px;background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02)),rgba(10,8,18,.18);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 10px 24px rgba(0,0,0,.25)}
+ .qbar-t{flex:1;min-width:0;text-align:left;font:inherit;font-size:14px;color:#C9C2D8;background:none;border:0;padding:0 0 0 12px;height:42px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
  .qbar-m,.qbar-p{width:42px!important;height:42px!important;min-height:0!important;padding:0!important;flex:none!important;border-radius:50%!important;display:grid!important;place-items:center;color:#fff!important}
  .qbar-m{background:linear-gradient(155deg,rgba(196,164,255,.38),rgba(106,63,208,.25))!important;border:1px solid rgba(196,164,255,.5)!important}
  .qbar-p{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.12)!important;color:#C4A4FF!important}
@@ -2650,6 +2650,12 @@ body:has(.hrp) .nav .pfab{display:none!important}
 }
 
 /* БЕЗ ЯРКОГО ФИОЛЕТОВОГО: финальный слой — плашки только стекло, фиолетовый в рамке и лёгкой подсветке */
+@media(max-width:1023px){body:has(.qbar) .wrap,body:has(.qbar) .dash,body:has(.qbar) .hmw{padding-bottom:calc(72px + env(safe-area-inset-bottom))!important}body:has(.qbar) .nav .pfab{display:none!important}}
+.qbi{display:flex;align-items:center;gap:6px;padding:6px;margin:2px 0 12px;border-radius:99px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.02)),rgba(10,8,18,.35);border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.14);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.qbi-t{flex:1;min-width:0;height:42px;padding:0 0 0 14px;text-align:left;font:inherit;font-size:15px;color:#9A94AB;background:none;border:0;min-height:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qbi-m{width:42px!important;height:42px!important;flex:none;border-radius:50%!important;display:grid!important;place-items:center;padding:0!important;min-height:0!important;color:#fff;background:linear-gradient(155deg,rgba(196,164,255,.3),rgba(106,63,208,.18))!important;border:1px solid rgba(196,164,255,.45)!important}
+.qbi-m svg{width:19px;height:19px;fill:none;stroke:currentColor}
+@media(min-width:1024px){.qbi{display:none}}
 /* О приложении v2 */
 .ab2-hd{display:grid;justify-items:center;text-align:center;margin:10px 0 18px}.ab2-wm{width:170px;height:auto}.ab2-sl{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:#D8D2E6;margin-top:12px}
 .ab2-ld p{font-size:15px;line-height:1.55;color:#D8D2E6;margin:0 0 10px}
@@ -4377,7 +4383,7 @@ render(){const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_
   const mtabs=simple?[['home','Сегодня'],['plans','Планы'],['tracker','Привычки'],['me','Настройки']]:[['home','Сегодня'],['plans','Планы'],['tracker','Привычки'],['progress','Прогресс'],['more','Профиль']],inMore=['more','profile','me'].includes(this.tab),fromHome=['journal','program'].includes(this.tab);
   this._pop=null;
   const canAdd=!this.sub&&['home','plans','tracker'].includes(this.tab);
-  $('nav').innerHTML=(canAdd?`<button class="pfab" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button>`:'')+'<div class="in nv5">'+mtabs.map(([k,l])=>`<button class="${this.tab===k||(k==='more'&&inMore)||(k==='home'&&fromHome)||(simple&&k==='me'&&inMore)?'on':''}" onclick="APP.go('${k}')" aria-label="${l}">${NI[k]}</button>`).join('')+'</div>';
+  $('nav').innerHTML=(canAdd?(this.tab==='home'?`<div class="qbar"><button class="qbar-t" onclick="APP.qaOpen()">${this.lang()==='en'?'Say or type a task':'Скажи или напиши задачу'}</button><button class="qbar-m" onclick="APP.qaOpen(1)" aria-label="Голосом">${this.QA_MIC}</button><button class="qbar-p" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button></div>`:`<button class="pfab" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button>`):'')+'<div class="in nv5">'+mtabs.map(([k,l])=>`<button class="${this.tab===k||(k==='more'&&inMore)||(k==='home'&&fromHome)||(simple&&k==='me'&&inMore)?'on':''}" onclick="APP.go('${k}')" aria-label="${l}">${NI[k]}</button>`).join('')+'</div>';
   const P=this.prog();
   const ttl=this.sub==='programs'?'Программы':this.sub==='deals'?'Воронка':this.sub==='onboard'?'Старт':{home:'Сегодня',habits:'Прогресс',goals:(P?P.name:'Программа'),week:'Неделя',me:'Профиль'}[this.tab];
   const Pp=this.S.profile||{};
@@ -5253,6 +5259,7 @@ cdSave(){const t=($('cdT')||{}).value||'',d=($('cdD')||{}).value||'';if(!t.trim(
   this.save();this.render();this.buzz(8);this.cdOpen(x.id)},
 cdDel(id){this.S.del=[...(this.S.del||[]),id];this.S.events=(this.S.events||[]).filter(e=>e.id!==id);this.save();this.render();if((this.S.events||[]).length)this.cdOpen();else this.close()},
 QA_MIC:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
+qbInline(){const en=this.lang()==='en';return `<div class="qbi"><button class="qbi-t" onclick="APP.qaOpen()">${en?'Say or type a task':'Скажи или напиши задачу'}</button><button class="qbi-m" onclick="APP.qaOpen(1)" aria-label="${en?'Voice':'Голосом'}">${this.QA_MIC}</button></div>`},
 homeRings(o){const td=today(),H=o.H||[],hD=H.filter(x=>this.hOn(x,td)).length;
   let K=[];try{K=(this.S.tasks||[]).filter(x=>!x.drop&&x.date===td&&!(this.S.del||[]).includes(x.id))}catch(e){}const kD=K.filter(x=>x.done).length;
   const fm=this.focusOf(td),fg=Math.max(15,Math.round((+(this.S.pref||{}).focusGoal||10)*60/7));
