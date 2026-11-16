@@ -2407,6 +2407,33 @@ body:has(.hrp) .nav .pfab{display:none!important}
  body:has(.qbar) .toast{bottom:calc(140px + env(safe-area-inset-bottom))}
  body:has(#modal.on) .qbar{display:none}
 }
+
+@media(min-width:1024px){
+.hr-c{display:flex;align-items:center;gap:18px;padding:18px;border-radius:24px;margin:4px 0 12px;position:relative;background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.hr-c:before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(140deg,rgba(196,164,255,.5),rgba(196,164,255,0) 35%,rgba(196,164,255,0) 70%,rgba(155,111,232,.35));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.hr-r{width:118px;height:118px;flex:none;padding:0;border:0;background:none}
+.hr-svg{width:118px;height:118px;display:block}
+.hr-l{flex:1;display:grid;gap:9px;min-width:0}
+.hr-l button{display:flex;align-items:center;gap:10px;font:inherit;font-size:13.5px;color:#A49DB5;background:none;border:0;padding:1px 0;text-align:left;min-height:24px}
+.hr-l button i{width:8px;height:8px;border-radius:50%;flex:none}
+.hr-l button b{margin-left:auto;color:#F4F1EA;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.hr-s{display:flex;align-items:center;gap:6px;font-size:12px;color:#A49DB5;padding-top:9px;border-top:1px solid rgba(255,255,255,.08)}
+.hr-s b{color:#F4F1EA;font-weight:600}
+.hr-s svg{width:14px;height:14px;color:#C4A4FF;flex:none}
+.hn-c{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;margin:0 0 12px;border-radius:22px;text-align:left;font:inherit;color:#F4F1EA;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09)}
+.hn-t{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em;flex:none}
+.hn-c .sp{min-width:0}
+.hn-c .sp b{display:block;font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hn-c .sp em{display:block;font-style:normal;font-size:12px;color:#A49DB5;margin-top:2px}
+.hn-b{width:4px;height:36px;border-radius:4px;background:linear-gradient(#C4A4FF,#6A3FD0);flex:none}
+ .hd-r1{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px;align-items:stretch;margin-bottom:14px}
+ .hd-r1 .hr-c{margin:0!important;height:100%}
+ .hd-r1b{display:flex;flex-direction:column;gap:12px;min-width:0}.hd-r1b .qbi{display:flex!important;margin:0}.hd-r1b .hn-c{margin:0}.hd-r1b .cd-hs{margin:2px 4px 0}.hd-r1b .cd-row{margin:0;padding:0}
+ .hz-gr{display:none!important}.hz-dt{display:inline!important;letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:#A8A1B8}
+ .hmz .hx-ring,.hmz .hx-cta,.hd-kp{display:none!important}
+ .hr-c{background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.02)),rgba(10,8,18,.3);border:1px solid rgba(255,255,255,.11);border-radius:24px;padding:20px;display:flex;align-items:center;gap:22px}
+ .hr-r,.hr-svg{width:140px!important;height:140px!important}
+}
 @media(min-width:1024px){.qbar{display:none!important}}
 /* шторка быстрого ввода */
 .qa-w{display:grid;gap:12px;padding-bottom:6px}
@@ -2650,6 +2677,19 @@ body:has(.hrp) .nav .pfab{display:none!important}
 }
 
 /* БЕЗ ЯРКОГО ФИОЛЕТОВОГО: финальный слой — плашки только стекло, фиолетовый в рамке и лёгкой подсветке */
+#msgOv .mov-x{z-index:30!important;width:44px!important;height:44px!important;display:grid!important;place-items:center;font-size:26px;line-height:1;color:#fff!important;background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05)),rgba(10,8,18,.35)!important;border:1px solid rgba(255,255,255,.22)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);top:max(18px,calc(env(safe-area-inset-top) + 8px))!important;right:18px!important}
+#msgOv canvas{cursor:pointer}
+/* веб: неделя на всю ширину, фото и стекло */
+.dmain:has(> .wtl){display:block!important}.dmain:has(> .wtl) > *{max-width:none!important}
+@media(min-width:1024px){
+ .wtl-g{min-height:600px}.wtl-ev{padding:5px 8px}.wtl-ev b{font-size:12.5px!important;-webkit-line-clamp:2}.wtl-ev em{font-size:11px}
+ .wtl-hd b{font-size:18px;width:36px;height:36px}.wtl-hd em{font-size:11.5px}
+ html:has(body.bgph){background:#05040A!important}body.bgph{background:transparent!important}
+ body.bgph:before{content:"";position:fixed;inset:0;z-index:-2;background:url(ocean-2.jpg) center 40%/cover}
+ body.bgph:after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,4,10,.62) 0%,rgba(5,4,10,.74) 35%,rgba(5,4,10,.9) 75%,#05040A 100%)}
+ body.bgph .card,body.bgph .hd-c,body.bgph .msg3{background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.02)),rgba(10,8,18,.3)!important;border-color:rgba(255,255,255,.11)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 18px 40px rgba(0,0,0,.3)!important;backdrop-filter:blur(22px) saturate(1.25);-webkit-backdrop-filter:blur(22px) saturate(1.25)}
+ body.bgph .sbar,body.bgph #snav{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015)),rgba(8,7,14,.45)!important;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+}
 @media(max-width:1023px){body:has(.qbar) .wrap,body:has(.qbar) .dash,body:has(.qbar) .hmw{padding-bottom:calc(72px + env(safe-area-inset-bottom))!important}body:has(.qbar) .nav .pfab{display:none!important}}
 .qbi{display:flex;align-items:center;gap:6px;padding:6px;margin:2px 0 12px;border-radius:99px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.02)),rgba(10,8,18,.35);border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.14);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
 .qbi-t{flex:1;min-width:0;height:42px;padding:0 0 0 14px;text-align:left;font:inherit;font-size:15px;color:#9A94AB;background:none;border:0;min-height:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -5173,11 +5213,11 @@ msgOpen(){this._mcur=this.msgToday();this.track('msg_open',null,'day');const en=
  const ov=document.createElement('div');ov.id='msgOv';ov.className='mov'+(first&&!reduce?'':' fast');
  const st=Array.from({length:34},()=>`<i style="left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*2.6}s"></i>`).join('');
  const ring=((en?'MESSAGE OF THE DAY':'ПОСЛАНИЕ ДНЯ')+' · ').repeat(4);
- const mbtn=`<div class="mov-b"><button onclick="APP.msgDl()">${en?'Download':'Скачать'}</button>${navigator.canShare?`<button onclick="APP.msgShare()">${en?'Share':'Поделиться'}</button>`:''}<button onclick="APP.msgRoll()">${en?'Another message':'Ещё послание'}</button></div>`;
+ const mbtn=`<div class="mov-b"><button onclick="APP.msgDl()">${en?'Download':'Скачать'}</button>${navigator.canShare?`<button onclick="APP.msgShare()">${en?'Share':'Поделиться'}</button>`:''}</div>`;
  ov.innerHTML=`<div class="ml-aur"><i></i><i></i></div><div class="ml-aur ml-st">${st}</div><button class="mov-x" onclick="APP.msgClose()" aria-label="${en?'Close':'Закрыть'}">×</button>
  <div class="ml-seal" style="--p:0"><svg class="ml-tx" viewBox="0 0 210 210"><defs><path id="mlcp" d="M105 105m-92 0a92 92 0 1 1 184 0a92 92 0 1 1-184 0"/></defs><text><textPath href="#mlcp">${ring}</textPath></text></svg><i class="ml-ring"></i><div class="ml-comet"></div><div class="ml-orb"><i></i></div><div class="ml-orb"><i></i></div><div class="ml-core">${this.msgFacets()}</div></div>
  <div class="ml-t"><span>${en?'Choosing a word':'Выбираю слово'}</span><span>${en?'Ready':'Готово'}</span></div><i class="ml-wave"></i><i class="ml-wave"></i><i class="ml-wave"></i>
- <canvas id="msgCv" width="1080" height="1920"></canvas>${mbtn}`;
+ <canvas id="msgCv" width="1080" height="1920" onclick="APP.msgRoll()" role="button" aria-label="${en?'Next message':'Следующее послание'}"></canvas>${mbtn}`;
  document.body.appendChild(ov);requestAnimationFrame(()=>ov.classList.add('on'));
  const seal=ov.querySelector('.ml-seal'),D=first&&!reduce?2200:450,t0=performance.now();
  const painted=(document.fonts&&document.fonts.load?document.fonts.load('300 74px Manrope'):Promise.resolve()).catch(()=>{}).then(()=>this.msgPaint());
@@ -5384,7 +5424,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const jr=`<div class="hd-c"><div class="hd-h"><b>Дневник</b><span onclick="APP._jd=today();APP.go('journal')" style="cursor:pointer">Все записи</span></div>${ents.length?ents.map(e=>`<div class="hd-jr" onclick="APP._jd='${e.d}';APP.go('journal')"><span class="hd-jd">${fd(e.d)}</span><div><b>${e.t}</b><span>${esc(e.x.length>90?e.x.slice(0,90)+'…':e.x)}</span></div></div>`).join(''):`<button class="hd-add" onclick="APP._jd=today();APP.go('journal')">+ Записать день</button>`}</div>`;
   const rad=this.pcRadar();
   const msgC=this.msgCard();
-  return {desk:`${this.ftPill()}${kpis}<div class="hd-g1">${dyn}${foc}</div><div class="hd-g2">${hab}${goals}</div><div class="hd-g3">${jr}<div class="hd-rd">${rad}</div>${msgC}</div>`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}${msgC}`,b:`${dyn}${hab}${goals}`}},
+  return {desk:`${this.ftPill()}<div class="hd-r1">${this.homeRings(o)}<div class="hd-r1b">${this.qbInline()}${this.homeNext()}${this.cdChips?this.cdChips():''}</div></div><div class="hd-g1">${dyn}${foc}</div><div class="hd-g2">${hab}${goals}</div><div class="hd-g3">${jr}<div class="hd-rd">${rad}</div>${msgC}</div>`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}${msgC}`,b:`${dyn}${hab}${goals}`}},
 dynHover(e,el){const v=JSON.parse(el.dataset.v),n=v.length;if(n<2)return;const r=el.getBoundingClientRect();let i=e?Math.round((e.clientX-r.left)/r.width*(n-1)):n-1;i=Math.max(0,Math.min(n-1,i));
   if(v[i]==null){let k=1;while(k<n&&v[i-k]==null&&v[i+k]==null)k++;i=v[i-k]!=null?i-k:i+k;if(v[i]==null)return}
   if(!e){i=n-1;while(i>0&&v[i]==null)i--}
