@@ -2970,6 +2970,13 @@ html body.bgph .hd-c .hx-row,html body.bgph .card .hx-row,html body.bgph .sheet 
 html body.bgph .hd-c .hx-row:last-child,html body.bgph .card .hx-row:last-child,html body.bgph .sheet .hx-row:last-child,html body.bgph .hd-c .plr:last-child,html body.bgph .card .plr:last-child,html body.bgph .sheet .plr:last-child{border-bottom:0!important}
 html body .jx-pr{flex-wrap:wrap!important;overflow:visible!important;margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important;gap:8px!important}
 @media(min-width:1024px){html body .mgw>.qadd,html body .hcards>.qadd{display:none!important}}
+/* СТРОКА ВВОДА: уже и темнее (16.11) */
+@media(max-width:1023px){
+ html body .qbar{left:50%!important;right:auto!important;transform:translateX(-50%);width:min(330px,calc(100vw - 48px))!important;padding:5px 10px 5px 5px!important;gap:8px!important;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.01)),rgba(10,8,18,.40)!important;border-color:rgba(255,255,255,.12)!important;backdrop-filter:blur(22px) saturate(1.2)!important;-webkit-backdrop-filter:blur(22px) saturate(1.2)!important;box-shadow:0 10px 30px -10px rgba(0,0,0,.7)!important}
+ html body .qbar-t{display:block!important;text-align:left!important;color:#8C8C93!important;font-weight:400!important;font-size:14px!important;letter-spacing:0!important;height:36px!important;padding-left:12px!important}
+ html body .qbar-m,html body .qbar-p{width:34px!important;height:34px!important;background:rgba(255,255,255,.05)!important;border:1px solid rgba(255,255,255,.10)!important;box-shadow:none!important;color:#B9B3C8!important}
+ html body .qbar svg{width:16px!important;height:16px!important;stroke-width:1.6}
+}
 </style>
 </head>
 <body>
