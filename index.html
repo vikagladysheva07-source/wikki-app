@@ -1821,7 +1821,7 @@ a.btn{text-decoration:none!important;display:flex;align-items:center;justify-con
 /* карточка */
 
 #msgOv.done 
-@keyframes mlrise{0%{opacity:0;transform:translateY(46px) scale(.93);filter:blur(16px)}60%{opacity:1}100%{opacity:1;transform:none;filter:blur(0)}}
+@keyframes mlrise{0%{opacity:0;transform:translateY(40px) scale(.94)}100%{opacity:1;transform:none}}
 
 
 #msgOv.done 
@@ -1833,7 +1833,7 @@ a.btn{text-decoration:none!important;display:flex;align-items:center;justify-con
 #msgOv.done #msgOv .mov-b button{animation:mlup .6s ease forwards}#msgOv.done #msgOv .mov-b button:nth-child(1){animation-delay:1.3s}#msgOv.done #msgOv .mov-b button:nth-child(2){animation-delay:1.42s}#msgOv.done #msgOv .mov-b button:nth-child(3){animation-delay:1.54s}
 @keyframes mlup{to{opacity:1;transform:none}}
 
-#msgOv canvas{opacity:0;transform:translateY(46px) scale(.93);filter:blur(16px)}
+#msgOv canvas{opacity:0;transform:translateY(40px) scale(.94);will-change:transform,opacity}
 #msgOv.done canvas{animation:mlrise 1.05s cubic-bezier(.2,.8,.2,1) .2s forwards}
 @keyframes mlrise{0%{opacity:0;transform:translateY(46px) scale(.93);filter:blur(16px)}60%{opacity:1}100%{opacity:1;transform:none;filter:blur(0)}}
 #msgOv.fast canvas{animation-duration:.55s;animation-delay:0s}#msgOv.fast .mov-b button{animation-delay:.25s!important}
@@ -2677,6 +2677,13 @@ body:has(.hrp) .nav .pfab{display:none!important}
 }
 
 /* БЕЗ ЯРКОГО ФИОЛЕТОВОГО: финальный слой — плашки только стекло, фиолетовый в рамке и лёгкой подсветке */
+#msgOv .ml-card{position:relative;display:inline-block;line-height:0}
+#msgOv .ml-cx{position:absolute;top:12px;right:12px;z-index:5;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font:inherit;font-size:24px;line-height:1;color:#fff;background:rgba(10,8,18,.38);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:0;min-height:0;opacity:0;pointer-events:none;transition:opacity .4s}
+#msgOv.done .ml-cx{opacity:1;pointer-events:auto;transition-delay:.9s}
+#msgOv.done > .mov-x{opacity:0!important;pointer-events:none}
+#msgOv .mov-b button{border-radius:99px!important;color:#fff!important;background:linear-gradient(155deg,rgba(255,255,255,.16),rgba(255,255,255,.05))!important;border:1px solid rgba(255,255,255,.22)!important;will-change:opacity}
+#msgOv .ml-core svg g.f{will-change:transform,opacity}
+@media(max-width:1023px){#msgOv .ml-aur i{filter:blur(40px)}}
 #msgOv .mov-x{z-index:30!important;width:44px!important;height:44px!important;display:grid!important;place-items:center;font-size:26px;line-height:1;color:#fff!important;background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05)),rgba(10,8,18,.35)!important;border:1px solid rgba(255,255,255,.22)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);top:max(18px,calc(env(safe-area-inset-top) + 8px))!important;right:18px!important}
 #msgOv canvas{cursor:pointer}
 /* веб: неделя на всю ширину, фото и стекло */
@@ -5217,7 +5224,7 @@ msgOpen(){this._mcur=this.msgToday();this.track('msg_open',null,'day');const en=
  ov.innerHTML=`<div class="ml-aur"><i></i><i></i></div><div class="ml-aur ml-st">${st}</div><button class="mov-x" onclick="APP.msgClose()" aria-label="${en?'Close':'Закрыть'}">×</button>
  <div class="ml-seal" style="--p:0"><svg class="ml-tx" viewBox="0 0 210 210"><defs><path id="mlcp" d="M105 105m-92 0a92 92 0 1 1 184 0a92 92 0 1 1-184 0"/></defs><text><textPath href="#mlcp">${ring}</textPath></text></svg><i class="ml-ring"></i><div class="ml-comet"></div><div class="ml-orb"><i></i></div><div class="ml-orb"><i></i></div><div class="ml-core">${this.msgFacets()}</div></div>
  <div class="ml-t"><span>${en?'Choosing a word':'Выбираю слово'}</span><span>${en?'Ready':'Готово'}</span></div><i class="ml-wave"></i><i class="ml-wave"></i><i class="ml-wave"></i>
- <canvas id="msgCv" width="1080" height="1920" onclick="APP.msgRoll()" role="button" aria-label="${en?'Next message':'Следующее послание'}"></canvas>${mbtn}`;
+ <div class="ml-card"><canvas id="msgCv" width="1080" height="1920" onclick="APP.msgRoll()" role="button" aria-label="${en?'Next message':'Следующее послание'}"></canvas><button class="ml-cx" onclick="APP.msgClose()" aria-label="${en?'Close':'Закрыть'}">×</button></div>${mbtn}`;
  document.body.appendChild(ov);requestAnimationFrame(()=>ov.classList.add('on'));
  const seal=ov.querySelector('.ml-seal'),D=first&&!reduce?2200:450,t0=performance.now();
  const painted=(document.fonts&&document.fonts.load?document.fonts.load('300 74px Manrope'):Promise.resolve()).catch(()=>{}).then(()=>this.msgPaint());
@@ -5424,7 +5431,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const jr=`<div class="hd-c"><div class="hd-h"><b>Дневник</b><span onclick="APP._jd=today();APP.go('journal')" style="cursor:pointer">Все записи</span></div>${ents.length?ents.map(e=>`<div class="hd-jr" onclick="APP._jd='${e.d}';APP.go('journal')"><span class="hd-jd">${fd(e.d)}</span><div><b>${e.t}</b><span>${esc(e.x.length>90?e.x.slice(0,90)+'…':e.x)}</span></div></div>`).join(''):`<button class="hd-add" onclick="APP._jd=today();APP.go('journal')">+ Записать день</button>`}</div>`;
   const rad=this.pcRadar();
   const msgC=this.msgCard();
-  return {desk:`${this.ftPill()}<div class="hd-r1">${this.homeRings(o)}<div class="hd-r1b">${this.qbInline()}${this.homeNext()}${this.cdChips?this.cdChips():''}</div></div><div class="hd-g1">${dyn}${foc}</div><div class="hd-g2">${hab}${goals}</div><div class="hd-g3">${jr}<div class="hd-rd">${rad}</div>${msgC}</div>`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}${msgC}`,b:`${dyn}${hab}${goals}`}},
+  return {desk:`${this.ftPill()}<div class="hd-r1">${this.homeRings(o)}<div class="hd-r1b">${this.qbInline()}${this.homeNext()}${this.cdChips?this.cdChips():''}</div></div><div class="hd-g1">${dyn}${foc}</div><div class="hd-g2">${hab}${goals}</div><div class="hd-g3">${jr}<div class="hd-rd">${rad}</div>${msgC}</div>`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`${msgC}${dyn}${hab}${goals}`}},
 dynHover(e,el){const v=JSON.parse(el.dataset.v),n=v.length;if(n<2)return;const r=el.getBoundingClientRect();let i=e?Math.round((e.clientX-r.left)/r.width*(n-1)):n-1;i=Math.max(0,Math.min(n-1,i));
   if(v[i]==null){let k=1;while(k<n&&v[i-k]==null&&v[i+k]==null)k++;i=v[i-k]!=null?i-k:i+k;if(v[i]==null)return}
   if(!e){i=n-1;while(i>0&&v[i]==null)i--}
@@ -6138,7 +6145,7 @@ async pushOff(){try{const sub=await this.pushSub();if(sub){await this.sb.from('t
   this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPrefs(),on:false};this.save();this._pushOn=false;this.render();this.toast('Уведомления выключены')},
 async pushSet(k,v){this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPrefs(),on:!!this._pushOn,[k]:v};this.save();this.render();
   const sub=await this.pushSub();if(sub&&this.user)await this.sb.from('tw_push').update({prefs:this.pushPrefs(),lang:this.lang(),tz:Intl.DateTimeFormat().resolvedOptions().timeZone,updated_at:new Date().toISOString()}).eq('endpoint',sub.endpoint)},
-async pushTest(){try{const{data,error}=await this.sb.functions.invoke('tw-push',{body:{test:true}});if(error)throw error;const ok=(data.sent||[]).filter(x=>x>=200&&x<300).length;this.toast(ok?'Отправили. Уведомление придёт через пару секунд':'Не дошло. Выключи и включи уведомления заново')}catch(e){this.toast('Ошибка: '+this.errText(e))}},
+async pushTest(){try{const{data,error}=await this.sb.functions.invoke('tw-push',{body:{test:true}});if(error)throw error;const ok=(data.sent||[]).filter(x=>x>=200&&x<300).length;this.toast(ok?'Отправили. Уведомление придёт через пару секунд':'Не дошло. Выключи и включи уведомления заново')}catch(e){const m=String((e&&e.message)||e||'');this.toast(/Failed to send|fetch|network/i.test(m)?'Не получилось отправить тестовое уведомление. Попробуй позже':'Ошибка: '+this.errText(e))}},
 async pushSum(force){if(!this.user||!this.sb||!this._pushOn)return;const td=today(),a=this.dayAll(td),sm={date:td,n:a.n-a.done,st:this.dayStreak(),an:this.ancSum()},k=JSON.stringify(sm);if(!force&&k===this._pSum)return;this._pSum=k;
   try{await this.sb.from('tw_push').update({sum:sm}).eq('user_id',this.user.id)}catch(e){}},
 async pushCheck(){const sub=this.pushSupported()?await this.pushSub():null,on=!!sub&&Notification.permission==='granted';if(on!==this._pushOn){this._pushOn=on;this.render()}
