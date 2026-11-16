@@ -2902,6 +2902,22 @@ html body.bgph .hd-c,html body.bgph .hr-c,html body.bgph .hd-rd .gx,html body.bg
 html body .wl-wm,html body .au-wm,html body .ab2-wm{filter:drop-shadow(0 2px 3px rgba(0,0,0,.45)) drop-shadow(0 8px 18px rgba(0,0,0,.35))}
 html body .tp-wm,html body img.wm,html body .sb-wm img{filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.5)) drop-shadow(0 4px 10px rgba(0,0,0,.35))}
 html body.bgph .pv-gem,html body.bgph .fc-top,html body.bgph .pwc{border:1px solid rgba(255,255,255,.08)!important;border-top-color:rgba(255,255,255,.26)!important;border-bottom-color:rgba(0,0,0,.45)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -20px 34px -20px rgba(0,0,0,.7),0 1px 2px rgba(0,0,0,.35),0 8px 16px -6px rgba(0,0,0,.45),0 28px 56px -18px rgba(0,0,0,.7)!important}
+/* МИНИМАЛИЗМ: иконки без квадратных подложек (16.11) */
+html body .sp-i,html body .sv-i,html body .hd-ib,html body .pg-l span:has(>svg),html body .skh-r>span:first-child{background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;width:auto!important;min-width:22px;height:auto!important;padding:0!important}
+html body .sp-i svg,html body .sv-i svg,html body .hd-ib svg,html body .pg-l span:has(>svg) svg,html body .skh-r>span:first-child svg{width:20px!important;height:20px!important;color:#C4A4FF}
+html body .chc-h>span:first-child{background:none!important;border:0!important;box-shadow:none!important;width:auto!important;height:auto!important;min-width:0;padding:0 2px 0 0!important;color:#8E8A98!important;font-size:13px;font-weight:600}
+html body .cb-hd{margin:18px 0 22px!important}
+html body .cb-hd+*{margin-top:0!important}
+@media(max-width:1023px){html body .hx-row+.msg3,html body .msg3{margin-top:16px!important}}
+/* ПУСТЫЕ СОСТОЯНИЯ: текст слева, без одиноких слов (16.11) */
+html body p,html body span,html body em,html body b,html body div,html body button,html body label{text-wrap:pretty}
+html body .empty,html body .hd-emp,html body .hx-dx-e,html body .st-empty,html body .st-empty>*,html body .vb-empty,html body .vb-empty>*,html body .gx-e,html body .pm-e,html body .mxq-e,html body .sq-e,html body .ib-e,html body .jx-e,html body .pg-empty{text-align:left!important}
+html body .hx-empty{justify-content:flex-start!important;text-align:left!important}
+html body .hd-emp{padding:18px 4px!important;display:flex;align-items:flex-start}
+html body .ib-e{align-items:flex-start!important;padding:40px 8px 0!important}
+html body .vb-empty{margin:24px 0 0!important}
+html body .mgn em{text-wrap:balance}
+html body .hx-empty>svg:last-child{margin-left:auto}
 </style>
 </head>
 <body>
@@ -3607,11 +3623,11 @@ dzPlans(){const td=today(),dp=this.dayAll(td),pct=dp.n?Math.round(dp.p*100):0,or
   const stD=new Set(this.starList(td)),L=[...tk,...hs].sort((a,b)=>(stD.has(b.k+':'+b.o.id)?1:0)-(stD.has(a.k+':'+a.o.id)?1:0)||rank(a)-rank(b)||(a.tm||'99').localeCompare(b.tm||'99')),top=L.slice(0,3);
   const row=i=>{const x=i.o,chk=i.k==='k'?`APP.taskToggle('${x.id}')`:(x.kind||'check')==='check'?`APP.hToggle('${x.id}','${td}')`:`APP.go('plans')`;
     const sub=i.k==='k'?[x.date<td?'с прошлых дней':'',APP.tmR(x),x.pr?['','низкий','средний','высокий'][x.pr]+' приоритет':'',x.rep?this.kRepTxt(x.rep):''].filter(Boolean).join(' · ')||'задача':(x.kind==='num'||x.kind==='time')?`${this.hVal(x,td)||0} / ${x.target||'—'} ${esc(x.unit||(x.kind==='time'?'мин':''))}`:x.kind==='scale'?'оценка 1–5':this.TOD[x.tod||''].toLowerCase();
-    return `<div class="dzp-r" ${i.k==='k'?`data-sw="k:${x.id}"`:(x.kind||'check')==='check'?`data-sw="h:${x.id}:${td}"`:''}><button class="chk ${i.k==='k'?'kp'+(x.pr||0):''}" onclick="${chk}" aria-label="Отметить"></button><button class="dzp-t" onclick="APP.go('plans')"><b>${this.starList(td).includes(i.k+':'+x.id)?`<i class="dzp-st">${this.STAR}</i>`:''}${esc(x.title)}</b><em>${sub}</em></button></div>`};
+    return `<div class="dzp-r" ${i.k==='k'?`data-sw="k:${x.id}"`:(x.kind||'check')==='check'?`data-sw="h:${x.id}:${td}"`:''}><button class="chk ${i.k==='k'?'kp'+(x.pr||0):''}" onclick="${chk}" aria-label="Отметить"></button><button class="dzp-t" onclick="APP.navGo('plans')"><b>${this.starList(td).includes(i.k+':'+x.id)?`<i class="dzp-st">${this.STAR}</i>`:''}${esc(x.title)}</b><em>${sub}</em></button></div>`};
   return `<div class="card dzp"><div class="dz-ch"><span class="dz-ti">${I.plan}Планы</span><span class="sp"></span><span class="dzp-n"><b>${dp.done}</b> из ${dp.n}</span></div>
    <div class="dzp-bar"><i style="width:${pct}%"></i></div>
    ${top.length?`<div class="dzp-l">${top.map(row).join('')}</div>`:`<div class="dzp-ok">${dp.n?'Все планы на сегодня закрыты':'На сегодня планов нет'}</div>`}
-   <button class="dz-all" onclick="APP.go('plans')">${dp.left>top.length?`Все планы · ещё ${dp.left-top.length}`:'Открыть планы'} ${I.r}</button></div>`},
+   <button class="dz-all" onclick="APP.navGo('plans')">${dp.left>top.length?`Все планы · ещё ${dp.left-top.length}`:'Открыть планы'} ${I.r}</button></div>`},
 /* задачи в стиле TickTick: приоритет, теги, подзадачи, список по датам, матрица */
 PRC:['', 'rgb(107 79 216)','rgb(168 139 255)','rgb(237 230 255)'],PRN:['Без приоритета','Низкий','Средний','Высокий'],
 kFlag(n,sz){return `<svg width="${sz||14}" height="${sz||14}" viewBox="0 0 24 24" fill="${n?this.PRC[n]:'none'}" stroke="${n?this.PRC[n]:'currentColor'}" stroke-width="2" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>`},
@@ -3792,7 +3808,7 @@ vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData()
    
    
   </div>
-  <div class="pf-b"><div class="pf-lb">Приложение</div><div class="pf-g pf-g0">${row('gear','Настройки','',"APP.go('me')")}${row('phone','На экран «Домой»','Установить',"APP.installSheet()")}${row('bell','Напоминания',pp,"APP.go('me');APP._sset='notif';APP.render()")}${row('globe','Язык',lang,"APP.go('me');APP._sset='lang';APP.render()")}${row('down','Мои данные','Выгрузить',"APP.go('me');APP._sset='data';APP.render()")}</div><div class="pf-lb">Доступ</div><div class="pf-g">${g3.join('')}</div><div class="pf-lb">Поддержка</div><div class="pf-g">${g2.join('')}</div></div></div>`},
+  <div class="pf-b"><div class="pf-lb">Приложение</div><div class="pf-g pf-g0">${row('gear','Настройки','',"APP.go('me')")}${row('sun','Видение','',"APP._ct='vision';APP.go('profile')")}${row('phone','На экран «Домой»','Установить',"APP.installSheet()")}${row('bell','Напоминания',pp,"APP.go('me');APP._sset='notif';APP.render()")}${row('globe','Язык',lang,"APP.go('me');APP._sset='lang';APP.render()")}${row('down','Мои данные','Выгрузить',"APP.go('me');APP._sset='data';APP.render()")}</div><div class="pf-lb">Доступ</div><div class="pf-g">${g3.join('')}</div><div class="pf-lb">Поддержка</div><div class="pf-g">${g2.join('')}</div></div></div>`},
 installSheet(){const ua=navigator.userAgent||'',ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),standalone=window.navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
   if(standalone){this.toast('Приложение уже установлено');return}
   const safari=ios&&!/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
@@ -4092,7 +4108,7 @@ cabinet(){const S=this.S,P=S.profile||{},D=this.rpgData(),pct=Math.round((D.xp-D
   const links=`<div class="card ngrp pcl">${[['crown','rgb(201 162 39)','Полный доступ',this.paid()?'активен':'',"APP.go('me');APP._sset='premium';APP.render()"],['user','#5D27DB','Аккаунт и данные','',"APP.go('me')"],['share','#9B6FE8','Поделиться приложением','',"APP.shareApp()"]].map(([ic,c,l,v,a])=>`<button class="nrow" onclick="${a}"><span class="ni" style="color:${c}">${SI[ic]}</span><span class="sp">${l}</span>${v?`<span class="nval">${v}</span>`:''}${I.r}</button>`).join('')}</div>`;
   const ct=this._ct||'hero';
   const lvl=`<div class="card pcl2"><div class="pcl2-h"><b>Уровень ${D.lvl}</b><span>ещё ${D.nxt-D.xp} опыта до ${D.lvl+1}-го</span><button class="pcl2-i" onclick="APP.skHelp()" aria-label="Как растёт персонаж">?</button></div><div class="rpbar"><i style="width:${pct}%"></i></div><div class="pcl2-q">${D.left>0?`<span>${I.target||I.goal}</span>Задание дня: ещё ${D.left} ${this.pl(D.left,'дело','дела','дел')}`:`<span>${I.ok}</span>Задание дня выполнено, возвращайся завтра`}</div></div>`;
-  return this.cabTabs()+(ct==='rewards'?this.cabRewards():['vision','dream','ideal'].includes(ct)?this.cabVision():this.cabFacets()+goal)},
+  return (ct==='rewards'?this.cabRewards():ct==='vision'?this.cabVision():this.cabFacets()+goal)},
 dzRings(){const td=today(),a=this.dayAll(td),dP=a.n?a.p:0,wk=this.wkStat(this.monday(td)).pct,ms=td.slice(0,8)+'01';let s2=0,n2=0;for(let d=ms;d<=td;d=add(d,1)){const x=this.dayAll(d);if(x.n){s2+=x.p;n2++}}const mP=n2?s2/n2:0,wP=(wk||0)/100;
   const ring=(r,p,c)=>{const C=2*Math.PI*r;return `<circle cx="70" cy="70" r="${r}" fill="none" stroke="${c}" stroke-opacity=".16" stroke-width="11"/><circle cx="70" cy="70" r="${r}" fill="none" stroke="${c}" stroke-width="11" stroke-linecap="round" stroke-dasharray="${(C*Math.min(1,p)).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 70 70)" style="filter:drop-shadow(0 0 4px ${c})"/>`};
   return `<div class="card dz-c dz-rg"><div class="dz-ch"><span class="dz-ti">Кольца активности</span></div><div class="rg-w"><svg viewBox="0 0 140 140">${ring(58,dP,'rgb(201 184 255)')}${ring(44,wP,'rgb(168 139 255)')}${ring(30,mP,'rgb(107 79 216)')}</svg><div class="rg-l"><div><i style="background:rgb(201 184 255)"></i><span>Сегодня</span><b>${Math.round(dP*100)}%</b></div><div><i style="background:rgb(168 139 255)"></i><span>Неделя</span><b>${wk??0}%</b></div><div><i style="background:rgb(107 79 216)"></i><span>Месяц</span><b>${Math.round(mP*100)}%</b></div></div></div></div>`},
@@ -4489,6 +4505,7 @@ tHabitToggle(tid,d){if(d>today()||d<this.st)return;const t=this.S.tactics.find(x
   if(t.type==='check')this.toggle(tid,d);else this.setLog(tid,d,this.v(t,d)>=(+t.per||1)?0:+t.per||1)},
 
 /* ---------- навигация ---------- */
+navGo(k){if(k==='plans'){this._plv='day';this.day=today();this._pf=null}this.go(k)},
 go(tab,sub){this._ie=null;this._stats=0;this._sset=null;tab=this.normTab(tab);this.track('tab_'+tab,null,'day');this.tab=tab;this.sub=sub||null;try{sessionStorage.setItem('tw-tab',tab)}catch(e){}window.scrollTo(0,0);this.render()},
 openSub(sub){this.sub=sub;window.scrollTo(0,0);this.render()},
 shiftDay(n){const d=add(this.day,n);if(d>add(today(),30))return;this.day=d;this.render()},
@@ -4525,12 +4542,12 @@ render(){const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_
   const mtabs=simple?[['home','Сегодня'],['plans','Планы'],['tracker','Привычки'],['me','Настройки']]:[['home','Сегодня'],['plans','Планы'],['tracker','Привычки'],['progress','Прогресс'],['more','Профиль']],inMore=['more','profile','me'].includes(this.tab),fromHome=['journal','program'].includes(this.tab);
   this._pop=null;
   const canAdd=!this.sub&&['home','plans','tracker'].includes(this.tab);
-  $('nav').innerHTML=(canAdd?(this.tab==='home'?`<div class="qbar"><button class="qbar-t" onclick="APP.qaOpen()">${this.lang()==='en'?'Say or type a task':'Скажи или напиши задачу'}</button><button class="qbar-m" onclick="APP.qaOpen(1)" aria-label="Голосом">${this.QA_MIC}</button><button class="qbar-p" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button></div>`:`<button class="pfab" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button>`):'')+'<div class="in nv5">'+mtabs.map(([k,l])=>`<button class="${this.tab===k||(k==='more'&&inMore)||(k==='home'&&fromHome)||(simple&&k==='me'&&inMore)?'on':''}" onclick="APP.go('${k}')" aria-label="${l}">${NI[k]}</button>`).join('')+'</div>';
+  $('nav').innerHTML=(canAdd?(this.tab==='home'?`<div class="qbar"><button class="qbar-t" onclick="APP.qaOpen()">${this.lang()==='en'?'Say or type a task':'Скажи или напиши задачу'}</button><button class="qbar-m" onclick="APP.qaOpen(1)" aria-label="Голосом">${this.QA_MIC}</button><button class="qbar-p" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button></div>`:`<button class="pfab" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button>`):'')+'<div class="in nv5">'+mtabs.map(([k,l])=>`<button class="${this.tab===k||(k==='more'&&inMore)||(k==='home'&&fromHome)||(simple&&k==='me'&&inMore)?'on':''}" onclick="APP.navGo('${k}')" aria-label="${l}">${NI[k]}</button>`).join('')+'</div>';
   const P=this.prog();
   const ttl=this.sub==='programs'?'Программы':this.sub==='deals'?'Воронка':this.sub==='onboard'?'Старт':{home:'Сегодня',habits:'Прогресс',goals:(P?P.name:'Программа'),week:'Неделя',me:'Профиль'}[this.tab];
   const Pp=this.S.profile||{};
   $('snav').innerHTML=`<div class="sb-brand sb-wm"><img class="wm" src="logo-volyo.png" alt="VOLYO"><span>by WIKKI.OCEAN</span></div>
-   <div class="sb-nav">${(simple?tabs:[...tabs.slice(0,-1),['profile','Профиль',I.me],tabs[tabs.length-1]]).map(([k,l,ic])=>`<button class="${this.tab===k&&!this.sub?'on':''}" onclick="APP.go('${k}')">${ic}<span>${({journal:'Дневник рефлексии'})[k]||l}</span></button>`).join('')}</div>
+   <div class="sb-nav">${(simple?tabs:[...tabs.slice(0,-1),['profile','Профиль',I.me],tabs[tabs.length-1]]).map(([k,l,ic])=>`<button class="${this.tab===k&&!this.sub?'on':''}" onclick="APP.navGo('${k}')">${ic}<span>${({journal:'Дневник рефлексии'})[k]||l}</span></button>`).join('')}</div>
    <div class="sb-q">«${esc(Pp.motto||'Дисциплина — это выбор между тем, чего хочешь сейчас, и тем, чего хочешь больше всего.')}»<i></i></div>
    <button class="sb-me" onclick="APP.go('profile')"><span class="ava">${(this.S.profile||{}).photo?`<img src="${this.S.profile.photo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:esc(this.initial())}</span><span class="sp"><b>${esc(Pp.hero||Pp.name||'Гость')}</b><span>Профиль героя</span></span></button>`;
   this.tr($('nav'));this.tr($('snav'));
@@ -5412,7 +5429,7 @@ homeRings(o){const td=today(),H=o.H||[],hD=H.filter(x=>this.hOn(x,td)).length;
   const svg=`<svg class="hr-svg" viewBox="0 0 120 120"><defs><linearGradient id="hrg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDE3FF"/><stop offset="1" stop-color="#C4A4FF"/></linearGradient><linearGradient id="hrg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B796F5"/><stop offset="1" stop-color="#7E55DA"/></linearGradient><linearGradient id="hrg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7B5CE0"/><stop offset="1" stop-color="#4A2BA8"/></linearGradient></defs>${R.map(([r,v,g])=>{const C=2*Math.PI*r;return `<circle cx="60" cy="60" r="${r}" stroke="rgba(255,255,255,.07)" stroke-width="10" fill="none"/>${v>0?`<circle cx="60" cy="60" r="${r}" stroke="url(#${g})" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${(C*Math.max(v,.02)).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 60 60)"/>`:''}`}).join('')}</svg>`;
   const stk=o.stk||0;
   return `<div class="hr-c"><button class="hr-r" onclick="APP._prv='over';APP.go('progress')" aria-label="Прогресс">${svg}</button><div class="hr-l">
-   <button onclick="APP.go('plans')"><i style="background:#C4A4FF"></i>Дела<b>${kD}/${K.length}</b></button>
+   <button onclick="APP.navGo('plans')"><i style="background:#C4A4FF"></i>Дела<b>${kD}/${K.length}</b></button>
    <button onclick="APP.go('tracker')"><i style="background:#9B6FE8"></i>Привычки<b>${hD}/${H.length}</b></button>
    <button onclick="APP.focusOpen()"><i style="background:#6A3FD0"></i>Фокус<b>${fmt(fm)}</b></button>
    <div class="hr-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-9z"/></svg>Серия <b>${stk} ${this.pl(stk,'день','дня','дней')}</b></div></div></div>`},
@@ -5439,8 +5456,8 @@ qaParse(text){const out=[];const AR=this.areaList();
     const P=this.parseTask(t.replace(/,(\s)/g,'$1').trim(),today());let ti=P.title.replace(/^[,\s-]+|[,\s-]+$/g,'').replace(/\s{2,}/g,' ');
     if(!ti)return;ti=ti.charAt(0).toUpperCase()+ti.slice(1);out.push(Object.assign({},P,{title:ti,rem,area,dl}))});
   return out},
-qaOpen(mic){this._qa={t:''};const en=this.lang()==='en';
-  this.open(`<div class="qa-w"><div class="qa-h"><button class="qa-mic" id="qaMic" onclick="APP.qaMic()" aria-label="Голосом">${this.QA_MIC}</button><div class="qa-wv" id="qaWv">${Array.from({length:26},(_,i)=>`<i style="--d:${(i*0.07).toFixed(2)}s;--h:${(30+Math.abs(Math.sin(i*.9))*70).toFixed(0)}%"></i>`).join('')}</div><span class="qa-st" id="qaSt">${en?'Tap the mic or type':'Нажми на микрофон или напиши'}</span></div>
+qaOpen(mic){if(mic&&!this.paid())return this.paySheet('voice');this._qa={t:''};const en=this.lang()==='en',pd=this.paid();
+  this.open(`<div class="qa-w"><div class="qa-h"><button class="qa-mic" id="qaMic" onclick="APP.qaMic()" aria-label="Голосом">${this.QA_MIC}</button><div class="qa-wv" id="qaWv">${Array.from({length:26},(_,i)=>`<i style="--d:${(i*0.07).toFixed(2)}s;--h:${(30+Math.abs(Math.sin(i*.9))*70).toFixed(0)}%"></i>`).join('')}</div><span class="qa-st" id="qaSt">${pd?(en?'Tap the mic or type':'Нажми на микрофон или напиши'):(en?'Type a task. Voice is in full access':'Напиши задачу. Голосом — в полном доступе')}</span></div>
    <textarea id="qaT" class="qa-in" rows="2" placeholder="${en?'Call with a client tomorrow at 9, remind 10 minutes before, work':'Завтра в 9 созвон с клиентом, напомни за 10 минут, работа'}" oninput="APP.qaUpd()" enterkeyhint="done" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();APP.qaSave()}"></textarea>
    <div id="qaP" class="qa-p"></div>
    <button class="qa-go" id="qaGo" onclick="APP.qaSave()" disabled>${en?'Add':'Добавить'}</button>
@@ -5459,7 +5476,7 @@ qaSave(){this.qaStop();const e=$('qaT');if(!e)return;const L=this.qaParse(e.valu
   const td=today(),x=L[0],w=x.date===td?'сегодня':x.date===add(td,1)?'завтра':WD[pd(x.date).getDay()]+', '+fd(x.date);
   this.toast(L.length>1?'Добавлено '+L.length+' '+this.pl(L.length,'задача','задачи','задач'):'Задача на '+w+(x.tm?' в '+x.tm:''))},
 qaManual(){const e=$('qaT'),v=e?e.value:'';this.qaStop();this.taskNew();setTimeout(()=>{const n=$('nT');if(n&&v){n.value=v.split(/\n/)[0];this._tn.title=n.value}},200)},
-qaMic(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition,en=this.lang()==='en',st=$('qaSt'),w=$('qaWv'),mb=$('qaMic'),e=$('qaT');
+qaMic(){if(!this.paid()){this.close();return this.paySheet('voice')}const SR=window.SpeechRecognition||window.webkitSpeechRecognition,en=this.lang()==='en',st=$('qaSt'),w=$('qaWv'),mb=$('qaMic'),e=$('qaT');
   if(this._qr){this.qaStop();return}
   const ua=navigator.userAgent||'',ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),pwa=window.navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
   const kb=()=>{if(st)st.textContent=en?'Tap the mic on the keyboard and speak':'Нажми микрофон на клавиатуре и говори';if(e){e.focus()}};
@@ -5553,8 +5570,8 @@ homeHero(dpT){const td=today(),P=this.S.profile||{},nm=(P.name||'').split(' ')[0
     ...K.map(x=>({done:!!x.done,o:x.tm?-1:1.5,tm:x.tm||'',html:`<div class="hx-row ${x.done?'done':''}"><button class="hx-ck" onclick="APP.taskToggle('${x.id}');APP.render()" aria-label="Отметить">${x.done?I.ok:''}</button><button class="hx-rt" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b></button>${x.tm&&!x.done?`<span class="hx-tag">${APP.tmR(x)}</span>`:''}</div>`}))]
     .sort((a,b)=>(a.done-b.done)||(a.o-b.o)||(a.tm||'').localeCompare(b.tm||''));
   const nD=rows.filter(r=>r.done).length;
-  const list=rows.length?`<div class="hx-sec"><b>На сегодня</b><button onclick="APP.go('plans')">Все дела${MI.chev}</button></div><div class="hx-list">${rows.slice(0,12).map(r=>r.html).join('')}</div>`
-    :`<div class="hx-sec"><b>На сегодня</b></div><button class="hx-empty" onclick="APP.qMenu()">Пока пусто. Добавь первую привычку или дело ${MI.chev}</button>`;
+  const list=rows.length?`<div class="hx-sec"><b>На сегодня</b><button onclick="APP.navGo('plans')">Все дела${MI.chev}</button></div><div class="hx-list">${rows.slice(0,12).map(r=>r.html).join('')}</div>`
+    :`<div class="hx-sec"><b>На сегодня</b></div><button class="hx-empty" onclick="APP.qMenu()">Добавь первое дело или привычку ${MI.chev}</button>`;
   // дашборд
   const pct=dpT.n?Math.round(dpT.p*100):0,C=2*Math.PI*27;
   let stk=0;try{stk=this.dayStreak()}catch(e){}
@@ -5640,10 +5657,10 @@ dzSheet(){const o=this.dzOrder();this.open(`<div class="row"><div class="h2 sp" 
   <div class="small mut" style="margin:4px 0 14px">Включи нужные блоки и расставь их в удобном порядке.</div>
   <div class="dzl">${o.map(([k,on],i)=>{const w=this.DZW.find(x=>x[0]===k);return `<div class="dzr ${on?'':'off'}"><button class="dzr-t" onclick="APP.dzTog('${k}')"><span class="tgl ${on?'on':''}"><i></i></span><span class="sp"><b>${w[1]}</b><em>${w[2]}</em></span></button><div class="dzr-m"><button ${i?'':'disabled'} onclick="APP.dzMove(${i},-1)" aria-label="Выше">${I.l}</button><button ${i<o.length-1?'':'disabled'} onclick="APP.dzMove(${i},1)" aria-label="Ниже">${I.r}</button></div></div>`}).join('')}</div>
   <button class="btn gh w" style="margin-top:12px" onclick="APP.S.pref.dz=null;APP.save();APP.render();APP.dzSheet()">Вернуть как было</button>`)},
-vProfile(){const ct=['dream','ideal'].includes(this._ct)?'vision':this._ct==='skills'?'hero':(this._ct||'hero'),T={hero:'Огранка',rewards:'Награды',vision:'Видение'}[ct]||'Огранка';
+vProfile(){const ct=['vision','dream','ideal'].includes(this._ct)?'vision':this._ct==='rewards'?'rewards':'hero',T={hero:'Огранка',rewards:'Награды',vision:'Видение'}[ct];
   const bk=`<button class="cb-bk" onclick="APP.go('more')" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>`;
   const act=`<span class="cb-ac"><button onclick="APP.shareStudio('hero')" aria-label="В сторис">${SI.share}</button><button onclick="APP.editProfile()" aria-label="Изменить профиль">${I.ed}</button></span>`;
-  return `<div class="cb-hd">${bk}<div class="h1">${T}</div>${act}</div>__S1____S2__`+this.cabinet()},
+  return `<div class="cb-hd">${bk}<div class="h1">${T}</div>${ct==='hero'?act:''}</div>__S1____S2__`+this.cabinet()},
 vProgram(){const pv=this._pgv==='week'?'week':'goals';
   const seg=`<div class="pseg">${[['goals','Цели'],['week','Неделя']].map(([k,l])=>`<button class="${pv===k?'on':''}" onclick="APP._pgv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
   const body=pv==='week'?this.stripV(this.vWeek()):this.stripV(this.vGoals());
@@ -6185,10 +6202,11 @@ canAddH(n){if(this.paid())return true;const c=this.S.habits.filter(h=>!h.archive
 price(){return this.lang()==='en'?{v:'$29'}:{v:'2 490 ₽'}},
 payBody(kind,page){const T={program:['Программы','Цель за 12 недель','Готовый план на 12 недель: цели, действия на каждый день, счёт недели и воскресный разбор. Каждое утро понятно, что делать.'],
     progress:['Прогресс','Видно, как меняется жизнь','Колесо баланса, год в пикселях и графики за месяцы. Через месяц разница видна в цифрах.'],
+    voice:['Голосовой ввод','Задачи голосом','Скажи «завтра в 9 созвон», и задача появится с датой и временем. Голосовой ввод входит в полный доступ.'],
     habits:['Привычки','Сколько угодно привычек','В бесплатной версии три привычки. В полном доступе ограничений нет.'],
     full:['Полный доступ','Вся система VOLYO','Программы, безлимит привычек, весь прогресс и разборы недели. Платишь один раз.']}[kind]||['Полный доступ','Вся система VOLYO',''],pr=this.price(),en=this.lang()==='en';
   const ok='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',no='<i class="pwc-no"></i>';
-  const C=[['Задачи, календарь, фокус',ok,ok],['Привычки','3','без ограничений'],['Прогресс','неделя','месяцы и год'],['Программы на 12 недель',no,ok],['Колесо баланса',no,ok],['Разбор недели',no,ok]];
+  const C=[['Задачи',ok,ok],['Привычки','3','без ограничений'],['Прогресс','неделя','месяцы и год'],['Программы',no,ok],['Задачи голосом',no,ok],['Колесо баланса',no,ok],['Разбор недели',no,ok]];
   const day=!en&&/\d/.test(pr.v)?Math.round(parseInt(pr.v.replace(/\D/g,''),10)/365):0;
   return `<div class="pw pw2"><div class="pw-ey2">${T[0]}</div><div class="pw-t pw-tp">${T[1]}</div><div class="pw-s">${T[2]}</div>
   <div class="pwc"><div class="pwc-h"><span></span><span>Бесплатно</span><span class="pwc-f">Полный</span></div>${C.map(r=>`<div class="pwc-r"><b>${r[0]}</b><span>${r[1]}</span><span class="pwc-f">${r[2]}</span></div>`).join('')}</div>
