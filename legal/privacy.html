@@ -25,7 +25,7 @@ h2{font-size:18px;margin:30px 0 8px}p,li{color:#D6D6E0}ul{padding-left:20px}a{co
 <li><b>Статистика использования.</b> Случайный номер устройства и простые события: открыл приложение, создал аккаунт, сделал первую отметку. Содержание записей в статистику не попадает. Она хранится в нашей же базе и нужна, чтобы понять, что улучшать. Для аккаунтов мы видим дату регистрации, дни и частоту заходов, чтобы вовремя помочь тем, кто перестал пользоваться приложением, и продлить доступ.</li></ul>
 <p>Без аккаунта всё хранится только на вашем устройстве и к нам не попадает.</p>
 <h2>Чего мы не делаем</h2>
-<ul><li>Не подключаем сторонние рекламные и аналитические счётчики.</li><li>Не продаём и не передаём данные для маркетинга.</li><li>Не читаем ваш дневник и записи, кроме случаев, когда вы сами просите помочь с ошибкой.</li></ul>
+<ul><li>Не подключаем рекламные счётчики. Чтобы улучшать приложение, используем сервис продуктовой аналитики PostHog (серверы в Евросоюзе): он видит, какие экраны открываются и какие действия выполняются, но не видит текст ваших записей, привычек и дел, имя и почту — весь текст на экране и в полях скрыт.</li><li>Не продаём и не передаём данные для маркетинга.</li><li>Не читаем ваш дневник и записи, кроме случаев, когда вы сами просите помочь с ошибкой.</li></ul>
 <h2>Где хранятся данные</h2>
 <p>Данные аккаунта хранятся в сервисе Supabase на серверах в Лондоне, Великобритания. Соединение защищено шифрованием, доступ к записям есть только у владельца аккаунта. Шрифты загружаются с Google Fonts.</p>
 <h2>Оплата</h2>
@@ -53,7 +53,7 @@ h2{font-size:18px;margin:30px 0 8px}p,li{color:#D6D6E0}ul{padding-left:20px}a{co
 <li><b>Usage statistics.</b> A random device ID and simple events: opened the app, created an account, made a first check-in. The content of your entries is never included. It's stored in our own database and helps us decide what to improve.</li></ul>
 <p>Without an account, everything stays on your device and never reaches us.</p>
 <h2>What we don't do</h2>
-<ul><li>No third-party advertising or analytics trackers.</li><li>No selling or sharing data for marketing.</li><li>We don't read your journal or entries unless you ask us to help with a bug.</li></ul>
+<ul><li>No advertising trackers. To improve the app we use PostHog product analytics (EU servers): it sees which screens are opened and which actions are taken, but not the text of your entries, habits or tasks, your name or email — all on-screen text and inputs are masked.</li><li>No selling or sharing data for marketing.</li><li>We don't read your journal or entries unless you ask us to help with a bug.</li></ul>
 <h2>Where data is stored</h2>
 <p>Account data is stored with Supabase on servers in London, United Kingdom. Connections are encrypted, and only the account owner can access their entries. Fonts are loaded from Google Fonts.</p>
 <h2>Payments</h2><p>Payments are handled by a payment provider. We never see or store your card details. We only receive confirmation that a payment went through.</p>
