@@ -6756,8 +6756,9 @@ iosSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px"
 methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">На чём построена система</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin-top:10px;line-height:1.55">Каркас — «12 недель в году» Брайана Морана: тактики вместо результатов, недельный счёт, планка 85%, еженедельный разбор, 13-я неделя на итоги.<br><br>Разделение действий и результата — «4 дисциплины исполнения». Банк побед — исследование Терезы Амабайл о малых победах. «Не пропускай дважды» и 66 дней до автоматизма — Джеймс Клир и Филиппа Лалли. Часы фокуса — Кэл Ньюпорт, «Глубокая работа». Партнёр и итоги для сторис — мета-анализ Харкин (2016): когда о прогрессе знают другие, цели достигаются чаще. «Если — то» — Питер Гольвитцер. WOOP — Габриэль Эттинген. Привычки и «не пропускай дважды» — Джеймс Клир. Отчёт партнёру — исследование Гейл Мэтьюз. Строгие программы — по правилам их авторов.</div>`)},
 lang(){return ((this.S.pref||{}).lang)||'ru'},
+syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
-async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
+async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
 async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=187');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
@@ -6802,7 +6803,7 @@ initAuth(){
     if(u){let oa=0;try{oa=+localStorage.getItem('tw-oauth')||0;if(oa)localStorage.removeItem('tw-oauth')}catch(e){}
       if(oa&&Date.now()-oa<6e5){const nw=Date.now()-new Date(u.created_at).getTime()<3e5;this.track(nw?'signup':'login',{lang:this.lang(),via:'google'},nw?'ever':'day');
         if(nw&&!(this.S.pref||{}).seen){this.seen();this._in=1;this.sub='intro';window.scrollTo(0,0)}}}
-    if(u&&u.id!==was){const md=u.user_metadata||{},gn=md.name||md.full_name;if(!this.S.profile.name&&gn)this.S.profile.name=gn;this.pull(true);this.grpLoad()}if(!u){this.groups=[];this.boards={}}
+    if(u&&u.id!==was){setTimeout(()=>this.syncLang(),3000);const md=u.user_metadata||{},gn=md.name||md.full_name;if(!this.S.profile.name&&gn)this.S.profile.name=gn;this.pull(true);this.grpLoad()}if(!u){this.groups=[];this.boards={}}
     if(!u&&was){this.cloud='off'}
     this.render()});
   this.sb.auth.getSession().catch(()=>{this.cloud='err';this.render()});
@@ -6825,7 +6826,7 @@ async auth(mode){
     const e=$('aE').value.trim();if(!/.+@.+\..+/.test(e))return this.msg('Проверь почту');
     if(mode==='link'){const{error}=await this.sb.auth.signInWithOtp({email:e,options:{emailRedirectTo:location.origin+location.pathname}});if(error)throw error;return this.msg('Письмо отправлено. Открой ссылку из него на этом устройстве.')}
     if(mode==='up'){if(p.length<8)return this.msg('Пароль не короче 8 символов');const n=($('aN')||{}).value||'';if(n)this.S.profile.name=n.trim();this.save();
-      const{data,error}=await this.sb.auth.signUp({email:e,password:p,options:{data:{name:n.trim()},emailRedirectTo:location.origin+location.pathname}});if(error)throw error;
+      const{data,error}=await this.sb.auth.signUp({email:e,password:p,options:{data:{name:n.trim(),lang:this.lang()},emailRedirectTo:location.origin+location.pathname}});if(error)throw error;
       this.track('signup',{lang:this.lang()},'ever');
       if(data.session&&this.sub==='welcome'){this.seen();this._in=1;this.sub='intro';window.scrollTo(0,0);this.render()}else if(!data.session)this.msg('Готово. Подтверди почту по ссылке из письма и войди.')}
     else{const{error}=await this.sb.auth.signInWithPassword({email:e,password:p});if(error)throw error;this._amsg=''}
