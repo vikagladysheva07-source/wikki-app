@@ -3276,6 +3276,8 @@ html body .wlx-a .wlx-tag span,html body .wlx-a .wlx-tag em{text-shadow:none!imp
 html body.wlw .wlx-a .wlx-tag span{font-weight:400!important;font-size:15px!important;letter-spacing:.6em!important;margin-right:-.6em}html body.wlw .wlx-a .wlx-tag em{gap:10px!important}html body.wlw .wlx-a .wlx-tag em:before,html body.wlw .wlx-a .wlx-tag em:after{width:14px!important}
 html body .wlx-lg{padding:2px!important}html body .wlx-lg button{min-width:32px!important;height:26px!important;padding:0 8px!important;font-size:11px!important;font-weight:500!important}
 html body .wlx-lg{background:none!important;border:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding:0!important;align-items:center}html body .wlx-lg button{min-width:0!important;height:28px!important;padding:0 7px!important;font-size:11px!important;font-weight:400!important;letter-spacing:.14em!important;color:rgba(255,255,255,.32)!important;background:none!important}html body .wlx-lg button.on{color:rgba(255,255,255,.85)!important;background:none!important}html body .wlx-lg button+button{border-left:1px solid rgba(255,255,255,.16)!important;border-radius:0!important}
+html body .hx-row.done .hx-ck,html body .tk .chk.on{background:linear-gradient(155deg,rgba(176,140,245,.26),rgba(106,63,208,.12))!important;border-color:rgba(196,164,255,.32)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 5px rgba(155,111,232,.12)!important;color:rgba(255,255,255,.78)!important}
+html body .mgc.on{background:linear-gradient(155deg,rgba(176,140,245,.24),rgba(106,63,208,.1))!important;border-color:rgba(196,164,255,.3)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)!important;color:rgba(255,255,255,.78)!important}html body .mgc.td{box-shadow:0 0 0 1px rgba(196,164,255,.42)!important}html body .mgc.on.td{box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 0 1px rgba(196,164,255,.42)!important}
 </style>
 </head>
 <body>
@@ -5013,7 +5015,7 @@ ring(v,th,cap){const r=52,C=2*Math.PI*r,p=v==null?0:v/100,a=th/100*360-90,x=59+r
 /* ================= ГЛАВНОЕ ================= */
 vWelcome(){const m=this._wm||'up',E=esc(this._wE||''),N=esc(this._wN||'');
   if(m==='fg'||m==='code'||m==='reset')return this.vRecover(m,E);
-  return `<div class="wl wlx wlx-a">${this.lgSw()}${this._wforce?`<button class="wlx-back" onclick="APP._wforce=false;APP.sub=null;APP.render()" aria-label="Назад">${I.x}</button>`:''}
+  return `<div class="wl wlx wlx-a">${this.lgSw()}
   <div class="wlx-top"><img class="wl-wm" src="logo-volyo.png" alt="VOLYO"><div class="wlx-rule"></div><div class="wlx-tag"><span>дисциплина</span><em>путь к свободе</em></div></div>
   <div class="wlx-bot">
    <div class="pseg au-seg"><button class="${m==='in'?'on':''}" onclick="APP.wMode('in')">Вход</button><button class="${m==='up'?'on':''}" onclick="APP.wMode('up')">Регистрация</button></div>
@@ -7031,7 +7033,7 @@ APP.backStep=function(){try{
   const ft=document.getElementById('ftOv');if(ft){this.ftHide();return true}
   if(this.sub==='welcome'&&(this._wm==='fg'||this._wm==='code')){this.wMode('in');return true}
   if(this.sub==='intro'){if((this._in||1)>1){this.inBack();return true}return false}
-  if(['welcome','start','onboard'].includes(this.sub))return false;
+  if(this.sub==='welcome'&&this._wforce&&!this.user){this._wforce=false;this.sub=null;this.render();return true}if(['welcome','start','onboard'].includes(this.sub))return false;
   if(this.sub){this.sub=null;this.render();window.scrollTo(0,0);return true}
   if(this.tab==='me'&&this._asub){this._asub='';this.render();window.scrollTo(0,0);return true}
   if(this.tab==='me'&&this._sset){this._sset='';this.render();window.scrollTo(0,0);return true}
