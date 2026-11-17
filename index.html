@@ -3200,6 +3200,22 @@ html body .ppc-ch em.st{color:#F2EDE2!important;border-color:rgba(196,164,255,.5
 html:root,html body{--dim:#7E7A8C}
 /* iPhone: поля ввода 16px, чтобы экран не увеличивался при нажатии */
 @media (pointer:coarse){html body input:not([type=checkbox]):not([type=radio]):not([type=range]),html body textarea,html body select{font-size:16px!important}}
+html body .wlx-gg{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:48px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#fff;font:600 15px/1 var(--f,inherit);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);cursor:pointer;margin:0}
+html body .wlx-gg:active{background:rgba(255,255,255,.1)}
+html body .wlx-or{display:flex;align-items:center;gap:12px;margin:12px 0;color:var(--mut);font-size:12px}
+html body .wlx-or:before,html body .wlx-or:after{content:"";flex:1;height:1px;min-width:20px;display:block;background:rgba(255,255,255,.2)}
+html body .wlx-fgl{align-self:flex-end;background:none;border:0;color:rgba(242,237,226,.62);font:inherit;font-size:13px;padding:2px 2px 4px;margin-top:-2px;cursor:pointer}
+html body .wlx-rec{gap:12px;justify-content:flex-start;box-sizing:border-box}
+html body .wlx-rb{align-self:flex-start;display:flex;align-items:center;gap:6px;background:none;border:0;color:rgba(242,237,226,.7);font:inherit;font-size:14px;padding:4px 0;cursor:pointer}
+html body .wlx-rb svg{width:18px;height:18px}
+html body .wlx-rt{font-size:22px;font-weight:600;color:#fff;text-align:center;align-self:stretch}
+html body .wlx-rs{font-size:14px;line-height:1.45;color:rgba(242,237,226,.62);text-align:center;align-self:center;max-width:300px;margin:-4px auto 4px}
+html body .wlx-rm{font-size:15px;font-weight:600;color:#fff;text-align:center;align-self:stretch;margin-top:-6px;overflow-wrap:anywhere}
+html body .wlx-ri{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(155,111,232,.45);box-shadow:0 0 22px rgba(155,111,232,.25);color:#C4A4FF;align-self:center}
+html body .wlx-ri svg{width:24px;height:24px}
+html body .wlx-rec .wlx-b3[disabled]{opacity:.5;cursor:default}
+html body .wlx-code{height:56px!important;text-align:center!important;font:600 26px/1 var(--mono,monospace)!important;letter-spacing:10px;padding-left:10px!important}
+html body .wlx-hint{font-size:12.5px;color:rgba(242,237,226,.5);text-align:center;margin-top:-4px}
 </style>
 </head>
 <body>
@@ -4931,6 +4947,7 @@ ring(v,th,cap){const r=52,C=2*Math.PI*r,p=v==null?0:v/100,a=th/100*360-90,x=59+r
 
 /* ================= ГЛАВНОЕ ================= */
 vWelcome(){const m=this._wm||'up',E=esc(this._wE||''),N=esc(this._wN||'');
+  if(m==='fg'||m==='code'||m==='reset')return this.vRecover(m,E);
   return `<div class="wl wlx wlx-a">${this._wforce?`<button class="wlx-back" onclick="APP._wforce=false;APP.sub=null;APP.render()" aria-label="Назад">${I.x}</button>`:''}
   <div class="wlx-top"><img class="wl-wm" src="logo-volyo.png" alt="VOLYO"><div class="wlx-rule"></div><div class="wlx-tag"><span>Дисциплина</span><em>путь к свободе</em></div></div>
   <div class="wlx-bot">
@@ -4938,12 +4955,33 @@ vWelcome(){const m=this._wm||'up',E=esc(this._wE||''),N=esc(this._wN||'');
    ${m==='up'?`<input id="aN" autocomplete="name" placeholder="Имя" value="${N}">`:''}
    <input id="aE" type="email" autocomplete="email" inputmode="email" placeholder="Почта" value="${E}">
    <input id="aP" type="password" autocomplete="${m==='in'?'current-password':'new-password'}" placeholder="${m==='in'?'Пароль':'Пароль, не короче 8 символов'}" onkeydown="if(event.key==='Enter')APP.auth('${m}')">
+   ${m==='in'?`<button class="wlx-fgl" onclick="APP.wMode('fg')">Забыли пароль?</button>`:''}
    <button class="btn pr w wlx-b1" onclick="APP.auth('${m}')">${m==='up'?'Создать аккаунт':'Войти'}</button>
+   ${this.GOOGLE_ON?`   <div class="wlx-or"><span>или</span></div>
+   <button class="wlx-gg" onclick="APP.oauth('google')"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Продолжить с Google</button>`:''}
    <div class="small wlx-msg" id="aMsg">${esc(this._amsg||'')}</div>
-   ${m==='in'?`<button class="wlx-b3" onclick="APP.forgot()">Забыли пароль?</button>`:''}
    <div class="wlx-law">Продолжая, ты принимаешь <a href="./legal/terms.html" target="_blank">условия</a> и <a href="./legal/privacy.html" target="_blank">политику конфиденциальности</a></div>
   </div></div>`},
-wMode(m){const g=i=>(($(i)||{}).value||'');this._wE=g('aE')||this._wE;this._wN=g('aN')||this._wN;this._wm=m;this._amsg='';this.render()},
+vRecover(m,E){const hd=`<div class="wlx-top"><img class="wl-wm" src="logo-volyo.png" alt="VOLYO"><div class="wlx-rule"></div><div class="wlx-tag"><span>Дисциплина</span><em>путь к свободе</em></div></div>`;
+  const bk=m==='reset'?'':`<button class="wlx-rb" onclick="APP.wMode('in')">${I.l}<span>Ко входу</span></button>`;
+  let b;
+  if(m==='fg')b=`<div class="wlx-rt">Восстановление пароля</div><div class="wlx-rs">Пришлю код для&nbsp;нового пароля<br>на&nbsp;почту аккаунта</div>
+   <input id="aE" type="email" autocomplete="email" inputmode="email" placeholder="Почта" value="${E}" onkeydown="if(event.key==='Enter')APP.forgot()">
+   <button class="btn pr w wlx-b1" onclick="APP.forgot()">Получить код</button>`;
+  else if(m==='code'){const t=Math.max(0,Math.ceil(((this._fgT||0)-Date.now())/1000));
+   b=`<div class="wlx-rt">Введи код</div><div class="wlx-rs">Код отправлен на&nbsp;почту</div><div class="wlx-rm">${E}</div>
+   <input id="aC" class="wlx-code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="••••••" oninput="this.value=this.value.replace(/\\D/g,'')">
+   <input id="aP" type="password" autocomplete="new-password" placeholder="Новый пароль, от 8 символов" onkeydown="if(event.key==='Enter')APP.codeReset()">
+   <button class="btn pr w wlx-b1" onclick="APP.codeReset()">Сохранить пароль</button>
+   <button class="wlx-b3" id="fgRe" ${t?'disabled':''} onclick="APP.forgot()">${t?'Отправить код ещё раз через '+t+' с':'Отправить код ещё раз'}</button>
+   <div class="wlx-hint">Нет письма? Проверь папку «Спам»</div>`}
+  else b=`<div class="wlx-rt">Новый пароль</div><div class="wlx-rs">Придумай пароль не&nbsp;короче 8 символов</div>
+   <input id="aP" type="password" autocomplete="new-password" placeholder="Новый пароль">
+   <input id="aP2" type="password" autocomplete="new-password" placeholder="Повтори пароль" onkeydown="if(event.key==='Enter')APP.auth('reset')">
+   <button class="btn pr w wlx-b1" onclick="APP.auth('reset')">Сохранить пароль</button>`;
+  return `<div class="wl wlx wlx-a">${hd}<div class="wlx-bot wlx-rec" style="min-height:${this._wbH||472}px">${bk}${b}<div class="small wlx-msg" id="aMsg">${esc(this._amsg||'')}</div></div></div>`},
+authScreen(m,msg){this._wforce=true;this._wm=m;this._amsg=msg||'';this.close&&this.close();this.sub='welcome';window.scrollTo(0,0);this.render()},
+wMode(m){const g=i=>(($(i)||{}).value||'');const bb=document.querySelector('.wlx-bot:not(.wlx-rec)');if(bb&&this._wm!=='up')this._wbH=bb.offsetHeight;this._wE=g('aE')||this._wE;this._wN=g('aN')||this._wN;this._wm=m;this._amsg='';this.render()},
 seen(){this.S.pref=this.S.pref||{};this.S.pref.seen=1;this.save()},
 vToday(){
   const S=this.S,td=today();
@@ -6666,18 +6704,18 @@ vProgFree(){const td=today(),WD=['вс','пн','вт','ср','чт','пт','сб
 vPaywall(kind){if(kind==='progress')return this.vProgFree();this.track('paywall',{kind},'day');return `<div class="h1">${kind==='progress'?'Прогресс':'Программа'}</div>`+this.payBody(kind,1)},
 paySheet(kind){this.track('paywall',{kind},'day');this.open(`<div class="row"><span class="sp"></span><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>`+this.payBody(kind))},
 /* Оплата через Продамус. PAY_URL — адрес платёжной страницы магазина, пустой = оплата ещё не включена */
-PAY_URL:'https://wikkiocean.payform.ru',PAY_RUB:2490,
+PAY_URL:'https://wikkiocean.payform.ru',GOOGLE_ON:false,PAY_RUB:2490,
 buy(){this.track('buy_click',null,'day');if(this.PAY_URL)return this.payGo();this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Оплата скоро откроется</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin:6px 0 16px;line-height:1.55">Оплата картой скоро заработает. Напиши в Telegram, и доступ откроется по цене запуска сразу после запуска оплаты.</div>
   <button class="btn pr w" onclick="window.open('https://t.me/wikki_shark','_blank')">Написать в Telegram</button>
   <button class="btn gh w" style="margin-top:8px" onclick="APP.codeAsk()">У меня есть код</button>`)},
-payGo(){if(!this.user){this.close();this._amsg='Войди или создай аккаунт, чтобы открыть полный доступ';this._am='up';this.sub=null;return this.go('me')}
+payGo(){if(!this.user)return this.authScreen('up','Войди или создай аккаунт, чтобы открыть полный доступ');
   const u=this.user,q=new URLSearchParams({do:'pay','products[0][name]':'VOLYO — полный доступ навсегда','products[0][price]':String(this.PAY_RUB),'products[0][quantity]':'1',order_id:'vl-'+u.id+'-'+Date.now().toString(36),_param_uid:u.id,customer_email:u.email||'',urlReturn:location.origin+'/',urlSuccess:location.origin+'/?paid=1'});
   const url=this.PAY_URL.replace(/\/?$/,'/')+'?'+q.toString();try{localStorage.setItem('tw-paywait',String(Date.now()))}catch(e){}this.close();
   const w=window.open(url,'_blank');if(!w)location.href=url;this.payWatch()},
 payWatch(){let t0=0;try{t0=+localStorage.getItem('tw-paywait')||0}catch(e){}if(!t0||Date.now()-t0>3600e3||this._pw)return;let n=0;
   this._pw=setInterval(async()=>{n++;if(this.user)await this.loadAcc();if(this.paid()){clearInterval(this._pw);this._pw=0;try{localStorage.removeItem('tw-paywait')}catch(e){}this.track('purchase_ok',null,'ever');this.sub=null;this.render();this.toast('Полный доступ открыт навсегда');this.buzz&&this.buzz(14)}else if(n>60){clearInterval(this._pw);this._pw=0}},4000)},
-codeAsk(){if(!this.user){this.close();this._amsg='Войди или создай аккаунт, чтобы активировать код';this._am='up';this.sub=null;return this.go('me')}
+codeAsk(){if(!this.user)return this.authScreen('up','Войди или создай аккаунт, чтобы активировать код');
   this.ask('Код доступа','',v=>this.redeem(v))},
 async redeem(c){c=(c||'').trim();if(!c)return;try{const{data,error}=await this.sb.rpc('tw_redeem',{c});if(error)throw error;if(!data.ok)return this.toast(data.err||'Код не подошёл');
   this.track('redeem',{code:c.toUpperCase()},'ever');await this.loadAcc();this.close();this.sub=null;this.render();this.toast(data.until?'Полный доступ открыт до '+fd(data.until):'Полный доступ открыт навсегда')}catch(e){this.toast('Ошибка: '+this.errText(e))}},
@@ -6720,7 +6758,7 @@ methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17
 lang(){return ((this.S.pref||{}).lang)||'ru'},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();if(l==='en')await this.loadDict();this.render();this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=186');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=187');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
@@ -6758,9 +6796,13 @@ initAuth(){
   if(!window.supabase){this.cloud='err';return}
   this.sb=supabase.createClient(CFG.url,CFG.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'tw-auth'}});
   this.sb.auth.onAuthStateChange((ev,ses)=>{
-    if(ev==='PASSWORD_RECOVERY'){this._am='reset';this._amsg='Придумай новый пароль';this.user=null;this.go('me');return}
+    if(this._rcv)return;
+    if(ev==='PASSWORD_RECOVERY'){this.user=null;this.authScreen('reset');return}
     const u=ses&&ses.user;const was=this.user&&this.user.id;this.user=u||null;if(this.user){this.pushCheck();this.loadStats();this.loadAcc()}else{this._acc=null}
-    if(u&&u.id!==was){if(!this.S.profile.name&&u.user_metadata&&u.user_metadata.name)this.S.profile.name=u.user_metadata.name;this.pull(true);this.grpLoad()}if(!u){this.groups=[];this.boards={}}
+    if(u){let oa=0;try{oa=+localStorage.getItem('tw-oauth')||0;if(oa)localStorage.removeItem('tw-oauth')}catch(e){}
+      if(oa&&Date.now()-oa<6e5){const nw=Date.now()-new Date(u.created_at).getTime()<3e5;this.track(nw?'signup':'login',{lang:this.lang(),via:'google'},nw?'ever':'day');
+        if(nw&&!(this.S.pref||{}).seen){this.seen();this._in=1;this.sub='intro';window.scrollTo(0,0)}}}
+    if(u&&u.id!==was){const md=u.user_metadata||{},gn=md.name||md.full_name;if(!this.S.profile.name&&gn)this.S.profile.name=gn;this.pull(true);this.grpLoad()}if(!u){this.groups=[];this.boards={}}
     if(!u&&was){this.cloud='off'}
     this.render()});
   this.sb.auth.getSession().catch(()=>{this.cloud='err';this.render()});
@@ -6772,13 +6814,14 @@ errText(e){const m=String(e&&e.message||e);
   if(/Email not confirmed/i.test(m))return 'Подтверди почту: ссылка пришла в письме';
   if(/rate limit/i.test(m))return 'Слишком много писем подряд. Попробуй через час';
   if(/Password should be/i.test(m))return 'Пароль слишком короткий';
+  if(/expired|invalid.*token|token.*invalid|otp/i.test(m))return 'Код неверный или устарел. Запроси новый';
   if(/fetch|network/i.test(m))return 'Нет связи с сервером. Попробуй позже';
   return m},
 async auth(mode){
   if(!this.sb)return this.msg('Нет связи с сервером. Попробуй позже');
   const p=$('aP').value;
   try{
-    if(mode==='reset'){if(p.length<8)return this.msg('Пароль не короче 8 символов');const{error}=await this.sb.auth.updateUser({password:p});if(error)throw error;this._am='in';this._amsg='';this.toast('Пароль обновлён');const{data}=await this.sb.auth.getSession();this.user=data.session&&data.session.user;if(this.user)this.pull(true);return this.render()}
+    if(mode==='reset'){if(p.length<8)return this.msg('Пароль не короче 8 символов');if(($('aP2')||{}).value!==p)return this.msg('Пароли не совпадают');const{error}=await this.sb.auth.updateUser({password:p});if(error)throw error;this._wm='in';this._amsg='';this._wforce=false;this.sub=null;this.toast('Пароль обновлён');const{data}=await this.sb.auth.getSession();this.user=data.session&&data.session.user;if(this.user)this.pull(true);return this.render()}
     const e=$('aE').value.trim();if(!/.+@.+\..+/.test(e))return this.msg('Проверь почту');
     if(mode==='link'){const{error}=await this.sb.auth.signInWithOtp({email:e,options:{emailRedirectTo:location.origin+location.pathname}});if(error)throw error;return this.msg('Письмо отправлено. Открой ссылку из него на этом устройстве.')}
     if(mode==='up'){if(p.length<8)return this.msg('Пароль не короче 8 символов');const n=($('aN')||{}).value||'';if(n)this.S.profile.name=n.trim();this.save();
@@ -6788,8 +6831,29 @@ async auth(mode){
     else{const{error}=await this.sb.auth.signInWithPassword({email:e,password:p});if(error)throw error;this._amsg=''}
   }catch(err){this.msg(this.errText(err))}
 },
-async forgot(){const e=($('aE')||{}).value.trim();if(!/.+@.+\..+/.test(e))return this.msg('Впиши почту выше, и я пришлю ссылку');
-  try{const{error}=await this.sb.auth.resetPasswordForEmail(e,{redirectTo:location.origin+location.pathname});if(error)throw error;this.msg('Письмо со ссылкой отправлено')}catch(err){this.msg(this.errText(err))}},
+async oauth(p){
+  if(!this.sb)return this.msg('Нет связи с сервером. Попробуй позже');
+  if(/Instagram|FBAN|FBAV|Telegram|VKClient|Line\//i.test(navigator.userAgent))return this.msg('Вход через Google не работает во встроенном браузере. Открой volyo.app в Safari или Chrome, или войди по почте');
+  try{localStorage.setItem('tw-oauth',String(Date.now()))}catch(e){}
+  this.msg('Открываю Google…');
+  const{error}=await this.sb.auth.signInWithOAuth({provider:p,options:{redirectTo:location.origin+location.pathname,queryParams:{prompt:'select_account'}}});
+  if(error)this.msg(this.errText(error))},
+async codeReset(){const e=(this._wE||'').trim(),c=(($('aC')||{}).value||'').trim(),p=(($('aP')||{}).value||'');
+  if(!/^\d{6,8}$/.test(c))return this.msg('Введи код из письма');if(p.length<8)return this.msg('Пароль не короче 8 символов');
+  if(!this.sb)return this.msg('Нет связи с сервером. Попробуй позже');
+  this._rcv=true;this.msg('Проверяю код…');
+  try{const{error:e1}=await this.sb.auth.verifyOtp({email:e,token:c,type:'recovery'});if(e1)throw e1;
+    const{error:e2}=await this.sb.auth.updateUser({password:p});if(e2)throw e2;
+    this._rcv=false;this._wm='in';this._amsg='';this._wforce=false;this.sub=null;
+    const{data}=await this.sb.auth.refreshSession();if(data&&data.session&&!this.user){this.user=data.session.user;this.pushCheck();this.loadStats();this.loadAcc();this.pull(true);this.grpLoad()}
+    this.render();this.toast('Пароль обновлён');this.track('pw_reset',null,'day')}
+  catch(err){this._rcv=false;this.msg(this.errText(err))}},
+async forgot(){const el=$('aE'),e=((el&&el.value)||this._wE||'').trim();if(!/.+@.+\..+/.test(e))return this.msg('Проверь почту');
+  if(this._fgT&&this._fgT>Date.now())return;this._wE=e;
+  try{const{error}=await this.sb.auth.resetPasswordForEmail(e,{redirectTo:location.origin+location.pathname});if(error)throw error;
+    this._fgT=Date.now()+60000;this._wm='code';this._amsg='';this.render();clearInterval(this._fgI);
+    this._fgI=setInterval(()=>{const b=$('fgRe');if(!b||this._wm!=='code'){clearInterval(this._fgI);return}const t=Math.ceil((this._fgT-Date.now())/1000);if(t>0){b.textContent='Отправить код ещё раз через '+t+' с'}else{b.disabled=false;b.textContent='Отправить код ещё раз';clearInterval(this._fgI)}},1000)}
+  catch(err){this.msg(this.errText(err))}},
 async logout(){if(!confirm('Выйти? Данные останутся в облаке, а с этого устройства будут стёрты.'))return;
   clearTimeout(this._pt);await this.push();try{const sub=await this.pushSub();if(sub){await this.sb.from('tw_push').delete().eq('endpoint',sub.endpoint);await sub.unsubscribe()}}catch(e){}this._pushOn=false;try{Object.keys(localStorage).filter(k=>k.startsWith('tw-vimg-')).forEach(k=>localStorage.removeItem(k))}catch(e){}try{await this.sb.auth.signOut()}catch(e){}
   this.user=null;this.cloud='off';localStorage.removeItem(KEY);this.S=this.fresh();this.go('home')},
@@ -6896,6 +6960,7 @@ APP.backStep=function(){try{
   const ib=document.getElementById('inbx');if(ib&&ib.classList.contains('on')){this.inboxClose();return true}
   const md=document.getElementById('modal');if(md&&md.classList.contains('on')){this.close();return true}
   const ft=document.getElementById('ftOv');if(ft){this.ftHide();return true}
+  if(this.sub==='welcome'&&(this._wm==='fg'||this._wm==='code')){this.wMode('in');return true}
   if(this.sub==='intro'){if((this._in||1)>1){this.inBack();return true}return false}
   if(['welcome','start','onboard'].includes(this.sub))return false;
   if(this.sub){this.sub=null;this.render();window.scrollTo(0,0);return true}
