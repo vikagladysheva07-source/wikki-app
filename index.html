@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>VOLYO — дисциплина, привычки и планы</title>
-<meta name="description" content="VOLYO — приложение для дисциплины: привычки, планы на день и неделю, прогресс и программы вроде «12 недель» и «75 Hard». Становись тем, кем хочешь быть.">
+<meta name="description" content="VOLYO — приложение для дисциплины: привычки, планы на день и неделю, прогресс и программы «12 недель» и «75 дней без компромиссов». Становись тем, кем хочешь быть.">
 <link rel="canonical" href="https://volyo.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLYO">
@@ -3278,6 +3278,13 @@ html body .wlx-lg{padding:2px!important}html body .wlx-lg button{min-width:32px!
 html body .wlx-lg{background:none!important;border:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding:0!important;align-items:center}html body .wlx-lg button{min-width:0!important;height:28px!important;padding:0 7px!important;font-size:11px!important;font-weight:400!important;letter-spacing:.14em!important;color:rgba(255,255,255,.32)!important;background:none!important}html body .wlx-lg button.on{color:rgba(255,255,255,.85)!important;background:none!important}html body .wlx-lg button+button{border-left:1px solid rgba(255,255,255,.16)!important;border-radius:0!important}
 html body .hx-row.done .hx-ck,html body .tk .chk.on{background:linear-gradient(155deg,rgba(176,140,245,.26),rgba(106,63,208,.12))!important;border-color:rgba(196,164,255,.32)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 5px rgba(155,111,232,.12)!important;color:rgba(255,255,255,.78)!important}
 html body .mgc.on{background:linear-gradient(155deg,rgba(176,140,245,.24),rgba(106,63,208,.1))!important;border-color:rgba(196,164,255,.3)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)!important;color:rgba(255,255,255,.78)!important}html body .mgc.td{box-shadow:0 0 0 1px rgba(196,164,255,.42)!important}html body .mgc.on.td{box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 0 1px rgba(196,164,255,.42)!important}
+.rv{margin:6px 0 18px}.rv-lb{font-size:13px;color:rgba(255,255,255,.5);margin:0 2px 12px}
+.rv-m{display:flex;align-items:flex-end;gap:10px;margin:0 0 12px}
+.rv-a{width:38px;height:38px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
+.rv-b{flex:1;min-width:0;padding:11px 14px 12px;border-radius:18px 18px 18px 6px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.rv-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}.rv-h b{font-size:13.5px;font-weight:600;color:rgba(255,255,255,.92)}.rv-h span{font-size:12px;color:rgba(255,255,255,.45)}
+.rv-b p{margin:0;font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.82);text-align:left}
+.pw3-w{font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.82);text-align:center;margin:18px 8px 6px}
 </style>
 </head>
 <body>
@@ -3406,7 +3413,7 @@ const TPL=[
 const PROGRAMS=[
  {id:'w12',name:'12 недель',origin:'Брайан Моран, «12 недель в году»',weeks:12,mode:'score',color:'#9B6FE8',glyph:'◆',free:true,
   rules:['До трёх целей и тактики под каждой','Каждую неделю счёт: закрыто ≥85% тактик','Воскресный разбор, 13-я неделя — итоги']},
- {id:'h75',name:'75 Hard: Фокус',origin:'По мотивам 75 Hard Энди Фриселлы — версия для дела',days:75,mode:'strict',color:'#F2EDE2',glyph:'■',
+ {id:'h75',name:'75 дней без компромиссов',origin:'Жёсткий режим на 75 дней — версия для дела',days:75,mode:'strict',color:'#F2EDE2',glyph:'■',
   rules:['2 часа глубокой работы без телефона каждый день','Главная задача дня закрыта до обеда','Движение 45 минут — энергия для работы','10 страниц книги по делу и план на завтра','Пропуск любого пункта — день 1 заново'],
   tactics:[['Глубокая работа 2 часа без телефона','check',{tod:'m'}],['Главная задача дня закрыта до обеда','check',{tod:'d'}],['Движение 45 минут','check',{tod:''}],['10 страниц книги по делу','check',{tod:'e'}],['План на завтра: 3 главные задачи','check',{tod:'e'}],['Экраны выключены до 23:00','check',{tod:'e'}]]},
  {id:'arc',hidden:true,name:'Winter Arc',origin:'Тренд: «зима, когда ты меняешься»',fixed:['10-01','01-01'],mode:'score',color:'#9B6FE8',glyph:'◇',free:true,
@@ -5112,7 +5119,7 @@ homeBoard(dp,pct,inS,w,sc,prog,fz){const td=today(),dd=pd(this.day),S=this.S,ci=
   const C=inS?`<div class="card hb3"><div class="row"><div class="sp"><div class="pn" style="margin-top:0">${esc(P?P.name:(S.sprint.title||'Программа'))}</div></div><button class="pill" onclick="APP.go('goals')">${I.r}</button></div>
     <div class="pd"><b>День ${di}</b><span>из ${this.sprintDays()}</span><span class="sp"></span><em>${Math.round(pp*100)}%</em></div><div class="wseg" style="--n:${this.W}">${Array.from({length:this.W},(_,i)=>{const k=i+1,cw=this.weekOf(td),s2=k<=cw?this.score(k):null,th=+S.sprint.threshold||85;return `<button title="Неделя ${k}${s2!=null?' · '+s2+'%':''}" onclick="APP.wk=${k};APP.go('week')" class="${k<cw?(s2!=null&&s2>=th?'ok':'past'):k===cw?'cur':''}"></button>`}).join('')}</div>
     <div class="kg"><div><b class="fl">${I.flame}${ds}</b><span>серия дней</span></div><div><b>${a30??'—'}${a30!=null?'%':''}</b><span>среднее 30 дн.</span></div><div><b>${c30}</b><span>закрытых дней</span></div><div><b>${this.mode==='strict'?this.strictRun():this.mode==='count'?this.countDays():(sc??'—')+(sc!=null?'%':'')}</b><span>${this.mode==='strict'?'подряд':this.mode==='count'?'в копилке':'счёт недели '+w}</span></div></div></div>`
-   :`<div class="card hb3"><div class="lbl">Программа</div><div class="pn">Не выбрана</div><div class="small mut" style="margin-top:6px">12 недель, 75 Hard или Теория шести месяцев. Привычки и задачи работают и без программы.</div>
+   :`<div class="card hb3"><div class="lbl">Программа</div><div class="pn">Не выбрана</div><div class="small mut" style="margin-top:6px">12 недель, 75 дней без компромиссов или Теория шести месяцев. Привычки и задачи работают и без программы.</div>
     <div class="kg"><div><b class="fl">${I.flame}${ds}</b><span>серия дней</span></div><div><b>${a30??'—'}${a30!=null?'%':''}</b><span>среднее 30 дн.</span></div></div><button class="btn pr w" style="margin-top:14px" onclick="APP.startWizard()">Выбрать программу</button></div>`;
   return `<div class="dboard">${A}${B}${C}</div>`},
 setGroup(g){this.S.pref=this.S.pref||{};this.S.pref.group=g;this.save();this.render()},
@@ -6545,7 +6552,7 @@ vMe(){
      ['<circle cx="12" cy="12" r="8.5"/><path d="M8 12l3 3 5-6"/>','Привычки','Отметка одним касанием. Серия переживает один пропуск.'],
      ['<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>','Обратный отсчёт','Сколько дней осталось до важных дат.'],
      ['<path d="M5 20V12M12 20V5M19 20v-6"/>','Прогресс','Видно, как ты меняешься неделя за неделей, месяц за месяцем и за год.'],
-     ['<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>','Программы','«12 недель», «75 Hard: Фокус» и «Теория шести месяцев».'],
+     ['<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>','Программы','«12 недель», «75 дней без компромиссов» и «Теория шести месяцев».'],
      ['<path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M12 21L8 9l4-6 4 6z"/>','Огранка и награды','Пять граней характера растут от привычек и дел.'],
      ['<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>','Дневник и послание дня','Страница на каждый день и короткая мысль на утро.']];
     const PH=[['Свобода','Свобода начинается с того, что ты делаешь каждый день.','Когда решения принимаешь ты, а не настроение, усталость или чужие ожидания, жизнь идёт туда, куда ты её ведёшь. Эту свободу даёт дисциплина. Дисциплина — путь к свободе.'],['Огранка','Каждый человек похож на бриллиант, который ещё не огранён.','Сила, ум, характер и дело уже есть, а форму им даёт работа над собой, грань за гранью. В этой огранке человек становится тем, кем хочет быть.'],['Постоянство','Огранка идёт медленно, как вода точит камень: одно и то же действие снова и снова.','Одна тренировка почти ничего не меняет, а сто таких дней меняют человека. Самое трудное — продолжать, когда первый запал прошёл, а результата ещё не видно.'],['VOLYO','VOLYO берёт на себя всё, что обычно ломает дисциплину.','Каждое утро понятно, что делать, и не нужно заново искать силы на решение. Каждое сделанное дело оставляет след: растут грани характера, копится серия, меняются цифры. В день, когда хочется бросить, приложение напоминает, сколько уже пройдено, а пропуск не стирает прошлую работу. Так шаг за шагом дисциплина становится частью тебя, и вместе с ней приходит свобода жить по своим правилам. Через месяц изменения видны в цифрах, через год в тебе самом.']];
@@ -6743,8 +6750,10 @@ payBody(kind,page){const T={program:['Программы','Цель за 12 не
   return `<div class="pw pw3"><div class="pw3-ey">${H[0]}</div><div class="pw3-t">${H[1]}</div><div class="pw3-s">${H[2]}</div>
   <div class="pw3-lb">Что ты получаешь</div>
   <div class="pw3-c">${C.map(c=>`<div class="pw3-i">${c[0]}<div><b>${c[1]}</b><p>${c[2]}</p></div></div>`).join('')}</div>
+  ${this.revLoad()||''}${this.revBlock(3)}
   <div class="pw3-f">Без оплаты остаются дела, календарь и три привычки.</div>
-  <div class="pw3-p"><b>${pr.v}</b><span>один раз и навсегда</span>${mo?`<em>Меньше ${mo} ₽ в месяц за первый год</em>`:''}</div>
+  <div class="pw3-w">Через месяц изменения видны в&nbsp;цифрах, через год&nbsp;— в&nbsp;тебе самом.</div>
+  <div class="pw3-p"><b>${pr.v}</b><span>один раз и навсегда</span>${mo?`<em>Меньше ${mo} ₽ в месяц уже в первый год, дальше бесплатно</em>`:''}</div>
   <button class="btn pr w pw3-go" onclick="APP.buy()">Открыть полный доступ</button>
   <div class="pw3-g"><span>Без подписки и автосписаний</span><span>Можно вернуть деньги в течение 14 дней</span></div>
   <button class="pw-code" onclick="APP.codeAsk()">У меня есть код доступа</button></div>`},
@@ -6774,7 +6783,9 @@ vProgFree(){const td=today(),WD=['вс','пн','вт','ср','чт','пт','сб
 vPaywall(kind){if(kind==='progress')return this.vProgFree();this.track('paywall',{kind},'day');return `<div class="h1">${kind==='progress'?'Прогресс':'Программа'}</div>`+this.payBody(kind,1)},
 paySheet(kind){this.track('paywall',{kind},'day');this.open(`<div class="row"><span class="sp"></span><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>`+this.payBody(kind))},
 /* Оплата через Продамус. PAY_URL — адрес платёжной страницы магазина, пустой = оплата ещё не включена */
-PAY_URL:'https://wikkiocean.payform.ru',GOOGLE_ON:false,PAY_RUB:2490,
+PAY_URL:'https://wikkiocean.payform.ru',REVIEWS:[],
+revLoad(){if(this._rvL)return;this._rvL=1;fetch('reviews.json?v='+Date.now()).then(r=>r.ok?r.json():[]).then(a=>{if(Array.isArray(a)&&a.length){this.REVIEWS=a;if(this.sub||this.tab)this.render()}}).catch(()=>{})},
+revBlock(max){const R=(this.REVIEWS||[]).slice(0,max||3);if(!R.length)return '';const en=this.lang()==='en';return `<div class="rv" data-nt><div class="rv-lb">${en?'From the first members':'Что говорят первые пользователи'}</div>${R.map(r=>`<div class="rv-m"><img class="rv-a" src="${esc(r.p||'')}" alt="" loading="lazy"><div class="rv-b"><div class="rv-h"><b>${esc(r.n||'')}</b>${r.r||r.re?`<span>${esc(en&&r.re?r.re:r.r||'')}</span>`:''}</div><p>${esc(en&&r.te?r.te:r.t||'')}</p></div></div>`).join('')}</div>`},GOOGLE_ON:false,PAY_RUB:2490,
 buy(){this.track('buy_click',null,'day');if(this.PAY_URL)return this.payGo();this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Оплата скоро откроется</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin:6px 0 16px;line-height:1.55">Оплата картой скоро заработает. Напиши в Telegram, и доступ откроется по цене запуска сразу после запуска оплаты.</div>
   <button class="btn pr w" onclick="window.open('https://t.me/wikki_shark','_blank')">Написать в Telegram</button>
@@ -6829,7 +6840,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=188');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=190');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];

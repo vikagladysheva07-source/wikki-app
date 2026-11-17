@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>VOLYO — приложение для дисциплины: привычки, планы и прогресс</title>
-<meta name="description" content="VOLYO — система самодисциплины. Привычки, планы на день и неделю, программы «12 недель», «75 Hard: Фокус» и «Теория шести месяцев». Дисциплина — путь к свободе.">
+<meta name="description" content="VOLYO — система самодисциплины. Привычки, планы на день и неделю, программы «12 недель», «75 дней без компромиссов» и «Теория шести месяцев». Дисциплина — путь к свободе.">
 <link rel="canonical" href="https://volyo.app/about/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLYO">
@@ -136,6 +136,13 @@ details p{padding:0 16px 15px;font-size:14px;color:rgba(242,237,226,.72)}
 footer{border-top:1px solid rgba(255,255,255,.07);padding:24px 0 40px;display:flex;flex-wrap:wrap;gap:12px 22px;font-size:14px;color:var(--dim)}
 footer a:hover{color:var(--tx)}
 @media(min-width:760px){.ph{grid-template-columns:1fr 1fr}.ph .card:last-child{grid-column:1/-1}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr 1fr}.w{padding:0 32px}}
+.rvl{display:grid;gap:14px;max-width:640px}
+.rv-m{display:flex;align-items:flex-end;gap:12px}
+.rv-a{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
+.rv-b{flex:1;min-width:0;padding:12px 16px 14px;border-radius:20px 20px 20px 6px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09)}
+.rv-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}.rv-h b{font-size:15px;font-weight:600}.rv-h span{font-size:13px;color:var(--dim)}
+.rv-b p{margin:0;font-size:15.5px;line-height:1.55;opacity:.85}
+@media(min-width:760px){.rvl{grid-template-columns:1fr 1fr;max-width:none}}
 </style>
 </head>
 <body>
@@ -252,7 +259,7 @@ footer a:hover{color:var(--tx)}
  </div>
  <div class="g2">
   <div class="card"><h3>12 недель</h3><div class="org">По книге Брайана Морана «12 недель в году»</div><ul><li>До трёх целей и действия под каждой</li><li>Каждую неделю счёт: закрыто 85% и больше</li><li>Воскресный разбор, на 13-й неделе итоги</li></ul></div>
-  <div class="card"><h3>75 Hard: Фокус</h3><div class="org">По мотивам 75 Hard Энди Фриселлы, версия для дела</div><ul><li>2 часа глубокой работы без телефона каждый день</li><li>Главная задача дня закрыта до обеда</li><li>Пропуск любого пункта — день 1 заново</li></ul></div>
+  <div class="card"><h3>75 дней без компромиссов</h3><div class="org">Жёсткий режим на 75 дней, версия для дела</div><ul><li>2 часа глубокой работы без телефона каждый день</li><li>Главная задача дня закрыта до обеда</li><li>Пропуск любого пункта — день 1 заново</li></ul></div>
   <div class="card"><h3>Теория шести месяцев</h3><div class="org">За полгода можно изменить жизнь</div><ul><li>26 недель, до трёх больших целей</li><li>Недельный счёт и итоги каждые 4 недели</li><li>Длинная дистанция, где важнее не бросить</li></ul></div>
   <div class="card"><h3>Своя программа</h3><div class="org">Любой срок и свои правила</div><ul><li>Срок, цели и действия на твой выбор</li><li>Способ счёта: планка недели, строгий режим или копилка дней</li><li>Подходит, если готовые программы не под твой ритм</li></ul></div>
  </div>
@@ -267,6 +274,12 @@ footer a:hover{color:var(--tx)}
   <div class="card"><h3>Данные твои</h3><p>Без рекламы и чужих счётчиков. Всё выгружается и удаляется за пару касаний.</p></div>
   <div class="card"><h3>Покупка один раз</h3><p>Без подписки и автосписаний. 14 дней на возврат.</p></div>
  </div>
+</section>
+
+<section id="rvS" hidden>
+ <div class="lb">Отзывы</div>
+ <h2>Что говорят первые пользователи</h2>
+ <div class="rvl" id="rvL"></div>
 </section>
 
 <section class="price">
@@ -303,5 +316,6 @@ footer a:hover{color:var(--tx)}
  <a href="https://t.me/wikki_shark">Написать в Telegram</a>
 </footer>
 </div>
+<script>(function(){var e=function(t){return String(t||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};fetch('/reviews.json?v='+Date.now()).then(function(r){return r.ok?r.json():[]}).then(function(a){if(!a||!a.length)return;document.getElementById('rvL').innerHTML=a.slice(0,6).map(function(r){return '<div class="rv-m"><img class="rv-a" src="/'+e(r.p).replace(/^\//,'')+'" alt="" loading="lazy"><div class="rv-b"><div class="rv-h"><b>'+e(r.n)+'</b>'+(r.r?'<span>'+e(r.r)+'</span>':'')+'</div><p>'+e(r.t)+'</p></div></div>'}).join('');document.getElementById('rvS').hidden=false}).catch(function(){})})()</script>
 </body>
 </html>
