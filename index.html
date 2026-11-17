@@ -3285,6 +3285,7 @@ html body .mgc.on{background:linear-gradient(155deg,rgba(176,140,245,.24),rgba(1
 .rv-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}.rv-h b{font-size:13.5px;font-weight:600;color:rgba(255,255,255,.92)}.rv-h span{font-size:12px;color:rgba(255,255,255,.45)}
 .rv-b p{margin:0;font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.82);text-align:left}
 .pw3-w{font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.82);text-align:center;margin:18px 8px 6px}
+.pw3-fd{display:table;margin:16px auto 14px;padding:7px 14px;border-radius:99px;font-size:12.5px;letter-spacing:.02em;color:rgba(255,255,255,.85);background:rgba(255,255,255,.04);border:1px solid rgba(200,172,255,.38);box-shadow:0 0 14px rgba(139,92,246,.18)}
 </style>
 </head>
 <body>
@@ -6729,7 +6730,7 @@ paid(){if(!this.user)return false;const a=this._acc;return !!a&&(!a.until||a.unt
 async loadAcc(){if(!this.user||!this.sb)return;const k='tw-acc-'+this.user.id;try{const c=localStorage.getItem(k);if(c&&!this._acc)this._acc=JSON.parse(c)}catch(e){}
   try{const{data,error}=await this.sb.from('tw_access').select('plan,source,until').eq('user_id',this.user.id).maybeSingle();if(error)throw error;this._acc=data||null;try{data?localStorage.setItem(k,JSON.stringify(data)):localStorage.removeItem(k)}catch(e){}this.render()}catch(e){}},
 canAddH(n){if(this.paid())return true;const c=this.S.habits.filter(h=>!h.archived).length;if(c+n<=this.FREE_H)return true;this.paySheet('habits');return false},
-price(){return this.lang()==='en'?{v:'$29'}:{v:'2 490 ₽'}},
+price(){return this.lang()==='en'?{v:'$37'}:{v:'3 777 ₽'}},
 payBody(kind,page){const T={program:['Программы','Цель за 12 недель','Готовый план на 12 недель: цели, действия на каждый день, счёт недели и воскресный разбор. Каждое утро понятно, что делать.'],
     progress:['Прогресс','Видно, как ты меняешься','Графики за месяцы, весь год на одной странице и где в жизни перекос. Через месяц разница видна в цифрах.'],
     voice:['Голосовой ввод','Задачи голосом','Скажи «завтра в 9 созвон», и задача появится с датой и временем. Голосовой ввод входит в полный доступ.'],
@@ -6753,7 +6754,7 @@ payBody(kind,page){const T={program:['Программы','Цель за 12 не
   ${this.revLoad()||''}${this.revBlock(3)}
   <div class="pw3-f">Без оплаты остаются дела, календарь и три привычки.</div>
   <div class="pw3-w">Через месяц изменения видны в&nbsp;цифрах, через год&nbsp;— в&nbsp;тебе самом.</div>
-  <div class="pw3-p"><b>${pr.v}</b><span>один раз и навсегда</span>${mo?`<em>Меньше ${mo} ₽ в месяц уже в первый год, дальше бесплатно</em>`:''}</div>
+  ${this.fdLoad()||''}${this._fd>0?`<div class="pw3-fd" data-nt>${en?`Founding 100 · ${this._fd} of 100 spots left`:`Founding 100 · осталось ${this._fd} из 100 мест`}</div>`:''}<div class="pw3-p"><b>${pr.v}</b><span>один раз и навсегда</span></div>
   <button class="btn pr w pw3-go" onclick="APP.buy()">Открыть полный доступ</button>
   <div class="pw3-g"><span>Без подписки и автосписаний</span><span>Можно вернуть деньги в течение 14 дней</span></div>
   <button class="pw-code" onclick="APP.codeAsk()">У меня есть код доступа</button></div>`},
@@ -6784,8 +6785,9 @@ vPaywall(kind){if(kind==='progress')return this.vProgFree();this.track('paywall'
 paySheet(kind){this.track('paywall',{kind},'day');this.open(`<div class="row"><span class="sp"></span><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>`+this.payBody(kind))},
 /* Оплата через Продамус. PAY_URL — адрес платёжной страницы магазина, пустой = оплата ещё не включена */
 PAY_URL:'https://wikkiocean.payform.ru',REVIEWS:[],
+fdLoad(){if(this._fdT&&Date.now()-this._fdT<60000)return;this._fdT=Date.now();try{this.sb.rpc('tw_founding_left').then(r=>{if(!r.error&&typeof r.data==='number'){const ch=this._fd!==r.data;this._fd=r.data;if(ch&&document.querySelector('.pw3'))this.render()}})}catch(e){}},
 revLoad(){if(this._rvL)return;this._rvL=1;fetch('reviews.json?v='+Date.now()).then(r=>r.ok?r.json():[]).then(a=>{if(Array.isArray(a)&&a.length){this.REVIEWS=a;if(this.sub||this.tab)this.render()}}).catch(()=>{})},
-revBlock(max){const R=(this.REVIEWS||[]).slice(0,max||3);if(!R.length)return '';const en=this.lang()==='en';return `<div class="rv" data-nt><div class="rv-lb">${en?'From the first members':'Что говорят первые пользователи'}</div>${R.map(r=>`<div class="rv-m"><img class="rv-a" src="${esc(r.p||'')}" alt="" loading="lazy"><div class="rv-b"><div class="rv-h"><b>${esc(r.n||'')}</b>${r.r||r.re?`<span>${esc(en&&r.re?r.re:r.r||'')}</span>`:''}</div><p>${esc(en&&r.te?r.te:r.t||'')}</p></div></div>`).join('')}</div>`},GOOGLE_ON:false,PAY_RUB:2490,
+revBlock(max){const R=(this.REVIEWS||[]).slice(0,max||3);if(!R.length)return '';const en=this.lang()==='en';return `<div class="rv" data-nt><div class="rv-lb">${en?'From the first members':'Что говорят первые пользователи'}</div>${R.map(r=>`<div class="rv-m"><img class="rv-a" src="${esc(r.p||'')}" alt="" loading="lazy"><div class="rv-b"><div class="rv-h"><b>${esc(r.n||'')}</b>${r.r||r.re?`<span>${esc(en&&r.re?r.re:r.r||'')}</span>`:''}</div><p>${esc(en&&r.te?r.te:r.t||'')}</p></div></div>`).join('')}</div>`},GOOGLE_ON:false,PAY_RUB:3777,
 buy(){this.track('buy_click',null,'day');if(this.PAY_URL)return this.payGo();this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Оплата скоро откроется</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin:6px 0 16px;line-height:1.55">Оплата картой скоро заработает. Напиши в Telegram, и доступ откроется по цене запуска сразу после запуска оплаты.</div>
   <button class="btn pr w" onclick="window.open('https://t.me/wikki_shark','_blank')">Написать в Telegram</button>
