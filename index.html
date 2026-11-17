@@ -3225,6 +3225,16 @@ html body.wlw #app{padding-top:0!important;padding-bottom:0!important;margin-top
 html body.wlw .wlx-a{min-height:100svh!important;padding-bottom:max(16px,env(safe-area-inset-bottom))!important}
 @media (max-height:720px){html body.wlw .wlx-a{gap:18px!important;padding-top:calc(max(12px,env(safe-area-inset-top)) + 50px)!important}html body.wlw .wlx-a .wl-wm{width:170px!important}html body.wlw .wlx-a .wlx-rule{margin:10px auto 8px!important}html body.wlw .wlx-a .wlx-tag span{font-size:26px!important}html body.wlw .wlx-a input{height:46px!important}html body.wlw .wlx-rec{gap:8px!important}}
 html body .wlx-a .wlx-tag span{font-size:27px!important;color:rgba(255,255,255,.74)!important}
+html body .wlx-a .wl-wm{filter:drop-shadow(0 1px 1px rgba(0,0,0,.6)) drop-shadow(0 4px 8px rgba(0,0,0,.5)) drop-shadow(0 12px 28px rgba(0,0,0,.45))!important}html body .wlx-a .wlx-tag span,html body .wlx-a .wlx-tag em{text-shadow:0 1px 2px rgba(0,0,0,.55),0 4px 14px rgba(0,0,0,.45)}
+html body .wlx-tag span i{display:inline-block;font-style:normal}
+html body .wlx-tag span.fx i{animation:tagIn 1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes tagIn{from{opacity:0;filter:blur(12px);transform:translateY(8px)}to{opacity:1;filter:blur(0);transform:none}}
+html body .wlx-a .wlx-tag span.fx+em{animation:tagSub 1s .45s ease both}
+@keyframes tagSub{from{opacity:0;filter:blur(6px)}to{opacity:1;filter:blur(0)}}
+html body .wlx-a .wlx-tag{filter:blur(.7px)}
+html body .wlx-a .wlx-tag span{letter-spacing:.14em!important;margin-right:-.14em;font-weight:400!important}
+@media (min-height:721px){html body.wlw .wlx-a .wlx-rule{margin:30px auto 22px!important}}
+html body .wlx-a .wlx-tag span{text-transform:uppercase}html body.wlw .wlx-a .wlx-tag span{font-size:21px!important}
 </style>
 </head>
 <body>
@@ -4919,7 +4929,7 @@ render(){if(!this._ph)this.phInit();this.phUser();const _th=(this.S&&this.S.pref
   else if(this.sub==='deals')body=this.vDeals();
   else if(['program','progress'].includes(this.normTab(this.tab))&&!this.paid()){this.tab=this.normTab(this.tab);body=this.vPaywall(this.tab)}
   else{this.tab=this.normTab(this.tab);body={profile:this.vProfile,home:this.vHome,plans:this.vPlans,more:this.vMore,program:this.vProgram,progress:this.vProgress,tracker:this.vTracker,journal:this.vJournal,me:this.vMe}[this.tab].call(this)}
-  $('app').innerHTML=this.thx(this.top()+this.dash(body));if(this._ptc)this.ptAuto();this.tr($('app'));this.fit($('app'));
+  $('app').innerHTML=this.thx(this.top()+this.dash(body));if(this._ptc)this.ptAuto();this.tr($('app'));this.tagFx();this.fit($('app'));
   const simple=this.simple();
   const tabs=simple?[['home','Сегодня',I.dash],['plans','Планы',I.plan],['tracker','Привычки',I.habit],['me','Настройки',I.gear]]:[['home','Сегодня',I.dash],['plans','Планы',I.plan],['program','Программа',I.goal],['progress','Прогресс',I.chart],['tracker','Привычки',I.habit],['journal','Дневник',I.diary],['me','Настройки',I.gear]];
   const NI={home:'<svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 01-1 1h-4v-6h-6v6H5a1 1 0 01-1-1z"/></svg>',plans:'<svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3.5"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>',tracker:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.3l2.6 2.6 5-5.4"/></svg>',progress:'<svg viewBox="0 0 24 24"><path d="M5 20V11M12 20V4M19 20v-6"/></svg>',more:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5"/></svg>',me:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5"/></svg>'};
@@ -4958,7 +4968,7 @@ ring(v,th,cap){const r=52,C=2*Math.PI*r,p=v==null?0:v/100,a=th/100*360-90,x=59+r
 vWelcome(){const m=this._wm||'up',E=esc(this._wE||''),N=esc(this._wN||'');
   if(m==='fg'||m==='code'||m==='reset')return this.vRecover(m,E);
   return `<div class="wl wlx wlx-a">${this.lgSw()}${this._wforce?`<button class="wlx-back" onclick="APP._wforce=false;APP.sub=null;APP.render()" aria-label="Назад">${I.x}</button>`:''}
-  <div class="wlx-top"><img class="wl-wm" src="logo-volyo.png" alt="VOLYO"><div class="wlx-rule"></div><div class="wlx-tag"><span>Дисциплина</span><em>путь к свободе</em></div></div>
+  <div class="wlx-top"><img class="wl-wm" src="logo-volyo.png" alt="VOLYO"><div class="wlx-rule"></div><div class="wlx-tag"><span>дисциплина</span><em>путь к свободе</em></div></div>
   <div class="wlx-bot">
    <div class="pseg au-seg"><button class="${m==='in'?'on':''}" onclick="APP.wMode('in')">Вход</button><button class="${m==='up'?'on':''}" onclick="APP.wMode('up')">Регистрация</button></div>
    ${m==='up'?`<input id="aN" autocomplete="name" placeholder="Имя" value="${N}">`:''}
@@ -4971,7 +4981,7 @@ vWelcome(){const m=this._wm||'up',E=esc(this._wE||''),N=esc(this._wN||'');
    <div class="small wlx-msg" id="aMsg">${esc(this._amsg||'')}</div>
    <div class="wlx-law">Продолжая, ты принимаешь <a href="./legal/terms.html" target="_blank">условия</a> и <a href="./legal/privacy.html" target="_blank">политику конфиденциальности</a></div>
   </div></div>`},
-vRecover(m,E){const hd=`<div class="wlx-top"><img class="wl-wm" src="logo-volyo.png" alt="VOLYO"><div class="wlx-rule"></div><div class="wlx-tag"><span>Дисциплина</span><em>путь к свободе</em></div></div>`;
+vRecover(m,E){const hd=`<div class="wlx-top"><img class="wl-wm" src="logo-volyo.png" alt="VOLYO"><div class="wlx-rule"></div><div class="wlx-tag"><span>дисциплина</span><em>путь к свободе</em></div></div>`;
   const bk=m==='reset'?'':`<button class="wlx-rb" onclick="APP.wMode('in')">${I.l}<span>Ко входу</span></button>`;
   let b;
   if(m==='fg')b=`<div class="wlx-rt">Восстановление пароля</div><div class="wlx-rs">Пришлю код для&nbsp;нового пароля<br>на&nbsp;почту аккаунта</div>
@@ -4990,6 +5000,7 @@ vRecover(m,E){const hd=`<div class="wlx-top"><img class="wl-wm" src="logo-volyo.
    <button class="btn pr w wlx-b1" onclick="APP.auth('reset')">Сохранить пароль</button>`;
   return `<div class="wl wlx wlx-a">${this.lgSw()}${hd}<div class="wlx-bot wlx-rec" style="min-height:${this._wbH||472}px">${bk}${b}<div class="small wlx-msg" id="aMsg">${esc(this._amsg||'')}</div></div></div>`},
 authScreen(m,msg){this._wforce=true;this._wm=m;this._amsg=msg||'';this.close&&this.close();this.sub='welcome';window.scrollTo(0,0);this.render()},
+tagFx(){const s=document.querySelector('.wlx-tag span:not([data-fx])');if(!s)return;s.dataset.fx=1;if(this._tagd)return;this._tagd=1;const t=[...s.textContent],c=(t.length-1)/2;s.innerHTML=t.map((ch,i)=>`<i style="animation-delay:${Math.round(Math.abs(i-c)*70)}ms">${ch}</i>`).join('');s.classList.add('fx')},
 lgSw(){const l=this.lang();return `<div class="wlx-lg" data-nt><button class="${l==='ru'?'on':''}" onclick="APP.wLang('ru')">RU</button><button class="${l==='en'?'on':''}" onclick="APP.wLang('en')">EN</button></div>`},
 wLang(l){if(l===this.lang())return;const g=i=>(($(i)||{}).value||'');this._wE=g('aE')||this._wE;this._wN=g('aN')||this._wN;this.setLang(l,1)},
 wMode(m){const g=i=>(($(i)||{}).value||'');const bb=document.querySelector('.wlx-bot:not(.wlx-rec)');if(bb&&this._wm!=='up')this._wbH=bb.offsetHeight;this._wE=g('aE')||this._wE;this._wN=g('aN')||this._wN;this._wm=m;this._amsg='';this.render()},
@@ -6770,7 +6781,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=187');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=188');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
