@@ -3235,9 +3235,29 @@ html body .wlx-a .wlx-tag{filter:blur(.7px)}
 html body .wlx-a .wlx-tag span{letter-spacing:.14em!important;margin-right:-.14em;font-weight:400!important}
 @media (min-height:721px){html body.wlw .wlx-a .wlx-rule{margin:30px auto 22px!important}}
 html body .wlx-a .wlx-tag span{text-transform:uppercase}html body.wlw .wlx-a .wlx-tag span{font-size:21px!important}
+#vsp{position:fixed;inset:0;z-index:99999;background:#030305;overflow:hidden;pointer-events:none;animation:vspOut .7s 2.55s cubic-bezier(.4,0,.2,1) forwards}
+#vsp .vs-bg{position:absolute;inset:-4%;background:url(ocean.jpg) center/cover;opacity:0;transform:scale(1.1);animation:vsBg 3.2s cubic-bezier(.2,.6,.2,1) forwards}
+#vsp .vs-bg:after{content:"";position:absolute;inset:0;background:radial-gradient(70% 50% at 50% 47%,rgba(5,4,10,.55),rgba(3,3,5,.92) 75%),linear-gradient(rgba(3,3,5,.35),rgba(3,3,5,.75))}
+#vsp .vs-c{position:absolute;left:50%;top:47%;width:250px;margin-left:-125px;transform:translateY(-50%)}
+#vsp .vs-glow{position:absolute;left:50%;top:50%;width:220px;height:120px;margin:-60px 0 0 -110px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);opacity:0;animation:vsF 1.4s .2s ease forwards}
+#vsp .vs-lg{position:relative;width:250px;height:auto;aspect-ratio:900/205}
+#vsp .vs-lg img,#vsp .vs-sh{position:absolute;inset:0;width:100%;height:100%}
+#vsp .vs-mv{position:absolute;inset:0;transform:translateX(37.5%);clip-path:inset(0 75.5% 0 0);opacity:0;filter:blur(12px);animation:vsIn .9s .15s cubic-bezier(.2,.7,.2,1) forwards,vsUn 1s 1s cubic-bezier(.7,0,.25,1) forwards}
+#vsp .vs-sh{-webkit-mask:url(logo-volyo.png) center/100% 100% no-repeat;mask:url(logo-volyo.png) center/100% 100% no-repeat;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.85) 50%,transparent 58%) 160% 0/300% 100% no-repeat;animation:vsSh 1.1s .75s cubic-bezier(.4,0,.2,1) forwards}
+#vsp .vs-rl{width:48px;height:1px;margin:30px auto 0;background:linear-gradient(90deg,transparent,rgba(242,237,226,.6),transparent);transform:scaleX(0);animation:vsLn .7s 1.75s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes vsBg{to{opacity:1;transform:scale(1)}}
+@keyframes vsF{to{opacity:1}}
+@keyframes vsIn{to{opacity:1;filter:blur(0)}}
+@keyframes vsUn{from{transform:translateX(37.5%);clip-path:inset(0 75.5% 0 0)}to{transform:translateX(0);clip-path:inset(0 0 0 0)}}
+@keyframes vsSh{from{background-position:160% 0}to{background-position:-60% 0}}
+@keyframes vsLn{to{transform:scaleX(1)}}
+@keyframes vspOut{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){#vsp{display:none}}
 </style>
 </head>
 <body>
+<div id="vsp" aria-hidden="true"><div class="vs-bg"></div><div class="vs-c"><div class="vs-glow"></div><div class="vs-lg"><div class="vs-mv"><img src="logo-volyo.png" alt=""><div class="vs-sh"></div></div></div><div class="vs-rl"></div></div></div>
+<script>(function(){var e=document.getElementById('vsp');try{if(sessionStorage.getItem('vsp')&&location.hash!=='#splash'){e.remove();return}sessionStorage.setItem('vsp','1')}catch(_){}setTimeout(function(){e.remove()},3400)})()</script>
 <div class="wrap" id="app"></div>
 <nav class="nav" id="nav"></nav>
 <nav class="snav" id="snav"></nav>
@@ -5000,7 +5020,7 @@ vRecover(m,E){const hd=`<div class="wlx-top"><img class="wl-wm" src="logo-volyo.
    <button class="btn pr w wlx-b1" onclick="APP.auth('reset')">Сохранить пароль</button>`;
   return `<div class="wl wlx wlx-a">${this.lgSw()}${hd}<div class="wlx-bot wlx-rec" style="min-height:${this._wbH||472}px">${bk}${b}<div class="small wlx-msg" id="aMsg">${esc(this._amsg||'')}</div></div></div>`},
 authScreen(m,msg){this._wforce=true;this._wm=m;this._amsg=msg||'';this.close&&this.close();this.sub='welcome';window.scrollTo(0,0);this.render()},
-tagFx(){const s=document.querySelector('.wlx-tag span:not([data-fx])');if(!s)return;s.dataset.fx=1;if(this._tagd)return;this._tagd=1;const t=[...s.textContent],c=(t.length-1)/2;s.innerHTML=t.map((ch,i)=>`<i style="animation-delay:${Math.round(Math.abs(i-c)*70)}ms">${ch}</i>`).join('');s.classList.add('fx')},
+tagFx(){const s=document.querySelector('.wlx-tag span:not([data-fx])');if(!s)return;s.dataset.fx=1;if(this._tagd)return;this._tagd=1;const t=[...s.textContent],c=(t.length-1)/2,o=document.getElementById('vsp')?2700:0;if(o&&s.nextElementSibling)s.nextElementSibling.style.animationDelay=(o+450)+'ms';s.innerHTML=t.map((ch,i)=>`<i style="animation-delay:${o+Math.round(Math.abs(i-c)*70)}ms">${ch}</i>`).join('');s.classList.add('fx')},
 lgSw(){const l=this.lang();return `<div class="wlx-lg" data-nt><button class="${l==='ru'?'on':''}" onclick="APP.wLang('ru')">RU</button><button class="${l==='en'?'on':''}" onclick="APP.wLang('en')">EN</button></div>`},
 wLang(l){if(l===this.lang())return;const g=i=>(($(i)||{}).value||'');this._wE=g('aE')||this._wE;this._wN=g('aN')||this._wN;this.setLang(l,1)},
 wMode(m){const g=i=>(($(i)||{}).value||'');const bb=document.querySelector('.wlx-bot:not(.wlx-rec)');if(bb&&this._wm!=='up')this._wbH=bb.offsetHeight;this._wE=g('aE')||this._wE;this._wN=g('aN')||this._wN;this._wm=m;this._amsg='';this.render()},
