@@ -4359,17 +4359,17 @@ skWeak(){const SK=this.skillsData().filter(x=>x.k!=='dis'),w=SK.slice().sort((a,
     const tot=nx[0]-cur[0],got=n-cur[0],left=tot-got,F=this.fc57(),pp=Math.max(0,...F.L.filter(f=>!f.on).map(f=>Math.min(.95,f.v/f.n)));
     return `<div class="rkp"><div class="rkp-h"><b>${cur[1]}</b><span>${nx[1]}</span></div><div class="rkp-b">${Array.from({length:tot},(_,k)=>`<i class="${k<got?'on':''}${k===got-1?' last':''}${k===got?' nx':''}"${k===got?` style="--p:${Math.round(pp*100)}%"`:''}></i>`).join('')}<svg class="rkp-g" viewBox="0 0 24 24"><path d="M5 9l3.5-4h7L19 9l-7 10z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M5 9h14M8.5 5L12 19l3.5-14" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" opacity=".6"/></svg></div><div class="rkp-f">Ещё ${left} ${this.pl(left,'грань','грани','граней')} до «${nx[1]}»</div></div>`},
   fcRank(n){return this.FCR[this.fcRankI(n)][1]},
-  fc57Defs(){if(this._f57d)return this._f57d;const D=[],a=(id,k,p,c,n,u,t)=>D.push({id,k,p,c,n,u,t});
-    [['str','силы'],['int','интеллекта'],['spi','духа']].forEach(([k,w])=>[1,10,30,60,100,200,300].forEach(n=>a(k+'m'+n,k,'c','m_'+k,n,'отм',`${n} ${this.pl(n,'отметка','отметки','отметок')} ${w}`)));
-    [1,10,50,100,250,500].forEach(n=>a('bt'+n,'biz','c','tasks',n,'',`${n} ${this.pl(n,'дело','дела','дел')} закрыто`));
-    [3,7,14,30,60,100].forEach(n=>a('ds'+n,'dis','c','streak',n,'',`Серия ${n} ${this.pl(n,'день','дня','дней')}`));
-    [7,21,66,100].forEach(n=>a('sh'+n,'str','p','hbest',n,'',`Привычка тела ${n} ${this.pl(n,'день','дня','дней')} подряд`));
-    [1,4,12,26].forEach(n=>a('ir'+n,'int','p','reviews',n,'',`${n} ${this.pl(n,'разбор','разбора','разборов')} недели`));
-    [1,10,30,100].forEach(n=>a('sj'+n,'spi','p','journal',n,'',`${n} ${this.pl(n,'запись','записи','записей')} в дневнике`));
-    [1,7,30,100].forEach(n=>a('bc'+n,'biz','p','closed',n,'',`${n} ${this.pl(n,'день','дня','дней')} закрыто на 80%`));
-    [10,50].forEach(n=>a('bf'+n,'biz','p','focus',n,'',`${n} ${this.pl(n,'час','часа','часов')} фокуса`));
-    [1,4,12,26].forEach(n=>a('dw'+n,'dis','p','strongw',n,'',`${n} ${this.pl(n,'сильная неделя','сильные недели','сильных недель')}`));
-    [1,3].forEach(n=>a('dc'+n,'dis','p','back',n,'',`${n} ${this.pl(n,'возврат','возврата','возвратов')} после пропуска`));
+  fc57Defs(){const en=this.lang()==='en';if(this._f57d&&this._f57dl===en)return this._f57d;this._f57dl=en;const D=[],a=(id,k,p,c,n,u,t)=>D.push({id,k,p,c,n,u,t}),pe=(n,o,m)=>n===1?o:m;
+    [['str','силы','body'],['int','интеллекта','mind'],['spi','духа','spirit']].forEach(([k,w,we])=>[1,10,30,60,100,200,300].forEach(n=>a(k+'m'+n,k,'c','m_'+k,n,'отм',en?`${n} ${we} ${pe(n,'check-in','check-ins')}`:`${n} ${this.pl(n,'отметка','отметки','отметок')} ${w}`)));
+    [1,10,50,100,250,500].forEach(n=>a('bt'+n,'biz','c','tasks',n,'',en?`${n} ${pe(n,'task','tasks')} done`:`${n} ${this.pl(n,'дело','дела','дел')} закрыто`));
+    [3,7,14,30,60,100].forEach(n=>a('ds'+n,'dis','c','streak',n,'',en?`${n}-day streak`:`Серия ${n} ${this.pl(n,'день','дня','дней')}`));
+    [7,21,66,100].forEach(n=>a('sh'+n,'str','p','hbest',n,'',en?`Body habit ${n} ${pe(n,'day','days')} in a row`:`Привычка тела ${n} ${this.pl(n,'день','дня','дней')} подряд`));
+    [1,4,12,26].forEach(n=>a('ir'+n,'int','p','reviews',n,'',en?`${n} weekly ${pe(n,'review','reviews')}`:`${n} ${this.pl(n,'разбор','разбора','разборов')} недели`));
+    [1,10,30,100].forEach(n=>a('sj'+n,'spi','p','journal',n,'',en?`${n} journal ${pe(n,'entry','entries')}`:`${n} ${this.pl(n,'запись','записи','записей')} в дневнике`));
+    [1,7,30,100].forEach(n=>a('bc'+n,'biz','p','closed',n,'',en?`${n} ${pe(n,'day','days')} closed at 80%`:`${n} ${this.pl(n,'день','дня','дней')} закрыто на 80%`));
+    [10,50].forEach(n=>a('bf'+n,'biz','p','focus',n,'',en?`${n} ${pe(n,'hour','hours')} of focus`:`${n} ${this.pl(n,'час','часа','часов')} фокуса`));
+    [1,4,12,26].forEach(n=>a('dw'+n,'dis','p','strongw',n,'',en?`${n} strong ${pe(n,'week','weeks')}`:`${n} ${this.pl(n,'сильная неделя','сильные недели','сильных недель')}`));
+    [1,3].forEach(n=>a('dc'+n,'dis','p','back',n,'',en?`${n} ${pe(n,'comeback','comebacks')} after a miss`:`${n} ${this.pl(n,'возврат','возврата','возвратов')} после пропуска`));
     return this._f57d=D},
   fc57(){const k=(this.S.t||0)+today();if(this._f57k===k)return this._f57v;const S=this.S,td=today(),R=this.rpgMemo(),P=R.pts||{};
     const hs=S.habits.filter(x=>!x.archived&&this.hSide(x)==='str');let hbest=0;try{hbest=Math.max(0,...hs.map(x=>{const[f,s_,fr]=this.hFns(x);return this.best(f,s_,fr||add(td,-400))}))}catch(e){}
@@ -6851,10 +6851,10 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=192');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=193');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
-  const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&D[m[1]]!==undefined)return D[m[1]]+m[2];
+  const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
     const lo=k.toLowerCase();if(D[lo]!==undefined){const v=D[lo];return k[0]===k[0].toUpperCase()&&k[0]!==k[0].toLowerCase()?v[0].toUpperCase()+v.slice(1):v}
     const cap=k[0].toUpperCase()+k.slice(1);if(D[cap]!==undefined){const v=D[cap];return k[0]===k[0].toLowerCase()?v[0].toLowerCase()+v.slice(1):v}return null};
   const tpl=k=>{if(!/\d/.test(k))return null;const nums=[];const tp=k.replace(/\d+(?:[ \u00a0]\d{3})*(?:[.,]\d+)?/g,m=>{nums.push(m.replace(/[ \u00a0](\d{3})/g,',$1').replace(/^\d{5,}$/,z=>z.replace(/\B(?=(\d{3})+(?!\d))/g,',')));return '{#}'});let v=D[tp];if(v==null){const lo=tp.toLowerCase();v=D[lo]}if(v==null)return null;let i=0;return v.replace(/\{(\d)\}/g,(_,d)=>nums[d-1]??'').replace(/\{#\}/g,()=>nums[i++]??'')};
@@ -6868,7 +6868,7 @@ tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.class
   const fixRuns=str=>str.replace(/[А-ЯЁа-яё][^\n<>]*?(?=\s*(?:\d|%|$|[A-Za-z]|[·|]|\(|\)|—|$))|[А-ЯЁа-яё]+/g,run=>{
     const t=run.trim();if(!t)return run;const lead=run.slice(0,run.length-run.trimStart().length),tail=run.slice(run.trimEnd().length);
     const tryK=k=>D[k]!==undefined?D[k]:null;
-    let out=tryK(t);
+    let out=look(t);
     if(out==null){const m=t.match(/^(.*?)([.:,!?…»)]+)$/);if(m){const v=tryK(m[1]);if(v!=null)out=v+m[2]}}
     if(out==null){const v=tryK(t.toLowerCase());if(v!=null)out=t[0]===t[0].toUpperCase()?v[0].toUpperCase()+v.slice(1):v}
     if(out==null){const v=tryK(t[0].toUpperCase()+t.slice(1));if(v!=null)out=v[0].toLowerCase()+v.slice(1)}
