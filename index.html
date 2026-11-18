@@ -3301,7 +3301,7 @@ html body.bgph .hm-ph{display:none!important}
 .wag-d:not(:has(.wag-c)) .wag-h{margin-bottom:0}.wag-d:not(:has(.wag-c)) .wag-n b{font-size:15px;color:#A9A4B6}.wag-d:not(:has(.wag-c)) .wag-a{width:30px;height:30px}
 .wag-h{display:flex;align-items:center;justify-content:space-between;margin:0 2px 10px}
 .wag-n{display:flex;align-items:baseline;gap:10px;background:none;border:0;padding:0;font:inherit;color:#F4F1EC;cursor:pointer;text-align:left}
-.wag-n b{font-size:17px;font-weight:700}.wag-n span{font-size:13px;color:#8E8A9C}
+.wag-n b{font-size:17px;font-weight:700}.wag-n span{font-size:13px;color:#8E8A9C}.wag-n .wag-f{margin-left:-6px}
 .wag-d.td .wag-n span{color:#C8B6F5}
 .wag-d.pa .wag-n b{color:#B9B4C6}
 .wag-a{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#CFC9DC;cursor:pointer}.wag-a svg{width:16px;height:16px}
@@ -4063,7 +4063,7 @@ vWeekAg(days,td){const M=['янв','фев','мар','апр','мая','июн',
     const L=T.filter(t=>t.date===d).sort((a,b)=>(a.tm||'99').localeCompare(b.tm||'99'));
     const cards=L.map(t=>{const ar=t.area?(AL.find(a=>a[0]===t.area)||[])[1]:'';
       return `<div class="wag-c ${t.done?'dn':''}" onclick="APP.taskEdit('${t.id}')"><button class="wag-k ${t.done?'on':''}" onclick="event.stopPropagation();APP.taskToggle('${t.id}')" aria-label="Отметить">${t.done?I.ok:''}</button><span class="wag-x"><b>${esc(t.title)}</b></span>${t.tm?`<span class="wag-t">${t.tm}</span>`:''}</div>`}).join('');
-    return `<section class="wag-d ${d===td?'td':''} ${d<td?'pa':''}"><div class="wag-h"><button class="wag-n" onclick="APP.plOpenDay('${d}')"><b>${W}</b><span>${x.getDate()} ${M[x.getMonth()]}${tg?' · '+tg:''}${L.length?'':' · свободно'}</span></button><button class="wag-a" onclick="APP.plAddOn('${d}','${wd}')" aria-label="Добавить дело"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div>${cards}</section>`}).join('')}</div>`},
+    return `<section class="wag-d ${d===td?'td':''} ${d<td?'pa':''}"><div class="wag-h"><button class="wag-n" onclick="APP.plOpenDay('${d}')"><b>${W}</b><span>${x.getDate()} ${M[x.getMonth()]}${tg?' · '+tg:''}</span>${L.length?'<span></span>':'<span class="wag-f">· свободно</span>'}</button><button class="wag-a" onclick="APP.plAddOn('${d}','${wd}')" aria-label="Добавить дело"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div>${cards}</section>`}).join('')}</div>`},
 vWeekTl(days,td){const now=new Date(),WL=this.wdl?this.wdl():['пн','вт','ср','чт','пт','сб','вс'];
   const T=(this.S.tasks||[]).filter(x=>!x.drop&&days.includes(x.date)&&!(this.S.del||[]).includes(x.id));
   const mn=t=>{const[h,m]=t.split(':').map(Number);return h*60+m};const tim=T.filter(x=>x.tm);
@@ -6969,7 +6969,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=193');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=195');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
