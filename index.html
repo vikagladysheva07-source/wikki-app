@@ -3380,11 +3380,13 @@ html body .phx .v2 .gem.gimg{filter:none!important;opacity:1!important}
 html body .fc-map .fc-help{display:block;margin:14px auto 2px}
 html body .wlx-a .wlx-tag{filter:none!important}html body .wlx-a .wlx-tag span,html body .wlx-a .wlx-tag em{text-shadow:0 0 1.2px rgba(255,255,255,.28),0 0 6px rgba(196,164,255,.10)!important}
 html body .wlx-a .wlx-rule{background:linear-gradient(90deg,transparent,rgba(196,164,255,.85),transparent)!important}html body .wlx-a .wlx-tag em:before{background:linear-gradient(90deg,transparent,rgba(196,164,255,.85))!important}html body .wlx-a .wlx-tag em:after{background:linear-gradient(90deg,rgba(196,164,255,.85),transparent)!important}
+#vsp:not(.go),#vsp:not(.go) *{animation-play-state:paused!important}
 </style>
+<link rel="preload" href="logo-volyo.png" as="image"><link rel="preload" href="ocean.jpg" as="image">
 </head>
 <body>
 <div id="vsp" aria-hidden="true"><div class="vs-bg"></div><div class="vs-c"><div class="vs-glow"></div><div class="vs-lg"><div class="vs-mv"><img src="logo-volyo.png" alt=""><div class="vs-sh"></div></div></div><div class="vs-rl"></div></div></div>
-<script>(function(){var e=document.getElementById('vsp');try{if(sessionStorage.getItem('vsp')&&location.hash!=='#splash'){e.remove();return}sessionStorage.setItem('vsp','1')}catch(_){}setTimeout(function(){e.remove()},3400)})()</script>
+<script>(function(){var e=document.getElementById('vsp');try{if(sessionStorage.getItem('vsp')&&location.hash!=='#splash'){e.remove();return}sessionStorage.setItem('vsp','1')}catch(_){}var done=0;function go(){if(done)return;done=1;e.classList.add('go');window.__vspEnd=Date.now()+2700;setTimeout(function(){e.remove()},3400)}var im=e.querySelector('img'),oc=new Image();oc.src='ocean.jpg';var w=[im,oc].map(function(i){return new Promise(function(r){if(i.complete&&i.naturalWidth)r();else{i.addEventListener('load',r);i.addEventListener('error',r)}})});Promise.all(w).then(function(){setTimeout(go,40)});setTimeout(go,1500)})()</script>
 <div class="wrap" id="app"></div>
 <nav class="nav" id="nav"></nav>
 <nav class="snav" id="snav"></nav>
@@ -5170,7 +5172,7 @@ vRecover(m,E){const hd=`<div class="wlx-top"><img class="wl-wm" src="logo-volyo.
    <button class="btn pr w wlx-b1" onclick="APP.auth('reset')">Сохранить пароль</button>`;
   return `<div class="wl wlx wlx-a">${this.lgSw()}${hd}<div class="wlx-bot wlx-rec" style="min-height:${this._wbH||472}px">${bk}${b}<div class="small wlx-msg" id="aMsg">${esc(this._amsg||'')}</div></div></div>`},
 authScreen(m,msg){this._wforce=true;this._wm=m;this._amsg=msg||'';this.close&&this.close();this.sub='welcome';window.scrollTo(0,0);this.render()},
-tagFx(){const s=document.querySelector('.wlx-tag span:not([data-fx])');if(!s)return;s.dataset.fx=1;if(this._tagd)return;this._tagd=1;const t=[...s.textContent],c=(t.length-1)/2,o=document.getElementById('vsp')?2700:0;if(o&&s.nextElementSibling)s.nextElementSibling.style.animationDelay=(o+450)+'ms';s.innerHTML=t.map((ch,i)=>`<i style="animation-delay:${o+Math.round(Math.abs(i-c)*70)}ms">${ch}</i>`).join('');s.classList.add('fx')},
+tagFx(){const s=document.querySelector('.wlx-tag span:not([data-fx])');if(!s)return;s.dataset.fx=1;if(this._tagd)return;this._tagd=1;const t=[...s.textContent],c=(t.length-1)/2,vs=document.getElementById('vsp'),o=vs?Math.max(300,(window.__vspEnd||Date.now()+4200)-Date.now()):0;if(o&&s.nextElementSibling)s.nextElementSibling.style.animationDelay=(o+450)+'ms';s.innerHTML=t.map((ch,i)=>`<i style="animation-delay:${o+Math.round(Math.abs(i-c)*70)}ms">${ch}</i>`).join('');s.classList.add('fx')},
 lgSw(){const l=this.lang();return `<div class="wlx-lg" data-nt><button class="${l==='ru'?'on':''}" onclick="APP.wLang('ru')">RU</button><button class="${l==='en'?'on':''}" onclick="APP.wLang('en')">EN</button></div>`},
 wLang(l){if(l===this.lang())return;const g=i=>(($(i)||{}).value||'');this._wE=g('aE')||this._wE;this._wN=g('aN')||this._wN;this.setLang(l,1)},
 wMode(m){const g=i=>(($(i)||{}).value||'');const bb=document.querySelector('.wlx-bot:not(.wlx-rec)');if(bb&&this._wm!=='up')this._wbH=bb.offsetHeight;this._wE=g('aE')||this._wE;this._wN=g('aN')||this._wN;this._wm=m;this._amsg='';this.render()},
