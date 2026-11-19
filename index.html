@@ -111,6 +111,74 @@ html body #app .hd-cols .hd-ht{row-gap:0!important}
 html body #app .hd-cols .hd-ht .hd-nm{padding:1px 0!important}
 html body #app .hd-cols .hd-ht .hd-dt{padding:1px 0!important}
 }
+.thh{display:flex;flex-direction:column;align-items:flex-start;gap:8px;width:100%;margin:12px 0;padding:16px 18px;border-radius:24px;text-align:left;color:#fff;cursor:pointer;font-family:Manrope,system-ui,sans-serif}
+.thh-t{position:relative;display:flex;align-items:center;justify-content:space-between;width:100%}
+.thh-t b{font:600 15px Manrope,system-ui,sans-serif}
+.thh-t em{font:500 12px Manrope,system-ui,sans-serif;font-style:normal;color:#8F8FA3}
+.thh-p{position:relative;font:400 14.5px/1.5 Manrope,system-ui,sans-serif;color:rgba(255,255,255,.7)}
+.thh-g{position:relative;display:inline-flex;align-items:center;gap:6px;font:600 13px Manrope,system-ui,sans-serif;color:#fff;border:1px solid rgba(255,255,255,.14);border-radius:99px;padding:8px 14px;background:rgba(255,255,255,.05);margin-top:2px}
+.thh-g svg{width:14px;height:14px}
+@media(min-width:1024px){.thh{display:none}}
+/* плитка «Дневник» на обзоре: своя иконка — стеклянный блокнот с закладкой и пером */
+.msg3.thd{justify-content:flex-end}
+.msg3.thd .msg3-t{max-width:56%;margin-left:auto;text-align:left}
+html body .msg3.thd,html body.bgph .msg3.thd{background:radial-gradient(70% 120% at 82% 50%,rgba(255,255,255,.10),rgba(255,255,255,0) 70%),linear-gradient(155deg,rgba(30,30,36,.97),rgba(8,8,12,.99))!important;border:1px solid rgba(255,255,255,.16)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 18px 34px rgba(0,0,0,.45)!important}
+html body .msg3.thd .msg3-t b{color:#fff}
+html body .msg3.thd .msg3-t span{color:rgba(255,255,255,.72)}
+.thd-i{position:absolute;left:14px;top:50%;width:102px;height:102px;transform:translateY(-50%);pointer-events:none}
+.thd-i img{width:100%;height:100%;display:block;object-fit:contain;filter:brightness(1.18) drop-shadow(0 0 1px rgba(255,255,255,.4)) drop-shadow(0 10px 16px rgba(0,0,0,.5))}
+@media(min-width:1024px){.msg3.thd{display:none}}
+.th-sub{margin:-4px 0 12px;font:400 13.5px/1.4 Manrope,system-ui,sans-serif;color:#8F8FA3}
+/* телефон: «Дневник» и «Послание дня» в один ряд: название сверху слева, картинка уходит за нижний правый край */
+@media(max-width:1023px){
+html body .hm-duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin:14px 0}
+html body .hm-duo>.msg3{min-height:150px;margin:0!important;padding:16px 14px;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left}
+html body .hm-duo .msg3-t,html body .hm-duo .msg3.thd .msg3-t{max-width:100%;margin:0;text-align:left}
+html body .hm-duo .msg3-t b{font-size:17px}
+html body .hm-duo .msg3-t span,html body .hm-duo .msg3.thd .msg3-t span{display:none!important}
+html body .hm-duo .msg3.thd{justify-content:flex-start}
+html body .hm-duo .thd-i{left:auto;right:-14px;top:auto;bottom:-16px;width:118px;height:118px;transform:rotate(7deg)}
+html body .hm-duo .msg3-f{right:-4px;top:auto;bottom:-8px;width:120px;height:92px;transform:none}
+html body .hm-duo .msg3-f i{width:56px;height:84px;border-radius:13px}
+html body .hm-duo .msg3-f i:nth-child(1){transform:rotate(-22deg) translateX(-42px)}
+html body .hm-duo .msg3-f i:nth-child(2){transform:rotate(-8deg) translateX(-21px)}
+}
+/* галочки привычек на «Сегодня» = как в трекере привычек (.mgc.on): стеклянный круг и галочка из SVG */
+html body #app .hd-dt i{display:grid;place-items:center}
+html body #app .hd-dt i.on{background:linear-gradient(155deg,rgba(176,140,245,.24),rgba(106,63,208,.1))!important;border:1px solid rgba(196,164,255,.3)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)!important;color:#fff!important}
+html body #app .hd-dt i.on:after{display:none!important}
+html body #app .hd-dt i.on svg{width:11px;height:11px;stroke:#fff;color:#fff;filter:drop-shadow(0 1px 1px rgba(255,255,255,.25))}
+/* дневник: вкладка «Мысли» */
+.th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+.th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
+.th-ta{position:relative;width:100%;min-height:84px;max-height:240px;resize:none;background:none;border:0;outline:0;color:#fff;font:400 16px/1.5 Manrope,system-ui,sans-serif;caret-color:#C4A4FF}
+.th-ta::placeholder{color:rgba(255,255,255,.38)}
+.th-md{position:relative;display:flex;flex-wrap:wrap;gap:7px}
+.th-md button,.th-pr button{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.7);font:500 12.5px Manrope,system-ui,sans-serif;padding:7px 12px;border-radius:99px;cursor:pointer;min-height:34px}
+.th-md button.on{color:#fff;border-color:rgba(196,164,255,.65);background:rgba(255,255,255,.1);box-shadow:0 0 14px rgba(155,111,232,.22)}
+.th-ft{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.th-pr{display:flex;gap:6px;flex-wrap:wrap}
+.th-pr button{background:none;border-color:transparent;color:#8F8FA3;padding:7px 8px}
+.th-go{border:0;min-height:44px;padding:0 24px;border-radius:16px;font:600 14px Manrope,system-ui,sans-serif;color:#0a0a10;background:linear-gradient(180deg,#fff,#d9d9e6);box-shadow:inset 0 -3px 6px rgba(0,0,0,.12),0 8px 20px rgba(0,0,0,.4);cursor:pointer}
+.th-go:disabled{opacity:.35;cursor:default}
+.th-st{font:500 12px Manrope,system-ui,sans-serif;color:#8F8FA3;letter-spacing:.04em;padding:0 4px}
+.th-fd{display:flex;flex-direction:column;gap:18px}
+.th-g{position:relative;padding-left:18px;display:flex;flex-direction:column;gap:10px}
+.th-g::before{content:"";position:absolute;left:4px;top:22px;bottom:-14px;width:1px;background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.02))}
+.th-gh{position:relative;font:600 11px Manrope,system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#8F8FA3}
+.th-gh::before{content:"";position:absolute;left:-18px;top:2px;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff,rgba(196,164,255,.6) 60%,rgba(120,80,200,.4));box-shadow:0 0 10px rgba(155,111,232,.5)}
+.th-c{border-radius:22px;padding:13px 16px 15px}
+.th-ch{position:relative;display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.th-ch span{font:500 12px Manrope,system-ui,sans-serif;color:#8F8FA3}
+.th-ch em{font:500 11.5px Manrope,system-ui,sans-serif;font-style:normal;color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:3px 10px;background:rgba(255,255,255,.04)}
+.th-ch button{margin-left:auto;width:32px;height:32px;display:grid;place-items:center;background:none;border:0;color:#6C6878;cursor:pointer;padding:0}
+.th-ch button svg{width:15px;height:15px}
+.th-tx{position:relative;font:400 15px/1.55 Manrope,system-ui,sans-serif;color:rgba(255,255,255,.92);white-space:pre-wrap;word-break:break-word}
+.th-em{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:26px 24px}
+.th-em b{font:600 16px Manrope,system-ui,sans-serif}
+.th-em span{font:400 13px/1.5 Manrope,system-ui,sans-serif;color:#8F8FA3;max-width:280px}
+.th-ed{width:46px;height:46px;border-radius:50%;margin-bottom:6px;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.3),rgba(155,111,232,.12) 55%,rgba(0,0,0,.3));border:1px solid rgba(196,164,255,.4);box-shadow:0 0 22px rgba(155,111,232,.3),inset 0 1px 1px rgba(255,255,255,.3)}
+@media(min-width:1024px){.th-w{max-width:720px;margin-left:auto;margin-right:auto}}
 @media (prefers-reduced-motion:reduce){.fcm *{animation:none!important;transition-duration:.01s!important}}
 </style>
 <meta name="theme-color" content="#07070D">
@@ -4583,7 +4651,7 @@ skWeak(){const SK=this.skillsData().filter(x=>x.k!=='dis'),w=SK.slice().sort((a,
     let focus=0;Object.values(S.focus||{}).forEach(f=>focus+=(+f.m||0));
     const keys=Object.keys(S.hlog||{}).concat(Object.keys(S.log||{})).filter(d=>/^\d{4}-\d\d-\d\d$/.test(d)).sort();let d0=keys[0]||td;if(d0<add(td,-400))d0=add(td,-400);
     let back=0,prevOk=null,seen=false;const wk={};for(let d=d0;d<=td;d=add(d,1)){const ok=this.dayOk(d);if(ok){if(seen&&prevOk===false)back++;seen=true;const m=this.monday(d);wk[m]=(wk[m]||0)+1}prevOk=d<td?ok:prevOk}
-    const V={m_str:P.str||0,m_int:P.int||0,m_spi:P.spi||0,tasks:(S.tasks||[]).filter(x=>x.done).length,streak:this.dayBest(),hbest,reviews:Object.values(S.reports||{}).filter(r=>r&&r.t).length,journal:Object.values(S.checkin||{}).filter(c=>c&&(c.win||c.top||c.note||c.grat||c.block)).length,closed:R.closed||0,focus:Math.floor(focus/60),strongw:Object.values(wk).filter(n=>n>=5).length,back};
+    const V={m_str:P.str||0,m_int:P.int||0,m_spi:P.spi||0,tasks:(S.tasks||[]).filter(x=>x.done).length,streak:this.dayBest(),hbest,reviews:Object.values(S.reports||{}).filter(r=>r&&r.t).length,journal:Object.values(S.checkin||{}).filter(c=>c&&(c.win||c.top||c.note||c.grat||c.block)).length+(S.thoughts||[]).length,closed:R.closed||0,focus:Math.floor(focus/60),strongw:Object.values(wk).filter(n=>n>=5).length,back};
     const got=S.fc||{},L=this.fc57Defs().map(f=>Object.assign({},f,{v:V[f.c]||0,on:!!got[f.id]||(V[f.c]||0)>=f.n}));
     return this._f57k=k,this._f57v={L,n:L.filter(f=>f.on).length,V}},
   fcCheck(){const F=this.fc57(),S=this.S;S.fc=S.fc||{};const fresh=F.L.filter(f=>f.on&&!S.fc[f.id]);if(!fresh.length)return;
@@ -4732,7 +4800,24 @@ wkH(){const td=today(),dt=pd(td),hr=this._hr??new Date().getHours(),pf=this.S.pr
 jNote(d,v){this.track('journal',null,'day');clearTimeout(this._jnt);const st=$('jrSt');if(st)st.textContent='Сохраняю…';this._jnt=setTimeout(()=>{const S=this.S;S.checkin=S.checkin||{};const c=S.checkin[d]=Object.assign({energy:0,sleep:'',win:'',top:'',note:''},S.checkin[d]||{});c.note=v;c.t=Date.now();this.save();const s2=$('jrSt');if(s2)s2.textContent='Сохранено'},600)},
 jGrow(el){el.style.height='auto';el.style.height=Math.max(190,el.scrollHeight+4)+'px'},
 jPrompt(d,txt){const el=$('jrN');if(!el)return;const pre=el.value&&!el.value.endsWith('\n')?'\n\n':'';el.value+=pre+txt+'\n';this.jGrow(el);el.focus();el.setSelectionRange(el.value.length,el.value.length);this.jNote(d,el.value)},
-vJournal(){const jseg=`<div class="pseg">${[['day','День'],['pages','Страницы']].map(([k,l])=>`<button class="${(this._jv||'day')===k?'on':''}" onclick="APP._jv='${k}';APP._pg=null;APP.render()">${l}</button>`).join('')}</div>`;
+thHome(){const P=this.thPrompts();
+  return `<button class="msg3 thd" onclick="APP._jv='th';APP.go('journal')"><span class="msg3-t"><b>Дневник</b><span>Документируй путь</span></span><span class="thd-i" aria-hidden="true"><img src="diary.webp" alt="" draggable="false" width="150" height="150"></span></button>`},
+thList(){return this.S.thoughts=this.S.thoughts||[]},
+thPrompts(){return ['Что изменилось сегодня?','Какой шаг приблизил к цели?','Что стало яснее на этом пути?','Что сегодня далось непросто?','Чем сегодня можно гордиться?','За что сегодня спасибо?']},
+thMoods(){return [['calm','Спокойно'],['energy','Энергия'],['inspire','Вдохновение'],['anx','Тревога'],['tired','Усталость']]},
+thMood(k){this._thm=this._thm===k?'':k;document.querySelectorAll('.th-md button').forEach(b=>b.classList.toggle('on',b.dataset.k===this._thm))},
+thInp(el){this._thT=el.value;el.style.height='auto';el.style.height=Math.min(el.scrollHeight,240)+'px';const b=$('thGo');if(b)b.disabled=!el.value.trim()},
+thFill(s){const e=$('thT');if(!e)return;e.value=s;this.thInp(e);e.focus();try{e.setSelectionRange(s.length,s.length)}catch(x){}},
+thSave(){const e=$('thT'),v=(e?e.value:'').trim();if(!v)return;const o={id:'th'+uid(),d:today(),ts:Date.now(),text:v,mood:this._thm||'',upd:Date.now()};this.thList().unshift(o);this._thT='';this._thm='';this.save();this.buzz(14);this.toast('Мысль сохранена');this.render();setTimeout(()=>{try{this.fcCheck()}catch(x){}},400)},
+thDel(id){if(!confirm('Удалить эту запись?'))return;this.S.thoughts=this.thList().filter(x=>x.id!==id);this.S.del=this.S.del||[];this.S.del.push(id);this.save();this.render()},
+vThoughts(){const L=this.thList().slice().sort((a,b)=>(b.ts||0)-(a.ts||0)),td=today(),moods=Object.fromEntries(this.thMoods()),P=this.thPrompts(),ph=P[(pd(td).getDate())%P.length];
+  const days=new Set(L.map(x=>x.d)).size,tm=t=>{const d=new Date(t);return pad(d.getHours())+':'+pad(d.getMinutes())};
+  const grp={};L.forEach(x=>{(grp[x.d]=grp[x.d]||[]).push(x)});
+  const lab=d=>d===td?'Сегодня':d===add(td,-1)?'Вчера':fd(d);
+  const feed=L.length?Object.keys(grp).sort().reverse().map(d=>`<div class="th-g"><div class="th-gh">${lab(d)}</div>${grp[d].map(x=>`<div class="th-c fg"><div class="th-ch"><span>${tm(x.ts)}</span>${x.mood&&moods[x.mood]?`<em>${moods[x.mood]}</em>`:''}<button onclick="APP.thDel('${x.id}')" aria-label="Удалить">${I.x}</button></div><div class="th-tx">${esc(x.text)}</div></div>`).join('')}</div>`).join(''):`<div class="th-em"><div class="th-ed"></div><b>Здесь будет история твоей трансформации</b><span>Записывай шаги, сомнения и открытия. Каждая запись станет гранью в твоей огранке.</span></div>`;
+  return `<div class="h1">Дневник</div><div class="th-sub">Документируй путь</div>__SEG__<div class="th-w"><div class="th-cm fg"><textarea id="thT" class="th-ta" rows="3" placeholder="${this.tt(ph)}" oninput="APP.thInp(this)" maxlength="4000">${esc(this._thT||'')}</textarea><div class="th-md">${this.thMoods().map(([k,l])=>`<button data-k="${k}" class="${this._thm===k?'on':''}" onclick="APP.thMood('${k}')">${l}</button>`).join('')}</div><div class="th-ft"><div class="th-pr">${['Благодарность: ','Инсайт: ','Что мешало: '].map(s=>`<button onclick="APP.thFill('${s}')">${s.replace(': ','')}</button>`).join('')}</div><button class="th-go" id="thGo" onclick="APP.thSave()" ${(this._thT||'').trim()?'':'disabled'}>Записать</button></div></div>${L.length?`<div class="th-st"><span>${L.length} ${this.pl(L.length,'запись','записи','записей')}</span> · <span>${days} ${this.pl(days,'день','дня','дней')}</span></div>`:''}<div class="th-fd">${feed}</div></div>`},
+vJournal(){const jseg=`<div class="pseg">${[['th','Мысли'],['day','День'],['pages','Страницы']].map(([k,l])=>`<button class="${(this._jv||'th')===k?'on':''}" onclick="APP._jv='${k}';APP._pg=null;APP.render()">${l}</button>`).join('')}</div>`;
+  if((this._jv||'th')==='th')return this.vThoughts().replace('__SEG__',jseg);
   if(this._jv==='pages')return `<div class="h1">Дневник</div>${jseg}__S1____S2__`+this.npView();
   const S=this.S,td=today(),d=this._jd&&this._jd<=td?this._jd:td,C=S.checkin||{},c=C[d]||{},dd=pd(d);
   const dots=(k,v)=>`<div class="jx-dots">${[1,2,3,4,5].map(n=>`<button class="${(+v||0)>=n?'on':''}" onclick="APP.jSet('${d}','${k}',${(+v||0)===n?0:n},1)"aria-label="${n}"></button>`).join('')}</div>`;
@@ -5282,7 +5367,7 @@ render(){if(!this._ph)this.phInit();this.phUser();const _th=(this.S&&this.S.pref
   $('app').innerHTML=this.thx(this.top()+this.dash(body));if(this._ptc)this.ptAuto();this.tr($('app'));this.tagFx();this.popFx();this.fit($('app'));
   const simple=this.simple();
   const tabs=simple?[['home','Сегодня',I.dash],['plans','Планы',I.plan],['tracker','Привычки',I.habit],['me','Настройки',I.gear]]:[['home','Сегодня',I.dash],['plans','Планы',I.plan],['program','Программа',I.goal],['progress','Прогресс',I.chart],['tracker','Привычки',I.habit],['journal','Дневник',I.diary],['me','Настройки',I.gear]];
-  const NI={home:'<svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 01-1 1h-4v-6h-6v6H5a1 1 0 01-1-1z"/></svg>',plans:'<svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3.5"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>',tracker:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.3l2.6 2.6 5-5.4"/></svg>',progress:'<svg viewBox="0 0 24 24"><path d="M5 20V11M12 20V4M19 20v-6"/></svg>',more:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5"/></svg>',me:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5"/></svg>'};
+  const NI={home:'<svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 01-1 1h-4v-6h-6v6H5a1 1 0 01-1-1z"/></svg>',plans:'<svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3.5"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>',journal:'<svg viewBox="0 0 24 24"><path d="M6.5 3.5h10a2 2 0 012 2v13a2 2 0 01-2 2h-10z"/><path d="M6.5 3.5v17M10.5 8h5M10.5 11.5h4"/></svg>',tracker:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.3l2.6 2.6 5-5.4"/></svg>',progress:'<svg viewBox="0 0 24 24"><path d="M5 20V11M12 20V4M19 20v-6"/></svg>',more:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5"/></svg>',me:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5"/></svg>'};
   const mtabs=simple?[['home','Сегодня'],['plans','Планы'],['tracker','Привычки'],['me','Настройки']]:[['home','Сегодня'],['plans','Планы'],['tracker','Привычки'],['progress','Прогресс'],['more','Профиль']],inMore=['more','profile','me'].includes(this.tab),fromHome=['journal','program'].includes(this.tab);
   this._pop=null;
   const canAdd=!this.sub&&['home','plans','tracker'].includes(this.tab);
@@ -6430,7 +6515,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   // --- трекер привычек
   const wdays=this.rgDays(rgH).slice(0,62);
   const HS=S.habits.filter(x=>!x.archived).slice(0,6);
-  const hrow=x=>{const[f,s_,fr]=this.hFns(x),sk=this.streak(f,s_,fr);return `<div class="hd-nm"><span class="hd-mi">${hIco(x.ico||'star')}</span><span>${esc(x.title)}</span></div>${wdays.map(d=>{const fut=d>td,on=this.hOn(x,d),sch=this.hSched(x,d);return `<div class="hd-dt"><i class="${on?'on':fut?'f':sch?'':'x'}" ${fut?'':`onclick="APP.hToggle('${x.id}','${d}');APP.render()"`}></i></div>`}).join('')}<div class="hd-st">${sk}</div>`};
+  const hrow=x=>{const[f,s_,fr]=this.hFns(x),sk=this.streak(f,s_,fr);return `<div class="hd-nm"><span class="hd-mi">${hIco(x.ico||'star')}</span><span>${esc(x.title)}</span></div>${wdays.map(d=>{const fut=d>td,on=this.hOn(x,d),sch=this.hSched(x,d);return `<div class="hd-dt"><i class="${on?'on':fut?'f':sch?'':'x'}" ${fut?'':`onclick="APP.hToggle('${x.id}','${d}');APP.render()"`}>${on?I.ok2:''}</i></div>`}).join('')}<div class="hd-st">${sk}</div>`};
   const wl=ST?['Вс',...W7.slice(0,6)]:W7;
   const hab=`<div class="hd-c"><div class="hd-h"><b>Трекер привычек</b>${this.rgBtn('hab',rgH)}</div>${HS.length?`<div class="hd-ht" style="--n:${wdays.length}"><div class="hd-hh">Привычка</div>${wdays.map(d=>`<div class="hd-hh ${d===td?'td':''}">${wdays.length<=7?['Вс','Пн','Вт','Ср','Чт','Пт','Сб'][pd(d).getDay()]:(wdays.length<=16||pd(d).getDay()===1?+d.slice(8):'')}</div>`).join('')}<div class="hd-hh"></div>${HS.map(hrow).join('')}</div>`:`<button class="hd-add" onclick="APP.editH()">+ Добавить первую привычку</button>`}</div>`;
   // --- цели или сферы
@@ -6442,7 +6527,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const jr=`<div class="hd-c"><div class="hd-h"><b>Дневник</b><span onclick="APP._jd=today();APP.go('journal')" style="cursor:pointer">Все записи</span></div>${ents.length?ents.map(e=>`<div class="hd-jr" onclick="APP._jd='${e.d}';APP.go('journal')"><span class="hd-jd">${fd(e.d)}</span><div><b>${e.t}</b><span>${esc(e.x.length>90?e.x.slice(0,90)+'…':e.x)}</span></div></div>`).join(''):`<button class="hd-add" onclick="APP._jd=today();APP.go('journal')">+ Записать день</button>`}</div>`;
   const rad=this.pcRadar();
   const msgC=this.msgCard();
-  return {desk:`${this.ftPill()}<div class="hd-r1 hd-rs">${this.homeRings(o)}</div><div class="hd-cols"><div class="hd-cl">${this.homeNext()}${foc}${hab}</div><div class="hd-cr">${msgC}${this.cdChips?this.cdChips():''}${dyn}${rad?`<div class="hd-rd">${rad}</div>`:''}</div></div><div class="hd-g3 ${gs.length&&o.inS?'two':'one'}">${jr}${gs.length&&o.inS?goals:''}</div>`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`${msgC}${dyn}${hab}${goals}`}},
+  return {desk:`${this.ftPill()}<div class="hd-r1 hd-rs">${this.homeRings(o)}</div><div class="hd-cols"><div class="hd-cl">${this.homeNext()}${foc}${hab}</div><div class="hd-cr">${msgC}${this.cdChips?this.cdChips():''}${dyn}${rad?`<div class="hd-rd">${rad}</div>`:''}</div></div><div class="hd-g3 ${gs.length&&o.inS?'two':'one'}">${jr}${gs.length&&o.inS?goals:''}</div>`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`<div class="hm-duo">${this.thHome()}${msgC}</div>${dyn}${hab}${goals}`}},
 dynHover(e,el){const v=JSON.parse(el.dataset.v),n=v.length;if(n<2)return;const r=el.getBoundingClientRect();let i=e?Math.round((e.clientX-r.left)/r.width*(n-1)):n-1;i=Math.max(0,Math.min(n-1,i));
   if(v[i]==null){let k=1;while(k<n&&v[i-k]==null&&v[i+k]==null)k++;i=v[i-k]!=null?i-k:i+k;if(v[i]==null)return}
   if(!e){i=n-1;while(i>0&&v[i]==null)i--}
@@ -7247,7 +7332,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=199');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=204');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
@@ -7416,6 +7501,7 @@ merge(a,b){
   m.rw=Object.assign({},a.rw||{},b.rw||{});
   m.chl={};for(const src of [a.chl||{},b.chl||{}])for(const w in src)m.chl[w]=[...new Set([...(m.chl[w]||[]),...src[w]])];
   const pm=new Map();[...(a.pages||[]),...(b.pages||[])].forEach(x=>{if(m.del.includes(x.id))return;const q=pm.get(x.id);if(!q||(x.upd||0)>(q.upd||0))pm.set(x.id,x)});m.pages=[...pm.values()];
+  const thm=new Map();[...(a.thoughts||[]),...(b.thoughts||[])].forEach(x=>{if(m.del.includes(x.id))return;const q=thm.get(x.id);if(!q||(x.upd||0)>(q.upd||0))thm.set(x.id,x)});m.thoughts=[...thm.values()];
   m.fv={};for(const src of [old.fv||{},nw.fv||{}])for(const d in src)m.fv[d]=Object.assign({},m.fv[d]||{},src[d]);
   return m;
 },
