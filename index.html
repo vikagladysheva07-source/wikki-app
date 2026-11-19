@@ -189,6 +189,74 @@ html body .hm-duo-d .msg3-f i:nth-child(2){transform:rotate(-8deg) translateX(-2
 /* обложки программ в выборе программы: фото поверх стеклянного фона */
 html body .ppc .ppc-top{background:linear-gradient(180deg,rgba(2,5,12,.06),rgba(2,5,12,.55)),var(--pc) var(--pcp,center)/cover no-repeat,#0b0a14!important}
 html body.bgph .ppc .ppc-top{background:linear-gradient(180deg,rgba(2,5,12,.06),rgba(2,5,12,.55)),var(--pc) var(--pcp,center)/cover no-repeat,#0b0a14!important}
+/* программы в «Планах»: вступление и понятные карточки */
+.pgi{border-radius:24px;padding:18px 18px 16px;margin:12px 0 14px}
+.pgi-t{position:relative;font:600 17px Manrope,system-ui,sans-serif;margin-bottom:12px}
+.pgi-s{position:relative;display:flex;gap:12px;align-items:flex-start;padding:8px 0}
+.pgi-s i{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:600 12px Manrope,system-ui,sans-serif;font-style:normal;color:#fff;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06)}
+.pgi-s b{display:block;font:600 14.5px Manrope,system-ui,sans-serif}
+.pgi-s span{display:block;font:400 13px/1.45 Manrope,system-ui,sans-serif;color:#9A96A6;margin-top:2px}
+.pgi-n{position:relative;font:400 12.5px/1.45 Manrope,system-ui,sans-serif;color:#8F8FA3;margin:8px 0 12px}
+.pgi .btn{position:relative}
+.pgi-b{display:inline-flex;margin:10px 0 4px;padding:8px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#C9C6D2;font:500 13px Manrope,system-ui,sans-serif;cursor:pointer}
+.ppc-d{font:400 13.5px/1.5 Manrope,system-ui,sans-serif;color:rgba(242,237,226,.78);margin-top:10px}
+.ppc-d span{display:block;font:600 11px Manrope,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8F8FA3;margin-bottom:3px}
+.ppc-bk{font:400 12px Manrope,system-ui,sans-serif;color:#8F8FA3;margin-top:8px}
+/* «Планы»: основной переключатель из трёх видов, а «Сферы» и «Программы» вторым рядом */
+.pl-x{display:flex;gap:8px;margin:10px 0 4px}
+.pl-x button{flex:1;display:flex;align-items:center;justify-content:space-between;gap:6px;min-height:44px;padding:0 14px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));color:rgba(255,255,255,.78);font:500 13.5px Manrope,system-ui,sans-serif;cursor:pointer;text-align:left}
+.pl-x button svg{width:15px;height:15px;opacity:.55;flex:none}
+.pl-x button.on{color:#fff;border-color:rgba(255,255,255,.3);background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.05));box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
+.pl-x button.on svg{opacity:.9}
+/* «Моя программа» в разделе программ */
+.mp{border-radius:26px;padding:18px 18px 16px;margin:12px 0 6px}
+.mp-h{position:relative;display:flex;align-items:center;justify-content:space-between;font:600 11px Manrope,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8F8FA3}
+.mp-h em{font:500 11.5px Manrope,system-ui,sans-serif;font-style:normal;letter-spacing:0;text-transform:none;color:#C9C6D2;border:1px solid rgba(255,255,255,.14);border-radius:99px;padding:3px 10px;background:rgba(255,255,255,.05)}
+.mp-n{position:relative;font:600 24px/1.15 Manrope,system-ui,sans-serif;margin-top:10px}
+.mp-s{position:relative;font:400 13px Manrope,system-ui,sans-serif;color:#8F8FA3;margin-top:3px}
+.mp-t{position:relative;margin-top:16px}.mp-t b{font:600 15px Manrope,system-ui,sans-serif}
+.mp-bar{height:6px;border-radius:6px;background:rgba(255,255,255,.09);box-shadow:inset 0 1px 2px rgba(0,0,0,.5);overflow:hidden;margin-top:8px}.mp-bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#5B2FBE,#C4A4FF);box-shadow:0 0 10px rgba(155,111,232,.5)}
+.mp-sc{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.mp-sc>div{border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px;background:rgba(255,255,255,.04)}
+.mp-sc b{display:block;font:600 22px Manrope,system-ui,sans-serif;letter-spacing:-.01em}.mp-sc span{display:block;font:400 12px Manrope,system-ui,sans-serif;color:#8F8FA3;margin-top:2px}
+.mp-w{position:relative;display:flex;align-items:flex-end;gap:4px;height:44px;margin-top:14px}.mp-w i{flex:1;min-width:0;max-width:22px;border-radius:5px;background:rgba(255,255,255,.14)}.mp-w i.ok{background:linear-gradient(180deg,rgba(196,164,255,.95),rgba(155,111,232,.35))}.mp-w i.cur{outline:1px solid rgba(255,255,255,.5);outline-offset:1px}
+.mp .btn{position:relative;margin-top:14px}
+.mp-o{font:600 11px Manrope,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8F8FA3;margin:18px 4px 2px}
+/* флажки в онбординге программы в нашей палитре, а не системный синий */
+html body #app input[type=checkbox]{accent-color:#9B6FE8}
+/* программа: нейтральное стекло, без цветных линий и свечений */
+html body .gc2{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02)),rgba(8,8,12,.55)!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 14px 30px rgba(0,0,0,.4)!important}
+html body .gc2:before,html body .gc2:after{display:none!important}
+html body .gc2-bar i,html body .gm-bar i{background:linear-gradient(90deg,rgba(255,255,255,.5),rgba(255,255,255,.9))!important;box-shadow:none!important}
+html body .gc2-w{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.1)!important}
+html body .gc2-w span{color:#9A96A6!important}
+html body .pgh{border:1px solid rgba(255,255,255,.12)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 18px 40px -18px rgba(0,0,0,.6)!important}
+html body .quote,html body .quote.small{border-left:1px solid rgba(255,255,255,.22)!important;box-shadow:none!important}
+html body .seg button.on{border-color:rgba(255,255,255,.3)!important;box-shadow:none!important;background:rgba(255,255,255,.1)!important;color:#fff!important}
+html body .ppc-on{background:rgba(255,255,255,.1)!important;color:#fff!important;border:1px solid rgba(255,255,255,.2)}
+html body .ppc-r svg{color:rgba(255,255,255,.65)!important}
+html body .mp-bar i{background:linear-gradient(90deg,rgba(255,255,255,.5),rgba(255,255,255,.92))!important;box-shadow:none!important}
+html body .gc2-f button{color:#C9C6D2!important}
+html body .mp-w i.ok{background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.3))!important}
+/* календарь выбора даты старта (компактный) */
+.sdc{margin-top:4px}
+.sdc-q{display:flex;gap:6px;margin-bottom:8px}
+.sdc-q button{flex:1;min-width:0;padding:0 6px;border-radius:99px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:rgba(255,255,255,.78);font:500 12px Manrope,system-ui,sans-serif;cursor:pointer;min-height:32px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sdc-q button.on{color:#fff;border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.12)}
+.sdc-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
+.sdc-h b{font:600 14px Manrope,system-ui,sans-serif}
+.sdc-h button{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;cursor:pointer;padding:0}
+.sdc-h button svg{width:14px;height:14px}
+.sdc-w,.sdc-g{display:grid;grid-template-columns:repeat(7,1fr);gap:0;text-align:center}
+.sdc-w span{font:500 10.5px Manrope,system-ui,sans-serif;color:#8F8FA3;padding:2px 0}
+.sdc-g i{display:block}
+.sdc-g button{height:32px;width:32px;margin:1px auto;border-radius:50%;display:grid;place-items:center;font:500 13px Manrope,system-ui,sans-serif;color:rgba(255,255,255,.85);background:none;border:1px solid transparent;cursor:pointer;padding:0}
+.sdc-g button.mon{color:#fff;font-weight:600}
+.sdc-g button.td{border-color:rgba(255,255,255,.3)}
+.sdc-g button.sel{background:linear-gradient(180deg,#fff,#d9d9e6);color:#0a0a10;border-color:transparent;font-weight:700}
+.sdc-g button:disabled{opacity:.28;cursor:default}
+.sdc-s{font:400 12.5px Manrope,system-ui,sans-serif;color:#8F8FA3;margin:6px 0 0}.sdc-s b{color:#fff;font-weight:600}
+.sdc .small.dim{display:none}
 /* дневник: вкладка «Мысли» */
 .th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
 .th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
@@ -3679,9 +3747,9 @@ const I={more:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" strok
 
 function example(start){
   const g=[
-    {id:'g1',title:'Тело',result:'К концу спринта пробегаю 10 км без остановки',color:COLORS[0],date:'',woop:{},metrics:[{id:uid(),name:'Длинная пробежка',unit:'км',start:3,target:10,cur:3,auto:''}]},
-    {id:'g2',title:'Дело',result:'К концу спринта 5 новых клиентов, договоры подписаны и оплачены',color:COLORS[1],date:'',woop:{},metrics:[{id:uid(),name:'Клиенты',unit:'',start:0,target:5,cur:0,auto:'paid'}]},
-    {id:'g3',title:'Навык',result:'К концу спринта сдаю тест по английскому на B2',color:COLORS[2],date:'',woop:{},metrics:[]}
+    {id:'g1',title:'Тело',result:'К концу программы пробегаю 10 км без остановки',color:COLORS[0],date:'',woop:{},metrics:[{id:uid(),name:'Длинная пробежка',unit:'км',start:3,target:10,cur:3,auto:''}]},
+    {id:'g2',title:'Дело',result:'К концу программы 5 новых клиентов, договоры подписаны и оплачены',color:COLORS[1],date:'',woop:{},metrics:[{id:uid(),name:'Клиенты',unit:'',start:0,target:5,cur:0,auto:'paid'}]},
+    {id:'g3',title:'Навык',result:'К концу программы сдаю тест по английскому на B2',color:COLORS[2],date:'',woop:{},metrics:[]}
   ];
   const t=[T('g1','Тренировка','count',{target:3}),T('g1','Сон до 23:30','check',{target:6}),
     T('g2','Касания с потенциальными клиентами','count',{target:15}),T('g2','Созвоны с предложением','count',{target:3}),
@@ -3695,33 +3763,33 @@ function H(title,o){return Object.assign({id:'h'+uid(),title,days:[0,1,2,3,4,5,6
 const HKIND={check:'Галочка',num:'Число',time:'Минуты',scale:'Оценка 1–5'};
 /* Шаблоны спринтов: цель + тактики. Нейтральные, без личных данных. */
 const TPL=[
- {id:'product',name:'Запуск продукта',icon:'◆',result:'К концу спринта продукт запущен, первые клиенты заплатили',color:'#4205CF',
+ {id:'product',name:'Запуск продукта',icon:'◆',result:'К концу программы продукт запущен, первые клиенты заплатили',color:'#4205CF',
   metrics:[{name:'Оплат',unit:'',target:5,auto:'paid'}],
   tactics:[['Касания с потенциальными клиентами','count',{target:15,tod:'d'}],['Созвоны с предложением и ценой','count',{target:3,tod:'d'}],['Контент о продукте','count',{target:5,tod:'m'}],['Упаковать оффер: результат, срок, цена','ms',{week:2}],['Открыть продажи','ms',{week:5}]]},
  {id:'body',name:'Тело к дате',icon:'●',result:'К дате финала форма, которую можно показать: вес, сила или выносливость по плану',color:'#9B6FE8',
   metrics:[{name:'Вес',unit:'кг',target:0}],
   tactics:[['Тренировка','count',{target:4,tod:'m'}],['Сон до 23:30','check',{target:6,tod:'e'}],['Еда по плану','check',{target:6,tod:'d'}],['Вода','num',{per:2,unit:'л',tod:''}],['Контрольное взвешивание','count',{target:1,tod:'m'}]]},
- {id:'lang',name:'Язык до уровня',icon:'◇',result:'К концу спринта подтверждаю уровень тестом',color:'#C4A4FF',
+ {id:'lang',name:'Язык до уровня',icon:'◇',result:'К концу программы подтверждаю уровень тестом',color:'#C4A4FF',
   metrics:[{name:'Балл теста',unit:'',target:0}],
   tactics:[['Новые слова','num',{per:10,unit:'слов',total:800,tod:'m'}],['Говорю вживую','count',{target:2,tod:'d'}],['Тема грамматики','count',{target:3,tod:'m'}],['Повторяю за спикером 15 минут','check',{target:5,mins:15,tod:'e'}],['Читаю 10 страниц','num',{per:10,unit:'стр.',tod:'e'}]]},
- {id:'content',name:'Контент 90 дней',icon:'▲',result:'К концу спринта 60 роликов выпущено, аудитория выросла по плану',color:'#9B6FE8',
+ {id:'content',name:'Контент 90 дней',icon:'▲',result:'К концу программы 60 роликов выпущено, аудитория выросла по плану',color:'#9B6FE8',
   metrics:[{name:'Подписчики',unit:'',target:0}],
   tactics:[['Ролики','count',{target:5,total:60,tod:'d'}],['Посты','count',{target:3,tod:'d'}],['Сторис','count',{target:5,tod:''}],['Разбор статистики','count',{target:1,tod:'e'}],['Коллаборация','ms',{week:4}]]},
- {id:'money',name:'Деньги под контролем',icon:'■',result:'К концу спринта подушка на N месяцев и ноль импульсных трат',color:'#7C4FD4',
+ {id:'money',name:'Деньги под контролем',icon:'■',result:'К концу программы подушка на N месяцев и ноль импульсных трат',color:'#7C4FD4',
   metrics:[{name:'Накоплено',unit:'',target:0}],
   tactics:[['Записать расходы дня','check',{target:7,tod:'e'}],['Перевод в накопления','count',{target:1,tod:'m'}],['Неделя без импульсных покупок','check',{target:6,tod:''}],['Разбор бюджета','count',{target:1,tod:'e'}]]},
  {id:'own',name:'Своя цель',icon:'+',result:'',color:'#9B6FE8',metrics:[],tactics:[]}
 ];
 /* Программы: длинные циклы. mode: score — планка 85% по неделям; strict — пропуск дня обнуляет счётчик; count — копилка выполненных дней. */
 const PROGRAMS=[
- {id:'w12',name:'12 недель',origin:'Брайан Моран, «12 недель в году»',weeks:12,mode:'score',color:'#9B6FE8',glyph:'◆',free:true,
+ {id:'w12',name:'12 недель',origin:'Квартал вместо года',weeks:12,mode:'score',color:'#9B6FE8',glyph:'◆',free:true,
   rules:['До трёх целей и тактики под каждой','Каждую неделю счёт: закрыто ≥85% тактик','Воскресный разбор, 13-я неделя — итоги']},
- {id:'h75',name:'75 дней без компромиссов',origin:'Жёсткий режим на 75 дней — версия для дела',days:75,mode:'strict',color:'#F2EDE2',glyph:'■',
+ {id:'h75',name:'75 дней без компромиссов',origin:'Жёсткий режим без пропусков',days:75,mode:'strict',color:'#F2EDE2',glyph:'■',
   rules:['2 часа глубокой работы без телефона каждый день','Главная задача дня закрыта до обеда','Движение 45 минут — энергия для работы','10 страниц книги по делу и план на завтра','Пропуск любого пункта — день 1 заново'],
   tactics:[['Глубокая работа 2 часа без телефона','check',{tod:'m'}],['Главная задача дня закрыта до обеда','check',{tod:'d'}],['Движение 45 минут','check',{tod:''}],['10 страниц книги по делу','check',{tod:'e'}],['План на завтра: 3 главные задачи','check',{tod:'e'}],['Экраны выключены до 23:00','check',{tod:'e'}]]},
  {id:'arc',hidden:true,name:'Winter Arc',origin:'Тренд: «зима, когда ты меняешься»',fixed:['10-01','01-01'],mode:'score',color:'#9B6FE8',glyph:'◇',free:true,
   rules:['С 1 октября до 1 января','Тело, дело, дисциплина — свои цели','Тот же недельный счёт 85%']},
- {id:'m6',name:'Теория шести месяцев',origin:'Тренд: «за полгода можно изменить жизнь»',weeks:26,mode:'score',color:'#C4A4FF',glyph:'●',free:true,
+ {id:'m6',name:'Теория шести месяцев',origin:'Большая цель за полгода',weeks:26,mode:'score',color:'#C4A4FF',glyph:'●',free:true,
   rules:['26 недель, до трёх больших целей','Недельный счёт и итоги каждые 4 недели','Длинная дистанция: заморозки важнее']},
  {id:'d30',hidden:true,name:'30 дней',origin:'Классика: месяц на одну привычку',days:30,mode:'count',color:'#5B2FBE',glyph:'◐',
   rules:['Одна привычка, 30 дней подряд','Считаются выполненные дни','Хорошо как первый шаг перед длинной программой'],
@@ -4217,9 +4285,10 @@ pxFilterSheet(){const groups=[['k','Дела'],['h','Привычки']].map(([k
   ${groups.length?groups.map(([k,l,P])=>P.map(p=>`<div class="lbl" style="margin:12px 0 6px">${l} · ${esc(p.name)}</div><div class="pv-o">${p.opts.map(o=>{const on=this._pf&&this._pf.pid===p.id&&this._pf.v===o.v;return `<button class="${on?'on':''}" style="--c:${this.PCOL[o.c%this.PCOL.length]}" onclick='APP._pf=${on?'null':JSON.stringify({k,pid:p.id,v:o.v,n:o.v}).replace(/'/g,"&#39;")};APP.close();APP.render()'>${esc(o.v)}</button>`}).join('')}</div>`).join('')).join(''):`<div class="small mut" style="margin:8px 0 14px">Пока нечего фильтровать. Добавь делу или привычке свойство с вариантами, например «Приоритет» или «Проект».</div>`}
   <div class="row" style="margin-top:16px">${this._pf?`<button class="btn gh sp" onclick="APP._pf=null;APP.close();APP.render()">Сбросить фильтр</button>`:''}<button class="btn gh sp" onclick="APP.pxRet('k','');APP.pxEdit('k')">${I.plus} Свойство для дел</button></div>`)},
 /* вкладка «Планы» и компактный блок на дашборде */
-vPlans(){const v=['list','week','month','spheres'].includes(this._plv)?this._plv:'day';
-  const seg=`<div class="pseg">${[['day','День'],['week','Неделя'],['month','Месяц'],['spheres','Сферы']].map(([k,l])=>`<button class="${v===k?'on':''}" onclick="APP._plv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
+vPlans(){const v=['list','week','month','spheres','progs'].includes(this._plv)?this._plv:'day';
+  const seg=`<div class="pseg">${[['day','День'],['week','Неделя'],['month','Месяц'],['progs','Программы']].map(([k,l])=>`<button class="${v===k?'on':''}" onclick="APP._plv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
   const hint='';
+  if(v==='progs')return `<div class="h1">Планы</div>${seg}`+this.vPrograms(true);
   if(v==='list')return `<div class="h1">Планы</div>${seg}__S1____S2__`+hint+this.vPlanList();
   if(v==='week')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vPlanWeek();
   if(v==='month')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vPlanMonth();
@@ -5398,7 +5467,7 @@ render(){if(!this._ph)this.phInit();this.phUser();const _th=(this.S&&this.S.pref
   else if(this.sub==='welcome')body=this.vWelcome();
   else if(this.sub==='intro')body=this.vIntro();
   else if(this.sub==='start')body=this.vStart();
-  else if((this.sub==='onboard'||this.sub==='programs')&&!this.paid())body=this.vPaywall('program');
+  else if(this.sub==='onboard'&&!this.paid())body=this.vPaywall('program');
   else if(this.sub==='onboard')body=this.vOnboard();
   else if(this.sub==='programs')body=this.vPrograms();
   else if(this.sub==='report')body=this.vReport();
@@ -5501,7 +5570,6 @@ vToday(){
   if(ytop&&!this._noBoard)h+=`<button class="quote" style="margin:14px 0;display:block;width:100%;text-align:left" onclick="APP.editTop('${add(this.day,-1)}')"><span class="lbl" style="display:block;margin-bottom:2px">Главное на ${this.day===td?'сегодня':'этот день'}</span>${esc(ytop)}</button>`;
   const grp=(S.pref||{}).group||'tod';
   h+=`__S2__`;
-  if(fz)h+=`<div class="card frozen small"><b>День заморожен.</b> Отметки не обязательны, серии не прервутся, счёт недели пересчитан без этого дня. <button class="btn sm" style="margin-left:6px" onclick="APP.freeze('${this.day}',false)">Разморозить</button></div>`;
   const hs=S.habits.filter(x=>!x.archived&&(this.hSched(x,this.day)||this.hOn(x,this.day)));
   if(grp==='goal')h+=this.tasksBlock(tk);
   if(grp==='goal'){
@@ -5760,36 +5828,52 @@ tRow(t,w,showGoal){
 startWizard(prog){this._ob=null;this.sub='onboard';if(prog)this._ob={step:1,prog,start:this.progStart(PROGRAMS.find(x=>x.id===prog)),weeks:12,days:0,pick:[],own:[],name:this.S.profile.name||'',partner:'',ok:false};window.scrollTo(0,0);this.render()},
 vOnboard(){if(!this._ob)this._ob={step:0,start:this.st,weeks:this.W,pick:[],own:[],name:this.S.profile.name||'',partner:'',ok:false};return this.obView()},
 obSet(k,v){this._ob[k]=v},
+obCm(d){const o=this._ob,cm=o.cm||o.start.slice(0,7);let y=+cm.slice(0,4),m=+cm.slice(5,7)-1+d;while(m<0){m+=12;y--}while(m>11){m-=12;y++}o.cm=y+'-'+pad(m+1);this.render()},
+obDate(ds){this._ob.start=ds;this._ob.cm=ds.slice(0,7);this.render()},
+obCal(){const o=this._ob,td=today(),cm=o.cm||o.start.slice(0,7),y=+cm.slice(0,4),m=+cm.slice(5,7)-1,dim=new Date(y,m+1,0).getDate(),off=(new Date(y,m,1).getDay()+6)%7;
+  const quick=[['Сегодня',td],['Завтра',add(td,1)],['Понедельник',nextMonday()]];
+  const H=['пн','вт','ср','чт','пт','сб','вс'];let cells='';for(let i=0;i<off;i++)cells+='<i></i>';
+  for(let d=1;d<=dim;d++){const ds=y+'-'+pad(m+1)+'-'+pad(d),dow=new Date(y,m,d).getDay(),past=ds<td;cells+=`<button class="${ds===o.start?'sel':''}${ds===td?' td':''}${dow===1?' mon':''}" ${past?'disabled':''} onclick="APP.obDate('${ds}')">${d}</button>`}
+  return `<div class="sdc"><div class="sdc-q">${quick.map(([l,ds])=>`<button class="${ds===o.start?'on':''}" onclick="APP.obDate('${ds}')">${l}</button>`).join('')}</div>
+   <div class="sdc-h"><button onclick="APP.obCm(-1)" aria-label="Прошлый месяц">${I.l}</button><b>${MONF[m]} ${y}</b><button onclick="APP.obCm(1)" aria-label="Следующий месяц">${I.r}</button></div>
+   <div class="sdc-w">${H.map(x=>`<span>${x}</span>`).join('')}</div><div class="sdc-g">${cells}</div>
+   <div class="sdc-s">Старт: <b>${fd(o.start)}, ${WDF[pd(o.start).getDay()]}</b></div><div class="small dim">Лучше понедельник: неделя считается с него.</div></div>`},
+
 obView(){const o=this._ob,st=o.step;
   const P=PROGRAMS.find(x=>x.id===o.prog)||PROGRAMS[0],fixedT=!!(P.tactics&&P.tactics.length);
-  const dots=`<div class="row" style="gap:6px;margin-bottom:14px">${[0,1,2,3,4].map(i=>`<i style="height:4px;flex:1;border-radius:4px;background:${i<=st?'var(--p)':'var(--s3)'};${i<=st?'box-shadow:0 0 8px rgba(155,111,232,.6)':''}"></i>`).join('')}</div>`;
+  const dots=`<div class="row" style="gap:6px;margin-bottom:14px">${[0,1,2,3,4].map(i=>`<i style="height:4px;flex:1;border-radius:4px;background:${i<=st?'rgba(255,255,255,.78)':'rgba(255,255,255,.12)'}"></i>`).join('')}</div>`;
   const nav=(back,next,label)=>`<div class="row" style="margin-top:18px">${back?`<button class="btn gh" onclick="${typeof back==='string'?back:'APP._ob.step--;APP.render()'}">${I.l} Назад</button>`:''}<span class="sp"></span><button class="btn pr" onclick="${next}">${label||'Дальше'} ${I.r}</button></div>`;
   if(st===0)return `<div class="lbl">Начало</div><div class="h1">Выбери<br>программу</div>${dots}
    <div class="small mut" style="margin:6px 0 12px">Одна программа за раз. Внутри — свои цели, тактики, недельный счёт и разбор. Короткие челленджи добавишь потом.</div>
    ${PROGRAMS.filter(p=>!p.hidden||o.prog==='own').map(p=>{const on=o.prog===p.id;const len=p.days?p.days+' дней':p.fixed?'до 1 янв':p.weeks+' недель';
      return `<button class="card" style="width:100%;text-align:left;display:block;margin:8px 0;${on?'border-color:rgba(196,164,255,.6);box-shadow:var(--glow),inset 0 1px 0 rgba(255,255,255,.12)':''}" onclick="APP._ob.prog='${p.id}';APP._ob.start=APP.progStart(PROGRAMS.find(x=>x.id==='${p.id}'));APP._ob.weeks=${p.weeks||12};APP._ob.days=${p.days||0};APP.render()">
-      <div class="row"><span style="font-family:var(--mono);color:${p.color};font-size:18px">${p.glyph}</span><b class="sp">${esc(p.name)}</b><span class="pill">${len}</span></div>
+      <div class="row"><b class="sp">${esc(p.name)}</b><span class="pill">${len}</span></div>
       <div class="small mut" style="margin-top:4px">${esc(p.origin)}${p.mode==='strict'?' · строгий режим':p.mode==='count'?' · копилка дней':''}</div></button>`}).join('')}
    ${o.prog==='own'?'':`<button class="btn gh w" onclick="APP._ob.prog='own';APP._ob.start=nextMonday();APP._ob.weeks=12;APP._ob.days=0;APP.render()">Собрать свою программу</button>`}
    ${nav("APP.sub=null;APP._ob=null;APP.render()",o.prog?"APP._ob.step=1;APP.render()":"APP.toast('Выбери программу')",'Дальше')}
    `;
   if(st===1)return `<div class="lbl">Шаг 1 из 4</div><div class="h1">Когда<br>стартуем</div>${dots}
-   <div class="card"><div class="f"><label class="lbl">Дата старта</label><input type="date" value="${o.start}" onchange="APP.obSet('start',this.value)"><div class="small dim" style="margin-top:6px">Лучше понедельник: неделя считается с него.</div></div>
+   <div class="card"><div class="f"><label class="lbl">Дата старта</label>${this.obCal()}</div>
    ${P.days?`<div class="f"><label class="lbl">Длительность</label><div class="pill p" style="display:inline-block">${P.days} дней · до ${fd(add(o.start,P.days-1))}</div></div>`:P.fixed?`<div class="f"><label class="lbl">Финал</label><div class="pill p" style="display:inline-block">1 января</div></div>`:`<div class="f"><label class="lbl">Длина программы</label><div class="seg">${(P.id==='m6'?[20,26,30]:[8,12,16]).map(w=>`<button class="${+o.weeks===w?'on':''}" onclick="APP.obSet('weeks',${w});APP.render()">${w} недель</button>`).join('')}</div></div>`}
    ${P.rules?`<div class="quote small" style="margin-top:8px">${P.rules.map(esc).join('<br>')}</div>`:''}
    ${nav(true,fixedT?"APP.obBuild();APP._ob.step=3;APP.render()":"APP._ob.step=2;APP.render()")}</div>`;
-  if(st===2){const n=o.pick.length+o.own.length;return `<div class="lbl">Шаг 2 из 4 · выбрано ${n} из 3</div><div class="h1">Три цели,<br>не больше</div>${dots}
-   <div class="small mut" style="margin-bottom:10px">Выбери готовые дорожки или добавь свою. В каждой уже есть тактики, их можно менять.</div>
-   ${TPL.map(t=>{const on=t.id==='own'?false:o.pick.includes(t.id);const full=n>=3&&!on;
-     return `<button class="card" style="width:100%;text-align:left;display:block;margin:8px 0;${on?'border-color:rgba(196,164,255,.6);box-shadow:var(--glow),inset 0 1px 0 rgba(255,255,255,.12)':''}${full?';opacity:.4':''}" ${full?'disabled':''} onclick="${t.id==='own'?'APP.obOwn()':`APP.obPick('${t.id}')`}">
-     <div class="row"><span style="font-family:var(--mono);color:${t.color};font-size:18px">${t.icon}</span><b class="sp">${t.name}</b>${on?`<span class="chk on" style="width:28px;height:28px;border-radius:9px">${I.ok2}</span>`:''}</div>
-     <div class="small mut" style="margin-top:4px">${t.id==='own'?'Название, результат и свои тактики':esc(t.result)+' · '+t.tactics.length+' тактик'}</div></button>`}).join('')}
-   ${o.own.map((g,i)=>`<div class="card" style="border-color:rgba(196,164,255,.6)"><div class="row"><span style="font-family:var(--mono);color:var(--pb);font-size:18px">+</span><b class="sp">${esc(g.title)}</b><button class="btn sm gh" onclick="APP._ob.own.splice(${i},1);APP.render()">Убрать</button></div><div class="small mut" style="margin-top:4px">${esc(g.result)}</div></div>`).join('')}
-   ${nav(true,n?"APP.obBuild();APP._ob.step=3;APP.render()":"APP.toast('Выбери хотя бы одну цель')")}`}
+  if(st===2){const n=o.pick.length+o.own.length,full3=n>=3;return `<div class="lbl">Шаг 2 из 4 · целей: ${n} из 3</div><div class="h1">Твои цели</div>${dots}
+   <div class="small mut" style="margin-bottom:12px">Поставь от одной до трёх целей, которых хочешь добиться к концу программы. Свои цели работают лучше всего. Если не знаешь, с чего начать, возьми шаблон и поменяй его под себя.</div>
+   <button class="card" style="width:100%;text-align:left;display:block;margin:8px 0;border-color:rgba(255,255,255,.22);${full3?';opacity:.4':''}" ${full3?'disabled':''} onclick="APP.obOwn()">
+     <div class="row"><b class="sp" style="font-size:16px">Поставить свою цель</b></div>
+     <div class="small mut" style="margin-top:4px">Назови цель, опиши результат и добавь действия, которые к нему ведут.</div></button>
+   ${o.own.map((g,i)=>`<div class="card" style="border-color:rgba(196,164,255,.5)"><div class="row"><b class="sp">${esc(g.title)}</b><button class="btn sm gh" onclick="APP._ob.own.splice(${i},1);APP.render()">Убрать</button></div><div class="small mut" style="margin-top:4px">${esc(g.result)}</div></div>`).join('')}
+   <div class="lbl" style="margin:18px 0 4px">Или возьми шаблон как основу</div>
+   <div class="small dim" style="margin-bottom:6px">Шаблон можно менять: название, результат и действия твои.</div>
+   ${TPL.filter(t=>t.id!=='own').map(t=>{const on=o.pick.includes(t.id);const full=full3&&!on;
+     return `<button class="card" style="width:100%;text-align:left;display:block;margin:8px 0;${on?'border-color:rgba(196,164,255,.6);box-shadow:var(--glow),inset 0 1px 0 rgba(255,255,255,.12)':''}${full?';opacity:.4':''}" ${full?'disabled':''} onclick="APP.obPick('${t.id}')">
+     <div class="row"><b class="sp">${t.name}</b>${on?`<span class="chk on" style="width:28px;height:28px;border-radius:9px">${I.ok2}</span>`:''}</div>
+     <div class="small mut" style="margin-top:4px">${esc(t.result)} · ${t.tactics.length} ${APP.pl(t.tactics.length,'действие','действия','действий')}</div></button>`}).join('')}
+   ${nav(true,n?"APP.obBuild();APP._ob.step=3;APP.render()":"APP.toast('Поставь или выбери хотя бы одну цель')")}`}
   if(st===3)return `<div class="lbl">Шаг 3 из 4</div><div class="h1">${P.mode==='strict'?'Правила<br>каждый день':'Тактики<br>на неделю'}</div>${dots}
    <div class="small mut" style="margin-bottom:10px">${P.mode==='strict'?'Каждый пункт — каждый день. Один пропуск, и счётчик начинается с первого дня. Убери то, что точно не твоё, до старта.':'Оставь только то, что реально будешь делать. Лучше 4 тактики по 85%, чем 8 по 40%.'}</div>
    ${o.goals.map(g=>`<div class="card"><div class="row"><span class="dot" style="background:${g.color}"></span><input value="${esc(g.title)}" style="font-weight:700;background:transparent;border:0;padding:4px 0;box-shadow:none" onchange="APP._ob.goals.find(x=>x.id==='${g.id}').title=this.value"></div>
-     <textarea style="margin-top:6px;min-height:52px" placeholder="Результат: что будет правдой в конце спринта" onchange="APP._ob.goals.find(x=>x.id==='${g.id}').result=this.value">${esc(g.result)}</textarea>
+     <textarea style="margin-top:6px;min-height:52px" placeholder="Результат: что будет правдой в конце программы" onchange="APP._ob.goals.find(x=>x.id==='${g.id}').result=this.value">${esc(g.result)}</textarea>
      ${o.tactics.filter(t=>t.goal===g.id).map(t=>`<label class="list-item" style="cursor:pointer"><input type="checkbox" style="width:auto" ${t.on?'checked':''} onchange="APP._ob.tactics.find(x=>x.id==='${t.id}').on=this.checked"><div class="sp"><div>${esc(t.title)}</div><div class="small mut">${this.tDesc(t)}</div></div></label>`).join('')}
      <button class="btn sm" style="margin-top:8px" onclick="APP.obAddT('${g.id}')">${I.plus} Своя тактика</button></div>`).join('')}
    ${nav(fixedT?"APP._ob.step=1;APP.render()":true,"APP._ob.step=4;APP.render()")}`;
@@ -5798,12 +5882,12 @@ obView(){const o=this._ob,st=o.step;
    <div class="quote" style="margin:14px 0">Я, <b>${esc(o.name)||'…'}</b>, с ${fd(o.start)} по ${fd(o.days?add(o.start,o.days-1):add(o.start,o.weeks*7-1))} прохожу программу «${esc(P.name)}»${o.goals&&o.goals.length&&!fixedT?': '+o.goals.map(g=>esc(g.title)).join(', '):''}. ${P.mode==='strict'?'Каждый день закрываю все пункты. Пропуск — начинаю с первого дня.':P.mode==='count'?'Каждый выполненный день идёт в копилку, срыв не обнуляет.':'Каждый день отмечаю сделанное, каждое воскресенье смотрю счёт недели и держу планку 85%.'}</div>
    <div class="f"><label class="lbl">Партнёр по подотчётности (необязательно)</label><input value="${esc(o.partner)}" placeholder="Кому будешь отправлять отчёт по воскресеньям" onchange="APP.obSet('partner',this.value)"><div class="small dim" style="margin-top:6px">Люди, которые отчитываются другому человеку, доходят до цели заметно чаще.</div></div>
    <label class="row" style="cursor:pointer;margin-top:8px"><input type="checkbox" style="width:auto" ${o.ok?'checked':''} onchange="APP.obSet('ok',this.checked)"> Подтверждаю и начинаю</label>
-   ${nav(true,"APP.obFinish()",'Начать спринт')}</div>`},
+   ${nav(true,"APP.obFinish()",'Начать программу')}</div>`},
 obPick(id){const o=this._ob;if(o.pick.includes(id))o.pick=o.pick.filter(x=>x!==id);else if(o.pick.length+o.own.length<3)o.pick.push(id);this.render()},
 obOwn(){const o=this._ob;if(o.pick.length+o.own.length>=3)return this.toast('Уже три цели');
   this.open(`<div class="row"><div class="h2 sp">Своя цель</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="f"><label class="lbl">Короткое название</label><input id="ogT" placeholder="Например: Бизнес"></div>
-  <div class="f"><label class="lbl">Результат в конце спринта</label><textarea id="ogR" placeholder="Конкретно и измеримо, с датой"></textarea></div>
+  <div class="f"><label class="lbl">Результат в конце программы</label><textarea id="ogR" placeholder="Конкретно и измеримо, с датой"></textarea></div>
   <button class="btn pr w" onclick="const t=$('ogT').value.trim();if(!t)return APP.toast('Нужно название');APP._ob.own.push({title:t,result:$('ogR').value.trim()});APP.close();APP.render()">Добавить</button>`)},
 obBuild(){const o=this._ob;const P=PROGRAMS.find(x=>x.id===o.prog);const key=(o.prog||'')+'|'+o.pick.join(',')+'|'+o.own.length;if(o.goals&&o.built===key)return;
   o.goals=[];o.tactics=[];let ci=0;
@@ -5821,7 +5905,7 @@ obFinish(){const o=this._ob;if(!o.ok)return this.toast('Поставь гало�
 vOnboardOld(){return `<div class="lbl">Система 12 недель</div><div class="h1">Год длиной<br>в 12 недель</div>
   <div class="card"><p style="margin-top:0">Три цели на 12 недель, под каждой несколько тактик: конкретных действий, которые полностью под твоим контролем. Каждый день отмечаешь сделанное, раз в неделю смотришь счёт. Закрыто 85% тактик недели — значит, цель будет достигнута.</p>
   <div class="f"><label class="lbl">Дата старта (лучше понедельник)</label><input type="date" id="obStart" value="${this.st}"></div>
-  <div class="f"><label class="lbl">Длина спринта, недель</label><input type="number" id="obW" value="${this.W}" min="1" max="26"></div>
+  <div class="f"><label class="lbl">Длина программы, недель</label><input type="number" id="obW" value="${this.W}" min="1" max="26"></div>
   <div class="row" style="flex-wrap:wrap;margin-top:16px"><button class="btn pr" onclick="APP.obStart(0)">Создать свои цели</button><button class="btn" onclick="APP.obStart(1)">Начать с примера</button></div></div>
   `},
 obStart(ex){const s=$('obStart').value||this.st;this.S.sprint.start=s;this.S.sprint.weeks=+$('obW').value||12;
@@ -5831,21 +5915,36 @@ obStart(ex){const s=$('obStart').value||this.st;this.S.sprint.start=s;this.S.spr
 
 /* ================= ПРОГРАММЫ ================= */
 vPrograms(asTab){const cur=this.S.sprint.program,inS=this.S.goals.length>0;
-  const FOR={w12:'1–3 цели и результат к концу квартала',h75:'Перезагрузка эффективности: 75 дней без пропусков',m6:'Большая цель и длинный разгон на полгода'};
   const BG={w12:['prog-w12.jpg','62% 50%'],h75:['prog-h75.jpg','55% 40%'],m6:['prog-m6.jpg','60% 45%']};
-  let h=`${asTab?'':`<button class="back" onclick="APP.sub=null;APP.render()">${I.l} Назад</button>`}
-  <div class="pph2"><div class="pph2-t">Выбери, как пройдёшь ближайшие месяцы</div><div class="pph2-s">Одна программа за раз. Цели, ежедневные действия и счёт недели — система сама подскажет, что делать сегодня.</div></div>
-  <div class="ppl">`;
-  PROGRAMS.filter(p=>!p.hidden).forEach(p=>{const on=inS&&cur===p.id;const len=p.days?p.days+' дней':p.weeks+' недель';
-    const modeTxt={score:'планка 85%',strict:'пропуск — заново',count:'копилка дней'}[p.mode];
+  const D={
+   w12:{what:'Мини-год из 12 недель. Ты выбираешь 1–3 главные цели, под каждую ставишь ежедневные действия, а каждую неделю платформа считает счёт.',who:'Для тех, кто хочет за три месяца реально сдвинуть главные цели, а не распыляться на всё сразу.',adapt:'Раскладывает действия по дням и времени суток, напоминает, считает счёт недели (неделя засчитана при 85%), в воскресенье даёт разбор, на 13-й неделе подводит итоги.',book:'По книге Брайана Морана «12 недель в году».'},
+   h75:{what:'75 дней подряд пять обязательных пунктов: 2 часа работы без телефона, главная задача до обеда, 45 минут движения, 10 страниц книги и план на завтра.',who:'Для тех, кому нужна жёсткая рамка и ощущение «я держу слово». Подходит, чтобы перезагрузить режим.',adapt:'Ведёт счёт дней и серию. Пропустил любой пункт, и день 1 начинается заново: в этом смысл режима.'},
+   m6:{what:'Длинная дистанция на 26 недель: до трёх больших целей и итоги каждые 4 недели.',who:'Для больших перемен: сменить профессию, прийти в форму, накопить, выучить язык. Всё, что не успеть за 12 недель.',adapt:'Держит недельный счёт, раз в 4 недели собирает итоги и предлагает пересмотреть цели. Заморозки помогают, чтобы короткий сбой не ломал полгода.'}};
+  const seen=(this.S.pref||{}).pgIntro===1,openI=this._pgi===1;
+  const step=(n,b,t)=>`<div class="pgi-s"><i>${n}</i><div><b>${b}</b><span>${t}</span></div></div>`;
+  const intro=(!seen||openI)?`<div class="pgi fg"><div class="pgi-t">Как работают программы</div>${step(1,'Выбираешь программу','Готовый план на срок: 12 недель, 75 дней или полгода.')}${step(2,'Платформа подстраивается','Разбивает цели на ежедневные действия, ставит их в расписание дня, напоминает и считает счёт недели.')}${step(3,'Видишь результат','Недельный счёт, серия, воскресный разбор и итоги в конце программы.')}<div class="pgi-n">Одна программа за раз. Программы входят в полный доступ.</div><button class="btn pr w" onclick="APP._pgi=0;APP.setPref('pgIntro',1)">Понятно, выбрать программу</button></div>`:`<button class="pgi-b" onclick="APP._pgi=1;APP.render()">Как это работает</button>`;
+  let mine='';
+  if(inS){const P=this.prog();if(P){const td=today(),th=+this.S.sprint.threshold||85,W=this.W,cw=this.curWeek(),sc=this.score(cw),strict=!!P.days,dn=Math.min(P.days||0,Math.max(1,diff(this.st,td)+1)),tot=Math.max(1,diff(this.st,this.end())+1),el=Math.max(0,Math.min(100,Math.round((diff(this.st,td)+1)/tot*100))),started=td>=this.st;
+    const ws=Array.from({length:Math.min(cw,W)},(_,k)=>this.score(k+1));
+    const bars=ws.map((v,i)=>`<i class="${v!=null&&v>=th?'ok':''}${i+1===cw?' cur':''}" style="height:${v==null?3:Math.max(4,v)}%"></i>`).join('');
+    mine=`<div class="mp fg"><div class="mp-h"><span>Моя программа</span><em>${started?'идёт сейчас':'скоро старт'}</em></div><div class="mp-n">${esc(P.name)}</div><div class="mp-s">${fd(this.st)} — ${fd(this.end())}</div>
+     <div class="mp-t"><b>${strict?`День ${dn} из ${P.days}`:`Неделя ${cw} из ${W}`}</b><div class="mp-bar"><i style="width:${el}%"></i></div></div>
+     <div class="mp-sc"><div><b>${sc==null?'—':sc+'%'}</b><span>счёт этой недели</span></div><div><b>≥${th}%</b><span>нужно для зачёта</span></div></div>
+     ${ws.length?`<div class="mp-w">${bars}</div>`:''}
+     <button class="btn pr w" onclick="APP.sub=null;APP.go('program')">Открыть программу</button></div><div class="mp-o">Другие программы</div>`}}
+  let h=`${asTab?'':`<button class="back" onclick="APP.sub=null;APP.render()">${I.l} Назад</button>`}${mine}${intro}<div class="ppl">`;
+  PROGRAMS.filter(p=>!p.hidden&&!(inS&&cur===p.id&&this.prog())).forEach(p=>{const on=inS&&cur===p.id;const len=p.days?p.days+' дней':p.weeks+' недель',d=D[p.id]||{};
+    const modeTxt={score:'счёт недели ≥85%',strict:'пропуск — день 1 заново',count:'копилка дней'}[p.mode];
     h+=`<div class="ppc ${on?'on':''}"><div class="ppc-top" style="--pc:url(${(BG[p.id]||['ocean-w.jpg'])[0]});--pcp:${(BG[p.id]||[0,'center'])[1]}">
       ${on?'<span class="ppc-on">идёт сейчас</span>':''}<div class="ppc-n">${esc(p.name)}</div><div class="ppc-o">${esc(p.origin)}</div>
       <div class="ppc-ch"><em>${len}</em><em class="${p.mode==='strict'?'st':''}">${modeTxt}</em></div></div>
-      <div class="ppc-b"><div class="ppc-f">${esc(FOR[p.id]||'')}</div>
-      <div class="ppc-r">${p.rules.map(r=>`<div>${I.ok}<span>${esc(r)}</span></div>`).join('')}</div>
-      <button class="btn ${on?'':'pr'} w" onclick="${on?`APP.sub=null;APP.go('program')`:`APP.startProgram('${p.id}')`}">${on?'Открыть программу':inS?'Начать вместо текущей':'Начать'}</button></div></div>`});
-  h+=`</div><button class="qadd pg-mini" onclick="APP.startProgram('own')">${I.plus} Собрать свою программу</button>`;
+      <div class="ppc-b">${d.what?`<div class="ppc-f">${d.what}</div>`:''}
+      ${d.who?`<div class="ppc-d"><span>Для кого</span>${d.who}</div>`:''}${d.adapt?`<div class="ppc-d"><span>Что делает платформа</span>${d.adapt}</div>`:''}
+      <div class="ppc-d"><span>Что делаешь</span></div><div class="ppc-r">${p.rules.map(r=>`<div>${I.ok}<span>${esc(r)}</span></div>`).join('')}</div>${d.book?`<div class="ppc-bk">${d.book}</div>`:''}
+      <button class="btn ${on?'':'pr'} w" onclick="${on?`APP.sub=null;APP.go('program')`:`APP.progGate('${p.id}')`}">${on?'Открыть программу':inS?'Начать вместо текущей':'Начать'}</button></div></div>`});
+  h+=`</div><button class="qadd pg-mini" onclick="APP.progGate('own')">${I.plus} Собрать свою программу</button>`;
   return h},
+progGate(id){if(!this.paid())return this.paySheet('program');this.startProgram(id)},
 startProgram(id){const p=PROGRAMS.find(x=>x.id===id);if(!p)return;
   if(this.S.goals.length){if(!confirm('Текущая программа уйдёт в архив вместе с отметками. Привычки и задачи останутся. Продолжить?'))return;
     const S=this.S;S.archive.push({sprint:JSON.parse(JSON.stringify(S.sprint)),goals:S.goals,tactics:S.tactics,log:S.log,weeks:S.weeks,avg:this.avg()});
@@ -6825,7 +6924,7 @@ gForm(){const g=this._g,w=g.woop||{};
     this.S.tactics.filter(t=>t.goal===g.id).map(t=>`<option value="t:${t.id}" ${m.auto==='t:'+t.id?'selected':''}>сумма: ${esc(t.title)}</option>`).join('');
   this.open(`<div class="row"><div class="h2 sp">${this._gNew?'Новая цель':'Цель'}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="f"><label class="lbl">Короткое название</label><input id="gT" value="${esc(g.title)}" placeholder="Спорт"></div>
-  <div class="f"><label class="lbl">Результат: что будет правдой в конце спринта</label><textarea id="gR" placeholder="Конкретно и измеримо, с датой">${esc(g.result)}</textarea></div>
+  <div class="f"><label class="lbl">Результат: что будет правдой в конце программы</label><textarea id="gR" placeholder="Конкретно и измеримо, с датой">${esc(g.result)}</textarea></div>
   <div class="f2"><div class="f"><label class="lbl">Сфера жизни</label><select id="gA"><option value="">не выбрана</option>${AREAS.map(a=>`<option value="${a[0]}" ${g.area===a[0]?'selected':''}>${a[1]}</option>`).join('')}</select></div>
    <div class="f"><label class="lbl">Статус</label><select id="gDn"><option value="">в работе</option><option value="1" ${g.done?'selected':''}>достигнута</option></select></div></div>
   <div class="f2"><div class="f"><label class="lbl">Ключевая дата</label><input type="date" id="gD" value="${g.date||''}"></div>
@@ -6971,7 +7070,7 @@ monthBlock(w){const S=this.S,k='m'+Math.ceil(w/4),M=S.weeks[k]||{},ws=[];for(let
   return h},
 aiReport(w){const S=this.S,ds=this.wDays(w),ts=S.tactics.filter(t=>this.activeIn(t,w)),C=S.checkin||{};
   let r=`Разбери мою неделю как партнёр по системе «12 недель в году» (Моран): коротко, прямо, без похвалы ради похвалы. Нужно: 1) что реально двигало цели, а что было имитацией; 2) где я избегаю главную задачу; 3) один конкретный шаг на следующую неделю. Данные:\n\n`;
-  r+=`Спринт «${S.sprint.title}», неделя ${w} из ${this.W} (${fd(ds[0])}–${fd(ds[6])}). Планка ${S.sprint.threshold}%. Счёт недели ${this.score(w)??'—'}%, средний по спринту ${this.avg()??'—'}%.\n`;
+  r+=`Программа «${S.sprint.title}», неделя ${w} из ${this.W} (${fd(ds[0])}–${fd(ds[6])}). Планка ${S.sprint.threshold}%. Счёт недели ${this.score(w)??'—'}%, средний по спринту ${this.avg()??'—'}%.\n`;
   if(S.sprint.vision)r+=`Видение: ${S.sprint.vision}\n`;
   S.goals.forEach(g=>{r+=`\nЦЕЛЬ «${g.title}» (${this.score(w,g.id)??'—'}%): ${g.result}\n`;
     (g.metrics||[]).forEach(m=>{const pc=this.pace(this.metricVal(m),+m.target,+m.start);r+=`  метрика ${m.name}: ${this.metricVal(m)}/${m.target} ${m.unit||''}${pc?' · '+pc.txt:''}\n`});
@@ -7015,16 +7114,16 @@ async copyReport(w){const r=this.report(w);try{await navigator.clipboard.writeTe
 
 /* ---------- неделя 13 ---------- */
 vFinal(){const S=this.S,F=S.weeks.final||{};
-  return `<div class="lbl">Неделя 13 · разбор спринта</div><div class="h1">Итоги</div>
+  return `<div class="lbl">Неделя 13 · разбор программы</div><div class="h1">Итоги</div>
   <div class="card hero">${this.ring(this.avg(),+S.sprint.threshold||85)}<div><div class="lbl">Средний счёт за ${this.W} недель</div>${S.goals.map(g=>`<div class="row small" style="margin:6px 0"><span class="dot" style="background:${g.color}"></span><span class="sp">${esc(g.title)}</span><b>${this.avg(g.id)??'—'}%</b></div>`).join('')}</div></div>
   <div class="card"><div class="f"><label class="lbl">Что получилось</label><textarea onchange="APP.setW('final','won',this.value)">${esc(F.won)}</textarea></div>
    <div class="f"><label class="lbl">Главный урок</label><textarea onchange="APP.setW('final','lesson',this.value)">${esc(F.lesson)}</textarea></div>
-   <div class="f"><label class="lbl">Что беру в следующий спринт, от чего отказываюсь</label><textarea onchange="APP.setW('final','next',this.value)">${esc(F.next)}</textarea></div></div>
-  <div class="row" style="flex-wrap:wrap"><button class="btn" onclick="APP._skipFinal=1;APP.go('goals')">Смотреть цели</button><button class="btn pr" onclick="APP.newSprint()">Новый спринт</button></div>`},
-newSprint(){const s=prompt('Дата старта нового спринта (ГГГГ-ММ-ДД)',nextMonday());if(!s||!/^\d{4}-\d{2}-\d{2}$/.test(s))return;
+   <div class="f"><label class="lbl">Что беру в следующую программу, от чего отказываюсь</label><textarea onchange="APP.setW('final','next',this.value)">${esc(F.next)}</textarea></div></div>
+  <div class="row" style="flex-wrap:wrap"><button class="btn" onclick="APP._skipFinal=1;APP.go('goals')">Смотреть цели</button><button class="btn pr" onclick="APP.newSprint()">Новая программа</button></div>`},
+newSprint(){const s=prompt('Дата старта новой программы (ГГГГ-ММ-ДД)',nextMonday());if(!s||!/^\d{4}-\d{2}-\d{2}$/.test(s))return;
   const S=this.S;S.archive.push({sprint:JSON.parse(JSON.stringify(S.sprint)),goals:JSON.parse(JSON.stringify(S.goals)),tactics:JSON.parse(JSON.stringify(S.tactics)),log:S.log,weeks:S.weeks,avg:this.avg()});
   S.sprint.start=s;S.log={};S.weeks={};S.tactics.forEach(t=>{if(t.type==='ms')t.deadline=''});this._skipFinal=0;this.day=this.clampDay(today());
-  this.save();this.go('goals');this.toast('Цели перенесены — обнови их под новый спринт')},
+  this.save();this.go('goals');this.toast('Цели перенесены — обнови их под новую программу')},
 
 /* ================= Я (личный кабинет) ================= */
 vMe(){
@@ -7379,7 +7478,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=205');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=208');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
