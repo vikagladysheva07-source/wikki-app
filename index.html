@@ -26,7 +26,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous"></script>
 <style>
 :root{
   --bg:#07070D;--bg2:#050509;--s1:rgba(22,20,34,.62);--s2:rgba(255,255,255,.045);--s3:rgba(255,255,255,.08);
@@ -3424,9 +3424,10 @@ const MONF=['Январь','Февраль','Март','Апрель','Май','
 const WD=['вс','пн','вт','ср','чт','пт','сб'];
 const WDF=['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
 const fd=s=>{const d=pd(s);return d.getDate()+' '+MON[d.getMonth()]};
-const AREAS0=[['health','Здоровье','<path d="M6 7v10M18 7v10M3 9v6M21 9v6M6 12h12"/>'],['career','Карьера','<path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/>'],['money','Финансы','<circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3h4"/>'],['rel','Семья','<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M10 20c0-3 3-5 6-5s6 2 6 5"/>'],['love','Отношения','<path d="M12 21s-7-4.5-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.5-9 9-9 9z"/>'],['spirit','Саморазвитие','<circle cx="12" cy="13" r="4"/><path d="M12 3v3M4 13H1M23 13h-3M5.6 6.6l2.1 2.1M18.4 6.6l-2.1 2.1M3 21h18"/>'],['fun','Хобби','<path d="M4 20h16M6 20V9a6 6 0 0112 0v11"/><circle cx="12" cy="9" r="2"/>'],['home','Окружение','<path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/>']];
-const AREA_RN={"Здоровье и энергия": "Здоровье", "Карьера и дело": "Карьера", "Семья и друзья": "Семья", "Любовь и партнёр": "Отношения", "Личностный рост": "Саморазвитие", "Отдых и радость": "Хобби", "Дом и окружение": "Окружение"};
-let AREAS=AREAS0.slice();
+const AREAS0=[['health','Здоровье','<path d="M6 7v10M18 7v10M3 9v6M21 9v6M6 12h12"/>'],['career','Карьера','<path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/>'],['money','Финансы','<circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3h4"/>'],['rel','Семья','<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M10 20c0-3 3-5 6-5s6 2 6 5"/>'],['love','Отношения','<path d="M12 21s-7-4.5-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.5-9 9-9 9z"/>'],['spirit','Саморазвитие','<circle cx="12" cy="13" r="4"/><path d="M12 3v3M4 13H1M23 13h-3M5.6 6.6l2.1 2.1M18.4 6.6l-2.1 2.1M3 21h18"/>'],['fun','Хобби','<path d="M4 20h16M6 20V9a6 6 0 0112 0v11"/><circle cx="12" cy="9" r="2"/>'],['home','Дом и быт','<path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/>']];
+const AREA_RN={"Здоровье и энергия": "Здоровье", "Карьера и дело": "Карьера", "Семья и друзья": "Семья", "Любовь и партнёр": "Отношения", "Личностный рост": "Саморазвитие", "Отдых и радость": "Хобби", "Дом и окружение": "Дом и быт", "Окружение": "Дом и быт"};
+const AREA_OFF=['home'];/* предлагаются при выборе сфер, но не включены по умолчанию */
+let AREAS=AREAS0.filter(a=>!AREA_OFF.includes(a[0]));
 const aIco=k=>{const a=AREAS.find(x=>x[0]===k);return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${a?a[2]:''}</svg>`};
 const COLORS=['#9B6FE8','#4205CF','#C4A4FF','#9B6FE8','#7C4FD4'];
 const TYPES={check:'Галочка: N дней в неделю',num:'Число каждый день',count:'N раз в неделю',ms:'Веха с дедлайном'};
@@ -3592,8 +3593,8 @@ buzz(ms){try{if((this.S.pref||{}).haptics===false)return;if(navigator.vibrate){i
 hapt(){if(!this._hp){const l=document.createElement('label');l.setAttribute('aria-hidden','true');l.style.cssText='position:fixed;left:-200px;top:0;width:1px;height:1px;opacity:0;pointer-events:none';l.innerHTML='<input type="checkbox" switch tabindex="-1">';document.body.appendChild(l);this._hp=l}this._hp.click()},
 popFx(){if(this._pop){this._shId=this._pop;this._shT=Date.now()}const id=this._shId;if(!id||Date.now()-this._shT>500)return;const p=document.querySelector('.tk.pop')||document.querySelector(`[data-pid="${id}"]`);if(!p||p.querySelector('.shn'))return;p.classList.add('shin');const s=document.createElement('span');s.className='shn';p.appendChild(s);setTimeout(()=>{s.remove();p.classList.remove('shin')},1100)},
 navFx(){const a=$('app');if(!a||matchMedia('(prefers-reduced-motion:reduce)').matches)return;a.classList.remove('navin');void a.offsetWidth;a.classList.add('navin')},
-areaList(){const c=(this.S&&this.S.areas)||null;if(!c||!c.length)return AREAS0;return c.map(x=>{const d=AREAS0.find(a=>a[0]===x.k);return [x.k,AREA_RN[x.n]||x.n,x.i?(HICO[x.i]||HICO.star):(d?d[2]:HICO.star)]})},
-areasGet(){const c=this.S.areas;return c&&c.length?c.map(x=>({...x,n:AREA_RN[x.n]||x.n})):AREAS0.map(a=>({k:a[0],n:a[1]}))},
+areaList(){const c=(this.S&&this.S.areas)||null;if(!c||!c.length)return AREAS0.filter(a=>!AREA_OFF.includes(a[0]));return c.map(x=>{const d=AREAS0.find(a=>a[0]===x.k);return [x.k,AREA_RN[x.n]||x.n,x.i?(HICO[x.i]||HICO.star):(d?d[2]:HICO.star)]})},
+areasGet(){const c=this.S.areas;return c&&c.length?c.map(x=>({...x,n:AREA_RN[x.n]||x.n})):AREAS0.filter(a=>!AREA_OFF.includes(a[0])).map(a=>({k:a[0],n:a[1]}))},
 areasSave(a,keep){this.S.areas=a;this.save();this.render();if(keep!==false)this.areaSheet()},
 areaRen(i,v){v=(v||'').trim();if(!v)return;const a=this.areasGet();a[i].n=v.slice(0,40);this.areasSave(a,false)},
 areaMove(i,d){const a=this.areasGet(),j=i+d;if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];this.areasSave(a)},
@@ -3607,7 +3608,7 @@ sqIco(k){const a=[...AREAS0,...this.areaList()].find(x=>x[0]===k);return `<svg v
 sqNote(){return ''},
 sqIntro(){return `<div class="sq-in"><div class="sq-ring"><svg viewBox="0 0 120 120">${[0,1,2,3,4,5,6,7].map(i=>{const t0=-Math.PI/2+i*Math.PI/4+.05,t1=t0+Math.PI/4-.1,P=(r,t)=>[(60+r*Math.cos(t)).toFixed(1),(60+r*Math.sin(t)).toFixed(1)],a=P(52,t0),b=P(52,t1),c=P(20,t1),d=P(20,t0);return `<path d="M${a}A52 52 0 0 1 ${b}L${c}A20 20 0 0 0 ${d}Z" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)" stroke-dasharray="3 3"/>`}).join('')}</svg></div><b>Оцени свою жизнь по сферам</b><p>Ответь на несколько вопросов, и появится колесо баланса. Дальше оно будет меняться по твоим привычкам и делам.</p><button class="btn pr w" onclick="APP.sqStart()">Начать</button></div>`},
 sqStart(){const cur=this.areasGet(),opts=[...AREAS0.map(a=>({k:a[0],n:a[1]})),...cur.filter(x=>!AREAS0.some(a=>a[0]===x.k))];
-  this._sq={st:'pick',opts,sel:this.S.areas&&this.S.areas.length?cur.map(x=>x.k):opts.map(o=>o.k),lv:Object.assign({},this.S.areaLvl||{}),i:0};this.sqRender()},
+  this._sq={st:'pick',opts,sel:this.S.areas&&this.S.areas.length?cur.map(x=>x.k):opts.map(o=>o.k).filter(k=>!AREA_OFF.includes(k)),lv:Object.assign({},this.S.areaLvl||{}),i:0};this.sqRender()},
 sqTog(k){const q=this._sq,i=q.sel.indexOf(k);if(i>=0)q.sel.splice(i,1);else if(q.sel.length<8)q.sel.push(k);this.sqRender()},
 sqNext(){const q=this._sq;q.sel=q.opts.map(o=>o.k).filter(k=>q.sel.includes(k));q.st='rate';q.i=0;this.sqRender()},
 sqBack(){const q=this._sq;if(q.i>0)q.i--;else q.st='pick';this.sqRender()},
@@ -5649,7 +5650,7 @@ copyTasks(from,to){(this.S.tasks||[]).filter(x=>x.date===from).forEach(x=>this.S
 pvBalance(){if(!this.S.areaQ)return this.sqIntro();AREAS=this.areaList();return this.sqNote()+this.pcRadar()+`<button class="sv-whl" onclick="APP.tab='plans';APP._plv='spheres';APP.render()">${I.goal||''}<span>Сферы жизни<em>Привычки, цели и дела по сферам</em></span>${MI.chev}</button>`},
 pvBalanceOld(){const S=this.S,td=today(),cur=td.slice(0,7),mo=this._wm||cur,[y,m]=mo.split('-').map(Number);
   const pm=iso(new Date(y,m-2,1)).slice(0,7),nm=iso(new Date(y,m,1)).slice(0,7),W=S.wheel||{},A=W[mo]||{},B=W[pm]||{};
-  const SHT={health:'Здоровье',career:'Карьера',money:'Финансы',rel:'Близкие',love:'Любовь',spirit:'Рост',fun:'Отдых',home:'Окружение'},SH=AREAS.map(a=>{const d=AREAS0.find(x=>x[0]===a[0]);return d&&d[1]===a[1]?SHT[a[0]]:(a[1].length>13?a[1].slice(0,12)+'…':a[1])});
+  const SHT={health:'Здоровье',career:'Карьера',money:'Финансы',rel:'Близкие',love:'Любовь',spirit:'Рост',fun:'Отдых',home:'Дом и быт'},SH=AREAS.map(a=>{const d=AREAS0.find(x=>x[0]===a[0]);return d&&d[1]===a[1]?SHT[a[0]]:(a[1].length>13?a[1].slice(0,12)+'…':a[1])});
   const n=AREAS.length,R=112,C=170,pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/n,r=R*v/10;return [C+r*Math.cos(a),C+r*Math.sin(a)]};
   const poly=V=>AREAS.map((x,i)=>pt(i,+V[x[0]]||0).map(z=>z.toFixed(1)).join(',')).join(' ');
   const filled=AREAS.filter(x=>A[x[0]]).length,avg=filled?(AREAS.reduce((s2,x)=>s2+(+A[x[0]]||0),0)/filled):null,pavg=(()=>{const k=AREAS.filter(x=>B[x[0]]).length;return k?AREAS.reduce((s2,x)=>s2+(+B[x[0]]||0),0)/k:null})();
@@ -6042,11 +6043,91 @@ homeNext(){const td=today(),now=new Date(),nm=pad(now.getHours())+':'+pad(now.ge
   const ar=x.area?(this.areaList().find(a=>a[0]===x.area)||[])[1]:'';
   return `<button class="hn-c" onclick="APP.taskEdit('${x.id}')"><b class="hn-t">${x.tm}</b><span class="sp"><b>${esc(x.title)}</b><em>${when}${ar?' · '+esc(ar):''}</em></span><i class="hn-b"></i></button>`},
 // ---- быстрое добавление: фраза → задачи
+qaIntro(s){
+  /* убирает вводные слова перед самой задачей: «давай добавим задачу», «у меня по планам», «планирую», «please add a task» */
+  const OBJ='(?:новую\\s+|ещё\\s+одну\\s+|одну\\s+|такую\\s+|следующую\\s+)?(?:задач[ауи]|дел[оа]|заметк[ау]|напоминани[ея]|пункт)',
+    VERB='(?:добав(?:ь|ьте|им|ить|лю)|запиш(?:и|ите|ем|у)|записать|созда(?:й|йте|дим|м)|создать|постав(?:ь|ьте|им|лю)|поставить|внес(?:и|ите|ём|ем|у)|внести|занес(?:и|ите|ём|ем)|запланиру(?:й|йте|ем|ю)|запланировать)',
+    SEP='[\\s,:;—–-]*',
+    RX=[
+    new RegExp('^(?:ну|так|итак|значит|короче|слушай|смотри|окей|ладно|вот|эм|ага|привет)(?=[\\s,])'+SEP,'i'),
+    new RegExp('^(?:пожалуйста|прошу|можешь|не\\s+мог(?:ла)?\\s+бы|сможешь)(?=[\\s,:;—–-])'+SEP,'i'),
+    new RegExp('^(?:давай(?:те)?)\\s+(?:(?:мне|нам)\\s+)?'+VERB+'(?:\\s+(?:мне|нам))?(?:\\s+в\\s+(?:план|планы|список|календарь|задачи))?(?:\\s+'+OBJ+')?(?:\\s+в\\s+(?:план|планы|список|календарь|задачи))?(?:[\\s,:;—–-]+(?:что|чтобы))?(?=[\\s,:;—–-]|$)'+SEP,'i'),
+    new RegExp('^(?:(?:мне|нам)\\s+)?'+VERB+'(?:\\s+(?:мне|нам))?(?:\\s+в\\s+(?:план|планы|список|календарь|задачи))?\\s+'+OBJ+'(?:\\s+в\\s+(?:план|планы|список|календарь|задачи))?(?:[\\s,:;—–-]+(?:что|чтобы))?(?=[\\s,:;—–-]|$)'+SEP,'i'),
+    new RegExp('^запиш(?:и|ите|ем)(?:[\\s,]+(?:что|чтобы)(?=\\s)|\\s+(?=[\\p{L}-]+(?:ть|ться|ти|чь|тись)(?=[\\s,]|$)))[\\s,]*','iu'),
+    new RegExp('^(?:новая\\s+)?задача(?=\\s*[:,—–-])'+SEP,'i'),
+    new RegExp('^у\\s+меня(?=\\s+(?:сегодня|завтра|послезавтра|на\\s|по\\s+планам|в\\s+планах))\\s*','i'),
+    new RegExp('^((?:сегодня|завтра|послезавтра|на\\s+(?:сегодня|завтра|послезавтра))\\s+)?(?:по\\s+планам|в\\s+планах)(?=[\\s,:;—–-]|$)'+SEP,'i'),
+    new RegExp('^(?:я\\s+)?(?:планирую|собираюсь|хочу|хотела\\s+бы|хотел\\s+бы|хотелось\\s+бы|намерена|намерен|мне\\s+(?:нужно|надо|необходимо|предстоит)|предстоит|необходимо|(?:надо|нужно)\\s+не\\s+забыть|не\\s+забыть(?:\\s+бы)?)(?=[\\s,])'+SEP,'i'),
+    new RegExp('^(?:please\\s+|can\\s+you\\s+|could\\s+you\\s+)?(?:let\'?s\\s+)?(?:add|create|put|make|write\\s+down|note)\\s+(?:me\\s+)?(?:a\\s+|an\\s+|the\\s+)?(?:new\\s+)?(?:task|todo|to-do|item|reminder|note)(?:\\s+(?:to|that|about|for\\s+me\\s+to))?(?=[\\s,:;-]|$)'+SEP,'i'),
+    new RegExp('^(?:i\\s+(?:need|have|want|plan|am\\s+going|am\\s+planning)\\s+to|i\'?m\\s+(?:going|planning)\\s+to|i\'d\\s+like\\s+to|my\\s+plan\\s+is\\s+to|i\\s+should|i\\s+must|don\'t\\s+forget\\s+to|remember\\s+to|please)(?=\\s)'+SEP,'i')
+  ];
+  let t=String(s||'').replace(/^[\s,.;:—–-]+/,'').trim(),prev;
+  for(let i=0;i<6;i++){prev=t;for(const re of RX){t=t.replace(re,(m,g)=>g||'').trim()}if(t===prev)break}
+  t=t.replace(/^((?:на\s+)?(?:сегодня|завтра|послезавтра))\s*[:,—–-]\s*/i,'$1 ').replace(/(^|\s)на\s+(сегодня|завтра|послезавтра)(?=[\s,.]|$)/gi,'$1$2');
+  return t.replace(/[\s,]+(?:пожалуйста|спасибо|вот\s+и\s+всё|вот\s+и\s+все|thanks|thank\s+you|please)\s*$/i,'').trim()},
+qaNorm(text){
+  /* чистка надиктованного: слова-паразиты, время словами, самоисправления («в 15, нет, в 16») */
+  let t=String(text||'').replace(/\r/g,'');
+  t=t.replace(/(^|[\s,])(?:э+м*|м+м+|ну|типа|как\s+бы|в\s+общем|так\s+сказать|короче)(?=[\s,.!?]|$)/gi,'$1');
+  /* время словами: «без пятнадцати девять», «в четверть десятого», «в пятнадцать ноль-ноль», «в девять тридцать» */
+  const U='(?:одну|одна|один|два|две|три|четыре|пять|шесть|семь|восемь|девять)',TEEN='(?:десять|одиннадцать|двенадцать|тринадцать|четырнадцать|пятнадцать|шестнадцать|семнадцать|восемнадцать|девятнадцать)',TENS='(?:двадцать|тридцать|сорок|пятьдесят)',
+    N59='(?:'+TENS+'(?:\\s+'+U+')?|'+TEEN+'|'+U+')',
+    NW={ноль:0,час:1,один:1,одну:1,одна:1,два:2,две:2,три:3,четыре:4,пять:5,шесть:6,семь:7,восемь:8,девять:9,десять:10,одиннадцать:11,двенадцать:12,тринадцать:13,четырнадцать:14,пятнадцать:15,шестнадцать:16,семнадцать:17,восемнадцать:18,девятнадцать:19,двадцать:20,тридцать:30,сорок:40,пятьдесят:50},
+    w2n=x=>String(x).toLowerCase().trim().split(/\s+/).reduce((a,w)=>a+(NW[w]||0),0),
+    HR={'первого':1,'второго':2,'третьего':3,'четвёртого':4,'четвертого':4,'пятого':5,'шестого':6,'седьмого':7,'восьмого':8,'девятого':9,'десятого':10,'одиннадцатого':11,'двенадцатого':12},
+    HRG='(первого|второго|третьего|четв[её]ртого|пятого|шестого|седьмого|восьмого|девятого|десятого|одиннадцатого|двенадцатого)',
+    H12='(\\d{1,2}|час|'+U+'|десять|одиннадцать|двенадцать)',
+    hv=x=>/^\d/.test(x)?+x:w2n(x),hrOf=n=>((n-1)||12),END='(?=[\\s,.!?]|$)',PM=(h,full,off,str)=>(h>=1&&h<=6&&!/^\s*(?:утра|ночи)/i.test(str.slice(off+full.length)))?h+12:h;
+  t=t.replace(new RegExp('(^|\\s)без\\s+(пяти|десяти|пятнадцати|двадцати\\s+пяти|двадцати|четверти)(?:\\s+минут)?\\s+'+H12+END,'gi'),(a,sp,m,h,off,str)=>{const mm={'пяти':5,'десяти':10,'пятнадцати':15,'двадцати':20,'двадцати пяти':25,'четверти':15}[m.toLowerCase().replace(/\s+/g,' ')];return sp+'в '+PM(hrOf(hv(h)),a,off,str)+':'+pad(60-mm)});
+  t=t.replace(new RegExp('(^|\\s)в\\s+четверть\\s+'+HRG+END,'gi'),(a,sp,w,off,str)=>sp+'в '+PM(hrOf(HR[w.toLowerCase().replace('ё','е')]||HR[w.toLowerCase()]),a,off,str)+':15');
+  t=t.replace(new RegExp('(^|\\s)в\\s+('+N59+')\\s+минут[а-я]*\\s+'+HRG+END,'gi'),(a,sp,n,w,off,str)=>sp+'в '+PM(hrOf(HR[w.toLowerCase()]||HR[w.toLowerCase().replace('ё','е')]),a,off,str)+':'+pad(w2n(n)));
+  t=t.replace(new RegExp('(^|\\s)в\\s+(?:половин[еу]|пол\\s?)\\s*'+HRG+END,'gi'),(a,sp,w,off,str)=>sp+'в '+PM(hrOf(HR[w.toLowerCase()]||HR[w.toLowerCase().replace('ё','е')]),a,off,str)+':30');
+  const HRW='(?:ноль|'+U+'|'+TEEN+'|двадцать(?:\\s+(?:один|два|три|четыре))?)',MIN='(?:ноль\\s+ноль|ноль-ноль|ноль\\s+'+U+'|'+TENS+'(?:\\s+'+U+')?|'+TEEN+')';
+  t=t.replace(new RegExp('(^|\\s)в\\s+('+HRW+')\\s+('+MIN+')'+END,'gi'),(a,sp,h,m,off,str)=>{const hh=w2n(h),mm=w2n(m);return hh<=23&&mm<=59?sp+'в '+PM(hh,a,off,str)+':'+pad(mm):a});
+  t=t.replace(new RegExp('(^|\\s)в\\s+(тринадцать|четырнадцать|пятнадцать|шестнадцать|семнадцать|восемнадцать|девятнадцать|двадцать(?:\\s+(?:один|два|три|четыре))?)(?:\\s+час(?:а|ов)?)?'+END,'gi'),(a,sp,h)=>sp+'в '+w2n(h)+':00');
+  t=t.replace(new RegExp('(\\s(?:через|на)\\s+)('+N59+')(?=\\s+(?:минут|мин|час|дн|недел|месяц))','gi'),(a,p,n)=>p+w2n(n));
+  /* самоисправления */
+  t=t.replace(/(\sв\s)\d{1,2}(?::\d\d)?[,\s]+(?:нет|ой|точнее|вернее|то\s+есть)[,\s]+(?:не\s+(?:в\s)?\d{1,2}(?::\d\d)?\s+а\s+)?(?:в\s)?(\d{1,2}(?::\d\d)?)/gi,'$1$2');
+  t=t.replace(/(\s)(?:в\s)?не\s+(?:в\s)?\d{1,2}(?::\d\d)?[,\s]+а\s+(?:в\s)?(\d{1,2}(?::\d\d)?)/gi,'$1в $2');
+  t=t.replace(/(сегодня|завтра|послезавтра)[,\s]+(?:нет|ой|точнее|вернее|то\s+есть)[,\s]+(?:не\s+\S+\s+а\s+)?(сегодня|завтра|послезавтра)/gi,'$2');
+  t=t.replace(/не\s+(сегодня|завтра|послезавтра)[,\s]+а\s+(сегодня|завтра|послезавтра)/gi,'$2');
+  return t.replace(/\s*,(\s*,)+/g,',').replace(/[ \t]{2,}/g,' ').replace(/\s+([,.!?;])/g,'$1').replace(/^[\s,.;:—–-]+/,'')},
+qaSplit(sg){
+  /* делит одну фразу на несколько задач: «сегодня A, завтра B, в пятницу C» и «встреча в 14 и ужин в 20» */
+  const DW='(?:сегодня|завтра|послезавтра|в\\s+(?:понедельник|вторник|среду|четверг|пятницу|субботу|воскресенье)|во\\s+вторник|в\\s+следующ(?:ий|ую|ее)\\s+[а-яё]+|на\\s+следующей\\s+неделе|в\\s+выходные|через\\s+\\d{1,2}\\s+[а-яё]+|через\\s+неделю)',
+    STOP=/^(?:утром|вечером|днём|днем|ночью|пораньше|позже|обязательно|срочно|тоже|потом|и|а|час|часа|часов|ч)$/i;
+  let parts=String(sg||'').split(new RegExp(',\\s+(?:(?:а|и)\\s+)?(?=(?:'+DW+'(?=[\\s,]))|(?:в\\s+\\d{1,2}(?::\\d\\d)?\\s+\\S))','i')).filter(Boolean);
+  /* кусок с одной только датой («…, в пятницу вечером») приклеиваем обратно */
+  const fixed=[];parts.forEach((x,i)=>{if(i>0){const rest=x.replace(new RegExp('^'+DW+'\\s*','i'),'').replace(/^(?:в|к)\s+\d{1,2}(?::\d\d)?\s*/i,'').split(/\s+/).filter(w=>w&&!STOP.test(w));if(!rest.length){fixed[fixed.length-1]+=', '+x;return}}fixed.push(x)});
+  const TM=/(?:^|\s)(?:в|к)\s+\d{1,2}(?::\d\d)?(?=[\s,.!?]|$)|\d{1,2}[:.]\d\d/,INF=/(?:^|\s)[а-яё-]{3,}(?:ть|ться|ти|чь|тись)(?=[\s,.!?]|$)/i;
+  const out=[];fixed.forEach(part=>{let cur=part,m,re=/\s+и\s+/g,cut=[];
+    while((m=re.exec(part))){const L=part.slice(0,m.index),R=part.slice(m.index+m[0].length);
+      const wl=L.trim().split(/\s+/).length,wr=R.trim().split(/\s+/).length;
+      const RINF=/^(?:(?:сегодня|завтра|послезавтра|потом)\s+)?[а-яё-]{3,}(?:ть|ться|ти|чь|тись)(?=[\s,.!?]|$)/i,TOD=/(?:^|\s)(?:утром|днём|днем|вечером|ночью|с\s+утра)(?=[\s,.!?]|$)/i;
+      if(wl>=2&&wr>=2&&((TM.test(L)&&TM.test(R))||((INF.test(L)||TM.test(L))&&RINF.test(R))||(TOD.test(L)&&TOD.test(R))))cut.push([m.index,m[0].length])}
+    if(!cut.length){out.push(part);return}
+    let last=0;cut.forEach(([i,l])=>{out.push(part.slice(last,i));last=i+l});out.push(part.slice(last))});
+  return out.map(x=>x.trim()).filter(Boolean)},
+qaArea(title,AR){
+  /* сфера по смыслу задачи; ставим, только если уверены (один явный лидер) */
+  const keys=new Set((AR||[]).map(a=>a[0])),L=' '+String(title||'').toLowerCase().replace(/ё/g,'е')+' ',W='(?<![\\p{L}])',E='(?![\\p{L}])';
+  const D={
+    health:'тренировк|трениров|зарядк|йог|пилатес|растяжк|пробежк|бегать|бег|плаван|бассейн|спортзал|зал|спорт|врач|доктор|стоматолог|терапевт|сдать анализ|анализы|прививк|лекарств|таблетк|витамин|массаж|диет|прогулк|гулять|бокс|спарринг|единоборств|тренер|поликлиник|больниц|здоровь|сон|лечь спать|выспаться|медосмотр|выпить воду|воду',
+    career:'созвон|клиент|совещан|планерк|летучк|митинг|отчет|презентац|проект|дедлайн|коммерческ|договор|контракт|оффер|бриф|собеседован|резюме|коллег|начальник|босс|стартап|заказчик|подрядчик|переговор|воронк|продаж|реклам|таргет|контент|ролик|сторис|пост|рилс|reels|монтаж|сценари|работ|офис|кампан|менеджер|сотрудник|найм|нанять|команд|crm|сайт|лендинг|приложени|платформ|автоматизац',
+    money:'оплат|счет|счета|налог|зарплат|бюджет|инвестиц|накоплен|кредит|ипотек|аренд|коммунал|подписк|расход|доход|финанс|банк|страховк|долг|инвойс|перевести|платеж|квитанц',
+    rel:'маме|маму|мама|мамы|папе|папу|папа|папы|бабушк|дедушк|сестр|брат|родител|семь|ребен|детей|детям|доч|сын|племянн|родственник|тете|тетя|дяде|дядя|внук',
+    love:'свидани|любим|девушк|парн|мужу|жене|годовщин|романтик|отношени|поцел',
+    spirit:'чтени|книг|читать|прочитать|учить|учеб|курс|урок|английск|язык|лекци|вебинар|экзамен|поступлен|ielts|toefl|gmat|дневник|медитац|обучен|изуч|подкаст|саморазвит|практик|ментор|наставник',
+    fun:'кино|фильм|сериал|играть|концерт|театр|выставк|путешеств|отпуск|поездк|билет|музей|друзьями|друзья|подруг|вечеринк|рисовать|гитар|фотосесс|отдых|отдохнуть|ресторан|кафе|караоке|пикник|настолк'};
+  let best='',bs=0,tie=false;
+  for(const k in D){if(!keys.has(k))continue;const SH=['сон','зал','бег','дом','пост','воду','дома','цветы','счет'];const n=D[k].split('|').filter(x=>new RegExp(W+x+(SH.includes(x)?E:''),'iu').test(L)).length;
+    if(n>bs){bs=n;best=k;tie=false}else if(n&&n===bs)tie=true}
+  return bs&&!tie?best:''},
 qaParse(text){const out=[];const AR=this.areaList();
   const ORD='(?:во-?\\s?)?(?:первых|вторых|третьих|четв[её]ртых|пятых|шестых)|первое|второе|третье|четв[её]ртое|пятое|шестое|(?:перв|втор|трет|четв[её]рт|пят)(?:ая|ья) задача|следующая задача|потом|затем|после этого|также|и ещё|а ещё|а также|ещё|плюс|and also|then';
-  const segs=String(text||'').replace(/\r/g,'').replace(new RegExp('^\\s*(?:'+ORD+')[\\s,:]+','i'),'').split(new RegExp('(?<=[.!?;])\\s+|\\n+|[,:]?\\s+(?:'+ORD+')[\\s,:]+','i')).map(x=>x.trim()).filter(Boolean);
+  const segs=this.qaNorm(text).replace(new RegExp('^\\s*(?:'+ORD+')[\\s,:]+','i'),'').split(new RegExp('(?<=[.!?;])\\s+|\\n+|[,:]?\\s+(?:'+ORD+')[\\s,:]+','i')).map(x=>x.trim()).filter(Boolean).flatMap(x=>this.qaSplit(x));
   let lastD='';const NW={'один':1,'одну':1,'два':2,'две':2,'три':3,'четыре':4,'пять':5,'шесть':6,'семь':7,'восемь':8,'девять':9,'десять':10,'одиннадцать':11,'двенадцать':12};
-  segs.forEach(sg=>{let t=' '+sg.replace(/[.!?;]+$/,'')+' ',rem=null,area='',m,dl=false,vpr=null;
+  segs.forEach(sg=>{let t=' '+this.qaIntro(sg.replace(/[.!?;]+$/,''))+' ',rem=null,area='',m,dl=false,vpr=null,dur=null,tm2='';
     /* приоритет голосом */
     if((m=t.match(/[\s,]+(?:это\s)?(?:не\s?срочно|не\s?важно|неважно|когда-нибудь|когда будет время|низкий приоритет|приоритет низкий)(?=[\s,])/i))){vpr=1;t=t.replace(m[0],' ')}
     else if((m=t.match(/[\s,]+(?:это\s)?(?:очень\s(?:важно|срочно)|срочно|горит|самое важное|высокий приоритет|приоритет высокий)(?=[\s,])/i))){vpr=3;t=t.replace(m[0],' ')}
@@ -6060,6 +6141,16 @@ qaParse(text){const out=[];const AR=this.areaList();
     if((m=t.match(/\sв\sполдень(?=[\s,])/i)))t=t.replace(m[0],' в 12:00 ');
     if(!/\sв\s\d|\d[:.]\d\d|\sat\s\d/i.test(t)){const TD=[[/\s(?:с\s)?утра(?=[\s,])|\sутром(?=[\s,])/i,'09:00'],[/\sв\sобед(?=[\s,])|\sднём(?=[\s,])|\sднем(?=[\s,])/i,'13:00'],[/\sвечером(?=[\s,])/i,'19:00']];for(const [re,v] of TD){if((m=t.match(re))){t=t.replace(m[0],' в '+v+' ');break}}}
     else t=t.replace(/\s(?:утром|вечером|днём)(?=[\s,])/i,' ');
+    /* «к 15» → до 15:00 */
+    if(!/\sв\s\d|\d[:.]\d\d/.test(t)&&(m=t.match(/\sк\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?(?:\s?ч(?:ас[а-я]*)?)?(?=\s*(?:[,.]|$))/i))){t=t.replace(m[0],' в '+m[1]+':'+(m[2]||'00')+' ');dl=true}
+    /* «с 11 до 12» → начало и конец */
+    if((m=t.match(/\sс\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?\sдо\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?(?=[\s,.]|$)/i))&&(+m[3]*60+(+m[4]||0))>(+m[1]*60+(+m[2]||0))){tm2=pad(+m[3])+':'+(m[4]||'00');t=t.replace(m[0],' в '+m[1]+':'+(m[2]||'00')+' ')}
+    /* «на час», «на 30 минут», «на полтора часа» */
+    if(/\sв\s\d|\d[:.]\d\d/.test(t)&&(m=t.match(/\sна\s(полтора\sчаса|полчаса|час|\d{1,3}\s*(?:мин[а-я]*|час[а-я]*|ч))(?=[\s,.]|$)/i))){const w=m[1].toLowerCase();dur=w==='полтора часа'?90:w==='полчаса'?30:w==='час'?60:(/^\d+\s*ч/.test(w)&&!/^\d+\s*мин/.test(w)?parseInt(w)*60:parseInt(w));t=t.replace(m[0],' ')}
+    /* «через 2 недели», «через месяц», «в следующий вторник» */
+    if((m=t.match(/\sчерез\s(\d{1,2})\sнедел[а-я]*(?=[\s,.]|$)/i))){const dn=add(today(),7*+m[1]);t=t.replace(m[0],' '+(+dn.slice(8))+'.'+dn.slice(5,7)+' ')}
+    else if((m=t.match(/\sчерез\sмесяц(?=[\s,.]|$)/i))){const dd=new Date();dd.setMonth(dd.getMonth()+1);const dn=iso(dd);t=t.replace(m[0],' '+(+dn.slice(8))+'.'+dn.slice(5,7)+' ')}
+    else if((m=t.match(/\sв\sследующ(?:ий|ую|ее)\s(понедельник|вторник|среду|четверг|пятницу|субботу|воскресенье)(?=[\s,.]|$)/i))){const wi=['понедельник','вторник','среду','четверг','пятницу','субботу','воскресенье'].indexOf(m[1].toLowerCase()),dn=add(this.monday(today()),7+wi);t=t.replace(m[0],' '+(+dn.slice(8))+'.'+dn.slice(5,7)+' ')}
     /* дни: через N дней, на следующей неделе, в выходные */
     if((m=t.match(/\sчерез\s(\d{1,2})\s(?:дня|дней|день)(?=[\s,])/i))){const dn=add(today(),+m[1]);t=t.replace(m[0],' '+(+dn.slice(8))+'.'+dn.slice(5,7)+' ')}
     else if((m=t.match(/\s(?:через\s)?(?:на\s)?следующей\sнеделе(?=[\s,])/i))){const nm=add(this.monday(today()),7);t=t.replace(m[0],' '+(+nm.slice(8))+'.'+nm.slice(5,7)+' ')}
@@ -6073,9 +6164,10 @@ qaParse(text){const out=[];const AR=this.areaList();
     for(const a of AR){const nm=String(a[1]||'').toLowerCase();const own=nm.length>=3?[nm.length>5?nm.slice(0,nm.length-2):nm.slice(0,Math.max(3,nm.length-1))]:[];const all=[...own,...(SYN[a[0]]||[])];let hit=null;
       for(const st of all){const e2=rx(st);const r1=new RegExp('[\\s,]+(?:это|сфера|по|для|в сферу|в сфере|про|тег)\\s+'+e2+'[\\p{L}]*(?=[\\s,]|$)','iu'),r2=new RegExp(own.includes(st)?'[\\s,]+'+e2+'[\\p{L}]*\\s*$':'(?:,\\s*'+e2+'[\\p{L}]*|\\s'+e2+'(?:а|ы|ье|я|и)?)\\s*$','iu');if((hit=t.match(r1))||(hit=t.match(r2)))break}
       if(hit){area=a[0];t=t.replace(hit[0],' ');break}}
-    t=t.replace(/[\s,]+это\s*$/i,' ').replace(/^\s*(?:и|а|ну|так|ещё|также|потом)\s+/i,' ').replace(/^\s*(?:мне\s)?(?:надо|нужно|не забыть|запиши|добавь(?: задачу)?|задача)\s+/i,' ');
+    t=t.replace(/[\s,]+это\s*$/i,' ').replace(/^\s*(?:и|а|ну|так|ещё|также|потом)\s+/i,' ').replace(/^\s*(?:мне\s)?(?:надо|нужно|не забыть|добавь(?: задачу)?|задача)\s+/i,' ');
+    t=t.replace(/(\p{L}),(\s+)(?!(?:сегодня|завтра|послезавтра|в|к|на|во|через|потом|затем|а|и|нет)(?=[\s,.]))/giu,'$1§$2');
     const P=this.parseTask(t.replace(/,(\s)/g,'$1').trim(),today());if(P.hit)lastD=P.date;else if(lastD)P.date=lastD;let ti=P.title.replace(/^[,\s-]+|[,\s-]+$/g,'').replace(/\s{2,}/g,' ');
-    if(!ti)return;ti=ti.charAt(0).toUpperCase()+ti.slice(1);out.push(Object.assign({},P,{title:ti,rem,area,dl},vpr?{pr:vpr}:{}))});
+    if(!ti)return;ti=ti.replace(/§/g,',').replace(/,\s*$/,'');if(!area)area=this.qaArea(ti,AR);ti=ti.charAt(0).toUpperCase()+ti.slice(1);if(P.tm){if(tm2&&tm2>P.tm)P.tm2=tm2;else if(dur){const hm=P.tm.split(':').map(Number),e=hm[0]*60+hm[1]+dur;if(e<24*60)P.tm2=pad(Math.floor(e/60))+':'+pad(e%60)}}out.push(Object.assign({},P,{title:ti,rem,area,dl},vpr?{pr:vpr}:{}))});
   return out},
 qaOpen(mic){if(mic&&!this.paid())return this.paySheet('voice');this._qa={t:''};const en=this.lang()==='en',pd=this.paid();
   this.open(`<div class="qa-w"><div class="qa-h"><button class="qa-mic" id="qaMic" onclick="APP.qaMic()" aria-label="Голосом">${this.QA_MIC}</button><div class="qa-wv" id="qaWv">${Array.from({length:26},(_,i)=>`<i style="--d:${(i*0.07).toFixed(2)}s;--h:${(30+Math.abs(Math.sin(i*.9))*70).toFixed(0)}%"></i>`).join('')}</div><span class="qa-st" id="qaSt">${pd?(en?'Tap the mic or type':'Нажми на микрофон или напиши'):(en?'Type a task. Voice is in full access':'Напиши задачу. Голосом — в полном доступе')}</span></div>
@@ -6089,10 +6181,10 @@ qaUpd(){const e=$('qaT'),P=$('qaP'),G=$('qaGo');if(!e||!P)return;e.style.height=
   const ic={d:'<svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17"/></svg>',t:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg>',b:'<svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"/></svg>',r:'<svg viewBox="0 0 24 24"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15"/></svg>'};
   const rpN={d:'Каждый день',wd:'По будням',w:'Каждую неделю',m:'Каждый месяц',y:'Каждый год'};
   P.innerHTML=L.length?`<div class="qa-lb">${L.length>1?(en?'Will add':'Добавлю')+' '+L.length:(en?'Will add':'Добавлю')}</div>`+L.map(x=>{const ar=x.area?(this.areaList().find(a=>a[0]===x.area)||[])[1]:'';
-    return `<div class="qa-c"><b>${esc(x.title)}</b><div class="qa-ch"><span>${ic.d}${dTx(x.date)}</span>${x.tm?`<span>${ic.t}${x.dl?(en?'by ':'до '):''}${x.tm}</span>`:''}${x.rem!=null?`<span>${ic.b}${x.rem?(en?x.rem+' min before':'за '+(x.rem>=60&&x.rem%60===0?x.rem/60+' ч':x.rem+' мин')):(en?'remind':'напомнить')}</span>`:''}${x.rep?`<span>${ic.r}${rpN[x.rep.f]||''}</span>`:''}${x.pr?`<span>${['','Низкий','Средний','Высокий'][x.pr]} приоритет</span>`:''}${ar?`<span class="tg">${esc(ar)}</span>`:''}</div></div>`}).join(''):'';
+    return `<div class="qa-c"><b>${esc(x.title)}</b><div class="qa-ch"><span>${ic.d}${dTx(x.date)}</span>${x.tm?`<span>${ic.t}${x.dl?(en?'by ':'до '):''}${x.tm}${x.tm2?'–'+x.tm2:''}</span>`:''}${x.rem!=null?`<span>${ic.b}${x.rem?(en?x.rem+' min before':'за '+(x.rem>=60&&x.rem%60===0?x.rem/60+' ч':x.rem+' мин')):(en?'remind':'напомнить')}</span>`:''}${x.rep?`<span>${ic.r}${rpN[x.rep.f]||''}</span>`:''}${x.pr?`<span>${['','Низкий','Средний','Высокий'][x.pr]} приоритет</span>`:''}${ar?`<span class="tg">${esc(ar)}</span>`:''}</div></div>`}).join(''):'';
   if(G){G.disabled=!L.length;G.textContent=L.length>1?(en?'Add '+L.length+' tasks':'Добавить '+L.length+' '+this.pl(L.length,'задачу','задачи','задач')):(en?'Add':'Добавить')}},
 qaSave(){this.qaStop();const e=$('qaT');if(!e)return;const L=this.qaParse(e.value);if(!L.length){e.focus();return}this.S.tasks=this.S.tasks||[];
-  L.forEach(P=>{const o={id:'k'+uid(),title:P.title,date:P.date,tm:P.tm||'',done:'',t:Date.now()};if(P.pr)o.pr=P.pr;if(P.area)o.area=P.area;if(P.tags&&P.tags.length)o.tags=P.tags;if(P.rep)o.rep=P.rep;if(P.rem!=null&&o.tm)o.rem=P.rem;this.S.tasks.push(o);this.track('task_add',null,'day')});
+  L.forEach(P=>{const o={id:'k'+uid(),title:P.title,date:P.date,tm:P.tm||'',done:'',t:Date.now()};if(P.pr)o.pr=P.pr;if(P.area)o.area=P.area;if(P.tags&&P.tags.length)o.tags=P.tags;if(P.rep)o.rep=P.rep;if(P.rem!=null&&o.tm)o.rem=P.rem;if(P.tm2&&o.tm)o.tm2=P.tm2;this.S.tasks.push(o);this.track('task_add',null,'day')});
   this.track('qa_add',null,'day');this.save();this.close();this.render();this.buzz(10);
   const td=today(),x=L[0],w=x.date===td?'сегодня':x.date===add(td,1)?'завтра':WD[pd(x.date).getDay()]+', '+fd(x.date);
   this.toast(L.length>1?'Добавлено '+L.length+' '+this.pl(L.length,'задача','задачи','задач'):'Задача на '+w+(x.tm?' в '+x.tm:''))},
@@ -6969,7 +7061,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=195');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=197');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
@@ -7066,7 +7158,7 @@ async forgot(){const el=$('aE'),e=((el&&el.value)||this._wE||'').trim();if(!/.+@
     this._fgI=setInterval(()=>{const b=$('fgRe');if(!b||this._wm!=='code'){clearInterval(this._fgI);return}const t=Math.ceil((this._fgT-Date.now())/1000);if(t>0){b.textContent='Отправить код ещё раз через '+t+' с'}else{b.disabled=false;b.textContent='Отправить код ещё раз';clearInterval(this._fgI)}},1000)}
   catch(err){this.msg(this.errText(err))}},
 async logout(){if(!confirm('Выйти? Данные останутся в облаке, а с этого устройства будут стёрты.'))return;
-  clearTimeout(this._pt);await this.push();try{const sub=await this.pushSub();if(sub){await this.sb.from('tw_push').delete().eq('endpoint',sub.endpoint);await sub.unsubscribe()}}catch(e){}this._pushOn=false;try{Object.keys(localStorage).filter(k=>k.startsWith('tw-vimg-')).forEach(k=>localStorage.removeItem(k))}catch(e){}try{await this.sb.auth.signOut()}catch(e){}
+  clearTimeout(this._pt);await this.push();if(this.cloud==='err'){this.toast('Нет связи: данные ещё не сохранились в облаке. Выйти можно, когда появится интернет.');return}try{const sub=await this.pushSub();if(sub){await this.sb.from('tw_push').delete().eq('endpoint',sub.endpoint);await sub.unsubscribe()}}catch(e){}this._pushOn=false;try{Object.keys(localStorage).filter(k=>k.startsWith('tw-vimg-')).forEach(k=>localStorage.removeItem(k))}catch(e){}try{await this.sb.auth.signOut()}catch(e){}
   this.user=null;this.cloud='off';localStorage.removeItem(KEY);this.S=this.fresh();this.go('home')},
 /* ---------- группы: общий счёт недели ---------- */
 groups:[],boards:{},
