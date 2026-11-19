@@ -286,6 +286,14 @@ html body #app .pw3-c{display:grid!important;grid-template-columns:repeat(2,minm
 @media(min-width:1200px){
 html body .hcards{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 }
+/* значки сторон: фото предметов */
+html body .sdi{width:22px;height:22px;object-fit:contain;display:block;filter:none}
+html body .rpi:has(.sdi),html body .rnode i:has(.sdi){background:none!important;box-shadow:none!important;border:0!important}
+html body .rpi:has(.sdi){width:30px;height:30px}html body .rpi .sdi{width:28px;height:28px}
+html body .rnode i:has(.sdi){width:40px;height:40px}html body .rnode i .sdi{width:38px;height:38px}
+html body .pcx-s i .sdi{width:20px;height:20px}
+html body .skw-r span .sdi{width:22px;height:22px}
+html body .fc-i:has(.sdi){width:46px}html body .fc-i .sdi{width:46px;height:46px}
 /* дневник: вкладка «Мысли» */
 .th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
 .th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
@@ -3854,7 +3862,7 @@ const HICO_NEW={"pill":"<path d=\"M10.5 20.5a4.5 4.5 0 01-6.4-6.4l8-8a4.5 4.5 0 
 const ICO_CATS=[["Здоровье",["drop","pill","eye","bed","tooth","heart","food","moon","smile","wind"]],["Спорт",["dumb","steps","swim","bike","timer","flame","mount","lotus","snow","sun"]],["Ум и учёба",["book","bulb","phones","lang","note","pen","chat","target","star","spark"]],["Работа и деньги",["brief","laptop","mail","chart","coin","wallet","cal","list","video","phone"]],["Дом",["home","trash","cart","tree","gift","coffee","bell","check"]],["Люди и отдых",["users","paw","music","camera","brush","game","plane","ban"]]];
 const ICO_KEYS=[...new Set(ICO_CATS.flatMap(c=>c[1]))];
 const icoGuess=t=>{t=(t||'').toLowerCase();const R=[[/вод|water|литр/,'drop'],[/медит|дыхан|meditat/,'lotus'],[/сон|спат|отбой|ложусь|sleep/,'moon'],[/подъ|встаю|утр/,'sun'],[/чита|стр\.|книг|read|page/,'book'],[/англ|язык|слов|грамм|english|шедоу|говорю/,'chat'],[/трен|зал|спорт|зарядк|спарр|workout|gym/,'dumb'],[/шаг|бег|run|step/,'steps'],[/прогул|улиц|walk/,'tree'],[/плава|бассейн|swim/,'swim'],[/соцсет|телефон|экран|phone/,'phone'],[/сахар|алког|без |no /,'ban'],[/душ|холод|cold/,'snow'],[/днев|запис|journal/,'pen'],[/план|задач|plan/,'list'],[/ем |еда|диет|питан|норм|food|diet/,'food'],[/настро|энерг|mood|energy/,'heart'],[/клиент|созвон|оффер|касан|продаж|работ|client/,'brief'],[/ролик|видео|сторис|пост|reels|video|контент/,'video'],[/монтан|сериал|фильм/,'video']];for(const [r,k] of R)if(r.test(t))return k;return ''};
-const hIco=k=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${HICO[k]||HICO.drop}</svg>`;
+const hIco=k=>/^sd-/.test(k)?`<img class="sdi" src="side-${k.slice(3)}.webp" alt="">`:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${HICO[k]||HICO.drop}</svg>`;
 function nextMonday(){const d=new Date();const w=d.getDay();if(w!==1)d.setDate(d.getDate()+((8-w)%7||7));return iso(d)}
 
 const APP={
@@ -4024,7 +4032,7 @@ weekStrip(){const td=today(),cur=this.day||td,m0=this.monday(cur),days=[0,1,2,3,
   return `<div class="wst"><button class="wst-n" onclick="APP.day=add(APP.day,-7);APP.render()" aria-label="Прошлая неделя">${I.l}</button>${days.map(d=>{const a=this.dayAll(d),p=a.n&&d<=td?a.p:0,kt=(this.S.tasks||[]).filter(x=>x.date===d&&!x.done).length;return `<button class="wst-d ${d===cur?'on':''} ${d===td?'td':''} ${d>td?'fu':''} ${p>=1?'full':''}" onclick="APP.day='${d}';APP.render()"><em>${WD[pd(d).getDay()]}</em><span class="wst-r"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="14" fill="none" stroke="rgba(255,255,255,.11)" stroke-width="3"/><circle cx="18" cy="18" r="14" fill="none" stroke="url(#wsg)" stroke-width="3" stroke-linecap="round" ${p>0?'':'stroke-opacity="0"'} stroke-dasharray="${(C*p).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 18 18)"/></svg><b>${pd(d).getDate()}</b></span><span class="wst-k">${'<i></i>'.repeat(Math.min(kt,3))}</span></button>`}).join('')}<button class="wst-n" onclick="APP.day=add(APP.day,7);APP.render()" aria-label="Следующая неделя">${I.r}</button><svg width="0" height="0" style="position:absolute"><defs><linearGradient id="wsg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B2FBE"/><stop offset=".55" stop-color="#9B6FE8"/><stop offset="1" stop-color="#C4A4FF"/></linearGradient></defs></svg></div>`},
 /* личный кабинет */
 /* игровой кабинет: навыки, мечта, идеал */
-SKD:[['str','Сила','dumb','Тело и энергия','спорт, сон, вода, питание'],['int','Интеллект','book','Знания и навыки','чтение, обучение, языки, письмо'],['spi','Дух','lotus','Спокойствие и баланс','медитация, отдых, близкие, без телефона'],['biz','Дело\u200b','brief','Работа и деньги','задачи из Планов, работа, контент, деньги'],['dis','Дисциплина','target','Закрытые дни','дни, закрытые на 80% и выше']],
+SKD:[['str','Сила','sd-str','Тело и энергия','спорт, сон, вода, питание'],['int','Интеллект','sd-int','Знания и навыки','чтение, обучение, языки, письмо'],['spi','Дух','sd-spi','Спокойствие и баланс','медитация, отдых, близкие, без телефона'],['biz','Дело\u200b','sd-biz','Работа и деньги','задачи из Планов, работа, контент, деньги'],['dis','Дисциплина','sd-dis','Закрытые дни','дни, закрытые на 80% и выше']],
 PERK:{str:['Первый шаг','Утренний заряд','Выносливость','Атлет','Титан'],int:['Любопытство','Книжный червь','Острый ум','Эрудит','Мудрец'],spi:['Тишина','Ясность','Баланс','Внутренний стержень','Дзен'],biz:['Деловая хватка','Фокус на результат','Стратег','Предприниматель','Империя'],dis:['Слово держу','Режим','Самоконтроль','Несгибаемость','Легенда дисциплины']},
 PLV:[5,10,15,20,25],
 skillsData(){const D=this.rpgData(),pts=D.pts||{};return this.SKD.map(([k,n,ic,sub,how])=>{const L=(D.st.find(x=>x[0]===k)||[0,0,1])[2],p=pts[k]||0,p0=(L-1)**2/2,p1=L**2/2,fr=p1>p0?Math.max(0,Math.min(1,(p-p0)/(p1-p0))):0;return {k,n,ic,sub,how,L,p,fr,left:Math.max(1,Math.ceil(p1-p))}})},
@@ -4123,12 +4131,12 @@ cabFacets(){const SK=this.skillsData(),D=this.rpgData(),w7=D.pts7||{},pct=D.nxt>
     const top=`<div class="fc-top">${this.pvSmoke()}<div class="fc-tt"><span class="fc-n57">${F57.n}<i>/57</i></span><b class="fc-rk">${this.fcRank(F57.n)}</b><em>${this.FCR[this.fcRankI(F57.n)][2]}</em></div>${this.pvGem(this.fcSt())}${this.fcRankBar(F57.n)}<div class="fc-q">Вода камень точит не&nbsp;силой, а&nbsp;постоянством.<br>Так и&nbsp;дисциплина огранивает тебя:<br>день за&nbsp;днём, грань за&nbsp;гранью.</div></div>
     <div class="fc-map"><div class="fc-mh"><b>Карта огранки</b><em>Вид сверху и снизу</em></div>${this.fcGrid()}<button class="fc-help" onclick="APP.skHelp()">Как растёт огранка</button></div>`;
   const cards=SK.map(s=>{const F=this.FAC[s.k]||['','',''],w=w7[s.k]||0,np=this.PLV.find(l=>s.L<l),pn=np?this.PERK[s.k][this.PLV.indexOf(np)]:'';
-    return `<div class="fc-c ${grow===s.k?'gr':''}"><div class="fc-h"><span class="fc-i">${sv(F[2])}</span><span class="fc-n"><b>${s.n}</b><em>${F[0]}</em></span><span class="fc-l"><b>${F57.L.filter(f=>f.k===s.k&&f.on).length}</b><em>из ${F57.L.filter(f=>f.k===s.k).length}</em></span></div>
+    return `<div class="fc-c"><div class="fc-h"><span class="fc-i">${hIco('sd-'+s.k)}</span><span class="fc-n"><b>${s.n}</b><em>${F[0]}</em></span><span class="fc-l"><b>${F57.L.filter(f=>f.k===s.k&&f.on).length}</b><em>из ${F57.L.filter(f=>f.k===s.k).length}</em></span></div>
      <div class="fc-bar"><i style="width:${Math.round(F57.L.filter(f=>f.k===s.k&&f.on).length/F57.L.filter(f=>f.k===s.k).length*100)}%"></i></div>
      <div class="fc-m"><span>Огранено ${F57.L.filter(f=>f.k===s.k&&f.on).length} из ${F57.L.filter(f=>f.k===s.k).length}</span><span>${w?'+'+w+' за неделю':'новая неделя впереди'}</span></div>
      <div class="fc-how">${F[1]}</div>
      ${(()=>{const nx=F57.L.filter(f=>f.k===s.k&&!f.on).sort((a,b)=>a.n-b.n)[0];return nx?`<div class="fc-pk">Следующая грань: ${esc(nx.t)}${nx.v?` · сейчас ${nx.v}`:''}</div>`:'<div class="fc-pk">Все грани этой стороны огранены</div>'})()}
-     ${grow===s.k?`<div class="fc-gr"><b>Простор для роста</b><em>Эта грань только начинает сиять. Одна привычка в день, и она догонит остальные.</em>${sug.length?`<div class="fc-sg">${sug.map(([x,i])=>`<button onclick="APP.addLib(${i})">${I.plus}<span>${esc(x[0])}</span></button>`).join('')}</div>`:''}</div>`:''}</div>`}).join('');
+     </div>`}).join('');
   return top+`<div class="fc-lb">Пять граней</div>`+cards},
 cabSkills(){const SK=this.skillsData(),D=this.rpgData(),w7=D.pts7||{},sel=this._sks||SK[0].k,cur=SK.find(s=>s.k===sel)||SK[0],COL={str:'rgb(237 230 255)',int:'rgb(201 184 255)',spi:'rgb(168 139 255)',biz:'rgb(138 108 240)',dis:'rgb(107 79 216)'};
   const W=340,C=170,R0=40,STEP=19,n=SK.length;
@@ -4750,7 +4758,7 @@ cabRewards(){this.chCheck();const R=this.rwCalc(),g=this.S.rw||{},m=R.n*this.M_D
    <div class="pg-sh" style="margin:20px 2px 10px"><b>За друзей</b><span>появятся вместе с приглашениями</span></div>${grid(this.RWF)}`;
   return hero+ch+mapH+col+(g.d30?`<button class="btn gh w" style="margin-top:16px" onclick="APP.S.pref.frame=APP.rwFrame()?0:1;APP.save();APP.render()">${this.rwFrame()?'Скрыть рамку аватара':'Показать рамку аватара'}</button>`:'')},
 /* характеристики: явный выбор, угадывание по названию, перки с пользой */
-SKO:[['str','Сила','dumb'],['int','Интеллект','book'],['spi','Дух','lotus'],['biz','Дело\u200b','brief']],
+SKO:[['str','Сила','sd-str'],['int','Интеллект','sd-int'],['spi','Дух','sd-spi'],['biz','Дело\u200b','sd-biz']],
 skGuess(t){t=(t||'').toLowerCase();
   if(/чит|чтен|книг|стр\.|страниц|учи|изуч|курс|язык|англ|урок|лекц|писат|пишу|текст|подкаст|обучен|знани|программир|код/.test(t))return 'int';
   if(/медит|дыхан|благодар|дневник|молит|тишин|прогул|природ|семь|мам|пап|родн|друз|близк|отдых|соцсет|телефон|экран|алког|курени|сигар|настроен|любов|партн|йог/.test(t))return 'spi';
@@ -5019,7 +5027,7 @@ cabinet(){const S=this.S,P=S.profile||{},D=this.rpgData(),pct=Math.round((D.xp-D
   const keys=[...Object.keys(S.hlog||{}),...Object.keys(S.log||{}),...Object.keys(S.checkin||{})].filter(Boolean).sort(),since=keys[0]||today(),days=Math.max(1,Math.round((pd(today())-pd(since))/864e5)+1);
   const active=new Set([...Object.keys(S.hlog||{}).filter(d=>Object.keys(S.hlog[d]||{}).length),...Object.keys(S.log||{}).filter(d=>Object.keys(S.log[d]||{}).length)]).size;
   const best=Math.max(0,...S.habits.filter(h=>!h.archived).map(h=>this.softStreak(h).n)),wins=this.winsAll().length;
-  const icoS={str:'dumb',int:'book',spi:'lotus',biz:'brief',dis:'target'};
+  const icoS={str:'sd-str',int:'sd-int',spi:'sd-spi',biz:'sd-biz',dis:'sd-dis'};
   const head=`<div class="pcab ocean"><div class="pcab-in">
     <button class="pcab-ed" onclick="APP.editProfile()">${I.ed}<span>Редактировать</span></button><button class="pcab-ed pcab-sh" onclick="APP.shareStudio('hero')">${SI.share}<span>В сторис</span></button>
     <div class="pcab-av" style="--p:${pct}"><span>${this.avaHtml()}</span><em>${D.lvl}</em></div>
@@ -6216,7 +6224,7 @@ rpgData(){const S=this.S,td=today();const CAT={dumb:'str',steps:'str',swim:'str'
   const dp=this.dayAll(td),left=dp.n-dp.done;
   return {pts,pts7,xp,lvl,cur,nxt,R,st:[['str','Сила',stat('str')],['int','Интеллект',stat('int')],['spi','Дух',stat('spi')],['biz','Дело\u200b',stat('biz')],['dis','Дисциплина',stat('dis')]],ach,weeks,marks,closed,left,todayXp:wk[m0]||0}},
 rpg(){const D=this.rpgData(),S=this.S,P=S.profile||{},nm=P.hero||(P.name||'').split(' ')[0]||'Герой',pct=Math.round((D.xp-D.cur)/(D.nxt-D.cur)*100);
-  const icoS={str:'dumb',int:'book',spi:'lotus',biz:'brief',dis:'target'},st=D.st,mx=Math.max(10,...st.map(x=>x[2]));
+  const icoS={str:'sd-str',int:'sd-int',spi:'sd-spi',biz:'sd-biz',dis:'sd-dis'},st=D.st,mx=Math.max(10,...st.map(x=>x[2]));
   const ava=P.ava&&P.ava!=='shark'?`<span class="rpic">${hIco(P.ava)}</span>`:SHARK;
   const pill=x=>`<div class="rpill"><span class="rpi">${hIco(icoS[x[0]])}</span><span class="sp">${x[1]}</span><b>${x[2]}</b></div>`;
   const filled=!!(P.hero||P.motto||P.goalY);
