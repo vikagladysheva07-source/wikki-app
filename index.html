@@ -3679,7 +3679,11 @@ parseTask(text,base){let t=' '+String(text||'').trim()+' ',d=base||this.day||tod
   const cut=re=>{const m=t.match(re);if(m){t=t.replace(m[0],' ');return m}return null};
   let m,rp=null;
   if(cut(/\s(каждый день|ежедневно|every day|daily)\s/i))rp={f:'d'};
-  else if(cut(/\s(по будням|weekdays|every weekday)\s/i))rp={f:'wd'};
+  else if(cut(/\s(по будням|в будние дни|каждый будний день|каждые будни|weekdays|every weekday)\s/i))rp={f:'wd'};
+  else if(cut(/\s(по выходным|каждые выходные|каждый выходной|every weekend|weekends)\s/i)){rp={f:'w',days:[6,0]};let x=td;while(![6,0].includes(pd(x).getDay()))x=add(x,1);d=x;hit=WDF[pd(x).getDay()]}
+  else if((m=cut(/\s(?:каждый|каждую|каждое|каждые|по)\s((?:понедельник|вторник|сред|четверг|пятниц|суббот|воскресень)[а-я]*(?:\s?(?:,|§|и)\s?(?:понедельник|вторник|сред|четверг|пятниц|суббот|воскресень)[а-я]*)*)\s/i))){const ST=['воскресень','понедельник','вторник','сред','четверг','пятниц','суббот'],ds=[];m[1].toLowerCase().split(/\s*[,§]\s*|\sи\s/).forEach(w=>{const i=ST.findIndex(s=>w.startsWith(s));if(i>=0&&!ds.includes(i))ds.push(i)});if(ds.length){rp={f:'w',days:ds};let x=td;while(!ds.includes(pd(x).getDay()))x=add(x,1);d=x;hit=WDF[pd(x).getDay()]}}
+  else if(cut(/\sраз в неделю\s/i))rp={f:'w'};
+  else if(cut(/\sраз в месяц\s/i))rp={f:'m'};
   else if((m=cut(/\severy\s(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s/i))){const wi=['sunday','monday','tuesday','wednesday','thursday','friday','saturday'].indexOf(m[1].toLowerCase());rp={f:'w',days:[wi]};let x=td;while(pd(x).getDay()!==wi)x=add(x,1);d=x;hit=WDF[wi]}
   else if((m=cut(/\sкажд(?:ый|ую|ое)\s(понедельник|вторник|среду|четверг|пятницу|субботу|воскресенье)\s/i))){const wi=['воскресенье','понедельник','вторник','среду','четверг','пятницу','субботу'].indexOf(m[1].toLowerCase());rp={f:'w',days:[wi]};let x=td;while(pd(x).getDay()!==wi)x=add(x,1);d=x;hit=WDF[wi]}
   else if(cut(/\s(каждую неделю|еженедельно|every week|weekly)\s/i))rp={f:'w'};
@@ -6134,6 +6138,8 @@ qaParse(text){const out=[];const AR=this.areaList();
     else if((m=t.match(/[\s,]+(?:это\s)?(?:важно|средний приоритет|приоритет средний)(?=[\s,])/i))){vpr=2;t=t.replace(m[0],' ')}
     /* числа словами: «в девять», «через три дня» */
     t=t.replace(/(\s(?:в|через|на)\s)(одну|один|две|два|три|четыре|пять|шесть|семь|восемь|девять|десять|одиннадцать|двенадцать)(?=\s)/gi,(a,b,w)=>b+NW[w.toLowerCase()]);
+    /* «каждое утро», «каждый вечер» → каждый день + время суток */
+    t=t.replace(/\sкаждое\sутро(?=[\s,.]|$)/i,' каждый день утром ').replace(/\sкаждый\sвечер(?=[\s,.]|$)/i,' каждый день вечером ');
     /* «в 9 30» → 9:30 */
     t=t.replace(/(\sв\s)([01]?\d|2[0-3])\s([0-5]\d)(?=\s)/,'$1$2:$3');
     /* утра, дня, вечера, ночи */
@@ -6141,10 +6147,15 @@ qaParse(text){const out=[];const AR=this.areaList();
     if((m=t.match(/\sв\sполдень(?=[\s,])/i)))t=t.replace(m[0],' в 12:00 ');
     if(!/\sв\s\d|\d[:.]\d\d|\sat\s\d/i.test(t)){const TD=[[/\s(?:с\s)?утра(?=[\s,])|\sутром(?=[\s,])/i,'09:00'],[/\sв\sобед(?=[\s,])|\sднём(?=[\s,])|\sднем(?=[\s,])/i,'13:00'],[/\sвечером(?=[\s,])/i,'19:00']];for(const [re,v] of TD){if((m=t.match(re))){t=t.replace(m[0],' в '+v+' ');break}}}
     else t=t.replace(/\s(?:утром|вечером|днём)(?=[\s,])/i,' ');
+    /* голое «в 5» без «утра»: 1–6 часов по умолчанию вечер */
+    const morn=/\sутром(?=[\s,.])|\sс\sутра(?=[\s,.])/i.test(t)||/\sв\s0\d[:.]\d\d/.test(t);
+    const pm=h=>(h>=1&&h<=6&&!morn)?h+12:h;
     /* «к 15» → до 15:00 */
-    if(!/\sв\s\d|\d[:.]\d\d/.test(t)&&(m=t.match(/\sк\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?(?:\s?ч(?:ас[а-я]*)?)?(?=\s*(?:[,.]|$))/i))){t=t.replace(m[0],' в '+m[1]+':'+(m[2]||'00')+' ');dl=true}
+    if(!/\sв\s\d|\d[:.]\d\d/.test(t)&&(m=t.match(/\sк\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?(?:\s?ч(?:ас[а-я]*)?)?(?=\s*(?:[,.]|$))/i))){t=t.replace(m[0],' в '+(m[2]?m[1]:pm(+m[1]))+':'+(m[2]||'00')+' ');dl=true}
     /* «с 11 до 12» → начало и конец */
-    if((m=t.match(/\sс\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?\sдо\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?(?=[\s,.]|$)/i))&&(+m[3]*60+(+m[4]||0))>(+m[1]*60+(+m[2]||0))){tm2=pad(+m[3])+':'+(m[4]||'00');t=t.replace(m[0],' в '+m[1]+':'+(m[2]||'00')+' ')}
+    if((m=t.match(/\sс\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?\sдо\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?(?=[\s,.]|$)/i))&&(+m[3]*60+(+m[4]||0))>(+m[1]*60+(+m[2]||0))){let a=+m[1],b=+m[3];if(!m[2]&&!m[4]&&a>=1&&a<=6&&b<=8&&!morn){a+=12;b+=12}tm2=pad(b)+':'+(m[4]||'00');t=t.replace(m[0],' в '+pad(a)+':'+(m[2]||'00')+' ')}
+    /* одиночное «в 5» / «в 5 часов» → 17:00 */
+    if(!/\d[:.]\d\d/.test(t)&&(m=t.match(/\sв\s([1-6])(?:\s?ч(?:ас[а-я]*)?)?(?=[\s,.]|$)(?!\s(?:раз|раза|дня|дней|недел|месяц|минут|человек|пункт|класс|групп|част|этап))/i))&&!morn)t=t.replace(m[0],' в '+(+m[1]+12)+':00');
     /* «на час», «на 30 минут», «на полтора часа» */
     if(/\sв\s\d|\d[:.]\d\d/.test(t)&&(m=t.match(/\sна\s(полтора\sчаса|полчаса|час|\d{1,3}\s*(?:мин[а-я]*|час[а-я]*|ч))(?=[\s,.]|$)/i))){const w=m[1].toLowerCase();dur=w==='полтора часа'?90:w==='полчаса'?30:w==='час'?60:(/^\d+\s*ч/.test(w)&&!/^\d+\s*мин/.test(w)?parseInt(w)*60:parseInt(w));t=t.replace(m[0],' ')}
     /* «через 2 недели», «через месяц», «в следующий вторник» */
