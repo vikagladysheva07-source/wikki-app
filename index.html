@@ -127,7 +127,6 @@ html body .msg3.thd .msg3-t b{color:#fff}
 html body .msg3.thd .msg3-t span{color:rgba(255,255,255,.72)}
 .thd-i{position:absolute;left:14px;top:50%;width:102px;height:102px;transform:translateY(-50%);pointer-events:none}
 .thd-i img{width:100%;height:100%;display:block;object-fit:contain;filter:brightness(1.18) drop-shadow(0 0 1px rgba(255,255,255,.4)) drop-shadow(0 10px 16px rgba(0,0,0,.5))}
-@media(min-width:1024px){.msg3.thd{display:none}}
 .th-sub{margin:-4px 0 12px;font:400 13.5px/1.4 Manrope,system-ui,sans-serif;color:#8F8FA3}
 /* телефон: «Дневник» и «Послание дня» в один ряд: название сверху слева, картинка уходит за нижний правый край */
 @media(max-width:1023px){
@@ -148,6 +147,45 @@ html body #app .hd-dt i{display:grid;place-items:center}
 html body #app .hd-dt i.on{background:linear-gradient(155deg,rgba(176,140,245,.24),rgba(106,63,208,.1))!important;border:1px solid rgba(196,164,255,.3)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)!important;color:#fff!important}
 html body #app .hd-dt i.on:after{display:none!important}
 html body #app .hd-dt i.on svg{width:11px;height:11px;stroke:#fff;color:#fff;filter:drop-shadow(0 1px 1px rgba(255,255,255,.25))}
+.yh-h .yh-top{display:flex;align-items:center;gap:18px;margin-top:14px}
+.yh-ring{position:relative;width:76px;height:76px;flex:none}.yh-ring svg{width:100%;height:100%}.yh-ring b{position:absolute;inset:0;display:grid;place-items:center;font:600 16px Manrope,system-ui,sans-serif}
+.yh-big b{display:block;font:600 44px/1 Manrope,system-ui,sans-serif;letter-spacing:-.02em}.yh-big span{display:block;font:500 14px Manrope,system-ui,sans-serif;margin-top:4px}.yh-big em{display:block;font:400 12px Manrope,system-ui,sans-serif;font-style:normal;color:#8F8FA3;margin-top:2px}
+.yh-g{display:grid;grid-template-columns:28px repeat(31,minmax(0,1fr));gap:2px;align-items:center}
+.yh-g .yh-l{font:500 9.5px Manrope,system-ui,sans-serif;color:#8F8FA3}
+.yh-g i{display:block;aspect-ratio:1;min-width:0;border-radius:50%;background:rgba(255,255,255,.05);cursor:pointer;opacity:0;animation:yhIn .5s ease both;animation-delay:calc(var(--i,0)*3ms)}
+.yh-g i.x{background:none;cursor:default;animation:none;opacity:1}
+.yh-g i.fu{background:rgba(255,255,255,.02);cursor:default}
+.yh-g i.n{background:rgba(255,255,255,.08)}
+.yh-g i.l1,.yh-lg i.l1{background:rgba(155,111,232,.22)}.yh-g i.l2,.yh-lg i.l2{background:rgba(155,111,232,.4)}.yh-g i.l3,.yh-lg i.l3{background:rgba(160,120,240,.62)}
+.yh-g i.l4,.yh-lg i.l4{background:radial-gradient(circle at 35% 30%,#E6DAFF,#A07CF0 58%,#6A3FD0);box-shadow:0 0 6px rgba(155,111,232,.45)}
+.yh-g i.td{box-shadow:0 0 0 1.5px #fff}
+.yh-lg{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin-top:12px;font:400 11px Manrope,system-ui,sans-serif;color:#8F8FA3}.yh-lg i{width:11px;height:11px;border-radius:50%}
+@keyframes yhIn{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+@media(min-width:1024px){.yh-g{gap:4px}.yr{max-width:820px;margin-left:auto;margin-right:auto}}
+@media (prefers-reduced-motion:reduce){.yh-g i{animation:none;opacity:1}}
+/* путь камня: бриллианты вместо кружков (неогранённый впереди, огранённый пройдено) */
+html body .fcr .fcr-r{grid-template-columns:42px 26px 1fr;column-gap:10px;align-items:center}
+html body .fcr .fcr-r i{width:42px;height:28px;margin:0;border:0!important;border-radius:0;background:none!important;box-shadow:none!important;display:block}
+html body .fcr .fcr-r i img{width:100%;height:100%;object-fit:contain;display:block}
+html body .fcr .fcr-r.cur i{filter:drop-shadow(0 0 7px rgba(196,164,255,.5))}
+html body .fcr .fcr-r:not(:last-child):before{left:20px;top:34px;bottom:-8px}
+/* просроченная задача: тёмное стекло, не фиолетовое */
+html body .ovl{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015)),rgba(8,8,12,.62)!important;border:1px solid rgba(255,255,255,.12)!important;color:rgba(255,255,255,.72)!important}
+html body .ovl button{background:rgba(255,255,255,.07)!important;border:1px solid rgba(255,255,255,.16)!important;color:#fff!important}
+/* ноутбук: «Дневник» и «Послание дня» парой в правой колонке */
+@media(min-width:1024px){
+html body .hm-duo-d{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+html body .hm-duo-d>.msg3{min-height:138px;margin:0!important;padding:16px;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;height:auto!important}
+html body .hm-duo-d .msg3-t,html body .hm-duo-d .msg3.thd .msg3-t{max-width:100%;margin:0;text-align:left}
+html body .hm-duo-d .msg3-t b{font-size:17px}
+html body .hm-duo-d .msg3-t span,html body .hm-duo-d .msg3.thd .msg3-t span{display:none!important}
+html body .hm-duo-d .msg3.thd{justify-content:flex-start}
+html body .hm-duo-d .thd-i{left:auto;right:-10px;top:auto;bottom:-14px;width:110px;height:110px;transform:rotate(7deg)}
+html body .hm-duo-d .msg3-f{right:-4px;top:auto;bottom:-8px;width:120px;height:92px;transform:none}
+html body .hm-duo-d .msg3-f i{width:56px;height:84px;border-radius:13px}
+html body .hm-duo-d .msg3-f i:nth-child(1){transform:rotate(-22deg) translateX(-42px)}
+html body .hm-duo-d .msg3-f i:nth-child(2){transform:rotate(-8deg) translateX(-21px)}
+}
 /* дневник: вкладка «Мысли» */
 .th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
 .th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
@@ -4729,7 +4767,7 @@ skHelp(){const R=(ic,b,t)=>`<div class="skh-r"><span>${ic}</span><div><b>${b}</b
    <div class="skh-ba"><div><div class="gimg"><img src="gem-dark.webp" alt=""></div><b>Неогранённый</b><em>в начале пути</em></div><span class="skh-ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><div><div class="gimg"><img src="gem-lit.webp" alt=""></div><b>Огранённый</b><em>все 57 граней</em></div></div>
    <div class="skh-in">В классическом бриллианте 57 граней: 33 сверху и 24 снизу. Огранено ${F.n} из 57.</div>
    <div class="skh">${R(I.ok,'Корона, 33 грани','То, что видно: отметки привычек, закрытые дела и серии дней.')}${R(I.ok,'Павильон, 24 грани','То, что не видно: разборы недели, записи в дневнике, сильные недели и возвраты после пропуска. Сияние камню дают именно нижние грани.')}${R(I.ok,'Каждая грань — рубеж','Грань огранивается один раз и остаётся навсегда. Пропуск её не стирает.')}${R(I.ok,'Пять сторон','Грани распределены между Силой, Интеллектом, Духом, Делом и Дисциплиной.')}</div>
-   <div class="fcr-h">Путь камня</div><div class="fcr">${this.FCR.map((r,k)=>{const ci=this.fcRankI(F.n);return `<div class="fcr-r ${k<ci?'done':k===ci?'cur':''}"><i></i><span class="fcr-n">${r[0]}</span><div><b>${r[1]}${k===ci?' · ты здесь':''}</b><em>${r[2]}</em></div></div>`}).join('')}</div>`)},
+   <div class="fcr-h">Путь камня</div><div class="fcr">${this.FCR.map((r,k)=>{const ci=this.fcRankI(F.n);return `<div class="fcr-r ${k<ci?'done':k===ci?'cur':''}"><i><img src="${k<=ci?'gem-lit.webp':'gem-dark.webp'}" alt="" draggable="false"></i><span class="fcr-n">${r[0]}</span><div><b>${r[1]}${k===ci?' · ты здесь':''}</b><em>${r[2]}</em></div></div>`}).join('')}</div>`)},
 ptOn(){this.S.pref=this.S.pref||{};this.S.pref.dz=this.dzOrder().map(x=>x[0]==='partner'?[x[0],true]:x);this.save()},
 ptAuto(){const c=this._ptc;if(!c||this._ptBusy)return;if(!this.user){if(!this._ptTold){this._ptTold=1;setTimeout(()=>this.toast('Войди или зарегистрируйся, и вы станете партнёрами'),900)}return}
   this._ptBusy=1;this.grpRpc('tw_group_join',{p_code:c,p_me:this.S.profile.name||''}).then(async g=>{this._ptc=null;try{sessionStorage.removeItem('tw-pt')}catch(e){}this.ptOn();await this.grpLoad();await this.grpPush();await this.grpLoad();this.render();this.toast('Вы теперь партнёры: «'+((g&&g.name)||'Партнёры')+'»')}).catch(e=>{this._ptc=null;try{sessionStorage.removeItem('tw-pt')}catch(_){}this.toast(this.grpErr(e))}).finally(()=>{this._ptBusy=0})},
@@ -5371,7 +5409,7 @@ render(){if(!this._ph)this.phInit();this.phUser();const _th=(this.S&&this.S.pref
   const mtabs=simple?[['home','Сегодня'],['plans','Планы'],['tracker','Привычки'],['me','Настройки']]:[['home','Сегодня'],['plans','Планы'],['tracker','Привычки'],['progress','Прогресс'],['more','Профиль']],inMore=['more','profile','me'].includes(this.tab),fromHome=['journal','program'].includes(this.tab);
   this._pop=null;
   const canAdd=!this.sub&&['home','plans','tracker'].includes(this.tab);
-  $('nav').innerHTML=(canAdd?(this.tab==='home'?`<div class="qbar"><button class="qbar-t" onclick="APP.qaOpen()">${this.lang()==='en'?'Say or type your tasks':'Скажи или напиши задачи'}</button><button class="qbar-m" onclick="APP.qaOpen(1)" aria-label="Голосом">${this.QA_MIC}</button><button class="qbar-p" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button></div>`:`<button class="pfab" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button>`):'')+'<div class="in nv5">'+mtabs.map(([k,l])=>`<button class="${this.tab===k||(k==='more'&&inMore)||(k==='home'&&fromHome)||(simple&&k==='me'&&inMore)?'on':''}" onclick="APP.navGo('${k}')" aria-label="${l}">${NI[k]}</button>`).join('')+'</div>';
+  $('nav').innerHTML=(canAdd?((this.tab==='home'||this.tab==='plans')?`<div class="qbar"><button class="qbar-t" onclick="APP.qaOpen()">${this.lang()==='en'?'Say or type your tasks':'Скажи или напиши задачи'}</button><button class="qbar-m" onclick="APP.qaOpen(1)" aria-label="Голосом">${this.QA_MIC}</button><button class="qbar-p" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button></div>`:`<button class="pfab" onclick="APP.qMenu()" aria-label="Добавить">${MI.plus}</button>`):'')+'<div class="in nv5">'+mtabs.map(([k,l])=>`<button class="${this.tab===k||(k==='more'&&inMore)||(k==='home'&&fromHome)||(simple&&k==='me'&&inMore)?'on':''}" onclick="APP.navGo('${k}')" aria-label="${l}">${NI[k]}</button>`).join('')+'</div>';
   const P=this.prog();
   const ttl=this.sub==='programs'?'Программы':this.sub==='deals'?'Воронка':this.sub==='onboard'?'Старт':{home:'Сегодня',habits:'Прогресс',goals:(P?P.name:'Программа'),week:'Неделя',me:'Профиль'}[this.tab];
   const Pp=this.S.profile||{};
@@ -5938,23 +5976,29 @@ pvBalanceOld(){const S=this.S,td=today(),cur=td.slice(0,7),mo=this._wm||cur,[y,m
   return h},
 setWheel(mo,k,v){const S=this.S;S.wheel=S.wheel||{};S.wheel[mo]=Object.assign({},S.wheel[mo]||{});if(v)S.wheel[mo][k]=v;else delete S.wheel[mo][k];S.wheel[mo].t=Date.now();this.save();this.buzz(6);this.render()},
 wheelCopy(from,to){const S=this.S;S.wheel=S.wheel||{};S.wheel[to]=Object.assign({},S.wheel[from]||{},{t:Date.now()});this.save();this.render();this.toast('Скопировано, поправь, что изменилось')},
-pvYear(){const td=today(),y=+(this._yy||td.slice(0,4)),mode=this._ym||'done',C=this.S.checkin||{},f=v=>v.toFixed(1);
-  let closed=0,tracked=0;const mon=Array.from({length:12},()=>({a:0,b:0,e:0,k:0}));
-  for(let mi=0;mi<12;mi++){const dim=new Date(y,mi+1,0).getDate();for(let d=1;d<=dim;d++){const ds=y+'-'+pad(mi+1)+'-'+pad(d);if(ds>td)break;const a=this.dayAll(ds);if(a.n){tracked++;mon[mi].b++;mon[mi].a+=a.p;if(a.p>=.8)closed++}const c=C[ds],e=c&&+c.energy;if(e){mon[mi].k++;mon[mi].e+=e/5}}}
-  const val=mon.map(x=>mode==='mood'?(x.k?x.e/x.k:null):(x.b?x.a/x.b:null));
-  const curM=y===+td.slice(0,4)?+td.slice(5,7)-1:11;let sel=this._ymo;if(sel==null||sel<0||sel>11||(this._ymy!==y)){sel=val[curM]!=null?curM:val.reduce((q,v,i)=>v!=null?i:q,curM);this._ymo=sel;this._ymy=y}
-  const L=this.lang()==='en'?['J','F','M','A','M','J','J','A','S','O','N','D']:['Я','Ф','М','А','М','И','И','А','С','О','Н','Д'];
-  let cols='<defs><linearGradient id="yg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#5B2FBE"/><stop offset=".6" stop-color="#9B6FE8"/><stop offset="1" stop-color="#C4A4FF"/></linearGradient></defs>';
-  val.forEach((v,i)=>{const x=6+i*26.5,h=118,y0=134,on=i===sel,fut=y===+td.slice(0,4)&&i>curM;
-    cols+=`<g onclick="APP._ymo=${i};APP.render()" style="cursor:pointer"><rect x="${x-3}" y="8" width="25" height="150" fill="transparent"/><rect x="${x}" y="${y0-h}" width="19" height="${h}" rx="9.5" fill="rgba(255,255,255,${fut?.03:.06})" ${on?'stroke="#C4A4FF" stroke-opacity=".7" stroke-width="1.5"':''}/>${v?`<rect x="${x}" y="${f(y0-h*v)}" width="19" height="${f(Math.max(h*v,10))}" rx="9.5" fill="url(#yg)"/>`:''}<text x="${x+9.5}" y="152" text-anchor="middle" fill="${on?'#fff':'#8E8A98'}" font-size="12" font-weight="${on?700:600}">${L[i]}</text></g>`});
-  const bm=val.map((v,i)=>({i,v})).filter(x=>x.v!=null).sort((a,b)=>b.v-a.v)[0];
-  const sv=val[sel],opn=`APP.day='${y===+td.slice(0,4)&&sel===curM?td:y+'-'+pad(sel+1)+'-01'}';APP._plv='month';APP.go('plans')`;
-  return `<div class="yr"><div class="card"><div class="row"><button class="ic" onclick="APP._yy=${y-1};APP.render()">${I.l}</button><div class="sp" style="text-align:center"><b>${y}</b></div><button class="ic" ${y>=+td.slice(0,4)?'disabled style="opacity:.3"':''} onclick="APP._yy=${y+1};APP.render()">${I.r}</button></div>
-   <div class="pseg mini" style="margin:14px 0 0"><button class="${mode==='done'?'on':''}" onclick="APP._ym='done';APP.render()">Выполнение</button><button class="${mode==='mood'?'on':''}" onclick="APP._ym='mood';APP.render()">Энергия</button></div>
-   <div class="ym-big"><b>${sv==null?'—':Math.round(sv*100)+'%'}</b><span>${MONF[sel].toLowerCase()}</span></div>
-   <svg class="ym-s" viewBox="0 0 330 160">${cols}</svg>
-   <button class="btn gh w" style="margin-top:12px" onclick="${opn}">Открыть месяц</button></div>
-   <div class="card"><div class="kg ykg" style="margin-top:0"><div><b>${closed}</b><span>закрытых дней</span></div><div><b>${tracked}</b><span>дней с отметками</span></div><div><b>${tracked?Math.round(closed/tracked*100)+'%':'—'}</b><span>доля закрытых</span></div><div><b>${bm&&mode!=='mood'?MONF[bm.i]:'—'}</b><span>лучший месяц</span></div></div></div></div>`},
+pvYear(){const td=today(),Y=+td.slice(0,4),y=+(this._yy||Y),mode=this._ym||'done',C=this.S.checkin||{},en=this.lang()==='en';
+  const MS=en?['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']:['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
+  let closed=0,tracked=0,best=0,cur=0,focus=0,k=0;const wd=Array.from({length:7},()=>({a:0,n:0})),mon=Array.from({length:12},()=>({a:0,b:0}));
+  const lvl=p=>p<.34?1:p<.67?2:p<.8?3:4;let grid='';
+  for(let mi=0;mi<12;mi++){const dim=new Date(y,mi+1,0).getDate();grid+=`<span class="yh-l">${MS[mi]}</span>`;
+    for(let d=1;d<=31;d++){if(d>dim){grid+='<i class="x"></i>';continue}
+      const ds=y+'-'+pad(mi+1)+'-'+pad(d);k++;let cl='',p=null;
+      if(ds>td){cl='fu'}else if(mode==='mood'){const c=C[ds],e=c&&+c.energy;if(e){p=e/5;cl='l'+lvl(p)}else cl='n';const a=this.dayAll(ds);if(a.n){tracked++;mon[mi].b++;mon[mi].a+=a.p;if(a.p>=.8){closed++;cur++;best=Math.max(best,cur)}else cur=0}else cur=0}
+      else{const a=this.dayAll(ds);if(a.n){p=a.p;cl='l'+lvl(p);tracked++;mon[mi].b++;mon[mi].a+=p;const w=pd(ds).getDay();wd[w].a+=p;wd[w].n++;if(p>=.8){closed++;cur++;best=Math.max(best,cur)}else cur=0;focus+=this.focusOf(ds)}else{cl='n';cur=0}}
+      if(ds===td)cl+=' td';
+      const clk=ds>td?'':` onclick="APP.day='${ds}';APP._plv='day';APP.go('plans')"`;
+      grid+=`<i class="${cl}" style="--i:${k}"${clk} title="${d} ${MS[mi]}${p!=null?' · '+Math.round(p*100)+'%':''}"></i>`}}
+  const bm=mon.map((x,i)=>({i,v:x.b?x.a/x.b:null})).filter(x=>x.v!=null).sort((a,b)=>b.v-a.v)[0];
+  const wdb=wd.map((x,i)=>({i,v:x.n?x.a/x.n:null})).filter(x=>x.v!=null).sort((a,b)=>b.v-a.v)[0];
+  const fc=Object.values(this.S.fc||{}).filter(d=>String(d).startsWith(String(y))).length;
+  const pct=tracked?Math.round(closed/tracked*100):0,C2=2*Math.PI*30,dash=(C2*Math.min(1,pct/100)).toFixed(1);
+  const chip=(v,l)=>`<div><b>${v}</b><span>${l}</span></div>`;
+  return `<div class="yr"><div class="card yh-h"><div class="row"><button class="ic" onclick="APP._yy=${y-1};APP.render()" aria-label="Прошлый год">${I.l}</button><div class="sp" style="text-align:center"><b>${y}</b></div><button class="ic" ${y>=Y?'disabled style="opacity:.3"':''} onclick="APP._yy=${y+1};APP.render()" aria-label="Следующий год">${I.r}</button></div>
+   <div class="yh-top"><div class="yh-ring"><svg viewBox="0 0 72 72"><circle cx="36" cy="36" r="30" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="36" cy="36" r="30" fill="none" stroke="url(#yhg)" stroke-width="6" stroke-linecap="round" stroke-dasharray="${dash} ${C2.toFixed(1)}" transform="rotate(-90 36 36)"/><defs><linearGradient id="yhg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B2FBE"/><stop offset="1" stop-color="#C4A4FF"/></linearGradient></defs></svg><b>${tracked?pct+'%':'—'}</b></div>
+    <div class="yh-big"><b>${closed}</b><span>закрытых дней</span><em>из ${tracked} дней с отметками</em></div></div>
+   <div class="pseg mini" style="margin:12px 0 0"><button class="${mode==='done'?'on':''}" onclick="APP._ym='done';APP.render()">Выполнение</button><button class="${mode==='mood'?'on':''}" onclick="APP._ym='mood';APP.render()">Энергия</button></div></div>
+   <div class="card yh-c"><div class="yh-g">${grid}</div><div class="yh-lg"><span>меньше</span><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><span>больше</span></div></div>
+   <div class="card"><div class="kg ykg" style="margin-top:0">${chip(best,'лучшая серия')}${chip(bm&&mode!=='mood'?MS[bm.i]:'—','лучший месяц')}${chip(wdb&&mode!=='mood'?WD[wdb.i]:'—','сильный день недели')}${chip(fc,'граней за год')}</div></div></div>`},
 pvInsights(compact){const td=today(),rng=this._irng||30,scope=this._iscope||'all';
   let series=[];for(let i=rng-1;i>=0;i--){const d=add(td,-i);series.push({d,p:this.progDay(d,scope)})}series=this.trimLead(series,2);
   const v=series.map(x=>x.p).filter(x=>x!=null),avg=v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length*100):null;
@@ -6527,7 +6571,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const jr=`<div class="hd-c"><div class="hd-h"><b>Дневник</b><span onclick="APP._jd=today();APP.go('journal')" style="cursor:pointer">Все записи</span></div>${ents.length?ents.map(e=>`<div class="hd-jr" onclick="APP._jd='${e.d}';APP.go('journal')"><span class="hd-jd">${fd(e.d)}</span><div><b>${e.t}</b><span>${esc(e.x.length>90?e.x.slice(0,90)+'…':e.x)}</span></div></div>`).join(''):`<button class="hd-add" onclick="APP._jd=today();APP.go('journal')">+ Записать день</button>`}</div>`;
   const rad=this.pcRadar();
   const msgC=this.msgCard();
-  return {desk:`${this.ftPill()}<div class="hd-r1 hd-rs">${this.homeRings(o)}</div><div class="hd-cols"><div class="hd-cl">${this.homeNext()}${foc}${hab}</div><div class="hd-cr">${msgC}${this.cdChips?this.cdChips():''}${dyn}${rad?`<div class="hd-rd">${rad}</div>`:''}</div></div><div class="hd-g3 ${gs.length&&o.inS?'two':'one'}">${jr}${gs.length&&o.inS?goals:''}</div>`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`<div class="hm-duo">${this.thHome()}${msgC}</div>${dyn}${hab}${goals}`}},
+  return {desk:`${this.ftPill()}<div class="hd-r1 hd-rs">${this.homeRings(o)}</div><div class="hd-cols"><div class="hd-cl">${this.homeNext()}${foc}${hab}</div><div class="hd-cr"><div class="hm-duo hm-duo-d">${this.thHome()}${msgC}</div>${this.cdChips?this.cdChips():''}${dyn}${rad?`<div class="hd-rd">${rad}</div>`:''}</div></div>${gs.length&&o.inS?`<div class="hd-g3 one">${goals}</div>`:''}`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`<div class="hm-duo">${this.thHome()}${msgC}</div>${dyn}${hab}${goals}`}},
 dynHover(e,el){const v=JSON.parse(el.dataset.v),n=v.length;if(n<2)return;const r=el.getBoundingClientRect();let i=e?Math.round((e.clientX-r.left)/r.width*(n-1)):n-1;i=Math.max(0,Math.min(n-1,i));
   if(v[i]==null){let k=1;while(k<n&&v[i-k]==null&&v[i+k]==null)k++;i=v[i-k]!=null?i-k:i+k;if(v[i]==null)return}
   if(!e){i=n-1;while(i>0&&v[i]==null)i--}
@@ -7332,7 +7376,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=204');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=205');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
