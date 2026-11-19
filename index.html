@@ -257,6 +257,20 @@ html body .mp-w i.ok{background:linear-gradient(180deg,rgba(255,255,255,.85),rgb
 .sdc-g button:disabled{opacity:.28;cursor:default}
 .sdc-s{font:400 12.5px Manrope,system-ui,sans-serif;color:#8F8FA3;margin:6px 0 0}.sdc-s b{color:#fff;font-weight:600}
 .sdc .small.dim{display:none}
+/* флажки везде как галочки трекера: стеклянный круг и белая галочка */
+html body input[type=checkbox]{-webkit-appearance:none;appearance:none;width:22px;height:22px;min-width:22px;border-radius:50%;margin:0;flex:none;cursor:pointer;display:inline-block;vertical-align:middle;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);transition:background .15s,border-color .15s}
+html body input[type=checkbox]:checked{border-color:rgba(196,164,255,.3);background:linear-gradient(155deg,rgba(176,140,245,.24),rgba(106,63,208,.1)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat}
+html body input[type=checkbox]:focus-visible{outline:2px solid rgba(255,255,255,.4);outline-offset:2px}
+/* шаг «действия»: аккуратные строки со стеклянными флажками */
+html body .ob-t{display:flex;align-items:center;gap:12px}
+html body label.list-item.ob-t{padding:12px 2px;border-top:1px solid rgba(255,255,255,.08)}
+html body label.list-item.ob-t>.sp>div:first-child{font:500 14.5px Manrope,system-ui,sans-serif;color:#fff}
+html body label.list-item.ob-t .small{font-size:12.5px;color:#8F8FA3;margin-top:2px}
+/* шаг «действия»: спокойные поля, с воздухом внутри карточки */
+html body #app .card:has(.ob-gt){padding:18px 18px 14px}
+html body #app input.ob-gt{width:100%;font:600 15px Manrope,system-ui,sans-serif!important;font-size:15px!important;background:transparent!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.1)!important;border-radius:0!important;padding:2px 0 10px!important;box-shadow:none!important;color:#fff}
+html body #app textarea.ob-gr{width:100%;min-height:56px;margin:10px 0 6px;font:400 13.5px/1.5 Manrope,system-ui,sans-serif!important;font-size:13.5px!important;background:rgba(255,255,255,.035)!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:14px!important;padding:12px 14px!important;color:rgba(255,255,255,.8)}
+html body .ppc-ch em{padding:6px 12px!important;font-size:12px!important}
 /* дневник: вкладка «Мысли» */
 .th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
 .th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
@@ -5870,18 +5884,18 @@ obView(){const o=this._ob,st=o.step;
      <div class="row"><b class="sp">${t.name}</b>${on?`<span class="chk on" style="width:28px;height:28px;border-radius:9px">${I.ok2}</span>`:''}</div>
      <div class="small mut" style="margin-top:4px">${esc(t.result)} · ${t.tactics.length} ${APP.pl(t.tactics.length,'действие','действия','действий')}</div></button>`}).join('')}
    ${nav(true,n?"APP.obBuild();APP._ob.step=3;APP.render()":"APP.toast('Поставь или выбери хотя бы одну цель')")}`}
-  if(st===3)return `<div class="lbl">Шаг 3 из 4</div><div class="h1">${P.mode==='strict'?'Правила<br>каждый день':'Тактики<br>на неделю'}</div>${dots}
-   <div class="small mut" style="margin-bottom:10px">${P.mode==='strict'?'Каждый пункт — каждый день. Один пропуск, и счётчик начинается с первого дня. Убери то, что точно не твоё, до старта.':'Оставь только то, что реально будешь делать. Лучше 4 тактики по 85%, чем 8 по 40%.'}</div>
-   ${o.goals.map(g=>`<div class="card"><div class="row"><span class="dot" style="background:${g.color}"></span><input value="${esc(g.title)}" style="font-weight:700;background:transparent;border:0;padding:4px 0;box-shadow:none" onchange="APP._ob.goals.find(x=>x.id==='${g.id}').title=this.value"></div>
-     <textarea style="margin-top:6px;min-height:52px" placeholder="Результат: что будет правдой в конце программы" onchange="APP._ob.goals.find(x=>x.id==='${g.id}').result=this.value">${esc(g.result)}</textarea>
-     ${o.tactics.filter(t=>t.goal===g.id).map(t=>`<label class="list-item" style="cursor:pointer"><input type="checkbox" style="width:auto" ${t.on?'checked':''} onchange="APP._ob.tactics.find(x=>x.id==='${t.id}').on=this.checked"><div class="sp"><div>${esc(t.title)}</div><div class="small mut">${this.tDesc(t)}</div></div></label>`).join('')}
-     <button class="btn sm" style="margin-top:8px" onclick="APP.obAddT('${g.id}')">${I.plus} Своя тактика</button></div>`).join('')}
+  if(st===3)return `<div class="lbl">Шаг 3 из 4</div><div class="h1">${P.mode==='strict'?'Правила<br>каждый день':'Действия<br>на неделю'}</div>${dots}
+   <div class="small mut" style="margin-bottom:10px">${P.mode==='strict'?'Каждый пункт — каждый день. Один пропуск, и счётчик начинается с первого дня. Убери то, что точно не твоё, до старта.':'Оставь только то, что реально будешь делать. Лучше 4 действия по 85%, чем 8 по 40%.'}</div>
+   ${o.goals.map(g=>`<div class="card"><div class="row"><input class="ob-gt" value="${esc(g.title)}" onchange="APP._ob.goals.find(x=>x.id==='${g.id}').title=this.value"></div>
+     <textarea class="ob-gr" placeholder="Результат: что будет правдой в конце программы" onchange="APP._ob.goals.find(x=>x.id==='${g.id}').result=this.value">${esc(g.result)}</textarea>
+     ${o.tactics.filter(t=>t.goal===g.id).map(t=>`<label class="list-item ob-t" style="cursor:pointer"><input type="checkbox" ${t.on?'checked':''} onchange="APP._ob.tactics.find(x=>x.id==='${t.id}').on=this.checked"><div class="sp"><div>${esc(t.title)}</div><div class="small mut">${this.tDesc(t)}</div></div></label>`).join('')}
+     <button class="btn sm" style="margin-top:8px" onclick="APP.obAddT('${g.id}')">${I.plus} Своё действие</button></div>`).join('')}
    ${nav(fixedT?"APP._ob.step=1;APP.render()":true,"APP._ob.step=4;APP.render()")}`;
-  return `<div class="lbl">Шаг 4 из 4</div><div class="h1">Обяза-<br>тельство</div>${dots}
+  return `<div class="lbl">Шаг 4 из 4</div><div class="h1">Твоё<br>обещание</div>${dots}
    <div class="card"><div class="f"><label class="lbl">Как тебя зовут</label><input value="${esc(o.name)}" placeholder="Имя" onchange="APP.obSet('name',this.value)"></div>
    <div class="quote" style="margin:14px 0">Я, <b>${esc(o.name)||'…'}</b>, с ${fd(o.start)} по ${fd(o.days?add(o.start,o.days-1):add(o.start,o.weeks*7-1))} прохожу программу «${esc(P.name)}»${o.goals&&o.goals.length&&!fixedT?': '+o.goals.map(g=>esc(g.title)).join(', '):''}. ${P.mode==='strict'?'Каждый день закрываю все пункты. Пропуск — начинаю с первого дня.':P.mode==='count'?'Каждый выполненный день идёт в копилку, срыв не обнуляет.':'Каждый день отмечаю сделанное, каждое воскресенье смотрю счёт недели и держу планку 85%.'}</div>
    <div class="f"><label class="lbl">Партнёр по подотчётности (необязательно)</label><input value="${esc(o.partner)}" placeholder="Кому будешь отправлять отчёт по воскресеньям" onchange="APP.obSet('partner',this.value)"><div class="small dim" style="margin-top:6px">Люди, которые отчитываются другому человеку, доходят до цели заметно чаще.</div></div>
-   <label class="row" style="cursor:pointer;margin-top:8px"><input type="checkbox" style="width:auto" ${o.ok?'checked':''} onchange="APP.obSet('ok',this.checked)"> Подтверждаю и начинаю</label>
+   <label class="row ob-t" style="cursor:pointer;margin-top:8px;gap:12px"><input type="checkbox" ${o.ok?'checked':''} onchange="APP.obSet('ok',this.checked)"> <span>Подтверждаю и начинаю</span></label>
    ${nav(true,"APP.obFinish()",'Начать программу')}</div>`},
 obPick(id){const o=this._ob;if(o.pick.includes(id))o.pick=o.pick.filter(x=>x!==id);else if(o.pick.length+o.own.length<3)o.pick.push(id);this.render()},
 obOwn(){const o=this._ob;if(o.pick.length+o.own.length>=3)return this.toast('Уже три цели');
@@ -7478,7 +7492,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=208');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=209');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
