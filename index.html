@@ -3646,8 +3646,8 @@ init(){
   if(tp){history.replaceState(null,'',location.pathname);this.applyTpl(tp)}
   this.day=this.clampDay(today());
   try{this.tab=sessionStorage.getItem('tw-tab')||'home'}catch(e){}
-  const qpt=new URLSearchParams(location.search).get('pt');if(qpt){try{sessionStorage.setItem('tw-pt',qpt)}catch(e){}history.replaceState(null,'',location.pathname+location.hash)}try{this._ptc=sessionStorage.getItem('tw-pt')||null}catch(e){}const qt=new URLSearchParams(location.search).get('tab');if(qt){this.tab=this.normTab(qt);history.replaceState(null,'',location.pathname+location.hash)}
-  if(navigator.serviceWorker)navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.tab)this.go(e.data.tab)});
+  const qpt=new URLSearchParams(location.search).get('pt');if(qpt){try{sessionStorage.setItem('tw-pt',qpt)}catch(e){}history.replaceState(null,'',location.pathname+location.hash)}try{this._ptc=sessionStorage.getItem('tw-pt')||null}catch(e){}const qt=new URLSearchParams(location.search).get('tab');if(qt){this.tab=this.normTab(qt==='wk'?'progress':qt);if(qt==='wk')setTimeout(()=>this.wkCard(),1800);history.replaceState(null,'',location.pathname+location.hash)}
+  if(navigator.serviceWorker)navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.tab){if(e.data.tab==='wk'){this.go('progress');setTimeout(()=>this.wkCard(),600)}else this.go(e.data.tab)}});
   document.documentElement.lang=this.lang();
   if(this.lang()==='en')this.loadDict().then(()=>this.render());
   this.render();
@@ -6904,6 +6904,7 @@ vMe(){
       tog(ic('moon','#7C5CE6'),'Вечер',!!pp.evening,"APP.pushSet('evening',APP.pushPrefs().evening?'':'21:00')",pp.evening?'Закрыть день в '+pp.evening:'Выключено'),
       pp.evening?row(ic('list','#7C5CE6'),'Время вечером',pp.evening,"APP.ask('Время вечером',APP.pushPrefs().evening,v=>v&&APP.pushSet('evening',v),'time')"):'',
       tog(ic('target','#5D27DB'),'Разбор недели',pp.review,"APP.pushSet('review',!APP.pushPrefs().review)",'Воскресенье, 18:00'),
+      tog(ic('heart','#9B6FE8'),'Серия и возвращение',pp.ladder,"APP.pushSet('ladder',!APP.pushPrefs().ladder)",'Напомню, если серия под угрозой, и до трёх раз после пауз'),
       tog(ic('lotus','#9B6FE8'),'Колесо баланса',pp.wheel,"APP.pushSet('wheel',!APP.pushPrefs().wheel)",'1-е число месяца, 12:00')].join('')}</div>
     ${this.S.habits.some(h=>h.anc)?`<div class="lbl sec">Привязки привычек</div><div class="card sgrp"${dis}>${this.ANC.filter(a=>this.S.habits.some(h=>h.anc===a[0]&&!h.archived)).map(a=>row(ic('list','#9B6FE8'),a[1],this.ancTimes()[a[0]]||'выкл',`APP.ask('${a[1]}: время',APP.ancTimes()['${a[0]}'],v=>APP.ancSet('${a[0]}',v||''),'time')`,'Напомним про привычки, если они ещё не отмечены')).join('')}</div>`:''}
     ${on?`<button class="btn w nbtn" onclick="APP.pushTest()">Отправить тестовое уведомление</button>`:''}
@@ -7184,7 +7185,7 @@ track(ev,props,once){try{if(!this.sb||location.hostname==='localhost')return;con
   this.sb.from('tw_events').insert({did:this.did(),uid:this.user?this.user.id:null,ev,props:props||{},d:today()}).then(()=>{},()=>{});if(window.posthog&&this._ph&&!/^tab_/.test(ev))posthog.capture(ev,props||{})}catch(e){}},
 trackMarks(){if(this._fmk)return;const S=this.S,has=o=>Object.values(o||{}).some(x=>x&&Object.keys(x).length);if(has(S.hlog)||has(S.log)){this._fmk=1;this.track('first_mark',null,'ever')}},
 VAPID:'BDAUrTsDVqNLfDpt0giGnSTzxis_9Rq393FySipLm5Za0yTPZUvxyUgAo8yn8tQvPalCzZTD8uj2hdj4Pn4IA_k',
-pushPrefs(){const P=(this.S.pref||{}).push||{};return{morning:P.morning===undefined?'07:30':P.morning,evening:P.evening===undefined?'21:00':P.evening,review:P.review!==false,wheel:P.wheel===true,anch:this.ancTimes()}},
+pushPrefs(){const P=(this.S.pref||{}).push||{};return{morning:P.morning===undefined?'07:30':P.morning,evening:P.evening===undefined?'21:00':P.evening,review:P.review!==false,ladder:P.ladder!==false,wheel:P.wheel===true,anch:this.ancTimes()}},
 pushSupported(){return 'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window},
 isIOS(){return /iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)},
 isStandalone(){return navigator.standalone===true||matchMedia('(display-mode: standalone)').matches},
@@ -7205,7 +7206,7 @@ async pushOff(){try{const sub=await this.pushSub();if(sub){await this.sb.from('t
 async pushSet(k,v){this.S.pref=this.S.pref||{};this.S.pref.push={...this.pushPrefs(),on:!!this._pushOn,[k]:v};this.save();this.render();
   const sub=await this.pushSub();if(sub&&this.user)await this.sb.from('tw_push').update({prefs:this.pushPrefs(),lang:this.lang(),tz:Intl.DateTimeFormat().resolvedOptions().timeZone,updated_at:new Date().toISOString()}).eq('endpoint',sub.endpoint)},
 async pushTest(){try{const{data,error}=await this.sb.functions.invoke('tw-push',{body:{test:true}});if(error)throw error;const ok=(data.sent||[]).filter(x=>x>=200&&x<300).length;this.toast(ok?'Отправили. Уведомление придёт через пару секунд':'Не дошло. Выключи и включи уведомления заново')}catch(e){const m=String((e&&e.message)||e||'');this.toast(/Failed to send|fetch|network/i.test(m)?'Не получилось отправить тестовое уведомление. Попробуй позже':'Ошибка: '+this.errText(e))}},
-async pushSum(force){if(!this.user||!this.sb||!this._pushOn)return;const td=today(),a=this.dayAll(td),sm={date:td,n:a.n-a.done,st:this.dayStreak(),an:this.ancSum()},k=JSON.stringify(sm);if(!force&&k===this._pSum)return;this._pSum=k;
+async pushSum(force){if(!this.user||!this.sb||!this._pushOn)return;const td=today(),a=this.dayAll(td),la=(()=>{for(let i=0;i<=30;i++){const d=add(td,-i);if(this.dayAll(d).done>0)return d}return null})(),W=this.wkData(),sm={date:td,n:a.n-a.done,m:a.done,st:this.dayStreak(),la,fz:this.frozen(td)?1:0,wk:{d:W.marked,t:W.tasks,f:W.fc,e:add(this.monday(td),6)===td?1:0},an:this.ancSum()},k=JSON.stringify(sm);if(!force&&k===this._pSum)return;this._pSum=k;
   try{await this.sb.from('tw_push').update({sum:sm}).eq('user_id',this.user.id)}catch(e){}},
 async pushCheck(){const sub=this.pushSupported()?await this.pushSub():null,on=!!sub&&Notification.permission==='granted';if(on!==this._pushOn){this._pushOn=on;this.render()}
   if(sub&&this.user&&!(this.S.pref||{}).nw1){this.S.pref=this.S.pref||{};this.S.pref.nw1=1;this.S.pref.push={...this.pushPrefs(),on:true,wheel:false};this.save();try{await this.sb.from('tw_push').update({prefs:this.pushPrefs(),updated_at:new Date().toISOString()}).eq('endpoint',sub.endpoint)}catch(e){}}},
@@ -7219,7 +7220,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=198');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=199');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
