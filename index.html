@@ -84,6 +84,33 @@
 .wkc-b b{color:#fff;font-weight:600}
 .wkc-open{width:100%;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02));color:#fff;font:600 13px Manrope,sans-serif;cursor:pointer}
 @media(min-width:1024px){html body .g57{max-width:540px;margin-left:auto;margin-right:auto}html body .g57-s{max-width:540px;margin-left:auto;margin-right:auto}html body .fc-top,html body .fc-map{max-width:760px;margin-left:auto!important;margin-right:auto!important}}
+/* ноутбук: профиль компактной сеткой, чтобы всё было видно почти на одном экране */
+@media(min-width:1024px){
+html body .dmain:has(>.fc-top){display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;align-items:start}
+html body .dmain:has(>.fc-top)>*{margin:0!important;max-width:none!important}
+html body .dmain:has(>.fc-top)>.fc-top,html body .dmain:has(>.fc-top)>.fc-map{grid-column:span 3}
+html body .dmain:has(>.fc-top)>.fc-lb,html body .dmain:has(>.fc-top)>.pcg0{grid-column:1/-1}
+html body .dmain:has(>.fc-top)>.fc-c{grid-column:span 2}
+html body .dmain:has(>.fc-top)>.fc-c:nth-child(n+7){grid-column:span 3}
+html body .dmain:has(>.fc-top) .g57{max-width:330px}
+html body .dmain:has(>.fc-top) .fc-top .gimg,html body .dmain:has(>.fc-top) .fc-top .pv-gm{max-width:190px!important;margin-left:auto!important;margin-right:auto!important}
+html body .dmain:has(>.fc-top) .fc-how,html body .dmain:has(>.fc-top) .fc-gr,html body .dmain:has(>.fc-top) .fc-q{display:none!important}
+html body .dmain:has(>.fc-top)>.fc-top,html body .dmain:has(>.fc-top)>.fc-map{align-self:stretch}
+}
+/* ноутбук: «Сегодня» двумя колонками, чтобы почти всё помещалось на экран */
+@media(min-width:1024px){
+html body .hd-cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:12px;align-items:start;margin-top:12px}
+html body .hd-cl,html body .hd-cr{display:flex;flex-direction:column;gap:12px;min-width:0}
+html body .hd-cl>*,html body .hd-cr>*{margin:0!important}
+html body .hd-rs{display:block;margin-bottom:0}
+html body #app .hd-r1.hd-rs .hr-c{padding:10px 22px!important}
+html body #app .hd-r1.hd-rs .hr-r,html body #app .hd-r1.hd-rs .hr-svg{width:64px!important;height:64px!important;min-width:0!important}
+html body #app .hmz{padding:8px 26px!important}
+html body #app .hd-cols .hx-row{padding:8px 14px!important}
+html body #app .hd-cols .hd-ht{row-gap:0!important}
+html body #app .hd-cols .hd-ht .hd-nm{padding:1px 0!important}
+html body #app .hd-cols .hd-ht .hd-dt{padding:1px 0!important}
+}
 @media (prefers-reduced-motion:reduce){.fcm *{animation:none!important;transition-duration:.01s!important}}
 </style>
 <meta name="theme-color" content="#07070D">
@@ -6415,7 +6442,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const jr=`<div class="hd-c"><div class="hd-h"><b>Дневник</b><span onclick="APP._jd=today();APP.go('journal')" style="cursor:pointer">Все записи</span></div>${ents.length?ents.map(e=>`<div class="hd-jr" onclick="APP._jd='${e.d}';APP.go('journal')"><span class="hd-jd">${fd(e.d)}</span><div><b>${e.t}</b><span>${esc(e.x.length>90?e.x.slice(0,90)+'…':e.x)}</span></div></div>`).join(''):`<button class="hd-add" onclick="APP._jd=today();APP.go('journal')">+ Записать день</button>`}</div>`;
   const rad=this.pcRadar();
   const msgC=this.msgCard();
-  return {desk:`${this.ftPill()}<div class="hd-r1">${this.homeRings(o)}<div class="hd-r1b">${this.homeNext()}${msgC}${this.cdChips?this.cdChips():''}${foc}</div></div><div class="hd-g1 one">${dyn}</div><div class="hd-g2${rad?'':' one'}">${hab}${rad?`<div class="hd-rd">${rad}</div>`:''}</div><div class="hd-g3 ${gs.length&&o.inS?'two':'one'}">${jr}${gs.length&&o.inS?goals:''}</div>`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`${msgC}${dyn}${hab}${goals}`}},
+  return {desk:`${this.ftPill()}<div class="hd-r1 hd-rs">${this.homeRings(o)}</div><div class="hd-cols"><div class="hd-cl">${this.homeNext()}${foc}${hab}</div><div class="hd-cr">${msgC}${this.cdChips?this.cdChips():''}${dyn}${rad?`<div class="hd-rd">${rad}</div>`:''}</div></div><div class="hd-g3 ${gs.length&&o.inS?'two':'one'}">${jr}${gs.length&&o.inS?goals:''}</div>`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`${msgC}${dyn}${hab}${goals}`}},
 dynHover(e,el){const v=JSON.parse(el.dataset.v),n=v.length;if(n<2)return;const r=el.getBoundingClientRect();let i=e?Math.round((e.clientX-r.left)/r.width*(n-1)):n-1;i=Math.max(0,Math.min(n-1,i));
   if(v[i]==null){let k=1;while(k<n&&v[i-k]==null&&v[i+k]==null)k++;i=v[i-k]!=null?i-k:i+k;if(v[i]==null)return}
   if(!e){i=n-1;while(i>0&&v[i]==null)i--}
