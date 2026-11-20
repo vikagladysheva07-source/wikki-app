@@ -306,6 +306,114 @@ html body #app .dd-hot{outline:1.5px solid rgba(155,111,232,.6);outline-offset:-
 .dd-chip b{display:block;font-size:16px;font-weight:600}.dd-chip span{display:block;font-size:11px;color:var(--mut,rgba(229,222,246,.58))}
 .dd-chip.dd-hot{border-color:rgba(155,111,232,.75);background:rgba(34,26,60,.9);box-shadow:0 0 14px rgba(155,111,232,.35);outline:0}
 @media(prefers-reduced-motion:reduce){html body #app .dd-ghost{transform:none}}
+.dzp-r,.hx-row[data-tid]{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+html body #app .dzp-r.dd-ghost{background:rgba(22,18,36,.94);border:1px solid rgba(255,255,255,.16)!important;border-radius:16px;padding:10px 14px}
+/* дневник как на iPhone: страницы списком, мысли ровными плитками, шаги программ с подсветкой */
+.ios-s{position:relative;margin:2px 0 14px}.ios-s svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:#8E8A98;pointer-events:none}
+html body #app .ios-q{width:100%;height:46px;margin:0;border-radius:14px;padding:0 14px 0 42px!important;font:400 16px Manrope,system-ui,sans-serif;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#F2EDE2;outline:0}
+html body #app .ios-q:focus{border-color:rgba(155,111,232,.5);box-shadow:0 0 14px rgba(155,111,232,.18)}
+.ios-gh{font:600 13px Manrope,system-ui,sans-serif;color:#8E8A98;margin:20px 6px 8px}
+.ios-g{border-radius:18px;overflow:hidden;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+.ios-r{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:14px 16px;text-align:left;background:none;border:0;border-top:1px solid rgba(255,255,255,.07);color:#F2EDE2;font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ios-r:first-child{border-top:0}.ios-r:active{background:rgba(255,255,255,.06)}
+.ios-r>b{flex:1;font:600 16px/1.3 Manrope,system-ui,sans-serif}
+.ios-m{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}.ios-m b{font:600 16px/1.3 Manrope,system-ui,sans-serif;display:flex;align-items:center;gap:6px}
+.ios-m em{font-style:normal;font:400 14px/1.35 Manrope,system-ui,sans-serif;color:#9A96A6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ios-d{flex:none;align-self:flex-start;margin-top:3px;font:400 13px Manrope,system-ui,sans-serif;color:#8E8A98}
+.ios-c{flex:none;display:grid;place-items:center;color:#6C6878}.ios-c svg{width:16px;height:16px}
+.ios-pin{display:inline-grid;color:#C4A4FF}.ios-pin svg{width:13px;height:13px}
+.ios-new i{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-style:normal;color:#fff;border:1.5px solid rgba(196,164,255,.7);box-shadow:0 0 14px rgba(155,111,232,.4)}.ios-new i svg{width:16px;height:16px}
+.ios-new b{font-weight:600}
+.ios-tp{margin-top:10px}.ios-tp>.ios-r:first-child .ios-c{transition:transform .2s}.ios-tp.op>.ios-r:first-child .ios-c{transform:rotate(90deg)}.ios-sub b{font-weight:500;color:#D9D4E6;padding-left:6px}
+html body #app .th-md{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+html body #app .th-md button{grid-column:span 2;min-height:46px;padding:0 6px;border-radius:14px;font:500 14px Manrope,system-ui,sans-serif;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.78)}
+html body #app .th-md button:nth-child(n+4){grid-column:span 3}
+html body #app .th-md button.on{color:#fff;border-color:rgba(196,164,255,.7);background:linear-gradient(160deg,rgba(155,111,232,.22),rgba(91,47,190,.08));box-shadow:0 0 16px rgba(155,111,232,.3)}
+html body #app .th-ft{flex-direction:column;align-items:stretch;gap:10px}
+html body #app .th-pr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%}
+html body #app .th-pr button{min-height:42px;padding:0 3px;border-radius:12px;font:500 12.5px Manrope,system-ui,sans-serif;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);color:#B9B4C6}
+html body #app .th-go{width:100%;min-height:50px;border-radius:16px;font-size:15px}
+html body #app .pgi-s{align-items:center;gap:14px;padding:10px 0}
+html body #app .pgi-s i{width:32px;height:32px;font:700 14px Manrope,system-ui,sans-serif;color:#fff;border:1.5px solid rgba(196,164,255,.6);background:rgba(155,111,232,.16);box-shadow:0 0 10px rgba(155,111,232,.3)}
+html body #app .pgi-s b{font-size:15.5px}
+/* программы: единый стиль приложения (стекло, подписи без капса, тонкие разделители) */
+html body #app .mp-h{font:600 13px Manrope,system-ui,sans-serif;letter-spacing:0;text-transform:none;color:#8E8A98}
+html body #app .mp-o{font:600 13px Manrope,system-ui,sans-serif;letter-spacing:0;text-transform:none;color:#8E8A98;margin:22px 6px 6px}
+html body #app .ppc{background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+html body #app .ppc.on{border-color:rgba(155,111,232,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 20px rgba(155,111,232,.12)}
+html body #app .ppc-n{font-size:24px;font-weight:600;letter-spacing:-.2px}
+html body #app .ppc-on{background:rgba(255,255,255,.1);color:#F2EDE2;border:1px solid rgba(255,255,255,.18)}
+html body #app .ppc-ch em,html body #app .ppc-ch em.st{background:rgba(255,255,255,.1)!important;color:#F2EDE2!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:none!important}
+html body #app .ppc-f{font:500 15.5px/1.45 Manrope,system-ui,sans-serif;color:#F2EDE2;margin-bottom:0}
+html body #app .ppc-d{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);font:400 14.5px/1.5 Manrope,system-ui,sans-serif;color:#CFCADB}
+html body #app .ppc-d span{font:600 13px Manrope,system-ui,sans-serif;letter-spacing:0;text-transform:none;color:#8E8A98;margin-bottom:5px}
+html body #app .ppc-r{margin-top:2px}
+html body #app .ppc-r div{padding:11px 0;border-top:1px solid rgba(255,255,255,.06);font-size:14.5px;color:#D6D1E3}
+html body #app .ppc-r div:first-child{border-top:0}
+html body #app .ppc-b .btn,html body #app .mp .btn{font-weight:600}
+html body #app .ppc-b .btn{margin-top:18px}
+@media(min-width:1024px){html body #app .ppl{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}}
+/* программы: компактные карточки, подробности по тапу */
+html body #app .ppc-top{padding:40px 18px 14px}
+html body #app .ppc-b{padding:14px 18px 16px}
+html body #app .ppc-det{margin-top:12px;border-top:1px solid rgba(255,255,255,.08)}
+html body #app .ppc-det>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:13px 2px 2px;font:500 14.5px Manrope,system-ui,sans-serif;color:#D6D1E3;cursor:pointer;-webkit-tap-highlight-color:transparent}
+html body #app .ppc-det>summary::-webkit-details-marker{display:none}
+html body #app .ppc-det>summary::before{content:none!important;display:none!important}
+html body #app .ppc-det>summary::marker{content:''}
+html body #app .ppc-det>summary{text-align:left}
+html body #app .ppc-det>summary::after{content:"";width:8px;height:8px;margin-right:4px;border:solid #8E8A98;border-width:0 1.8px 1.8px 0;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+html body #app .ppc-det[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}
+html body #app .ppc-det[open]>summary{padding-bottom:0}
+html body #app .ppc-det>.ppc-d:first-of-type{border-top:0;margin-top:6px}
+html body #app .ppc-b .btn{margin-top:14px}
+/* дневник: свободные мысли и распаковка, страница как в Заметках iPhone */
+html body #app .th-un{margin-top:12px;border-radius:22px;padding:0;overflow:hidden}
+html body #app .th-un>summary{list-style:none;display:flex;align-items:center;gap:14px;padding:16px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+html body #app .th-un>summary::-webkit-details-marker{display:none}
+html body #app .th-un>summary::before{content:none!important;display:none!important}
+html body #app .th-un>summary::after{content:"";margin-left:auto;width:8px;height:8px;border:solid #8E8A98;border-width:0 1.8px 1.8px 0;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+html body #app .th-un[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}
+html body #app .th-un>summary>i{display:grid;color:#C4A4FF}html body #app .th-un>summary>i svg{width:26px;height:26px}
+html body #app .th-un-t b{display:block;font:600 16px Manrope,system-ui,sans-serif;color:#F2EDE2}
+html body #app .th-un-t em{display:block;font:400 13.5px Manrope,system-ui,sans-serif;font-style:normal;color:#9A96A6;margin-top:2px}
+html body #app .th-ql{display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.08)}
+html body #app .th-q{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:15px 16px;background:none;border:0;border-top:1px solid rgba(255,255,255,.06);color:#EDE8F7;font:400 15.5px/1.4 Manrope,system-ui,sans-serif;cursor:pointer}
+html body #app .th-q:first-child{border-top:0}html body #app .th-q span{flex:1}
+html body #app .th-q i{display:grid;color:#8E8A98}html body #app .th-q i svg{width:18px;height:18px}
+html body #app .th-q:active{background:rgba(255,255,255,.05)}
+html body #app .th-qm{width:100%;padding:14px;background:none;border:0;border-top:1px solid rgba(255,255,255,.08);color:#B9B4C6;font:500 14.5px Manrope,system-ui,sans-serif;cursor:pointer}
+html body #app .th-ft{display:block}
+html body #app .ios-ed{padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
+html body #app .ios-ed .np-top{display:flex;align-items:center;justify-content:space-between;margin:2px 0 4px}
+html body #app .ios-ed .np-bk{display:flex;align-items:center;gap:2px;margin-left:-6px;padding:10px 8px 10px 4px;background:none;border:0;color:#F2EDE2;font:500 16px Manrope,system-ui,sans-serif;cursor:pointer}
+html body #app .ios-ed .np-bk svg{width:20px;height:20px}
+html body #app .ios-ed .np-mn{display:grid;place-items:center;width:44px;height:44px;margin-right:-8px;background:none;border:0;color:#F2EDE2;cursor:pointer}html body #app .ios-ed .np-mn svg{width:22px;height:22px}
+html body #app .ios-ed .np-dt{text-align:center;font:400 12.5px Manrope,system-ui,sans-serif;color:#8E8A98;margin:4px 0 14px}
+html body #app .ios-ed .np-title{width:100%;padding:4px 0 12px;font:600 28px/1.2 Manrope,system-ui,sans-serif;letter-spacing:-.3px;color:#F2EDE2;background:none;border:0;outline:0}
+html body #app .ios-ed .np-title::placeholder{color:rgba(242,237,226,.28)}
+html body #app .ios-ed .np-r{padding-left:0}html body #app .ios-ed .np-h{display:none}
+html body #app .ios-ed .np-t{font-size:16.5px;line-height:1.6;color:#E7E2F2;padding:4px 0}
+html body #app .ios-ed .np-tbw{position:sticky;bottom:96px;z-index:6;margin-top:28px;display:flex;flex-direction:column;align-items:center;gap:8px}
+html body #app .ios-ed .np-tb{display:flex;align-items:center;gap:4px;padding:5px;border-radius:20px;background:rgba(18,16,28,.82);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.14);box-shadow:0 14px 34px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.1)}
+html body #app .ios-ed .np-tb button{display:grid;place-items:center;width:64px;height:46px;border-radius:15px;background:none;border:0;color:#EDE8F7;cursor:pointer}
+html body #app .ios-ed .np-tb button:active{background:rgba(255,255,255,.08)}html body #app .ios-ed .np-tb svg{width:24px;height:24px}
+html body #app .ios-ed .np-fm{display:none;width:min(260px,100%);flex-direction:column;border-radius:18px;overflow:hidden;background:rgba(18,16,28,.94);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.14);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+html body #app .ios-ed .np-fm.on{display:flex}
+html body #app .ios-ed .np-fm button{padding:14px 18px;text-align:left;background:none;border:0;border-top:1px solid rgba(255,255,255,.07);color:#F2EDE2;font:500 15.5px Manrope,system-ui,sans-serif;cursor:pointer}
+html body #app .ios-ed .np-fm button:first-child{border-top:0}html body #app .ios-ed .np-fm button:active{background:rgba(255,255,255,.07)}
+@media(min-width:1024px){html body #app .ios-ed .np-tbw{bottom:22px}}
+html body #app .ios-ed .np-title,html body #app .ios-ed .np-t{border:0!important;background:none!important;box-shadow:none!important;border-radius:0!important;outline:0!important;padding-left:0!important;padding-right:0!important}
+html body #app .ios-ed .np-title{padding-top:4px!important;padding-bottom:12px!important}
+html body #app .ios-ed{display:flex;flex-direction:column;min-height:calc(100vh - 250px)}
+html body #app .ios-ed .np-b{flex:0 0 auto}
+html body #app .ios-ed .np-tbw{margin-top:auto;padding-top:28px}
+html body #app .ios-ed input.np-title{font-size:28px!important;line-height:1.2!important;font-weight:600!important;letter-spacing:-.3px}
+html body #app .ios-ed textarea.np-t{font-size:16.5px!important;line-height:1.6!important}
+html body #app .ios-ed .np-st:not(:empty)::before{content:" · "}
+html body #app .th-go{color:#F2EDE2;border:1px solid rgba(196,164,255,.5);background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.05));box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 16px rgba(155,111,232,.22);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-weight:600}
+html body #app .th-go:active{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.07))}
+html body #app .th-go:disabled{color:rgba(242,237,226,.45);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04);box-shadow:none}
 /* дневник: вкладка «Мысли» */
 .th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
 .th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
@@ -4236,6 +4344,7 @@ npKey(e,el){const p=this.npCur();if(!p)return;const i=p.blocks.findIndex(x=>x.id
     if(i>0){let j=i-1;while(j>=0&&p.blocks[j].t==='hr')j--;e.preventDefault();if(j<0){p.blocks.splice(i-1,1);this.npTouch();this.render();return this.npFocus(b.id,0)}const pr=p.blocks[j],pos=pr.v.length;pr.v+=el.value;p.blocks.splice(i,1);this.npTouch();this.render();return this.npFocus(pr.id,pos)}}
   if(e.key==='ArrowUp'&&el.selectionStart===0&&i>0){const pr=p.blocks.slice(0,i).reverse().find(x=>x.t!=='hr');if(pr){e.preventDefault();this.npFocus(pr.id)}}
   if(e.key==='ArrowDown'&&el.selectionEnd===el.value.length){const nx=p.blocks.slice(i+1).find(x=>x.t!=='hr');if(nx){e.preventDefault();this.npFocus(nx.id,0)}}},
+npFmt(f){const m=$('npFm');if(!m)return;m.classList.toggle('on',f==null?!m.classList.contains('on'):!!f)},
 npAdd(t){const p=this.npCur();if(!p)return;const last=p.blocks[p.blocks.length-1];let b;if(t!=='hr'&&last&&last.t==='p'&&!last.v){last.t=t;b=last}else{b={id:'k'+uid(),t,v:''};p.blocks.push(b)}if(t==='hr'){const nb={id:'k'+uid(),t:'p',v:''};p.blocks.push(nb);b=nb}this.npTouch();this.render();this.npFocus(b.id)},
 npCheck(id){const p=this.npCur(),b=p&&p.blocks.find(x=>x.id===id);if(!b)return;b.done=!b.done;if(b.done)this.buzz(8);this.npTouch();this.render()},
 npBMenu(id){const p=this.npCur(),i=p?p.blocks.findIndex(x=>x.id===id):-1,b=p&&p.blocks[i];if(!b)return;const T=[['p','Текст'],['h','Заголовок'],['li','Список'],['todo','Задача'],['quote','Цитата']];
@@ -4262,16 +4371,28 @@ npBlock(b){const H='<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" 
 npView(){const P=this.npList(),p=this.npCur();
   if(p){setTimeout(()=>document.querySelectorAll('.np-t').forEach(e=>this.npGrow(e)),0);
     const td=p.blocks.filter(b=>b.t==='todo'),dn=td.filter(b=>b.done).length;
-    return `<div class="card np-ed"><div class="np-top"><button class="ic" onclick="APP._pg=null;APP.render()" aria-label="Назад">${I.l}</button><span class="sp np-st" id="npSt">${td.length?`${dn} из ${td.length} ${this.pl(td.length,'задачи','задач','задач')}`:''}</span><button class="ic" onclick="APP.npMenu()" aria-label="Меню">${I.gear}</button></div>
-    <input class="np-title" value="${esc(p.title||'')}" placeholder="Без названия" oninput="APP.npTitle(this.value)" onkeydown="if(event.key==='Enter'){event.preventDefault();const f=APP.npCur().blocks.find(x=>x.t!=='hr');f&&APP.npFocus(f.id,0)}">
+    const en=this.lang()==='en',dx=new Date(p.upd||Date.now()),dts=dx.toLocaleDateString(en?'en-US':'ru-RU',{day:'numeric',month:'long',year:'numeric'})+(en?' at ':' в ')+pad(dx.getHours())+':'+pad(dx.getMinutes());
+    const TI={
+      todo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="7" r="2.2"/><circle cx="5.5" cy="17" r="2.2"/><path d="M11 7h9M11 17h9"/></svg>',
+      li:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="5" cy="7" r="1.2" fill="currentColor"/><circle cx="5" cy="12" r="1.2" fill="currentColor"/><circle cx="5" cy="17" r="1.2" fill="currentColor"/><path d="M10 7h10M10 12h10M10 17h10"/></svg>',
+      aa:'<svg viewBox="0 0 24 24" fill="currentColor"><text x="1.5" y="17.5" font-size="16" font-weight="600" font-family="Manrope,system-ui,sans-serif">Aa</text></svg>'};
+    const FM=[['h','Заголовок'],['p','Текст'],['li','Список'],['todo','Чек-лист'],['quote','Цитата'],['hr','Разделитель']];
+    return `<div class="np-ed ios-ed"><div class="np-top"><button class="np-bk" onclick="APP._pg=null;APP.render()" aria-label="Назад">${I.l}<span>Страницы</span></button><button class="np-mn" onclick="APP.npMenu()" aria-label="Меню"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button></div>
+    <div class="np-dt">${dts}<span class="np-st" id="npSt">${td.length?`${dn}/${td.length}`:''}</span></div>
+    <input class="np-title" value="${esc(p.title||'')}" placeholder="Заголовок" oninput="APP.npTitle(this.value)" onkeydown="if(event.key==='Enter'){event.preventDefault();const f=APP.npCur().blocks.find(x=>x.t!=='hr');f&&APP.npFocus(f.id,0)}">
     <div class="np-b">${p.blocks.map(b=>this.npBlock(b)).join('')}</div>
-    <div class="np-add">${[['p','Текст'],['h','Заголовок'],['li','Список'],['todo','Задача'],['quote','Цитата'],['hr','Линия']].map(([t,l])=>`<button onmousedown="event.preventDefault()" onclick="APP.npAdd('${t}')">+ ${l}</button>`).join('')}</div></div>`}
+    <div class="np-tbw"><div class="np-fm" id="npFm">${FM.map(([t,l])=>`<button onmousedown="event.preventDefault()" onclick="APP.npFmt(0);APP.npAdd('${t}')">${l}</button>`).join('')}</div>
+      <div class="np-tb"><button onmousedown="event.preventDefault()" onclick="APP.npFmt()" aria-label="Формат">${TI.aa}</button><button onmousedown="event.preventDefault()" onclick="APP.npAdd('todo')" aria-label="Чек-лист">${TI.todo}</button><button onmousedown="event.preventDefault()" onclick="APP.npAdd('li')" aria-label="Список">${TI.li}</button></div></div></div>`}
   const q=(this._npq||'').trim().toLowerCase(),L=P.filter(x=>!q||this.npText(x).toLowerCase().includes(q)).sort((a,b)=>(b.pin?1:0)-(a.pin?1:0)||(b.upd||0)-(a.upd||0));
-  const card=x=>{const fb=x.blocks.find(b=>b.v&&b.t!=='h')||x.blocks.find(b=>b.v),td=x.blocks.filter(b=>b.t==='todo'&&b.v),dn=td.filter(b=>b.done).length;
-    return `<button class="np-c" onclick="APP._pg='${x.id}';APP.render();window.scrollTo(0,0)">${x.pin?`<i class="np-pin">${I.star}</i>`:''}<b>${esc(x.title||'Без названия')}</b><em>${fb?esc(fb.v.slice(0,110)):'Пустая страница'}</em><span>${td.length?`<u style="--p:${Math.round(dn/td.length*100)}%"></u>${dn}/${td.length} · `:''}${new Date(x.upd||Date.now()).toLocaleDateString('ru-RU',{day:'numeric',month:'short'})}</span></button>`};
-  return `<div class="np-new"><button class="np-nb" onclick="APP.npNew(0)"><span>${I.plus}</span><b>Новая страница</b></button><div class="np-tp">${this.NPT.slice(1).map((t,i)=>`<button onclick="APP.npNew(${i+1})">${t[0]}</button>`).join('')}</div></div>
-  ${P.length>3?`<input class="jb-q np-q" placeholder="Поиск по страницам" value="${esc(this._npq||'')}" oninput="APP._npq=this.value;clearTimeout(APP._npqt);APP._npqt=setTimeout(()=>{APP.render();const e=document.querySelector('.np-q');if(e){e.focus();e.setSelectionRange(e.value.length,e.value.length)}},250)">`:''}
-  ${L.length?`<div class="np-g">${L.map(card).join('')}</div>`:`<div class="vb-empty"><b>${q?'Ничего не нашлось':'Свои страницы'}</b><p>${q?'Попробуй другое слово.':'Планы, списки, конспекты, идеи. Пиши свободно: заголовки, списки, задачи с галочками. Начни строку с «- », «[] » или «# », и блок сам станет списком, задачей или заголовком.'}</p></div>`}`},
+  const now=Date.now(),DAY=864e5,fmtD=x=>new Date(x.upd||now).toLocaleDateString('ru-RU',{day:'numeric',month:'short'});
+  const row=x=>{const fb=x.blocks.find(b=>b.v&&b.t!=='h')||x.blocks.find(b=>b.v),td=x.blocks.filter(b=>b.t==='todo'&&b.v),dn=td.filter(b=>b.done).length;
+    return `<button class="ios-r" onclick="APP._pg='${x.id}';APP.render();window.scrollTo(0,0)"><span class="ios-m"><b>${x.pin?`<i class="ios-pin">${I.star}</i>`:''}${esc(x.title||'Без названия')}</b><em>${td.length?`${dn}/${td.length} · `:''}${fb?esc(fb.v.slice(0,90)):'Пустая страница'}</em></span><span class="ios-d">${fmtD(x)}</span></button>`};
+  const GR=[['Закреплённые',x=>x.pin],['Последние 7 дней',x=>!x.pin&&now-(x.upd||now)<7*DAY],['Ранее',x=>!x.pin&&now-(x.upd||now)>=7*DAY]];
+  const groups=GR.map(([l,f])=>{const A=L.filter(f);return A.length?`<div class="ios-gh">${l}</div><div class="ios-g">${A.map(row).join('')}</div>`:''}).join('');
+  return `<div class="ios-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input class="jb-q np-q ios-q" placeholder="Поиск по страницам" value="${esc(this._npq||'')}" oninput="APP._npq=this.value;clearTimeout(APP._npqt);APP._npqt=setTimeout(()=>{APP.render();const e=document.querySelector('.np-q');if(e){e.focus();e.setSelectionRange(e.value.length,e.value.length)}},250)"></div>
+  <div class="ios-g"><button class="ios-r ios-new" onclick="APP.npNew(0)"><i>${I.plus}</i><b>Новая страница</b></button></div>
+  <div class="ios-g ios-tp ${this._npt?'op':''}"><button class="ios-r" onclick="APP._npt=!APP._npt;APP.render()"><b>Шаблоны</b><span class="ios-c">${I.r}</span></button>${this._npt?this.NPT.slice(1).map((t,i)=>`<button class="ios-r ios-sub" onclick="APP.npNew(${i+1})"><b>${t[0]}</b><span class="ios-c">${I.r}</span></button>`).join(''):''}</div>
+  ${L.length?groups:`<div class="vb-empty"><b>${q?'Ничего не нашлось':'Свои страницы'}</b><p>${q?'Попробуй другое слово.':'Планы, списки, конспекты, идеи. Пиши свободно: заголовки, списки, задачи с галочками. Начни строку с «- », «[] » или «# », и блок сам станет списком, задачей или заголовком.'}</p></div>`}`},
 /* свойства дел и привычек как в Notion */
 PCOL:['#9B6FE8','#C4A4FF','#5B2FBE','#E8DFFF','#8A8F9E'],
 PTYPES:[['sel','Выбор'],['multi','Несколько'],['num','Число'],['text','Текст'],['date','Дата'],['check','Галочка'],['url','Ссылка']],
@@ -4962,7 +5083,13 @@ jPrompt(d,txt){const el=$('jrN');if(!el)return;const pre=el.value&&!el.value.end
 thHome(){const P=this.thPrompts();
   return `<button class="msg3 thd" onclick="APP._jv='th';APP.go('journal')"><span class="msg3-t"><b>Дневник</b><span>Документируй путь</span></span><span class="thd-i" aria-hidden="true"><img src="diary.webp" alt="" draggable="false" width="150" height="150"></span></button>`},
 thList(){return this.S.thoughts=this.S.thoughts||[]},
-thPrompts(){return ['Что изменилось сегодня?','Какой шаг приблизил к цели?','Что стало яснее на этом пути?','Что сегодня далось непросто?','Чем сегодня можно гордиться?','За что сегодня спасибо?']},
+THQ:['Что сегодня было важным для тебя?','Какие эмоции были с тобой сегодня?','Что сегодня получилось лучше, чем ожидалось?','Что сегодня забрало больше всего сил?','Что ты чувствуешь прямо сейчас и где это в теле?','Что хочется отпустить из сегодняшнего дня?','За что сегодня хочется сказать спасибо?','О чём больше всего думалось сегодня?','Какой момент дня хочется запомнить?','Что сегодня удивило?','Что сегодня было сложным, и что помогло с этим справиться?','Какой разговор сегодня остался внутри?','Что сегодня сказало тебе тело?','Чего сегодня не хватало?','Какое решение сегодня было самым честным?','Где сегодня получилось быть собой?','Что осталось несказанным сегодня?','Что сегодня приблизило тебя к цели?','Что сегодня отвлекало больше всего?','Что нового стало понятно сегодня?','Какая мысль сегодня повторялась чаще всего?','Чем сегодня можно гордиться?','Что сегодня заставило улыбнуться?','Что сегодня вызывало тревогу, и что за ней стоит?','Какую привычку сегодня было легче всего держать?','Какой совет пригодился бы тебе вчера?','Что сегодня дало энергию?','С кем сегодня было хорошо рядом?','Что хочется изменить в завтрашнем дне?','Какой один шаг сделает завтрашний день удачным?','Что сегодня было важнее, чем казалось утром?','Что стоит попросить у себя на завтра?','Где сегодня хватило терпения?','Что сегодня осталось недоделанным, и что это значит для тебя?','Какое слово лучше всего описывает сегодняшний день?','Что ты хочешь сказать себе перед сном?'],
+thQs(){const Q=this.THQ,n=Q.length,o=Math.floor(Date.parse(today()+'T00:00:00Z')/864e5),st=((o+(this._thq||0))*3)%n;this._thqc=[0,1,2].map(i=>Q[(st+i)%n]);return this._thqc},
+thQRows(){return this.thQs().map((q,i)=>`<button class="th-q" onclick="APP.thAsk(${i})"><span>${esc(q)}</span><i>${I.plus}</i></button>`).join('')},
+thMore(){this._thq=(this._thq||0)+1;const el=document.querySelector('.th-ql');if(el){el.innerHTML=this.thQRows();this.tr(el)}},
+thAsk(i){const q=this._thqc&&this._thqc[i];if(!q)return;const e=$('thT');if(!e)return;const t=this.tt(q);e.value=(e.value.trim()?e.value.replace(/\s+$/,'')+'\n\n':'')+t+'\n';this.thInp(e);e.focus();try{e.setSelectionRange(e.value.length,e.value.length)}catch(x){}try{e.scrollIntoView({block:'center',behavior:'smooth'})}catch(x){}},
+
+thPrompts(){return ['Что изменилось сегодня?','Какой шаг приблизил к цели?','О чём хочется написать?','Что сегодня далось непросто?','Чем сегодня можно гордиться?','За что сегодня спасибо?']},
 thMoods(){return [['calm','Спокойно'],['energy','Энергия'],['inspire','Вдохновение'],['anx','Тревога'],['tired','Усталость']]},
 thMood(k){this._thm=this._thm===k?'':k;document.querySelectorAll('.th-md button').forEach(b=>b.classList.toggle('on',b.dataset.k===this._thm))},
 thInp(el){this._thT=el.value;el.style.height='auto';el.style.height=Math.min(el.scrollHeight,240)+'px';const b=$('thGo');if(b)b.disabled=!el.value.trim()},
@@ -4974,7 +5101,8 @@ vThoughts(){const L=this.thList().slice().sort((a,b)=>(b.ts||0)-(a.ts||0)),td=to
   const grp={};L.forEach(x=>{(grp[x.d]=grp[x.d]||[]).push(x)});
   const lab=d=>d===td?'Сегодня':d===add(td,-1)?'Вчера':fd(d);
   const feed=L.length?Object.keys(grp).sort().reverse().map(d=>`<div class="th-g"><div class="th-gh">${lab(d)}</div>${grp[d].map(x=>`<div class="th-c fg"><div class="th-ch"><span>${tm(x.ts)}</span>${x.mood&&moods[x.mood]?`<em>${moods[x.mood]}</em>`:''}<button onclick="APP.thDel('${x.id}')" aria-label="Удалить">${I.x}</button></div><div class="th-tx">${esc(x.text)}</div></div>`).join('')}</div>`).join(''):`<div class="th-em"><div class="th-ed"></div><b>Здесь будет история твоей трансформации</b><span>Записывай шаги, сомнения и открытия. Каждая запись станет гранью в твоей огранке.</span></div>`;
-  return `<div class="h1">Дневник</div><div class="th-sub">Документируй путь</div>__SEG__<div class="th-w"><div class="th-cm fg"><textarea id="thT" class="th-ta" rows="3" placeholder="${this.tt(ph)}" oninput="APP.thInp(this)" maxlength="4000">${esc(this._thT||'')}</textarea><div class="th-md">${this.thMoods().map(([k,l])=>`<button data-k="${k}" class="${this._thm===k?'on':''}" onclick="APP.thMood('${k}')">${l}</button>`).join('')}</div><div class="th-ft"><div class="th-pr">${['Благодарность: ','Инсайт: ','Что мешало: '].map(s=>`<button onclick="APP.thFill('${s}')">${s.replace(': ','')}</button>`).join('')}</div><button class="th-go" id="thGo" onclick="APP.thSave()" ${(this._thT||'').trim()?'':'disabled'}>Записать</button></div></div>${L.length?`<div class="th-st"><span>${L.length} ${this.pl(L.length,'запись','записи','записей')}</span> · <span>${days} ${this.pl(days,'день','дня','дней')}</span></div>`:''}<div class="th-fd">${feed}</div></div>`},
+  return `<div class="h1">Дневник</div><div class="th-sub">Документируй путь</div>__SEG__<div class="th-w"><div class="th-cm fg"><textarea id="thT" class="th-ta" rows="3" placeholder="${this.tt(ph)}" oninput="APP.thInp(this)" maxlength="4000">${esc(this._thT||'')}</textarea><div class="th-ft"><button class="th-go" id="thGo" onclick="APP.thSave()" ${(this._thT||'').trim()?'':'disabled'}>Записать</button></div></div>
+    <details class="th-un fg"><summary><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg></i><span class="th-un-t"><b>Распаковка мыслей</b><em>Вопросы на сегодня</em></span></summary><div class="th-ql">${this.thQRows()}</div><button class="th-qm" onclick="APP.thMore()">Другие вопросы</button></details>${L.length?`<div class="th-st"><span>${L.length} ${this.pl(L.length,'запись','записи','записей')}</span> · <span>${days} ${this.pl(days,'день','дня','дней')}</span></div>`:''}<div class="th-fd">${feed}</div></div>`},
 vJournal(){const jseg=`<div class="pseg">${[['th','Мысли'],['day','День'],['pages','Страницы']].map(([k,l])=>`<button class="${(this._jv||'th')===k?'on':''}" onclick="APP._jv='${k}';APP._pg=null;APP.render()">${l}</button>`).join('')}</div>`;
   if((this._jv||'th')==='th')return this.vThoughts().replace('__SEG__',jseg);
   if(this._jv==='pages')return `<div class="h1">Дневник</div>${jseg}__S1____S2__`+this.npView();
@@ -5840,7 +5968,7 @@ initDrag(){const app=$('app');let drag=null,kd=null;
     const kind=drag.list.dataset.rl;drag=null;this.reorder(kind,ids)};
   app.addEventListener('pointerup',end);app.addEventListener('pointercancel',end)},
 initTaskDrag(){if(this._tdi)return;this._tdi=1;
-  const app=$('app'),SEL='.tk[data-sw^="k:"],.plr[data-sw^="k:"],.wag-c[data-tid]',ZS='[data-dd],[data-pr]';
+  const app=$('app'),SEL='.tk[data-sw^="k:"],.plr[data-sw^="k:"],.wag-c[data-tid],.dzp-r[data-sw^="k:"],.hx-row[data-tid]',ZS='[data-dd],[data-pr]';
   const idOf=el=>el.dataset.tid||(el.dataset.sw||'').split(':')[1];
   let s=null;
   const mid=r=>r.top+r.height/2;
@@ -5852,6 +5980,7 @@ initTaskDrag(){if(this._tdi)return;this._tdi=1;
     document.querySelectorAll('.dd-hot').forEach(z=>z.classList.remove('dd-hot'));s.drop=null;if(s.ph.parentNode)s.ph.remove();
     const t=document.elementFromPoint(x,y);if(!t)return;
     const srcCont=s.el.parentElement;let zone=t.closest(ZS);if(!zone&&srcCont&&srcCont.contains(t))zone=srcCont;if(!zone)return;
+    if(s.el.matches('.dzp-r,.hx-row')&&!zone.matches('.dd-chip'))return;
     const chip=zone.matches('.dd-chip,.mc-d'),cards=chip?[]:[...zone.querySelectorAll(SEL)].filter(c=>c!==s.el);
     let before=null;for(const c of cards){if(y<mid(c.getBoundingClientRect())){before=c;break}}
     s.drop={date:zone.dataset.dd||null,pr:zone.dataset.pr!=null?+zone.dataset.pr:null,chip,cards:cards.map(idOf),before:before?idOf(before):null};
@@ -5861,9 +5990,9 @@ initTaskDrag(){if(this._tdi)return;this._tdi=1;
     const g=el.cloneNode(true);['data-sw','data-lp','data-tid'].forEach(a=>g.removeAttribute(a));g.classList.add('dd-ghost');
     g.style.cssText='width:'+r.width+'px;left:'+r.left+'px;top:'+r.top+'px;margin:0';app.appendChild(g);s.ghost=g;
     el.classList.add('dd-src');document.body.classList.add('dd-on');s.ph=document.createElement('div');s.ph.className='dd-ph';
-    const td=today(),bar=document.createElement('div');bar.className='dd-bar';let hh='';
-    for(let i=0;i<7;i++){const d=add(td,i),x=pd(d);hh+='<button class="dd-chip" data-dd="'+d+'"><b>'+x.getDate()+'</b><span>'+(i===0?'Сегодня':i===1?'Завтра':WD[x.getDay()])+'</span></button>'}
-    bar.innerHTML=hh;document.body.appendChild(bar);this.tr(bar);s.bar=bar;
+    if(!app.querySelector('[data-dd]')){const td=today(),bar=document.createElement('div');bar.className='dd-bar';let hh='';
+      for(let i=0;i<7;i++){const d=add(td,i),x=pd(d);hh+='<button class="dd-chip" data-dd="'+d+'"><b>'+x.getDate()+'</b><span>'+(i===0?'Сегодня':i===1?'Завтра':WD[x.getDay()])+'</span></button>'}
+      bar.innerHTML=hh;document.body.appendChild(bar);this.tr(bar);s.bar=bar}
     this.buzz(18);pos();
     const tick=()=>{if(!s||!s.active)return;const y=s.cy;let sc=0;if(y>innerHeight-130)sc=12;else if(y<130&&y>74)sc=-12;if(sc){window.scrollBy(0,sc);pos()}s.raf=requestAnimationFrame(tick)};s.raf=requestAnimationFrame(tick)};
   app.addEventListener('pointerdown',e=>{if(s||e.button>0)return;const el=e.target.closest(SEL);if(!el)return;
@@ -5875,7 +6004,7 @@ initTaskDrag(){if(this._tdi)return;this._tdi=1;
     if(dist>8)s.moved=true;pos()});
   const up=e=>{if(!s)return;if(!s.active){finish();return}
     const id=s.id,d=s.drop,moved=s.moved,cancel=e.type==='pointercancel';finish();this._swing=Date.now();
-    if(cancel)return;if(!moved){this.buzz(10);this.lpMenu('k',id);return}
+    if(cancel||!moved)return;
     if(d)this.ddApply(id,d)};
   window.addEventListener('pointerup',up);window.addEventListener('pointercancel',up);
   window.addEventListener('keydown',e=>{if(e.key==='Escape'&&s&&s.active){finish();this._swing=Date.now()}});
@@ -6030,7 +6159,7 @@ vPrograms(asTab){const cur=this.S.sprint.program,inS=this.S.goals.length>0;
     mine=`<div class="mp fg"><div class="mp-h"><span>Моя программа</span><em>${started?'идёт сейчас':'скоро старт'}</em></div><div class="mp-n">${esc(P.name)}</div><div class="mp-s">${fd(this.st)} — ${fd(this.end())}</div>
      <div class="mp-t"><b>${strict?`День ${dn} из ${P.days}`:`Неделя ${cw} из ${W}`}</b><div class="mp-bar"><i style="width:${el}%"></i></div></div>
      <div class="mp-sc"><div><b>${sc==null?'—':sc+'%'}</b><span>счёт этой недели</span></div><div><b>≥${th}%</b><span>нужно для зачёта</span></div></div>
-     ${ws.length?`<div class="mp-w">${bars}</div>`:''}
+     ${ws.length>1?`<div class="mp-w">${bars}</div>`:''}
      <button class="btn pr w" onclick="APP.sub=null;APP.go('program')">Открыть программу</button></div><div class="mp-o">Другие программы</div>`}}
   let h=`${asTab?'':`<button class="back" onclick="APP.sub=null;APP.render()">${I.l} Назад</button>`}${mine}${intro}<div class="ppl">`;
   PROGRAMS.filter(p=>!p.hidden&&!(inS&&cur===p.id&&this.prog())).forEach(p=>{const on=inS&&cur===p.id;const len=p.days?p.days+' дней':p.weeks+' недель',d=D[p.id]||{};
@@ -6039,8 +6168,8 @@ vPrograms(asTab){const cur=this.S.sprint.program,inS=this.S.goals.length>0;
       ${on?'<span class="ppc-on">идёт сейчас</span>':''}<div class="ppc-n">${esc(p.name)}</div><div class="ppc-o">${esc(p.origin)}</div>
       <div class="ppc-ch"><em>${len}</em><em class="${p.mode==='strict'?'st':''}">${modeTxt}</em></div></div>
       <div class="ppc-b">${d.what?`<div class="ppc-f">${d.what}</div>`:''}
-      ${d.who?`<div class="ppc-d"><span>Для кого</span>${d.who}</div>`:''}${d.adapt?`<div class="ppc-d"><span>Что делает платформа</span>${d.adapt}</div>`:''}
-      <div class="ppc-d"><span>Что делаешь</span></div><div class="ppc-r">${p.rules.map(r=>`<div>${I.ok}<span>${esc(r)}</span></div>`).join('')}</div>${d.book?`<div class="ppc-bk">${d.book}</div>`:''}
+      <details class="ppc-det"><summary>Подробнее</summary>${d.who?`<div class="ppc-d"><span>Для кого</span>${d.who}</div>`:''}${d.adapt?`<div class="ppc-d"><span>Что делает платформа</span>${d.adapt}</div>`:''}
+      <div class="ppc-d"><span>Что делаешь</span></div><div class="ppc-r">${p.rules.map(r=>`<div>${I.ok}<span>${esc(r)}</span></div>`).join('')}</div>${d.book?`<div class="ppc-bk">${d.book}</div>`:''}</details>
       <button class="btn ${on?'':'pr'} w" onclick="${on?`APP.sub=null;APP.go('program')`:`APP.progGate('${p.id}')`}">${on?'Открыть программу':inS?'Начать вместо текущей':'Начать'}</button></div></div>`});
   h+=`</div><button class="qadd pg-mini" onclick="APP.progGate('own')">${I.plus} Собрать свою программу</button>`;
   return h},
@@ -6594,6 +6723,13 @@ qaNorm(text){
   t=t.replace(new RegExp('(^|\\s)в\\s+('+HRW+')\\s+('+MIN+')'+END,'gi'),(a,sp,h,m,off,str)=>{const hh=w2n(h),mm=w2n(m);return hh<=23&&mm<=59?sp+'в '+PM(hh,a,off,str)+':'+pad(mm):a});
   t=t.replace(new RegExp('(^|\\s)в\\s+(тринадцать|четырнадцать|пятнадцать|шестнадцать|семнадцать|восемнадцать|девятнадцать|двадцать(?:\\s+(?:один|два|три|четыре))?)(?:\\s+час(?:а|ов)?)?'+END,'gi'),(a,sp,h)=>sp+'в '+w2n(h)+':00');
   t=t.replace(new RegExp('(\\s(?:через|на)\\s+)('+N59+')(?=\\s+(?:минут|мин|час|дн|недел|месяц))','gi'),(a,p,n)=>p+w2n(n));
+   /* диапазон словами: «с одиннадцати до часу тридцати», «с 11 до часу 30», «с десяти до двух» → «с 11 до 1:30» */
+   const HW2={час:1,часу:1,часа:1,одного:1,одна:1,один:1,двух:2,два:2,две:2,трёх:3,трех:3,три:3,четырёх:4,четырех:4,четыре:4,пяти:5,пять:5,шести:6,шесть:6,семи:7,семь:7,восьми:8,восемь:8,девяти:9,девять:9,десяти:10,десять:10,одиннадцати:11,одиннадцать:11,двенадцати:12,двенадцать:12,тринадцати:13,тринадцать:13,четырнадцати:14,четырнадцать:14,пятнадцати:15,пятнадцать:15,шестнадцати:16,шестнадцать:16,семнадцати:17,семнадцать:17,восемнадцати:18,восемнадцать:18,девятнадцати:19,девятнадцать:19,двадцати:20,двадцать:20},
+     MW2={'ноль ноль':0,пяти:5,пять:5,десяти:10,десять:10,пятнадцати:15,пятнадцать:15,двадцати:20,двадцать:20,'двадцати пяти':25,'двадцать пять':25,тридцати:30,тридцать:30,'тридцати пяти':35,'тридцать пять':35,сорока:40,сорок:40,'сорока пяти':45,'сорок пять':45,пятидесяти:50,пятьдесят:50,'пятидесяти пяти':55,'пятьдесят пять':55},
+     HWR='(?:\\d{1,2}|'+Object.keys(HW2).join('|')+')',MWR='(?:\\d{2}|ноль\\s+ноль|'+Object.keys(MW2).filter(k=>k.indexOf(' ')>0).sort((a,b)=>b.length-a.length).map(k=>k.replace(' ','\\s+')).concat(Object.keys(MW2).filter(k=>k.indexOf(' ')<0)).join('|')+')',
+     hwv=x=>/^\d/.test(x)?+x:HW2[String(x).toLowerCase()],mwv=x=>/^\d/.test(x)?+x:MW2[String(x).toLowerCase().replace(/\s+/g,' ')];
+   t=t.replace(new RegExp('(^|\\s)с\\s+('+HWR+')(?:\\s+('+MWR+'))?\\s+до\\s+('+HWR+')(?:\\s+('+MWR+'))?(?:\\s+дня)?'+END,'gi'),(a,sp,h1,m1,h2,m2)=>{const A=hwv(h1),B=hwv(h2),M1=m1==null?0:mwv(m1),M2=m2==null?0:mwv(m2);if(A==null||B==null||M1==null||M2==null||A>23||B>24||M1>59||M2>59)return a;return sp+'с '+A+(m1!=null?':'+pad(M1):'')+' до '+B+(m2!=null?':'+pad(M2):'')});
+   t=t.replace(/(^|\s)до\s+час[ау](?:\s+дня)?(?=[\s,.!?]|$)/gi,'$1до 13:00');
   /* самоисправления */
   t=t.replace(/(\sв\s)\d{1,2}(?::\d\d)?[,\s]+(?:нет|ой|точнее|вернее|то\s+есть)[,\s]+(?:не\s+(?:в\s)?\d{1,2}(?::\d\d)?\s+а\s+)?(?:в\s)?(\d{1,2}(?::\d\d)?)/gi,'$1$2');
   t=t.replace(/(\s)(?:в\s)?не\s+(?:в\s)?\d{1,2}(?::\d\d)?[,\s]+а\s+(?:в\s)?(\d{1,2}(?::\d\d)?)/gi,'$1в $2');
@@ -6657,7 +6793,7 @@ qaParse(text){const out=[];const AR=this.areaList();
     /* «к 15» → до 15:00 */
     if(!/\sв\s\d|\d[:.]\d\d/.test(t)&&(m=t.match(/\sк\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?(?:\s?ч(?:ас[а-я]*)?)?(?=\s*(?:[,.]|$))/i))){t=t.replace(m[0],' в '+(m[2]?m[1]:pm(+m[1]))+':'+(m[2]||'00')+' ');dl=true}
     /* «с 11 до 12» → начало и конец */
-    if((m=t.match(/\sс\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?\sдо\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?(?=[\s,.]|$)/i))&&(+m[3]*60+(+m[4]||0))>(+m[1]*60+(+m[2]||0))){let a=+m[1],b=+m[3];if(!m[2]&&!m[4]&&a>=1&&a<=6&&b<=8&&!morn){a+=12;b+=12}tm2=pad(b)+':'+(m[4]||'00');t=t.replace(m[0],' в '+pad(a)+':'+(m[2]||'00')+' ')}
+    if((m=t.match(/\sс\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?\sдо\s([01]?\d|2[0-3])(?:[:.]([0-5]\d))?(?=[\s,.]|$)/i))&&((+m[3]*60+(+m[4]||0))>(+m[1]*60+(+m[2]||0))||(+m[3]<=12&&+m[3]+12<24&&(+m[3]+12)*60+(+m[4]||0)>(+m[1]*60+(+m[2]||0))))){let a=+m[1],b=+m[3];if(!m[2]&&!m[4]&&a>=1&&a<=6&&b<=8&&b>a&&!morn){a+=12;b+=12}else if(b*60+(+m[4]||0)<=a*60+(+m[2]||0))b+=12;tm2=pad(b)+':'+(m[4]||'00');t=t.replace(m[0],' в '+pad(a)+':'+(m[2]||'00')+' ')}
     /* одиночное «в 5» / «в 5 часов» → 17:00 */
     if(!/\d[:.]\d\d/.test(t)&&(m=t.match(/\sв\s([1-6])(?:\s?ч(?:ас[а-я]*)?)?(?=[\s,.]|$)(?!\s(?:раз|раза|дня|дней|недел|месяц|минут|человек|пункт|класс|групп|част|этап))/i))&&!morn)t=t.replace(m[0],' в '+(+m[1]+12)+':00');
     /* «на час», «на 30 минут», «на полтора часа» */
@@ -6795,7 +6931,7 @@ homeHero(dpT){const td=today(),P=this.S.profile||{},nm=(P.name||'').split(' ')[0
   let H=[],K=[];try{H=this.S.habits.filter(x=>!x.archived&&this.hSched(x,td))}catch(e){}try{K=(this.S.tasks||[]).filter(x=>!x.drop&&x.date===td&&!(this.S.del||[]).includes(x.id))}catch(e){}
   const rows=[...H.map(h=>{const on=this.hOn(h,td),v=this.hVal?this.hVal(h,td):0,num=h.kind==='time'||h.kind==='num';
       return {done:on,o:ord[h.tod||'']??3,html:`<div class="hx-row ${on?'done':''}" data-pid="${h.id}"><button class="hx-ck" onclick="APP.hToggle('${h.id}','${td}');APP.render()" aria-label="Отметить">${on?I.ok:''}</button><button class="hx-rt" onclick="APP.go('tracker')"><b>${esc(h.title)}</b>${num?`<em>${(+v||0)+' из '+(h.target||'')+' '+(h.unit||'')}</em>`:''}</button>${num&&!on?`<button class="hx-plus" onclick="APP.hInc('${h.id}','${td}',${+h.step||1});APP.render()" aria-label="Добавить ${+h.step||1} ${esc(h.unit||'')}">+${+h.step||1}${h.unit?' '+esc(h.unit):''}</button>`:''}</div>`}}),
-    ...K.map(x=>({done:!!x.done,o:x.tm?-1:1.5,tm:x.tm||'',html:`<div class="hx-row ${x.done?'done':''}" data-pid="${x.id}"><button class="hx-ck" onclick="APP.taskToggle('${x.id}');APP.render()" aria-label="Отметить">${x.done?I.ok:''}</button><button class="hx-rt" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b></button>${x.tm&&!x.done?`<span class="hx-tag">${APP.tmR(x)}</span>`:''}</div>`}))]
+    ...K.map(x=>({done:!!x.done,o:x.tm?-1:1.5,tm:x.tm||'',html:`<div class="hx-row ${x.done?'done':''}" data-pid="${x.id}" data-tid="${x.id}"><button class="hx-ck" onclick="APP.taskToggle('${x.id}');APP.render()" aria-label="Отметить">${x.done?I.ok:''}</button><button class="hx-rt" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b></button>${x.tm&&!x.done?`<span class="hx-tag">${APP.tmR(x)}</span>`:''}</div>`}))]
     .sort((a,b)=>(a.done-b.done)||(a.o-b.o)||(a.tm||'').localeCompare(b.tm||''));
   const nD=rows.filter(r=>r.done).length;
   const list=rows.length?`<div class="hx-sec"><b>На сегодня</b><button onclick="APP.navGo('plans')">Все дела${MI.chev}</button></div><div class="hx-list">${rows.slice(0,12).map(r=>r.html).join('')}</div>`
@@ -7578,7 +7714,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=210');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=214');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
