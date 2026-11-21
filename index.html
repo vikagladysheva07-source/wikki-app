@@ -469,6 +469,33 @@ html body #app .ft3-run{flex-direction:row;align-items:center;justify-content:sp
 html body #app .ft3-clk{font:300 32px Manrope,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#F2EDE2}
 /* подзадачи: компактные строки */
 html body #app .te-r textarea,html body .sheet .te-r textarea{min-height:0!important;height:auto;display:block;width:100%;overflow:hidden}
+/* нижняя панель: держать у нижнего края на iPhone при прокрутке */
+html,body{overscroll-behavior-y:none}
+@media(max-width:1023px){html body .nav{bottom:0!important;transform:translate3d(0,0,0);-webkit-transform:translate3d(0,0,0);will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+html body .qbar{transform:translate3d(-50%,0,0)!important;-webkit-transform:translate3d(-50%,0,0)!important;will-change:transform;backface-visibility:hidden}}
+/* фокус: экран настройки */
+html body .fto-st{max-width:380px;margin:auto 0}
+html body .fto-hd{text-align:center;margin-bottom:26px}
+html body .fto-hd h3{margin:0 0 10px;font-size:26px;font-weight:500;letter-spacing:-.01em}
+html body .fto-hd p{margin:0 auto;max-width:300px;font-size:14px;line-height:1.5;color:#A29EAE;font-weight:400}
+html body .fto-dial{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:18px}
+html body .fto-dv{width:150px;height:150px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(196,164,255,.4);background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.07),rgba(255,255,255,.015));box-shadow:0 0 34px rgba(155,111,232,.16),inset 0 1px 0 rgba(255,255,255,.1)}
+html body .fto-dv b{font-size:54px;font-weight:300;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+html body .fto-dv span{font-size:12.5px;color:#9A96A6;margin-top:4px}
+html body .fto-pm{width:46px;height:46px;border-radius:50%;font:inherit;font-size:22px;line-height:1;color:#F2EDE2;cursor:pointer;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+html body .fto-pm:active{background:rgba(255,255,255,.12)}
+html body .fto-dur{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:26px}
+html body .fto-dur button{height:44px;border-radius:14px;font:inherit;font-size:15px;font-weight:500;color:#CFCBD8;cursor:pointer;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+html body .fto-dur button.on{color:#fff;border-color:rgba(196,164,255,.6);background:linear-gradient(160deg,rgba(155,111,232,.2),rgba(91,47,190,.06));box-shadow:0 0 14px rgba(155,111,232,.22)}
+html body .fto-lb{font-size:13px;color:#8E8A98;margin:0 0 10px;text-align:left}
+html body .fto-wh{margin:0 0 20px}
+html body .fto-tip{text-align:center;font-size:12.5px;color:#8E8A98;margin-bottom:14px}
+/* задача в «Сегодня/Планах»: название сверху, подзадачи и мета под ним, редактор на всю ширину */
+html body .dsec-b .tk .t{flex-wrap:wrap!important;row-gap:4px}
+html body .dsec-b .tk .t>.ksb,html body .dsec-b .tk .t>.kmeta,html body .dsec-b .tk .t>.knote,html body .dsec-b .tk .t>.meta{order:3;flex:0 0 100%;width:100%;margin-top:2px}
+html body .dsec-b .tk .t>.ie{order:1;flex:1 1 100%;width:100%}
+html body .dsec-b .tk .t>.ie .iename{flex:1;width:100%;min-width:0;font-size:15px!important;font-weight:600}
+html body .dsec-b .tk .t .ksb-r span{white-space:normal!important}
 /* дневник: вкладка «Мысли» */
 .th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
 .th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
@@ -6668,7 +6695,14 @@ focusOpen(){const f=this.ftGet();if(f&&f.done)this.ftShow('fin');else if(f)this.
 ftShow(mode){const o=this.ftOv();clearInterval(this._ftt);
   if(mode==='start'){let d=+(localStorage.getItem('tw-ftd')||25);this._ftd=d;this._ftw=this._ftw||'';const T=(this.tasksFor?this.tasksFor(today()):[]).filter(x=>!x.done).slice(0,8);this._ftT=T;
     const own=![25,50,90].includes(d)||this._fto;
-    o.innerHTML=`<button class="fto-x" onclick="APP.ftHide()" aria-label="Закрыть">×</button><div class="fto-st"><h3>Фокус</h3><div class="fto-dur" id="ftDur">${[25,50,90].map(m=>`<button class="${d===m?'on':''}" onclick="APP.ftDur(${m})"><b>${m}</b><span>мин</span></button>`).join('')}<button class="${[25,50,90].includes(d)?'':'on'}" onclick="APP.ftOwn()"><b>…</b><span>своё</span></button></div><div class="fto-own ${own?'on':''}" id="ftOwn"><em onclick="APP.ftStep(-5)">−</em><b id="ftOwnV">${d} мин</b><em onclick="APP.ftStep(5)">+</em></div><div class="fto-wh" id="ftWh"><span class="${this._ftw?'':'on'}" onclick="APP.ftTask(-1)">Без задачи</span>${T.map((x,i)=>`<span class="${this._ftw===x.title?'on':''}" onclick="APP.ftTask(${i})">${esc(x.title)}</span>`).join('')}</div><button class="fto-go" onclick="APP.ftStart()">Начать</button></div>`}
+    const PS=[15,25,50,90],tot=this.focusOf(today());
+    o.innerHTML=`<button class="fto-x" onclick="APP.ftHide()" aria-label="Закрыть">×</button><div class="fto-st"><div class="fto-hd"><h3>Фокус</h3><p>Один отрезок времени на одно дело. Без телефона и переключений: таймер идёт, ты работаешь.</p></div>
+    <div class="fto-dial"><button class="fto-pm" onclick="APP.ftStep(-5)" aria-label="Меньше">−</button><div class="fto-dv"><b id="ftOwnV">${d}</b><span>минут</span></div><button class="fto-pm" onclick="APP.ftStep(5)" aria-label="Больше">+</button></div>
+    <div class="fto-dur" id="ftDur">${PS.map(m=>`<button class="${d===m?'on':''}" onclick="APP.ftDur(${m})">${m}</button>`).join('')}</div>
+    <div class="fto-lb">Над чем работаешь</div>
+    <div class="fto-wh" id="ftWh"><span class="${this._ftw?'':'on'}" onclick="APP.ftTask(-1)">Без задачи</span>${T.map((x,i)=>`<span class="${this._ftw===x.title?'on':''}" onclick="APP.ftTask(${i})">${esc(x.title)}</span>`).join('')}</div>
+    <div class="fto-tip">Сегодня ${tot} мин</div>
+    <button class="fto-go" onclick="APP.ftStart()">Начать фокус</button></div>`}
   else if(mode==='run'){const f=this.ftGet();if(!f)return this.ftShow('start');
     o.innerHTML=`<button class="fto-x" onclick="APP.ftHide()" aria-label="Свернуть">×</button><div class="fto-run ${f.paused?'paused':''}" id="ftRun"><div class="fto-ring"><svg viewBox="0 0 292 292"><circle cx="146" cy="146" r="140" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="3"/><circle id="ftArc" cx="146" cy="146" r="140" fill="none" stroke="#E3D6FF" stroke-width="3" stroke-linecap="round" stroke-dasharray="879.6" stroke-dashoffset="0"/></svg><div class="fto-tm"><b id="ftClk"></b><span id="ftLab">${f.paused?'пауза':esc(f.label||'')}</span></div></div><div class="fto-ctl"><button class="fto-pb" onclick="APP.ftPause()" aria-label="Пауза"><i></i></button><button class="fto-end" onclick="APP.ftEnd()">Завершить</button></div></div>`;
     this.ftWake(true);this.ftTick();this._ftt=setInterval(()=>this.ftTick(),250)}
@@ -6677,7 +6711,7 @@ ftShow(mode){const o=this.ftOv();clearInterval(this._ftt);
   try{this.tr(o)}catch(e){}},
 ftDur(m){this._ftd=m;this._fto=false;localStorage.setItem('tw-ftd',m);this.ftShow('start')},
 ftOwn(){this._fto=true;this.ftShow('start')},
-ftStep(k){let d=Math.max(5,Math.min(180,(this._ftd||25)+k));this._ftd=d;localStorage.setItem('tw-ftd',d);const e=$('ftOwnV');e&&(e.textContent=d+' мин');document.querySelectorAll('#ftDur button').forEach((b,i)=>b.classList.toggle('on',i<3?[25,50,90][i]===d:![25,50,90].includes(d)))},
+ftStep(k){let d=Math.max(5,Math.min(180,(this._ftd||25)+k));this._ftd=d;localStorage.setItem('tw-ftd',d);const e=$('ftOwnV');e&&(e.textContent=d);document.querySelectorAll('#ftDur button').forEach((b,i)=>b.classList.toggle('on',[15,25,50,90][i]===d))},
 ftTask(i){this._ftw=i<0?'':(this._ftT[i]||{}).title||'';document.querySelectorAll('#ftWh span').forEach((s,j)=>s.classList.toggle('on',j===i+1))},
 ftStart(){const d=this._ftd||25,total=d*60000;this.ftSet({end:Date.now()+total,total,paused:0,label:this._ftw||''});this.track('focus_start',{m:d},'day');this.ftShow('run')},
 ftPause(){const f=this.ftGet();if(!f||f.done)return;if(f.paused){f.end=Date.now()+f.paused;f.paused=0}else{f.paused=Math.max(1,f.end-Date.now())}this.ftSet(f);this.buzz(6);const r=$('ftRun');if(r)r.classList.toggle('paused',!!f.paused);const l=$('ftLab');if(l){l.textContent=f.paused?'пауза':(f.label||'');try{this.tr(l)}catch(e){}}this.ftTick()},
@@ -7792,7 +7826,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=216');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=217');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
