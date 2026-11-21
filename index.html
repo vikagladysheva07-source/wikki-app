@@ -414,6 +414,61 @@ html body #app .ios-ed .np-st:not(:empty)::before{content:" · "}
 html body #app .th-go{color:#F2EDE2;border:1px solid rgba(196,164,255,.5);background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.05));box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 16px rgba(155,111,232,.22);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-weight:600}
 html body #app .th-go:active{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.07))}
 html body #app .th-go:disabled{color:rgba(242,237,226,.45);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04);box-shadow:none}
+/* настройки: единый стиль плашек, без линий и разноцветных иконок; обратная связь; логотип компании */
+html body #app .sgrp .srow{border:0!important;box-shadow:none;padding:15px 4px}
+html body #app .sgrp .srow .si svg{color:#C4A4FF!important}
+html body #app .sgrp .srow[disabled] .si svg{color:#8E8A98!important;opacity:.6}
+html body #app .sgrp .srow[disabled] .sp>div:first-child,html body #app .sgrp .srow[disabled] .sval{opacity:.6}
+html body #app .tgl{width:48px;height:30px;border-radius:15px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16)}
+html body #app .tgl i{top:3px;left:3px;width:22px;height:22px;background:#E9E4F4;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+html body #app .tgl.on{background:rgba(155,111,232,.32);border-color:rgba(196,164,255,.6);box-shadow:0 0 12px rgba(155,111,232,.28)}
+html body #app .tgl.on i{left:21px;background:#fff}
+.fb-w{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.fb-ta,.fb-in{width:100%;box-sizing:border-box;border-radius:16px;padding:14px 16px;font:400 16px/1.45 Manrope,system-ui,sans-serif;color:#F2EDE2;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);outline:0;resize:none}
+.fb-ta:focus,.fb-in:focus{border-color:rgba(155,111,232,.55);box-shadow:0 0 14px rgba(155,111,232,.18)}
+.fb-ta::placeholder,.fb-in::placeholder{color:rgba(255,255,255,.34)}
+.fb-n{font:400 13px/1.45 Manrope,system-ui,sans-serif;color:#8E8A98;margin:0 2px}
+.fb-go{width:100%;min-height:50px;border-radius:16px;font:600 15px Manrope,system-ui,sans-serif;color:#F2EDE2;cursor:pointer;border:1px solid rgba(196,164,255,.5);background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.05));box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 16px rgba(155,111,232,.22)}
+.fb-go:disabled{color:rgba(242,237,226,.45);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04);box-shadow:none}
+.fb-gh{margin-top:6px;border-color:rgba(255,255,255,.14);box-shadow:none}
+.fb-ok{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:22px 8px 18px}
+.fb-ok i{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(196,164,255,.65);box-shadow:0 0 16px rgba(155,111,232,.3);color:#fff}.fb-ok i svg{width:22px;height:22px}
+.fb-ok b{font:600 18px Manrope,system-ui,sans-serif;color:#F2EDE2}.fb-ok span{font:400 14.5px/1.5 Manrope,system-ui,sans-serif;color:#B9B4C6}
+html body #app .ab2-ft .ab2-oc{display:block;width:190px;max-width:70%;height:auto;margin:0 auto 14px;opacity:.9}
+html body #msgOv.mov{background:#000!important}
+html body #msgOv .ml-aur{opacity:.22}
+/* плашки без боковых линий и тёмных теней: ровное стекло */
+html body #app :is(.hd-c,.hr-c,.hd-rd .gx,.msg3,.card,.gx,.sv-r,.hx-row,.plr,.mc,.jx-card,.pf-g,.fc-c,.fc-top,.fc-map,.pw-p,.pv-aw,.hcard,.mp,.ppc,.tk,.wag-c,.th-c,.th-cm,.th-un,.mxq,.pgi,.pgc):not(.dd-ghost):not(.dd-src),
+html body #app :is(.hd-c,.hr-c,.hd-rd .gx,.msg3,.card,.gx,.sv-r,.hx-row,.plr,.mc,.jx-card,.pf-g,.fc-c,.fc-top,.fc-map,.pw-p,.pv-aw,.hcard,.mp,.ppc,.tk,.wag-c,.th-c,.th-cm,.th-un,.mxq,.pgi,.pgc):not(.dd-ghost):not(.dd-src):hover{border:1px solid rgba(255,255,255,.11)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)!important;transform:none}
+html body #app .th-g{padding-left:0}
+html body #app .th-g::before,html body #app .th-gh::before{display:none!important}
+html body #app .th-gh{font:600 13px Manrope,system-ui,sans-serif;letter-spacing:0;text-transform:none;color:#8E8A98;margin-left:4px}
+/* заставка «Послания дня»: утверждённый знак V, тёмный прозрачный фон без фиолетовых засветов */
+html body #msgOv .ml-aur:not(.ml-st){display:none!important}
+html body #msgOv .ml-st{opacity:.4}
+html body #msgOv .ml-seal .ml-ring{background:conic-gradient(from -90deg,rgba(255,255,255,.62) calc(var(--p)*1%),rgba(255,255,255,.07) 0)}
+html body #msgOv .ml-comet:after{box-shadow:0 0 10px 3px rgba(255,255,255,.5),0 0 26px 8px rgba(255,255,255,.18)}
+html body #msgOv .ml-tx text{fill:rgba(255,255,255,.5)}
+html body #msgOv .ml-orb i{background:rgba(255,255,255,.85);box-shadow:0 0 6px rgba(255,255,255,.55)}
+html body #msgOv .ml-core{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);box-shadow:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+html body #msgOv .ml-vm{display:block;width:66px;height:auto;opacity:0;animation:mlvm .9s cubic-bezier(.2,.9,.2,1) .15s forwards;-webkit-user-drag:none}
+@keyframes mlvm{from{opacity:0;transform:scale(.84)}to{opacity:1;transform:scale(1)}}
+html body #msgOv .ml-t{color:rgba(255,255,255,.55)}
+html body #msgOv .ml-wave{border-color:rgba(255,255,255,.32)}
+/* плашка «Фокус» на обзоре */
+html body #app .ft3{display:flex;flex-direction:column;gap:12px;margin:14px 0;padding:16px 18px;width:100%;border-radius:22px;text-align:left;color:#F2EDE2;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.11);box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+html body #app .ft3-t b{display:block;font:600 17px Manrope,system-ui,sans-serif;color:#F2EDE2}
+html body #app .ft3-t span{display:block;font:400 13.5px Manrope,system-ui,sans-serif;color:#9A96A6;margin-top:2px}
+html body #app .ft3-d{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+html body #app .ft3-d button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:56px;padding:0;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#EDE8F7;font:inherit;cursor:pointer}
+html body #app .ft3-d button b{font:600 18px Manrope,system-ui,sans-serif}
+html body #app .ft3-d button span{font:400 11.5px Manrope,system-ui,sans-serif;color:#9A96A6}
+html body #app .ft3-d button.on{border-color:rgba(196,164,255,.65);background:linear-gradient(160deg,rgba(155,111,232,.22),rgba(91,47,190,.08));box-shadow:0 0 14px rgba(155,111,232,.25)}
+html body #app .ft3-go{min-height:50px;border-radius:16px;font:600 15px Manrope,system-ui,sans-serif;color:#F2EDE2;cursor:pointer;border:1px solid rgba(196,164,255,.5);background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.05));box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 16px rgba(155,111,232,.22)}
+html body #app .ft3-run{flex-direction:row;align-items:center;justify-content:space-between;width:100%;font:inherit;cursor:pointer}
+html body #app .ft3-clk{font:300 32px Manrope,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#F2EDE2}
+/* подзадачи: компактные строки */
+html body #app .te-r textarea,html body .sheet .te-r textarea{min-height:0!important;height:auto;display:block;width:100%;overflow:hidden}
 /* дневник: вкладка «Мысли» */
 .th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
 .th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
@@ -4568,9 +4623,9 @@ kPr(id,n){const x=this.kKeep(id);if(!x)return;x.pr=n;this.save();this.taskEditR(
 ksbH(x){const sb=x.sub||[];if(!sb.length&&!x._ksa)return '';return `<div class="ksb">${sb.slice(0,8).map(z=>`<button class="ksb-r ${z.d?'on':''}" onclick="event.stopPropagation();APP.kSubT('${x.id}','${z.id}')"><i></i><span>${esc(z.t)}</span></button>`).join('')}${sb.length>8?`<span class="ksb-m">ещё ${sb.length-8}</span>`:''}</div>`},
 kSubT(id,sid){const x=(this.S.tasks||[]).find(t=>t.id===id),s=x&&(x.sub||[]).find(z=>z.id===sid);if(!s)return;s.d=s.d?0:1;if(s.d)this.buzz(6);x.t=Date.now();this.save();this.render()},
 kSubQ(id){this.ask('Новая подзадача','',v=>{v=(v||'').trim();if(!v)return;const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;x.sub=x.sub||[];x.sub.push({id:'s'+uid(),t:v.slice(0,120),d:0});x.t=Date.now();this.save();this.render()})},
-kSubRow(id,z){return `<button class="te-c ${z.d?'on':''}" onclick="APP.kSubTog('${id}','${z.id}')" aria-label="Отметить">${z.d?I.ok:''}</button><textarea rows="1" enterkeyhint="next" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'" onchange="APP.kSubSet('${id}','${z.id}',this.value)" onkeydown="APP.kSubKey(event,'${id}','${z.id}',this)">${esc(z.t)}</textarea><button class="nt-x" onclick="APP.kSubDel('${id}','${z.id}')" aria-label="Убрать">${I.x}</button>`},
-subFit(){document.querySelectorAll('#sheet .te-r textarea').forEach(t=>{t.style.height='auto';t.style.height=t.scrollHeight+'px'})},
-subPaste(e,kind,id){const t=(e.clipboardData||window.clipboardData).getData('text')||'';if(!/\n/.test(t.trim()))return;e.preventDefault();t.split(/\n+/).map(s=>s.replace(/^\s*(?:[-•*]|\d+[.)])\s*/,'').trim()).filter(Boolean).forEach(s=>kind==='k'?this.kSubAdd(id,s):this.ntSub(s))},
+kSubRow(id,z){return `<button class="te-c ${z.d?'on':''}" onclick="APP.kSubTog('${id}','${z.id}')" aria-label="Отметить">${z.d?I.ok:''}</button><textarea rows="1" enterkeyhint="next" oninput="this.style.height='0px';this.style.height=Math.max(this.scrollHeight,24)+'px'" onchange="APP.kSubSet('${id}','${z.id}',this.value)" onkeydown="APP.kSubKey(event,'${id}','${z.id}',this)">${esc(z.t)}</textarea><button class="nt-x" onclick="APP.kSubDel('${id}','${z.id}')" aria-label="Убрать">${I.x}</button>`},
+subFit(){const f=()=>document.querySelectorAll('#sheet .te-r textarea').forEach(t=>{t.style.height='0px';t.style.height=Math.max(t.scrollHeight,24)+'px'});f();requestAnimationFrame(f);setTimeout(f,80);setTimeout(f,300)},
+subPaste(e,kind,id){const t=(e.clipboardData||window.clipboardData).getData('text')||'';if(!/\n/.test(t.trim()))return;e.preventDefault();t.split(/\n+/).map(s=>s.replace(/^\s*(?:[-•*]|\d+[.)])\s*/,'').trim()).filter(Boolean).forEach(s=>kind==='k'?this.kSubAdd(id,s):this.ntSub(s));this.subFit()},
 kSubAdd(id,v){v=(v||'').trim();if(!v)return;const x=this.kKeep(id);if(!x)return;x.sub=x.sub||[];const z={id:'s'+uid(),t:v.slice(0,300),d:0};x.sub.push(z);x.t=Date.now();this.save();const nw=$('kSn');if(!nw||!nw.closest('.te-r')){this.taskEditR(id);return}
   const row=document.createElement('div');row.className='te-r';row.dataset.sid=z.id;row.innerHTML=this.kSubRow(id,z);nw.closest('.te-r').before(row);nw.value='';nw.focus();this.subFit();try{nw.scrollIntoView({block:'nearest'})}catch(e){}},
 kSubTog(id,sid){const x=(this.S.tasks||[]).find(t=>t.id===id),s=x&&(x.sub||[]).find(z=>z.id===sid);if(!s)return;this.kKeep(id);s.d=s.d?0:1;if(s.d)this.buzz(6);x.t=Date.now();this.save();const row=document.querySelector(`#sheet [data-sid="${sid}"]`);if(!row){this.taskEditR(id);return}row.classList.toggle('on',!!s.d);const b=row.querySelector('.te-c');b.classList.toggle('on',!!s.d);b.innerHTML=s.d?I.ok:''},
@@ -4853,7 +4908,7 @@ rwOpen(id){const g=this.S.rw||{},R=this.rwCalc(),r=this.rwAll().find(x=>x.id===i
   this.open(`<div class="row"><span class="sp"></span><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="rwo"><div class="rwo-m ${on?'on':''}">${this.medal(id,on,150,pr)}</div><span class="rwo-r" style="--c:${RA[1]}">${RA[0]}</span><b>${r.n}</b><p>${r.t}</p>
   <div class="rwo-s">${on?`Получена ${fd(on)}`:need}</div>
-  ${on&&r.id==='d365'?`<a class="btn pr w" href="https://t.me/wikki_shark" target="_blank" rel="noopener">Получить значок</a>`:on?`<button class="btn gh w" onclick="APP.close();APP.shareStudio('hero')">${SI.share} Поделиться в сторис</button>`:''}</div>`)},
+  ${on&&r.id==='d365'?`<button class="btn pr w" onclick="APP.close();APP.feedbackSheet('badge')">Получить значок</button>`:on?`<button class="btn gh w" onclick="APP.close();APP.shareStudio('hero')">${SI.share} Поделиться в сторис</button>`:''}</div>`)},
 nbIco(k){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${k==='ch'?'<path d="M5 4h14v4a7 7 0 01-14 0zM9 21h6M12 15v6"/>':'<circle cx="12" cy="9" r="5"/><path d="M8.5 13.5L7 21l5-3 5 3-1.5-7.5"/>'}</svg>`},
 banner(k,title,sub,act){let b=document.getElementById('nbn');if(!b){b=document.createElement('div');b.id='nbn';document.body.appendChild(b);
     let y0=null;b.addEventListener('touchstart',e=>{y0=e.touches[0].clientY},{passive:true});b.addEventListener('touchend',e=>{if(y0!=null&&e.changedTouches[0].clientY-y0<-18)this.bannerHide();y0=null},{passive:true})}
@@ -5870,7 +5925,7 @@ ntRender(){const q=this._tn,pr=q.pr,ar=this.areaList();let pn='';
 ntCal(m){this.ntKeep();const q=this._tn;if(!q._bak)q._bak={date:q.date,tm:q.tm,tm2:q.tm2,rep:q.rep};if(m)q.cal=m;else q.cal=q.date.slice(0,7);this.ntCalR()},
 ntCalPick(d){const q=this._tn;q.date=d;q.cal=d.slice(0,7);this.ntCalR()},
 ntCalMove(n){const q=this._tn,[y,m]=q.cal.split('-').map(Number),dt=new Date(y,m-1+n,1);q.cal=dt.getFullYear()+'-'+pad(dt.getMonth()+1);this.ntCalR()},
-ntRow(i,t){return `<div class="te-r" data-i="${i}"><span class="te-c"></span><textarea rows="1" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'" onchange="APP.ntSubSet(${i},this.value)">${esc(t)}</textarea><button class="nt-x" onclick="APP.ntSubDel(${i})" aria-label="Убрать">${I.x}</button></div>`},
+ntRow(i,t){return `<div class="te-r" data-i="${i}"><span class="te-c"></span><textarea rows="1" oninput="this.style.height='0px';this.style.height=Math.max(this.scrollHeight,24)+'px'" onchange="APP.ntSubSet(${i},this.value)">${esc(t)}</textarea><button class="nt-x" onclick="APP.ntSubDel(${i})" aria-label="Убрать">${I.x}</button></div>`},
 ntSubSet(i,v){v=(v||'').trim();if(v&&this._tn)this._tn.sub[i]=v},
 ntSub(v){v=(v||'').trim();if(!v)return;this.ntKeep();const q=this._tn;q.sub.push(v.slice(0,300));const nw=$('nS');if(!nw||q.panel!=='sub'||!nw.closest('.te-r')){this.ntRender();return}
   const row=document.createElement('div');row.innerHTML=this.ntRow(q.sub.length-1,v.slice(0,300));nw.closest('.te-r').before(row.firstElementChild);nw.value='';nw.focus();this.subFit();
@@ -6576,7 +6631,7 @@ msgOpen(){this._mcur=this.msgToday();this.track('msg_open',null,'day');const en=
  const ring=((en?'MESSAGE OF THE DAY':'ПОСЛАНИЕ ДНЯ')+' · ').repeat(4);
  const mbtn=`<div class="mov-b"><button onclick="APP.msgDl()">${en?'Download':'Скачать'}</button>${navigator.canShare?`<button onclick="APP.msgShare()">${en?'Share':'Поделиться'}</button>`:''}</div>`;
  ov.innerHTML=`<div class="ml-aur"><i></i><i></i></div><div class="ml-aur ml-st">${st}</div><button class="mov-x" onclick="APP.msgClose()" aria-label="${en?'Close':'Закрыть'}">×</button>
- <div class="ml-seal" style="--p:0"><svg class="ml-tx" viewBox="0 0 210 210"><defs><path id="mlcp" d="M105 105m-92 0a92 92 0 1 1 184 0a92 92 0 1 1-184 0"/></defs><text><textPath href="#mlcp">${ring}</textPath></text></svg><i class="ml-ring"></i><div class="ml-comet"></div><div class="ml-orb"><i></i></div><div class="ml-orb"><i></i></div><div class="ml-core">${this.msgFacets()}</div></div>
+ <div class="ml-seal" style="--p:0"><svg class="ml-tx" viewBox="0 0 210 210"><defs><path id="mlcp" d="M105 105m-92 0a92 92 0 1 1 184 0a92 92 0 1 1-184 0"/></defs><text><textPath href="#mlcp">${ring}</textPath></text></svg><i class="ml-ring"></i><div class="ml-comet"></div><div class="ml-orb"><i></i></div><div class="ml-orb"><i></i></div><div class="ml-core"><img class="ml-vm" src="v-mark.png" alt="" width="66" draggable="false"></div></div>
  <div class="ml-t"><span>${en?'Choosing a word':'Выбираю слово'}</span><span>${en?'Ready':'Готово'}</span></div><i class="ml-wave"></i><i class="ml-wave"></i><i class="ml-wave"></i>
  <div class="ml-card"><canvas id="msgCv" width="1080" height="1920" onclick="APP.msgRoll()" role="button" aria-label="${en?'Next message':'Следующее послание'}"></canvas><button class="ml-cx" onclick="APP.msgClose()" aria-label="${en?'Close':'Закрыть'}">×</button></div>${mbtn}`;
  document.body.appendChild(ov);requestAnimationFrame(()=>ov.classList.add('on'));
@@ -6586,7 +6641,7 @@ msgOpen(){this._mcur=this.msgToday();this.track('msg_open',null,'day');const en=
  (function tick(now){if(!$('msgOv'))return;const p=Math.min(1,(now-t0)/D),e=1-Math.pow(1-p,1.8);seal.style.setProperty('--p',e*100);if(p<1)requestAnimationFrame(tick);else fin()})(t0)},
 msgPaint(){const t=this._mcur,cv=$('msgCv');if(!cv||!t)return Promise.resolve();return this.msgImg(t.b).then(im=>{const c2=$('msgCv');if(c2&&this._mcur===t)this.msgDraw(c2,t.b,this.msgTxt(t.t),t.s,im)})},
 msgRoll(){const ov=$('msgOv');this.buzz(6);this._mcur=this.msgDeal();if(!ov){this.msgPaint();return}
-  ov.classList.remove('done');const seal=ov.querySelector('.ml-seal');ov.querySelectorAll('.ml-core svg').forEach(x=>{x.outerHTML=this.msgFacets()});const cr=ov.querySelector('.ml-core');if(cr&&!cr.querySelector('svg'))cr.innerHTML=this.msgFacets();
+  ov.classList.remove('done');const seal=ov.querySelector('.ml-seal');ov.querySelectorAll('.ml-vm').forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});
   ov.querySelectorAll('.ml-t span').forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});void ov.offsetWidth;
   const painted=this.msgPaint(),t0=performance.now(),D=2200;const fin=()=>{if(!$('msgOv'))return;painted.then(()=>{if(!$('msgOv'))return;ov.classList.add('done');this.buzz(14)})};
   (function tick(now){if(!$('msgOv'))return;const p=Math.min(1,(now-t0)/D),e=1-Math.pow(1-p,1.8);seal&&seal.style.setProperty('--p',e*100);if(p<1)requestAnimationFrame(tick);else fin()})(t0)},
@@ -6599,6 +6654,12 @@ ftSet(o){try{o?localStorage.setItem('tw-ft',JSON.stringify(o)):localStorage.remo
 ftLeft(f){return f.paused?f.paused:Math.max(0,f.end-Date.now())},
 ftFmt(ms){const s=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(s/60);return String(m).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},
 ftMinTxt(m){return m>=60?Math.floor(m/60)+'ч'+(m%60?' '+(m%60)+'м':''):m+'м'},
+ftHome(){const f=this.ftGet(),run=f&&!f.done,d=+(localStorage.getItem('tw-ftd')||25),tot=this.focusOf(today());
+  if(run)return `<button class="ft3 ft3-run" onclick="APP.focusOpen()"><span class="ft3-t"><b>Фокус идёт</b><span>Сегодня ${tot} мин</span></span><span class="ft3-clk ftp-t">${this.ftFmt(this.ftLeft(f))}</span></button>`;
+  const std=[25,50,90].includes(d);
+  return `<button class="ft3 ft3-run" onclick="APP.focusOpen()"><span class="ft3-t"><b>Фокус</b><span>Сегодня ${tot} мин</span></span></button>`},
+ftHPick(m){this._ftd=m;this._fto=false;try{localStorage.setItem('tw-ftd',m)}catch(e){}this.render()},
+ftHStart(){this._ftd=+(localStorage.getItem('tw-ftd')||25);this._ftw='';this.ftStart()},
 ftPill(){const f=this.ftGet();if(!f||f.done)return '';return `<button class="ft-pill" onclick="APP.focusOpen()"><span>Идёт фокус · <b class="ftp-t">${this.ftFmt(this.ftLeft(f))}</b></span><span>Открыть ›</span></button>`},
 ftOv(){let o=$('ftOv');if(!o){o=document.createElement('div');o.id='ftOv';o.className='fto';document.body.appendChild(o)}return o},
 ftHide(){const o=$('ftOv');o&&o.remove();this.render()},
@@ -6909,7 +6970,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const jr=`<div class="hd-c"><div class="hd-h"><b>Дневник</b><span onclick="APP._jd=today();APP.go('journal')" style="cursor:pointer">Все записи</span></div>${ents.length?ents.map(e=>`<div class="hd-jr" onclick="APP._jd='${e.d}';APP.go('journal')"><span class="hd-jd">${fd(e.d)}</span><div><b>${e.t}</b><span>${esc(e.x.length>90?e.x.slice(0,90)+'…':e.x)}</span></div></div>`).join(''):`<button class="hd-add" onclick="APP._jd=today();APP.go('journal')">+ Записать день</button>`}</div>`;
   const rad=this.pcRadar();
   const msgC=this.msgCard();
-  return {desk:`${this.ftPill()}<div class="hd-r1 hd-rs">${this.homeRings(o)}</div><div class="hd-cols"><div class="hd-cl">${this.homeNext()}${foc}${hab}</div><div class="hd-cr"><div class="hm-duo hm-duo-d">${this.thHome()}${msgC}</div>${this.cdChips?this.cdChips():''}${dyn}${rad?`<div class="hd-rd">${rad}</div>`:''}</div></div>${gs.length&&o.inS?`<div class="hd-g3 one">${goals}</div>`:''}`,a:`${this.ftPill()}${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`<div class="hm-duo">${this.thHome()}${msgC}</div>${dyn}${hab}${goals}`}},
+  return {desk:`<div class="hd-r1 hd-rs">${this.homeRings(o)}</div><div class="hd-cols"><div class="hd-cl">${this.homeNext()}${foc}${hab}</div><div class="hd-cr"><div class="hm-duo hm-duo-d">${this.thHome()}${msgC}</div>${this.ftHome()}${this.cdChips?this.cdChips():''}${dyn}${rad?`<div class="hd-rd">${rad}</div>`:''}</div></div>${gs.length&&o.inS?`<div class="hd-g3 one">${goals}</div>`:''}`,a:`${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`<div class="hm-duo">${this.thHome()}${msgC}</div>${this.ftHome()}${dyn}${hab}${goals}`}},
 dynHover(e,el){const v=JSON.parse(el.dataset.v),n=v.length;if(n<2)return;const r=el.getBoundingClientRect();let i=e?Math.round((e.clientX-r.left)/r.width*(n-1)):n-1;i=Math.max(0,Math.min(n-1,i));
   if(v[i]==null){let k=1;while(k<n&&v[i-k]==null&&v[i+k]==null)k++;i=v[i-k]!=null?i-k:i+k;if(v[i]==null)return}
   if(!e){i=n-1;while(i>0&&v[i]==null)i--}
@@ -7415,9 +7476,8 @@ vMe(){
     row(ic('target','#C4A4FF'),'Ссылка-шаблон','',"APP.tplLink().then(l=>APP.copy(l))",'Передать цели и тактики другому человеку'),
     row(ic('list','#9B6FE8'),'Прошлые программы',String((S.archive||[]).length),(S.archive||[]).length?"APP.historySheet()":null)]);
   pages.help=()=>sec('Поддержка',[
-    row(ic('chat','#7B4FE2'),'Написать в поддержку','',"window.open('https://t.me/wikki_shark','_blank')",'Ответим в Telegram'),
-    row(ic('star','#9B6FE8'),'Предложить идею','',"window.open('https://t.me/wikki_shark','_blank')"),
-    row(ic('book','#7C5CE6'),'Метод','',"APP.methodSheet()",'Моран, 4DX, Гольвитцер, Эттинген, Клир')]);
+    row(ic('chat','#C4A4FF'),'Написать в поддержку','',"APP.feedbackSheet('support')",'Вопрос или проблема'),
+    row(ic('star','#C4A4FF'),'Предложить идею','',"APP.feedbackSheet('idea')")]);
   pages.about=()=>{const sv=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
     const F=[['<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/>','Сегодня','Кольца дня, ближайшее дело и список на сегодня на одном экране.'],
      ['<rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/>','Планы','День списком, неделя по часам и месяц. Задачи с подзадачами и приоритетом.'],
@@ -7431,7 +7491,7 @@ vMe(){
     const PH=[['Свобода','Свобода начинается с того, что ты делаешь каждый день.','Когда решения принимаешь ты, а не настроение, усталость или чужие ожидания, жизнь идёт туда, куда ты её ведёшь. Эту свободу даёт дисциплина. Дисциплина — путь к свободе.'],['Огранка','Каждый человек похож на бриллиант, который ещё не огранён.','Сила, ум, характер и дело уже есть, а форму им даёт работа над собой, грань за гранью. В этой огранке человек становится тем, кем хочет быть.'],['Постоянство','Огранка идёт медленно, как вода точит камень: одно и то же действие снова и снова.','Одна тренировка почти ничего не меняет, а сто таких дней меняют человека. Самое трудное — продолжать, когда первый запал прошёл, а результата ещё не видно.'],['VOLYO','VOLYO берёт на себя всё, что обычно ломает дисциплину.','Каждое утро понятно, что делать, и не нужно заново искать силы на решение. Каждое сделанное дело оставляет след: растут грани характера, копится серия, меняются цифры. В день, когда хочется бросить, приложение напоминает, сколько уже пройдено, а пропуск не стирает прошлую работу. Так шаг за шагом дисциплина становится частью тебя, и вместе с ней приходит свобода жить по своим правилам. Через месяц изменения видны в цифрах, через год в тебе самом.']];
     const P=[['Цифры честные','Считается только сделанное. За вход в приложение ничего не начисляется.'],['Один пропуск ничего не ломает','Серия рвётся после двух пропусков подряд. Вернуться проще, чем начинать заново.'],['Данные твои','Без рекламы и чужих счётчиков. Всё выгружается и удаляется за пару касаний.'],['Покупка один раз','Без подписки и автосписаний. 14 дней на возврат.']];
     const M=['Брайан Моран','Джеймс Клир','Кэл Ньюпорт','Тереза Амабайл','Филиппа Лалли','Питер Гольвитцер','Габриэль Эттинген','4 дисциплины исполнения'];
-    const L=[['Политика конфиденциальности',"window.open('./legal/privacy.html'+(APP.lang()==='en'?'#en':''),'_blank')"],['Условия использования',"window.open('./legal/terms.html'+(APP.lang()==='en'?'#en':''),'_blank')"],['Написать в Telegram',"window.open('https://t.me/wikki_shark','_blank')"]];
+    const L=[['Политика конфиденциальности',"window.open('./legal/privacy.html'+(APP.lang()==='en'?'#en':''),'_blank')"],['Условия использования',"window.open('./legal/terms.html'+(APP.lang()==='en'?'#en':''),'_blank')"],['Написать в поддержку',"APP.feedbackSheet('support')"]];
     const chev='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
     return `<div class="ab2-hd"><img class="ab2-wm" src="logo-volyo.png" alt="VOLYO"><div class="ab2-sl">Дисциплина — путь к свободе</div></div>
     <div class="ab3-pr">Становись тем, кем хочешь быть</div>
@@ -7452,7 +7512,7 @@ vMe(){
     <div class="ab2-lb">Принципы</div><div class="ab2-g">${P.map(([t,d],k)=>`<div class="ab2-r"><span class="ab2-n">0${k+1}</span><span class="ab2-t"><b>${t}</b><em>${d}</em></span></div>`).join('')}</div>
     <div class="ab2-lb">На чём построено</div><div class="ab2-g ab2-m"><p>Метод собран из исследований и систем, которые годами проверяли на тысячах людей.</p><div class="ab2-ch">${M.map(x=>`<span>${x}</span>`).join('')}</div><button class="ab2-more" onclick="APP.methodSheet()">Подробнее о методе${chev}</button></div>
     <div class="ab2-g">${L.map(([l,a])=>`<button class="ab2-lk" onclick="${a}"><span>${l}</span>${chev}</button>`).join('')}</div>
-    <div class="ab2-ft"><b>Сделано в WIKKI.OCEAN</b><span>WIKKI.OCEAN строит системы роста для людей и компаний. VOLYO — продукт для каждого дня.</span><em>Версия 1.0</em></div>`};
+    <div class="ab2-ft"><img class="ab2-oc" src="wikki-ocean-logo.webp" alt="WIKKI.OCEAN" width="190" height="42"><b>Сделано в WIKKI.OCEAN</b><span>WIKKI.OCEAN строит системы роста для людей и компаний. VOLYO — продукт для каждого дня.</span><em>Версия 1.0</em></div>`};
   pages.integ=()=>sec('Интеграции',[
     row(ic('moon','#7C5CE6'),'Календарь телефона','',"APP.exportIcs()",'Утро, день, вечер, чек-ин и разбор недели в твоём календаре'),
     row(ic('heart','#56566A'),'Apple Здоровье','скоро',null,'Шаги и сон отмечаются сами'),
@@ -7574,7 +7634,7 @@ rateSheet(){const r=(this.S.pref||{}).rate||0;this.open(`<div class="row"><div c
   <div class="small mut" style="margin:4px 0 18px">Оценка помогает понять, что улучшать в первую очередь.</div>
   <div class="rstars">${[1,2,3,4,5].map(i=>`<button class="${i<=r?'on':''}" onclick="APP.rateSet(${i})" aria-label="${i}">${SI.star}</button>`).join('')}</div><div id="rMsg"></div>`)},
 rateSet(n){this.S.pref=this.S.pref||{};this.S.pref.rate=n;this.save();document.querySelectorAll('.rstars button').forEach((b,i)=>b.classList.toggle('on',i<n));this.buzz&&this.buzz();
-  const m=$('rMsg');if(m)m.innerHTML=n>=4?`<div class="rmsg"><b>Спасибо!</b><span>Поделись приложением с тем, кому оно тоже поможет держать слово.</span><button class="btn pr w" onclick="APP.close();APP.shareApp()">Поделиться</button></div>`:`<div class="rmsg"><b>Что исправить?</b><span>Напиши в двух словах, что мешает. Отвечаем лично.</span><button class="btn pr w" onclick="window.open('https://t.me/wikki_shark','_blank')">Написать в Telegram</button></div>`;this.render()},
+  const m=$('rMsg');if(m)m.innerHTML=n>=4?`<div class="rmsg"><b>Спасибо!</b><span>Поделись приложением с тем, кому оно тоже поможет держать слово.</span><button class="btn pr w" onclick="APP.close();APP.shareApp()">Поделиться</button></div>`:`<div class="rmsg"><b>Что исправить?</b><span>Напиши в двух словах, что мешает. Отвечаем лично.</span><button class="btn pr w" onclick="APP.close();APP.feedbackSheet('support')">Написать в поддержку</button></div>`;this.render()},
 newsSheet(){const N=[['Октябрь 2026','Новые настройки','Профиль сверху, разделы по группам, язык и интеграции на виду. Политика конфиденциальности и условия.'],['Октябрь 2026','Трекер привычек','Таблица на месяц, отметки в одно касание, серии и рекорды. Трекер работает без программы.'],['Октябрь 2026','Профиль героя','Уровень, характеристики и достижения растут от каждой отметки.'],['Октябрь 2026','Прогресс','Колесо баланса и год в пикселях.']];
   this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Что нового</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="nws">${N.map(x=>`<div class="nw"><span>${x[0]}</span><b>${x[1]}</b><p>${x[2]}</p></div>`).join('')}</div>`)},
@@ -7661,8 +7721,8 @@ fdLoad(){if(this._fdT&&Date.now()-this._fdT<60000)return;this._fdT=Date.now();tr
 revLoad(){if(this._rvL)return;this._rvL=1;fetch('reviews.json?v='+Date.now()).then(r=>r.ok?r.json():[]).then(a=>{if(Array.isArray(a)&&a.length){this.REVIEWS=a;if(this.sub||this.tab)this.render()}}).catch(()=>{})},
 revBlock(max){const R=(this.REVIEWS||[]).slice(0,max||3);if(!R.length)return '';const en=this.lang()==='en';return `<div class="rv" data-nt><div class="rv-lb">${en?'From the first members':'Что говорят первые пользователи'}</div>${R.map(r=>`<div class="rv-m"><img class="rv-a" src="${esc(r.p||'')}" alt="" loading="lazy"><div class="rv-b"><div class="rv-h"><b>${esc(r.n||'')}</b>${r.r||r.re?`<span>${esc(en&&r.re?r.re:r.r||'')}</span>`:''}</div><p>${esc(en&&r.te?r.te:r.t||'')}</p></div></div>`).join('')}</div>`},GOOGLE_ON:false,PAY_RUB:3777,
 buy(){this.track('buy_click',null,'day');if(this.PAY_URL)return this.payGo();this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Оплата скоро откроется</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
-  <div class="small mut" style="margin:6px 0 16px;line-height:1.55">Оплата картой скоро заработает. Напиши в Telegram, и доступ откроется по цене запуска сразу после запуска оплаты.</div>
-  <button class="btn pr w" onclick="window.open('https://t.me/wikki_shark','_blank')">Написать в Telegram</button>
+  <div class="small mut" style="margin:6px 0 16px;line-height:1.55">Оплата картой скоро заработает. Напиши в поддержку, и доступ откроется по цене запуска сразу после запуска оплаты.</div>
+  <button class="btn pr w" onclick="APP.close();APP.feedbackSheet('support')">Написать в поддержку</button>
   <button class="btn gh w" style="margin-top:8px" onclick="APP.codeAsk()">У меня есть код</button>`)},
 payGo(){if(!this.user)return this.authScreen('up','Войди или создай аккаунт, чтобы открыть полный доступ');
   const u=this.user,q=new URLSearchParams({do:'pay','products[0][name]':'VOLYO — полный доступ навсегда','products[0][price]':String(this.PAY_RUB),'products[0][quantity]':'1',order_id:'vl-'+u.id+'-'+Date.now().toString(36),_param_uid:u.id,customer_email:u.email||'',urlReturn:location.origin+'/',urlSuccess:location.origin+'/?paid=1'});
@@ -7708,13 +7768,31 @@ iosSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px"
   <div class="small mut" style="margin:4px 0 16px">iPhone присылает уведомления только приложениям с экрана «Домой». Это займёт 10 секунд.</div>
   <div class="ios-st">${['Открой VOLYO в Safari','Нажми «Поделиться» внизу экрана','Выбери «На экран "Домой"»','Открой приложение с иконки и включи уведомления здесь'].map((t,i)=>`<div><span>${i+1}</span>${t}</div>`).join('')}</div>
   <button class="btn pr w" style="margin-top:16px" onclick="APP.close()">Понятно</button>`)},
+FB:{url:'https://ttgzjjhysrwguwnmvqkh.supabase.co/rest/v1/rpc/okean_brief_submit',key:'sb_publishable_IGFZAMCIAs_x2V5iLTAVMg_bGkuK6xX'},
+feedbackSheet(kind){const k=kind||'support',T={support:['Написать в поддержку','Что случилось? Опиши, что произошло и на каком экране'],idea:['Предложить идею','Что добавить или улучшить в VOLYO?'],badge:['Значок за 365 дней','Напиши пару слов, и значок придёт на указанный контакт']},u=this.user;this._fbk=k;const c=this._fbc!=null?this._fbc:(u&&u.email||'');
+  this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">${T[k][0]}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+  <div class="fb-w"><textarea id="fbT" class="fb-ta" rows="5" maxlength="2000" placeholder="${esc(this.tt(T[k][1]))}" oninput="APP._fbt=this.value;$('fbGo').disabled=!this.value.trim()">${esc(this._fbt||'')}</textarea>
+  <input id="fbC" class="fb-in" type="text" maxlength="120" placeholder="${esc(this.tt('Почта или Telegram для ответа'))}" value="${esc(c)}" oninput="APP._fbc=this.value" autocomplete="off">
+  <div class="fb-n">Сообщение уйдёт команде VOLYO. Чтобы получить ответ, оставь почту или Telegram.</div>
+  <button class="fb-go" id="fbGo" onclick="APP.feedbackSend()" ${(this._fbt||'').trim()?'':'disabled'}>Отправить</button></div>`)},
+async feedbackSend(){const t=(($('fbT')||{}).value||'').trim(),c=(($('fbC')||{}).value||'').trim();if(!t)return;
+  let log=[];try{log=JSON.parse(localStorage.getItem('tw-fb')||'[]').filter(x=>Date.now()-x<36e5)}catch(e){}
+  if(log.length>=5)return this.toast('Слишком много сообщений. Попробуй позже');
+  const b=$('fbGo');if(b){b.disabled=true;b.textContent=this.tt('Отправляю…')}
+  const u=this.user||{},kind=this._fbk||'support',KL={support:'Поддержка',idea:'Идея',badge:'Значок за 365 дней'};
+  const text=['VOLYO · '+KL[kind],'',t,'','Контакт: '+(c||'не указан'),'Аккаунт: '+(u.email||'гость'),'Язык: '+this.lang(),'Устройство: '+String(navigator.userAgent||'').slice(0,90)].join('\n');
+  try{const r=await fetch(this.FB.url,{method:'POST',headers:{apikey:this.FB.key,Authorization:'Bearer '+this.FB.key,'Content-Type':'application/json'},body:JSON.stringify({p_id:'fb'+uid()+Date.now().toString(36),p_form:'volyo-'+kind,p_answers:{kind,text:t,contact:c,email:u.email||'',lang:this.lang()},p_text:text})});
+    const ok=r.ok&&(await r.json())===true;if(!ok)throw new Error('fb');
+    log.push(Date.now());try{localStorage.setItem('tw-fb',JSON.stringify(log))}catch(e){}this._fbt='';this._fbc=null;this.track('feedback',{kind},'day');
+    $('sheet').innerHTML=this.thx(`<div class="row"><span class="sp"></span><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div><div class="fb-ok"><i>${I.ok}</i><b>Спасибо!</b><span>${c?'Сообщение отправлено. Ответ придёт на указанный контакт.':'Сообщение отправлено.'}</span></div><button class="fb-go fb-gh" onclick="APP.close()">Закрыть</button>`);this.tr($('sheet'))}
+  catch(e){if(b){b.disabled=false;b.textContent=this.tt('Отправить')}this.toast('Не получилось отправить. Проверь соединение и попробуй ещё раз')}},
 methodSheet(){this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">На чём построена система</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin-top:10px;line-height:1.55">Каркас — «12 недель в году» Брайана Морана: тактики вместо результатов, недельный счёт, планка 85%, еженедельный разбор, 13-я неделя на итоги.<br><br>Разделение действий и результата — «4 дисциплины исполнения». Банк побед — исследование Терезы Амабайл о малых победах. «Не пропускай дважды» и 66 дней до автоматизма — Джеймс Клир и Филиппа Лалли. Часы фокуса — Кэл Ньюпорт, «Глубокая работа». Партнёр и итоги для сторис — мета-анализ Харкин (2016): когда о прогрессе знают другие, цели достигаются чаще. «Если — то» — Питер Гольвитцер. WOOP — Габриэль Эттинген. Привычки и «не пропускай дважды» — Джеймс Клир. Отчёт партнёру — исследование Гейл Мэтьюз. Строгие программы — по правилам их авторов.</div>`)},
 lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=214');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=216');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
