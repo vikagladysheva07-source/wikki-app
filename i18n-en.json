@@ -2933,5 +2933,13 @@
 "Проверь почту: на неё придёт чек": "Check your email: the receipt goes there",
 "Оплатить {#} ₽": "Pay {#} ₽",
 "Оплата на защищённой странице Продамуса. Возврат в течение 14 дней": "Payment on the secure Prodamus page. Refund within 14 days",
-"Оплатить ${#}": "Pay ${#}"
+"Оплатить ${#}": "Pay ${#}",
+"Одна задача и полное внимание до сигнала": "One task, full attention until the signal",
+"Помодоро": "Pomodoro",
+"отрезка": "blocks",
+"мин перерыв": "min break",
+"мин в конце": "min at the end",
+"Перерыв": "Break",
+"Длинный перерыв": "Long break",
+"Отрезок {#} из {#}": "Block {#} of {#}"
 }

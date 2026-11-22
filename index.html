@@ -715,6 +715,37 @@ html body .vlpay-go{display:block;width:100%;height:54px;margin-top:4px;border-r
 html body .vlpay-go:active{transform:scale(.985)}
 html body .vlpay-ft{display:flex;align-items:flex-start;gap:8px;margin:14px 4px 0;font:400 12px Manrope,system-ui,sans-serif;color:#8E8A98;line-height:1.45}
 html body .vlpay-ft svg{width:15px;height:15px;flex:none;margin-top:1px}
+/* фокус: режимы, помодоро, живое кольцо с делениями */
+html body .fto-md{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin:0 auto 22px;max-width:260px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+html body .fto-md button{height:36px;border-radius:11px;font:500 14px Manrope,system-ui,sans-serif;color:#A9A4B6;background:none;border:0;cursor:pointer}
+html body .fto-md button.on{color:#fff;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(196,164,255,.45)}
+html body .fto-pomo{display:flex;flex-direction:column;align-items:center;gap:18px;margin-bottom:22px}
+html body .fto-ps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+html body .fto-ps span{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font:400 11.5px Manrope,system-ui,sans-serif;color:#9A96A6}
+html body .fto-ps b{font:500 18px Manrope,system-ui,sans-serif;color:#F2EDE2}
+html body .fto-hd p{max-width:none}
+html body .fto-ring{width:min(300px,82vw)!important}
+html body .fto-ring svg{transform:none!important;overflow:visible}
+html body .ftk{stroke:rgba(196,164,255,.22);stroke-width:2;stroke-linecap:round;transition:stroke .4s}
+html body .ftk.on{stroke:#C4A4FF;filter:drop-shadow(0 0 3px rgba(196,164,255,.7))}
+html body #ftArc{filter:drop-shadow(0 0 10px rgba(155,111,232,.45));transition:stroke-dashoffset .25s linear}
+html body .fto-run.brk #ftArc{stroke:rgba(255,255,255,.55)}html body .fto-run.brk .ftk.on{stroke:rgba(255,255,255,.6)}
+html body .fto-tm b{font-weight:200!important}
+html body .fto-tm span{font:400 14px Manrope,system-ui,sans-serif;color:#B8B2C8;margin-top:6px}
+/* главная: мини-циферблат фокуса как в таймере */
+html body #app .ftc{padding:8px 20px 8px 8px}
+html body #app .ftc-dl{position:relative;width:72px;height:72px;flex:none;display:grid;place-items:center}
+html body #app .ftc-dl svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+html body #app .ftc-dl .ftk{stroke-width:1.4}
+html body #app .ftc-dl .ftc-arc{filter:drop-shadow(0 0 5px rgba(155,111,232,.45));transition:stroke-dashoffset .3s linear}
+html body #app .ftc-dl b{position:relative;font:300 17px Manrope,system-ui,sans-serif;color:#F4F1EC;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+html body #app .ftc-on .ftc-dl b{font-size:13px}
+/* фирменный циферблат на экране запуска фокуса */
+html body .fto-dv.fto-dvr{position:relative;width:176px!important;height:176px!important;border:0!important;background:none!important;box-shadow:none!important}
+html body .fto-dvr .fto-rs{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+html body .fto-dvr .fto-rs circle[stroke^="url"]{filter:drop-shadow(0 0 8px rgba(155,111,232,.45));transition:stroke-dashoffset .3s}
+html body .fto-dvr b,html body .fto-dvr span{position:relative}
+html body #app .ftc-dl .ftc-ic{position:relative;width:24px;height:24px;color:#F1EAFF}
 /* дневник: вкладка «Мысли» */
 .th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
 .th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
@@ -6914,12 +6945,13 @@ ftLeft(f){return f.paused?f.paused:Math.max(0,f.end-Date.now())},
 ftFmt(ms){const s=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(s/60);return String(m).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},
 ftMinTxt(m){return m>=60?Math.floor(m/60)+'ч'+(m%60?' '+(m%60)+'м':''):m+'м'},
 ftHome(){const f=this.ftGet(),run=f&&!f.done,d=+(localStorage.getItem('tw-ftd')||25),tot=this.focusOf(today());
-  const g=+((this.S.pref||{}).focusGoal)||10,tgt=Math.max(30,Math.round(g*60/7/5)*5),pct=Math.min(1,tot/tgt),L=144.5,pv=(this._lvPrev||{}).rgftg,st=pv!=null?pv:pct;
-  const moon='<svg class="ftc-ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V10M9.8 3h4.4M12 3v3.5M17.6 7.4l1.3-1.3"/></svg>';
-  const ring=`<svg class="ftc-rg" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="23" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="2.6"/><circle class="hr-arc" data-g="ftg" data-v="${run?1:pct}" data-c="${L}" cx="26" cy="26" r="23" fill="none" stroke="#C4A4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="${(L*(run?1:st)).toFixed(1)} ${L}" transform="rotate(-90 26 26)" style="${tot||st||run?'':'opacity:0'}"/></svg>`;
+  const g=+((this.S.pref||{}).focusGoal)||10,tgt=Math.max(30,Math.round(g*60/7/5)*5),pct=Math.min(1,tot/tgt);
+  const fr=run?Math.max(0,Math.min(1,this.ftLeft(f)/f.total)):pct,R=27,C=+(2*Math.PI*R).toFixed(1),N=40;
+  const ticks=[...Array(N)].map((_,i)=>{const an=i/N*2*Math.PI-Math.PI/2,r1=i%5?33.5:32.5,r2=36.5;return `<line class="ftk${i<Math.round(fr*N)?' on':''}" x1="${(40+r1*Math.cos(an)).toFixed(1)}" y1="${(40+r1*Math.sin(an)).toFixed(1)}" x2="${(40+r2*Math.cos(an)).toFixed(1)}" y2="${(40+r2*Math.sin(an)).toFixed(1)}"/>`}).join('');
+  const dial=`<span class="ftc-dl"><svg viewBox="0 0 80 80" aria-hidden="true"><defs><linearGradient id="ftG2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F1EAFF"/><stop offset=".5" stop-color="#C4A4FF"/><stop offset="1" stop-color="#7B55E0"/></linearGradient></defs><g class="ftc-tk">${ticks}</g><circle cx="40" cy="40" r="${R}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle class="ftc-arc" data-c="${C}" cx="40" cy="40" r="${R}" fill="none" stroke="url(#ftG2)" stroke-width="6" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${(C*(1-fr)).toFixed(1)}" transform="rotate(-90 40 40)" style="${fr>0?'':'opacity:0'}"/></svg>${run?`<b class="ftp-t">${this.ftFmt(this.ftLeft(f))}</b>`:'<svg class="ftc-ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V10M9.8 3h4.4M12 3v3.5M17.6 7.4l1.3-1.3"/></svg>'}</span>`;
   const chev='<svg class="ftc-ch" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  if(run)return `<button class="ftc ftc-on" onclick="APP.focusOpen()"><span class="ftc-c">${ring}${moon}</span><span class="ftc-t"><b>Фокус идёт</b><span class="ftp-t">${this.ftFmt(this.ftLeft(f))}</span></span>${chev}</button>`;
-  return `<button class="ftc" onclick="APP.focusOpen()"><span class="ftc-c">${ring}${moon}</span><span class="ftc-t"><b>Фокус</b></span>${chev}</button>`},
+  if(run)return `<button class="ftc ftc-on" onclick="APP.focusOpen()">${dial}<span class="ftc-t"><b>Фокус идёт</b></span>${chev}</button>`;
+  return `<button class="ftc" onclick="APP.focusOpen()">${dial}<span class="ftc-t"><b>Фокус</b></span>${chev}</button>`},
 ftHPick(m){this._ftd=m;this._fto=false;try{localStorage.setItem('tw-ftd',m)}catch(e){}this.render()},
 ftHStart(){this._ftd=+(localStorage.getItem('tw-ftd')||25);this._ftw='';this.ftStart()},
 ftPill(){const f=this.ftGet();if(!f||f.done)return '';return `<button class="ft-pill" onclick="APP.focusOpen()"><span>Идёт фокус · <b class="ftp-t">${this.ftFmt(this.ftLeft(f))}</b></span><span>Открыть ›</span></button>`},
@@ -6928,31 +6960,39 @@ ftHide(){const o=$('ftOv');o&&o.remove();this.render()},
 ftWake(on){try{if(on){if(navigator.wakeLock&&!this._ftwl)navigator.wakeLock.request('screen').then(l=>{this._ftwl=l;l.addEventListener('release',()=>{this._ftwl=null})}).catch(()=>{})}else if(this._ftwl){this._ftwl.release();this._ftwl=null}}catch(e){}},
 focusOpen(){const f=this.ftGet();if(f&&f.done)this.ftShow('fin');else if(f)this.ftShow('run');else this.ftShow('start')},
 ftShow(mode){const o=this.ftOv();clearInterval(this._ftt);
-  if(mode==='start'){let d=+(localStorage.getItem('tw-ftd')||25);this._ftd=d;this._ftw=this._ftw||'';const T=(this.tasksFor?this.tasksFor(today()):[]).filter(x=>!x.done).slice(0,8);this._ftT=T;
-    const own=![25,50,90].includes(d)||this._fto;
+  if(mode==='start'){let d=+(localStorage.getItem('tw-ftd')||25);this._ftd=d;this._ftw='';const pm=this.ftMode()==='pomo';
     const PS=[15,25,50,90],tot=this.focusOf(today());
-    o.innerHTML=`<button class="fto-x" onclick="APP.ftHide()" aria-label="Закрыть">×</button><div class="fto-st"><div class="fto-hd"><h3>Фокус</h3><p>Один отрезок времени на одно дело. Без телефона и переключений: таймер идёт, ты работаешь.</p></div>
-    <div class="fto-dial"><button class="fto-pm" onclick="APP.ftStep(-5)" aria-label="Меньше">−</button><div class="fto-dv"><b id="ftOwnV">${d}</b><span>минут</span></div><button class="fto-pm" onclick="APP.ftStep(5)" aria-label="Больше">+</button></div>
-    <div class="fto-dur" id="ftDur">${PS.map(m=>`<button class="${d===m?'on':''}" onclick="APP.ftDur(${m})">${m}</button>`).join('')}</div>
-    <div class="fto-lb">Над чем работаешь</div>
-    <div class="fto-wh" id="ftWh"><span class="${this._ftw?'':'on'}" onclick="APP.ftTask(-1)">Без задачи</span>${T.map((x,i)=>`<span class="${this._ftw===x.title?'on':''}" onclick="APP.ftTask(${i})">${esc(x.title)}</span>`).join('')}</div>
-    <div class="fto-tip">Сегодня ${tot} мин</div>
+    const body=pm?`<div class="fto-pomo"><div class="fto-dv fto-dvr">${this.ftRing(25/90,'ftGp')}<b>25</b><span>минут</span></div><div class="fto-ps"><span><b>4</b>отрезка</span><span><b>5</b>мин перерыв</span><span><b>15</b>мин в конце</span></div></div>`
+     :`<div class="fto-dial"><button class="fto-pm" onclick="APP.ftStep(-5)" aria-label="Меньше">−</button><div class="fto-dv fto-dvr">${this.ftRing(Math.min(1,d/90),'ftGs')}<b id="ftOwnV">${d}</b><span>минут</span></div><button class="fto-pm" onclick="APP.ftStep(5)" aria-label="Больше">+</button></div><div class="fto-dur" id="ftDur">${PS.map(m=>`<button class="${d===m?'on':''}" onclick="APP.ftDur(${m})">${m}</button>`).join('')}</div>`;
+    o.innerHTML=`<button class="fto-x" onclick="APP.ftHide()" aria-label="Закрыть">×</button><div class="fto-st"><div class="fto-hd"><h3>Фокус</h3><p>Одна задача и полное внимание до сигнала</p></div>
+    <div class="fto-md"><button class="${pm?'':'on'}" onclick="APP.ftSetMode('free')">Таймер</button><button class="${pm?'on':''}" onclick="APP.ftSetMode('pomo')">Помодоро</button></div>
+    ${body}
     <button class="fto-go" onclick="APP.ftStart()">Начать фокус</button></div>`}
   else if(mode==='run'){const f=this.ftGet();if(!f)return this.ftShow('start');
-    o.innerHTML=`<button class="fto-x" onclick="APP.ftHide()" aria-label="Свернуть">×</button><div class="fto-run ${f.paused?'paused':''}" id="ftRun"><div class="fto-ring"><svg viewBox="0 0 292 292"><circle cx="146" cy="146" r="140" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="3"/><circle id="ftArc" cx="146" cy="146" r="140" fill="none" stroke="#E3D6FF" stroke-width="3" stroke-linecap="round" stroke-dasharray="879.6" stroke-dashoffset="0"/></svg><div class="fto-tm"><b id="ftClk"></b><span id="ftLab">${f.paused?'пауза':esc(f.label||'')}</span></div></div><div class="fto-ctl"><button class="fto-pb" onclick="APP.ftPause()" aria-label="Пауза"><i></i></button><button class="fto-end" onclick="APP.ftEnd()">Завершить</button></div></div>`;
+    const R=118,C=(2*Math.PI*R).toFixed(1),N=60,ticks=[...Array(N)].map((_,i)=>{const an=i/N*2*Math.PI-Math.PI/2,r1=i%5?136:132,r2=144,x1=150+r1*Math.cos(an),y1=150+r1*Math.sin(an),x2=150+r2*Math.cos(an),y2=150+r2*Math.sin(an);return `<line class="ftk" x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`}).join('');
+    o.innerHTML=`<button class="fto-x" onclick="APP.ftHide()" aria-label="Свернуть">×</button><div class="fto-run ${f.paused?'paused':''} ${f.ph==='b'?'brk':''}" id="ftRun"><div class="fto-ring"><svg viewBox="0 0 300 300"><defs><linearGradient id="ftG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F1EAFF"/><stop offset=".5" stop-color="#C4A4FF"/><stop offset="1" stop-color="#7B55E0"/></linearGradient></defs><g id="ftTk">${ticks}</g><circle cx="150" cy="150" r="${R}" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="16"/><circle id="ftArc" data-c="${C}" cx="150" cy="150" r="${R}" fill="none" stroke="url(#ftG)" stroke-width="16" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="0" transform="rotate(-90 150 150)"/></svg><div class="fto-tm"><b id="ftClk"></b><span id="ftLab">${this.ftLabel(f)}</span></div></div><div class="fto-ctl"><button class="fto-pb" onclick="APP.ftPause()" aria-label="Пауза"><i></i></button><button class="fto-end" onclick="APP.ftEnd()">Завершить</button></div></div>`;
     this.ftWake(true);this.ftTick();this._ftt=setInterval(()=>this.ftTick(),250)}
   else{const f=this.ftGet(),m=f&&f.m||0,tot=this.focusOf(today());
     o.innerHTML=`<div class="fto-fin"><div class="fto-big">${m}</div><div class="fto-u">минут фокуса</div><div class="fto-tot">Сегодня всего ${this.ftMinTxt(tot)}</div><div class="fto-bt"><button class="fto-go" onclick="APP.ftDone()">Готово</button><button class="fto-end" onclick="APP.ftAgain()">Ещё раз</button></div></div>`}
   try{this.tr(o)}catch(e){}},
+ftRing(fr,gid){const N=60,R=60,ticks=[...Array(N)].map((_,i)=>{const an=i/N*2*Math.PI-Math.PI/2,r1=i%5?69:67,r2=73.5;return `<line class="ftk${i<Math.round(fr*N)?' on':''}" x1="${(80+r1*Math.cos(an)).toFixed(1)}" y1="${(80+r1*Math.sin(an)).toFixed(1)}" x2="${(80+r2*Math.cos(an)).toFixed(1)}" y2="${(80+r2*Math.sin(an)).toFixed(1)}"/>`}).join(''),C=2*Math.PI*R;
+  return `<svg class="fto-rs" viewBox="0 0 160 160" aria-hidden="true"><defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F1EAFF"/><stop offset=".5" stop-color="#C4A4FF"/><stop offset="1" stop-color="#7B55E0"/></linearGradient></defs>${ticks}<circle cx="80" cy="80" r="${R}" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="9"/><circle cx="80" cy="80" r="${R}" fill="none" stroke="url(#${gid})" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C*(1-fr)).toFixed(1)}" transform="rotate(-90 80 80)"/></svg>`},
+ftMode(){try{return localStorage.getItem('tw-ftm')||'free'}catch(e){return 'free'}},
+ftSetMode(m){try{localStorage.setItem('tw-ftm',m)}catch(e){}this.buzz&&this.buzz(4);this.ftShow('start')},
+ftLabel(f){if(f.paused)return 'пауза';if(f.mode==='pomo')return f.ph==='b'?(f.cy>=4?'Длинный перерыв':'Перерыв'):`Отрезок ${f.cy} из 4`;return esc(f.label||'')},
+ftPhase(){const f=this.ftGet();if(!f||f.mode!=='pomo')return this.ftFinish(true);try{navigator.vibrate&&navigator.vibrate([60,40,60])}catch(e){}this.buzz&&this.buzz(12);
+  if(f.ph==='w'){f.wm=(f.wm||0)+25;this.focusAdd(25,today(),null,true);const lb=f.cy>=4?15:5;Object.assign(f,{ph:'b',end:Date.now()+lb*60000,total:lb*60000,paused:0});this.ftSet(f);this.ftShow('run');return}
+  if(f.cy>=4){this.ftSet({done:true,m:f.wm||0});this.track('focus_done',{m:f.wm||0,pomo:1},'day');this.ftWake(false);this.ftShow('fin');return}
+  Object.assign(f,{ph:'w',cy:f.cy+1,end:Date.now()+25*60000,total:25*60000,paused:0});this.ftSet(f);this.ftShow('run')},
 ftDur(m){this._ftd=m;this._fto=false;localStorage.setItem('tw-ftd',m);this.ftShow('start')},
 ftOwn(){this._fto=true;this.ftShow('start')},
-ftStep(k){let d=Math.max(5,Math.min(180,(this._ftd||25)+k));this._ftd=d;localStorage.setItem('tw-ftd',d);const e=$('ftOwnV');e&&(e.textContent=d);document.querySelectorAll('#ftDur button').forEach((b,i)=>b.classList.toggle('on',[15,25,50,90][i]===d))},
+ftStep(k){let d=Math.max(5,Math.min(180,(this._ftd||25)+k));this._ftd=d;localStorage.setItem('tw-ftd',d);const e=$('ftOwnV');e&&(e.textContent=d);const dv=e&&e.closest('.fto-dvr');if(dv){const sv=dv.querySelector('.fto-rs');if(sv){const t=document.createElement('div');t.innerHTML=this.ftRing(Math.min(1,d/90),'ftGs');sv.replaceWith(t.firstChild)}}document.querySelectorAll('#ftDur button').forEach((b,i)=>b.classList.toggle('on',[15,25,50,90][i]===d))},
 ftTask(i){this._ftw=i<0?'':(this._ftT[i]||{}).title||'';document.querySelectorAll('#ftWh span').forEach((s,j)=>s.classList.toggle('on',j===i+1))},
-ftStart(){const d=this._ftd||25,total=d*60000;this.ftSet({end:Date.now()+total,total,paused:0,label:this._ftw||''});this.track('focus_start',{m:d},'day');this.ftShow('run')},
-ftPause(){const f=this.ftGet();if(!f||f.done)return;if(f.paused){f.end=Date.now()+f.paused;f.paused=0}else{f.paused=Math.max(1,f.end-Date.now())}this.ftSet(f);this.buzz(6);const r=$('ftRun');if(r)r.classList.toggle('paused',!!f.paused);const l=$('ftLab');if(l){l.textContent=f.paused?'пауза':(f.label||'');try{this.tr(l)}catch(e){}}this.ftTick()},
-ftTick(){const f=this.ftGet();if(!f){clearInterval(this._ftt);return}if(f.done)return;const left=this.ftLeft(f);const c=$('ftClk');if(c)c.textContent=this.ftFmt(left);const a=$('ftArc');if(a)a.style.strokeDashoffset=(879.6*(1-Math.max(0,left)/f.total)).toFixed(1);document.querySelectorAll('.ftp-t').forEach(e=>e.textContent=this.ftFmt(left));if(!f.paused&&left<=0)this.ftFinish(true)},
+ftStart(){if(this.ftMode()==='pomo'){this.ftSet({mode:'pomo',ph:'w',cy:1,wm:0,end:Date.now()+25*60000,total:25*60000,paused:0,label:''});this.track('focus_start',{m:25,pomo:1},'day');return this.ftShow('run')}const d=this._ftd||25,total=d*60000;this.ftSet({end:Date.now()+total,total,paused:0,label:''});this.track('focus_start',{m:d},'day');this.ftShow('run')},
+ftPause(){const f=this.ftGet();if(!f||f.done)return;if(f.paused){f.end=Date.now()+f.paused;f.paused=0}else{f.paused=Math.max(1,f.end-Date.now())}this.ftSet(f);this.buzz(6);const r=$('ftRun');if(r)r.classList.toggle('paused',!!f.paused);const l=$('ftLab');if(l){l.textContent=this.ftLabel(f);try{this.tr(l)}catch(e){}}this.ftTick()},
+ftTick(){const f=this.ftGet();if(!f){clearInterval(this._ftt);return}if(f.done)return;const left=this.ftLeft(f);const c=$('ftClk');if(c)c.textContent=this.ftFmt(left);const a=$('ftArc'),fr=Math.max(0,Math.min(1,left/f.total));if(a){const C=+(a.dataset.c||879.6);a.style.strokeDashoffset=(C*(1-fr)).toFixed(1)}const tk=$('ftTk');if(tk){const n=Math.round(fr*60),L=tk.children;for(let i=0;i<L.length;i++)L[i].classList.toggle('on',i<n)}document.querySelectorAll('.ftp-t').forEach(e=>e.textContent=this.ftFmt(left));document.querySelectorAll('.ftc-arc').forEach(c=>{c.style.opacity=1;c.style.strokeDashoffset=((+c.dataset.c)*(1-fr)).toFixed(1)});document.querySelectorAll('.ftc-tk').forEach(g=>{const n=Math.round(fr*40);[...g.children].forEach((l,i)=>l.classList.toggle('on',i<n))});if(!f.paused&&left<=0){if(f.mode==='pomo')this.ftPhase();else this.ftFinish(true)}},
 ftEnd(){this.ftFinish(false)},
-ftFinish(auto){const f=this.ftGet();if(!f||f.done)return;clearInterval(this._ftt);const left=this.ftLeft(f),m=auto?Math.round(f.total/60000):Math.round((f.total-left)/60000);this.ftWake(false);
+ftFinish(auto){const f=this.ftGet();if(!f||f.done)return;clearInterval(this._ftt);const left=this.ftLeft(f);if(f.mode==='pomo'){const part=f.ph==='w'?Math.round((f.total-left)/60000):0,tm=(f.wm||0)+part;this.ftWake(false);if(part>=1)this.focusAdd(part,today(),null,true);if(tm<1){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.toast('Меньше минуты не записываем');this.render();return}this.ftSet({done:true,m:tm});this.track('focus_done',{m:tm,pomo:1},'day');this.buzz(12);this.ftShow('fin');return}const m=auto?Math.round(f.total/60000):Math.round((f.total-left)/60000);this.ftWake(false);
   if(m<1){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.toast('Меньше минуты не записываем');this.render();return}
   this.ftSet({done:true,m});this.focusAdd(m,today(),null,true);this.track('focus_done',{m},'day');try{navigator.vibrate&&navigator.vibrate([60,40,60])}catch(e){}this.buzz(12);this.ftShow('fin')},
 ftDone(){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.render()},
@@ -8105,7 +8145,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=231');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=232');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
