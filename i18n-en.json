@@ -2918,5 +2918,9 @@
 "Накопление месяца": "Month build-up",
 "На {#} выше прошлого месяца": "{#} ahead of last month",
 "На {#} ниже прошлого месяца": "{#} behind last month",
-"Вровень с прошлым месяцем": "Level with last month"
+"Вровень с прошлым месяцем": "Level with last month",
+"Привычки по дням": "Habits by day",
+"{#} из {#}": "{#} of {#}",
+"+ Добавить дело на этот день": "+ Add a task for this day",
+"из {#} минут": "of {#} minutes"
 }
