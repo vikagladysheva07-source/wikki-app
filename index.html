@@ -690,6 +690,31 @@ html body #app .ftc-t b{font-size:17px!important;font-weight:600!important;lette
 html body #app .ftc{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02))!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)!important;-webkit-backdrop-filter:blur(6px) saturate(1.1);backdrop-filter:blur(6px) saturate(1.1)}
 /* кружок с таймером: полупрозрачный, как сама капсула */
 html body #app .ftc-c{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)!important;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+/* неделя: названия дней белым, всегда заметны */
+html body #app #wkAg .wag-n b,html body #app #wkAg .wag-d.pa .wag-n b,html body #app #wkAg .wag-d:not(:has(.wag-c)) .wag-n b{color:#FFFFFF!important}
+html body #app .pwc-b em{color:#E9E5F0}
+/* страница оформления перед оплатой */
+html body .vlpay{padding:0 2px 4px}
+html body .vlpay-hd{display:flex;align-items:center;gap:14px;margin:2px 0 18px}
+html body .vlpay-ic{width:52px;height:52px;border-radius:14px;box-shadow:0 0 18px rgba(155,111,232,.25)}
+html body .vlpay-t{font:600 20px Manrope,system-ui,sans-serif;color:#F4F1EC}
+html body .vlpay-s{font:400 13px Manrope,system-ui,sans-serif;color:#9A96A6;margin-top:2px}
+html body .vlpay-card{padding:16px;border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);margin-bottom:16px}
+html body .vlpay-row,html body .vlpay-tot{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+html body .vlpay-row span{font:500 15px Manrope,system-ui,sans-serif;color:#E9E5F0}html body .vlpay-row b{font:500 15px Manrope,system-ui,sans-serif;color:#E9E5F0}
+html body .vlpay-li{display:flex;flex-direction:column;gap:8px;margin:14px 0;padding:14px 0;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)}
+html body .vlpay-li span{display:flex;align-items:center;gap:10px;font:400 13.5px Manrope,system-ui,sans-serif;color:#B8B2C8}
+html body .vlpay-li svg{width:16px;height:16px;color:#C4A4FF;flex:none}
+html body .vlpay-tot span{font:400 14px Manrope,system-ui,sans-serif;color:#9A96A6}html body .vlpay-tot b{font:300 30px Manrope,system-ui,sans-serif;color:#F4F1EC;letter-spacing:-.02em}
+html body .vlpay-f{display:block;margin-bottom:12px}
+html body .vlpay-f span{display:block;font:400 12.5px Manrope,system-ui,sans-serif;color:#9A96A6;margin:0 0 6px 4px}
+html body .vlpay-f input{width:100%;height:50px;padding:0 16px!important;border-radius:15px!important;font:400 16px Manrope,system-ui,sans-serif!important;color:#F4F1EC;background:rgba(255,255,255,.05)!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:none!important}
+html body .vlpay-f input:focus{border-color:rgba(196,164,255,.6)!important;outline:0}
+html body .vlpay-err{min-height:16px;font:400 12.5px Manrope,system-ui,sans-serif;color:#F0A8A8;margin:-4px 0 6px 4px}
+html body .vlpay-go{display:block;width:100%;height:54px;margin-top:4px;border-radius:17px;font:600 16px Manrope,system-ui,sans-serif;color:#fff;cursor:pointer;background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05));border:1px solid rgba(196,164,255,.6);box-shadow:0 0 22px rgba(155,111,232,.28),inset 0 1px 0 rgba(255,255,255,.18)}
+html body .vlpay-go:active{transform:scale(.985)}
+html body .vlpay-ft{display:flex;align-items:flex-start;gap:8px;margin:14px 4px 0;font:400 12px Manrope,system-ui,sans-serif;color:#8E8A98;line-height:1.45}
+html body .vlpay-ft svg{width:15px;height:15px;flex:none;margin-top:1px}
 /* дневник: вкладка «Мысли» */
 .th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
 .th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
@@ -7993,12 +8018,27 @@ PAY_URL:'https://wikkiocean.payform.ru',REVIEWS:[],
 fdLoad(){if(this._fdT&&Date.now()-this._fdT<60000)return;this._fdT=Date.now();try{this.sb.rpc('tw_founding_left').then(r=>{if(!r.error&&typeof r.data==='number'){const ch=this._fd!==r.data;this._fd=r.data;if(ch&&document.querySelector('.pw3'))this.render()}})}catch(e){}},
 revLoad(){if(this._rvL)return;this._rvL=1;fetch('reviews.json?v='+Date.now()).then(r=>r.ok?r.json():[]).then(a=>{if(Array.isArray(a)&&a.length){this.REVIEWS=a;if(this.sub||this.tab)this.render()}}).catch(()=>{})},
 revBlock(max){const R=(this.REVIEWS||[]).slice(0,max||3);if(!R.length)return '';const en=this.lang()==='en';return `<div class="rv" data-nt><div class="rv-lb">${en?'From the first members':'Что говорят первые пользователи'}</div>${R.map(r=>`<div class="rv-m"><img class="rv-a" src="${esc(r.p||'')}" alt="" loading="lazy"><div class="rv-b"><div class="rv-h"><b>${esc(r.n||'')}</b>${r.r||r.re?`<span>${esc(en&&r.re?r.re:r.r||'')}</span>`:''}</div><p>${esc(en&&r.te?r.te:r.t||'')}</p></div></div>`).join('')}</div>`},GOOGLE_ON:false,PAY_RUB:3777,
-buy(){this.track('buy_click',null,'day');if(this.PAY_URL)return this.payGo();this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Оплата скоро откроется</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+buy(){this.track('buy_click',null,'day');if(this.PAY_URL){if(!this.user)return this.authScreen('up','Войди или создай аккаунт, чтобы открыть полный доступ');return this.payCheck()}this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Оплата скоро откроется</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
   <div class="small mut" style="margin:6px 0 16px;line-height:1.55">Оплата картой скоро заработает. Напиши в поддержку, и доступ откроется по цене запуска сразу после запуска оплаты.</div>
   <button class="btn pr w" onclick="APP.close();APP.feedbackSheet('support')">Написать в поддержку</button>
   <button class="btn gh w" style="margin-top:8px" onclick="APP.codeAsk()">У меня есть код</button>`)},
+payCheck(){const u=this.user||{},pr=this.price(),en=this.lang()==='en';let ph='';try{ph=localStorage.getItem('tw-pph')||''}catch(e){}
+  const ok='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  const lock='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>';
+  this.open(`<div class="vlpay"><div class="row"><span class="sp"></span><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+  <div class="vlpay-hd"><img src="icon-192.png" alt="" class="vlpay-ic"><div><div class="vlpay-t">Полный доступ</div><div class="vlpay-s">VOLYO навсегда</div></div></div>
+  <div class="vlpay-card"><div class="vlpay-row"><span>Полный доступ навсегда</span><b>${pr.v}</b></div><div class="vlpay-li"><span>${ok}Программы, голос, все привычки</span><span>${ok}Весь прогресс и защита серии</span><span>${ok}Без подписки и автосписаний</span></div><div class="vlpay-tot"><span>К оплате</span><b>${pr.v}</b></div></div>
+  <label class="vlpay-f"><span>Почта для чека</span><input id="pcE" type="email" inputmode="email" autocomplete="email" value="${esc(u.email||'')}" placeholder="name@mail.com" oninput="$('pcErr').textContent=''"></label>
+  <label class="vlpay-f"><span>Телефон</span><input id="pcP" type="tel" inputmode="tel" autocomplete="tel" value="${esc(ph)}" placeholder="+7 900 000 00 00"></label>
+  <div class="vlpay-err" id="pcErr"></div>
+  <button class="vlpay-go" onclick="APP.payGo()">Оплатить ${pr.v}</button>
+  <div class="vlpay-ft">${lock}<span>Оплата на защищённой странице Продамуса. Возврат в течение 14 дней</span></div></div>`)},
 payGo(){if(!this.user)return this.authScreen('up','Войди или создай аккаунт, чтобы открыть полный доступ');
-  const u=this.user,q=new URLSearchParams({do:'pay','products[0][name]':'VOLYO — полный доступ навсегда','products[0][price]':String(this.PAY_RUB),'products[0][quantity]':'1',order_id:'vl-'+u.id+'-'+Date.now().toString(36),_param_uid:u.id,customer_email:u.email||'',urlReturn:location.origin+'/',urlSuccess:location.origin+'/?paid=1'});
+  const u=this.user,em=(($('pcE')||{}).value||u.email||'').trim(),ph=String(($('pcP')||{}).value||'').replace(/\D/g,'').replace(/^8(\d{10})$/,'7$1');
+  if($('pcE')&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){const e=$('pcErr');if(e)e.textContent='Проверь почту: на неё придёт чек';$('pcE').focus();return}
+  try{if(ph)localStorage.setItem('tw-pph',ph)}catch(e){}
+  const o={do:'pay','products[0][name]':'VOLYO — полный доступ навсегда','products[0][price]':String(this.PAY_RUB),'products[0][quantity]':'1',order_id:'vl-'+u.id+'-'+Date.now().toString(36),_param_uid:u.id,customer_email:em,urlReturn:location.origin+'/',urlSuccess:location.origin+'/?paid=1'};if(ph.length>=10)o.customer_phone=ph;
+  const q=new URLSearchParams(o);this.track('pay_go',{ph:ph?1:0},'day');
   const url=this.PAY_URL.replace(/\/?$/,'/')+'?'+q.toString();try{localStorage.setItem('tw-paywait',String(Date.now()))}catch(e){}this.close();
   const w=window.open(url,'_blank');if(!w)location.href=url;this.payWatch()},
 payWatch(){let t0=0;try{t0=+localStorage.getItem('tw-paywait')||0}catch(e){}if(!t0||Date.now()-t0>3600e3||this._pw)return;let n=0;
@@ -8065,7 +8105,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=229');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=231');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}

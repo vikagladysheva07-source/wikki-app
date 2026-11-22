@@ -2922,5 +2922,16 @@
 "Привычки по дням": "Habits by day",
 "{#} из {#}": "{#} of {#}",
 "+ Добавить дело на этот день": "+ Add a task for this day",
-"из {#} минут": "of {#} minutes"
+"из {#} минут": "of {#} minutes",
+"Полный доступ навсегда": "Lifetime full access",
+"VOLYO навсегда": "VOLYO, forever",
+"Программы, голос, все привычки": "Programs, voice, unlimited habits",
+"Весь прогресс и защита серии": "All progress and streak protection",
+"К оплате": "Total",
+"Почта для чека": "Email for the receipt",
+"Телефон": "Phone",
+"Проверь почту: на неё придёт чек": "Check your email: the receipt goes there",
+"Оплатить {#} ₽": "Pay {#} ₽",
+"Оплата на защищённой странице Продамуса. Возврат в течение 14 дней": "Payment on the secure Prodamus page. Refund within 14 days",
+"Оплатить ${#}": "Pay ${#}"
 }
