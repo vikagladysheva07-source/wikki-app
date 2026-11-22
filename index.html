@@ -496,6 +496,93 @@ html body .dsec-b .tk .t>.ksb,html body .dsec-b .tk .t>.kmeta,html body .dsec-b 
 html body .dsec-b .tk .t>.ie{order:1;flex:1 1 100%;width:100%}
 html body .dsec-b .tk .t>.ie .iename{flex:1;width:100%;min-width:0;font-size:15px!important;font-weight:600}
 html body .dsec-b .tk .t .ksb-r span{white-space:normal!important}
+/* настройки: без рамки, без пятна подсветки и без вложенного размытия на строках */
+html body #app .card.sgrp:not(.dd-ghost):not(.dd-src),html body #app .card.sgrp:not(.dd-ghost):not(.dd-src):hover{border:0!important;box-shadow:none!important;background:rgba(18,16,26,.62)!important;background-image:none!important;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+html body #app .card.sgrp::before,html body #app .card.sgrp::after{display:none!important}
+html body #app .sgrp .srow,html body #app .sgrp .srow:hover,html body #app .sgrp .srow:active,html body #app .sgrp .srow:focus{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:none!important;box-shadow:none!important;outline:0!important;-webkit-tap-highlight-color:transparent}
+html body #app .srow{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html body #app .sgrp .srow+.srow{border-top:1px solid rgba(255,255,255,.05)!important}
+/* трекер привычек на главной: быстрый выбор периода и прокрутка длинных периодов */
+.rg-c{display:flex;gap:6px;margin:-2px 0 12px}
+.rg-c button{flex:1;height:34px;min-height:0;padding:0 8px;border-radius:11px;font:inherit;font-size:13px;font-weight:500;color:#CFCBD8;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09)}
+.rg-c button.sel{color:#fff;border-color:rgba(196,164,255,.55);background:linear-gradient(160deg,rgba(155,111,232,.2),rgba(91,47,190,.06));box-shadow:0 0 12px rgba(155,111,232,.18)}
+html body #app .hd-ht.hd-wide{grid-template-columns:112px repeat(var(--n),34px)!important;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain;padding-bottom:2px}
+html body #app .hd-ht.hd-wide::-webkit-scrollbar{display:none}
+html body #app .hd-ht.hd-wide .hd-dt i{width:24px!important;height:24px!important;max-width:none!important}
+html body #app .hd-ht.hd-wide .hd-hh{min-width:0}
+html body #app .hd-ht.hd-wide>.hd-nm,html body #app .hd-ht.hd-wide>.hd-hh:first-child{position:sticky;left:0;z-index:3;background:linear-gradient(90deg,rgba(20,18,28,.97) 78%,rgba(20,18,28,0));padding-right:14px}
+@media(min-width:1024px){html body #app .hd-ht.hd-wide{grid-template-columns:150px repeat(var(--n),32px) 36px!important}}
+/* главная: плашка фокуса с кольцом и неделей */
+html body #app .ft3.ft3-r{flex-direction:row;align-items:center;gap:14px;padding:12px 16px;min-height:0;cursor:pointer}
+html body #app .ft3-ring{position:relative;width:48px;height:48px;flex:none;display:grid;place-items:center}
+html body #app .ft3-ring svg{position:absolute;inset:0;width:100%;height:100%}
+html body #app .ft3-ring b{font:600 14px Manrope,system-ui,sans-serif;color:#F2EDE2;font-variant-numeric:tabular-nums}
+html body #app .ft3-r .ft3-t{flex:1;min-width:0}
+html body #app .ft3-wk{display:flex;align-items:flex-end;gap:4px;height:30px;flex:none}
+html body #app .ft3-wk i{display:block;width:5px;border-radius:3px;background:rgba(255,255,255,.2)}
+html body #app .ft3-wk i.td{background:#C4A4FF}
+/* трекер на главной: неделя со стрелками и ссылка на весь месяц */
+html body #app .hw-nav{margin:0 0 10px}
+html body #app .hw-nav .tp-c{width:36px!important;height:36px!important}
+html body #app .hw-nav b{font-size:14.5px}
+html body #app .hd-lk{background:none;border:0;padding:6px 0 6px 10px;min-height:0;font:inherit;font-size:13px;font-weight:500;color:#B8A6E8;cursor:pointer;white-space:nowrap}
+/* трекер привычек: название привычки целиком, до двух строк */
+html body #app .hd-ht .hd-nm>span:last-child{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere;line-height:1.2;font-size:13px}
+html body #app .hd-ht .hd-nm{gap:8px;align-items:center}
+html body #app .hd-ht .hd-mi{flex:none}
+@media(max-width:1023px){html body #app .hmm .hd-ht:not(.hd-wide){grid-template-columns:minmax(0,1fr) repeat(var(--n,7),26px)!important}
+html body #app .hmm .hd-ht:not(.hd-wide) .hd-dt i{width:min(22px,100%)!important;height:auto!important;aspect-ratio:1}}
+/* трекер привычек: одинаковая высота строк, название мельче и в одну линию с заголовком */
+html body #app .hd-ht .hd-nm>span:last-child{font-size:12px!important;line-height:1.2!important;font-weight:500;color:#DAD5E3}
+html body #app .hd-ht .hd-nm,html body #app .hd-ht .hd-dt{min-height:44px;box-sizing:border-box;padding-top:0!important;padding-bottom:0!important;display:flex;align-items:center}
+html body #app .hd-ht .hd-dt{justify-content:center}
+html body #app .hd-ht .hd-nm{padding-right:8px!important}
+html body #app .hd-ht .hd-mi{width:16px;height:16px}html body #app .hd-ht .hd-mi svg{width:16px;height:16px}
+html body #app .hd-ht .hd-hh{font-size:11px}
+/* трекер привычек (вкладка): заголовок месяца со стрелками */
+html body #app .card>.row:has(>.ic):not(:has(.h2)){align-items:center;margin-bottom:2px}
+html body #app .card>.row:has(>.ic) .sp b{font-size:16px;font-weight:600;color:#F4F1EC}
+/* живые графики привычек (ноутбук): неделя столбиками, топ стабильных, накопление месяца, идеальный день */
+.lv-desk{display:none}
+@media(min-width:1024px){.lv-desk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 14px}}
+html body #app .lv-c .hd-h{margin-bottom:12px}
+html body #app .lv-sum,html body #app .lv-sub{font-size:12.5px;color:#9A96A6}html body #app .lv-sum b{font-size:18px;font-weight:600;color:#F2EDE2;font-variant-numeric:tabular-nums}
+html body #app .lv-sub b{font-size:15px;font-weight:600;color:#F2EDE2;font-variant-numeric:tabular-nums}
+html body #app .lv-wk{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:8px;height:150px;align-items:end}
+html body #app .lv-col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px;position:relative}
+html body #app .lv-col .lv-v{font-size:11px;color:#8E8A98;font-variant-numeric:tabular-nums;height:13px;line-height:13px}
+html body #app .lv-bt{width:100%;max-width:26px;flex:1;display:flex;align-items:flex-end;border-radius:9px;background:rgba(255,255,255,.04)}
+html body #app .lv-bt i{display:block;width:100%;border-radius:9px;background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,.1));transition:height .75s cubic-bezier(.2,.9,.25,1),box-shadow .4s}
+html body #app .lv-col.ok .lv-bt i{background:linear-gradient(180deg,rgba(196,164,255,.55),rgba(155,111,232,.2));box-shadow:0 0 14px rgba(155,111,232,.3),inset 0 0 0 1px rgba(196,164,255,.55)}
+html body #app .lv-col.td .lv-v{color:#C4A4FF}
+html body #app .lv-col.td:not(.ok) .lv-bt i{box-shadow:inset 0 0 0 1px rgba(196,164,255,.5)}
+html body #app .lv-col.f{opacity:.45}
+html body #app .lv-col em{font-style:normal;font-size:11.5px;color:#8E8A98}
+html body #app .lv-col.td em{color:#E7DFF8;font-weight:600}
+html body #app .lv-col.pulse .lv-bt i{box-shadow:0 0 22px rgba(196,164,255,.65),inset 0 0 0 1px rgba(196,164,255,.8)}
+html body #app .lv-goal{position:absolute;left:0;right:0;height:0;border-top:1px dashed rgba(196,164,255,.38);pointer-events:none;z-index:1}
+html body #app .lv-goal u{position:absolute;right:0;top:-15px;text-decoration:none;font-size:10.5px;color:#B8A6E8}
+html body #app .lv-ft{display:flex;align-items:baseline;gap:8px;margin-top:12px;font-size:12.5px;color:#9A96A6}
+html body #app .lv-ft>span:first-child[data-cu]{font-size:20px;font-weight:600;color:#F2EDE2;font-variant-numeric:tabular-nums}
+html body #app .lv-top{display:flex;flex-direction:column;gap:10px}
+html body #app .lv-tr{display:grid;grid-template-columns:18px minmax(0,1fr) 78px 40px;align-items:center;gap:10px}
+html body #app .lv-ti svg{width:16px;height:16px;color:#C4A4FF}
+html body #app .lv-tn{font-size:13px;color:#E4E0EC;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html body #app .lv-tp{height:7px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden}
+html body #app .lv-tp i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,rgba(255,255,255,.22),rgba(196,164,255,.7));transition:width .8s cubic-bezier(.2,.9,.25,1)}
+html body #app .lv-tr b{font-size:12.5px;font-weight:600;color:#F2EDE2;text-align:right;font-variant-numeric:tabular-nums}
+html body #app .lv-em{font-size:13px;color:#8E8A98;padding:14px 0}
+html body #app .lv-cv{width:100%;height:96px;display:block;overflow:visible}
+html body #app .lv-old{stroke:rgba(255,255,255,.28);stroke-width:1.6;stroke-dasharray:4 4;vector-effect:non-scaling-stroke}
+html body #app .lv-new{stroke:#C4A4FF;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-dasharray:1200;stroke-dashoffset:1200;animation:lvdraw 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+html body #app .lv-dot{fill:#F2EDE2;filter:drop-shadow(0 0 5px rgba(196,164,255,.9))}
+@keyframes lvdraw{to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){html body #app .lv-new{animation:none;stroke-dashoffset:0}.lv-bt i,.lv-tp i{transition:none!important}}
+/* телефон: недельные столбики вместо «Динамики», живые кольца */
+html body #app .lv-m .lv-wk{height:112px;gap:6px}
+html body #app .lv-m .lv-bt{max-width:30px}
+html body #app .hr-arc{transition:stroke-dasharray .85s cubic-bezier(.2,.9,.25,1)}
+@media(prefers-reduced-motion:reduce){html body #app .hr-arc{transition:none}}
 /* дневник: вкладка «Мысли» */
 .th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
 .th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
@@ -5712,7 +5799,7 @@ dash(html){const p=html.split('__S1__');if(p.length<2)return html;const head=p[0
   return `<div class="dhead">${head}</div><div class="dash"><div class="dtop">${top}</div><div class="dmain">${r2[0]}</div><div class="dbot">${r2[1]||''}</div></div>`},
 simple(){return !!((this.S.pref||{}).simple)},
 setSimple(v){this.S.pref=this.S.pref||{};this.S.pref.simple=!!v;this.save();if(v&&(this.tab==='habits'||this.tab==='goals'))this.tab='home';this.render()},
-render(){if(!this._ph)this.phInit();this.phUser();const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_th){this._tha=_th;this.thApply()}
+render(){{const w=[...document.querySelectorAll('.hd-ht.hd-wide')].find(e=>e.offsetParent);this._hdsl=w?w.scrollLeft:null;requestAnimationFrame(()=>{this.hdSnap();this.lvAnim&&this.lvAnim()})}if(!this._ph)this.phInit();this.phUser();const _th=(this.S&&this.S.pref&&this.S.pref.theme)||'';if(this._tha!==_th){this._tha=_th;this.thApply()}
   AREAS=this.areaList();
   this._tix=Object.fromEntries(this.S.tactics.map(t=>[t.id,t]));
   let body;
@@ -6317,8 +6404,8 @@ pvHabits(){
   const kpi=hs.length?`<div class="card tkx"><div class="tkx-r2"><svg viewBox="0 0 108 108"><defs><linearGradient id="tkg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B2FBE"/><stop offset=".55" stop-color="#9B6FE8"/><stop offset="1" stop-color="#C4A4FF"/></linearGradient></defs><circle cx="54" cy="54" r="44" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="9"/><circle cx="54" cy="54" r="44" fill="none" stroke="url(#tkg)" stroke-width="9" stroke-linecap="round" ${tp>0?'':'stroke-opacity="0"'} stroke-dasharray="${(2.76*tp).toFixed(1)} 276.5" transform="rotate(-90 54 54)"/></svg><b>${Math.round(tp)}%</b></div><div class="tkx-g"><div><b class="fl">${I.flame}${curS}</b><span>серия, ${this.pl(curS,'день','дня','дней')}</span></div></div></div>`:'';
   const base=this._gm||td.slice(0,7),[gy,gmo]=base.split('-').map(Number),pm=iso(new Date(gy,gmo-2,1)).slice(0,7),nm=iso(new Date(gy,gmo,1)).slice(0,7);
   if(!hs.length&&!tt.length)return `<div class="card st-empty"><b>Трекер пока пустой</b><span>Выбери 2–3 привычки — займёт минуту.</span><button class="btn pr w" onclick="APP._st=1;APP.sub='start';window.scrollTo(0,0);APP.render()">Выбрать привычки</button><button class="st-own" onclick="APP.editH(null)">Создать свою</button></div>`;
-  let h=kpi+`<div class="tkm"><span class="sp"></span><button class="btn pr sm" onclick="APP.editH(null)">${I.plus} Привычка</button></div>`;
-  const tr2=trend;this._trendDays=tr2.length;this._series={main:tr2};const mkd=Object.keys(this.S.hlog||{}).filter(d=>Object.values(this.S.hlog[d]||{}).some(Boolean)).length;this._trendHtml='';this._trendAvg=avg30;this._noHead=true;
+  let h=kpi+this.lvDesk()+`<div class="tkm"><span class="sp"></span><button class="btn pr sm" onclick="APP.editH(null)">${I.plus} Привычка</button></div>`;
+  const tr2=trend;this._trendDays=tr2.length;this._series={main:tr2};const mkd=Object.keys(this.S.hlog||{}).filter(d=>Object.values(this.S.hlog[d]||{}).some(Boolean)).length;this._trendHtml='';this._trendAvg=avg30;this._noHead=false;
   h+='__S2__'+(mode==='w'?this.weekGrid(rows):this.monthGrid(hs,tt));this._trendHtml='';this._noHead=false;
   const have=new Set(hs.map(x=>x.title));const lib=HABIT_LIB.filter(([t])=>!have.has(t));
   if(lib.length&&(!hs.length||this._libOpen))h+=this.hPicker(hs.length>0);
@@ -6613,8 +6700,13 @@ msgImg(i){this._mi=this._mi||{};const n=(i%this.MSG_PH)+1;if(this._mi[n])return 
 MSG_SC:['moon','dawn','layers','stars','hills','light','aurora','bokeh','waves','glow'],
 MSG_TY:{moon:.78,dawn:.78,layers:.25,stars:.78,hills:.24,light:.26,aurora:.78,bokeh:.3,waves:.5,glow:.5},
 msgDeal(){const P=this.S.pref=this.S.pref||{},mb=P.mb=P.mb||{t:[],b:[]};const sh=n=>{const a=[...Array(n).keys()];for(let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
-  if(!mb.t||!mb.t.length)mb.t=sh(this.MSG_RU.length);if(!mb.b||!mb.b.length)mb.b=sh(this.MSG_PH);
-  const o={t:mb.t.pop(),b:mb.b.pop(),s:Math.floor(Math.random()*1e6)};this.save();return o},
+  /* история показанных живёт только на этом устройстве (не синхронизируется), поэтому повторы не возвращаются после обновления из облака */
+  let H;try{H=JSON.parse(localStorage.getItem('tw-mbh')||'null')}catch(e){H=null}H=H&&Array.isArray(H.t)&&Array.isArray(H.b)?H:{t:[],b:[]};
+  const NT=this.MSG_RU.length,NB=this.MSG_PH;
+  const take=(k,n,keep)=>{let v,tries=0;do{if(!mb[k]||!mb[k].length)mb[k]=sh(n);v=mb[k].pop();tries++}while((v==null||v>=n||H[k].includes(v))&&tries<n*2);if(v==null||v>=n)v=Math.floor(Math.random()*n);H[k].push(v);H[k]=H[k].slice(-keep);return v};
+  const o={t:take('t',NT,Math.min(40,NT-5)),b:take('b',NB,Math.min(8,NB-3)),s:Math.floor(Math.random()*1e6)};
+  try{localStorage.setItem('tw-mbh',JSON.stringify(H))}catch(e){}
+  this.save();return o},
 msgToday(){const P=this.S.pref=this.S.pref||{},mb=P.mb=P.mb||{t:[],b:[]};if(!mb.today||mb.today.d!==today())mb.today=Object.assign({d:today()},this.msgDeal());this.save();return mb.today},
 msgScene(c,t,seed){const W=1080,H=1920;function R(s){return function(){s|=0;s=s+0x6D2B79F5|0;let q=Math.imul(s^s>>>15,1|s);q=q+Math.imul(q^q>>>7,61|q)^q;return((q^q>>>14)>>>0)/4294967296}}
   const lg=(y0,y1,st)=>{const g=c.createLinearGradient(0,y0,0,y1);st.forEach(([o,col])=>g.addColorStop(o,col));return g};
@@ -6683,8 +6775,9 @@ ftFmt(ms){const s=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(s/60);return Strin
 ftMinTxt(m){return m>=60?Math.floor(m/60)+'ч'+(m%60?' '+(m%60)+'м':''):m+'м'},
 ftHome(){const f=this.ftGet(),run=f&&!f.done,d=+(localStorage.getItem('tw-ftd')||25),tot=this.focusOf(today());
   if(run)return `<button class="ft3 ft3-run" onclick="APP.focusOpen()"><span class="ft3-t"><b>Фокус идёт</b><span>Сегодня ${tot} мин</span></span><span class="ft3-clk ftp-t">${this.ftFmt(this.ftLeft(f))}</span></button>`;
-  const std=[25,50,90].includes(d);
-  return `<button class="ft3 ft3-run" onclick="APP.focusOpen()"><span class="ft3-t"><b>Фокус</b><span>Сегодня ${tot} мин</span></span></button>`},
+  const td=today(),g=+((this.S.pref||{}).focusGoal)||10,tgt=Math.max(30,Math.round(g*60/7/5)*5),pct=Math.min(1,tot/tgt),C=119.4;
+  const wk=[6,5,4,3,2,1,0].map(i=>this.focusOf(add(td,-i))),mx=Math.max(tgt,...wk);
+  return `<button class="ft3 ft3-r" onclick="APP.focusOpen()"><span class="ft3-ring"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="3"/><circle cx="24" cy="24" r="19" fill="none" stroke="#C4A4FF" stroke-width="3" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${(C*(1-pct)).toFixed(1)}" transform="rotate(-90 24 24)"/></svg><b>${tot}</b></span><span class="ft3-t"><b>Фокус</b><span>Сегодня ${tot} из ${tgt} мин</span></span><span class="ft3-wk">${wk.map((v,i)=>`<i class="${i===6?'td':''}" style="height:${Math.max(4,Math.round(v/mx*28))}px"></i>`).join('')}</span></button>`},
 ftHPick(m){this._ftd=m;this._fto=false;try{localStorage.setItem('tw-ftd',m)}catch(e){}this.render()},
 ftHStart(){this._ftd=+(localStorage.getItem('tw-ftd')||25);this._ftw='';this.ftStart()},
 ftPill(){const f=this.ftGet();if(!f||f.done)return '';return `<button class="ft-pill" onclick="APP.focusOpen()"><span>Идёт фокус · <b class="ftp-t">${this.ftFmt(this.ftLeft(f))}</b></span><span>Открыть ›</span></button>`},
@@ -6761,11 +6854,11 @@ homeRings(o){const td=today(),H=o.H||[],hD=H.filter(x=>this.hOn(x,td)).length;
   const fm=this.focusOf(td),fg=Math.max(15,Math.round((+(this.S.pref||{}).focusGoal||10)*60/7));
   const fmt=m=>m>=60?Math.floor(m/60)+' ч'+(m%60?' '+(m%60)+' мин':''):m+' мин';
   const R=[[52,K.length?kD/K.length:0,'hrg1'],[38,H.length?hD/H.length:0,'hrg2'],[24,Math.min(1,fm/fg),'hrg3']];
-  const svg=`<svg class="hr-svg" viewBox="0 0 120 120"><defs><linearGradient id="hrg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDE3FF"/><stop offset="1" stop-color="#C4A4FF"/></linearGradient><linearGradient id="hrg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B796F5"/><stop offset="1" stop-color="#7E55DA"/></linearGradient><linearGradient id="hrg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7B5CE0"/><stop offset="1" stop-color="#4A2BA8"/></linearGradient></defs>${R.map(([r,v,g])=>{const C=2*Math.PI*r;return `<circle cx="60" cy="60" r="${r}" stroke="rgba(255,255,255,.07)" stroke-width="10" fill="none"/>${v>0?`<circle cx="60" cy="60" r="${r}" stroke="url(#${g})" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${(C*Math.max(v,.02)).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 60 60)"/>`:''}`}).join('')}</svg>`;
+  const svg=`<svg class="hr-svg" viewBox="0 0 120 120"><defs><linearGradient id="hrg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDE3FF"/><stop offset="1" stop-color="#C4A4FF"/></linearGradient><linearGradient id="hrg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B796F5"/><stop offset="1" stop-color="#7E55DA"/></linearGradient><linearGradient id="hrg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7B5CE0"/><stop offset="1" stop-color="#4A2BA8"/></linearGradient></defs>${R.map(([r,v,g])=>{const C=2*Math.PI*r,pv=(this._lvPrev||{})['rg'+g],vv=v>0?Math.max(v,.02):0,st=pv!=null?pv:vv;return `<circle cx="60" cy="60" r="${r}" stroke="rgba(255,255,255,.07)" stroke-width="10" fill="none"/>${(vv>0||st>0)?`<circle class="hr-arc" data-g="${g}" data-v="${vv}" data-c="${C.toFixed(2)}" cx="60" cy="60" r="${r}" stroke="url(#${g})" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${(C*st).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 60 60)"/>`:''}`}).join('')}</svg>`;
   const stk=o.stk||0;
   return `<div class="hr-c"><button class="hr-r" onclick="APP._prv='over';APP.go('progress')" aria-label="Прогресс">${svg}</button><div class="hr-l">
-   <button onclick="APP.navGo('plans')"><i style="background:#C4A4FF"></i>Дела<b>${kD}/${K.length}</b></button>
-   <button onclick="APP.go('tracker')"><i style="background:#9B6FE8"></i>Привычки<b>${hD}/${H.length}</b></button>
+   <button onclick="APP.navGo('plans')"><i style="background:#C4A4FF"></i>Дела<b><span data-cu="${kD}" data-ck="rk" data-sfx="/${K.length}">${kD}/${K.length}</span></b></button>
+   <button onclick="APP.go('tracker')"><i style="background:#9B6FE8"></i>Привычки<b><span data-cu="${hD}" data-ck="rh" data-sfx="/${H.length}">${hD}/${H.length}</span></b></button>
    <button onclick="APP.focusOpen()"><i style="background:#6A3FD0"></i>Фокус<b>${fmt(fm)}</b></button>
    <div class="hr-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-9z"/></svg>Серия <b>${stk} ${this.pl(stk,'день','дня','дней')}</b></div></div></div>`},
 homeNext(){const td=today(),now=new Date(),nm=pad(now.getHours())+':'+pad(now.getMinutes());
@@ -6952,6 +7045,35 @@ qaStop(quiet){const r=this._qr;this._qr=null;if(r){try{r.stop()}catch(e){}}const
 rgGet(k){const td=today(),R=(this._rg=this._rg||{});if(R[k])return R[k];if(k==='hab'){const m=this.monday(td);return {a:m,b:add(m,6)}}return {a:add(td,-29),b:td}},
 rgDays(r){const o=[];for(let d=r.a;d<=r.b&&o.length<400;d=add(d,1))o.push(d);return o},
 rgLbl(r){const a=r.a,b=r.b;return a.slice(0,7)===b.slice(0,7)?(+a.slice(8))+'–'+fd(b):fd(a)+' – '+fd(b)},
+hwNav(r){const wo=this._hwo||0,ar=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="${d}"/></svg>`;
+  return `<div class="pw-nav hw-nav"><button class="tp-c" onclick="APP.hwShift(-1)" aria-label="Прошлая неделя">${ar('M15 6l-6 6 6 6')}</button><div class="sp"><b>${this.hwLbl(r)}</b></div><button class="tp-c" ${wo>=0?'disabled style="opacity:.3"':''} onclick="APP.hwShift(1)" aria-label="Следующая неделя">${ar('M9 6l6 6-6 6')}</button></div>`},
+hwLbl(r){const a=pd(r.a),b=pd(r.b),en=this.lang()==='en',G=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'],ma=a.getMonth(),mb=b.getMonth();
+  if(en)return ma===mb?MON_EN[ma]+' '+a.getDate()+'–'+b.getDate():MON_EN[ma]+' '+a.getDate()+' – '+MON_EN[mb]+' '+b.getDate();
+  return ma===mb?a.getDate()+'–'+b.getDate()+' '+G[mb]:a.getDate()+' '+G[ma]+' – '+b.getDate()+' '+G[mb]},
+hwShift(n){this._hwo=Math.min(0,Math.max(-52,(this._hwo||0)+n));this.render()},
+rgChips(k,r){const td=today(),m=this.monday(td),P=[['Неделя',m,add(m,6)],['14 дней',add(td,-13),td],['30 дней',add(td,-29),td]];return `<div class="rg-c">${P.map(([l,a,b])=>`<button class="${r.a===a&&r.b===b?'sel':''}" onclick="APP.rgSet('${k}','${a}','${b}')">${l}</button>`).join('')}</div>`},
+lvWd(d){return ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'][pd(d).getDay()]},
+lvWeekData(){const td=today(),m=this.monday(td),R=this.progRows('h');return [...Array(7)].map((_,i)=>{const d=add(m,i);let a=0,b=0;R.forEach(r=>{const[f,sc]=this.hFns(r.o);if(sc(d)){b++;if(f(d))a++}});return {d,a,b,p:d>td||!b?null:a/b,fut:d>td}})},
+lvWeek(m){const td=today(),D=this.lvWeekData(),P=this._lvPrev=this._lvPrev||{};let A=0,B=0;D.forEach(x=>{if(!x.fut){A+=x.a;B+=x.b}});const pct=B?Math.round(A/B*100):0;
+  const cols=D.map(x=>{const h=x.p==null?0:Math.max(4,Math.round(x.p*100)),pv=P[x.d]!=null?P[x.d]:0,ok=x.p!=null&&x.p>=.85;
+   return `<div class="lv-col ${x.d===td?'td':''} ${x.fut?'f':''} ${ok?'ok':''}" data-d="${x.d}"><span class="lv-v">${x.p!=null?Math.round(x.p*100)+'%':''}</span><div class="lv-bt"><i data-h="${h}" style="height:${pv}%"></i></div><em>${this.lvWd(x.d)}</em></div>`}).join('');
+  return `<div class="hd-c lv-c ${m?'lv-m':''}"><div class="hd-h"><b>Выполнение недели</b><span class="lv-sum"><b data-cu="${A}" data-ck="wa">${A}</b> <span>из ${B}</span></span></div><div class="lv-wk"><i class="lv-goal" style="bottom:calc(22px + (100% - 40px)*.85)"><u>85%</u></i>${cols}</div><div class="lv-ft"><span data-cu="${pct}" data-ck="wp" data-sfx="%">${pct}%</span><span>привычек выполнено на этой неделе</span></div></div>`},
+lvTop(){const td=today(),hs=this.S.habits.filter(x=>!x.archived);const rows=hs.map(h=>{const[f,sc,fr]=this.hFns(h);let a=0,b=0;for(let i=0;i<30;i++){const d=add(td,-i);if(d<(fr||'0000'))break;if(sc(d)){b++;if(f(d))a++}}return {h,a,b,p:b?Math.round(a/b*100):0}}).filter(x=>x.b>0).sort((x,y)=>y.p-x.p||y.a-x.a).slice(0,5),P=this._lvPrev=this._lvPrev||{};
+  const body=rows.length?rows.map(x=>`<div class="lv-tr"><span class="lv-ti">${hIco(x.h.ico||'star')}</span><span class="lv-tn">${esc(x.h.title)}</span><span class="lv-tp"><i data-w="${x.p}" style="width:${P['t'+x.h.id]!=null?P['t'+x.h.id]:0}%"></i></span><b data-cu="${x.p}" data-ck="t${x.h.id}" data-sfx="%">${x.p}%</b></div>`).join(''):`<div class="lv-em">Отмечай привычки, и здесь появится рейтинг</div>`;
+  return `<div class="hd-c lv-c"><div class="hd-h"><b>Самые стабильные</b><span class="lv-sub">за 30 дней</span></div><div class="lv-top">${body}</div></div>`},
+lvCurve(){const td=today(),[y,mo]=td.slice(0,7).split('-').map(Number),n=new Date(y,mo,0).getDate(),pm=iso(new Date(y,mo-2,1)).slice(0,7),H=this.S.habits.filter(x=>!x.archived);
+  const cum=(base,len,upto)=>{let c=0;const o=[0];for(let i=1;i<=len;i++){const d=base+'-'+pad(i);if(i<=upto)H.forEach(h=>{if(this.hOn(h,d))c++});o.push(i<=upto?c:null)}return o};
+  const dn=+td.slice(8),pml=new Date(y,mo-1,0).getDate(),A=cum(td.slice(0,7),n,dn),B=cum(pm,pml,pml),mx=Math.max(1,...A.filter(v=>v!=null),...B.filter(v=>v!=null)),W=300,Hh=96,X=i=>(i/Math.max(n,pml))*W,Y=v=>Hh-(v/mx)*(Hh-8);
+  const pa=A.map((v,i)=>v==null?null:(X(i).toFixed(1)+','+Y(v).toFixed(1))).filter(Boolean),pb=B.map((v,i)=>v==null?null:(X(i).toFixed(1)+','+Y(v).toFixed(1))).filter(Boolean);
+  const cur=A[dn]||0,old=B[Math.min(dn,pml)]||0,df=cur-old;const cap=df>0?`На ${df} выше прошлого месяца`:df<0?`На ${-df} ниже прошлого месяца`:'Вровень с прошлым месяцем';
+  return `<div class="hd-c lv-c"><div class="hd-h"><b>Накопление месяца</b><span class="lv-sub"><b data-cu="${cur}" data-ck="cm">${cur}</b> <span>отметок</span></span></div><svg class="lv-cv" viewBox="0 0 ${W} ${Hh}" preserveAspectRatio="none"><defs><linearGradient id="lvg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C4A4FF" stop-opacity=".28"/><stop offset="1" stop-color="#C4A4FF" stop-opacity="0"/></linearGradient></defs>${pb.length>1?`<polyline class="lv-old" points="${pb.join(' ')}" fill="none"/>`:''}${pa.length>1?`<polygon points="0,${Hh} ${pa.join(' ')} ${X(dn).toFixed(1)},${Hh}" fill="url(#lvg)"/><polyline class="lv-new" points="${pa.join(' ')}" fill="none"/>`:''}${pa.length?`<circle class="lv-dot" cx="${pa[pa.length-1].split(',')[0]}" cy="${pa[pa.length-1].split(',')[1]}" r="3.4"/>`:''}</svg><div class="lv-ft"><span>${cap}</span></div></div>`},
+lvDesk(){const H=this.S.habits.filter(x=>!x.archived);return H.length?`<div class="lv-desk">${this.lvWeek()}${this.lvTop()}${this.lvCurve()}</div>`:''},
+lvAnim(){const P=this._lvPrev=this._lvPrev||{},C=this._lvCu=this._lvCu||{},P0=Object.assign({},P),C0=Object.assign({},C);
+  document.querySelectorAll('.lv-col').forEach(c=>{const i=c.querySelector('i[data-h]');if(!i)return;const to=+i.dataset.h,from=P0[c.dataset.d]!=null?P0[c.dataset.d]:0;void i.offsetHeight;requestAnimationFrame(()=>{i.style.height=to+'%'});if(from!==to&&P0[c.dataset.d]!=null){c.classList.add('pulse');setTimeout(()=>c.classList.remove('pulse'),900)}P[c.dataset.d]=to});
+  document.querySelectorAll('.lv-tp i[data-w]').forEach(i=>{const row=i.closest('.lv-tr'),k=row&&row.querySelector('[data-ck]');void i.offsetWidth;requestAnimationFrame(()=>{i.style.width=i.dataset.w+'%'});if(k)P[k.dataset.ck]=+i.dataset.w});
+  document.querySelectorAll('.hr-arc').forEach(c=>{const k='rg'+c.dataset.g,to=+c.dataset.v;c.getBoundingClientRect();requestAnimationFrame(()=>{c.style.strokeDasharray=(to*(+c.dataset.c)).toFixed(1)+' '+(+c.dataset.c).toFixed(1)});P[k]=to});
+  document.querySelectorAll('[data-cu]').forEach(e=>{const to=+e.dataset.cu,k=e.dataset.ck,from=C0[k]!=null?C0[k]:0,sfx=e.dataset.sfx||'';C[k]=to;if(from===to||matchMedia('(prefers-reduced-motion:reduce)').matches){e.textContent=to+sfx;return}const t0=performance.now();(function f(now){const p=Math.min(1,(now-t0)/650),v=Math.round(from+(to-from)*(1-Math.pow(1-p,3)));e.textContent=v+sfx;if(p<1)requestAnimationFrame(f)})(t0)})},
+hdSnap(){const w=[...document.querySelectorAll('.hd-ht.hd-wide')].find(e=>e.offsetParent);if(!w)return;w.scrollLeft=this._hdsl==null?w.scrollWidth:this._hdsl},
 rgBtn(k,r){return `<button class="rg-b" onclick="APP.rgOpen('${k}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>${this.rgLbl(r)}</span></button>`},
 rgOpen(k){const td=today(),m=this.monday(td),r=this.rgGet(k);
   const P=k==='hab'?[['Эта неделя',m,add(m,6)],['Прошлая неделя',add(m,-7),add(m,-1)],['14 дней',add(td,-13),td],['30 дней',add(td,-29),td]]:[['7 дней',add(td,-6),td],['30 дней',add(td,-29),td],['90 дней',add(td,-89),td],['С начала года',td.slice(0,4)+'-01-01',td]];
@@ -6974,7 +7096,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const kp=(ic,n,l,d,bar,go)=>`<div class="hd-c hd-k" ${go?`onclick="${go}" style="cursor:pointer"`:''}><div class="hd-kr"><span class="hd-ib">${sv(ic)}</span><svg class="hd-ol" viewBox="0 0 24 24">${IC[ic]}</svg></div><div><div class="hd-n">${n}</div><div class="hd-l">${l}</div></div>${bar!=null?`<div class="hd-bar"><i style="width:${Math.min(100,Math.max(0,bar))}%"></i></div>`:`<div class="hd-d">${d}</div>`}</div>`;
   const kpis=`<div class="hd-kp">${kp('fl',o.stk,'Дней серия',`лучшая серия: ${best}`)}${kp('ck',hDone+'/'+H.length,'Привычки сегодня',dTxt)}${kp('gl',prgPct+'%',prgLbl,'',prgPct)}${kp('tm',fm?fmt(fm):'0м','Фокус сегодня',`за неделю: ${fmt(fw)}`,null,'APP.focusOpen()')}</div>`;
   // --- график динамики
-  const rgD=this.rgGet('dyn'),rgH=this.rgGet('hab'),DR=this.rgDays(rgD),R=DR.length,vals=DR.map(d=>{if(d>td)return null;const a=this.dayAll(d);return a.n?Math.round(a.p*100):null});
+  const rgD=this.rgGet('dyn'),rgH=(()=>{const wo=this._hwo||0,mm=this.monday(td);return {a:add(mm,7*wo),b:add(mm,7*wo+6)}})(),DR=this.rgDays(rgD),R=DR.length,vals=DR.map(d=>{if(d>td)return null;const a=this.dayAll(d);return a.n?Math.round(a.p*100):null});
   const sm=R>=30?vals.map((x,i)=>{if(x==null)return null;const w=[vals[i-1],x,vals[i+1]].filter(q=>q!=null);return Math.round(w.reduce((s,q)=>s+q,0)/w.length)}):vals;
   const f0=sm.findIndex(x=>x!=null),vv=f0<0?[]:sm.slice(f0),nn=vv.length,d0=DR[f0<0?0:f0],th=+(S.sprint||{}).threshold||85;
   const CH=230,CW=700,cy=p=>CH-16-(p/100)*(CH-50),cxx=i=>nn>1?i*CW/(nn-1):0;
@@ -6994,7 +7116,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const HS=S.habits.filter(x=>!x.archived).slice(0,6);
   const hrow=x=>{const[f,s_,fr]=this.hFns(x),sk=this.streak(f,s_,fr);return `<div class="hd-nm"><span class="hd-mi">${hIco(x.ico||'star')}</span><span>${esc(x.title)}</span></div>${wdays.map(d=>{const fut=d>td,on=this.hOn(x,d),sch=this.hSched(x,d);return `<div class="hd-dt"><i class="${on?'on':fut?'f':sch?'':'x'}" ${fut?'':`onclick="APP.hToggle('${x.id}','${d}');APP.render()"`}>${on?I.ok2:''}</i></div>`}).join('')}<div class="hd-st">${sk}</div>`};
   const wl=ST?['Вс',...W7.slice(0,6)]:W7;
-  const hab=`<div class="hd-c"><div class="hd-h"><b>Трекер привычек</b>${this.rgBtn('hab',rgH)}</div>${HS.length?`<div class="hd-ht" style="--n:${wdays.length}"><div class="hd-hh">Привычка</div>${wdays.map(d=>`<div class="hd-hh ${d===td?'td':''}">${wdays.length<=7?['Вс','Пн','Вт','Ср','Чт','Пт','Сб'][pd(d).getDay()]:(wdays.length<=16||pd(d).getDay()===1?+d.slice(8):'')}</div>`).join('')}<div class="hd-hh"></div>${HS.map(hrow).join('')}</div>`:`<button class="hd-add" onclick="APP.editH()">+ Добавить первую привычку</button>`}</div>`;
+  const hab=`<div class="hd-c"><div class="hd-h"><b>Трекер привычек</b><button class="hd-lk" onclick="APP.go('tracker')">Весь месяц ›</button></div>${this.hwNav(rgH)}${HS.length?`<div class="hd-ht ${wdays.length>7?'hd-wide':''}" style="--n:${wdays.length}"><div class="hd-hh">Привычка</div>${wdays.map(d=>`<div class="hd-hh ${d===td?'td':''}">${wdays.length<=7?['Вс','Пн','Вт','Ср','Чт','Пт','Сб'][pd(d).getDay()]:+d.slice(8)}</div>`).join('')}<div class="hd-hh"></div>${HS.map(hrow).join('')}</div>`:`<button class="hd-add" onclick="APP.editH()">+ Добавить первую привычку</button>`}</div>`;
   // --- цели или сферы
   let goals='';const gs=(S.goals||[]).filter(g=>!g.mini&&!g.done).slice(0,3);
   if(gs.length&&o.inS){goals=`<div class="hd-c"><div class="hd-h"><b>Цели недели</b><span onclick="APP.go('program')" style="cursor:pointer">Все</span></div>${gs.map(g=>{const s=this.score(o.w,g.id);return `<div class="hd-gl"><span class="hd-ib" style="flex:none"><svg viewBox="0 0 24 24">${IC.gl}</svg></span><div class="hd-gt"><b>${esc(g.title)}</b><span>${esc(g.result||'')}</span><div class="hd-bar"><i style="width:${s==null?0:s}%"></i></div></div><em>${s==null?'—':s+'%'}</em></div>`}).join('')}</div>`}
@@ -7004,7 +7126,7 @@ homeDesk(o){const td=today(),S=this.S,W7=['Пн','Вт','Ср','Чт','Пт','С
   const jr=`<div class="hd-c"><div class="hd-h"><b>Дневник</b><span onclick="APP._jd=today();APP.go('journal')" style="cursor:pointer">Все записи</span></div>${ents.length?ents.map(e=>`<div class="hd-jr" onclick="APP._jd='${e.d}';APP.go('journal')"><span class="hd-jd">${fd(e.d)}</span><div><b>${e.t}</b><span>${esc(e.x.length>90?e.x.slice(0,90)+'…':e.x)}</span></div></div>`).join(''):`<button class="hd-add" onclick="APP._jd=today();APP.go('journal')">+ Записать день</button>`}</div>`;
   const rad=this.pcRadar();
   const msgC=this.msgCard();
-  return {desk:`<div class="hd-r1 hd-rs">${this.homeRings(o)}</div><div class="hd-cols"><div class="hd-cl">${this.homeNext()}${foc}${hab}</div><div class="hd-cr"><div class="hm-duo hm-duo-d">${this.thHome()}${msgC}</div>${this.ftHome()}${this.cdChips?this.cdChips():''}${dyn}${rad?`<div class="hd-rd">${rad}</div>`:''}</div></div>${gs.length&&o.inS?`<div class="hd-g3 one">${goals}</div>`:''}`,a:`${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`<div class="hm-duo">${this.thHome()}${msgC}</div>${this.ftHome()}${dyn}${hab}${goals}`}},
+  return {desk:`<div class="hd-r1 hd-rs">${this.homeRings(o)}</div><div class="hd-cols"><div class="hd-cl">${this.homeNext()}${foc}${hab}</div><div class="hd-cr"><div class="hm-duo hm-duo-d">${this.thHome()}${msgC}</div>${this.ftHome()}${this.cdChips?this.cdChips():''}${S.habits.some(x=>!x.archived)?this.lvWeek():dyn}${rad?`<div class="hd-rd">${rad}</div>`:''}</div></div>${gs.length&&o.inS?`<div class="hd-g3 one">${goals}</div>`:''}`,a:`${this.homeRings(o)}${this.homeNext()}${this.cdChips?this.cdChips():''}`,b:`<div class="hm-duo">${this.thHome()}${msgC}</div>${this.ftHome()}${S.habits.some(x=>!x.archived)?this.lvWeek(1):dyn}${hab}${goals}`}},
 dynHover(e,el){const v=JSON.parse(el.dataset.v),n=v.length;if(n<2)return;const r=el.getBoundingClientRect();let i=e?Math.round((e.clientX-r.left)/r.width*(n-1)):n-1;i=Math.max(0,Math.min(n-1,i));
   if(v[i]==null){let k=1;while(k<n&&v[i-k]==null&&v[i+k]==null)k++;i=v[i-k]!=null?i-k:i+k;if(v[i]==null)return}
   if(!e){i=n-1;while(i>0&&v[i]==null)i--}
@@ -7826,7 +7948,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=217');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=223');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
