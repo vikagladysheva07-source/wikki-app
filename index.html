@@ -746,6 +746,34 @@ html body .fto-dvr .fto-rs{position:absolute;inset:0;width:100%;height:100%;over
 html body .fto-dvr .fto-rs circle[stroke^="url"]{filter:drop-shadow(0 0 8px rgba(155,111,232,.45));transition:stroke-dashoffset .3s}
 html body .fto-dvr b,html body .fto-dvr span{position:relative}
 html body #app .ftc-dl .ftc-ic{position:relative;width:24px;height:24px;color:#F1EAFF}
+/* ноутбук: трекер привычек без точек у названий и без дубля карточек под сеткой; кружок прогресса у каждого дня недели */
+@media(min-width:1024px){html body #app .mgn .hti,html body #app .mgn .dot{display:none!important}html body #app .mgn::before{display:none!important;content:none!important}
+html body #app .hcards{display:none!important}
+html body #app #wkAg .wag-rg{width:32px;height:32px}html body #app #wkAg .wag-rg svg{width:32px;height:32px}}
+html body #app .wag-rg.em svg{opacity:.55}
+/* месячный трекер (ноутбук): линия прогресса сверху и недели полосами */
+html body #app .mgl-l{font:500 12px Manrope,system-ui,sans-serif;color:#9A96A6;align-self:end;padding-bottom:4px}
+html body #app .mgl{height:46px;align-self:stretch}html body #app .mgl svg{width:100%;height:100%;display:block;overflow:visible}
+html body #app .mgl-p{fill:none;stroke:#C4A4FF;stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 4px rgba(196,164,255,.6))}
+html body #app .mgl-g{stroke:rgba(196,164,255,.3);stroke-width:1;stroke-dasharray:3 4;vector-effect:non-scaling-stroke}
+html body #app .mgw-b{height:24px;display:flex;align-items:center;justify-content:center;border-radius:9px;font:600 11.5px Manrope,system-ui,sans-serif;color:#E9E5F0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+html body #app .mgw-b.wb1,html body #app .mgw-b.wb3{background:rgba(255,255,255,.025)}
+html body #app .mgw-b.cur{border-color:rgba(196,164,255,.55);background:linear-gradient(160deg,rgba(155,111,232,.22),rgba(91,47,190,.06));box-shadow:0 0 12px rgba(155,111,232,.2)}
+html body #app .mgh.ws{box-shadow:-4px 0 0 -3px rgba(255,255,255,.12)}
+/* неделя (ноутбук): семь колонок, большой кружок прогресса и список дел под ним */
+.wag-big{display:none}
+@media(min-width:1024px){html body #app #wkAg{grid-template-columns:repeat(7,minmax(0,1fr))!important;gap:10px!important}
+html body #app #wkAg .wag-rg{display:none}
+html body #app #wkAg .wag-d{padding:12px 10px 10px}
+html body #app .wag-big{display:grid;place-items:center;position:relative;width:96px;height:96px;margin:6px auto 12px}
+html body #app .wag-big svg{position:absolute;inset:0;width:100%;height:100%}
+html body #app .wag-big.ok svg{filter:drop-shadow(0 0 8px rgba(196,164,255,.55))}
+html body #app .wag-big b{position:relative;font:300 20px Manrope,system-ui,sans-serif;color:#F4F1EC;font-variant-numeric:tabular-nums}
+html body #app #wkAg .wag-c{padding:8px;gap:7px}html body #app #wkAg .wag-x b{font-size:12.5px;font-weight:500}
+html body #app #wkAg .wag-t{display:none}}
+@media(min-width:1024px){html body #app #wkAg .wag-n b{font-size:13.5px!important}html body #app #wkAg .wag-n span{font-size:11px}
+html body #app #wkAg .wag-a{width:26px;height:26px}html body #app #wkAg .wag-a svg{width:13px;height:13px}
+html body #app #wkAg .wag-x b{-webkit-hyphens:auto;hyphens:auto}}
 /* дневник: вкладка «Мысли» */
 .th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
 .th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
@@ -4841,12 +4869,12 @@ vWeekAg(days,td){const M=MON,WS=['Вс','Пн','Вт','Ср','Чт','Пт','Сб
    const AL=this.areaList();
    const sel=days.includes(this._wsel)?this._wsel:(days.includes(td)?td:days[0]);this._wsel=sel;
    const strip=`<div class="wk2-strip">${days.map(d=>{const x=pd(d),L=T.filter(t=>t.date===d),dn=L.filter(t=>t.done).length;return `<button class="wk2-c ${d===sel?'sel':''} ${d===td?'td':''} ${d<td?'pa':''}" data-wd="${d}" onclick="APP.wkSel('${d}')"><em>${WS[x.getDay()]}</em><b>${x.getDate()}</b><span class="wk2-dots">${L.length?L.slice(0,4).map(t=>`<i class="${t.done?'on':''}"></i>`).join(''):'<i class="e"></i>'}</span></button>`}).join('')}</div>`;
-   return strip+`<div class="wag" id="wkAg">${days.map(d=>{const x=pd(d),wd=WDF[x.getDay()],W=wd.charAt(0).toUpperCase()+wd.slice(1);
+   return strip+`<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="wkBG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F1EAFF"/><stop offset=".5" stop-color="#C4A4FF"/><stop offset="1" stop-color="#7B55E0"/></linearGradient></defs></svg><div class="wag" id="wkAg">${days.map(d=>{const x=pd(d),wd=WDF[x.getDay()],W=wd.charAt(0).toUpperCase()+wd.slice(1);
      const tg=d===td?'сегодня':d===add(td,1)?'завтра':d===add(td,-1)?'вчера':'';
      const L=T.filter(t=>t.date===d).sort((a,b)=>this.cmpT(a,b)),dn=L.filter(t=>t.done).length;
      const cards=L.map(t=>{const ar=t.area?(AL.find(a=>a[0]===t.area)||[])[1]:'';
        return `<div class="wag-c ${t.done?'dn':''}" data-tid="${t.id}" onclick="APP.taskEdit('${t.id}')"><button class="wag-k ${t.done?'on':''}" onclick="event.stopPropagation();APP.taskToggle('${t.id}')" aria-label="Отметить">${t.done?I.ok:''}</button><span class="wag-x"><b>${esc(t.title)}</b></span>${t.tm?`<span class="wag-t">${t.tm}</span>`:''}</div>`}).join('');
-     return `<section class="wag-d ${d===td?'td':''} ${d<td?'pa':''} ${d===sel?'sel':''}" data-dd="${d}"><div class="wag-h"><button class="wag-n" onclick="APP.plOpenDay('${d}')"><b>${W}</b><span>${x.getDate()} ${M[x.getMonth()]}</span></button>${L.length?`<span class="wag-rg ${dn===L.length?'ok':''}" aria-label="${dn}/${L.length}"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3"/>${dn?`<circle cx="12" cy="12" r="9" fill="none" stroke="#C4A4FF" stroke-width="3" stroke-linecap="round" stroke-dasharray="${(56.55*dn/L.length).toFixed(1)} 56.55" transform="rotate(-90 12 12)"/>`:''}</svg></span>`:''}<button class="wag-a" onclick="APP.plAddOn('${d}','${wd}')" aria-label="Добавить дело"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div>${cards}</section>`}).join('')}</div>`},
+     return `<section class="wag-d ${d===td?'td':''} ${d<td?'pa':''} ${d===sel?'sel':''}" data-dd="${d}"><div class="wag-h"><button class="wag-n" onclick="APP.plOpenDay('${d}')"><b>${W}</b><span>${x.getDate()} ${M[x.getMonth()]}</span></button>${true?`<span class="wag-rg ${L.length&&dn===L.length?'ok':''} ${L.length?'':'em'}" aria-label="${dn}/${L.length}"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3"/>${dn?`<circle cx="12" cy="12" r="9" fill="none" stroke="#C4A4FF" stroke-width="3" stroke-linecap="round" stroke-dasharray="${(56.55*dn/L.length).toFixed(1)} 56.55" transform="rotate(-90 12 12)"/>`:''}</svg></span>`:''}<button class="wag-a" onclick="APP.plAddOn('${d}','${wd}')" aria-label="Добавить дело"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div>${(()=>{const pc=L.length?dn/L.length:0,R=38,C=2*Math.PI*R;return `<div class="wag-big ${L.length&&dn===L.length?'ok':''}"><svg viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="${R}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="7"/>${dn?`<circle cx="48" cy="48" r="${R}" fill="none" stroke="url(#wkBG)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${(C*pc).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 48 48)"/>`:''}</svg><b>${L.length?Math.round(pc*100)+'%':'—'}</b></div>`})()}${cards}</section>`}).join('')}</div>`},
 wkChart(days,td){return days.map(d=>{const a=d<=td?this.dayAll(d):null,p=a&&a.n?a.p:null,h=p==null?8:Math.max(10,Math.round(p*100));return `<button class="pwc-b ${d===td?'td':''} ${d>td?'fu':''} ${p!=null&&p>=.85?'ok':''}" onclick="APP.wkGo('${d}')" aria-label="${fd(d)}"><span><i style="height:${h}%"></i></span><em>${pd(d).getDate()}</em></button>`}).join('')},
 wkGo(d){const sec=document.querySelector('#wkAg .wag-d[data-dd="'+d+'"]');if(!sec)return;this._wsel=d;const y=sec.getBoundingClientRect().top+scrollY-110;window.scrollTo({top:Math.max(0,y),behavior:'smooth'});sec.classList.add('pulse');setTimeout(()=>sec.classList.remove('pulse'),800)},
 wkSnap(){return;const w=document.getElementById('wkAg');if(!w||innerWidth>=1024)return;const k=this._plw||0;if(this._wkSn===k&&w._sn)return;w._sn=1;this._wkSn=k;const d=this._wsel||today(),sec=w.querySelector('.wag-d[data-dd="'+d+'"]')||w.querySelector('.wag-d.td');if(sec)w.scrollLeft=sec.offsetLeft-w.offsetLeft-4},
@@ -6717,7 +6745,8 @@ monthGrid(hs,tt){
   const addForm=`${this.qaBox('h','APP.hQuick(this.q.value)','Название привычки')}`;
   let h=`<div class="card" style="padding:14px 12px">${this._noHead?'':`<div class="row"><button class="ic" onclick="APP._gm='${pm}';APP.render()">${I.l}</button><div class="sp" style="text-align:center"><b>${MONF[mo-1]} ${y}</b></div><button class="ic" onclick="APP._gm='${nm}';APP.render()">${I.r}</button></div>`}
   ${this._trendHtml?`<div class="trh"><span class="sp"></span><span class="trv">среднее <b>${this._trendAvg??'—'}${this._trendAvg!=null?'%':''}</b></span></div><div class="trc">${this._trendHtml}</div>`:''}
-  <div class="mgw fit" style="margin-top:14px"><div class="mg fit" style="--n:${n}"><div class="mgh first"></div>${days.map(d=>{const p=d<=td?this.progDay(d,'h'):null;return `<div class="mgh ${d===td?'td':''}">${pd(d).getDate()}${p!=null?`<i class="mgb ${p>=1?'ok':''}" style="--h:${Math.max(.08,p)}"></i>`:''}</div>`}).join('')}<div class="mgh" style="text-align:left;padding-left:10px">% · серия</div>`;
+  <div class="mgw fit" style="margin-top:14px"><div class="mg fit" style="--n:${n}">${(()=>{const W=n*10,P=days.map((d,i)=>{const p=d<=td?this.progDay(d,'h'):null;return p==null?null:[(i+.5)*10,38-p*32]}),pts=P.filter(Boolean);const line=pts.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' ');const last=pts[pts.length-1];
+      return `<div class="mgl-l">Прогресс</div><div class="mgl" style="grid-column:span ${n}"><svg viewBox="0 0 ${W} 42" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mglG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C4A4FF" stop-opacity=".35"/><stop offset="1" stop-color="#C4A4FF" stop-opacity="0"/></linearGradient></defs><line x1="0" x2="${W}" y1="${(38-.85*32).toFixed(1)}" y2="${(38-.85*32).toFixed(1)}" class="mgl-g"/>${pts.length>1?`<polygon points="${pts[0][0].toFixed(1)},42 ${line} ${last[0].toFixed(1)},42" fill="url(#mglG)"/><polyline points="${line}" class="mgl-p"/>`:''}</svg></div><div></div>`})()}${(()=>{const G=[];days.forEach(d=>{const m=this.monday(d);if(!G.length||G[G.length-1].m!==m)G.push({m,k:0});G[G.length-1].k++});return '<div></div>'+G.map((g,i)=>`<div class="mgw-b wb${i%4} ${g.m<=td&&add(g.m,6)>=td?'cur':''}" style="grid-column:span ${g.k}">${g.k>=3?'Неделя '+(i+1):(i+1)}</div>`).join('')+'<div></div>'})()}<div class="mgh first"></div>${days.map(d=>`<div class="mgh ${d===td?'td':''} ${this.monday(d)===d&&d!==days[0]?'ws':''}">${pd(d).getDate()}</div>`).join('')}<div class="mgh" style="text-align:left;padding-left:10px">% · серия</div>`;
   rows.forEach(r=>{h+=`<div class="mgn" role="button" title="${esc(r.o.title)}" onclick="APP.ieStart('${r.k}','${r.o.id}')">${this.tile(r.o,r.k,r.k==='h'?null:r.col)}${this.nmE(r.k,r.o)}</div>`+days.map(d=>cell(r,d,false)).join('')+`<div class="mgs">${stats(r)}</div>`});
   h+=`</div>${addForm}</div>`;
   const off=this.woff(new Date(y,mo-1,1));
@@ -8145,7 +8174,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=232');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=233');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
