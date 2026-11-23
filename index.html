@@ -544,7 +544,7 @@ html body #app .card>.row:has(>.ic):not(:has(.h2)){align-items:center;margin-bot
 html body #app .card>.row:has(>.ic) .sp b{font-size:16px;font-weight:600;color:#F4F1EC}
 /* живые графики привычек (ноутбук): неделя столбиками, топ стабильных, накопление месяца, идеальный день */
 .lv-desk{display:none}
-@media(min-width:1024px){.lv-desk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 14px}}
+@media(min-width:1024px){.lv-desk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:16px 0 14px}}
 html body #app .lv-c .hd-h{margin-bottom:12px}
 html body #app .lv-sum,html body #app .lv-sub{font-size:12.5px;color:#9A96A6}html body #app .lv-sum b{font-size:18px;font-weight:600;color:#F2EDE2;font-variant-numeric:tabular-nums}
 html body #app .lv-sub b{font-size:15px;font-weight:600;color:#F2EDE2;font-variant-numeric:tabular-nums}
@@ -787,12 +787,6 @@ html body #app .mgwk.w0{background:#D9C8FF}html body #app .mgwk.w1{background:#B
 html body #app .mgwk.w2 b,html body #app .mgwk.w3 b,html body #app .mgwk.w2 .mgwk-n span,html body #app .mgwk.w3 .mgwk-n span{color:#fff}
 html body #app .mgwk.w2 .mgwk-r span,html body #app .mgwk.w3 .mgwk-r span{color:rgba(255,255,255,.8)}
 html body #app .mgwk.cur{box-shadow:0 0 18px rgba(155,111,232,.45)}
-html body #app .mg.fit .mgc{border-radius:8px!important}
-html body #app .mg.fit .mgc.on[data-w="0"]{background:#D9C8FF!important;color:#160D2E}
-html body #app .mg.fit .mgc.on[data-w="1"]{background:#B9A0FB!important;color:#160D2E}
-html body #app .mg.fit .mgc.on[data-w="2"]{background:#9B7CF3!important;color:#fff}
-html body #app .mg.fit .mgc.on[data-w="3"]{background:#7F5FE6!important;color:#fff}
-html body #app .mg.fit .mgc.on{box-shadow:0 0 10px rgba(155,111,232,.35)!important}
 html body #app .mg.fit .mgc.on svg{stroke:currentColor}}
 /* ноутбук: воздух между текстом и линиями графиков */
 html body #app .lv-goal u{top:-19px;right:2px;padding:0 4px;border-radius:6px;background:rgba(18,16,26,.85);line-height:15px}
@@ -803,21 +797,26 @@ html body #app .lv-ft{margin-top:16px}
 html body #app .mgl{margin-bottom:10px;padding-top:6px}
 html body #app .mgl-l{align-self:center;padding:0 12px 0 0}
 html body #app .mgwk{margin-top:4px}
+/* ноутбук: воздух слева у месячного трекера */
+@media(min-width:1024px){html body #app .mgw.fit{padding:0 18px 4px 20px!important}html body #app .mg.fit .mgn{padding-right:10px}}
+/* ноутбук: недели только линией сверху, воздух у заголовка месяца, тонкие разделители строк */
+.mgsep{display:none}
+@media(min-width:1024px){
+html body #app .card:has(> .mgw.fit){padding:26px 14px 18px!important}
+html body #app .card:has(> .mgw.fit) > .row{margin-bottom:10px}
+html body #app .mg.fit .mgsep{display:block;grid-column:1/-1;height:1px;background:rgba(255,255,255,.05);margin:-3px 0}
 }
 /* недели в трекере: полупрозрачное стекло вместо ярких заливок */
 @media(min-width:1024px){
 html body #app .mgwk{color:#F1EAFF;border:1px solid rgba(196,164,255,.28);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
-html body #app .mgwk.w0{background:rgba(196,164,255,.13)}html body #app .mgwk.w1{background:rgba(155,111,232,.16)}html body #app .mgwk.w2{background:rgba(123,85,224,.2)}html body #app .mgwk.w3{background:rgba(196,164,255,.08)}
+html body #app .mgwk,html body #app .mgwk.w0,html body #app .mgwk.w1,html body #app .mgwk.w2,html body #app .mgwk.w3{background:rgba(255,255,255,.03)!important;border-color:rgba(196,164,255,.22)!important;box-shadow:0 0 10px rgba(155,111,232,.10),inset 0 1px 0 rgba(255,255,255,.08)!important}
 html body #app .mgwk b,html body #app .mgwk.w2 b,html body #app .mgwk.w3 b{color:#F1EAFF!important}
 html body #app .mgwk .mgwk-r span,html body #app .mgwk.w2 .mgwk-r span,html body #app .mgwk.w3 .mgwk-r span{color:rgba(241,234,255,.6)!important}
 html body #app .mgwk .mgwk-n span,html body #app .mgwk.w2 .mgwk-n span,html body #app .mgwk.w3 .mgwk-n span{color:#FFFFFF!important}
 html body #app .mgwk-n span.td{background:rgba(196,164,255,.3)!important;box-shadow:inset 0 0 0 1px rgba(196,164,255,.8);color:#fff!important}
-html body #app .mgwk.cur{border-color:rgba(196,164,255,.6);box-shadow:0 0 14px rgba(155,111,232,.25),inset 0 1px 0 rgba(255,255,255,.12)}
-html body #app .mg.fit .mgc.on[data-w]{color:#fff!important;border:1px solid rgba(196,164,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.15)!important}
-html body #app .mg.fit .mgc.on[data-w="0"]{background:rgba(196,164,255,.3)!important}
-html body #app .mg.fit .mgc.on[data-w="1"]{background:rgba(155,111,232,.36)!important}
-html body #app .mg.fit .mgc.on[data-w="2"]{background:rgba(123,85,224,.42)!important}
-html body #app .mg.fit .mgc.on[data-w="3"]{background:rgba(196,164,255,.22)!important}
+html body #app .mgwk.cur{border-color:rgba(196,164,255,.6)!important;box-shadow:0 0 14px rgba(155,111,232,.25),inset 0 1px 0 rgba(255,255,255,.12)!important}
+html body #app .mgwk,html body #app .mgwk.w0,html body #app .mgwk.w1,html body #app .mgwk.w2,html body #app .mgwk.w3,html body #app .mgwk.cur{background:none!important;border:0!important;border-top:1px solid rgba(196,164,255,.28)!important;border-radius:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;margin:0 4px!important;padding-top:8px!important}
+html body #app .mgwk.cur{border-top:1.5px solid rgba(196,164,255,.75)!important;box-shadow:0 -1px 10px -4px rgba(155,111,232,.6)!important}
 }
 /* ноутбук: верхняя панель вместо боковой — тёмное стекло как нижняя панель телефона */
 @media(min-width:1024px){
@@ -6033,14 +6032,17 @@ hAsk(id,d){const h=this.S.habits.find(x=>x.id===id);if(!h||d>today())return;cons
    <button class="btn pr w" style="margin-top:14px" onclick="APP.close();APP.hSet('${id}','${d}',$('hv').value.replace(',','.'))">Сохранить</button>`}`);setTimeout(()=>$('hv')&&$('hv').focus(),50)},
 hSched(h,d){return d>=h.created&&(h.days||[]).includes(pd(d).getDay())&&!this.skipped(h.id,d)},
 hToggle(id,d){if(d>today())return;this.track('mark',null,'day');{const h=this.S.habits.find(x=>x.id===id);if(h&&h.created&&d<h.created)h.created=d}const el=this._lastEl();this.snap();const L=this.S.hlog;this.stamp('H|'+d+'|'+id);L[d]=L[d]||{};if(L[d][id])delete L[d][id];else{L[d][id]=true;this.buzz(12);this._pop=id;this.burst(el)}if(!Object.keys(L[d]).length)delete L[d];this.save();this.render();if(this._hcal)this.hCal(id);else if(L[d]&&L[d][id]){this.toast('Отмечено',true);this.dayParty(d)}},
-/* универсальная серия: fn(d) — выполнено ли, sch(d) — запланировано ли */
-streak(fn,sch,from){let d=today(),n=0,lim=400;if(!fn(d))d=add(d,-1);
-  while(lim--&&d>=from){if(sch(d)){if(fn(d))n++;else break}d=add(d,-1)}return n},
-best(fn,sch,from){let d=from,n=0,b=0;const t=today();while(d<=t){if(sch(d)){if(fn(d)){n++;b=Math.max(b,n)}else if(d<t)n=0}d=add(d,1)}return b},
+/* универсальная серия: fn(d) — выполнено ли, sch(d) — запланировано ли.
+   Правило «не пропускай дважды»: рвётся после двух пропусков подряд, дни отпуска и заморозки не считаются.
+   sch.hard (строгая программа) — рвётся после первого пропуска. */
+streak(fn,sch,from){let d=today(),n=0,miss=0,lim=400;const hard=!!sch.hard;if(!fn(d))d=add(d,-1);
+  if(hard){while(lim--&&d>=from){if(sch(d)){if(fn(d))n++;else break}d=add(d,-1)}return n}
+  while(lim--&&d>=from){if(sch(d)&&!this.frozen(d)){if(fn(d)){n++;miss=0}else{miss++;if(miss>=2)break}}d=add(d,-1)}return n},
+best(fn,sch,from){let d=from,n=0,b=0,miss=0;const t=today(),hard=!!sch.hard;while(d<=t){if(sch(d)&&(hard||!this.frozen(d))){if(fn(d)){n++;miss=0;b=Math.max(b,n)}else if(d<t){miss++;if(hard||miss>=2)n=0}}d=add(d,1)}return b},
 rate(fn,sch,from,days){let a=0,b=0;for(let i=0;i<days;i++){const d=add(today(),-i);if(d<from)break;if(sch(d)){b++;if(fn(d))a++}}return b?Math.round(a/b*100):null},
 hFns(h){return [d=>this.hOn(h,d),d=>this.hSched(h,d),h.created]},
 tDaily(t){return t.active!==false&&(t.type==='check'||t.type==='num')},
-tFns(t){return [d=>t.type==='check'?this.v(t,d)>0:this.v(t,d)>=(+t.per||1),d=>d>=this.st&&d<=this.end()&&this.activeIn(t,this.weekOf(d))&&!this.skipped(t.id,d),this.st]},
+tFns(t){const sch=d=>d>=this.st&&d<=this.end()&&this.activeIn(t,this.weekOf(d))&&!this.skipped(t.id,d);sch.hard=this.mode==='strict';return [d=>t.type==='check'?this.v(t,d)>0:this.v(t,d)>=(+t.per||1),sch,this.st]},
 tHabitToggle(tid,d){if(d>today()||d<this.st)return;const t=this.S.tactics.find(x=>x.id===tid);
   if(t.type==='check')this.toggle(tid,d);else this.setLog(tid,d,this.v(t,d)>=(+t.per||1)?0:+t.per||1)},
 
@@ -6667,9 +6669,9 @@ pvHabits(){
   const kpi=hs.length?`<div class="card tkx"><div class="tkx-r2"><svg viewBox="0 0 108 108"><defs><linearGradient id="tkg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B2FBE"/><stop offset=".55" stop-color="#9B6FE8"/><stop offset="1" stop-color="#C4A4FF"/></linearGradient></defs><circle cx="54" cy="54" r="44" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="9"/><circle cx="54" cy="54" r="44" fill="none" stroke="url(#tkg)" stroke-width="9" stroke-linecap="round" ${tp>0?'':'stroke-opacity="0"'} stroke-dasharray="${(2.76*tp).toFixed(1)} 276.5" transform="rotate(-90 54 54)"/></svg><b>${Math.round(tp)}%</b></div><div class="tkx-g"><div><b class="fl">${I.flame}${curS}</b><span>серия, ${this.pl(curS,'день','дня','дней')}</span></div></div></div>`:'';
   const base=this._gm||td.slice(0,7),[gy,gmo]=base.split('-').map(Number),pm=iso(new Date(gy,gmo-2,1)).slice(0,7),nm=iso(new Date(gy,gmo,1)).slice(0,7);
   if(!hs.length&&!tt.length)return `<div class="card st-empty"><b>Трекер пока пустой</b><span>Выбери 2–3 привычки — займёт минуту.</span><button class="btn pr w" onclick="APP._st=1;APP.sub='start';window.scrollTo(0,0);APP.render()">Выбрать привычки</button><button class="st-own" onclick="APP.editH(null)">Создать свою</button></div>`;
-  let h=kpi+this.lvDesk()+`<div class="tkm"><span class="sp"></span><button class="btn pr sm" onclick="APP.editH(null)">${I.plus} Привычка</button></div>`;
+  let h=kpi+`<div class="tkm"><span class="sp"></span><button class="btn pr sm" onclick="APP.editH(null)">${I.plus} Привычка</button></div>`;
   const tr2=trend;this._trendDays=tr2.length;this._series={main:tr2};const mkd=Object.keys(this.S.hlog||{}).filter(d=>Object.values(this.S.hlog[d]||{}).some(Boolean)).length;this._trendHtml='';this._trendAvg=avg30;this._noHead=false;
-  h+='__S2__'+(mode==='w'?this.weekGrid(rows):this.monthGrid(hs,tt));this._trendHtml='';this._noHead=false;
+  h+='__S2__'+(mode==='w'?this.weekGrid(rows):this.monthGrid(hs,tt));h+=this.lvDesk();this._trendHtml='';this._noHead=false;
   const have=new Set(hs.map(x=>x.title));const lib=HABIT_LIB.filter(([t])=>!have.has(t));
   if(lib.length&&(!hs.length||this._libOpen))h+=this.hPicker(hs.length>0);
   else if(lib.length)h+=`<button class="btn gh w" onclick="APP._libOpen=true;APP.render()">Идеи привычек ${I.r}</button>`;
@@ -6810,9 +6812,9 @@ monthGrid(hs,tt){
   let h=`<div class="card" style="padding:14px 12px">${this._noHead?'':`<div class="row"><button class="ic" onclick="APP._gm='${pm}';APP.render()">${I.l}</button><div class="sp" style="text-align:center"><b>${MONF[mo-1]} ${y}</b></div><button class="ic" onclick="APP._gm='${nm}';APP.render()">${I.r}</button></div>`}
   ${this._trendHtml?`<div class="trh"><span class="sp"></span><span class="trv">среднее <b>${this._trendAvg??'—'}${this._trendAvg!=null?'%':''}</b></span></div><div class="trc">${this._trendHtml}</div>`:''}
   <div class="mgw fit" style="margin-top:14px"><div class="mg fit" style="--n:${n}">${(()=>{const W=n*10,P=days.map((d,i)=>{const p=d<=td?this.progDay(d,'h'):null;return p==null?null:[(i+.5)*10,38-p*32]}),pts=P.filter(Boolean);const line=pts.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' ');const last=pts[pts.length-1];
-      return `<div class="mgl-l">Прогресс</div><div class="mgl" style="grid-column:span ${n}"><svg viewBox="0 0 ${W} 42" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mglG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C4A4FF" stop-opacity=".35"/><stop offset="1" stop-color="#C4A4FF" stop-opacity="0"/></linearGradient></defs><line x1="0" x2="${W}" y1="${(38-.85*32).toFixed(1)}" y2="${(38-.85*32).toFixed(1)}" class="mgl-g"/>${pts.length>1?`<polygon points="${pts[0][0].toFixed(1)},42 ${line} ${last[0].toFixed(1)},42" fill="url(#mglG)"/><polyline points="${line}" class="mgl-p"/>`:''}</svg></div><div></div>`})()}${(()=>{const G=[];days.forEach(d=>{const m=this.monday(d);if(!G.length||G[G.length-1].m!==m)G.push({m,k:0,d:[]});G[G.length-1].k++;G[G.length-1].d.push(d)});const WS=['вс','пн','вт','ср','чт','пт','сб'];this._mgW={};G.forEach((g,i)=>g.d.forEach(d=>this._mgW[d]=i%4));
-      return '<div class="mgwk-l"></div>'+G.map((g,i)=>`<div class="mgwk w${i%4} ${g.m<=td&&add(g.m,6)>=td?'cur':''}" style="grid-column:span ${g.k};--k:${g.k}"><b>${g.k>=3?'Неделя '+(i+1):(i+1)}</b><div class="mgwk-r">${g.d.map(d=>`<span>${WS[pd(d).getDay()]}</span>`).join('')}</div><div class="mgwk-r mgwk-n">${g.d.map(d=>`<span class="${d===td?'td':''}">${pd(d).getDate()}</span>`).join('')}</div></div>`).join('')})()}<div class="mgh" style="text-align:left;padding-left:10px">% · серия</div>`;
-  rows.forEach(r=>{h+=`<div class="mgn" role="button" title="${esc(r.o.title)}" onclick="APP.ieStart('${r.k}','${r.o.id}')">${this.tile(r.o,r.k,r.k==='h'?null:r.col)}${this.nmE(r.k,r.o)}</div>`+days.map(d=>cell(r,d,false).replace('<button class="mgc','<button data-w="'+((this._mgW||{})[d]||0)+'" class="mgc')).join('')+`<div class="mgs">${stats(r)}</div>`});
+      return `<div class="mgl-l"></div><div class="mgl" style="grid-column:span ${n}"><svg viewBox="0 0 ${W} 42" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mglG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C4A4FF" stop-opacity=".35"/><stop offset="1" stop-color="#C4A4FF" stop-opacity="0"/></linearGradient></defs><line x1="0" x2="${W}" y1="${(38-.85*32).toFixed(1)}" y2="${(38-.85*32).toFixed(1)}" class="mgl-g"/>${pts.length>1?`<polygon points="${pts[0][0].toFixed(1)},42 ${line} ${last[0].toFixed(1)},42" fill="url(#mglG)"/><polyline points="${line}" class="mgl-p"/>`:''}</svg></div><div></div>`})()}${(()=>{const G=[];days.forEach(d=>{const m=this.monday(d);if(!G.length||G[G.length-1].m!==m)G.push({m,k:0,d:[]});G[G.length-1].k++;G[G.length-1].d.push(d)});const mg=(x,y)=>{y.d=x.d.concat(y.d);y.k=y.d.length};if(G.length>1&&G[0].k<4){mg(G[0],G[1]);G.shift()}if(G.length>1&&G[G.length-1].k<4){const L=G.pop(),P=G[G.length-1];P.d=P.d.concat(L.d);P.k=P.d.length}const WS=['вс','пн','вт','ср','чт','пт','сб'];this._mgW={};G.forEach((g,i)=>g.d.forEach(d=>this._mgW[d]=i%4));
+      return '<div class="mgwk-l"></div>'+G.map((g,i)=>`<div class="mgwk w${i%4} ${g.d[0]<=td&&g.d[g.d.length-1]>=td?'cur':''}" style="grid-column:span ${g.k};--k:${g.k}"><b>Неделя ${i+1}</b><div class="mgwk-r">${g.d.map(d=>`<span>${WS[pd(d).getDay()]}</span>`).join('')}</div><div class="mgwk-r mgwk-n">${g.d.map(d=>`<span class="${d===td?'td':''}">${pd(d).getDate()}</span>`).join('')}</div></div>`).join('')})()}<div class="mgh" style="text-align:left;padding-left:10px">% · серия</div>`;
+  rows.forEach(r=>{h+=`<div class="mgn" role="button" title="${esc(r.o.title)}" onclick="APP.ieStart('${r.k}','${r.o.id}')">${this.tile(r.o,r.k,r.k==='h'?null:r.col)}${this.nmE(r.k,r.o)}</div>`+days.map(d=>cell(r,d,false).replace('<button class="mgc','<button data-w="'+((this._mgW||{})[d]||0)+'" class="mgc')).join('')+`<div class="mgs">${stats(r)}</div>`+(r!==rows[rows.length-1]?'<div class="mgsep"></div>':'')});
   h+=`</div>${addForm}</div>`;
   const off=this.woff(new Date(y,mo-1,1));
   h+=`<div class="hcards">${rows.map(r=>`<div class="hcard"><div class="hch"><div class="nm" role="button" onclick="APP.ieStart('${r.k}','${r.o.id}')">${this.tile(r.o,r.k,r.k==='h'?null:r.col)}${this.nmE(r.k,r.o)}</div><span class="hst">${stats(r)}</span></div>
