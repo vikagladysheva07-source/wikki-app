@@ -746,6 +746,7 @@ html body .fto-dvr .fto-rs{position:absolute;inset:0;width:100%;height:100%;over
 html body .fto-dvr .fto-rs circle[stroke^="url"]{filter:drop-shadow(0 0 8px rgba(155,111,232,.45));transition:stroke-dashoffset .3s}
 html body .fto-dvr b,html body .fto-dvr span{position:relative}
 html body #app .ftc-dl .ftc-ic{position:relative;width:24px;height:24px;color:#F1EAFF}
+html body #app .ftc .ftc-ic,html body #app .ftc-dl .ftc-ic{color:#C4A4FF!important;filter:drop-shadow(0 0 6px rgba(155,111,232,.55))}
 /* ноутбук: трекер привычек без точек у названий и без дубля карточек под сеткой; кружок прогресса у каждого дня недели */
 @media(min-width:1024px){html body #app .mgn .hti,html body #app .mgn .dot{display:none!important}html body #app .mgn::before{display:none!important;content:none!important}
 html body #app .hcards{display:none!important}
@@ -3412,7 +3413,7 @@ body:has(.hrp) .nav .pfab{display:none!important}
 @media(max-width:1023px){
  html:has(body.bgph){background:#05040A!important}body.bgph{background:transparent!important}
  body.bgph:before{content:"";position:fixed;inset:0;z-index:-2;background:url(ocean-2.jpg) center 35%/cover;transform:scale(1.04)}
- body.bgph:after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,4,10,.42) 0%,rgba(5,4,10,.6) 28%,rgba(5,4,10,.86) 60%,#05040A 100%)}
+ body.bgph:after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,4,10,.52) 0%,rgba(5,4,10,.68) 28%,rgba(5,4,10,.9) 60%,#05040A 100%)}
  body.bgph .hm-ph{display:none!important}
  body.bgph .hmz,body.bgph .hmw,body.bgph .hm-in,body.bgph main,body.bgph #app,body.bgph .wrap{background:transparent!important}
  body.bgph .hr-c,body.bgph .hn-c,body.bgph .cd-ch,body.bgph .msg3,body.bgph .hd-c,body.bgph .card{background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.02)),rgba(10,8,18,.25)!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 20px 40px rgba(0,0,0,.35)!important;backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3)}
@@ -3609,7 +3610,7 @@ body:has(.hrp) .nav .pfab{display:none!important}
  .wtl-hd b{font-size:18px;width:36px;height:36px}.wtl-hd em{font-size:11.5px}
  html:has(body.bgph){background:#05040A!important}body.bgph{background:transparent!important}
  body.bgph:before{content:"";position:fixed;inset:0;z-index:-2;background:url(ocean-2.jpg) center 40%/cover}
- body.bgph:after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,4,10,.62) 0%,rgba(5,4,10,.74) 35%,rgba(5,4,10,.9) 75%,#05040A 100%)}
+ body.bgph:after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,4,10,.7) 0%,rgba(5,4,10,.8) 35%,rgba(5,4,10,.93) 75%,#05040A 100%)}
  body.bgph .card,body.bgph .hd-c,body.bgph .msg3{background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.02)),rgba(10,8,18,.3)!important;border-color:rgba(255,255,255,.11)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 18px 40px rgba(0,0,0,.3)!important;backdrop-filter:blur(22px) saturate(1.25);-webkit-backdrop-filter:blur(22px) saturate(1.25)}
  body.bgph .sbar,body.bgph #snav{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015)),rgba(8,7,14,.45)!important;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
 }
