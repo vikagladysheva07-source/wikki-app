@@ -774,6 +774,70 @@ html body #app #wkAg .wag-t{display:none}}
 @media(min-width:1024px){html body #app #wkAg .wag-n b{font-size:13.5px!important}html body #app #wkAg .wag-n span{font-size:11px}
 html body #app #wkAg .wag-a{width:26px;height:26px}html body #app #wkAg .wag-a svg{width:13px;height:13px}
 html body #app #wkAg .wag-x b{-webkit-hyphens:auto;hyphens:auto}}
+/* месячный трекер (ноутбук): недели цветными блоками как в примере, оттенки фиолетового VOLYO */
+@media(min-width:1024px){
+html body #app .mgw-b{display:none}
+html body #app .mgwk{display:flex;flex-direction:column;gap:3px;padding:6px 0 6px;border-radius:12px;margin:0 1px;color:#160D2E}
+html body #app .mgwk b{display:block;text-align:center;font:700 12px Manrope,system-ui,sans-serif;color:#160D2E;letter-spacing:.01em}
+html body #app .mgwk-r{display:grid;grid-template-columns:repeat(var(--k),1fr)}
+html body #app .mgwk-r span{text-align:center;font:500 10.5px Manrope,system-ui,sans-serif;color:rgba(22,13,46,.72)}
+html body #app .mgwk-n span{font:700 12px Manrope,system-ui,sans-serif;color:#160D2E;font-variant-numeric:tabular-nums}
+html body #app .mgwk-n span.td{display:inline-grid;place-items:center;justify-self:center;width:22px;height:22px;border-radius:50%;background:#160D2E;color:#fff}
+html body #app .mgwk.w0{background:#D9C8FF}html body #app .mgwk.w1{background:#B9A0FB}html body #app .mgwk.w2{background:#9B7CF3}html body #app .mgwk.w3{background:#7F5FE6}
+html body #app .mgwk.w2 b,html body #app .mgwk.w3 b,html body #app .mgwk.w2 .mgwk-n span,html body #app .mgwk.w3 .mgwk-n span{color:#fff}
+html body #app .mgwk.w2 .mgwk-r span,html body #app .mgwk.w3 .mgwk-r span{color:rgba(255,255,255,.8)}
+html body #app .mgwk.cur{box-shadow:0 0 18px rgba(155,111,232,.45)}
+html body #app .mg.fit .mgc{border-radius:8px!important}
+html body #app .mg.fit .mgc.on[data-w="0"]{background:#D9C8FF!important;color:#160D2E}
+html body #app .mg.fit .mgc.on[data-w="1"]{background:#B9A0FB!important;color:#160D2E}
+html body #app .mg.fit .mgc.on[data-w="2"]{background:#9B7CF3!important;color:#fff}
+html body #app .mg.fit .mgc.on[data-w="3"]{background:#7F5FE6!important;color:#fff}
+html body #app .mg.fit .mgc.on{box-shadow:0 0 10px rgba(155,111,232,.35)!important}
+html body #app .mg.fit .mgc.on svg{stroke:currentColor}}
+/* ноутбук: воздух между текстом и линиями графиков */
+html body #app .lv-goal u{top:-19px;right:2px;padding:0 4px;border-radius:6px;background:rgba(18,16,26,.85);line-height:15px}
+html body #app .lv-wk{margin-top:22px}
+html body #app .lv-col .lv-v{margin-bottom:4px}
+html body #app .lv-cv{margin-top:12px;margin-bottom:6px;padding-top:6px;box-sizing:content-box}
+html body #app .lv-ft{margin-top:16px}
+html body #app .mgl{margin-bottom:10px;padding-top:6px}
+html body #app .mgl-l{align-self:center;padding:0 12px 0 0}
+html body #app .mgwk{margin-top:4px}
+}
+/* недели в трекере: полупрозрачное стекло вместо ярких заливок */
+@media(min-width:1024px){
+html body #app .mgwk{color:#F1EAFF;border:1px solid rgba(196,164,255,.28);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+html body #app .mgwk.w0{background:rgba(196,164,255,.13)}html body #app .mgwk.w1{background:rgba(155,111,232,.16)}html body #app .mgwk.w2{background:rgba(123,85,224,.2)}html body #app .mgwk.w3{background:rgba(196,164,255,.08)}
+html body #app .mgwk b,html body #app .mgwk.w2 b,html body #app .mgwk.w3 b{color:#F1EAFF!important}
+html body #app .mgwk .mgwk-r span,html body #app .mgwk.w2 .mgwk-r span,html body #app .mgwk.w3 .mgwk-r span{color:rgba(241,234,255,.6)!important}
+html body #app .mgwk .mgwk-n span,html body #app .mgwk.w2 .mgwk-n span,html body #app .mgwk.w3 .mgwk-n span{color:#FFFFFF!important}
+html body #app .mgwk-n span.td{background:rgba(196,164,255,.3)!important;box-shadow:inset 0 0 0 1px rgba(196,164,255,.8);color:#fff!important}
+html body #app .mgwk.cur{border-color:rgba(196,164,255,.6);box-shadow:0 0 14px rgba(155,111,232,.25),inset 0 1px 0 rgba(255,255,255,.12)}
+html body #app .mg.fit .mgc.on[data-w]{color:#fff!important;border:1px solid rgba(196,164,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.15)!important}
+html body #app .mg.fit .mgc.on[data-w="0"]{background:rgba(196,164,255,.3)!important}
+html body #app .mg.fit .mgc.on[data-w="1"]{background:rgba(155,111,232,.36)!important}
+html body #app .mg.fit .mgc.on[data-w="2"]{background:rgba(123,85,224,.42)!important}
+html body #app .mg.fit .mgc.on[data-w="3"]{background:rgba(196,164,255,.22)!important}
+}
+/* ноутбук: верхняя панель вместо боковой — тёмное стекло как нижняя панель телефона */
+@media(min-width:1024px){
+html body #snav,html body.bgph #snav{flex-direction:row!important;align-items:center!important;gap:18px!important;top:14px!important;left:40px!important;right:40px!important;bottom:auto!important;transform:none!important;width:auto!important;height:64px;padding:0 12px 0 22px!important;border-radius:24px!important;background:radial-gradient(110% 90% at 0% 0%,rgba(255,255,255,.13),rgba(0,0,0,0) 50%),radial-gradient(80% 60% at 100% 0%,rgba(196,164,255,.06),rgba(0,0,0,0) 60%),linear-gradient(rgba(255,255,255,.07),rgba(255,255,255,.016) 60%,rgba(0,0,0,.18)),rgba(12,10,22,.45)!important;border:1px solid rgba(255,255,255,.11)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)!important;-webkit-backdrop-filter:blur(18px)!important;backdrop-filter:blur(18px)!important}
+html body #snav .sb-brand{padding:0!important;flex-direction:row!important;align-items:center;gap:0}
+html body #snav .sb-brand .wm{height:24px!important;width:auto!important;opacity:1!important}
+html body #snav .sb-brand span{display:none!important}
+html body #snav .sb-nav{flex-direction:row!important;gap:6px!important;margin:0 auto;padding:0!important;background:none!important;border:0!important}
+html body #snav .sb-nav button{padding:10px 18px!important;border-radius:22px!important;font-size:13.5px!important;font-weight:500!important;gap:9px!important;color:#A9A4B6!important;border:1px solid transparent!important;box-shadow:none!important;background:none!important;white-space:nowrap;letter-spacing:0!important}
+html body #snav .sb-nav button svg{display:block!important;width:18px!important;height:18px!important}
+html body #snav .sb-nav button:hover{color:#fff!important;background:rgba(255,255,255,.04)!important}
+html body #snav .sb-nav button.on{color:#fff!important;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02))!important;box-shadow:inset 0 0 0 1px rgba(160,123,255,.38),0 0 18px rgba(124,77,235,.22)!important}
+html body #snav .sb-nav button.on svg{color:#C4A4FF!important}
+html body #snav .sb-nav button[onclick*="'program'"],html body #snav .sb-nav button[onclick*="'profile'"],html body #snav .sb-nav button[onclick*="'me'"]{display:none!important}
+html body #snav .sb-q{display:none!important}
+html body #snav .sb-me{display:flex!important;align-items:center;margin:0!important;padding:0!important;background:none!important;border:0!important;width:auto!important}
+html body #snav .sb-me .sp{display:none!important}
+html body #snav .sb-me .ava{width:38px!important;height:38px!important;background:rgba(255,255,255,.07)!important;border:1px solid rgba(196,164,255,.45);box-shadow:0 0 12px rgba(155,111,232,.2)!important;color:#F1EAFF!important;font-weight:500!important}
+html body .wrap{padding:96px 40px 60px 40px!important}
+}
 /* дневник: вкладка «Мысли» */
 .th-w{display:flex;flex-direction:column;gap:14px;margin-top:14px}
 .th-cm{border-radius:26px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
@@ -6031,7 +6095,7 @@ render(){{const w=[...document.querySelectorAll('.hd-ht.hd-wide')].find(e=>e.off
   const ttl=this.sub==='programs'?'Программы':this.sub==='deals'?'Воронка':this.sub==='onboard'?'Старт':{home:'Сегодня',habits:'Прогресс',goals:(P?P.name:'Программа'),week:'Неделя',me:'Профиль'}[this.tab];
   const Pp=this.S.profile||{};
   $('snav').innerHTML=`<div class="sb-brand sb-wm"><img class="wm" src="logo-volyo.png" alt="VOLYO"><span>by WIKKI.OCEAN</span></div>
-   <div class="sb-nav">${(simple?tabs:[...tabs.slice(0,-1),['profile','Профиль',I.me],tabs[tabs.length-1]]).map(([k,l,ic])=>`<button class="${this.tab===k&&!this.sub?'on':''}" onclick="APP.navGo('${k}')">${ic}<span>${({journal:'Дневник рефлексии'})[k]||l}</span></button>`).join('')}</div>
+   <div class="sb-nav">${(simple?tabs:[...tabs.slice(0,-1),['profile','Профиль',I.me],tabs[tabs.length-1]]).map(([k,l,ic])=>`<button class="${this.tab===k&&!this.sub?'on':''}" onclick="APP.navGo('${k}')">${ic}<span>${(innerWidth>=1024?{journal:'Дневник'}:{journal:'Дневник рефлексии'})[k]||l}</span></button>`).join('')}</div>
    <div class="sb-q">«${esc(Pp.motto||'Дисциплина — это выбор между тем, чего хочешь сейчас, и тем, чего хочешь больше всего.')}»<i></i></div>
    <button class="sb-me" onclick="APP.go('profile')"><span class="ava">${(this.S.profile||{}).photo?`<img src="${this.S.profile.photo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:esc(this.initial())}</span><span class="sp"><b>${esc(Pp.hero||Pp.name||'Гость')}</b><span>Профиль героя</span></span></button>`;
   this.tr($('nav'));this.tr($('snav'));
@@ -6746,8 +6810,9 @@ monthGrid(hs,tt){
   let h=`<div class="card" style="padding:14px 12px">${this._noHead?'':`<div class="row"><button class="ic" onclick="APP._gm='${pm}';APP.render()">${I.l}</button><div class="sp" style="text-align:center"><b>${MONF[mo-1]} ${y}</b></div><button class="ic" onclick="APP._gm='${nm}';APP.render()">${I.r}</button></div>`}
   ${this._trendHtml?`<div class="trh"><span class="sp"></span><span class="trv">среднее <b>${this._trendAvg??'—'}${this._trendAvg!=null?'%':''}</b></span></div><div class="trc">${this._trendHtml}</div>`:''}
   <div class="mgw fit" style="margin-top:14px"><div class="mg fit" style="--n:${n}">${(()=>{const W=n*10,P=days.map((d,i)=>{const p=d<=td?this.progDay(d,'h'):null;return p==null?null:[(i+.5)*10,38-p*32]}),pts=P.filter(Boolean);const line=pts.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' ');const last=pts[pts.length-1];
-      return `<div class="mgl-l">Прогресс</div><div class="mgl" style="grid-column:span ${n}"><svg viewBox="0 0 ${W} 42" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mglG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C4A4FF" stop-opacity=".35"/><stop offset="1" stop-color="#C4A4FF" stop-opacity="0"/></linearGradient></defs><line x1="0" x2="${W}" y1="${(38-.85*32).toFixed(1)}" y2="${(38-.85*32).toFixed(1)}" class="mgl-g"/>${pts.length>1?`<polygon points="${pts[0][0].toFixed(1)},42 ${line} ${last[0].toFixed(1)},42" fill="url(#mglG)"/><polyline points="${line}" class="mgl-p"/>`:''}</svg></div><div></div>`})()}${(()=>{const G=[];days.forEach(d=>{const m=this.monday(d);if(!G.length||G[G.length-1].m!==m)G.push({m,k:0});G[G.length-1].k++});return '<div></div>'+G.map((g,i)=>`<div class="mgw-b wb${i%4} ${g.m<=td&&add(g.m,6)>=td?'cur':''}" style="grid-column:span ${g.k}">${g.k>=3?'Неделя '+(i+1):(i+1)}</div>`).join('')+'<div></div>'})()}<div class="mgh first"></div>${days.map(d=>`<div class="mgh ${d===td?'td':''} ${this.monday(d)===d&&d!==days[0]?'ws':''}">${pd(d).getDate()}</div>`).join('')}<div class="mgh" style="text-align:left;padding-left:10px">% · серия</div>`;
-  rows.forEach(r=>{h+=`<div class="mgn" role="button" title="${esc(r.o.title)}" onclick="APP.ieStart('${r.k}','${r.o.id}')">${this.tile(r.o,r.k,r.k==='h'?null:r.col)}${this.nmE(r.k,r.o)}</div>`+days.map(d=>cell(r,d,false)).join('')+`<div class="mgs">${stats(r)}</div>`});
+      return `<div class="mgl-l">Прогресс</div><div class="mgl" style="grid-column:span ${n}"><svg viewBox="0 0 ${W} 42" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mglG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C4A4FF" stop-opacity=".35"/><stop offset="1" stop-color="#C4A4FF" stop-opacity="0"/></linearGradient></defs><line x1="0" x2="${W}" y1="${(38-.85*32).toFixed(1)}" y2="${(38-.85*32).toFixed(1)}" class="mgl-g"/>${pts.length>1?`<polygon points="${pts[0][0].toFixed(1)},42 ${line} ${last[0].toFixed(1)},42" fill="url(#mglG)"/><polyline points="${line}" class="mgl-p"/>`:''}</svg></div><div></div>`})()}${(()=>{const G=[];days.forEach(d=>{const m=this.monday(d);if(!G.length||G[G.length-1].m!==m)G.push({m,k:0,d:[]});G[G.length-1].k++;G[G.length-1].d.push(d)});const WS=['вс','пн','вт','ср','чт','пт','сб'];this._mgW={};G.forEach((g,i)=>g.d.forEach(d=>this._mgW[d]=i%4));
+      return '<div class="mgwk-l"></div>'+G.map((g,i)=>`<div class="mgwk w${i%4} ${g.m<=td&&add(g.m,6)>=td?'cur':''}" style="grid-column:span ${g.k};--k:${g.k}"><b>${g.k>=3?'Неделя '+(i+1):(i+1)}</b><div class="mgwk-r">${g.d.map(d=>`<span>${WS[pd(d).getDay()]}</span>`).join('')}</div><div class="mgwk-r mgwk-n">${g.d.map(d=>`<span class="${d===td?'td':''}">${pd(d).getDate()}</span>`).join('')}</div></div>`).join('')})()}<div class="mgh" style="text-align:left;padding-left:10px">% · серия</div>`;
+  rows.forEach(r=>{h+=`<div class="mgn" role="button" title="${esc(r.o.title)}" onclick="APP.ieStart('${r.k}','${r.o.id}')">${this.tile(r.o,r.k,r.k==='h'?null:r.col)}${this.nmE(r.k,r.o)}</div>`+days.map(d=>cell(r,d,false).replace('<button class="mgc','<button data-w="'+((this._mgW||{})[d]||0)+'" class="mgc')).join('')+`<div class="mgs">${stats(r)}</div>`});
   h+=`</div>${addForm}</div>`;
   const off=this.woff(new Date(y,mo-1,1));
   h+=`<div class="hcards">${rows.map(r=>`<div class="hcard"><div class="hch"><div class="nm" role="button" onclick="APP.ieStart('${r.k}','${r.o.id}')">${this.tile(r.o,r.k,r.k==='h'?null:r.col)}${this.nmE(r.k,r.o)}</div><span class="hst">${stats(r)}</span></div>
@@ -7064,13 +7129,13 @@ homeRings(o){const td=today(),H=o.H||[],hD=H.filter(x=>this.hOn(x,td)).length;
   let K=[];try{K=(this.S.tasks||[]).filter(x=>!x.drop&&x.date===td&&!(this.S.del||[]).includes(x.id))}catch(e){}const kD=K.filter(x=>x.done).length;
   const fm=this.focusOf(td),fg=Math.max(15,Math.round((+(this.S.pref||{}).focusGoal||10)*60/7));
   const fmt=m=>m>=60?Math.floor(m/60)+' ч'+(m%60?' '+(m%60)+' мин':''):m+' мин';
-  const R=[[52,K.length?kD/K.length:0,'hrg1'],[38,H.length?hD/H.length:0,'hrg2'],[24,Math.min(1,fm/fg),'hrg3']];
+  const R=[[52,K.length?kD/K.length:0,'hrg3'],[38,H.length?hD/H.length:0,'hrg2'],[24,Math.min(1,fm/fg),'hrg1']];
   const svg=`<svg class="hr-svg" viewBox="0 0 120 120"><defs><linearGradient id="hrg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDE3FF"/><stop offset="1" stop-color="#C4A4FF"/></linearGradient><linearGradient id="hrg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B796F5"/><stop offset="1" stop-color="#7E55DA"/></linearGradient><linearGradient id="hrg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7B5CE0"/><stop offset="1" stop-color="#4A2BA8"/></linearGradient></defs>${R.map(([r,v,g])=>{const C=2*Math.PI*r,pv=(this._lvPrev||{})['rg'+g],vv=v>0?Math.max(v,.02):0,st=pv!=null?pv:vv;return `<circle cx="60" cy="60" r="${r}" stroke="rgba(255,255,255,.07)" stroke-width="10" fill="none"/>${(vv>0||st>0)?`<circle class="hr-arc" data-g="${g}" data-v="${vv}" data-c="${C.toFixed(2)}" cx="60" cy="60" r="${r}" stroke="url(#${g})" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${(C*st).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 60 60)"/>`:''}`}).join('')}</svg>`;
   const stk=o.stk||0;
   return `<div class="hr-c"><button class="hr-r" onclick="APP._prv='over';APP.go('progress')" aria-label="Прогресс">${svg}</button><div class="hr-l">
-   <button onclick="APP.navGo('plans')"><i style="background:#C4A4FF"></i>Дела<b><span data-cu="${kD}" data-ck="rk" data-sfx="/${K.length}">${kD}/${K.length}</span></b></button>
+   <button onclick="APP.navGo('plans')"><i style="background:#6A3FD0"></i>Дела<b><span data-cu="${kD}" data-ck="rk" data-sfx="/${K.length}">${kD}/${K.length}</span></b></button>
    <button onclick="APP.go('tracker')"><i style="background:#9B6FE8"></i>Привычки<b><span data-cu="${hD}" data-ck="rh" data-sfx="/${H.length}">${hD}/${H.length}</span></b></button>
-   <button onclick="APP.focusOpen()"><i style="background:#6A3FD0"></i>Фокус<b>${fmt(fm)}</b></button>
+   <button onclick="APP.focusOpen()"><i style="background:#C4A4FF"></i>Фокус<b>${fmt(fm)}</b></button>
    <div class="hr-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-9z"/></svg>Серия <b>${stk} ${this.pl(stk,'день','дня','дней')}</b></div></div></div>`},
 homeNext(){const td=today(),now=new Date(),nm=pad(now.getHours())+':'+pad(now.getMinutes());
   const K=(this.S.tasks||[]).filter(x=>!x.drop&&!x.done&&x.date===td&&x.tm&&(x.tm2||x.tm)>=nm&&!(this.S.del||[]).includes(x.id)).sort((a,b)=>a.tm.localeCompare(b.tm));
