@@ -3207,5 +3207,9 @@
 "Перенос на другой день не прячет задачу: в плане того дня она остаётся невыполненной": "Moving a task doesn’t hide it: it stays undone in that day’s plan",
 "Запланируй задачи на день, и здесь появится процент выполненного": "Plan tasks for the day and the completion rate appears here",
 "Задачи: {#} из {#}": "Tasks: {#} of {#}",
-"{#}% · перенесено {#}": "{#}% · moved {#}"
+"{#}% · перенесено {#}": "{#}% · moved {#}",
+"Перенести": "Move",
+"Выполнено": "Done",
+"Вернуть в работу": "Back to work",
+"Изменить: время, повтор, приоритет": "Edit: time, repeat, priority"
 }
