@@ -4398,7 +4398,7 @@ function example(start){
 }
 function T(goal,title,type,o){return Object.assign({id:uid(),goal,title,type,target:1,per:1,days:7,unit:'',total:0,deadline:'',from:1,to:0,when:'',ifthen:'',min:'',active:true,tod:'',mins:0},o||{})}
 function H(title,o){return Object.assign({id:'h'+uid(),title,days:[0,1,2,3,4,5,6],created:today(),archived:false,when:'',tod:'',kind:'check',unit:'',target:0,step:1},o||{})}
-const HKIND={check:'Галочка',num:'Число',time:'Минуты',scale:'Оценка 1–5'};
+const HKIND={check:'Галочка',num:'Число',time:'Минуты'};
 /* Шаблоны спринтов: цель + тактики. Нейтральные, без личных данных. */
 const TPL=[
  {id:'product',name:'Запуск продукта',icon:'◆',result:'К концу программы продукт запущен, первые клиенты заплатили',color:'#4205CF',
@@ -4471,7 +4471,7 @@ S:null,tab:'home',sub:null,day:today(),wk:null,
 sb:null,user:null,cloud:'off',
 
 fresh(){return {v:2,profile:{name:''},sprint:{title:'12 недель',start:nextMonday(),weeks:12,threshold:85,vision:'',partner:''},goals:[],tactics:[],habits:[],log:{},hlog:{},lt:{},weeks:{},deals:[],del:[],archive:[],skip:{},checkin:{},pref:{group:'tod'},tasks:[],t:0}},
-norm(s){const f=this.fresh();for(const k in f)if(s[k]==null)s[k]=f[k];if(!s.pref.d0){const ds=[...Object.keys(s.hlog||{}),...Object.keys(s.log||{}),...Object.keys(s.checkin||{}),...(s.habits||[]).map(h=>h.created).filter(Boolean),...(s.tasks||[]).map(x=>x.date).filter(Boolean)].filter(d=>/^\d{4}-\d\d-\d\d$/.test(d)).sort();s.pref.d0=ds[0]&&ds[0]<today()?ds[0]:today()}const HL=s.hlog||{};(s.habits||[]).forEach(h=>{for(const d in HL){const v=HL[d]&&HL[d][h.id];if(v&&(!h.created||d<h.created))h.created=d}});const AM={travel:'fun',comm:'rel'};(s.goals||[]).forEach(g=>{if(AM[g.area])g.area=AM[g.area]});(s.archive||[]).forEach(x=>(x.goals||[]).forEach(g=>{if(AM[g.area])g.area=AM[g.area]}));return s},
+norm(s){const f=this.fresh();for(const k in f)if(s[k]==null)s[k]=f[k];(s.habits||[]).forEach(h=>{if(h&&h.kind==='scale')h.kind='check'});if(!s.pref.d0){const ds=[...Object.keys(s.hlog||{}),...Object.keys(s.log||{}),...Object.keys(s.checkin||{}),...(s.habits||[]).map(h=>h.created).filter(Boolean),...(s.tasks||[]).map(x=>x.date).filter(Boolean)].filter(d=>/^\d{4}-\d\d-\d\d$/.test(d)).sort();s.pref.d0=ds[0]&&ds[0]<today()?ds[0]:today()}const HL=s.hlog||{};(s.habits||[]).forEach(h=>{for(const d in HL){const v=HL[d]&&HL[d][h.id];if(v&&(!h.created||d<h.created))h.created=d}});const AM={travel:'fun',comm:'rel'};(s.goals||[]).forEach(g=>{if(AM[g.area])g.area=AM[g.area]});(s.archive||[]).forEach(x=>(x.goals||[]).forEach(g=>{if(AM[g.area])g.area=AM[g.area]}));return s},
 load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.sprint)return this.norm(s)}catch(e){}return this.fresh()},
 save(){this._tix=Object.fromEntries(this.S.tactics.map(t=>[t.id,t]));this.S.t=Date.now();this.trackMarks();try{localStorage.setItem(KEY,JSON.stringify(this.S))}catch(e){}
   if(this.user){clearTimeout(this._pt);this._pt=setTimeout(()=>this.push(),1200)}},
@@ -6366,7 +6366,7 @@ hAsk(id,d){const h=this.S.habits.find(x=>x.id===id);if(!h||d>today())return;cons
    <div class="row" style="margin-top:10px;gap:8px">${[1,2,4].map(n=>`<button class="btn sp" onclick="$('hv').value=Math.round(((+$('hv').value||0)+${n*(+h.step||1)})*100)/100">+${n*(+h.step||1)}</button>`).join('')}</div>
    <button class="btn pr w" style="margin-top:14px" onclick="APP.close();APP.hSet('${id}','${d}',$('hv').value.replace(',','.'))">Сохранить</button>`}`);setTimeout(()=>$('hv')&&$('hv').focus(),50)},
 hSched(h,d){return d>=h.created&&(h.days||[]).includes(pd(d).getDay())&&!this.skipped(h.id,d)},
-hToggle(id,d){if(d>today())return;this.track('mark',null,'day');{const h=this.S.habits.find(x=>x.id===id);if(h&&h.created&&d<h.created)h.created=d}const el=this._lastEl();this.snap();const L=this.S.hlog;this.stamp('H|'+d+'|'+id);L[d]=L[d]||{};if(L[d][id])delete L[d][id];else{L[d][id]=true;this.buzz(12);this._pop=id;this.burst(el)}if(!Object.keys(L[d]).length)delete L[d];this.save();this.render();if(this._hcal)this.hCal(id);else if(L[d]&&L[d][id]){this.toast('Отмечено',true);this.dayParty(d)}},
+hToggle(id,d){if(d>today())return;{/* привычки с количеством, временем и оценкой: кружок засчитывает цель целиком, повторно снимает */const hh=this.S.habits.find(x=>x.id===id),kk=hh&&(hh.kind||'check');if(hh&&kk!=='check'){if(kk==='scale'&&!this.hOn(hh,d))return this.hAsk(id,d);return this.hSet(id,d,this.hOn(hh,d)?0:(+hh.target||1))}}this.track('mark',null,'day');{const h=this.S.habits.find(x=>x.id===id);if(h&&h.created&&d<h.created)h.created=d}const el=this._lastEl();this.snap();const L=this.S.hlog;this.stamp('H|'+d+'|'+id);L[d]=L[d]||{};if(L[d][id])delete L[d][id];else{L[d][id]=true;this.buzz(12);this._pop=id;this.burst(el)}if(!Object.keys(L[d]).length)delete L[d];this.save();this.render();if(this._hcal)this.hCal(id);else if(L[d]&&L[d][id]){this.toast('Отмечено',true);this.dayParty(d)}},
 /* универсальная серия: fn(d) — выполнено ли, sch(d) — запланировано ли.
    Правило «не пропускай дважды»: рвётся после двух пропусков подряд, дни отпуска и заморозки не считаются.
    sch.hard (строгая программа) — рвётся после первого пропуска. */
