@@ -3142,5 +3142,7 @@
 "Нужно хотя бы 10 дней с отметками за месяц": "You need at least 10 days with check-ins in the month",
 "Появится сам, если ритм прервётся на 3 дня": "Appears on its own if your rhythm breaks for 3 days",
 "Огранщик поможет вернуться без чувства вины": "The Gemcutter helps you come back without guilt",
-"Следующий разбор {*}": "Next review {*}"
+"Следующий разбор {*}": "Next review {*}",
+"Повтор: {*}. Будущие дни видно в Планах, отмечается в свой день": "Repeats: {*}. Future days show in Plans, check it off on its day",
+"повтор · {*}": "repeat · {*}"
 }

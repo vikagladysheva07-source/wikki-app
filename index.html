@@ -4292,6 +4292,16 @@ html body .tinv-sk{width:100%;height:44px;margin-top:6px;background:none!importa
 #tour .tr-ft button.fin{color:#fff!important;padding:7px 16px!important;border-radius:11px!important;background:linear-gradient(155deg,rgba(155,111,232,.32),rgba(124,92,230,.14))!important;border:1px solid rgba(196,164,255,.35)!important}
 #tour .tr-bt{display:flex;align-items:center;gap:6px}
 #tour .tr-ft button{background:none;border:0;color:rgba(255,255,255,.6);font:600 13px Manrope,system-ui,sans-serif;padding:6px 0 6px 12px}
+
+.pg-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+html body .nt-ch .nt-chv{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.7;margin-left:2px;flex:none}
+
+/* будущие повторы задач */
+html body #app .gh{opacity:.6;cursor:pointer}
+html body #app .gh .gh-c{display:grid;place-items:center;border:1.5px dashed rgba(255,255,255,.3)!important;background:none!important;border-radius:50%;flex:none}
+html body #app .tk.gh .gh-c{width:26px;height:26px}
+html body #app .gh .gh-c svg{width:13px;height:13px;fill:none;stroke:rgba(255,255,255,.7);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+html body #app .tk.gh .gh-tm{margin-left:auto;font-size:12.5px;color:rgba(255,255,255,.55)}
 </style>
 <link rel="preload" href="logo-volyo.png" as="image"><link rel="preload" href="ocean.jpg" as="image">
 </head>
@@ -4335,7 +4345,7 @@ const MONF=['Январь','Февраль','Март','Апрель','Май','
 const WD=['вс','пн','вт','ср','чт','пт','сб'];
 const WDF=['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
 const fd=s=>{const d=pd(s);return (typeof APP!=='undefined'&&APP.lang&&APP.lang()==='en')?MON_EN[d.getMonth()]+' '+d.getDate():d.getDate()+' '+MON[d.getMonth()]};
-const AREAS0=[['health','Здоровье','<path d="M6 7v10M18 7v10M3 9v6M21 9v6M6 12h12"/>'],['career','Карьера','<path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/>'],['money','Финансы','<circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3h4"/>'],['rel','Семья','<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M10 20c0-3 3-5 6-5s6 2 6 5"/>'],['love','Отношения','<path d="M12 21s-7-4.5-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.5-9 9-9 9z"/>'],['spirit','Саморазвитие','<circle cx="12" cy="13" r="4"/><path d="M12 3v3M4 13H1M23 13h-3M5.6 6.6l2.1 2.1M18.4 6.6l-2.1 2.1M3 21h18"/>'],['fun','Хобби','<path d="M4 20h16M6 20V9a6 6 0 0112 0v11"/><circle cx="12" cy="9" r="2"/>'],['home','Дом и быт','<path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/>']];
+const AREAS0=[['health','Здоровье','<path d="M6 7v10M18 7v10M3 9v6M21 9v6M6 12h12"/>'],['career','Карьера','<path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/>'],['money','Финансы','<circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3h4"/>'],['rel','Семья','<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M10 20c0-3 3-5 6-5s6 2 6 5"/>'],['love','Отношения','<path d="M12 21s-7-4.5-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.5-9 9-9 9z"/>'],['spirit','Саморазвитие','<circle cx="12" cy="13" r="4"/><path d="M12 3v3M4 13H1M23 13h-3M5.6 6.6l2.1 2.1M18.4 6.6l-2.1 2.1M3 21h18"/>'],['fun','Хобби','<path d="M12 3.5a8.5 8.5 0 100 17c1 0 1.6-.7 1.6-1.5 0-.5-.2-.8-.5-1.1-.3-.3-.5-.7-.5-1.1 0-.9.7-1.6 1.6-1.6h1.8a4.5 4.5 0 004.5-4.5c0-3.9-3.8-7.2-8.5-7.2z"/><circle cx="7.6" cy="11" r="1.1"/><circle cx="10.4" cy="7.4" r="1.1"/><circle cx="15" cy="7.8" r="1.1"/>'],['home','Дом и быт','<path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/>']];
 const AREA_RN={"Здоровье и энергия": "Здоровье", "Карьера и дело": "Карьера", "Семья и друзья": "Семья", "Любовь и партнёр": "Отношения", "Личностный рост": "Саморазвитие", "Отдых и радость": "Хобби", "Дом и окружение": "Дом и быт", "Окружение": "Дом и быт"};
 const AREA_OFF=['home'];/* предлагаются при выборе сфер, но не включены по умолчанию */
 let AREAS=AREAS0.filter(a=>!AREA_OFF.includes(a[0]));
@@ -4477,7 +4487,7 @@ save(){this._tix=Object.fromEntries(this.S.tactics.map(t=>[t.id,t]));this.S.t=Da
   if(this.user){clearTimeout(this._pt);this._pt=setTimeout(()=>this.push(),1200)}},
 toast(m,undo,act){const t=$('toast');t.innerHTML=esc(m)+(undo?` <button class="tundo" onclick="APP.undo()">Отменить</button>`:'')+(act?` <button class="tundo" onclick="${act[1]}">${act[0]}</button>`:'');this.tr(t);t.classList.toggle('act',!!(undo||act));t.classList.add('on');clearTimeout(this._tt);this._tt=setTimeout(()=>t.classList.remove('on'),act?6000:undo?4500:2000)},
 snap(){const S=this.S;this._snap={log:JSON.stringify(S.log),hlog:JSON.stringify(S.hlog),skip:JSON.stringify(S.skip||{}),tasks:JSON.stringify(S.tasks||[]),lt:JSON.stringify(S.lt||{})}},
-undo(){const z=this._snap;if(!z)return;const S=this.S;S.log=JSON.parse(z.log);S.hlog=JSON.parse(z.hlog);S.skip=JSON.parse(z.skip);S.tasks=JSON.parse(z.tasks);S.lt=JSON.parse(z.lt);if(S.del){const ids=new Set(S.tasks.map(t=>t.id));S.del=S.del.filter(i=>!ids.has(i))}
+undo(){const z=this._snap;if(!z)return;const S=this.S;const cur=new Map((S.tasks||[]).map(t=>[t.id,JSON.stringify(t)]));S.log=JSON.parse(z.log);S.hlog=JSON.parse(z.hlog);S.skip=JSON.parse(z.skip);S.tasks=JSON.parse(z.tasks);S.tasks.forEach(t=>{if(cur.get(t.id)!==JSON.stringify(t))t.t=Date.now()});S.lt=JSON.parse(z.lt);if(S.del){const ids=new Set(S.tasks.map(t=>t.id));S.del=S.del.filter(i=>!ids.has(i))}
   for(const k in S.lt)S.lt[k]=Date.now();this._snap=null;this.save();this.render();this.toast('Отменено')},
 
 init(){
@@ -4621,7 +4631,7 @@ parseTask(text,base){let t=' '+String(text||'').trim()+' ',d=base||this.day||tod
   const title=t.replace(/\s+/g,' ').trim();return {title:title||String(text).trim(),date:d,tm,hit,pr,tags,rep:rp}},
 tmR(x){return x.tm?x.tm+(x.tm2&&x.tm2>x.tm?'–'+x.tm2:''):''},
 taskWhen(x){return this.tmR(x)},
-taskMove(id,d){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;x.date=d;x.t=Date.now();this.save();this.close();this.render();this.toast(d===add(today(),1)?'Перенесено на завтра':'Перенесено на '+fd(d))},
+taskMove(id,d){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;this.snap();x.date=d;x.t=Date.now();this.save();this.close();this.render();this.toast(d===add(today(),1)?'Перенесено на завтра':'Перенесено на '+fd(d),true)},
 plHead(dp){const td=today(),d=this.day,dd=pd(d),C=2*Math.PI*46,p=dp.n?dp.p:0,pc=Math.round(p*100);
   const ttl=d===td?'Сегодня':d===add(td,-1)?'Вчера':d===add(td,1)?'Завтра':WDF[dd.getDay()].charAt(0).toUpperCase()+WDF[dd.getDay()].slice(1);
   return `<div class="dcard"><div class="dc-t"><button class="dc-n" onclick="APP.shiftDay(-1)" aria-label="Прошлый день">${I.l}</button><button class="dc-d" onclick="APP.dayMenu()"><b>${ttl}</b><span>${WDF[dd.getDay()]}, ${fd(d)}</span></button><button class="dc-n" onclick="APP.shiftDay(1)" aria-label="Следующий день">${I.r}</button></div>
@@ -4992,8 +5002,9 @@ vWeekAg(days,td){const M=MON,WS=['Вс','Пн','Вт','Ср','Чт','Пт','Сб
    const strip=`<div class="wk2-strip">${days.map(d=>{const x=pd(d),L=T.filter(t=>t.date===d),dn=L.filter(t=>t.done).length;return `<button class="wk2-c ${d===sel?'sel':''} ${d===td?'td':''} ${d<td?'pa':''}" data-wd="${d}" onclick="APP.wkSel('${d}')"><em>${WS[x.getDay()]}</em><b>${x.getDate()}</b><span class="wk2-dots">${L.length?L.slice(0,4).map(t=>`<i class="${t.done?'on':''}"></i>`).join(''):'<i class="e"></i>'}</span></button>`}).join('')}</div>`;
    return strip+`<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="wkBG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F1EAFF"/><stop offset=".5" stop-color="#C4A4FF"/><stop offset="1" stop-color="#7B55E0"/></linearGradient></defs></svg><div class="wag" id="wkAg">${days.map(d=>{const x=pd(d),wd=WDF[x.getDay()],W=wd.charAt(0).toUpperCase()+wd.slice(1);
      const tg=d===td?'сегодня':d===add(td,1)?'завтра':d===add(td,-1)?'вчера':'';
-     const L=T.filter(t=>t.date===d).sort((a,b)=>this.cmpT(a,b)),dn=L.filter(t=>t.done).length;
+     const L=[...T.filter(t=>t.date===d),...this.kGhosts(d)].sort((a,b)=>this.cmpT(a,b)),dn=L.filter(t=>t.done).length;
      const cards=L.map(t=>{const ar=t.area?(AL.find(a=>a[0]===t.area)||[])[1]:'';
+       if(t.gh)return `<div class="wag-c gh" onclick="APP.taskEdit('${t.gh}')"><span class="wag-k gh-c" aria-hidden="true">${this.GH_IC}</span><span class="wag-x"><b data-nt>${esc(t.title)}</b></span>${t.tm?`<span class="wag-t">${t.tm}</span>`:''}</div>`;
        return `<div class="wag-c ${t.done?'dn':''}" data-tid="${t.id}" onclick="APP.taskEdit('${t.id}')"><button class="wag-k ${t.done?'on':''}" onclick="event.stopPropagation();APP.taskToggle('${t.id}')" aria-label="Отметить">${t.done?I.ok:''}</button><span class="wag-x"><b data-nt>${esc(t.title)}</b></span>${t.tm?`<span class="wag-t">${t.tm}</span>`:''}</div>`}).join('');
      return `<section class="wag-d ${d===td?'td':''} ${d<td?'pa':''} ${d===sel?'sel':''}" data-dd="${d}"><div class="wag-h"><button class="wag-n" onclick="APP.plOpenDay('${d}')"><b>${W}</b><span>${x.getDate()} ${M[x.getMonth()]}</span></button>${true?`<span class="wag-rg ${L.length&&dn===L.length?'ok':''} ${L.length?'':'em'}" aria-label="${dn}/${L.length}"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3"/>${dn?`<circle cx="12" cy="12" r="9" fill="none" stroke="#C4A4FF" stroke-width="3" stroke-linecap="round" stroke-dasharray="${(56.55*dn/L.length).toFixed(1)} 56.55" transform="rotate(-90 12 12)"/>`:''}</svg></span>`:''}<button class="wag-a" onclick="APP.plAddOn('${d}','${wd}')" aria-label="Добавить дело"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div>${(()=>{const pc=L.length?dn/L.length:0,R=38,C=2*Math.PI*R;return `<div class="wag-big ${L.length&&dn===L.length?'ok':''}"><svg viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="${R}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="7"/>${dn?`<circle cx="48" cy="48" r="${R}" fill="none" stroke="url(#wkBG)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${(C*pc).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 48 48)"/>`:''}</svg><b>${L.length?Math.round(pc*100)+'%':'—'}</b></div>`})()}${cards}</section>`}).join('')}</div>`},
 wkChart(days,td){return days.map(d=>{const a=d<=td?this.dayAll(d):null,p=a&&a.n?a.p:null,h=p==null?8:Math.max(10,Math.round(p*100));return `<button class="pwc-b ${d===td?'td':''} ${d>td?'fu':''} ${p!=null&&p>=.85?'ok':''}" onclick="APP.wkGo('${d}')" aria-label="${fd(d)}"><span><i style="height:${h}%"></i></span><em>${pd(d).getDate()}</em></button>`}).join('')},
@@ -5093,7 +5104,7 @@ taskEditR(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;const p
    <label class="lbl">Повтор</label>
    <div class="kqd krep">${[['','Нет'],['d','Каждый день'],['wd','По будням'],['w','Каждую неделю'],['m','Каждый месяц'],['y','Каждый год']].map(([f,l])=>`<button class="${((x.rep&&x.rep.f)||'')===f?'on':''}" onclick="APP.kRep('${id}','${f}')">${l}</button>`).join('')}</div>
    ${x.rep&&x.rep.f==='w'?`<div class="seg krd">${[1,2,3,4,5,6,0].map(d=>`<button class="${(x.rep.days||[]).includes(d)?'on':''}" onclick="APP.kRepDay('${id}',${d})">${WD[d]}</button>`).join('')}</div>`:''}
-   ${x.rep?`<div class="small mut" style="margin:-2px 0 14px">Когда отметишь, следующая появится сама: ${this.kRepTxt(x.rep)}.</div>`:''}
+   ${x.rep?`<div class="small mut" style="margin:-2px 0 14px">Повтор: ${this.kRepTxt(x.rep)}. Будущие дни видно в Планах, отмечается в свой день</div>`:''}
    <div class="f"><label class="lbl">Сфера</label><div class="kqd krep">${[['','Нет'],...this.areaList().map(a=>[a[0],a[1]])].map(([k,l])=>`<button class="${(x.area||'')===k?'on':''}" onclick="APP.kArea('${id}','${k}')">${esc(l)}</button>`).join('')}</div></div>
    <div class="f"><label class="lbl">Теги</label><input id="kG" value="${esc((x.tags||[]).map(g=>'#'+g).join(' '))}" placeholder="#работа #звонки" oninput="APP.kAuto('${id}')"></div>
    <button class="btn del w" onclick="APP.taskDel('${id}')">Удалить задачу</button>
@@ -5124,14 +5135,18 @@ vMatrix(){const td=today(),open=(this.S.tasks||[]).filter(x=>!x.done&&!(this.S.d
 /* повторяющиеся задачи */
 REPN:{d:'Каждый день',wd:'По будням',w:'Каждую неделю',m:'Каждый месяц',y:'Каждый год'},
 kRepTxt(r){if(!r||!this.REPN[r.f])return '';if(r.f==='w'&&r.days&&r.days.length&&r.days.length<7)return 'по '+[1,2,3,4,5,6,0].filter(d=>r.days.includes(d)).map(d=>WD[d]).join(', ');return this.REPN[r.f].toLowerCase()},
-kNext(x){const r=x.rep,td=today();
-  const st=d=>{if(r.f==='d')return add(d,1);
+kNext(x){const td=today(),st=d=>this.kStep(x,d);let n=st(x.date),g=0;while(n<=td&&g++<800)n=st(n);return n},
+kStep(x,d){const r=x.rep;{if(r.f==='d')return add(d,1);
     if(r.f==='wd'){let n=add(d,1);while([0,6].includes(pd(n).getDay()))n=add(n,1);return n}
     if(r.f==='w'){const ds=r.days&&r.days.length?r.days:[pd(x.date).getDay()];let n=add(d,1);for(let i=0;i<8&&!ds.includes(pd(n).getDay());i++)n=add(n,1);return n}
     const y=+d.slice(0,4),m=+d.slice(5,7);
     if(r.f==='m'){const nm=m%12+1,ny=m===12?y+1:y,day=Math.min(r.dom||+d.slice(8),new Date(ny,nm,0).getDate());return ny+'-'+pad(nm)+'-'+pad(day)}
-    return (y+1)+d.slice(4)};
-  let n=st(x.date),g=0;while(n<=td&&g++<800)n=st(n);return n},
+    return (y+1)+d.slice(4)}},
+/* будущие повторы для показа в Планах: только просмотр, отмечается сама задача в свой день */
+kGhosts(d){const td=today();if(!d||d<=td)return [];const del=this.S.del||[],out=[];
+  (this.S.tasks||[]).forEach(x=>{if(!x.rep||x.done||x.drop||del.includes(x.id)||x.date>=d)return;let n=x.date,g=0;do{n=this.kStep(x,n)}while(n<d&&g++<800);if(n===d)out.push({id:'g_'+x.id,gh:x.id,title:x.title,date:d,tm:x.tm||'',pr:x.pr||0,area:x.area||'',rep:x.rep,done:''})});return out},
+kGhostRow(x){return `<div class="tk gh" onclick="APP.taskEdit('${x.gh}')"><span class="chk gh-c" aria-hidden="true">${this.GH_IC}</span><div class="t"><b data-nt>${esc(x.title)}</b><div class="meta">повтор · ${this.kRepTxt(x.rep)}</div></div>${x.tm?`<span class="gh-tm">${x.tm}</span>`:''}</div>`},
+GH_IC:'<svg viewBox="0 0 24 24"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3"/></svg>',
 kRep(id,f){const x=this.kKeep(id);if(!x)return;if(!f)delete x.rep;else{x.rep={f};if(f==='w')x.rep.days=[pd(x.date).getDay()];if(f==='m')x.rep.dom=+x.date.slice(8)}this.save();this.taskEditR(id)},
 kRepDay(id,d){const x=this.kKeep(id);if(!x||!x.rep)return;const a=x.rep.days||[];x.rep.days=a.includes(d)?a.filter(z=>z!==d):[...a,d];if(!x.rep.days.length)x.rep.days=[d];this.save();this.taskEditR(id)},
 /* свайпы по строкам: вправо — готово, влево — кнопки «Завтра» и «Удалить» */
@@ -6505,7 +6520,7 @@ vToday(){
   const ts=inS?S.tactics.filter(t=>this.activeIn(t,w)):[];
   const nm=(S.profile.name||'').split(' ')[0],dd=pd(this.day),fz=this.frozen(this.day);
   const dp=this.dayAll(this.day),hs0=S.habits.filter(x=>!x.archived),bestS=Math.max(0,...hs0.map(x=>{const[f,s_,fr]=this.hFns(x);return this.streak(f,s_,fr)}));
-  const tk=this.tasksFor(this.day),tkDone=tk.filter(x=>x.done).length;
+  const tk=[...this.tasksFor(this.day),...this.kGhosts(this.day)],tkDone=tk.filter(x=>x.done).length;
   const pct=dp.n?Math.round(dp.p*100):null;
   const prog=inS?(this.mode==='strict'?`день ${this.strictRun()} подряд · из ${this.sprintDays()}`:this.mode==='count'?`${this.countDays()} / ${this.sprintDays()} дней в копилке`:`неделя ${w} / ${this.W} · ${sc??'—'}${sc!=null?'%':''}`):'';
   let h=`<div class="h1">${this.day===td?'Сегодня':this.day===add(td,-1)?'Вчера':this.day===add(td,1)?'Завтра':WDF[dd.getDay()][0].toUpperCase()+WDF[dd.getDay()].slice(1)}</div>__S1__
@@ -6632,7 +6647,7 @@ ntRender(){const q=this._tn,pr=q.pr,ar=this.areaList();let pn='';
   else if(q.panel==='area')pn=`<div class="kqd">${[['','Нет'],...ar.map(a=>[a[0],a[1]])].map(([k,l])=>`<button class="${q.area===k?'on':''}" onclick="APP.ntPick('area','${k}')">${esc(l)}</button>`).join('')}</div>`;
   this.open(`<input id="nT" class="nt-in" value="${esc(q.title)}" placeholder="Что нужно сделать?" autocomplete="off" enterkeyhint="done" onkeydown="if(event.key==='Enter'){event.preventDefault();APP.ntSave()}">
   ${pn?`<div class="nt-pn">${pn}</div>`:''}
-  <div class="nt-tb"><button class="nt-ch on" onclick="APP.ntCal()">${I.week}<span>${esc(this.ntDateTxt())}</span></button>
+  <div class="nt-tb"><button class="nt-ch on" onclick="APP.ntCal()">${I.week}<span>${esc(this.ntDateTxt())}</span><svg class="nt-chv" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg></button>
    <button class="nt-ib ${pr?'on':''}" style="--c:${pr?this.PRC[pr]:'#9C9AA3'}" onclick="APP.ntPanel('pr')" aria-label="Приоритет">${this.kFlag(pr,20)}</button>
    <button class="nt-ib ${q.sub.length||q.panel==='sub'?'on':''}" onclick="APP.ntPanel('sub')" aria-label="Подзадачи"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h11M10 12h11M10 18h11M3 6l1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg>${q.sub.length?`<i>${q.sub.length}</i>`:''}</button>
    <button class="nt-ib ${q.area||q.panel==='area'?'on':''}" onclick="APP.ntPanel('area')" aria-label="Сфера">${I.goal}</button>
@@ -6803,7 +6818,7 @@ rowsDone(items,w,key){const tod=((this.S.pref||{}).group||'tod')==='tod';const o
   const nowM=null;let nl=false;const rr=i=>{let pre='';if(nowM&&!nl&&i.k==='k'&&i.o.tm&&i.o.tm>nowM&&open.some(z=>z.k==='k'&&z.o.tm)){nl=true;pre=`<div class="nowl"><span>сейчас ${nowM}</span></div>`}return pre+r(i)};
   return `<div class="tgrid">`+open.map(rr).join('')+'</div>'+(open.length?'':`<div class="tall">Всё на этот день сделано</div>`)+(done.length?`<button class="tdn" onclick="APP._showDone=!APP._showDone;APP.render()">${I.ok}<span>Сделано · ${done.length}</span><em>${this._showDone?'скрыть':'показать'}</em></button>${this._showDone?`<div class="tgrid tgd">${done.map(r).join('')}</div>`:''}`:'')},
 tAsk(id,d){const t=this.S.tactics.find(x=>x.id===id);if(!t)return;const cur=this.v(t,d);this.ask('Сколько сегодня',cur||'',v=>{this.setLog(id,d,Math.max(0,+String(v).replace(',','.')||0));this.render()},'number')},
-kRow(x){const d=this.day,over=x.date<d;return `<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${x.pr||0}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${x.tm?`<span class="ktm">${APP.tmR(x)}</span>`:''}${this.nmE('k',x,1)}${over?`<div class="meta kov">с ${fd(x.date)}</div>`:''}${this.kMeta(x)}${this.ksbH(x)}</div>${this.starBtn(d,'k:'+x.id)}<button class="kmn" onclick="APP.kMenu('${x.id}')" aria-label="Меню">⋯</button>${x.done?'':this.GRIP}</div>`},
+kRow(x){if(x.gh)return this.kGhostRow(x);const d=this.day,over=x.date<d;return `<div class="tk ${x.done?'done':''} ${this._pop===x.id?'pop':''}" data-lp="k:${x.id}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${x.pr||0}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="t" onclick="APP.ieStart('k','${x.id}')">${x.tm?`<span class="ktm">${APP.tmR(x)}</span>`:''}${this.nmE('k',x,1)}${over?`<div class="meta kov">с ${fd(x.date)}</div>`:''}${this.kMeta(x)}${this.ksbH(x)}</div>${this.starBtn(d,'k:'+x.id)}<button class="kmn" onclick="APP.kMenu('${x.id}')" aria-label="Меню">⋯</button>${x.done?'':this.GRIP}</div>`},
 tRow(t,w,showGoal){
   const d=this.day,val=this.v(t,d),wv=this.wVal(t,w),wt=this.wTarget(t,w),done=wv>=wt,sk=this.skipped(t.id,d)&&!this.frozen(d);
   let left='',right='',meta='';
@@ -7163,7 +7178,7 @@ ieObj(k,id){return k==='h'?this.S.habits.find(x=>x.id===id):k==='t'?this.S.tacti
 ieSave(k,id,v,keep){if(this._ie!==k+':'+id)return;const o=this.ieObj(k,id);v=(v||'').trim();if(o&&v&&o.title!==v){this.snap&&this.snap();o.title=v;if(k==='k')o.t=Date.now();this.save();this.toast('Сохранено',true)}this._ie=null;if(!keep)this.render()},
 ieFull(k,id){const e=[...document.querySelectorAll('.iename')].find(x=>x.offsetParent);this.ieSave(k,id,e?e.value:'',true);this.render();k==='h'?this.editH(id):k==='t'?this.editT(id):this.taskEdit(id)},
 nmE(k,o,bold){if(this._ie===k+':'+o.id)return `<span class="ie" onclick="event.stopPropagation()"><input class="iename" value="${esc(o.title)}" onkeydown="if(event.key==='Enter'){event.preventDefault();APP.ieSave('${k}','${o.id}',this.value)}if(event.key==='Escape'){event.preventDefault();APP._ie=null;APP.render()}" onblur="APP.ieSave('${k}','${o.id}',this.value)"><button class="iemore" title="Все настройки" onmousedown="event.preventDefault()" onclick="APP.ieFull('${k}','${o.id}')">${I.ed}</button></span>`;return bold?`<b>${esc(o.title)}</b>`:`<em>${esc(o.title)}</em>`},
-qaBox(k,act,ph){if(this._qa!==k)return `<button class="qadd" onclick="APP.qaOpen('${k}')">${I.plus}<span>Добавить</span></button>`;
+qaBox(k,act,ph){if(this._qa!==k)return `<button class="qadd" onclick="${k==='h'?'APP.editH(null)':'APP.qaOpen()'}">${I.plus}<span>Добавить</span></button>`;
   return `<form class="qaf" onsubmit="event.preventDefault();const v=this.q.value;if(!v.trim())return;APP._qa='${k}';${act};APP.qaOpen('${k}')"><input name="q" class="qain" placeholder="${ph}" autocomplete="off" onkeydown="if(event.key==='Escape'){APP._qa=null;APP.render()}" onblur="setTimeout(()=>{if(APP._qa==='${k}'&&!this.value.trim()){APP._qa=null;APP.render()}},150)"><button class="qago" type="submit">${I.ok2}</button></form>`},
 qaOpen(k){this._qa=k;this.render();setTimeout(()=>{const e=[...document.querySelectorAll('.qain')].find(x=>x.offsetParent);if(e)e.focus()},30)},
 rpgData(){const S=this.S,td=today();const CAT={dumb:'str',steps:'str',swim:'str',food:'str',tree:'str',snow:'str',drop:'str',book:'int',chat:'int',list:'int',pen:'int',lotus:'spi',moon:'spi',sun:'spi',heart:'spi',ban:'spi',phone:'spi',brief:'biz',video:'biz',target:'biz',star:'biz'};
@@ -7412,7 +7427,7 @@ ftRing(fr,gid){const N=60,R=60,ticks=[...Array(N)].map((_,i)=>{const an=i/N*2*Ma
 ftMode(){try{return localStorage.getItem('tw-ftm')||'free'}catch(e){return 'free'}},
 ftSetMode(m){try{localStorage.setItem('tw-ftm',m)}catch(e){}this.buzz&&this.buzz(4);this.ftShow('start')},
 ftLabel(f){if(f.paused)return 'пауза';if(f.mode==='pomo')return f.ph==='b'?(f.cy>=4?'Длинный перерыв':'Перерыв'):`Отрезок ${f.cy} из 4`;return esc(f.label||'')},
-ftPhase(){const f=this.ftGet();if(!f||f.mode!=='pomo')return this.ftFinish(true);try{navigator.vibrate&&navigator.vibrate([60,40,60])}catch(e){}this.buzz&&this.buzz(12);
+ftPhase(){const f=this.ftGet();if(!f||f.mode!=='pomo')return this.ftFinish(true);this.chime();try{navigator.vibrate&&navigator.vibrate([60,40,60])}catch(e){}this.buzz&&this.buzz(12);
   if(f.ph==='w'){f.wm=(f.wm||0)+25;this.focusAdd(25,today(),null,true);const lb=f.cy>=4?15:5;Object.assign(f,{ph:'b',end:Date.now()+lb*60000,total:lb*60000,paused:0});this.ftSet(f);this.ftShow('run');return}
   if(f.cy>=4){this.ftSet({done:true,m:f.wm||0});this.track('focus_done',{m:f.wm||0,pomo:1},'day');this.ftWake(false);this.ftShow('fin');return}
   Object.assign(f,{ph:'w',cy:f.cy+1,end:Date.now()+25*60000,total:25*60000,paused:0});this.ftSet(f);this.ftShow('run')},
@@ -7420,11 +7435,15 @@ ftDur(m){this._ftd=m;this._fto=false;localStorage.setItem('tw-ftd',m);this.ftSho
 ftOwn(){this._fto=true;this.ftShow('start')},
 ftStep(k){let d=Math.max(5,Math.min(180,(this._ftd||25)+k));this._ftd=d;localStorage.setItem('tw-ftd',d);const e=$('ftOwnV');e&&(e.textContent=d);const dv=e&&e.closest('.fto-dvr');if(dv){const sv=dv.querySelector('.fto-rs');if(sv){const t=document.createElement('div');t.innerHTML=this.ftRing(Math.min(1,d/90),'ftGs');sv.replaceWith(t.firstChild)}}document.querySelectorAll('#ftDur button').forEach((b,i)=>b.classList.toggle('on',[15,25,50,90][i]===d))},
 ftTask(i){this._ftw=i<0?'':(this._ftT[i]||{}).title||'';document.querySelectorAll('#ftWh span').forEach((s,j)=>s.classList.toggle('on',j===i+1))},
-ftStart(){if(this.ftMode()==='pomo'){this.ftSet({mode:'pomo',ph:'w',cy:1,wm:0,end:Date.now()+25*60000,total:25*60000,paused:0,label:''});this.track('focus_start',{m:25,pomo:1},'day');return this.ftShow('run')}const d=this._ftd||25,total=d*60000;this.ftSet({end:Date.now()+total,total,paused:0,label:''});this.track('focus_start',{m:d},'day');this.ftShow('run')},
+ftStart(){this.acUnlock();if(this.ftMode()==='pomo'){this.ftSet({mode:'pomo',ph:'w',cy:1,wm:0,end:Date.now()+25*60000,total:25*60000,paused:0,label:''});this.track('focus_start',{m:25,pomo:1},'day');return this.ftShow('run')}const d=this._ftd||25,total=d*60000;this.ftSet({end:Date.now()+total,total,paused:0,label:''});this.track('focus_start',{m:d},'day');this.ftShow('run')},
 ftPause(){const f=this.ftGet();if(!f||f.done)return;if(f.paused){f.end=Date.now()+f.paused;f.paused=0}else{f.paused=Math.max(1,f.end-Date.now())}this.ftSet(f);this.buzz(6);const r=$('ftRun');if(r)r.classList.toggle('paused',!!f.paused);const l=$('ftLab');if(l){l.textContent=this.ftLabel(f);try{this.tr(l)}catch(e){}}this.ftTick()},
 ftTick(){const f=this.ftGet();if(!f){clearInterval(this._ftt);return}if(f.done)return;const left=this.ftLeft(f);const c=$('ftClk');if(c)c.textContent=this.ftFmt(left);const a=$('ftArc'),fr=Math.max(0,Math.min(1,left/f.total));if(a){const C=+(a.dataset.c||879.6);a.style.strokeDashoffset=(C*(1-fr)).toFixed(1)}const tk=$('ftTk');if(tk){const n=Math.round(fr*60),L=tk.children;for(let i=0;i<L.length;i++)L[i].classList.toggle('on',i<n)}document.querySelectorAll('.ftp-t').forEach(e=>e.textContent=this.ftFmt(left));document.querySelectorAll('.ftc-arc').forEach(c=>{c.style.opacity=1;c.style.strokeDashoffset=((+c.dataset.c)*(1-fr)).toFixed(1)});document.querySelectorAll('.ftc-tk').forEach(g=>{const n=Math.round(fr*40);[...g.children].forEach((l,i)=>l.classList.toggle('on',i<n))});if(!f.paused&&left<=0){if(f.mode==='pomo')this.ftPhase();else this.ftFinish(true)}},
 ftEnd(){this.ftFinish(false)},
-ftFinish(auto){const f=this.ftGet();if(!f||f.done)return;clearInterval(this._ftt);const left=this.ftLeft(f);if(f.mode==='pomo'){const part=f.ph==='w'?Math.round((f.total-left)/60000):0,tm=(f.wm||0)+part;this.ftWake(false);if(part>=1)this.focusAdd(part,today(),null,true);if(tm<1){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.toast('Меньше минуты не записываем');this.render();return}this.ftSet({done:true,m:tm});this.track('focus_done',{m:tm,pomo:1},'day');this.buzz(12);this.ftShow('fin');return}const m=auto?Math.round(f.total/60000):Math.round((f.total-left)/60000);this.ftWake(false);
+/* мягкий звук конца фокуса: три тихих колокольчика с долгим затуханием; звук разблокируется нажатием «Начать» */
+acUnlock(){try{const A=window.AudioContext||window.webkitAudioContext;if(!A)return;const c=this._ac=this._ac||new A();if(c.state==='suspended')c.resume();const b=c.createBuffer(1,1,22050),s=c.createBufferSource();s.buffer=b;s.connect(c.destination);s.start(0)}catch(e){}},
+chime(){try{if((this.S.pref||{}).sound===false)return;const A=window.AudioContext||window.webkitAudioContext;if(!A)return;const c=this._ac=this._ac||new A();if(c.state==='suspended')c.resume();const t0=c.currentTime+.05;
+  [[523.25,0],[659.25,.42],[783.99,.84]].forEach(([f,d])=>{[[1,'sine',.11],[2,'sine',.025]].forEach(([m,tp,vol])=>{const o=c.createOscillator(),g=c.createGain();o.type=tp;o.frequency.value=f*m;g.gain.setValueAtTime(0,t0+d);g.gain.linearRampToValueAtTime(vol,t0+d+.06);g.gain.exponentialRampToValueAtTime(.0001,t0+d+2.6);o.connect(g);g.connect(c.destination);o.start(t0+d);o.stop(t0+d+2.7)})})}catch(e){}},
+ftFinish(auto){const f=this.ftGet();if(!f||f.done)return;if(auto&&f.end&&Date.now()-f.end<8000)this.chime();clearInterval(this._ftt);const left=this.ftLeft(f);if(f.mode==='pomo'){const part=f.ph==='w'?Math.round((f.total-left)/60000):0,tm=(f.wm||0)+part;this.ftWake(false);if(part>=1)this.focusAdd(part,today(),null,true);if(tm<1){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.toast('Меньше минуты не записываем');this.render();return}this.ftSet({done:true,m:tm});this.track('focus_done',{m:tm,pomo:1},'day');this.buzz(12);this.ftShow('fin');return}const m=auto?Math.round(f.total/60000):Math.round((f.total-left)/60000);this.ftWake(false);
   if(m<1){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.toast('Меньше минуты не записываем');this.render();return}
   this.ftSet({done:true,m});this.focusAdd(m,today(),null,true);this.track('focus_done',{m},'day');try{navigator.vibrate&&navigator.vibrate([60,40,60])}catch(e){}this.buzz(12);this.ftShow('fin')},
 ftDone(){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.render()},
@@ -7913,7 +7932,7 @@ vProgress(){const pv=['balance','year'].includes(this._prv)?this._prv:'over';
 vTracker(){const h=`<div class="h1">Привычки</div>__S1____S2__`+this.pvHabits().replace(/__S\d__/g,'');
   setTimeout(()=>{document.querySelectorAll('.acw').forEach(w=>{w._data=(this._series||{}).main||[]});this.acBind()},0);return h},
 jSet(d,k,v,re){const S=this.S;S.checkin=S.checkin||{};const c=S.checkin[d]=Object.assign({energy:0,sleep:'',win:'',top:'',note:''},S.checkin[d]||{});c[k]=v;c.t=Date.now();this.save();if(re){this.buzz(6);this.render()}else this.toast('Сохранено')},
-hQuick(t){t=(t||'').trim();if(!t)return;if(!this.canAddH(1))return;this.S.habits.push(H(t));this.save();this.buzz(10);this.render();this.toast('Привычка добавлена');this.qaOpen('h')},
+hQuick(t){t=(t||'').trim();if(!t)return;if(!this.canAddH(1))return;this.S.habits.push(H(t));this.save();this.buzz(10);this.render();this.toast('Привычка добавлена')},
 hCal(id,m){
   const x=this.S.habits.find(h=>h.id===id);if(!x)return;this._hcal=1;
   const base=m||this._hm||today().slice(0,7);this._hm=base;
@@ -8625,7 +8644,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=250');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=251');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
@@ -8838,7 +8857,7 @@ APP.backStep=function(){try{
   if(this.tab!=='home'){this.go('home');return true}
 }catch(e){}return false};
 try{const qp=new URLSearchParams(location.search);if(qp.get('paid')==='1'){history.replaceState(null,'',location.pathname+location.hash);try{localStorage.setItem('tw-paywait',String(Date.now()))}catch(e){}setTimeout(()=>APP.toast('Проверяю оплату…'),800)}APP.payWatch();document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')APP.payWatch()})}catch(e){}
-try{if(!(history.state&&history.state.vb))history.pushState({vb:1},'');window.addEventListener('popstate',()=>{if(APP.backStep())history.pushState({vb:1},'')})}catch(e){}
+try{const iOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);if(!iOS){if(!(history.state&&history.state.vb))history.pushState({vb:1},'');window.addEventListener('popstate',()=>{if(APP.backStep())history.pushState({vb:1},'')})}}catch(e){}
 </script>
 </body>
 </html>
