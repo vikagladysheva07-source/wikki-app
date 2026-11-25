@@ -4302,6 +4302,13 @@ html body #app .gh .gh-c{display:grid;place-items:center;border:1.5px dashed rgb
 html body #app .tk.gh .gh-c{width:26px;height:26px}
 html body #app .gh .gh-c svg{width:13px;height:13px;fill:none;stroke:rgba(255,255,255,.7);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 html body #app .tk.gh .gh-tm{margin-left:auto;font-size:12.5px;color:rgba(255,255,255,.55)}
+
+/* трекер привычек: дата под днём недели, видна и после отметки */
+html body #app .hcal.wkd .wd{line-height:1.1}
+html body #app .hcal .wdn{display:block;font-style:normal;font-size:12.5px;font-weight:600;letter-spacing:0;margin-top:3px;color:rgba(255,255,255,.7)}
+html body #app .hcal .wdn.t{color:#fff}
+html body #app .hcal .wdn.f{color:rgba(255,255,255,.38)}
+html body #app .hcal.wkd .mgc s{visibility:hidden}
 </style>
 <link rel="preload" href="logo-volyo.png" as="image"><link rel="preload" href="ocean.jpg" as="image">
 </head>
@@ -7169,7 +7176,7 @@ monthGrid(hs,tt){
   h+=`</div>${addForm}</div>`;
   const off=this.woff(new Date(y,mo-1,1));
   h+=`<div class="hcards">${rows.map(r=>`<div class="hcard"><div class="hch"><div class="nm" role="button" onclick="APP.ieStart('${r.k}','${r.o.id}')">${this.tile(r.o,r.k,r.k==='h'?null:r.col)}${this.nmE(r.k,r.o)}</div><span class="hst">${stats(r)}</span></div>
-    ${(()=>{const isCur=base===td.slice(0,7),hk=r.o.id+'|'+base,open=!!(this._hx||{})[hk],anchor=isCur?td:(base<td.slice(0,7)?days[days.length-1]:days[0]),m0=this.monday(anchor),wk=[0,1,2,3,4,5,6].map(i=>add(m0,i));return `<div class="hcal">${this.wdl().map(w=>`<span class="wd">${w}</span>`).join('')}${open?'<span></span>'.repeat(off)+days.map(d=>cell(r,d,true)).join(''):wk.map(d=>d.slice(0,7)===base?cell(r,d,true):'<span></span>').join('')}</div><button class="hmore" onclick="APP._hx=Object.assign({},APP._hx||{},{'${hk}':!${open?'true':'false'}});APP.render()">${open?'Свернуть':'Весь месяц'}</button>`})()}</div>`).join('')}${addForm}</div>`;
+    ${(()=>{const isCur=base===td.slice(0,7),hk=r.o.id+'|'+base,open=!!(this._hx||{})[hk],anchor=isCur?td:(base<td.slice(0,7)?days[days.length-1]:days[0]),m0=this.monday(anchor),wk=[0,1,2,3,4,5,6].map(i=>add(m0,i));return `<div class="hcal ${open?'':'wkd'}">${this.wdl().map((w,i)=>open?`<span class="wd">${w}</span>`:`<span class="wd">${w}<i class="wdn ${wk[i]===td?'t':wk[i]>td?'f':''}">${+wk[i].slice(8)}</i></span>`).join('')}${open?'<span></span>'.repeat(off)+days.map(d=>cell(r,d,true)).join(''):wk.map(d=>d.slice(0,7)===base?cell(r,d,true):'<span></span>').join('')}</div><button class="hmore" onclick="APP._hx=Object.assign({},APP._hx||{},{'${hk}':!${open?'true':'false'}});APP.render()">${open?'Свернуть':'Весь месяц'}</button>`})()}</div>`).join('')}${addForm}</div>`;
   h+=`</div>`;
   return h},
 tile(o,kind,col){const k=o.ic||icoGuess(o.title)||(kind==='t'?'target':'star');return `<span class="hti" style="--c:${col||'#5D27DB'}">${hIco(k)}</span>`},
