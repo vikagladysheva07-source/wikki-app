@@ -4319,6 +4319,15 @@ html body .hf-gr b{display:block;font-size:14.5px;font-weight:700}html body .hf-
 html body .hf-gk{flex:none;width:22px;height:22px;border-radius:7px;border:1.5px solid rgba(255,255,255,.35);display:grid;place-items:center;margin-top:1px}html body .hf-gr.on .hf-gk{border-color:rgba(196,164,255,.7);background:rgba(155,111,232,.25)}html body .hf-gk svg{width:13px;height:13px}
 html body .hx-af{display:block;font-style:normal;font-size:12px;color:rgba(255,255,255,.5);margin-top:2px}
 html body .hf-gr em.hf-gt{color:#fff;font-weight:600;margin-top:5px}
+
+/* задачи: план и факт */
+html body .ptk-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 4px}
+html body .ptk-t{padding:12px 10px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);min-width:0}
+html body .ptk-t em{display:block;font-style:normal;font-size:12px;color:rgba(255,255,255,.55)}
+html body .ptk-t b{display:block;font-size:26px;font-weight:700;letter-spacing:-.02em;color:#fff;margin:4px 0 2px}html body .ptk-t b small{font-size:14px;font-weight:600;margin-left:1px}
+html body .ptk-t span{display:block;font-size:12.5px;color:rgba(255,255,255,.7)}html body .ptk-t i{display:block;font-style:normal;font-size:11.5px;color:rgba(255,255,255,.45);margin-top:3px}
+html body .ci-tk{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:12px 0 2px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09)}
+html body .ci-tk b{font-size:15px;color:#fff}html body .ci-tk span{font-size:13px;color:rgba(255,255,255,.62)}
 </style>
 <link rel="preload" href="logo-volyo.png" as="image"><link rel="preload" href="ocean.jpg" as="image">
 </head>
@@ -4650,7 +4659,9 @@ parseTask(text,base){let t=' '+String(text||'').trim()+' ',d=base||this.day||tod
   const title=t.replace(/\s+/g,' ').trim();return {title:title||String(text).trim(),date:d,tm,hit,pr,tags,rep:rp}},
 tmR(x){return x.tm?x.tm+(x.tm2&&x.tm2>x.tm?'–'+x.tm2:''):''},
 taskWhen(x){return this.tmR(x)},
-taskMove(id,d){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;this.snap();x.date=d;x.t=Date.now();this.save();this.close();this.render();this.toast(d===add(today(),1)?'Перенесено на завтра':'Перенесено на '+fd(d),true)},
+/* перенос не прячет невыполненное: день, откуда задачу убрали, помнит её как запланированную и не сделанную */
+kMv(x,nd){if(!x||x.done||!nd||!x.date||nd<=x.date)return;const td=today();if(x.date>td)return;const a=new Set(x.mvf||[]);a.add(x.date);if(x.date<td&&nd>td)a.add(td);x.mvf=[...a].sort().slice(-40)},
+taskMove(id,d){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;this.snap();this.kMv(x,d);x.date=d;x.t=Date.now();this.save();this.close();this.render();this.toast(d===add(today(),1)?'Перенесено на завтра':'Перенесено на '+fd(d),true)},
 plHead(dp){const td=today(),d=this.day,dd=pd(d),C=2*Math.PI*46,p=dp.n?dp.p:0,pc=Math.round(p*100);
   const ttl=d===td?'Сегодня':d===add(td,-1)?'Вчера':d===add(td,1)?'Завтра':WDF[dd.getDay()].charAt(0).toUpperCase()+WDF[dd.getDay()].slice(1);
   return `<div class="dcard"><div class="dc-t"><button class="dc-n" onclick="APP.shiftDay(-1)" aria-label="Прошлый день">${I.l}</button><button class="dc-d" onclick="APP.dayMenu()"><b>${ttl}</b><span>${WDF[dd.getDay()]}, ${fd(d)}</span></button><button class="dc-n" onclick="APP.shiftDay(1)" aria-label="Следующий день">${I.r}</button></div>
@@ -4927,7 +4938,7 @@ pxBlock(k,id){const P=this.pxList(k);
   const rows=P.map(p=>`<div class="pv-r ${p.type==='sel'||p.type==='multi'?'pv-wide':''}"><button class="pv-n0" onclick="APP.pxRet('${k}','${id}');APP.pxEdit('${k}','${p.id}')">${esc(p.name)}</button>${this.pxCtl(k,id,p)}</div>`).join('');
   const pre=P.length?'':`<div class="jf-pre"><div>${this.PPRE[k].map((x,i)=>`<button onclick="APP.pxRet('${k}','${id}');APP.pxPreset('${k}',${i})">+ ${x[0]}</button>`).join('')}</div></div>`;
   return `<div class="pv"><div class="pv-h"><span class="lbl">Свойства</span><button onclick="APP.pxRet('${k}','${id}');APP.pxEdit('${k}')">${I.plus}<span>Свойство</span></button></div>${rows}${pre}</div>`},
-pxRet(k,id){if(k==='h')this.hKeep();else{const x=this.pxItem('k',id);if(x&&$('kT')){x.title=$('kT').value.trim()||x.title;x.date=$('kD').value||x.date;x.tm=$('kM').value||'';x.tm2=x.tm&&$('kM2')?$('kM2').value||'':'';this.save()}}this._pr={k,id}},
+pxRet(k,id){if(k==='h')this.hKeep();else{const x=this.pxItem('k',id);if(x&&$('kT')){x.title=$('kT').value.trim()||x.title;this.kMv(x,$('kD').value||x.date);x.date=$('kD').value||x.date;x.tm=$('kM').value||'';x.tm2=x.tm&&$('kM2')?$('kM2').value||'':'';this.save()}}this._pr={k,id}},
 pxBack(){const r=this._pr;this._pr=null;if(!r||!r.id)return this.close();if(r.k==='h')this.hForm();else this.taskEdit(r.id)},
 pxPreset(k,i){const [n,t,o]=this.PPRE[k][i];if(!this.pxList(k).some(p=>p.name===n))this.pxList(k).push({id:'p'+uid(),name:n,type:t,opts:(o||[]).map((v,j)=>({v,c:j}))});this.save();this.render();this.pxBack()},
 pxEdit(k,pid){const p=pid?this.pxList(k).find(x=>x.id===pid):null;this._pd=p?JSON.parse(JSON.stringify(p)):{id:'',name:'',type:'sel',opts:[]};this._pk=k;this.pxForm()},
@@ -5081,7 +5092,7 @@ dzPlans(){const td=today(),dp=this.dayAll(td),pct=dp.n?Math.round(dp.p*100):0,or
 /* задачи в стиле TickTick: приоритет, теги, подзадачи, список по датам, матрица */
 PRC:['', 'rgb(107 79 216)','rgb(168 139 255)','rgb(237 230 255)'],PRN:['Без приоритета','Низкий','Средний','Высокий'],
 kFlag(n,sz){return `<svg width="${sz||14}" height="${sz||14}" viewBox="0 0 24 24" fill="${n?this.PRC[n]:'none'}" stroke="${n?this.PRC[n]:'currentColor'}" stroke-width="2" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>`},
-kKeep(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x||!$('kT'))return x;x.title=$('kT').value.trim()||x.title;x.date=$('kD').value||x.date;x.tm=$('kM').value||'';x.tm2=x.tm&&$('kM2')?$('kM2').value||'':'';if(x.tm2&&x.tm2<=x.tm)x.tm2='';if($('kN'))x.note=$('kN').value;if($('kG'))x.tags=$('kG').value.split(/[,\s]+/).map(v=>v.replace(/^#/,'').trim()).filter(Boolean).slice(0,8);x.t=Date.now();this.save();return x},
+kKeep(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x||!$('kT'))return x;x.title=$('kT').value.trim()||x.title;this.kMv(x,$('kD').value||x.date);x.date=$('kD').value||x.date;x.tm=$('kM').value||'';x.tm2=x.tm&&$('kM2')?$('kM2').value||'':'';if(x.tm2&&x.tm2<=x.tm)x.tm2='';if($('kN'))x.note=$('kN').value;if($('kG'))x.tags=$('kG').value.split(/[,\s]+/).map(v=>v.replace(/^#/,'').trim()).filter(Boolean).slice(0,8);x.t=Date.now();this.save();return x},
 kArea(id,k){const x=this.kKeep(id);if(!x)return;if(k)x.area=k;else delete x.area;this.save();this.taskEditR(id)},
 kPr(id,n){const x=this.kKeep(id);if(!x)return;x.pr=n;this.save();this.taskEditR(id)},
 ksbH(x){const sb=x.sub||[];if(!sb.length&&!x._ksa)return '';return `<div class="ksb">${sb.slice(0,8).map(z=>`<button class="ksb-r ${z.d?'on':''}" onclick="event.stopPropagation();APP.kSubT('${x.id}','${z.id}')"><i></i><span>${esc(z.t)}</span></button>`).join('')}${sb.length>8?`<span class="ksb-m">ещё ${sb.length-8}</span>`:''}</div>`},
@@ -5128,7 +5139,7 @@ taskEditR(id){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;const p
    <div class="f"><label class="lbl">Теги</label><input id="kG" value="${esc((x.tags||[]).map(g=>'#'+g).join(' '))}" placeholder="#работа #звонки" oninput="APP.kAuto('${id}')"></div>
    <button class="btn del w" onclick="APP.taskDel('${id}')">Удалить задачу</button>
   </div>`);setTimeout(()=>document.querySelectorAll('.te-r textarea').forEach(t=>{t.style.height='auto';t.style.height=t.scrollHeight+'px'}),40)},
-plBulk(){const td=today();let n=0;(this.S.tasks||[]).forEach(x=>{if(!x.done&&x.date<td){x.date=td;x.t=Date.now();n++}});this.save();this.render();this.toast(`На сегодня: ${n} ${this.pl(n,'задача','задачи','задач')}`)},
+plBulk(){const td=today();let n=0;(this.S.tasks||[]).forEach(x=>{if(!x.done&&x.date<td){this.kMv(x,td);x.date=td;x.t=Date.now();n++}});this.save();this.render();this.toast(`На сегодня: ${n} ${this.pl(n,'задача','задачи','задач')}`)},
 plRow(x,showDate){const td=today(),over=!x.done&&x.date<td,pr=x.pr||0;
   const when=showDate?(x.date===td?'Сегодня':x.date===add(td,1)?'Завтра':x.date===add(td,-1)?'Вчера':WD[pd(x.date).getDay()]+', '+fd(x.date)):'';
   const row=`<div class="plr ${x.done?'done':''}" data-sw="k:${x.id}"><button class="chk ${x.done?'on':''} kp${pr}" onclick="APP.taskToggle('${x.id}')">${x.done?I.ok:''}</button><div class="plr-c"><button class="plr-t" onclick="APP.taskEdit('${x.id}')"><b>${esc(x.title)}</b>${this.kMeta(x)}</button>${this.ksbH(x)}</div><span class="plr-d ${over?'over':''}">${[APP.tmR(x),when].filter(Boolean).join(' · ')}</span>${x.done?'':this.GRIP}</div>`;return row},
@@ -5616,7 +5627,7 @@ topSet(d,v,quiet){v=(v||'').trim();const S=this.S;S.checkin=S.checkin||{};const 
 dayOk(d){if(this.frozen(d))return true;const a=this.dayAll(d);return a.n>0&&a.p>=.8},
 dayBest(){const td=today();let best=0,run=0,miss=0;for(let i=400;i>=0;i--){const d=add(td,-i);if(this.dayOk(d)){if(!this.frozen(d))run++;miss=0;best=Math.max(best,run)}else if(d<td){miss++;if(miss>=2)run=0}}return Math.max(best,this.dayStreak())},
 mpLeft(){const td=today();return (this.S.tasks||[]).filter(x=>!x.done&&!x.drop&&x.date<td)},
-mpMove(id,n){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;x.date=add(today(),n);x.t=Date.now();this.save();this.render()},
+mpMove(id,n){const x=(this.S.tasks||[]).find(t=>t.id===id);if(!x)return;this.kMv(x,add(today(),n));x.date=add(today(),n);x.t=Date.now();this.save();this.render()},
 mpDone(){this.S.pref.mp=today();this.save();this.track('plan_morning',null,'day');this.render();this.toast('План на день готов')},
 mpH(){return '';const td=today(),hr=this._hr??new Date().getHours(),pf=this.S.pref||{};if(hr<4||hr>=14||pf.mp===td)return '';
   const left=this.mpLeft(),st=this.starList(td);
@@ -5639,12 +5650,12 @@ trShow(){const id=this._tr&&this._tr[0],x=id&&(this.S.tasks||[]).find(t=>t.id===
    <div class="fc" style="margin:14px 0 0"><div class="fc-t">${esc(x.title)}</div><div class="fc-m">Просрочено на ${od} ${this.pl(od,'день','дня','дней')}</div></div>
    <div class="tr-b"><button class="btn pr" onclick="APP.trDo('today')">Сегодня</button><button class="btn gh" onclick="APP.trDo('tom')">Завтра</button><button class="btn gh" onclick="APP.trDo('week')">Через неделю</button><button class="btn gh" onclick="APP.trDo('done')">Уже сделано</button><button class="btn del" onclick="APP.trDo('del')">Убрать</button></div>`)},
 trDo(a){const id=this._tr[0],x=(this.S.tasks||[]).find(t=>t.id===id);if(x){const td=today();
-    if(a==='today'||a==='tom'||a==='week'){x.date=a==='today'?td:add(td,a==='tom'?1:7);x.t=Date.now();this.save()}
+    if(a==='today'||a==='tom'||a==='week'){this.kMv(x,a==='today'?td:add(td,a==='tom'?1:7));x.date=a==='today'?td:add(td,a==='tom'?1:7);x.t=Date.now();this.save()}
     else if(a==='done')this.taskToggle(id);
     else if(a==='del'){this.S.del=[...(this.S.del||[]),id];this.S.tasks=this.S.tasks.filter(t=>t.id!==id);this.save()}}
   this._tr.shift();this.trShow()},
 ovlH(){const td=today(),L=this.tasksFor(td).filter(x=>!x.done);if(L.length<=7)return '';return `<div class="ovl"><span class="sp">День плотный: ${L.length} ${this.pl(L.length,'задача','задачи','задач')}. Обычно успевают меньше, чем планируют.</span><button onclick="APP.plTrim()">Оставить 7</button></div>`},
-plTrim(){const td=today(),st=this.starList(td),L=this.tasksFor(td).filter(x=>!x.done).sort((a,b)=>(st.includes('k:'+b.id)?1:0)-(st.includes('k:'+a.id)?1:0)||(b.pr||0)-(a.pr||0)||(a.tm||'99').localeCompare(b.tm||'99'));const mv=L.slice(7);mv.forEach(x=>{x.date=add(td,1);x.t=Date.now()});this.save();this.render();this.toast(`На завтра: ${mv.length} ${this.pl(mv.length,'задача','задачи','задач')}`)},
+plTrim(){const td=today(),st=this.starList(td),L=this.tasksFor(td).filter(x=>!x.done).sort((a,b)=>(st.includes('k:'+b.id)?1:0)-(st.includes('k:'+a.id)?1:0)||(b.pr||0)-(a.pr||0)||(a.tm||'99').localeCompare(b.tm||'99'));const mv=L.slice(7);mv.forEach(x=>{this.kMv(x,add(td,1));x.date=add(td,1);x.t=Date.now()});this.save();this.render();this.toast(`На завтра: ${mv.length} ${this.pl(mv.length,'задача','задачи','задач')}`)},
 /* пакет 2: привязка «после чего», новая неделя, итог недели */
 ANC:[['wake','После пробуждения','m','07:00'],['coffee','После кофе','m','08:00'],['lunch','После обеда','d','13:30'],['work','После работы','e','18:30'],['dinner','После ужина','e','19:30'],['bed','Перед сном','e','22:00']],
 ancTimes(){const P=(this.S.pref||{}).push||{},A=P.anch||{};return Object.fromEntries(this.ANC.map(a=>[a[0],A[a[0]]===undefined?a[3]:A[a[0]]]))},
@@ -5923,6 +5934,18 @@ pgExec(){const x=this.execData(),vals=x.weeks.filter(w=>w.v!=null&&!w.cur),avg=v
   <div class="pex-top"><div class="pex-n">${x.cur??'—'}<small>${x.cur!=null?'%':''}</small></div><div class="sp"><div class="pex-l">${x.cur!=null&&x.cur>=x.th?'Неделя в зоне победы':x.left?`Ещё ${x.left} ${x.unit} до ${x.th}%`:'Начни неделю с первой отметки'}</div><div class="pex-bar"><i style="width:${Math.min(100,(x.cur||0)/x.th*100)}%"></i></div></div></div>
   <div class="pex" style="--n:${x.weeks.length}">${bars}</div>
   <div class="pg-note">${avg!=null?`В среднем ${avg}% · недель в зоне: ${inz} из ${vals.length}. `:''}Нажми на неделю, чтобы разобрать её.</div></div>`},
+/* задачи: план и факт. План = задачи на день + перенесённые с этого дня; факт = выполненные в свой день */
+kStat(from,to){const td=today(),del=this.S.del||[],T=(this.S.tasks||[]).filter(x=>!x.drop&&!del.includes(x.id));let n=0,dn=0,mv=0;
+  T.forEach(x=>{if(x.date>=from&&x.date<=to&&x.date<=td){n++;if(x.done)dn++}});
+  T.forEach(x=>{(x.mvf||[]).forEach(d=>{if(d>=from&&d<=to&&d!==x.date){n++;mv++}})});return {n,dn,mv,p:n?Math.round(dn/n*100):null}},
+pgTasks(){const td=today(),m0=this.monday(td),mo=td.slice(0,8)+'01',D=this.kStat(td,td),Wk=this.kStat(m0,td),M=this.kStat(mo,td);
+  const weeks=[];for(let k=7;k>=0;k--){const a=add(m0,-7*k),b=k?add(a,6):td,st=this.kStat(a,b);weeks.push({lab:pd(a).getDate()+'.'+pad(pd(a).getMonth()+1),v:st.p,cur:!k})}
+  const any=weeks.some(w=>w.v!=null)||D.n;
+  const tile=(l,x)=>`<div class="ptk-t"><em>${l}</em><b>${x.p??'—'}<small>${x.p!=null?'%':''}</small></b><span>${x.n?x.dn+' из '+x.n:'нет задач'}</span>${x.mv?`<i>перенесено ${x.mv}</i>`:''}</div>`;
+  const bars=weeks.map(w=>`<div class="pex-b ${w.cur?'cur':''}"><b>${w.v==null?'':w.v}</b><span><i class="${w.v!=null&&w.v>=80?'ok':''}" style="height:${w.v==null?0:Math.max(3,w.v)}%"></i></span><em>${w.lab}</em></div>`).join('');
+  return `<div class="card pg-s" id="pg-tasks"><div class="pg-sh"><b>Задачи: план и факт</b><span>сколько сделано из запланированного</span></div>
+  ${any?`<div class="ptk-g">${tile('Сегодня',D)}${tile('Неделя',Wk)}${tile('Месяц',M)}</div><div class="pex" style="--n:${weeks.length}">${bars}</div>`:`<div class="pg-empty">Запланируй задачи на день, и здесь появится процент выполненного</div>`}
+  <div class="pg-note">Перенос на другой день не прячет задачу: в плане того дня она остаётся невыполненной</div></div>`},
 pgWeek(w){const inP=this.inPrg();let body='';
   if(inP){const i=+w;body=`<div class="small mut" style="margin:4px 0 12px">Какая цель тянет неделю вниз</div>`+this.S.goals.map(g=>{const v=this.score(i,g.id);return `<div class="pwk"><span class="dot" style="background:${g.color}"></span><span class="sp">${esc(g.title)}</span><b>${v??'—'}${v!=null?'%':''}</b></div><div class="pwk-b"><i style="width:${v||0}%;background:${g.color}"></i></div>`}).join('')+`<button class="btn w" style="margin-top:14px" onclick="APP.close();APP.wk=${i};APP._pgv='week';APP.go('program')">Открыть неделю ${i} ${I.r}</button>`;
     this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Неделя ${i}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>${body}`);return}
@@ -6232,7 +6255,7 @@ pvOver(){this._pat=null;const x=this.execData(),hs=this.S.habits.filter(h=>!h.ar
   const ptv=P.n<14?'—':P.f.length?(P.f[0].d>0?'+':'')+P.f[0].d+'%':'—',pts=P.n<14?`через ${14-P.n} дн.`:P.f.length?esc(P.f[0].name):'связей пока нет';
   const R=this.repPeriod();
   return `${this.wai()}<div class="pgtg">${t('pg-exec','Исполнение',(x.cur??'—')+(x.cur!=null?'%':''),x.cur!=null&&x.cur>=x.th?'неделя в зоне':x.left?`ещё ${x.left} до ${x.th}%`:'эта неделя',this.mRing((x.cur||0)/100,'#9B6FE8'))}${t('pg-cons','Постоянство',(cp??'—')+(cp!=null?'%':''),'за 30 дней',this.mRing((cp||0)/100,'#9B6FE8'))}${t('pg-wins','Победы',wn,this.pgFromTxt(),`<div class="pgt-wb">${ww.map(x=>`<i style="height:${Math.max(8,x.c/wmx*100)}%;opacity:${x.c?1:.25}"></i>`).join('')}</div>`)}${t('pg-pat','Паттерн',ptv,pts,P.n>=14&&P.f.length?`<span class="pgt-ar ${P.f[0].d>0?'up':'dn'}">${P.f[0].d>0?'↑':'↓'}</span>`:'')}</div>
-  <div class="pgg">${this.pgExec()}${this.pgFocus()}${this.pgWins()}${this.pgPattern()}${this.pgCons()}</div>
+  <div class="pgg">${this.pgExec()}${this.pgTasks()}${this.pgFocus()}${this.pgWins()}${this.pgPattern()}${this.pgCons()}</div>
   <button class="card pg-rep" onclick="APP.openSub('report')"><span>${I.trophy}</span><div class="sp"><b>${R.inP?'Итоги цикла':'Итоги месяца'}</b><em>Цифры, победы, колесо, 80/20 и карточка для сторис</em></div>${I.r}</button>`},
 pgFields(){const F=this.fList();
   if(!F.length)return `<div class="card pg-s pfx-e" id="pg-fields"><div class="pg-sh"><b>Мои поля</b><span>то, что отслеживаешь вручную</span></div><div class="pg-empty">Добавь свои поля в дневнике: шаги, воду, вес, расходы. Здесь появятся графики и связь с выполнением дел.</div><div class="jf-pre"><div>${this.FPRE.slice(0,5).map((p,i)=>`<button onclick="APP.fPreset(${i})">+ ${p[0]}</button>`).join('')}</div></div></div>`;
@@ -6711,12 +6734,14 @@ dayAll(d){const w=this.S.goals.length&&d>=this.st&&d<=this.end()?this.weekOf(d):
   if(w)this.S.tactics.filter(t=>this.activeIn(t,w)&&t.type!=='ms'&&!this.skipped(t.id,d)).forEach(t=>{n++;const v=this.v(t,d);if(t.type==='check'?v>0:t.type==='num'?v>=(+t.per||1):v>0)done++});
   this.S.habits.filter(x=>!x.archived&&this.hSched(x,d)).forEach(x=>{n++;if(this.hOn(x,d))done++});
   this.tasksFor(d).forEach(x=>{n++;if(x.done)done++});
+  {const del=this.S.del||[];(this.S.tasks||[]).forEach(x=>{if(!x.drop&&x.mvf&&x.date!==d&&x.mvf.includes(d)&&!del.includes(x.id))n++})}
   return {n,done,left:n-done,p:n?done/n:0}},
 
 /* ---------- вечерний чек-ин ---------- */
 ciOpen(d){const c=((this.S.checkin||{})[d])||{};this._ci=Object.assign({energy:0,sleep:'',win:'',top:'',note:''},c);this._cid=d;this.ciForm()},
-ciForm(){const c=this._ci,d=this._cid;
+ciForm(){const c=this._ci,d=this._cid,KS=this.kStat(d,d);
   this.open(`<div class="row"><div class="h2 sp">Чек-ин · ${fd(d)}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+  ${KS.n?`<div class="ci-tk"><b>Задачи: ${KS.dn} из ${KS.n}</b><span>${KS.p}%${KS.mv?' · перенесено '+KS.mv:''}</span></div>`:''}
   <div class="f"><label class="lbl">Энергия за день</label><div class="ci">${[1,2,3,4,5].map(n=>`<button class="${c.energy===n?'on':''}" onclick="APP.ciKeep();APP._ci.energy=${n};APP.ciForm()">${n}</button>`).join('')}</div></div>
   <div class="f"><label class="lbl">Сон прошлой ночью, часов</label><input id="ciS" inputmode="decimal" value="${esc(c.sleep)}" placeholder="7.5"></div>
   <div class="f"><label class="lbl">Победа дня — одна строка</label><input id="ciW" value="${esc(c.win)}" placeholder="Что сегодня получилось"></div>
@@ -6821,7 +6846,7 @@ initTaskDrag(){if(this._tdi)return;this._tdi=1;
 ddApply(id,d){const S=this.S,T=S.tasks||[],x=T.find(t=>t.id===id);if(!x)return;const td=today();let msg='';
   if(d.pr!=null&&d.pr!==(x.pr||0))x.pr=d.pr;
   const nd=d.date&&d.date!==x.date?d.date:null;
-  if(nd){x.date=nd;msg=nd===add(td,1)?'Перенесено на завтра':nd===td?'Перенесено на сегодня':'Перенесено на '+fd(nd)}
+  if(nd){this.kMv(x,nd);x.date=nd;msg=nd===add(td,1)?'Перенесено на завтра':nd===td?'Перенесено на сегодня':'Перенесено на '+fd(nd)}
   if(d.chip){if(nd){const ex=T.filter(t=>t.id!==id&&t.date===nd&&!t.drop&&t.so!=null);if(ex.length)x.so=Math.max(...ex.map(t=>t.so))+1;else delete x.so}}
   else{const ids=d.cards.slice(),bi=d.before?ids.indexOf(d.before):-1;ids.splice(bi<0?ids.length:bi,0,id);
     const m=new Map(T.map(t=>[t.id,t]));ids.forEach((i,k)=>{const t=m.get(i);if(t)t.so=k+1})}
@@ -8676,7 +8701,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=252');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=253');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}

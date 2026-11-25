@@ -3199,5 +3199,13 @@
 "Под твои цели": "For your goals",
 "Лучше начать с 2–3. Остальные добавишь, когда эти станут привычкой": "Better start with 2–3. Add the rest once these become habits",
 "растёт на 1% в день": "grows 1% a day",
-"Сегодня {*}": "Today {*}"
+"Сегодня {*}": "Today {*}",
+"Задачи: план и факт": "Tasks: plan vs done",
+"сколько сделано из запланированного": "how much of the plan is done",
+"перенесено {#}": "moved {#}",
+"нет задач": "no tasks",
+"Перенос на другой день не прячет задачу: в плане того дня она остаётся невыполненной": "Moving a task doesn’t hide it: it stays undone in that day’s plan",
+"Запланируй задачи на день, и здесь появится процент выполненного": "Plan tasks for the day and the completion rate appears here",
+"Задачи: {#} из {#}": "Tasks: {#} of {#}",
+"{#}% · перенесено {#}": "{#}% · moved {#}"
 }
