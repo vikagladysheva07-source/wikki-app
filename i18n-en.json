@@ -3138,5 +3138,9 @@
 "Сделаешь первую отметку": "Make your first check-in",
 "Узнаешь счёт недели и Огранщика": "Learn the week score and meet the Gemcutter",
 "Увидишь, как дисциплина огранивает тебя": "See how discipline cuts you",
-"Выбери готовую или создай свою. Начни с маленькой": "Pick a ready one or create your own. Start small"
+"Выбери готовую или создай свою. Начни с маленькой": "Pick a ready one or create your own. Start small",
+"Нужно хотя бы 10 дней с отметками за месяц": "You need at least 10 days with check-ins in the month",
+"Появится сам, если ритм прервётся на 3 дня": "Appears on its own if your rhythm breaks for 3 days",
+"Огранщик поможет вернуться без чувства вины": "The Gemcutter helps you come back without guilt",
+"Следующий разбор {*}": "Next review {*}"
 }
