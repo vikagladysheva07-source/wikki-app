@@ -4600,7 +4600,7 @@ SQH:{health:'сон, энергия, спорт, самочувствие',caree
 sqIco(k){const a=[...AREAS0,...this.areaList()].find(x=>x[0]===k);return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${a?a[2]:''}</svg>`},
 sqNote(){return ''},
 sqIntro(){return `<div class="sq-in"><div class="sq-ring"><svg viewBox="0 0 120 120">${[0,1,2,3,4,5,6,7].map(i=>{const t0=-Math.PI/2+i*Math.PI/4+.05,t1=t0+Math.PI/4-.1,P=(r,t)=>[(60+r*Math.cos(t)).toFixed(1),(60+r*Math.sin(t)).toFixed(1)],a=P(52,t0),b=P(52,t1),c=P(20,t1),d=P(20,t0);return `<path d="M${a}A52 52 0 0 1 ${b}L${c}A20 20 0 0 0 ${d}Z" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)" stroke-dasharray="3 3"/>`}).join('')}</svg></div><b>Оцени свою жизнь по сферам</b><p>Ответь на несколько вопросов, и появится колесо баланса. Дальше оно будет меняться по твоим привычкам и делам.</p><button class="btn pr w" onclick="APP.sqStart()">Начать</button></div>`},
-sqStart(){const cur=this.areasGet(),opts=[...AREAS0.map(a=>({k:a[0],n:a[1]})),...cur.filter(x=>!AREAS0.some(a=>a[0]===x.k))];
+sqStart(){const cur=this.areasGet(),opts=[...AREAS0.map(a=>({k:a[0],n:(this.S.areas&&this.S.areas.length&&(cur.find(x=>x.k===a[0])||{}).n)||a[1]})),...cur.filter(x=>!AREAS0.some(a=>a[0]===x.k))];
   this._sq={st:'pick',opts,sel:this.S.areas&&this.S.areas.length?cur.map(x=>x.k):opts.map(o=>o.k).filter(k=>!AREA_OFF.includes(k)),lv:Object.assign({},this.S.areaLvl||{}),i:0};this.sqRender()},
 sqTri(){this.S.areas=[{k:'health',n:'Я',i:'user'},{k:'rel',n:'Семья'},{k:'career',n:'Работа'}];this.S.areaSnz=0;this.save();this.close();this.render();this.toast('Сферы: Я, Семья, Работа')},
 sqTog(k){const q=this._sq,i=q.sel.indexOf(k);if(i>=0)q.sel.splice(i,1);else if(q.sel.length<8)q.sel.push(k);this.sqRender()},
@@ -7685,10 +7685,12 @@ qaArea(title,AR){
     health:'марафон|пробеж|похуд|фигур|выносл|тренировк|трениров|зарядк|йог|пилатес|растяжк|пробежк|бегать|бег|плаван|бассейн|спортзал|зал|спорт|врач|доктор|стоматолог|терапевт|сдать анализ|анализы|прививк|лекарств|таблетк|витамин|массаж|диет|прогулк|гулять|бокс|спарринг|единоборств|тренер|поликлиник|больниц|здоровь|сон|лечь спать|выспаться|медосмотр|выпить воду|воду',
     career:'созвон|клиент|совещан|планерк|летучк|митинг|отчет|презентац|проект|дедлайн|коммерческ|договор|контракт|оффер|бриф|собеседован|резюме|коллег|начальник|босс|стартап|заказчик|подрядчик|переговор|воронк|продаж|реклам|таргет|контент|ролик|сторис|пост|рилс|reels|монтаж|сценари|работ|офис|кампан|менеджер|сотрудник|найм|нанять|команд|crm|сайт|лендинг|приложени|платформ|автоматизац',
     money:'накопить|сбережен|капитал|оплат|счет|счета|налог|зарплат|бюджет|инвестиц|накоплен|кредит|ипотек|аренд|коммунал|подписк|расход|доход|финанс|банк|страховк|долг|инвойс|перевести|платеж|квитанц',
-    rel:'маме|маму|мама|мамы|папе|папу|папа|папы|бабушк|дедушк|сестр|брат|родител|семь|ребен|детей|детям|доч|сын|племянн|родственник|тете|тетя|дяде|дядя|внук',
+    rel:'маме|маму|мама|мамы|папе|папу|папа|папы|бабушк|дедушк|сестр|брат|родител|семь[яеию]|семейн|ребен|детей|детям|доч|сын|племянн|родственник|тете|тетя|дяде|дядя|внук',
     love:'свидани|любим|девушк|парн|мужу|жене|годовщин|романтик|отношени|поцел',
     spirit:'спокойств|осознан|стресс|чтени|книг|читать|прочитать|учить|учеб|курс|урок|английск|язык|лекци|вебинар|экзамен|поступлен|ielts|toefl|gmat|дневник|медитац|обучен|изуч|подкаст|саморазвит|практик|ментор|наставник',
     fun:'кино|фильм|сериал|играть|концерт|театр|выставк|путешеств|отпуск|поездк|билет|музей|друзьями|друзья|подруг|вечеринк|рисовать|гитар|фотосесс|отдых|отдохнуть|ресторан|кафе|караоке|пикник|настолк'};
+  /* своя сфера по названию: «снять ролик для блога» → «Блог» */
+  {let nb='',nl=0;(AR||[]).forEach(a=>{String(a[1]||'').toLowerCase().replace(/ё/g,'е').split(/[^\p{L}]+/u).filter(w=>w.length>=3).forEach(w=>{const st=w.length>=6?w.slice(0,w.length-2):w.length>=5?w.slice(0,w.length-1):w;const mm=L.match(new RegExp(W+st+'\\p{L}*','iu'));if(mm&&!['семь'].includes(mm[0])&&st.length>nl){nl=st.length;nb=a[0]}})});if(nb)return nb}
   let best='',bs=0,tie=false;
   for(const k in D){if(!keys.has(k))continue;const SH=['сон','зал','бег','дом','пост','воду','дома','цветы','счет'];const n=D[k].split('|').filter(x=>new RegExp(W+x+(SH.includes(x)?E:''),'iu').test(L)).length;
     if(n>bs){bs=n;best=k;tie=false}else if(n&&n===bs)tie=true}
@@ -7804,7 +7806,7 @@ qaStop(quiet){const r=this._qr;this._qr=null;if(r){try{r.stop()}catch(e){}}const
 qaRecOk(){return !!(window.MediaRecorder&&navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&this.sb&&this.user&&this.paid())},
 qaList(v){const A=this._qa&&this._qa.ai;return A&&A.src===v&&A.L?A.L:this.qaParse(v)},
 qaCtx(){const d=new Date(),en=this.lang()==='en';return {today:today(),now:pad(d.getHours())+':'+pad(d.getMinutes()),weekday:['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'][d.getDay()],lang:en?'en':'ru',areas:this.areaList().map(a=>[a[0],String(a[1]||'')])}},
-qaAiSet(src,tasks){if(!this._qa)return;const td=today();this._qa.ai={src,L:Array.isArray(tasks)&&tasks.length?tasks.map(x=>Object.assign({date:td,tm:'',rem:null,area:'',dl:false},x)):null}},
+qaAiSet(src,tasks){if(!this._qa)return;const td=today();this._qa.ai={src,L:Array.isArray(tasks)&&tasks.length?tasks.map(x=>{const o=Object.assign({date:td,tm:'',rem:null,area:'',dl:false},x);if(!o.area&&o.title)o.area=this.qaArea(o.title,this.areaList());return o}):null}},
 qaAiLater(v){clearTimeout(this._qaT);const t=(v||'').trim();if(!t||!this.qaRecOk())return;this._qaT=setTimeout(async()=>{try{const{data,error}=await this.sb.functions.invoke('tw-voice',{body:{text:t,ctx:this.qaCtx()}});const e=$('qaT');if(error||!data||!e||e.value.trim()!==t)return;this.qaAiSet(e.value,data.tasks);this.qaUpd()}catch(x){}},900)},
 async qaRec(){const en=this.lang()==='en',st=$('qaSt'),w=$('qaWv'),mb=$('qaMic');let stream;
   try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}})}catch(x){this._qaNoAi=1;if(st)st.textContent=en?'Microphone access is off. Allow it in settings':'Нет доступа к микрофону. Разреши его в настройках';return}
