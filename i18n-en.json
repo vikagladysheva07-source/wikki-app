@@ -3240,5 +3240,10 @@
 "Добавить сегодня": "Add today",
 "Нажми на неделю, чтобы разобрать её": "Tap a week to review it",
 "Таймер фокуса записывает минуты сам": "The focus timer records minutes for you",
-"Это связь в твоих данных, а не доказанная причина": "This is a link in your data, not a proven cause"
+"Это связь в твоих данных, а не доказанная причина": "This is a link in your data, not a proven cause",
+"Я · Семья · Работа": "Me · Family · Work",
+"Три главные сферы: если одна хромает, видно, над какой работать": "Three core areas: when one lags, you see what to work on",
+"Пунктир: сферы без привычек, они не в фокусе": "Dashed: areas without habits are out of focus",
+"Сферы: Я, Семья, Работа": "Areas: Me, Family, Work",
+"Я": "Me"
 }
