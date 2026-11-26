@@ -1234,6 +1234,8 @@ details>summary::before{content:"▸ ";color:var(--pb)}details[open]>summary::be
 .pseg{display:flex;gap:4px;padding:4px;border-radius:14px;background:rgba(0,0,0,.3);box-shadow:inset 0 2px 6px rgba(0,0,0,.4);margin:0 0 12px}
 .pseg button{flex:1;padding:9px 8px;border-radius:11px;color:var(--mut);font-weight:700;font-size:13.5px;white-space:nowrap}
 .pseg button.on{color:#fff;background:linear-gradient(180deg,rgba(155,111,232,.5),rgba(91,47,190,.5));box-shadow:var(--glow),inset 0 1px 0 rgba(255,255,255,.3)}
+.pl-top{display:flex;align-items:center;gap:6px;margin:0 0 12px}.pl-top .pseg{flex:1;margin:0;min-width:0}
+.pl-mx{flex:none;width:40px;height:40px;display:grid;place-items:center;color:var(--mut);background:none;border:0;padding:0;opacity:.85}.pl-mx.on{color:#fff;opacity:1}
 .pseg.mini{margin:0;padding:3px}.pseg.mini button{padding:6px 10px;font-size:12px;border-radius:9px}
 .acw{position:relative}
 .actip{position:absolute;top:-6px;transform:translate(-50%,-100%);background:rgba(20,18,32,.95);border:1px solid rgba(196,164,255,.35);border-radius:10px;padding:5px 9px;font-family:var(--mono);font-size:11px;white-space:nowrap;box-shadow:var(--glow);pointer-events:none;z-index:3}
@@ -2217,7 +2219,7 @@ body.wlc .stw .st-d{color:rgba(232,226,247,.85);text-shadow:0 1px 12px rgba(0,0,
 .mxq-l{flex:1}.mxq .plr{padding:8px 0;gap:9px}.mxq .plr .chk{width:20px;height:20px}.mxq .plr-t b{font-size:13.5px}.mxq .plr-d{font-size:11px}
 .mxq-e{font-size:12.5px;color:var(--dim);padding:10px 0}.mxq-m{font-size:12.5px;color:#C4A4FF;padding:6px 0}
 .mxq-a input{width:100%;margin-top:8px;background:rgba(255,255,255,.03);border:1px dashed var(--line);border-radius:10px;height:36px;padding:0 10px;color:var(--tx);font-size:13px}
-@media(max-width:760px){.mxg{grid-template-columns:minmax(0,1fr)}.mxq{min-height:0}.mxq .plr-d{display:none}}
+.mxt{position:relative;padding:14px 13px 12px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.07);min-height:168px;cursor:pointer;display:flex;flex-direction:column;overflow:hidden}.mxt:before{content:'';position:absolute;left:14px;right:14px;top:0;height:2px;border-radius:0 0 2px 2px;background:var(--c);opacity:.85}.mxt-h{display:flex;align-items:baseline;gap:8px}.mxt-h b{flex:1;font-size:13px;line-height:1.25;font-weight:600;letter-spacing:.01em}.mxt-h i{font-style:normal;font-size:13px;font-weight:600;color:var(--c);line-height:1.25}.mxt-s{display:block;font-style:normal;font-size:11px;color:var(--dim);margin:2px 0 11px}.mxt-l{display:flex;flex-direction:column;gap:9px}.mxt-r{display:flex;align-items:center;gap:8px;min-width:0}.mxt-r span{font-size:13.5px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--tx)}.mxt-k{flex:none;width:16px;height:16px;border-radius:50%;border:1.5px solid var(--c);background:transparent;padding:0}.mxt-e{font-size:12.5px;color:var(--dim)}.mxt-m{font-size:12px;color:var(--dim);margin-top:1px}.mx-back{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;color:var(--mut);padding:2px 2px 10px}.mxq-one{min-height:0}html body #app .mxq.mxq-one:not(.dd-ghost):not(.dd-src),html body #app .mxq.mxq-one:not(.dd-ghost):not(.dd-src):hover{background:none!important;border:0!important;box-shadow:none!important;padding:2px 0 0!important;border-radius:0!important}.mxq-one .mxq-h{padding:0 2px 4px}.mxq-one .mxq-h b{font-size:15px;font-weight:600}html body #app .mxq-one .plr.plr:not(.dd-ghost):not(.dd-src),html body #app .mxq-one .plr.plr:not(.dd-ghost):not(.dd-src):hover{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;border-bottom:1px solid rgba(255,255,255,.06)!important;padding:12px 2px!important}html body #app .mxq-one .mxq-a input,html body #app .mxq-one .mxq-a input:focus{border:0!important;background:none!important;box-shadow:none!important;outline:0!important;padding:0 2px!important;height:44px;font-size:14px;margin-top:2px}html body #app .mxq-one .mxq-l{background:none!important}@media(max-width:760px){.mxg{gap:10px}.mxt{min-height:150px;padding:13px 12px 11px}.mxq .plr-d{display:none}}
 [data-sw]{touch-action:pan-y;will-change:transform}
 .swg{position:relative;z-index:3}.sw-r{background:linear-gradient(90deg,rgba(124,92,230,.55),rgba(124,92,230,.12))!important;box-shadow:inset 3px 0 0 #9B6FE8}.sw-l{background:linear-gradient(270deg,rgba(155,111,232,.4),rgba(155,111,232,.08))!important;box-shadow:inset -3px 0 0 #9B6FE8}
 .swhint{display:flex;align-items:center;gap:8px;padding:9px 12px;margin:0 0 12px;border-radius:12px;background:rgba(155,123,255,.1);border:1px solid rgba(155,123,255,.25);font-size:12.5px;color:#C4A4FF}.swhint span{flex:1}.swhint button{display:grid;color:var(--dim)}.swhint svg{width:13px;height:13px}
@@ -5022,15 +5024,17 @@ pxFilterSheet(){const groups=[['k','Дела'],['h','Привычки']].map(([k
   ${groups.length?groups.map(([k,l,P])=>P.map(p=>`<div class="lbl" style="margin:12px 0 6px">${l} · ${esc(p.name)}</div><div class="pv-o">${p.opts.map(o=>{const on=this._pf&&this._pf.pid===p.id&&this._pf.v===o.v;return `<button class="${on?'on':''}" style="--c:${this.PCOL[o.c%this.PCOL.length]}" onclick='APP._pf=${on?'null':JSON.stringify({k,pid:p.id,v:o.v,n:o.v}).replace(/'/g,"&#39;")};APP.close();APP.render()'>${esc(o.v)}</button>`}).join('')}</div>`).join('')).join(''):`<div class="small mut" style="margin:8px 0 14px">Пока нечего фильтровать. Добавь делу или привычке свойство с вариантами, например «Приоритет» или «Проект».</div>`}
   <div class="row" style="margin-top:16px">${this._pf?`<button class="btn gh sp" onclick="APP._pf=null;APP.close();APP.render()">Сбросить фильтр</button>`:''}<button class="btn gh sp" onclick="APP.pxRet('k','');APP.pxEdit('k')">${I.plus} Свойство для дел</button></div>`)},
 /* вкладка «Планы» и компактный блок на дашборде */
-vPlans(){const v=['list','week','month','spheres','progs'].includes(this._plv)?this._plv:'day';
-  const seg=`<div class="pseg">${[['day','День'],['week','Неделя'],['month','Месяц'],['progs','Программы']].map(([k,l])=>`<button class="${v===k?'on':''}" onclick="APP._plv='${k}';APP.render()">${l}</button>`).join('')}</div>`;
+vPlans(){const v=['list','week','month','spheres','progs','matrix'].includes(this._plv)?this._plv:'day';
+  // матрица — не вкладка, а значок справа от переключателя: сверху остаются четыре вкладки
+  const mxI=`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/></svg>`;
+  const seg=`<div class="pl-top"><div class="pseg">${[['day','День'],['week','Неделя'],['month','Месяц'],['progs','Программы']].map(([k,l])=>`<button class="${v===k?'on':''}" onclick="APP._plv='${k}';APP.render()">${l}</button>`).join('')}</div><button class="pl-mx ${v==='matrix'?'on':''}" onclick="APP._plv=${v==='matrix'?"'day'":"'matrix'"};APP._mxa=null;APP.render()" aria-label="Матрица">${mxI}</button></div>`;
   const hint='';
   if(v==='progs')return `<div class="h1">Планы</div>${seg}`+this.vPrograms(true);
   if(v==='list')return `<div class="h1">Планы</div>${seg}__S1____S2__`+hint+this.vPlanList();
   if(v==='week')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vPlanWeek();
   if(v==='month')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vPlanMonth();
   if(v==='spheres')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vSpheres();
-  if(v==='matrix')return `<div class="h1">Планы</div>${seg}__S1____S2__`+this.vMatrix();
+  if(v==='matrix')return `<div class="h1">Планы</div>${seg}`+this.vMatrix();
   this._noBoard=true;let t=this.vToday();this._noBoard=false;let mp='';try{mp=this.day===today()?this.mpH():''}catch(e){}return `<div class="h1">Планы</div>${seg}__S1____S2__`+mp+hint+this.stripV(t)},
 dtlSet(v){this.S.pref=this.S.pref||{};this.S.pref.dayTl=!!v;this.save();this.render()},
 dtlGo(n){this.day=add(this.day||today(),n);this.render()},
@@ -5206,13 +5210,20 @@ vPlanList(){const td=today(),T=(this.S.tasks||[]).filter(x=>!x.drop&&!(this.S.de
   const D=T.filter(x=>x.done&&x.done>=add(td,-7)).sort((a,b)=>b.done.localeCompare(a.done));
   if(D.length)h+=`<div class="plg dn"><div class="plg-h"><button onclick="APP._pld=!APP._pld;APP.render()"><i class="${this._pld?'op':''}">${I.r}</i><b>Выполнено за неделю</b><em>${D.length}</em></button></div>${this._pld?`<div class="plg-l">${D.map(x=>this.plRow(x,true)).join('')}</div>`:''}</div>`;
   return h},
-vMatrix(){const td=today(),open=(this.S.tasks||[]).filter(x=>!x.done&&!(this.S.del||[]).includes(x.id));
-  const Q=[[3,'Срочно и важно','Сделай сейчас'],[2,'Важно, не срочно','Запланируй'],[1,'Срочно, не важно','Делегируй или сделай быстро'],[0,'Не срочно и не важно','Отложи или откажись']];
+vMatrix(){const open=(this.S.tasks||[]).filter(x=>!x.done&&!(this.S.del||[]).includes(x.id));
+  // плитки 2×2: действие крупно, квадрант мелко, до трёх дел; тап — квадрант целиком
+  const Q=[[3,'Сделай сейчас','Срочно и важно'],[2,'Запланируй','Важно, не срочно'],[1,'Делегируй','Срочно, не важно'],[0,'Убери','Не срочно и не важно']];
   const srt=(a,b)=>a.date.localeCompare(b.date)||this.cmpT(a,b);
-  return this.plAdd()+`<div class="mxg">${Q.map(([n,t,s])=>{const L=open.filter(x=>(x.pr||0)===n).sort(srt);
-    return `<div class="card mxq" style="--c:${n?this.PRC[n]:'#9B6FE8'}"><div class="mxq-h"><span>${this.kFlag(n,14)}</span><div class="sp"><b>${t}</b><em>${s}</em></div><i>${L.length}</i></div>
-      <div class="mxq-l" data-pr="${n}">${L.length?L.slice(0,this._mxa===n?99:6).map(x=>this.plRow(x,true)).join(''):'<div class="mxq-e">Пусто</div>'}${L.length>6&&this._mxa!==n?`<button class="mxq-m" onclick="APP._mxa=${n};APP.render()">Ещё ${L.length-6}</button>`:''}</div>
-      <form class="mxq-a" onsubmit="event.preventDefault();APP.taskAdd(this.q.value,today(),${n});this.q.value=''"><input name="q" placeholder="+ Добавить" autocomplete="off"></form></div>`}).join('')}</div>
+  const one=Q.find(q=>q[0]===this._mxa);
+  if(one){const [n,t,s]=one,L=open.filter(x=>(x.pr||0)===n).sort(srt);
+    return `<button class="mx-back" onclick="APP._mxa=null;APP.render()">${I.l||'‹'} Все квадранты</button>
+    <div class="card mxq mxq-one" style="--c:${n?this.PRC[n]:'rgba(255,255,255,.35)'}"><div class="mxq-h"><div class="sp"><b>${t}</b><em>${s}</em></div><i>${L.length}</i></div>
+      <div class="mxq-l" data-pr="${n}">${L.length?L.map(x=>this.plRow(x,true)).join(''):'<div class="mxq-e">Пусто</div>'}</div>
+      <form class="mxq-a" onsubmit="event.preventDefault();APP.taskAdd(this.q.value,today(),${n});this.q.value=''"><input name="q" placeholder="+ Добавить" autocomplete="off"></form></div>`}
+  return `<div class="mxg">${Q.map(([n,t,s])=>{const L=open.filter(x=>(x.pr||0)===n).sort(srt),top=L.slice(0,3);
+    return `<div class="mxt" style="--c:${n?this.PRC[n]:'rgba(255,255,255,.35)'}" onclick="if(!event.target.closest('.mxt-k'))APP._mxa=${n},APP.render()">
+      <div class="mxt-h"><b>${t}</b><i>${L.length}</i></div><em class="mxt-s">${s}</em>
+      <div class="mxt-l">${top.length?top.map(x=>`<div class="mxt-r"><button class="mxt-k" onclick="APP.taskToggle('${x.id}')" aria-label="Готово"></button><span>${esc(x.title||'')}</span></div>`).join(''):'<div class="mxt-e">Пусто</div>'}${L.length>3?`<div class="mxt-m">ещё ${L.length-3}</div>`:''}</div></div>`}).join('')}</div>
     <div class="small mut" style="margin:10px 2px 0">Квадрант задаётся приоритетом. Поменяй приоритет в задаче, и она переедет.</div>`},
 /* повторяющиеся задачи */
 REPN:{d:'Каждый день',wd:'По будням',w:'Каждую неделю',m:'Каждый месяц',y:'Каждый год'},
@@ -8758,7 +8769,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=256');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=260');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
