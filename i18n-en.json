@@ -1,4 +1,5 @@
 {
+  "Главные дела": "Main tasks",
 "Имя": "Name",
 "мин": "min",
 "Код": "Code",
@@ -3352,5 +3353,15 @@
 "Все задачи на день, неделю и месяц": "All tasks for the day, week and month",
 "57 граней. Задачи, привычки и серии огранивают тебя навсегда": "57 facets. Tasks, habits and streaks cut you for good",
 "Завтра утром открой «Сегодня»: там твои задачи и привычки на день": "Tomorrow morning open «Today»: your tasks and habits for the day are there",
-"Первое завершённое задачу дня за минуту": "The first finished task of the day in a minute"
+"Первое завершённое задачу дня за минуту": "The first finished task of the day in a minute",
+"Даже если сделана одна привычка, отметь её. Первая отметка запускает серию": "Even if just one habit is done, mark it. The first mark starts your streak",
+"Новичку VOLYO вдвое снизит цели и будет понемногу их поднимать": "For beginners VOLYO halves the targets and raises them little by little",
+"Добавь первую задачу или привычку": "Add your first task or habit",
+"Один пропуск её не обнуляет. Сделай сегодня хотя бы одну задачу или привычку, и серия продолжится.": "One miss doesn’t reset it. Do at least one thing today and your streak continues.",
+"Сон меньше {#} часов. В такие дни задачи и привычки выполняются на {*}% реже — выбери {#} главных и начни с них.": "Sleep under {#} hours. On such days tasks get done {*}% less often: pick {#} main ones and start with them.",
+"В дни, когда «{*}» сделано, остальные задачи и привычки выполняются на {*}% {*}": "On days when “{*}” is done, the rest of your tasks get done {*}% {*}",
+"{*}: задачи и привычки выполняются так же, как в остальные дни": "{*}: tasks get done the same as on other days",
+"Мысль на сегодня": "A thought for today",
+"Итоги дня": "Day results",
+"Таймер без отвлечений": "Distraction-free timer"
 }
