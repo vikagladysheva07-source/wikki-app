@@ -4585,6 +4585,7 @@ init(){
 },
 TOD:{m:'Утро',d:'День',e:'Вечер','':'В любое время'},
 buzz(ms){try{if((this.S.pref||{}).haptics===false)return;if(navigator.vibrate){if(!navigator.userActivation||navigator.userActivation.hasBeenActive)navigator.vibrate(ms||12)}else this.hapt()}catch(e){}},
+softBuzz(){if((this.S.pref||{}).haptics===false)return;try{if(navigator.vibrate)navigator.vibrate([40,120,40,120,40]);else{this.hapt();setTimeout(()=>this.hapt(),220);setTimeout(()=>this.hapt(),440)}}catch(e){}},
 hapt(){if(!this._hp){const l=document.createElement('label');l.setAttribute('aria-hidden','true');l.style.cssText='position:fixed;left:-200px;top:0;width:1px;height:1px;opacity:0;pointer-events:none';l.innerHTML='<input type="checkbox" switch tabindex="-1">';document.body.appendChild(l);this._hp=l}this._hp.click()},
 popFx(){if(this._pop){this._shId=this._pop;this._shT=Date.now()}const id=this._shId;if(!id||Date.now()-this._shT>500)return;const p=document.querySelector('.tk.pop')||document.querySelector(`[data-pid="${id}"]`);if(!p||p.querySelector('.shn'))return;p.classList.add('shin');const s=document.createElement('span');s.className='shn';p.appendChild(s);setTimeout(()=>{s.remove();p.classList.remove('shin')},1100)},
 navFx(){const a=$('app');if(!a||matchMedia('(prefers-reduced-motion:reduce)').matches)return;a.classList.remove('navin');void a.offsetWidth;a.classList.add('navin')},
@@ -5284,7 +5285,7 @@ tourInvite(){if(this._tour!=null||$('modal').classList.contains('on'))return;con
   const L=[['Задача','Добавишь её одной фразой и научишься свайпам'],['Планы','Увидишь день, неделю и месяц'],['Привычка','Сделаешь первую отметку'],['Прогресс','Узнаешь счёт недели и Огранщика'],['Огранка','Увидишь, как дисциплина огранивает тебя']];
   this.open(`<div class="tinv"><div class="tinv-k">${en?'5 chapters · 3 minutes':'5 глав · 3 минуты'}</div><h3>Познакомься с VOLYO в действии</h3><p class="tinv-s">Не слайды, а настоящие действия: всё, что сделаешь, сразу останется в твоём плане</p>
    <ol>${L.map((x,k)=>`<li><i>${k+1}</i><div><b>${x[0]}</b><span>${x[1]}</span></div></li>`).join('')}</ol>
-   <button class="tinv-go" onclick="APP.close();APP.tourGo(0)">Начать</button><button class="tinv-sk" onclick="APP.close();APP.tourEnd();APP.toast('Знакомство можно пройти в Профиле')">Пропустить</button></div>`)},
+   <button class="tinv-go" onclick="APP.close();APP.tourGo(0)">Начать</button><button class="tinv-sk" onclick="APP.close();APP.tourEnd();APP.toast('Знакомство можно пройти снова: Профиль → Знакомство с VOLYO')">Пропустить</button></div>`)},
 tourGo(i){if(i>=this.TOUR.length)return this.tourEnd(1);if(this._swOpen)this.swClose();const S=this.TOUR[i];if(S.skip&&(this.tab==='home'||!S.go)&&S.skip(this))return this.tourGo(i+1);this._tour=i;this._tmiss=0;this._tmT0=Date.now();this.tBase();this.S.pref=this.S.pref||{};if(this.S.pref.tour!==i){this.S.pref.tour=i;this.save()}
   if(S.go&&this.tab!==S.go){this.close();this.go(S.go);return}this.tourShow()},
 tourTick(){if(this._tour==null)return;clearTimeout(this._tTk);this._tTk=setTimeout(()=>{const i=this._tour;if(i==null)return;const S=this.TOUR[i],mo=$('modal').classList.contains('on');
@@ -5402,7 +5403,7 @@ vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData()
   const row=(ic,t,v,act,cls)=>`<button class="pf-r ${cls||''}" onclick="${act}"><span class="pf-ib">${sv(ic)}</span><span class="pf-t">${t}</span>${v?`<span class="pf-v">${v}</span>`:''}<span class="pf-ch">›</span></button>`;
   const lang=this.lang()==='en'?'English':'Русский',pp=(()=>{try{return this._pushOn?'Включены':'Выключены'}catch(e){return ''}})();
   const g1=[row('gear','Настройки','',"APP.go('me')"),pd0?row('crown','Полный доступ',this._acc&&this._acc.until?'до '+fd(this._acc.until):'активен',"APP.go('me');APP._sset='premium';APP.render()"):row('crown','Полный доступ','открыть',"APP.paySheet('program')"),row('users','Позвать партнёра','',"APP.ptCreate()")];
-  const g2=[row('help','Помощь и обратная связь','',"APP.go('me');APP._sset='help';APP.render()"),row('info','О приложении','',"APP.go('me');APP._sset='about';APP.render()"),row('share','Поделиться приложением','',"APP.shareApp()")];
+  const g2=[row('<path d="M5 4l14 8-14 8z"/>','Знакомство с VOLYO','3 минуты',"APP.tourRestart()"),row('help','Помощь и обратная связь','',"APP.go('me');APP._sset='help';APP.render()"),row('info','О приложении','',"APP.go('me');APP._sset='about';APP.render()"),row('share','Поделиться приложением','',"APP.shareApp()")];
   if(this.user)g2.push(row('out','Выйти из аккаунта','',"APP.logout()",'out'));
   const xpP=this.fc57().n/57,RC=2*Math.PI*45,toN=Math.max(0,(D.nxt||100)-(D.xp||0));
   const SIC={str:'<path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12"/>',int:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',spi:'<path d="M12 21c-4-3-7-6-7-10a7 7 0 0 1 14 0c0 4-3 7-7 10z"/>',biz:'<rect x="3.5" y="7" width="17" height="12" rx="2"/><path d="M9 7V5h6v2"/>',dis:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>'};
@@ -5423,7 +5424,7 @@ vMore(){const pd0=this.paid(),P=this.S.profile||{},D=this.rpgData?this.rpgData()
    
    
   </div>
-  <div class="pf-b"><div class="pf-g pf-g0">${row('gear','Настройки','',"APP.go('me')")}${row('<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>','Видение','',"APP._ct='vision';APP.go('profile')")}${row('users','Позвать партнёра','',"APP.ptCreate()")}</div></div></div></div>`},
+  <div class="pf-b"><div class="pf-g pf-g0">${row('gear','Настройки','',"APP.go('me')")}${row('<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>','Видение','',"APP._ct='vision';APP.go('profile')")}${row('users','Позвать партнёра','',"APP.ptCreate()")}${row('<path d="M7 5l12 7-12 7z"/>','Знакомство с VOLYO','',"APP.tourRestart()")}</div></div></div></div>`},
 installSheet(){const ua=navigator.userAgent||'',ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),standalone=window.navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
   if(standalone){this.toast('Приложение уже установлено');return}
   const safari=ios&&!/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
@@ -7542,7 +7543,7 @@ ftRing(fr,gid){const N=60,R=60,ticks=[...Array(N)].map((_,i)=>{const an=i/N*2*Ma
 ftMode(){try{return localStorage.getItem('tw-ftm')||'free'}catch(e){return 'free'}},
 ftSetMode(m){try{localStorage.setItem('tw-ftm',m)}catch(e){}this.buzz&&this.buzz(4);this.ftShow('start')},
 ftLabel(f){if(f.paused)return 'пауза';if(f.mode==='pomo')return f.ph==='b'?(f.cy>=4?'Длинный перерыв':'Перерыв'):`Отрезок ${f.cy} из 4`;return esc(f.label||'')},
-ftPhase(){const f=this.ftGet();if(!f||f.mode!=='pomo')return this.ftFinish(true);this.chime();try{navigator.vibrate&&navigator.vibrate([60,40,60])}catch(e){}this.buzz&&this.buzz(12);
+ftPhase(){const f=this.ftGet();if(!f||f.mode!=='pomo')return this.ftFinish(true);this.chime();this.softBuzz();try{0}catch(e){}this.buzz&&this.buzz(12);
   if(f.ph==='w'){f.wm=(f.wm||0)+25;this.focusAdd(25,today(),null,true);const lb=f.cy>=4?15:5;Object.assign(f,{ph:'b',end:Date.now()+lb*60000,total:lb*60000,paused:0});this.ftSet(f);this.ftShow('run');return}
   if(f.cy>=4){this.ftSet({done:true,m:f.wm||0});this.track('focus_done',{m:f.wm||0,pomo:1},'day');this.ftWake(false);this.ftShow('fin');return}
   Object.assign(f,{ph:'w',cy:f.cy+1,end:Date.now()+25*60000,total:25*60000,paused:0});this.ftSet(f);this.ftShow('run')},
@@ -7558,7 +7559,7 @@ ftEnd(){this.ftFinish(false)},
 acUnlock(){try{const A=window.AudioContext||window.webkitAudioContext;if(!A)return;const c=this._ac=this._ac||new A();if(c.state==='suspended')c.resume();const b=c.createBuffer(1,1,22050),s=c.createBufferSource();s.buffer=b;s.connect(c.destination);s.start(0)}catch(e){}},
 chime(){try{if((this.S.pref||{}).sound===false)return;const A=window.AudioContext||window.webkitAudioContext;if(!A)return;const c=this._ac=this._ac||new A();if(c.state==='suspended')c.resume();const t0=c.currentTime+.05;
   [[523.25,0],[659.25,.42],[783.99,.84]].forEach(([f,d])=>{[[1,'sine',.11],[2,'sine',.025]].forEach(([m,tp,vol])=>{const o=c.createOscillator(),g=c.createGain();o.type=tp;o.frequency.value=f*m;g.gain.setValueAtTime(0,t0+d);g.gain.linearRampToValueAtTime(vol,t0+d+.06);g.gain.exponentialRampToValueAtTime(.0001,t0+d+2.6);o.connect(g);g.connect(c.destination);o.start(t0+d);o.stop(t0+d+2.7)})})}catch(e){}},
-ftFinish(auto){const f=this.ftGet();if(!f||f.done)return;if(auto&&f.end&&Date.now()-f.end<8000)this.chime();clearInterval(this._ftt);const left=this.ftLeft(f);if(f.mode==='pomo'){const part=f.ph==='w'?Math.round((f.total-left)/60000):0,tm=(f.wm||0)+part;this.ftWake(false);if(part>=1)this.focusAdd(part,today(),null,true);if(tm<1){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.toast('Меньше минуты не записываем');this.render();return}this.ftSet({done:true,m:tm});this.track('focus_done',{m:tm,pomo:1},'day');this.buzz(12);this.ftShow('fin');return}const m=auto?Math.round(f.total/60000):Math.round((f.total-left)/60000);this.ftWake(false);
+ftFinish(auto){const f=this.ftGet();if(!f||f.done)return;if(auto&&f.end&&Date.now()-f.end<8000){this.chime();this.softBuzz()}clearInterval(this._ftt);const left=this.ftLeft(f);if(f.mode==='pomo'){const part=f.ph==='w'?Math.round((f.total-left)/60000):0,tm=(f.wm||0)+part;this.ftWake(false);if(part>=1)this.focusAdd(part,today(),null,true);if(tm<1){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.toast('Меньше минуты не записываем');this.render();return}this.ftSet({done:true,m:tm});this.track('focus_done',{m:tm,pomo:1},'day');this.buzz(12);this.ftShow('fin');return}const m=auto?Math.round(f.total/60000):Math.round((f.total-left)/60000);this.ftWake(false);
   if(m<1){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.toast('Меньше минуты не записываем');this.render();return}
   this.ftSet({done:true,m});this.focusAdd(m,today(),null,true);this.track('focus_done',{m},'day');try{navigator.vibrate&&navigator.vibrate([60,40,60])}catch(e){}this.buzz(12);this.ftShow('fin')},
 ftDone(){this.ftSet(null);const o=$('ftOv');o&&o.remove();this.render()},
@@ -7782,7 +7783,7 @@ qaOpen(mic){if(mic&&!this.paid())return this.paySheet('voice');this._qa={t:''};c
    <div id="qaP" class="qa-p"></div>
    <button class="qa-go" id="qaGo" onclick="APP.qaSave()" disabled>${en?'Add':'Добавить'}</button>
    <button class="qa-man" onclick="APP.qaManual()">${en?'Add manually':'Заполнить вручную'}</button></div>`);
-  setTimeout(()=>{if(mic)this.qaMic();else{const e=$('qaT');e&&e.focus()}},180)},
+  setTimeout(()=>{if(mic)this.qaMic();else{const e=$('qaT'),st=$('qaSt');if(st&&!st.textContent)st.textContent=en?'Type, or tap the mic to speak':'Напиши или нажми на микрофон, чтобы сказать';e&&e.focus()}},180)},
 qaUpd(){const e=$('qaT'),P=$('qaP'),G=$('qaGo');if(!e||!P)return;this._qaTy=Date.now();if(this._tour!=null){this.tourTick();clearTimeout(this._tTy);this._tTy=setTimeout(()=>this.tourTick(),1500)}e.style.height='auto';e.style.height=Math.min(e.scrollHeight+2,window.innerHeight*.3)+'px';const L0=this.qaList(e.value),L=this.qaMode(L0);this._qa.L=L;if(this._qa.ai&&this._qa.ai.src!==e.value)this.qaAiLater(e.value);const td=today(),en=this.lang()==='en';
   const dTx=d=>d===td?(en?'Today':'Сегодня'):d===add(td,1)?(en?'Tomorrow':'Завтра'):WD[pd(d).getDay()]+', '+fd(d);
   const ic={d:'<svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17"/></svg>',t:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg>',b:'<svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"/></svg>',r:'<svg viewBox="0 0 24 24"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15"/></svg>'};
@@ -7799,6 +7800,8 @@ qaSave(){this.qaStop();const e=$('qaT');if(!e)return;const L=this.qaFin(e.value)
   this.toast(L.length>1?'Добавлено '+L.length+' '+this.pl(L.length,'задача','задачи','задач'):'Задача на '+w+(x.tm?' в '+x.tm:''))},
 qaManual(){const e=$('qaT'),v=e?e.value:'';this.qaStop();this.taskNew();setTimeout(()=>{const n=$('nT');if(n&&v){n.value=v.split(/\n/)[0];this._tn.title=n.value}},200)},
 qaMic(){if(!this.paid()){this.close();return this.paySheet('voice')}const SR=window.SpeechRecognition||window.webkitSpeechRecognition,en=this.lang()==='en',st=$('qaSt'),w=$('qaWv'),mb=$('qaMic'),e=$('qaT');
+  if(this._qrPend){this._qrPend='stop';return}
+  if(this._qaBusy)return;
   if(this._qr){this.qaStop();return}
   if(this.qaRecOk()&&!this._qaNoAi)return this.qaRec();
   const ua=navigator.userAgent||'',ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),pwa=window.navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
@@ -7819,10 +7822,10 @@ qaList(v){const A=this._qa&&this._qa.ai;return A&&A.src===v&&A.L?A.L:this.qaPars
 qaCtx(){const d=new Date(),en=this.lang()==='en';return {today:today(),now:pad(d.getHours())+':'+pad(d.getMinutes()),weekday:['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'][d.getDay()],lang:en?'en':'ru',areas:this.areaList().map(a=>[a[0],String(a[1]||'')])}},
 qaAiSet(src,tasks){if(!this._qa)return;const td=today();this._qa.ai={src,L:Array.isArray(tasks)&&tasks.length?tasks.map(x=>{const o=Object.assign({date:td,tm:'',rem:null,area:'',dl:false},x);if(!o.area&&o.title)o.area=this.qaArea(o.title,this.areaList());return o}):null}},
 qaAiLater(v){clearTimeout(this._qaT);const t=(v||'').trim();if(!t||!this.qaRecOk())return;this._qaT=setTimeout(async()=>{try{const{data,error}=await this.sb.functions.invoke('tw-voice',{body:{text:t,ctx:this.qaCtx()}});const e=$('qaT');if(error||!data||!e||e.value.trim()!==t)return;this.qaAiSet(e.value,data.tasks);this.qaUpd()}catch(x){}},900)},
-async qaRec(){const en=this.lang()==='en',st=$('qaSt'),w=$('qaWv'),mb=$('qaMic');let stream;
-  try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}})}catch(x){this._qaNoAi=1;if(st)st.textContent=en?'Microphone access is off. Allow it in settings':'Нет доступа к микрофону. Разреши его в настройках';return}
+async qaRec(){const en=this.lang()==='en',st=$('qaSt'),w=$('qaWv'),mb=$('qaMic');let stream;this._qrPend=1;if(st)st.textContent=en?'Turning on the mic…':'Включаю микрофон…';
+  try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}})}catch(x){this._qrPend=0;this._qaNoAi=1;if(st)st.textContent=en?'Microphone access is off. Allow it in settings':'Нет доступа к микрофону. Разреши его в настройках';return}
   const types=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/aac'],mt=types.find(t=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(t))||'';
-  let rec;try{rec=mt?new MediaRecorder(stream,{mimeType:mt}):new MediaRecorder(stream)}catch(x){stream.getTracks().forEach(t=>t.stop());this._qaNoAi=1;return this.qaMic()}
+  let rec;try{rec=mt?new MediaRecorder(stream,{mimeType:mt}):new MediaRecorder(stream)}catch(x){stream.getTracks().forEach(t=>t.stop());this._qrPend=0;this._qaNoAi=1;return this.qaMic()}
   const ch=[];let cancel=false,t0=Date.now();rec.ondataavailable=ev=>{if(ev.data&&ev.data.size)ch.push(ev.data)};
   rec.onstop=async()=>{stream.getTracks().forEach(t=>t.stop());clearTimeout(this._qaMax);if(w)w.classList.remove('on');if(mb)mb.classList.remove('on');
     if(cancel||!ch.length||Date.now()-t0<500){if(st&&!cancel)st.textContent=en?'Hold on a bit longer and speak':'Нажми и говори чуть дольше';return}
@@ -7838,7 +7841,7 @@ async qaRec(){const en=this.lang()==='en',st=$('qaSt'),w=$('qaWv'),mb=$('qaMic')
       this.track('voice_ai',{n:(data.tasks||[]).length},'day');if(st)st.textContent=en?'Tap the mic to add more':'Нажми на микрофон, чтобы добавить ещё';this.qaUpd()}
     catch(x){this._qaBusy=0;this._qaNoAi=1;try{console.warn('voice',x)}catch(y){}if(st)st.textContent=en?'Could not recognise. Try again or type':'Не получилось распознать. Попробуй ещё раз или напиши'}};
   this._qr={stop:()=>{try{rec.state!=='inactive'&&rec.stop()}catch(x){}},cancel:()=>{cancel=true;try{rec.state!=='inactive'&&rec.stop()}catch(x){}}};
-  rec.start(250);this._qaMax=setTimeout(()=>this.qaStop(true),90000);this.buzz(8);if(w)w.classList.add('on');if(mb)mb.classList.add('on');if(st)st.textContent=en?'Listening… tap the mic to finish':'Слушаю… нажми на микрофон, чтобы закончить'},
+  rec.start(250);this._qaMax=setTimeout(()=>this.qaStop(true),90000);this.buzz(8);if(w)w.classList.add('on');if(mb)mb.classList.add('on');if(st)st.textContent=en?'Listening… tap the mic to finish':'Слушаю… нажми на микрофон, чтобы закончить';const pq=this._qrPend;this._qrPend=0;if(pq==='stop'||!$('qaMic'))this.qaStop(true)},
 rgGet(k){const td=today(),R=(this._rg=this._rg||{});if(R[k])return R[k];if(k==='hab'){const m=this.monday(td);return {a:m,b:add(m,6)}}return {a:add(td,-29),b:td}},
 rgDays(r){const o=[];for(let d=r.a;d<=r.b&&o.length<400;d=add(d,1))o.push(d);return o},
 rgLbl(r){return this.hwLbl(r)},
@@ -8437,6 +8440,7 @@ vMe(){
     row(ic('target','#C4A4FF'),'Ссылка-шаблон','',"APP.tplLink().then(l=>APP.copy(l))",'Передать цели и тактики другому человеку'),
     row(ic('list','#9B6FE8'),'Прошлые программы',String((S.archive||[]).length),(S.archive||[]).length?"APP.historySheet()":null)]);
   pages.help=()=>sec('Поддержка',[
+    row(ic('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l13 8-13 8z"/></svg>','#C4A4FF'),'Пройти знакомство снова','',"APP.tourRestart()",'3 минуты, на настоящих действиях'),
     row(ic('chat','#C4A4FF'),'Написать в поддержку','',"APP.feedbackSheet('support')",'Вопрос или проблема'),
     row(ic('star','#C4A4FF'),'Предложить идею','',"APP.feedbackSheet('idea')")]);
   pages.about=()=>{const sv=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
