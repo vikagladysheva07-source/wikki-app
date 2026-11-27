@@ -2746,8 +2746,8 @@ a.btn{text-decoration:none!important;display:flex;align-items:center;justify-con
 @keyframes mlasm{0%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.4);filter:blur(5px)}100%{opacity:1;transform:none;filter:blur(0)}}
 .ml-core svg{filter:drop-shadow(0 0 6px rgba(155,111,232,.35))}
 #msgOv.done .ml-core svg{animation:mlflash .5s ease-out}@keyframes mlflash{0%{filter:brightness(3) drop-shadow(0 0 22px #fff)}100%{filter:drop-shadow(0 0 6px rgba(155,111,232,.35))}}
-.ml-t{position:absolute;top:calc(50% + 128px);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#A89CC8;transition:opacity .4s;height:14px;white-space:nowrap}
-.ml-t span{position:absolute;left:50%;transform:translateX(-50%);opacity:0;animation:mlph 1.6s ease forwards}.ml-t span:nth-child(2){animation-delay:1.55s}
+.ml-t{position:absolute;top:calc(50% + 158px);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#A89CC8;transition:opacity .4s;height:14px;white-space:nowrap}
+.ml-t span{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;opacity:0;animation:mlph 1s ease forwards}.ml-t span:nth-child(2){animation-delay:.95s}
 @keyframes mlph{0%{opacity:0;filter:blur(4px)}20%,70%{opacity:1;filter:none}100%{opacity:0}}
 .ml-t span:nth-child(2){animation-name:mlph2}@keyframes mlph2{0%{opacity:0}30%,100%{opacity:1}}
 #msgOv.done .ml-seal{opacity:0;transform:scale(1.5)}#msgOv.done .ml-t{opacity:0}
@@ -2770,13 +2770,13 @@ a.btn{text-decoration:none!important;display:flex;align-items:center;justify-con
 @keyframes mlup{to{opacity:1;transform:none}}
 
 #msgOv canvas{opacity:0;transform:translateY(40px) scale(.94);will-change:transform,opacity}
-#msgOv.done canvas{animation:mlrise 1.05s cubic-bezier(.2,.8,.2,1) .2s forwards}
+#msgOv.done canvas{animation:mlrise .8s cubic-bezier(.2,.8,.2,1) .1s forwards}
 @keyframes mlrise{0%{opacity:0;transform:translateY(46px) scale(.93);filter:blur(16px)}60%{opacity:1}100%{opacity:1;transform:none;filter:blur(0)}}
 #msgOv.fast canvas{animation-duration:.55s;animation-delay:0s}#msgOv.fast .mov-b button{animation-delay:.25s!important}
 #msgOv canvas.rl{animation:none;opacity:0;transform:scale(.97);filter:blur(10px);transition:opacity .22s,transform .22s,filter .22s}
 #msgOv canvas.rin{animation:none;opacity:1;transform:none;filter:none;transition:opacity .45s,transform .45s,filter .45s}
 #msgOv .mov-b button{opacity:0;transform:translateY(12px)}
-#msgOv.done .mov-b button{animation:mlup .6s ease forwards}#msgOv.done .mov-b button:nth-child(2){animation-delay:1.42s}#msgOv.done .mov-b button:nth-child(3){animation-delay:1.54s}#msgOv.done .mov-b button:nth-child(1){animation-delay:1.3s}
+#msgOv.done .mov-b button{animation:mlup .5s ease forwards}#msgOv.done .mov-b button:nth-child(2){animation-delay:.72s}#msgOv.done .mov-b button:nth-child(3){animation-delay:.84s}#msgOv.done .mov-b button:nth-child(1){animation-delay:.6s}
 @media(prefers-reduced-motion:reduce){#msgOv *{animation-duration:.01s!important;animation-delay:0s!important}}
 
 .mov-x{position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.1);border:0;color:#fff;font-size:24px;cursor:pointer}
@@ -3665,7 +3665,7 @@ body:has(.hrp) .nav .pfab{display:none!important}
 .fc-sg{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.fc-sg button{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:12.5px;color:#F4F1EA;padding:7px 12px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);min-height:0}.fc-sg svg{width:13px;height:13px;color:#C4A4FF}
 #msgOv .ml-card{position:relative;display:inline-block;line-height:0}
 #msgOv .ml-cx{position:absolute;top:12px;right:12px;z-index:5;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font:inherit;font-size:24px;line-height:1;color:#fff;background:rgba(10,8,18,.38);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:0;min-height:0;opacity:0;pointer-events:none;transition:opacity .4s}
-#msgOv.done .ml-cx{opacity:1;pointer-events:auto;transition-delay:.9s}
+#msgOv.done .ml-cx{opacity:1;pointer-events:auto;transition-delay:.5s}
 #msgOv.done > .mov-x{opacity:0!important;pointer-events:none}
 #msgOv .mov-b button{border-radius:99px!important;color:#fff!important;background:linear-gradient(155deg,rgba(255,255,255,.16),rgba(255,255,255,.05))!important;border:1px solid rgba(255,255,255,.22)!important;will-change:opacity}
 #msgOv .ml-core svg g.f{will-change:transform,opacity}
@@ -7498,7 +7498,7 @@ msgFacets(){const L=(p,q,t)=>[p[0]+(q[0]-p[0])*t,p[1]+(q[1]-p[1])*t];const cols=
    const cx=(t[0][0]+t[1][0]+t[2][0])/3,cy=(t[0][1]+t[1][1]+t[2][1])/3,ang=Math.atan2(cy-256,cx-256),d=140+Math.random()*80;
    out+=`<g class="f" style="--k:${k++};--x:${Math.cos(ang)*d}px;--y:${Math.sin(ang)*d}px;--r:${(Math.random()-.5)*120}deg;transform-origin:${cx}px ${cy}px"><path d="M${t.map(p=>p.join(' ')).join('L')}Z" fill="url(#${id})" stroke="rgba(245,240,255,.4)" stroke-width="1.2"/></g>`})});
  return `<svg viewBox="76 100 360 322"><defs>${defs}</defs>${out}</svg>`},
-msgOpen(){this._mcur=this.msgToday();this.track('msg_open',null,'day');const en=this.lang()==='en',mb=this.S.pref.mb,first=true;
+msgOpen(){this._mcur=this.msgToday();this.track('msg_open',null,'day');const en=this.lang()==='en',mb=this.S.pref.mb;let first=true;try{first=localStorage.getItem('vmsgd')!==today();localStorage.setItem('vmsgd',today())}catch(e){}
  const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
  const ov=document.createElement('div');ov.id='msgOv';ov.className='mov'+(first&&!reduce?'':' fast');
  const st=Array.from({length:34},()=>`<i style="left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*2.6}s"></i>`).join('');
@@ -7509,7 +7509,7 @@ msgOpen(){this._mcur=this.msgToday();this.track('msg_open',null,'day');const en=
  <div class="ml-t"><span>${en?'Choosing a word':'Выбираю слово'}</span><span>${en?'Ready':'Готово'}</span></div><i class="ml-wave"></i><i class="ml-wave"></i><i class="ml-wave"></i>
  <div class="ml-card"><canvas id="msgCv" width="1080" height="1920" onclick="APP.msgRoll()" role="button" aria-label="${en?'Next message':'Следующее послание'}"></canvas><button class="ml-cx" onclick="APP.msgClose()" aria-label="${en?'Close':'Закрыть'}">×</button></div>${mbtn}`;
  document.body.appendChild(ov);requestAnimationFrame(()=>ov.classList.add('on'));
- const seal=ov.querySelector('.ml-seal'),D=first&&!reduce?2200:450,t0=performance.now();
+ const seal=ov.querySelector('.ml-seal'),D=first&&!reduce?1300:450,t0=performance.now();
  const painted=(document.fonts&&document.fonts.load?document.fonts.load('300 74px Manrope'):Promise.resolve()).catch(()=>{}).then(()=>this.msgPaint());
  const fin=()=>{if(!$('msgOv'))return;painted.then(()=>{if(!$('msgOv'))return;ov.classList.add('done');this.buzz(14)})};
  (function tick(now){if(!$('msgOv'))return;const p=Math.min(1,(now-t0)/D),e=1-Math.pow(1-p,1.8);seal.style.setProperty('--p',e*100);if(p<1)requestAnimationFrame(tick);else fin()})(t0)},
@@ -7517,7 +7517,7 @@ msgPaint(){const t=this._mcur,cv=$('msgCv');if(!cv||!t)return Promise.resolve();
 msgRoll(){const ov=$('msgOv');this.buzz(6);this._mcur=this.msgDeal();if(!ov){this.msgPaint();return}
   ov.classList.remove('done');const seal=ov.querySelector('.ml-seal');ov.querySelectorAll('.ml-vm').forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});
   ov.querySelectorAll('.ml-t span').forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});void ov.offsetWidth;
-  const painted=this.msgPaint(),t0=performance.now(),D=2200;const fin=()=>{if(!$('msgOv'))return;painted.then(()=>{if(!$('msgOv'))return;ov.classList.add('done');this.buzz(14)})};
+  const painted=this.msgPaint(),t0=performance.now(),D=1300;const fin=()=>{if(!$('msgOv'))return;painted.then(()=>{if(!$('msgOv'))return;ov.classList.add('done');this.buzz(14)})};
   (function tick(now){if(!$('msgOv'))return;const p=Math.min(1,(now-t0)/D),e=1-Math.pow(1-p,1.8);seal&&seal.style.setProperty('--p',e*100);if(p<1)requestAnimationFrame(tick);else fin()})(t0)},
 msgClose(){const o=$('msgOv');o&&o.remove()},
 msgCanFile(){try{return !!(navigator.canShare&&matchMedia('(pointer:coarse)').matches&&navigator.canShare({files:[new File([new Blob(['x'],{type:'image/png'})],'v.png',{type:'image/png'})]}))}catch(e){return false}},
