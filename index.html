@@ -7500,7 +7500,8 @@ msgFacets(){const L=(p,q,t)=>[p[0]+(q[0]-p[0])*t,p[1]+(q[1]-p[1])*t];const cols=
    const cx=(t[0][0]+t[1][0]+t[2][0])/3,cy=(t[0][1]+t[1][1]+t[2][1])/3,ang=Math.atan2(cy-256,cx-256),d=140+Math.random()*80;
    out+=`<g class="f" style="--k:${k++};--x:${Math.cos(ang)*d}px;--y:${Math.sin(ang)*d}px;--r:${(Math.random()-.5)*120}deg;transform-origin:${cx}px ${cy}px"><path d="M${t.map(p=>p.join(' ')).join('L')}Z" fill="url(#${id})" stroke="rgba(245,240,255,.4)" stroke-width="1.2"/></g>`})});
  return `<svg viewBox="76 100 360 322"><defs>${defs}</defs>${out}</svg>`},
-msgOpen(){let fd=true;try{fd=localStorage.getItem('vmsgd')!==today()}catch(e){}this._mcur=fd?this.msgToday():this.msgDeal();this.track('msg_open',null,'day');const en=this.lang()==='en',mb=this.S.pref.mb;let first=true;try{first=localStorage.getItem('vmsgd')!==today();localStorage.setItem('vmsgd',today())}catch(e){}
+msgOpen(){try{return this._msgOpen()}catch(e){const o=$('msgOv');o&&o.remove();this.toast('Послание не открылось: '+String(e&&e.message||e).slice(0,80))}},
+_msgOpen(){let fd=true;try{fd=localStorage.getItem('vmsgd')!==today()}catch(e){}this._mcur=fd?this.msgToday():this.msgDeal();this.track('msg_open',null,'day');const en=this.lang()==='en',mb=this.S.pref.mb;let first=true;try{first=localStorage.getItem('vmsgd')!==today();localStorage.setItem('vmsgd',today())}catch(e){}
  const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
  const ov=document.createElement('div');ov.id='msgOv';ov.className='mov'+(reduce?' fast':'');
  const st=Array.from({length:34},()=>`<i style="left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*2.6}s"></i>`).join('');
@@ -7514,11 +7515,11 @@ msgOpen(){let fd=true;try{fd=localStorage.getItem('vmsgd')!==today()}catch(e){}t
  const seal=ov.querySelector('.ml-seal'),D=reduce?450:first?1800:1500,t0=performance.now();
  const painted=Promise.race([(document.fonts&&document.fonts.load?document.fonts.load('300 74px Manrope'):Promise.resolve()),new Promise(r=>setTimeout(r,1500))]).catch(()=>{}).then(()=>this.msgPaint()).catch(()=>{});
  const fin=()=>{if(!$('msgOv'))return;painted.then(()=>{if(!$('msgOv'))return;ov.classList.add('done');this.buzz(14)})};
- (function tick(now){if(!$('msgOv'))return;const p=Math.min(1,(now-t0)/D),e=1-Math.pow(1-p,1.8);seal.style.setProperty('--p',e*100);if(p<1)requestAnimationFrame(tick);else fin()})(t0)},
+ (function tick(now){if(!$('msgOv'))return;const p=Math.min(1,(now-t0)/D),e=1-Math.pow(1-p,1.8);seal.style.setProperty('--p',e*100);if(p<1)requestAnimationFrame(tick);else fin()})(t0);this._mst='start';this._mse='';clearTimeout(this._msW);this._msW=setTimeout(()=>{const o=$('msgOv');if(!o||o.classList.contains('done'))return;o.classList.add('done');this.toast('Послание: '+(this._mst||'?')+(this._mse?' · '+this._mse:''))},6000)},
 msgPaint(){const t=this._mcur,cv=$('msgCv');if(!cv||!t)return Promise.resolve();
   /* не ждём фото бесконечно: на iPhone загрузка иногда зависает, тогда рисуем без фото и подменяем, когда оно придёт */
-  const T=(p,ms)=>Promise.race([p,new Promise(r=>setTimeout(()=>r(null),ms))]),draw=im=>{try{const c2=$('msgCv');if(c2&&this._mcur===t)this.msgDraw(c2,t.b,this.msgTxt(t.t),t.s,im)}catch(e){console.warn('msgDraw',e)}};
-  return Promise.all([T(this.msgImg(t.b),4000),T(this.markLoad(),1500)]).then(([im])=>{draw(im);if(!im)this.msgImg(t.b).then(i2=>{if(i2)draw(i2)})}).catch(e=>console.warn('msgPaint',e))},
+  const T=(p,ms)=>Promise.race([p,new Promise(r=>setTimeout(()=>r(null),ms))]),draw=im=>{try{const c2=$('msgCv');if(c2&&this._mcur===t)this.msgDraw(c2,t.b,this.msgTxt(t.t),t.s,im)}catch(e){console.warn('msgDraw',e);this._mse=String(e&&e.message||e)}};
+  this._mst='img';return Promise.all([T(this.msgImg(t.b),4000),T(this.markLoad(),1500)]).then(([im])=>{this._mst='draw';draw(im);this._mst='drawn';if(!im)this.msgImg(t.b).then(i2=>{if(i2)draw(i2)})}).catch(e=>console.warn('msgPaint',e))},
 msgRoll(){const ov=$('msgOv');this.buzz(6);this._mcur=this.msgDeal();if(!ov){this.msgPaint();return}
   ov.classList.remove('done');const seal=ov.querySelector('.ml-seal');ov.querySelectorAll('.ml-vm').forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});
   ov.querySelectorAll('.ml-t span').forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});void ov.offsetWidth;
