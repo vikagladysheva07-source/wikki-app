@@ -7512,10 +7512,13 @@ msgOpen(){let fd=true;try{fd=localStorage.getItem('vmsgd')!==today()}catch(e){}t
  <div class="ml-card"><canvas id="msgCv" width="1080" height="1920" onclick="APP.msgRoll()" role="button" aria-label="${en?'Next message':'Следующее послание'}"></canvas><button class="ml-cx" onclick="APP.msgClose()" aria-label="${en?'Close':'Закрыть'}">×</button></div>${mbtn}`;
  document.body.appendChild(ov);requestAnimationFrame(()=>ov.classList.add('on'));
  const seal=ov.querySelector('.ml-seal'),D=reduce?450:first?1800:1500,t0=performance.now();
- const painted=(document.fonts&&document.fonts.load?document.fonts.load('300 74px Manrope'):Promise.resolve()).catch(()=>{}).then(()=>this.msgPaint());
+ const painted=Promise.race([(document.fonts&&document.fonts.load?document.fonts.load('300 74px Manrope'):Promise.resolve()),new Promise(r=>setTimeout(r,1500))]).catch(()=>{}).then(()=>this.msgPaint()).catch(()=>{});
  const fin=()=>{if(!$('msgOv'))return;painted.then(()=>{if(!$('msgOv'))return;ov.classList.add('done');this.buzz(14)})};
  (function tick(now){if(!$('msgOv'))return;const p=Math.min(1,(now-t0)/D),e=1-Math.pow(1-p,1.8);seal.style.setProperty('--p',e*100);if(p<1)requestAnimationFrame(tick);else fin()})(t0)},
-msgPaint(){const t=this._mcur,cv=$('msgCv');if(!cv||!t)return Promise.resolve();return Promise.all([this.msgImg(t.b),this.markLoad()]).then(([im])=>im).then(im=>{const c2=$('msgCv');if(c2&&this._mcur===t)this.msgDraw(c2,t.b,this.msgTxt(t.t),t.s,im)})},
+msgPaint(){const t=this._mcur,cv=$('msgCv');if(!cv||!t)return Promise.resolve();
+  /* не ждём фото бесконечно: на iPhone загрузка иногда зависает, тогда рисуем без фото и подменяем, когда оно придёт */
+  const T=(p,ms)=>Promise.race([p,new Promise(r=>setTimeout(()=>r(null),ms))]),draw=im=>{try{const c2=$('msgCv');if(c2&&this._mcur===t)this.msgDraw(c2,t.b,this.msgTxt(t.t),t.s,im)}catch(e){console.warn('msgDraw',e)}};
+  return Promise.all([T(this.msgImg(t.b),4000),T(this.markLoad(),1500)]).then(([im])=>{draw(im);if(!im)this.msgImg(t.b).then(i2=>{if(i2)draw(i2)})}).catch(e=>console.warn('msgPaint',e))},
 msgRoll(){const ov=$('msgOv');this.buzz(6);this._mcur=this.msgDeal();if(!ov){this.msgPaint();return}
   ov.classList.remove('done');const seal=ov.querySelector('.ml-seal');ov.querySelectorAll('.ml-vm').forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});
   ov.querySelectorAll('.ml-t span').forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});void ov.offsetWidth;
