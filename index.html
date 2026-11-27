@@ -6047,7 +6047,7 @@ pgExec(){const x=this.execData(),vals=x.weeks.filter(w=>w.v!=null&&!w.cur),avg=v
   return `<div class="card pg-s" id="pg-exec"><div class="pg-sh"><b>Исполнение по неделям</b><span>${x.inP?'':'все задачи и привычки · цель '+x.th+'%'}</span></div>
   <div class="pex-top"><div class="pex-n">${x.cur??'—'}<small>${x.cur!=null?'%':''}</small></div><div class="sp"><div class="pex-l">${x.cur!=null&&x.cur>=x.th?'Неделя в зоне победы':x.left?`Ещё ${x.left} ${x.unit} до ${x.th}%`:'Начни неделю с первой отметки'}</div><div class="pex-bar"><i style="width:${Math.min(100,(x.cur||0)/x.th*100)}%"></i></div></div></div>
   <div class="pex" style="--n:${x.weeks.length}">${bars}</div>
-  <div class="pg-note">${avg!=null?`В среднем ${avg}% · недель в зоне: ${inz} из ${vals.length}. `:''}Нажми на неделю, чтобы разобрать её</div></div>`},
+  <div class="pg-note">${this.lang()==='en'?(avg!=null?`On average ${avg}% · weeks in the zone: ${inz} of ${vals.length}. `:'')+'Tap a week to review it':(avg!=null?`В среднем ${avg}% · недель в зоне: ${inz} из ${vals.length}. `:'')+'Нажми на неделю, чтобы разобрать её'}</div></div>`},
 /* задачи: план и факт. План = задачи на день + перенесённые с этого дня; факт = выполненные в свой день */
 kStat(from,to){const td=today(),del=this.S.del||[],T=(this.S.tasks||[]).filter(x=>!x.drop&&!del.includes(x.id));let n=0,dn=0,mv=0;
   T.forEach(x=>{if(x.date>=from&&x.date<=to&&x.date<=td){n++;if(x.done)dn++}});
