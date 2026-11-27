@@ -5897,7 +5897,7 @@ async shDraw(cv,kind,bg){const W=1080,H=1920,x=cv.getContext('2d');cv.width=W;cv
     if(im){const s=Math.max(W/im.width,H/im.height);x.drawImage(im,(W-im.width*s)/2,(H-im.height*s)/2,im.width*s,im.height*s);const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgba(5,4,12,.42)');g.addColorStop(.45,'rgba(5,4,12,.52)');g.addColorStop(1,'rgba(5,4,12,.9)');x.fillStyle=g;x.fillRect(0,0,W,H)}
     else{const g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,'#1A1230');g.addColorStop(1,'#07060D');x.fillStyle=g;x.fillRect(0,0,W,H);const r=x.createRadialGradient(W*.8,H*.2,0,W*.8,H*.2,900);r.addColorStop(0,'rgba(124,92,230,.45)');r.addColorStop(1,'rgba(124,92,230,0)');x.fillStyle=r;x.fillRect(0,0,W,H)}}
   x.shadowColor=sticker?'rgba(0,0,0,.55)':'transparent';x.shadowBlur=sticker?24:0;x.textAlign='center';
-   {const lg=kind==='wk'?null:await img('logo-volyo.png');if(lg){const lw=330,lh=lw*lg.height/lg.width;x.save();x.shadowColor='rgba(0,0,0,.45)';x.shadowBlur=18;x.drawImage(lg,W/2-lw/2,sticker?70:96,lw,lh);x.restore()}}
+   {await this.markLoad();this.cardMark(x,W,H)}
   const cx=W/2,base=sticker?760:1120,D=this.shData(kind),VI='#C4A4FF',GO='#9B6FE8',CY='#9B6FE8';let yEnd=base;
   const ring=(cy,r,p,col,lw)=>{x.lineCap='round';x.lineWidth=lw;x.strokeStyle='rgba(255,255,255,.18)';x.beginPath();x.arc(cx,cy,r,0,Math.PI*2);x.stroke();x.strokeStyle=col;x.beginPath();x.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.max(.001,Math.min(1,p)));x.stroke()};
   if(kind==='wk'){const gi=await img('gem-lit.webp'),lg=await img('logo-wm.png');x.save();x.shadowColor='transparent';
@@ -5918,7 +5918,7 @@ async shDraw(cv,kind,bg){const W=1080,H=1920,x=cv.getContext('2d');cv.width=W;cv
     card(1,D.ha?D.hy+'/'+D.ha:'—',this.pl(D.hy,'отметка привычек','отметки привычек','отметок привычек'),(X,Y)=>bars(D.hb,X,Y));
     card(2,hh?hh+APP.tt('ч')+' '+mm+APP.tt('м'):mm+APP.tt('м'),'фокуса',(X,Y)=>bars(D.fb,X,Y));
     if(D.best){x.fillStyle='rgba(255,255,255,.5)';x.font=F(400,34);x.fillText(APP.tt('Лучший день —')+' '+APP.tt(D.best),cx,1815)}
-    if(lg){const lw=240,lh=lw*lg.height/lg.width;x.drawImage(lg,cx-lw/2,1850,lw,lh)}
+
     x.restore();yEnd=1900}
   if(kind==='streak'){x.fillStyle='#fff';x.font=F(800,300);x.fillText(String(D.n),cx,base);x.fillStyle=GO;x.font=F(700,64);x.fillText(APP.tt(this.pl(D.n,'день подряд','дня подряд','дней подряд')),cx,base+100);x.fillStyle='rgba(255,255,255,.85)';x.font=F(500,46);x.fillText(D.t.length>34?D.t.slice(0,33)+'…':D.t,cx,base+172);
     const sz=64,gap=18,cols=10,gx=cx-(cols*sz+(cols-1)*gap)/2,gy=base+250;D.days.forEach((on,i)=>{const c=i%cols,r=Math.floor(i/cols),X=gx+c*(sz+gap)+sz/2,Y=gy+r*(sz+gap)+sz/2;x.beginPath();x.arc(X,Y,sz/2,0,Math.PI*2);x.fillStyle=on?VI:'rgba(255,255,255,.14)';x.fill()});yEnd=gy+3*(sz+gap)}
@@ -6328,7 +6328,7 @@ async repShare(){const D=this.repData(),R=D.R,c=document.createElement('canvas')
   x.fillStyle='#C4A4FF';x.font='600 40px "DM Sans",sans-serif';x.fillText(APP.tt('Итоги · '+R.sub).toUpperCase(),90,300);x.fillStyle='#fff';x.font='800 110px "DM Sans",sans-serif';x.fillText(R.title,90,430);
   const st=[[(D.avg??0)+'%','в среднем выполнено'],[String(D.fh).replace('.',',')+' ч','часов фокуса'],[String(D.best),'лучшая серия, дней'],[String(D.wins.length),'побед записано']];
   st.forEach(([v,l],i)=>{const cx=90+(i%2)*470,cy=640+Math.floor(i/2)*400;x.fillStyle='rgba(255,255,255,.07)';x.beginPath();x.roundRect?x.roundRect(cx,cy,430,340,36):x.rect(cx,cy,430,340);x.fill();x.fillStyle='#fff';x.font='800 120px "DM Sans",sans-serif';x.fillText(v,cx+40,cy+170);x.fillStyle='rgba(232,226,247,.75)';x.font='500 38px "DM Sans",sans-serif';x.fillText(l,cx+40,cy+250)});
-  x.fillStyle='#C4A4FF';x.font='700 48px "DM Sans",sans-serif';x.fillText('VOLYO',90,1780);x.fillStyle='rgba(232,226,247,.6)';x.font='400 34px "DM Sans",sans-serif';x.fillText(APP.tt('система дисциплины и привычек'),90,1830);
+  await this.markLoad();this.cardMark(x,1080,1920);
   c.toBlob(async b=>{const f=new File([b],'wikki-itogi.png',{type:'image/png'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:APP.tt('Мои итоги')});return}}catch(e){if(e&&e.name==='AbortError')return}const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='wikki-itogi.png';a.click();this.toast('Карточка сохранена')},'image/png')},
 /* обзор прогресса */
 mRing(p,c,sz){sz=sz||44;const r=sz/2-5,C=2*Math.PI*r,id='mg'+(this._mg=(this._mg||0)+1);return `<svg width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}" class="mring"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B2FBE"/><stop offset=".55" stop-color="#9B6FE8"/><stop offset="1" stop-color="#C4A4FF"/></linearGradient></defs><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="5"/><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="url(#${id})" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(C*Math.max(0,Math.min(1,p))).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 ${sz/2} ${sz/2})"/></svg>`},
@@ -7486,7 +7486,7 @@ msgDraw(cv,bi,text,seed,img){const c=cv.getContext('2d'),W=1080,H=1920,k=cv.widt
   if(text){const ty=H*.46;{const g=c.createRadialGradient(W/2,ty,0,W/2,ty,700);g.addColorStop(0,'rgba(2,2,6,.55)');g.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=g;c.fillRect(0,ty-700,W,1400)}
     c.shadowColor='rgba(0,0,0,.45)';c.shadowBlur=24;
     c.fillStyle='#F4EFE6';c.textAlign='center';c.textBaseline='middle';c.font='300 74px Manrope, system-ui, sans-serif';const maxW=W*.78,words=text.split(' '),lines=[];let cur='';words.forEach(w=>{const q=cur?cur+' '+w:w;if(c.measureText(q).width>maxW&&cur){lines.push(cur);cur=w}else cur=q});lines.push(cur);
-    const lh=98,y0=ty-(lines.length-1)*lh/2;lines.forEach((l,i)=>c.fillText(l,W/2,y0+i*lh));c.shadowBlur=0;c.fillStyle='rgba(244,239,230,.6)';c.font='500 30px Manrope, system-ui, sans-serif';try{c.letterSpacing='14px'}catch(e){}c.fillText('VOLYO',W/2+7,H-140);try{c.letterSpacing='0px'}catch(e){}}},
+    const lh=98,y0=ty-(lines.length-1)*lh/2;lines.forEach((l,i)=>c.fillText(l,W/2,y0+i*lh));c.shadowBlur=0;APP.cardMark(c,W,H);}},
 msgThumbs(){const td=today();let s=0;for(const ch of td)s=(s*31+ch.charCodeAt(0))>>>0;const N=this.MSG_PH,a=s%N;return [a,(a+5)%N,(a+11)%N].map(n=>'msg/t'+String(n+1).padStart(2,'0')+'.jpg')},
 msgCard(){let th=['','',''];try{th=this.msgThumbs()}catch(e){}return `<button class="msg3" onclick="APP.msgOpen()"><div class="msg3-t"><b>Послание дня</b><span>Нажми, чтобы открыть</span></div><div class="msg3-f"><i style="background-image:url(${th[0]})"></i><i style="background-image:url(${th[1]})"></i><i style="background-image:url(${th[2]})"></i></div></button>`},
 msgTxt(i){return (this.lang()==='en'?this.MSG_EN:this.MSG_RU)[i]||''},
@@ -7513,7 +7513,7 @@ msgOpen(){this._mcur=this.msgToday();this.track('msg_open',null,'day');const en=
  const painted=(document.fonts&&document.fonts.load?document.fonts.load('300 74px Manrope'):Promise.resolve()).catch(()=>{}).then(()=>this.msgPaint());
  const fin=()=>{if(!$('msgOv'))return;painted.then(()=>{if(!$('msgOv'))return;ov.classList.add('done');this.buzz(14)})};
  (function tick(now){if(!$('msgOv'))return;const p=Math.min(1,(now-t0)/D),e=1-Math.pow(1-p,1.8);seal.style.setProperty('--p',e*100);if(p<1)requestAnimationFrame(tick);else fin()})(t0)},
-msgPaint(){const t=this._mcur,cv=$('msgCv');if(!cv||!t)return Promise.resolve();return this.msgImg(t.b).then(im=>{const c2=$('msgCv');if(c2&&this._mcur===t)this.msgDraw(c2,t.b,this.msgTxt(t.t),t.s,im)})},
+msgPaint(){const t=this._mcur,cv=$('msgCv');if(!cv||!t)return Promise.resolve();return Promise.all([this.msgImg(t.b),this.markLoad()]).then(([im])=>im).then(im=>{const c2=$('msgCv');if(c2&&this._mcur===t)this.msgDraw(c2,t.b,this.msgTxt(t.t),t.s,im)})},
 msgRoll(){const ov=$('msgOv');this.buzz(6);this._mcur=this.msgDeal();if(!ov){this.msgPaint();return}
   ov.classList.remove('done');const seal=ov.querySelector('.ml-seal');ov.querySelectorAll('.ml-vm').forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});
   ov.querySelectorAll('.ml-t span').forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});void ov.offsetWidth;
@@ -7522,6 +7522,9 @@ msgRoll(){const ov=$('msgOv');this.buzz(6);this._mcur=this.msgDeal();if(!ov){thi
 msgClose(){const o=$('msgOv');o&&o.remove()},
 msgCanFile(){try{return !!(navigator.canShare&&matchMedia('(pointer:coarse)').matches&&navigator.canShare({files:[new File([new Blob(['x'],{type:'image/png'})],'v.png',{type:'image/png'})]}))}catch(e){return false}},
 async msgSave(){const b=await this.msgBlob();if(!b)return;const f=new File([b],'volyo-poslanie.png',{type:'image/png'});try{this.track('msg_save',null,'day');await navigator.share({files:[f]})}catch(e){if(e&&e.name==='AbortError')return;this.msgDl()}},
+markLoad(){return this._vmP||(this._vmP=new Promise(r=>{const i=new Image();i.onload=()=>{this._vmImg=i;r(i)};i.onerror=()=>r(null);i.src='logo-wm.png'}))},
+cardMark(x,W,H){const im=this._vmImg;x.save();x.shadowColor='transparent';x.shadowBlur=0;x.globalAlpha=.35;
+ if(im){const w=150,h=w*im.height/im.width,X=W/2-w/2,Y=H-96-h/2;if('filter' in x){x.filter='blur(1.1px)';x.drawImage(im,X,Y,w,h);x.filter='none'}else{x.globalAlpha=.35/4;[[-1,0],[1,0],[0,-1],[0,1]].forEach(([dx,dy])=>x.drawImage(im,X+dx*1.1,Y+dy*1.1,w,h));x.globalAlpha=.35*.6;x.drawImage(im,X,Y,w,h)}}else{x.fillStyle='#fff';x.font='400 30px Georgia, serif';x.textAlign='center';x.textBaseline='middle';try{x.letterSpacing='8px'}catch(e){}x.fillText('VOLYO',W/2+4,H-96);try{x.letterSpacing='0px'}catch(e){}}x.restore()},
 msgBlob(){return new Promise(r=>{const cv=$('msgCv');cv?cv.toBlob(r,'image/png'):r(null)})},
 async msgDl(m){const b=await this.msgBlob();if(!b)return;this.track('msg_dl',null,'day');const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='volyo-poslanie-'+today()+'.png';document.body.appendChild(a);a.click();setTimeout(()=>{a.remove();URL.revokeObjectURL(a.href)},500);if(m)this.toast('Картинка сохранена в галерею, в папку «Загрузки»')},
 async msgShare(){const b=await this.msgBlob();if(!b)return;const f=new File([b],'volyo-poslanie.png',{type:'image/png'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){this.track('msg_share',null,'day');await navigator.share({files:[f]})}else this.msgDl()}catch(e){}},
@@ -8392,8 +8395,7 @@ async shareWeek(w){const S=this.S,ds=this.wDays(w),sc=this.score(w),P=this.prog(
   gs.forEach(g=>{card(y,170);x.textAlign='left';x.fillStyle=g.color;x.beginPath();x.arc(140,y+85,14,0,Math.PI*2);x.fill();
     x.fillStyle='#F2EDE2';x.font='700 44px "DM Sans",sans-serif';let t=g.title;while(x.measureText(t).width>560)t=t.slice(0,-2);x.fillText(t,190,y+100);
     const gsc=this.score(w,g.id);x.textAlign='right';x.font='900 56px "DM Sans",sans-serif';x.fillStyle=gsc!=null&&gsc>=(+S.sprint.threshold||85)?'#9B6FE8':'#C4A4FF';x.fillText(gsc==null?'—':gsc+'%',960,y+105);y+=200});
-  x.textAlign='left';x.fillStyle='rgba(229,222,246,.5)';x.font='500 30px "DM Mono",monospace';x.fillText('VOLYO  ·  '+APP.tt('система дисциплины').toUpperCase(),100,1800);
-  x.fillStyle='rgba(229,222,246,.35)';x.font='400 26px "DM Mono",monospace';x.fillText(location.host+location.pathname.replace(/\/$/,''),100,1850);
+  await this.markLoad();this.cardMark(x,1080,1920);
   const blob=await new Promise(r=>c.toBlob(r,'image/png'));const file=new File([blob],`week-${w}.png`,{type:'image/png'});
   if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:APP.tt('Неделя '+w)});return}catch(e){if(e.name==='AbortError')return}}
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=file.name;a.click();this.toast('Карточка сохранена')},
