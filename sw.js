@@ -1,8 +1,10 @@
 // VOLYO · офлайн-кэш. Страница — мгновенно из кэша, свежая версия в фоне; остальное — кэш первым.
-const V='tw-v318';
+const V='tw-v319';
 const CORE=['./','./index.html','./manifest.webmanifest','./icon-180.png','./icon-512.png','./ocean.jpg','./shark.svg','./favicon.png','./icon-192.png','./logo-volyo.png','./v-mark.png','./i18n-en.json?v=267'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+/* кэш на iPhone иногда зависает или ломается: ждём его не дольше 1,5 с, дальше идём в сеть */
+const CM=(q,o)=>Promise.race([caches.match(q,o).catch(()=>null),new Promise(r=>setTimeout(()=>r(null),1500))]);
 self.addEventListener('fetch',e=>{
   const u=new URL(e.request.url);
   if(e.request.method!=='GET')return;
@@ -12,9 +14,9 @@ self.addEventListener('fetch',e=>{
     // мгновенно из кэша, свежая версия — в фоне
     const net=fetch(e.request,{cache:'no-store'}).then(r=>{if(r.ok){const c=r.clone();caches.open(V).then(x=>{x.put('./',c.clone());x.put('./index.html',c)})}return r});
     e.waitUntil(net.catch(()=>{}));
-    e.respondWith(caches.match('./',{ignoreSearch:true}).then(r=>r||caches.match('./index.html')).then(r=>r||net));
+    e.respondWith(CM('./',{ignoreSearch:true}).then(r=>r||CM('./index.html')).then(r=>r||net));
     return}
-  e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{if(res.ok&&(u.origin===location.origin||/fonts|jsdelivr/.test(u.hostname))){const c=res.clone();caches.open(V).then(x=>x.put(e.request,c))}return res})));
+  e.respondWith(CM(e.request).then(r=>r||fetch(e.request).then(res=>{if(res.ok&&(u.origin===location.origin||/fonts|jsdelivr/.test(u.hostname))){const c=res.clone();caches.open(V).then(x=>x.put(e.request,c)).catch(()=>{})}return res})));
 });
 // пуш-уведомления: {title, body, tab}
 self.addEventListener('push',e=>{let d={};try{d=e.data?e.data.json():{}}catch(_){d={body:e.data&&e.data.text()}}
