@@ -1,5 +1,5 @@
 {
-  "Главные дела": "Main tasks",
+"Главные дела": "Main tasks",
 "Имя": "Name",
 "мин": "min",
 "Код": "Code",
@@ -3363,5 +3363,6 @@
 "{*}: задачи и привычки выполняются так же, как в остальные дни": "{*}: tasks get done the same as on other days",
 "Мысль на сегодня": "A thought for today",
 "Итоги дня": "Day results",
-"Таймер без отвлечений": "Distraction-free timer"
+"Таймер без отвлечений": "Distraction-free timer",
+"Картинка сохранена в галерею, в папку «Загрузки»": "Image saved to your gallery, in the Downloads folder"
 }
