@@ -58,6 +58,24 @@ html body .sheet .nt-tb{gap:2px!important}html body .sheet .nt-tb .nt-ch{padding
 html body #app .ftc .ftc-t{display:flex;flex-direction:column;gap:2px}html body #app .ftc .ftc-s{font-size:12.5px;font-weight:400;color:#9C9AA3;line-height:1.3}
 
 @media(max-width:370px){html body .sheet .nt-tb .nt-ch>svg:first-child{display:none}}
+
+/* огранка: история граней и «тогда и сейчас» */
+.g57-w{cursor:pointer;-webkit-tap-highlight-color:transparent}.g57-w polygon{cursor:pointer}
+.g57-tip{text-align:center;font-size:12px;color:#8E879E;margin:6px 0 2px}
+html body .fc-top .fct{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:18px!important;margin:20px 0 6px!important;position:relative;z-index:2}
+html body .fc-top .fct .fct-c{display:flex!important;flex-direction:column!important;align-items:center!important;gap:2px!important;width:110px!important;text-align:center}
+html body .fc-top .fct .gimg{position:relative!important;width:92px!important;max-width:92px!important;margin:0 auto 8px!important;display:block!important}
+html body .fc-top .fct .gimg img{display:block!important;width:100%!important;height:auto!important;position:static!important}
+html body .fc-top .fct .gimg img.gl{position:absolute!important;left:0!important;top:0!important}
+html body .fc-top .fct .fct-g.old{opacity:.75}
+html body .fc-top .fct b{display:block;font-size:20px!important;font-weight:600!important;color:#F4F1EA!important;font-variant-numeric:tabular-nums;font-style:normal!important}
+html body .fc-top .fct b i{font-style:normal!important;font-size:12px!important;color:#8E879E!important;margin-left:1px}
+html body .fc-top .fct em{display:block;font-style:normal!important;font-size:12px!important;color:#A49DB5!important}
+html body .fc-top .fct .fct-ar{display:flex!important;flex-direction:column!important;align-items:center!important;gap:4px;color:#8E879E;margin-top:-26px}
+html body .fc-top .fct .fct-ar svg{width:20px;height:20px}
+html body .fc-top .fct .fct-ar i{font-style:normal;font-size:12px;font-weight:600;color:#F4F1EA}
+.fch{display:grid;gap:10px;margin-top:6px}.fch-s{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8E879E}
+.fch-st{font-size:16px;font-weight:600;color:#A49DB5}.fch-st.cut{color:#F4F1EA}.fch-w{font-size:14px;line-height:1.5;color:#B8B1C8}
 </style>
 <style id="fcm-css">
 .fg{position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.025) 46%,rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.24),inset 0 -18px 28px rgba(0,0,0,.3),0 16px 34px rgba(0,0,0,.5);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
@@ -136,6 +154,7 @@ html body .dmain:has(>.fc-top)>.fc-c:nth-child(n+7){grid-column:span 3}
 html body .dmain:has(>.fc-top) .g57{max-width:330px}
 html body .dmain:has(>.fc-top) .fc-top .gimg,html body .dmain:has(>.fc-top) .fc-top .pv-gm{max-width:190px!important;margin-left:auto!important;margin-right:auto!important}
 html body .dmain:has(>.fc-top) .fc-how,html body .dmain:has(>.fc-top) .fc-gr,html body .dmain:has(>.fc-top) .fc-q{display:none!important}
+
 html body .dmain:has(>.fc-top)>.fc-top,html body .dmain:has(>.fc-top)>.fc-map{align-self:stretch}
 }
 /* ноутбук: «Сегодня» двумя колонками, чтобы почти всё помещалось на экран */
@@ -3627,6 +3646,7 @@ body:has(.hrp) .nav .pfab{display:none!important}
 .hd-spi b{flex:1;min-width:0;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hd-spi em{font-style:normal;font-size:12px;color:var(--dim);font-weight:700}
 .pv-gem .pv-gm,.fc-top .pv-gm{max-width:240px;margin:-14px auto -18px!important;display:block}
+html body .pv-gem .pv-gm.gimg{width:170px!important;max-width:170px!important;margin:22px auto 26px!important}
 .pv-gem .pv-dt em{margin-bottom:0}
 .pv-gm .co circle{fill:#fff}.pv-gm .co polyline,.pv-gm .co line{fill:none;stroke:rgba(255,255,255,.45);stroke-width:.7}
 .pv-gm .cn{fill:#B8B1C8;font-family:inherit;font-size:8.5px;letter-spacing:.14em;font-weight:500}
@@ -4838,7 +4858,7 @@ cabFacets(){const SK=this.skillsData(),D=this.rpgData(),w7=D.pts7||{},pct=D.nxt>
   let sug=[];if(grow){const have=new Set(this.S.habits.flatMap(h=>[h.title,h.lib]));sug=HABIT_LIB.map((x,i)=>[x,i]).filter(([x])=>!have.has(x[0])&&this.skGuess(x[0])===grow).slice(0,2)}
   const R=D.R||[1,'E','Новичок'];
   const F57=this.fc57();
-    const top=`<div class="fc-top">${this.pvSmoke()}<div class="fc-tt"><span class="fc-n57">${F57.n}<i>/57</i></span><b class="fc-rk">${this.fcRank(F57.n)}</b><em>${this.FCR[this.fcRankI(F57.n)][2]}</em></div>${this.pvGem(this.fcSt())}${this.fcRankBar(F57.n)}<div class="fc-q">Вода камень точит не&nbsp;силой, а&nbsp;постоянством.<br>Так и&nbsp;дисциплина огранивает тебя:<br>день за&nbsp;днём, грань за&nbsp;гранью.</div></div>
+    const top=`<div class="fc-top">${this.pvSmoke()}<div class="fc-tt"><span class="fc-n57">${F57.n}<i>/57</i></span><b class="fc-rk">${this.fcRank(F57.n)}</b><em>${this.FCR[this.fcRankI(F57.n)][2]}</em></div>${this.pvGem(this.fcSt())}${this.fcRankBar(F57.n)}${this.fcThen(F57.n)}</div>
     <div class="fc-map"><div class="fc-mh"><b>Карта огранки</b><em>Вид сверху и снизу</em></div>${this.fcGrid()}<button class="fc-help" onclick="APP.skHelp()">Как растёт огранка</button></div>`;
   const cards=SK.map(s=>{const F=this.FAC[s.k]||['','',''],w=w7[s.k]||0,np=this.PLV.find(l=>s.L<l),pn=np?this.PERK[s.k][this.PLV.indexOf(np)]:'';
     return `<div class="fc-c"><div class="fc-h"><span class="fc-i">${hIco('sd-'+s.k)}</span><span class="fc-n"><b>${s.n}</b><em>${F[0]}</em></span><span class="fc-l"><b>${F57.L.filter(f=>f.k===s.k&&f.on).length}</b><em>из ${F57.L.filter(f=>f.k===s.k).length}</em></span></div>
@@ -5679,7 +5699,7 @@ skWeak(){const SK=this.skillsData().filter(x=>x.k!=='dis'),w=SK.slice().sort((a,
   wkClose(){const el=$('wkc');if(!el)return;el.classList.remove('on');setTimeout(()=>el.remove(),450)},
   wkShare(){this.wkClose();setTimeout(()=>this.shareStudio('wk'),500)},
   gem57(on,big){const o=(on||[]).slice(),C=o.slice(0,33),P=o.slice(33),f=v=>v.toFixed(1),pt=(cx,cy,r,a)=>[cx+r*Math.cos(a),cy+r*Math.sin(a)],A=k=>-Math.PI/2+k*Math.PI/4,H=Math.PI/8;
-    const poly=(pts,lit)=>`<polygon points="${pts.map(q=>f(q[0])+','+f(q[1])).join(' ')}" class="${lit?'on':''}"/>`;
+    let gi=0;const poly=(pts,lit)=>`<polygon points="${pts.map(q=>f(q[0])+','+f(q[1])).join(' ')}" class="${lit?'on':''}" data-i="${gi++}"/>`;
     const crown=(cx,cy,R)=>{const t=R*.5,sR=R*.76;let g='',i=0;const T=k=>pt(cx,cy,t,A(k)),Sx=k=>pt(cx,cy,sR,A(k)+H),G=k=>pt(cx,cy,R,A(k)),M=k=>pt(cx,cy,R,A(k)+H);
       g+=poly([0,1,2,3,4,5,6,7].map(T),C[i++]);for(let k=0;k<8;k++)g+=poly([T(k),T(k+1),Sx(k)],C[i++]);for(let k=0;k<8;k++)g+=poly([T(k),Sx(k-1),G(k),Sx(k)],C[i++]);
       for(let k=0;k<8;k++){g+=poly([Sx(k),G(k),M(k)],C[i++]);g+=poly([Sx(k),M(k),G(k+1)],C[i++])}return g};
@@ -5687,8 +5707,17 @@ skWeak(){const SK=this.skillsData().filter(x=>x.k!=='dis'),w=SK.slice().sort((a,
       for(let k=0;k<8;k++)g+=poly([c,L(k-1),G(k),L(k)],P[i++]);for(let k=0;k<8;k++){g+=poly([L(k),G(k),M(k)],P[i++]);g+=poly([L(k),M(k),G(k+1)],P[i++])}return g};
     const ring=(cx,cy,R)=>`<circle cx="${cx}" cy="${cy}" r="${R+9}" fill="url(#g57h)"/><circle cx="${cx}" cy="${cy}" r="${R+1.5}" fill="none" stroke="url(#g57r)" stroke-width="1"/>`;
     return `<svg class="g57" viewBox="0 0 340 160"><defs><linearGradient id="g57l" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#E4E0F0"/><stop offset="1" stop-color="#9C97B4"/></linearGradient><linearGradient id="g57d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#211F2B"/><stop offset="1" stop-color="#0B0A10"/></linearGradient><radialGradient id="g57h" cx=".5" cy=".5" r=".5"><stop offset=".55" stop-color="#9B6FE8" stop-opacity=".22"/><stop offset="1" stop-color="#9B6FE8" stop-opacity="0"/></radialGradient><linearGradient id="g57r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".5" stop-color="#C4A4FF" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity=".1"/></linearGradient></defs>${ring(85,80,70)}${ring(255,80,70)}<g>${crown(85,80,70)}</g><g>${pav(255,80,70)}</g></svg>`},
+  fcThen(n){const S=this.S,fc=S.fc||{},d0=add(today(),-30);const p=Object.values(fc).filter(d=>d&&d<=d0).length;
+    const g=(k,cls)=>`<div class="fct-g ${cls}"><div class="gimg"><img src="gem-dark.webp" alt="" draggable="false"><img class="gl" src="gem-lit.webp" alt="" draggable="false" style="opacity:${(k<=0?0:Math.min(1,.15+.85*k/57)).toFixed(2)}"></div></div>`;
+    return `<div class="fct"><div class="fct-c">${g(p,'old')}<b>${p}<i>/57</i></b><em>Месяц назад</em></div><span class="fct-ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><i>+${Math.max(0,n-p)}</i></span><div class="fct-c">${g(n,'now')}<b>${n}<i>/57</i></b><em>Сейчас</em></div></div>`},
+  fcTap(e){const t=e.target&&e.target.closest&&e.target.closest('polygon[data-i]');if(!t)return;const F=this.fc57(),L=F.L,A=[...L.filter(f=>f.p==='c'),...L.filter(f=>f.p==='p')],f=A[+t.dataset.i];if(!f)return;
+    const en=this.lang()==='en',SN=en?{str:'Strength',int:'Mind',spi:'Spirit',biz:'Work',dis:'Discipline'}:{str:'Сила',int:'Интеллект',spi:'Дух',biz:'Дело',dis:'Дисциплина'},dt=(this.S.fc||{})[f.id],FA=this.FAC[f.k]||['',''];
+    this.buzz&&this.buzz(8);
+    this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">${esc(f.t)}</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
+     <div class="fch"><span class="fch-s">${SN[f.k]||''} · ${f.p==='c'?'Корона':'Павильон'}</span>
+     ${f.on?`<div class="fch-st cut">${dt?(en?'Cut on ':'Огранена ')+fd(dt):(en?'Cut':'Огранена')}</div><div class="fch-w">${this.fcmWhy(f.c)}</div>`:`<div class="fch-st">Ещё не огранена</div><div class="fch-w">${en?'Now '+(f.v||0)+' of '+f.n:'Сейчас '+(f.v||0)+' из '+f.n}. ${FA[1]}</div>`}</div>`)},
   fcGrid(){const F=this.fc57(),L=F.L,c=L.filter(f=>f.p==='c'),p=L.filter(f=>f.p==='p'),cn=c.filter(f=>f.on).length,pn=p.filter(f=>f.on).length;
-    return this.gem57([...c,...p].map(f=>f.on))+`<div class="g57-s"><div><b>${cn}<i>/33</i></b><span>Корона</span><em>то, что видно</em></div><div><b>${pn}<i>/24</i></b><span>Павильон</span><em>опора, которая даёт свет</em></div></div>`},
+    return `<div class="g57-w" onclick="APP.fcTap(event)">`+this.gem57([...c,...p].map(f=>f.on))+`</div><div class="g57-tip">Нажми на грань, чтобы узнать её историю</div><div class="g57-s"><div><b>${cn}<i>/33</i></b><span>Корона</span><em>то, что видно</em></div><div><b>${pn}<i>/24</i></b><span>Павильон</span><em>опора, которая даёт свет</em></div></div>`},
 skHelp(){const R=(ic,b,t)=>`<div class="skh-r"><span>${ic}</span><div><b>${b}</b><em>${t}</em></div></div>`;
   const F=this.fc57();this.open(`<div class="row"><div class="h2 sp" style="font-size:17px">Как растёт огранка</div><button class="xcl" onclick="APP.close()" aria-label="Закрыть">${I.x}</button></div>
    <div class="skh-ba"><div><div class="gimg"><img src="gem-dark.webp" alt=""></div><b>Неогранённый</b><em>в начале пути</em></div><span class="skh-ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><div><div class="gimg"><img src="gem-lit.webp" alt=""></div><b>Огранённый</b><em>все 57 граней</em></div></div>
@@ -8805,7 +8834,7 @@ lang(){return ((this.S.pref||{}).lang)||'ru'},
 syncLang(){try{if(!this.user||!this.sb)return;const l=this.lang();if((this.user.user_metadata||{}).lang===l)return;this.sb.auth.updateUser({data:{lang:l}}).then(r=>{if(r&&r.data&&r.data.user)this.user=r.data.user}).catch(()=>{})}catch(e){}},
 tt(m){if(this.lang()!=='en'||!m||!/[А-ЯЁа-яё]/.test(m))return m;const e=document.createElement('div');e.textContent=m;this.tr(e);return e.textContent},
 async setLang(l,q){this.S.pref=this.S.pref||{};this.S.pref.lang=l;document.documentElement.lang=l;this.save();this.syncLang();if(l==='en')await this.loadDict();this.render();if(!q)this.toast(l==='en'?'Language: English':'Язык: русский')},
-async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=267');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
+async loadDict(){if(this._dict){document.body.classList.remove('dw');return}try{const r=await fetch('i18n-en.json?v=268');const d=await r.json();this._dict=Object.assign({},I18N_BASE,d)}catch(e){this._dict=Object.assign({},I18N_BASE)}document.body.classList.remove('dw')},
 /* перевод отрендеренного текста: ищем русские фрагменты и подставляем словарь */
 tr(root){if(this.lang()!=='en'||!root)return;if(!this._dict){document.body.classList.add('dw');if(!this._dwp){this._dwp=1;this.loadDict().then(()=>{document.body.classList.remove('dw');this.render()})}return}const D=this._dict;
   const look=k=>{if(!k)return null;if(D[k]!==undefined)return D[k];const m=k.match(/^(.*?)([.:,!?…»)]+)$/);if(m&&m[1]){const b=look(m[1]);if(b!=null)return b+m[2]}
