@@ -585,10 +585,36 @@ footer .bot{display:flex;justify-content:space-between;gap:20px}footer .bot .lg{
  .wf .bigword{opacity:.08}
 }
 @media (min-width:1001px){.sdots.m{display:none}}
+
+/* ===== Премиальный слой (28.11): океан, заставка, воздух, свет за курсором ===== */
+.hero .hbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:saturate(.9) brightness(.85);transition:opacity 2s ease}
+.hero .hbg.on{opacity:.62}
+.hero .hshade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(10,10,15,.75) 0%,rgba(10,10,15,.15) 28%,rgba(10,10,15,.2) 60%,var(--vo-bg) 100%),linear-gradient(90deg,rgba(10,10,15,.7) 0%,rgba(10,10,15,0) 40%,rgba(10,10,15,0) 62%,rgba(10,10,15,.6) 100%)}
+.hero .bigword,.hero .stage{position:relative;z-index:1}.hero .bigword{position:absolute}
+.hero .halo{display:none}
+#intro{position:fixed;inset:0;z-index:200;background:#000;display:grid;place-items:center;transition:opacity .9s ease,visibility .9s}
+#intro video{width:min(720px,92vw);height:auto;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 60%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 60%,transparent 100%)}
+#intro.out{opacity:0;visibility:hidden}
+html.intro-skip #intro{display:none}
+html.intro-on{overflow:hidden}
+#cl{position:fixed;left:0;top:0;width:620px;height:620px;margin:-310px 0 0 -310px;border-radius:50%;pointer-events:none;z-index:3;background:radial-gradient(circle,rgba(196,164,255,.06),transparent 62%);mix-blend-mode:screen;opacity:0;transition:opacity .6s;will-change:transform}
+#cl.on{opacity:1}
+@media (hover:none),(pointer:coarse){#cl{display:none}}
+.glass,.st,.step,.price>div,.lead2 .row,.founding,.calc .card{background-image:radial-gradient(420px circle at var(--mx,-999px) var(--my,-999px),rgba(196,164,255,.07),transparent 60%),radial-gradient(110% 90% at 0% 0%,rgba(255,255,255,.10),transparent 50%),radial-gradient(80% 60% at 100% 0%,rgba(196,164,255,.05),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01) 60%,rgba(0,0,0,.22))}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
+/* больше воздуха */
+section{padding:104px 0}.mband{padding:96px 0 40px}.story{padding:104px 0 56px}.fcta{padding:128px 0 104px}
+.lead2 .answer{margin-top:72px}.proof .after{margin-top:72px}
+@media (max-width:1000px){section{padding:80px 0}.mband{padding:72px 0 32px}.story{padding:80px 0 40px}.fcta{padding:96px 0 80px}
+ .hero .hbg.on{opacity:.5}.hero .hshade{background:linear-gradient(180deg,rgba(10,10,15,.8) 0%,rgba(10,10,15,.35) 30%,rgba(10,10,15,.45) 70%,var(--vo-bg) 100%)}}
+@media (prefers-reduced-motion:reduce){#intro{display:none}.hero .hbg{display:none}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
 </head>
 <body>
 
+<div id="intro" aria-hidden="true"><video muted playsinline preload="auto" src="img/intro.mp4"></video></div>
+<div id="cl" aria-hidden="true"></div>
 <nav id="nav"><div class="wrap">
  <a class="logo" href="#top"><img src="img/logo.png" alt="VOLYO"></a>
  <div class="links"><a href="#inside">Features</a><a href="#facets">Facets</a><a href="#programs">Programs</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
@@ -597,6 +623,7 @@ footer .bot{display:flex;justify-content:space-between;gap:20px}footer .bot .lg{
 
 <!-- HERO -->
 <section class="hero" id="top">
+ <video class="hbg" muted playsinline loop autoplay preload="auto" aria-hidden="true"></video><div class="hshade"></div>
  <div class="bigword">VOLYO</div>
  <div class="glowbg halo"></div>
  <div class="stage">
@@ -615,13 +642,6 @@ footer .bot{display:flex;justify-content:space-between;gap:20px}footer .bot .lg{
  </div>
 </section>
 
-<div class="strip"><div class="wrap">
- <span>Built on methods by</span>
- <b>James Clear</b>
- <b>David Allen</b>
- <b>Cal Newport</b>
- <b>BJ Fogg</b>
-</div></div>
 
 <!-- MBAND -->
 <section class="mband"><div class="lit" style="left:-200px;top:0;width:800px;height:800px"></div><div class="lit" style="right:-200px;bottom:-200px;width:700px;height:700px"></div><div class="wrap">
@@ -798,17 +818,6 @@ footer .bot{display:flex;justify-content:space-between;gap:20px}footer .bot .lg{
  <div class="founding glass rv"><b>Founding 100</b><p>The first hundred pay once and keep everything forever, including future features</p></div>
 </div></section>
 
-<!-- REFUSE -->
-<section class="refuse"><div class="lit" style="right:-200px;top:-150px;width:700px;height:700px"></div><div class="wrap">
- <div class="grid">
-  <h2 class="t rv"><span class="a">VOLYO is not</span><span class="b">for you if</span></h2>
-  <div class="box glass rv d1">
-   <div><i></i>You want results without daily steps</div>
-   <div><i></i>You need a team project manager, not a personal system</div>
-   <div><i></i>You’re looking for motivation, not a rhythm</div>
-  </div>
- </div>
-</div></section>
 
 <!-- FAQ -->
 <section id="faq" style="padding-top:40px"><div class="wrap">
@@ -899,6 +908,29 @@ function ruDays(n){var a=n%10,b=n%100;return a===1&&b!==11?'день':a>=2&&a<=4
  document.querySelectorAll('.lang button').forEach(function(b){b.onclick=function(){set(b.dataset.l)}});
  var q=(location.search.match(/lang=(ru|en)/)||[])[1],saved=null;try{saved=localStorage.getItem('volyo-lang')}catch(e){}
  set(q||saved||((navigator.language||'').slice(0,2)==='ru'?'ru':'en'));
+})();
+</script>
+<script>
+(function(){
+ var H=document.documentElement,shot=/shot/.test(location.search),rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ /* 2. фирменное появление: один раз за сессию */
+ var I=document.getElementById('intro'),seen=false;try{seen=sessionStorage.getItem('vo-intro')}catch(e){}
+ function done(){if(!I||I.classList.contains('out'))return;I.classList.add('out');H.classList.remove('intro-on');try{sessionStorage.setItem('vo-intro','1')}catch(e){}setTimeout(function(){I&&I.remove()},1000)}
+ if(seen||shot||rm){H.classList.add('intro-skip');I&&I.remove()}
+ else{H.classList.add('intro-on');var v=I.querySelector('video');v.addEventListener('ended',function(){setTimeout(done,250)});
+  var p=v.play();if(p&&p.catch)p.catch(done);setTimeout(function(){if(v.currentTime<.05)done()},900);setTimeout(done,3600);I.addEventListener('click',done)}
+ /* 1. океан на первом экране */
+ var bg=document.querySelector('.hero .hbg');if(bg&&!rm){var tall=innerWidth<=1000;bg.poster='img/'+(tall?'ocean-tall':'ocean-wide')+'.jpg';bg.src='img/'+(tall?'ocean-tall':'ocean-wide')+'.mp4';
+  bg.addEventListener('playing',function(){bg.classList.add('on')});var q=bg.play();if(q&&q.catch)q.catch(function(){bg.classList.add('on')})}
+ /* 5. свет за курсором и блик на стекле */
+ var cl=document.getElementById('cl'),fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+ if(fine&&cl){var x=-999,y=-999,cx=-999,cy=-999;addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;cl.classList.add('on');var t=e.target.closest&&e.target.closest('.glass,.st,.step,.price>div,.lead2 .row,.founding,.calc .card');if(t){var r=t.getBoundingClientRect();t.style.setProperty('--mx',(e.clientX-r.left)+'px');t.style.setProperty('--my',(e.clientY-r.top)+'px')}},{passive:true});
+  document.addEventListener('mouseleave',function(){cl.classList.remove('on')});
+  (function loop(){cx+=(x-cx)*.12;cy+=(y-cy)*.12;cl.style.transform='translate('+cx.toFixed(1)+'px,'+cy.toFixed(1)+'px)';requestAnimationFrame(loop)})()}
+ /* 5. плавная прокрутка с инерцией (только мышь/трекпад) */
+ addEventListener('load',function(){if(!fine||rm||!window.Lenis)return;H.style.scrollBehavior='auto';var L=new Lenis({lerp:.1,smoothWheel:true});window.__lenis=L;
+  (function raf(t){L.raf(t);requestAnimationFrame(raf)})(performance.now());
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');var el=id.length>1&&document.querySelector(id);if(!el)return;e.preventDefault();L.scrollTo(el,{offset:-60,duration:1.4})})})});
 })();
 </script>
 </body>
