@@ -4601,7 +4601,7 @@ save(){this._tix=Object.fromEntries(this.S.tactics.map(t=>[t.id,t]));this.S.t=Da
   if(this.user){clearTimeout(this._pt);this._pt=setTimeout(()=>this.push(),1200)}},
 toast(m,undo,act){const t=$('toast');t.innerHTML=esc(m)+(undo?` <button class="tundo" onclick="APP.undo()">Отменить</button>`:'')+(act?` <button class="tundo" onclick="${act[1]}">${act[0]}</button>`:'');this.tr(t);t.classList.toggle('act',!!(undo||act));t.classList.add('on');clearTimeout(this._tt);this._tt=setTimeout(()=>t.classList.remove('on'),act?6000:/по связке/.test(m)?6000:undo?4500:2000)},
 snap(){const S=this.S;this._snap={log:JSON.stringify(S.log),hlog:JSON.stringify(S.hlog),skip:JSON.stringify(S.skip||{}),tasks:JSON.stringify(S.tasks||[]),lt:JSON.stringify(S.lt||{})}},
-undo(){const z=this._snap;if(!z)return;const S=this.S;const cur=new Map((S.tasks||[]).map(t=>[t.id,JSON.stringify(t)]));S.log=JSON.parse(z.log);S.hlog=JSON.parse(z.hlog);S.skip=JSON.parse(z.skip);S.tasks=JSON.parse(z.tasks);S.tasks.forEach(t=>{if(cur.get(t.id)!==JSON.stringify(t))t.t=Date.now()});S.lt=JSON.parse(z.lt);if(S.del){const ids=new Set(S.tasks.map(t=>t.id));S.del=S.del.filter(i=>!ids.has(i))}
+undo(){const z=this._snap;if(!z)return;const S=this.S;const cur=new Map((S.tasks||[]).map(t=>[t.id,JSON.stringify(t)]));S.log=JSON.parse(z.log);S.hlog=JSON.parse(z.hlog);S.skip=JSON.parse(z.skip);S.tasks=JSON.parse(z.tasks);S.tasks.forEach(t=>{if(cur.get(t.id)!==JSON.stringify(t))t.t=Date.now()});S.lt=JSON.parse(z.lt);{const ids=new Set(S.tasks.map(t=>t.id));S.del=(S.del||[]).filter(i=>!ids.has(i));/* задачи, которые отмена убрала (например следующий повтор), помечаем удалёнными, иначе синхронизация вернёт их с сервера */cur.forEach((_,i)=>{if(!ids.has(i)&&!S.del.includes(i))S.del.push(i)})}
   for(const k in S.lt)S.lt[k]=Date.now();this._snap=null;this.save();this.render();this.toast('Отменено')},
 
 init(){
@@ -8994,6 +8994,7 @@ merge(a,b){
   m.log=this.mergeLog(a.log,b.log,a.lt,b.lt,'');m.hlog=this.mergeLog(a.hlog,b.hlog,a.lt,b.lt,'H|');m.skip=this.mergeLog(a.skip,b.skip,a.lt,b.lt,'S|');
   m.checkin=Object.assign({},a.checkin||{});for(const d in b.checkin||{})if(!m.checkin[d]||(b.checkin[d].t||0)>(m.checkin[d].t||0))m.checkin[d]=b.checkin[d];
   m.pref=Object.assign({},old.pref||{},nw.pref||{});
+  m.del=[...new Set([...(a.del||[]),...(b.del||[])])];/* удалённое с любого устройства — до слияния списков */
   const km=new Map();[...(a.tasks||[]),...(b.tasks||[])].forEach(x=>{if(m.del.includes(x.id))return;const p=km.get(x.id);if(!p||(x.t||0)>(p.t||0))km.set(x.id,x)});m.tasks=[...km.values()];
   m.weeks=Object.assign({},old.weeks||{});for(const w in nw.weeks||{})m.weeks[w]=Object.assign({},(old.weeks||{})[w]||{},nw.weeks[w]);
   m.del=[...new Set([...(a.del||[]),...(b.del||[])])];
