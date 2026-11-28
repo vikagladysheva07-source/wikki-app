@@ -1,321 +1,862 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>VOLYO — приложение для дисциплины: привычки, планы и прогресс</title>
-<meta name="description" content="VOLYO — система самодисциплины. Привычки, планы на день и неделю, программы «12 недель», «75 дней без компромиссов» и «Теория шести месяцев». Дисциплина — путь к свободе.">
-<link rel="canonical" href="https://volyo.app/about/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="VOLYO">
-<meta property="og:url" content="https://volyo.app/about/">
-<meta property="og:title" content="VOLYO — становись тем, кем хочешь быть">
-<meta property="og:description" content="Дисциплина — путь к свободе. Привычки, планы и прогресс в одном приложении.">
-<meta property="og:image" content="https://volyo.app/og.jpg">
-<meta property="og:locale" content="ru_RU">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#07070D">
-<link rel="icon" type="image/png" href="../favicon.png">
-<link rel="apple-touch-icon" href="../icon-180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
-{"@type":"SoftwareApplication","name":"VOLYO","url":"https://volyo.app/","applicationCategory":"LifestyleApplication","operatingSystem":"iOS, Android, Web","description":"Система самодисциплины: привычки, планы и программы, которые день за днём огранивают человека, которым ты хочешь стать.","offers":[{"@type":"Offer","price":"0","priceCurrency":"RUB","name":"Бесплатно"},{"@type":"Offer","price":"3777","priceCurrency":"RUB","name":"Полный доступ, разовая покупка"}]},
-{"@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Нужно ли устанавливать приложение?","acceptedAnswer":{"@type":"Answer","text":"VOLYO открывается в браузере на телефоне и компьютере. На телефоне его можно добавить на экран «Домой», и оно работает как обычное приложение."}},
-{"@type":"Question","name":"Работает на iPhone и Android?","acceptedAnswer":{"@type":"Answer","text":"Да, на iPhone, Android и компьютере. С аккаунтом всё синхронизируется между устройствами."}},
-{"@type":"Question","name":"Что будет, если пропустить день?","acceptedAnswer":{"@type":"Answer","text":"Серия переживает один пропуск и рвётся только после двух пропусков подряд. В полном доступе можно заморозить день или включить режим отпуска."}},
-{"@type":"Question","name":"Это подписка?","acceptedAnswer":{"@type":"Answer","text":"Нет. Полный доступ покупается один раз, без автосписаний."}},
-{"@type":"Question","name":"Можно вернуть деньги?","acceptedAnswer":{"@type":"Answer","text":"Да, в течение 14 дней после покупки."}}]}]}
-</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VOLYO — your daily discipline system</title>
+<meta name="description" content="VOLYO keeps tasks, habits, focus and long goals in one system">
+<link rel="icon" href="img/icon.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--tx:#F2EDE2;--dim:#9A96A6;--lav:#C4A4FF;--vi:#9B6FE8}
+:root{--bg:#09090D;--bg2:#0E0E13;--txt:#F4F2F8;--mut:rgba(244,242,248,.58);--dim:rgba(244,242,248,.38);--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.14);
+--plat:linear-gradient(180deg,#FFFFFF 0%,#DCD7E6 55%,#B7B0C6 100%);--btn:linear-gradient(180deg,#F3F0F8 0%,#CFC9DB 55%,#A9A2BA 100%);--glow:rgba(155,111,232,.22)}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:#07060C}
-body{font-family:Manrope,system-ui,sans-serif;color:var(--tx);line-height:1.5;-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;background:url(../ocean-2.jpg) center/cover;opacity:.32;z-index:-2}
-body:after{content:"";position:fixed;inset:0;background:radial-gradient(80% 50% at 50% 0%,rgba(91,47,190,.16),transparent 70%),linear-gradient(180deg,rgba(7,6,12,.5),rgba(7,6,12,.9) 55%);z-index:-1}
-.w{max-width:1040px;margin:0 auto;padding:0 20px}
-a{color:inherit;text-decoration:none}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
-.nav img{height:20px;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.5)) drop-shadow(0 4px 10px rgba(0,0,0,.35))}
-.nav a.b{font-size:14px;padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05)}
-.hero{text-align:center;padding:56px 0 44px}
-.hero img{width:min(300px,70vw);filter:drop-shadow(0 2px 3px rgba(0,0,0,.45)) drop-shadow(0 8px 18px rgba(0,0,0,.35))}
-.rule{width:48px;height:1px;margin:30px auto 24px;background:linear-gradient(90deg,transparent,rgba(242,237,226,.6),transparent)}
-h1{text-wrap:balance;font-size:clamp(30px,5vw,46px);font-weight:600;line-height:1.12;letter-spacing:-.025em;background:linear-gradient(90deg,#fff 45%,#E8DFFF 72%,#C4A4FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;max-width:720px;margin:0 auto}
-.sub{font-size:clamp(16px,2.2vw,19px);color:rgba(242,237,226,.78);max-width:560px;margin:18px auto 0}
-.cta{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 30px;margin-top:32px;border-radius:15px;font-size:16px;font-weight:600;color:#fff;background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 30px -12px rgba(0,0,0,.6)}
-.note{font-size:14px;color:var(--dim);margin-top:14px}
-section{padding:40px 0}
-.lb{font-size:14px;color:var(--dim);margin-bottom:10px}
-h2{font-size:clamp(22px,3vw,28px);font-weight:600;letter-spacing:-.015em;line-height:1.25;margin-bottom:18px;max-width:640px;text-wrap:balance}
-.card{border-radius:18px;padding:16px 16px;background:radial-gradient(110% 90% at 0% 0%,rgba(255,255,255,.10),transparent 50%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015) 60%,rgba(0,0,0,.15)),rgba(12,10,22,.45);border:1px solid rgba(255,255,255,.08);border-top-color:rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 1px 2px rgba(0,0,0,.3),0 20px 44px -18px rgba(0,0,0,.7)}
-.ph{display:grid;gap:12px}
-.ph .card p{font-size:15px;line-height:1.6;color:rgba(242,237,226,.74)}
-.ph .card p b{font-weight:600;color:var(--tx)}
-.ch{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--dim);margin-bottom:10px}
-.ch span{color:var(--lav);font-size:12px}
-.g3,.g2{display:grid;gap:10px}
-.card h3{font-size:16px;font-weight:600;margin-bottom:4px}
-.card p{font-size:14px;color:rgba(242,237,226,.72);line-height:1.5}
-.ic{display:block;width:22px;height:22px;color:var(--lav);margin-bottom:10px}
-.card ul{list-style:none;margin-top:12px;display:grid;gap:7px}
-.card li{font-size:14px;color:rgba(242,237,226,.72);padding-left:16px;position:relative}
-.card li:before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--vi)}
-.org{font-size:13px;color:var(--dim);margin-top:4px}
-.price .card b.v{display:block;font-size:28px;font-weight:600;letter-spacing:-.02em;margin:6px 0 2px}
-.price .card .s{font-size:14px;color:var(--dim)}
-.price .full{border-color:rgba(196,164,255,.3);border-top-color:rgba(196,164,255,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 20px 44px -18px rgba(0,0,0,.7),0 0 40px -16px rgba(155,111,232,.45)}
-.faq{display:grid;gap:10px}
-.vis{display:block;width:100%;height:auto;max-height:96px;margin:2px 0 14px}
-.pn{position:relative;overflow:hidden;border-radius:24px;margin-bottom:14px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012) 60%,rgba(0,0,0,.2)),rgba(10,8,18,.55);border:1px solid rgba(255,255,255,.08);border-top-color:rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 30px 60px -24px rgba(0,0,0,.8)}
-.vz{position:relative;height:220px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06)}
-.tx{padding:22px 20px 24px}
-.no{font-size:13px;color:var(--dim);display:flex;gap:10px;align-items:center;margin-bottom:10px}
-.no b{font-weight:300;font-size:13px;color:var(--lav);letter-spacing:.08em}
-.tx h3{font-size:18px;font-weight:600;line-height:1.35;letter-spacing:-.005em;margin-bottom:8px;text-wrap:balance;max-width:26em}
-.tx p{font-size:15px;line-height:1.6;color:rgba(242,237,226,.72);max-width:34em;hyphens:none}
-/* 01 */
-.v1{background:radial-gradient(60% 90% at 72% 30%,rgba(155,111,232,.28),transparent 70%),linear-gradient(180deg,rgba(20,14,40,.6),rgba(7,6,12,.2))}
-.v1 svg{position:absolute;inset:0;width:100%;height:100%}
-.v1 img{position:absolute;right:12%;top:12%;width:84px;filter:drop-shadow(0 0 26px rgba(155,111,232,.55)) drop-shadow(0 14px 22px rgba(0,0,0,.6))}
-/* 02 */
-.v2{display:flex;align-items:center;justify-content:center;gap:0;background:radial-gradient(45% 80% at 82% 50%,rgba(196,164,255,.16),transparent 70%)}
-.v2 .st{display:flex;flex-direction:column;align-items:center;flex:1;min-width:0}
-.v2 .gem{display:block;height:auto;flex:none;max-width:none}.v2{padding:0 14px}
-.v2 .st:nth-child(1) .gem{width:120%;opacity:.55;filter:grayscale(1) brightness(.75)}
-.v2 .st:nth-child(3) .gem{width:140%;opacity:.85}
-.v2 .st:nth-child(5) .gem{width:172%;filter:drop-shadow(0 0 22px rgba(232,223,255,.35))}
-.v2 em{font-style:normal;font-size:12px;color:var(--dim);margin-top:-12px;position:relative}
-.v2 .st:nth-child(5) em{color:var(--tx)}
-.v2 .ar{flex:none;width:22px;height:1px;background:linear-gradient(90deg,rgba(196,164,255,0),rgba(196,164,255,.7));margin-bottom:14px}
-/* 03 */
-.v3{background:radial-gradient(50% 80% at 86% 78%,rgba(196,164,255,.18),transparent 70%)}
-.v3 svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(88%,520px)}
-.v3 span{position:absolute;bottom:12px;font-size:12px;color:var(--dim)}
-.v3 .a{left:20px;top:12px;bottom:auto}.v3 .b{right:20px;color:var(--tx)}
-/* 04 */
-.rows{display:grid;gap:0;margin-top:6px}
-.rw{display:block;padding:14px 0 14px 14px;border-top:1px solid rgba(255,255,255,.07);position:relative}
-.rw:before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:1px;background:linear-gradient(180deg,rgba(196,164,255,.15),rgba(196,164,255,.9))}
-.rw:first-child{border-top:0}
-.rw s{display:block;text-decoration:none;font-size:13.5px;color:var(--dim);line-height:1.4;margin-bottom:4px}
-.rw i{display:none}
-.rw b{display:block;font-size:15px;font-weight:600;line-height:1.4}
-.pfin{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.07);font-size:15.5px;font-weight:400;line-height:1.55;color:rgba(242,237,226,.8);max-width:40em}
-.pfin b{font-weight:600;background:linear-gradient(90deg,#fff,#C4A4FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-@media(min-width:820px){
- .pn{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
- .pn:nth-child(even) .vz{order:2;border-left:1px solid rgba(255,255,255,.06)}
- .vz{height:auto;min-height:280px;border-bottom:0}
- .pn:nth-child(odd) .vz{border-right:1px solid rgba(255,255,255,.06)}
- .tx{padding:34px 34px;display:flex;flex-direction:column;justify-content:center}
- .tx h3{font-size:20px}
- .pn.wide{display:block}.pn.wide .tx{padding:34px}
- .pn.wide .rows{grid-template-columns:1fr 1fr;column-gap:40px}
- .pn.wide .rw:nth-child(2){border-top:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--txt);font-family:Manrope,system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px;position:relative}
+section{position:relative;padding:120px 0}
+.center{text-align:center}
+/* headings: line 1 thin, line 2 platinum */
+.t{font-size:36px;line-height:1.14;letter-spacing:-.02em;text-wrap:balance}
+.t .a{display:block;font-weight:300;color:rgba(255,255,255,.6)}
+.t .b{display:block;font-weight:600;background:var(--plat);-webkit-background-clip:text;background-clip:text;color:transparent}
+.t.one .b{display:inline}
+.lead{color:var(--mut);font-size:17px;max-width:560px}
+.center .lead{margin-left:auto;margin-right:auto}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:999px;border:1px solid var(--line2);background:rgba(255,255,255,.03);font-size:13px;font-weight:500;color:rgba(255,255,255,.78);backdrop-filter:blur(10px)}
+.chip{display:inline-block;padding:6px 14px;border-radius:999px;border:1px solid var(--line2);font-size:13px;color:rgba(255,255,255,.72)}
+.glass{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:24px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.btn{white-space:nowrap;position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 26px;border-radius:14px;font-size:15px;font-weight:600;color:#14121A;background:var(--btn);box-shadow:0 10px 30px rgba(155,111,232,.18),inset 0 1px 0 rgba(255,255,255,.8);transition:transform .25s,box-shadow .25s}
+.btn:after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-20deg);transition:left .7s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(155,111,232,.28),inset 0 1px 0 rgba(255,255,255,.8)}
+.btn:hover:after{left:130%}
+.btn.ghost{color:var(--txt);background:rgba(255,255,255,.04);border:1px solid var(--line2);box-shadow:none}
+.btn.ghost:after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.12),transparent)}
+.btn.sm{height:40px;padding:0 18px;font-size:14px;border-radius:12px}
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+.t .b{transition:text-shadow 1.6s}
+.in .t .b,.t.in .b{animation:bloom 2.4s ease-out}
+@keyframes bloom{0%{filter:drop-shadow(0 0 0 rgba(196,164,255,0))}35%{filter:drop-shadow(0 0 18px rgba(196,164,255,.55))}100%{filter:drop-shadow(0 0 0 rgba(196,164,255,0))}}
+@keyframes driftY{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes driftX{0%,100%{transform:translateX(0)}50%{transform:translateX(-24px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.glowbg{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,var(--glow),transparent 62%);filter:blur(10px)}
+.bigword{position:absolute;left:0;right:0;font-weight:800;line-height:.8;letter-spacing:.02em;text-align:center;white-space:nowrap;pointer-events:none;user-select:none;
+ background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.02) 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.sc{background:rgba(9,9,13,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--line)}
+nav .wrap{display:flex;align-items:center;height:76px;gap:36px}
+nav .logo img{height:22px;width:auto}
+nav .links{display:flex;gap:30px;margin-left:auto;font-size:15px;color:var(--mut)}
+nav .links a:hover{color:var(--txt)}
+nav .right{display:flex;align-items:center;gap:16px}
+.lang{display:flex;gap:2px;padding:3px;border-radius:999px;border:1px solid var(--line2)}
+.lang button{all:unset;cursor:pointer;padding:5px 11px;border-radius:999px;font-size:13px;color:var(--dim)}
+.lang button.on{background:rgba(255,255,255,.1);color:var(--txt)}
+
+/* HERO */
+.hero{min-height:100vh;padding:0;overflow:hidden}
+.hero .bigword{top:110px;font-size:min(25vw,380px);animation:driftX 16s ease-in-out infinite}
+.hero .stage{position:relative;max-width:1280px;margin:0 auto;height:max(100vh,900px);padding:0 40px}
+.hero .ph{position:absolute;left:50%;bottom:-120px;width:400px;margin-left:-200px;filter:drop-shadow(0 50px 90px rgba(0,0,0,.7));animation:driftY 7s ease-in-out infinite}
+.hero .halo{left:50%;top:42%;width:900px;height:900px;margin:-450px 0 0 -450px;background:radial-gradient(circle,rgba(155,111,232,.28),transparent 60%)}
+.hero .ring{position:absolute;left:50%;top:50%;width:640px;height:640px;margin:-300px 0 0 -320px;border-radius:50%;border:1px solid rgba(255,255,255,.06);animation:spin 60s linear infinite}
+.hero .ring:before{content:"";position:absolute;top:-3px;left:50%;width:6px;height:6px;border-radius:50%;background:#E8E2F4;box-shadow:0 0 14px #C4A4FF}
+.hero .l{position:absolute;left:40px;top:52%;max-width:400px;z-index:3}
+.hero .l h1{font-size:44px;margin-top:22px}
+.hero .l p{margin-top:18px;color:var(--mut);font-size:16px}
+.hero .r{position:absolute;right:40px;top:40%;max-width:330px;text-align:right;z-index:3}
+.hero .r strong{display:block;font-size:28px;font-weight:600;letter-spacing:-.01em;background:var(--plat);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .r p{margin-top:10px;color:var(--mut);font-size:15px}
+.hero .acts{position:absolute;left:50%;bottom:110px;transform:translateX(-50%);display:flex;gap:12px;z-index:4}
+.hero .acts .ghost{background:rgba(18,17,24,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.hero .fade{height:340px}
+.hero .fade{position:absolute;left:0;right:0;bottom:0;height:220px;background:linear-gradient(180deg,transparent,var(--bg));z-index:2}
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0;position:relative;z-index:5;background:var(--bg)}
+.strip .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.strip span{font-size:14px;color:var(--dim)}
+.strip b{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:600;color:rgba(255,255,255,.85)}
+.strip b svg{width:22px;height:22px;opacity:.7}
+
+/* MBAND */
+.mband{padding:100px 0 60px}
+.mband .card{position:relative;overflow:hidden;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;min-height:460px;padding:56px 0 0 56px;border-radius:32px}
+.mband .card:before{content:"";position:absolute;inset:0;border-radius:32px;padding:1px;background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.03) 40%,rgba(196,164,255,.25));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.mband .txt{padding-bottom:56px}
+.mband .chips{display:flex;gap:8px;margin:24px 0 30px;flex-wrap:wrap}
+.mband .lead{margin-top:16px}
+.mband .phones{position:relative;height:100%;min-height:460px;align-self:end}
+.mband .phones img{position:absolute;width:250px}
+.mband .phones .p1{left:40px;bottom:-140px;transform:rotate(-6deg);opacity:.85}
+.mband .phones .p2{left:230px;bottom:-60px;transform:rotate(5deg)}
+
+/* PROOF carousel */
+.proof{padding:80px 0 120px;overflow:hidden}
+.proof .vword{position:absolute;left:-40px;top:300px;font-size:200px;writing-mode:vertical-rl;transform:rotate(180deg);text-align:left;width:auto}
+.proof h2{max-width:720px}
+.proof .sub{margin-top:14px;color:var(--mut)}
+.car{position:relative;margin-top:60px;height:800px}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .7s}
+.slide.on{opacity:1;pointer-events:auto}
+.slide h3{text-align:center;font-size:26px;line-height:1.2;font-weight:300;color:rgba(255,255,255,.62)}
+.slide h3 b{display:block;font-weight:600;background:var(--plat);-webkit-background-clip:text;background-clip:text;color:transparent}
+.slide .ph{position:absolute;left:50%;top:96px;width:270px;margin-left:-135px;transform:translateY(30px) scale(.96);transition:transform .9s cubic-bezier(.2,.7,.2,1);filter:drop-shadow(0 40px 70px rgba(0,0,0,.7))}
+.slide.on .ph{transform:none}
+.slide .side{position:absolute;top:220px;width:200px;opacity:.22;filter:blur(2px)}
+.slide .side.l{left:6%;transform:rotate(-8deg)}.slide .side.r{right:6%;transform:rotate(8deg)}
+.co{position:absolute;padding:16px 22px;border-radius:18px;text-align:center;z-index:3;opacity:0;transform:translateY(16px);transition:all .8s .35s}
+.slide.on .co{opacity:1;transform:none}
+.co b{display:block;font-size:19px;font-weight:600}
+.co span{font-size:13px;color:var(--mut)}
+.co.c1{left:calc(50% - 360px);top:460px}.co.c2{left:calc(50% + 150px);top:230px}
+.car .desc{position:absolute;left:50%;bottom:0;width:440px;margin-left:-220px;text-align:center;color:var(--mut);font-size:15px}
+.car .arr{position:absolute;top:400px;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;cursor:pointer;z-index:5;border:1px solid var(--line2);background:rgba(255,255,255,.05);color:var(--txt);font-size:20px;transition:background .2s}
+.car .arr:hover{background:rgba(255,255,255,.12)}
+.car .prev{left:calc(50% - 470px)}.car .next{right:calc(50% - 470px)}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:28px}
+.dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:all .3s}
+.dots i.on{width:26px;border-radius:8px;background:#E3DDEE}
+.proof .after{margin-top:90px}
+
+/* STACK */
+.stack{padding:120px 0 60px}
+.stack .head{position:sticky;top:96px;z-index:1;padding-bottom:30px}
+.scard{position:sticky;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;min-height:500px;padding:52px 0 0 52px;margin-bottom:60px;border-radius:32px;overflow:hidden;background:linear-gradient(180deg,#16151C,#101016);border:1px solid var(--line2);box-shadow:0 -20px 60px rgba(0,0,0,.5);transform-origin:50% 0;transition:transform .2s linear,filter .2s linear}
+.scard .chips{display:flex;gap:8px}
+.scard .nm{display:flex;align-items:center;gap:16px;margin-top:34px}
+.scard .nm svg{width:44px;height:44px;flex:none}
+.scard .nm h3{font-size:34px;font-weight:600;letter-spacing:-.02em}
+.scard p.d{margin-top:20px;max-width:470px;color:var(--mut);font-size:17px}
+.tiles{display:flex;gap:14px;margin:36px 0 52px}
+.tiles div{flex:1;max-width:170px;padding:18px 16px;border-radius:18px;border:1px solid var(--line2);background:rgba(255,255,255,.03);text-align:center}
+.tiles span{display:block;font-size:13px;color:var(--mut);line-height:1.35}
+.tiles b{display:block;margin-top:8px;font-size:18px;font-weight:700;background:var(--plat);-webkit-background-clip:text;background-clip:text;color:transparent}
+.scard .im{position:relative}
+.scard .im img{position:absolute;left:50%;top:6px;width:300px;margin-left:-150px;filter:drop-shadow(0 30px 60px rgba(0,0,0,.6))}
+
+/* LEADGEN */
+.lead2 .grid{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
+.lead2 .rows{display:grid;gap:14px}
+.lead2 .row{display:flex;gap:18px;align-items:center;padding:20px 24px;border-radius:18px}
+.lead2 .row svg{width:30px;height:30px;flex:none;opacity:.85}
+.lead2 .row p{color:rgba(255,255,255,.8);font-size:16px;line-height:1.45}
+.lead2 .answer{margin:70px auto 0;max-width:640px;text-align:center;color:var(--mut);font-size:18px}
+.lead2 .answer b{color:var(--txt);font-weight:600}
+
+/* CALC */
+.calc .card{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:52px;border-radius:32px}
+.calc .lead{margin:16px 0 30px}
+.calc .box{padding:30px;border-radius:22px;background:rgba(0,0,0,.25);border:1px solid var(--line)}
+.calc .box small{color:var(--dim);font-size:13px}
+.calc .ln{display:grid;grid-template-columns:28px 110px 1fr;align-items:center;margin-top:16px;font-size:15px}
+.calc .ln i{font-style:normal;color:var(--dim)}
+.calc .ln b{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.calc .ln span{color:var(--mut)}
+.calc input{width:100%;margin:18px 0 4px;accent-color:#DCD6E8}
+.calc .res{display:flex;align-items:baseline;gap:14px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.calc .res i{font-style:normal;font-size:26px;color:var(--dim)}
+.calc .res strong{font-size:52px;font-weight:700;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums;background:var(--plat);-webkit-background-clip:text;background-clip:text;color:transparent}
+.calc .res span{display:block;margin-top:8px;color:var(--mut);font-size:14px}
+.calc .worse{margin-top:14px;font-size:13px;color:var(--dim)}
+
+/* FACETS list */
+.sd{overflow:hidden}
+.sd .orb{position:absolute;pointer-events:none}
+.sd .o1{left:-160px;top:260px;width:520px;animation:driftY 9s ease-in-out infinite;opacity:.9}
+.sd .o2{left:120px;top:720px;width:260px;animation:driftY 11s ease-in-out infinite reverse;opacity:.55;filter:blur(1px)}
+.sd .o3{left:-60px;top:1000px;width:340px;animation:driftY 13s ease-in-out infinite;opacity:.35;filter:blur(3px)}
+.sd .list{margin:70px 0 0 auto;max-width:700px}
+.sd .it{display:grid;grid-template-columns:1fr 72px;gap:28px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line);text-align:right}
+.sd .it h3{font-size:22px;font-weight:600;letter-spacing:-.01em}
+.sd .it h3 em{font-style:normal;font-weight:300;color:rgba(255,255,255,.55)}
+.sd .it p{margin-top:8px;color:var(--mut);font-size:15px}
+.sd .it img{width:72px;height:72px;object-fit:contain;filter:drop-shadow(0 10px 20px rgba(0,0,0,.6))}
+
+/* WORKFLOW */
+.wf{overflow:hidden}
+.wf .bigword{top:150px;left:auto;right:-80px;text-align:right;font-size:240px}
+.wf .row{display:flex;gap:16px;margin-top:60px;height:440px;align-items:center}
+.step{position:relative;flex:1;height:340px;padding:26px;border-radius:24px;background:linear-gradient(180deg,#17161D,#111116);border:1px solid var(--line);cursor:pointer;overflow:hidden;transition:flex .6s cubic-bezier(.2,.7,.2,1),height .6s cubic-bezier(.2,.7,.2,1),border-color .4s,box-shadow .4s}
+.step .n{font-size:64px;font-weight:800;line-height:1;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.04));-webkit-background-clip:text;background-clip:text;color:transparent;transition:opacity .4s}
+.step .ic{position:absolute;left:26px;bottom:92px;width:28px;height:28px;opacity:.75}
+.step h4{position:absolute;left:26px;right:26px;bottom:26px;font-size:18px;font-weight:600;line-height:1.3}
+.step .more{position:absolute;left:30px;right:30px;bottom:30px;opacity:0;transform:translateY(14px);transition:all .5s}
+.step .more h4{position:static;font-size:24px}
+.step .more p{margin-top:12px;color:var(--mut);font-size:15px}
+.step .ill{position:absolute;left:50%;top:40px;width:140px;margin-left:-70px;opacity:0;transform:scale(.85);transition:all .6s .1s}
+.step.on{flex:1.6;height:440px;border-color:var(--line2);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(196,164,255,.12)}
+.step.on .n{opacity:0}.step.on>.ic,.step.on>h4{opacity:0}
+.step.on .more{opacity:1;transform:none}.step.on .ill{opacity:1;transform:none}
+
+/* PROGRAMS */
+.team .stats{display:flex;justify-content:center;gap:40px;margin-top:40px}
+.team .stats div{text-align:left}
+.team .stats b{display:block;font-size:40px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.team .stats span{color:var(--mut);font-size:14px}
+.team .stats hr{border:0;width:1px;background:var(--line2)}
+.pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+.pc{position:relative;height:460px;border-radius:26px;overflow:hidden;border:1px solid var(--line2)}
+.pc .bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(1.25) saturate(.9);transition:transform 1.2s}
+.pc:hover .bg{transform:scale(1.06)}
+.pc:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,9,13,.05) 30%,rgba(9,9,13,.9))}
+.pc .vt{position:absolute;left:14px;top:20px;z-index:2;writing-mode:vertical-rl;transform:rotate(180deg);font-size:64px;font-weight:800;letter-spacing:.04em;line-height:1;background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,255,255,.06));-webkit-background-clip:text;background-clip:text;color:transparent}
+.pc .cap{position:absolute;left:28px;right:28px;bottom:26px;z-index:2}
+.pc .cap b{display:block;font-size:22px;font-weight:600}
+.pc .cap p{color:var(--mut);font-size:14px;margin-top:4px}
+.pc .cap em{display:inline-block;margin-top:14px;font-style:normal}
+
+/* MARQUEE */
+.mq{margin-top:46px;display:grid;gap:14px;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.mq .tr{display:flex;gap:14px;width:max-content;animation:mq 40s linear infinite}
+.mq .tr.rev{animation-direction:reverse}
+.mq span{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border-radius:999px;border:1px solid var(--line2);background:rgba(255,255,255,.03);font-size:15px;color:rgba(255,255,255,.8);white-space:nowrap}
+.mq span:before{content:"";width:6px;height:6px;border-radius:50%;background:#D9D2E8;box-shadow:0 0 10px rgba(196,164,255,.8)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* PRICING */
+.price{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:920px;margin:56px auto 0;text-align:left}
+.price>div{padding:36px;border-radius:26px;display:flex;flex-direction:column}
+.price h3{font-size:24px;font-weight:600}
+.price .sub{color:var(--mut);font-size:14px;margin-top:4px}
+.price ul{list-style:none;margin:24px 0 30px;display:grid;gap:12px;flex:1}
+.price li{position:relative;padding-left:28px;font-size:15px;color:rgba(255,255,255,.82)}
+.price li:before{content:"";position:absolute;left:2px;top:6px;width:12px;height:7px;border-left:1.6px solid #DCD6E8;border-bottom:1.6px solid #DCD6E8;transform:rotate(-45deg)}
+.price .full{border-color:rgba(196,164,255,.3);box-shadow:0 30px 80px rgba(155,111,232,.12)}
+.founding{display:flex;gap:18px;align-items:center;max-width:920px;margin:18px auto 0;padding:20px 28px;border-radius:18px;text-align:left}
+.founding b{white-space:nowrap;font-size:15px}
+.founding p{color:var(--mut);font-size:15px}
+
+/* REFUSE */
+.refuse .grid{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:center}
+.refuse .box{padding:30px 34px;border-radius:22px;display:grid;gap:16px}
+.refuse .box div{display:flex;gap:14px;align-items:center;font-size:16px;color:rgba(255,255,255,.82)}
+.refuse .box i{flex:none;width:24px;height:24px;border-radius:50%;border:1px solid var(--line2);position:relative}
+.refuse .box i:before,.refuse .box i:after{content:"";position:absolute;left:6px;top:11px;width:11px;height:1.4px;background:#CFC9DB;transform:rotate(45deg)}
+.refuse .box i:after{transform:rotate(-45deg)}
+
+/* FAQ */
+.faq{max-width:900px;margin:50px auto 0}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font-size:18px;font-weight:500}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";font-size:28px;font-weight:300;color:#DCD6E8;transition:transform .3s}
+.faq details[open] summary:after{transform:rotate(45deg)}
+.faq details p{padding:0 40px 24px 0;color:var(--mut)}
+
+/* FINAL */
+.fcta{padding:140px 0 120px;text-align:center;overflow:hidden}
+.fcta .halo{left:50%;top:50%;width:1000px;height:700px;margin:-350px 0 0 -500px;background:radial-gradient(ellipse,rgba(155,111,232,.22),transparent 62%)}
+.fcta .t{font-size:46px}
+.fcta p{margin:20px auto 0;max-width:520px;color:var(--mut)}
+.fcta .acts{display:flex;gap:12px;justify-content:center;margin-top:34px}
+footer{border-top:1px solid var(--line);padding:60px 0 36px}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px}
+footer .logo img{height:22px;width:auto}
+footer .cols p{margin-top:16px;color:var(--mut);font-size:14px;max-width:260px}
+footer h5{font-size:15px;font-weight:600;margin-bottom:16px}
+footer .cols a{display:block;color:var(--mut);font-size:14px;margin-bottom:10px}
+footer .cols a:hover{color:var(--txt)}
+footer .cols a.btn{display:inline-flex;color:#14121A;margin:0}
+footer .bot{margin-top:50px;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
+
+@media (max-width:1000px){
+ nav .links{display:none}nav .right{margin-left:auto;gap:8px}nav .right .btn.sm{height:36px;padding:0 12px;font-size:13px}nav .logo img{height:18px}
+ section{padding:80px 0}.wrap{padding:0 20px}.t{font-size:28px}
+ .hero .stage{height:auto;padding:110px 20px 0;display:flex;flex-direction:column}
+ .hero .bigword{top:90px;font-size:30vw}
+ .hero .l,.hero .r,.hero .acts{position:static;transform:none;max-width:none}
+ .hero .l h1{font-size:34px}
+ .hero .acts{order:2;margin-top:26px}
+ .hero .r{order:3;text-align:left;margin-top:34px}.hero .r strong{font-size:22px}
+ .hero .ph{position:relative;order:4;left:auto;bottom:auto;margin:40px auto -160px;width:290px}
+ .hero .ring{display:none}
+ .strip .wrap{flex-wrap:wrap;justify-content:flex-start;gap:12px 22px}.strip span{width:100%}.strip b{font-size:16px}
+ .mband .card{grid-template-columns:1fr;padding:34px 24px 0}
+ .mband .phones{min-height:360px}.mband .phones img{width:200px}.mband .phones .p1{left:0;bottom:-120px}.mband .phones .p2{left:120px;bottom:-60px}
+ .proof .vword{display:none}
+ .car{height:660px}.slide .side{display:none}.slide .ph{width:250px;margin-left:-125px}
+ .co{padding:12px 16px}.co b{font-size:16px}.co.c1{left:0;top:470px}.co.c2{left:auto;right:0;top:210px}
+ .car .arr{top:auto;bottom:-70px}.car .prev{left:calc(50% - 60px)}.car .next{right:calc(50% - 60px)}
+ .car .desc{width:100%;left:0;margin:0;bottom:-10px}.dots{margin-top:90px}
+ .scard{grid-template-columns:1fr;padding:32px 24px 0;min-height:0}
+ .scard .nm h3{font-size:26px}.tiles{gap:8px;margin:26px 0 20px}.tiles div{padding:14px 8px}.tiles b{font-size:15px}
+ .scard .im{height:340px}.scard .im img{width:240px;margin-left:-120px}
+ .lead2 .grid,.refuse .grid,.calc .card{grid-template-columns:1fr;gap:30px}
+ .calc .card{padding:30px 22px}.calc .res strong{font-size:42px}
+ .sd .o1{width:300px;left:-140px;top:120px;opacity:.5}.sd .o2,.sd .o3{display:none}
+ .sd .it{grid-template-columns:1fr 56px}.sd .it img{width:56px;height:56px}
+ .wf .bigword{font-size:120px}
+ .wf .row{flex-direction:column;height:auto}.step{width:100%;height:110px;flex:none}.step .n{font-size:40px}.step .ic{display:none}.step h4{left:110px;bottom:auto;top:38px}
+ .step.on{height:330px;flex:none}
+ .team .stats{gap:22px}.team .stats b{font-size:30px}
+ .pcards{grid-template-columns:1fr}.pc{height:380px}
+ .price{grid-template-columns:1fr}.founding{flex-direction:column;align-items:flex-start}
+ .fcta .t{font-size:32px}.fcta .acts{flex-wrap:wrap}
+ footer .cols{grid-template-columns:1fr 1fr}
 }
-.lead{font-size:15px;line-height:1.6;color:rgba(242,237,226,.74);max-width:40em;margin:-6px 0 18px}
-.steps{display:grid;gap:14px;margin:0 0 22px}
-.steps>div{display:grid;grid-template-columns:28px 1fr;column-gap:12px;align-items:start}
-.steps b{grid-row:span 2;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:500;color:var(--lav);border:1px solid rgba(196,164,255,.4)}
-.steps h3{font-size:16px;font-weight:600;line-height:1.3}
-.steps p{font-size:14px;color:var(--dim);line-height:1.45;margin-top:2px}
-.steps>i{display:none}
-@media(min-width:760px){.steps{grid-template-columns:auto 28px auto 28px auto;justify-content:start;align-items:center;gap:0 16px}.steps>i{display:block;height:1px;background:linear-gradient(90deg,rgba(196,164,255,.1),rgba(196,164,255,.6))}}
-details.card{padding:0}
-details summary{list-style:none;cursor:pointer;padding:15px 16px;font-size:15px;font-weight:600;display:flex;justify-content:space-between;gap:12px}
-details summary::-webkit-details-marker{display:none}
-details summary:after{content:"+";color:var(--lav);font-weight:400;font-size:20px;line-height:1}
-details[open] summary:after{content:"–"}
-details p{padding:0 16px 15px;font-size:14px;color:rgba(242,237,226,.72)}
-.fin{text-align:center;padding:56px 0 44px}
-.fin h2{margin:0 auto}
-footer{border-top:1px solid rgba(255,255,255,.07);padding:24px 0 40px;display:flex;flex-wrap:wrap;gap:12px 22px;font-size:14px;color:var(--dim)}
-footer a:hover{color:var(--tx)}
-@media(min-width:760px){.ph{grid-template-columns:1fr 1fr}.ph .card:last-child{grid-column:1/-1}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr 1fr}.w{padding:0 32px}}
-.rvl{display:grid;gap:14px;max-width:640px}
-.rv-m{display:flex;align-items:flex-end;gap:12px}
-.rv-a{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
-.rv-b{flex:1;min-width:0;padding:12px 16px 14px;border-radius:20px 20px 20px 6px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09)}
-.rv-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}.rv-h b{font-size:15px;font-weight:600}.rv-h span{font-size:13px;color:var(--dim)}
-.rv-b p{margin:0;font-size:15.5px;line-height:1.55;opacity:.85}
-@media(min-width:760px){.rvl{grid-template-columns:1fr 1fr;max-width:none}}
+
+/* ===== Брендбук VOLYO v1.0: токены и компоненты (поверх всего выше) ===== */
+:root{--vo-bg:#0A0A0F;--vo-ink:#F4F1EC;--vo-muted:#8E8A98;--vo-dim:#56566A;
+--vo-glass-bg:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015)),rgba(16,16,22,.32);--vo-glass-border:rgba(255,255,255,.10);--vo-glass-hi:inset 0 1px 0 rgba(255,255,255,.12);
+--vo-accent-border:rgba(155,111,232,.50);--vo-accent-glow:0 0 40px rgba(155,111,232,.09);--vo-pill-bg:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01));
+--vo-title-1:rgba(244,241,236,.58);--vo-grad-title-2:linear-gradient(100deg,rgba(255,255,255,.88) 0%,rgba(255,255,255,.88) 48%,rgba(232,223,255,.84) 76%,rgba(196,164,255,.82) 100%);
+--vo-grad-giant:linear-gradient(180deg,rgba(255,255,255,.80) 10%,rgba(232,223,255,.58) 55%,rgba(196,164,255,0) 92%);
+--bg:var(--vo-bg);--txt:var(--vo-ink);--mut:var(--vo-muted);--dim:var(--vo-dim);--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.10);--plat:var(--vo-grad-title-2)}
+body{color:var(--vo-ink)}
+.wrap{padding:0 48px}
+/* заголовки: 300 / 500, раздел 24px */
+.t{font-size:24px;line-height:1.25;letter-spacing:-.02em}
+.t .a{font-weight:300;color:var(--vo-title-1);letter-spacing:-.025em}
+.t .b{font-weight:500;background:var(--vo-grad-title-2);-webkit-background-clip:text;background-clip:text;letter-spacing:-.03em}
+.hero .l h1{font-size:44px}.fcta .t{font-size:36px}
+.lead{font-size:16px}
+@keyframes bloom{0%,100%{filter:none}40%{filter:drop-shadow(0 0 10px rgba(196,164,255,.22))}}
+/* стекло */
+.glass,.scard,.step,.calc .box,.tiles div,.co,.pill,.chip,.mq span,.lead2 .row,.refuse .box,.founding,.price>div{background:var(--vo-glass-bg);border:1px solid var(--vo-glass-border);box-shadow:var(--vo-glass-hi);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.pill,.chip,.mq span{background:var(--vo-pill-bg);color:rgba(255,255,255,.70);font-size:13px}
+.glass,.scard,.step,.calc .box,.co,.lead2 .row,.refuse .box,.founding,.price>div,.mband .card,.calc .card,.pc{border-radius:16px}
+.tiles div{border-radius:14px}
+.mband .card:before{border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.03) 45%,rgba(255,255,255,.08))}
+.price .full,.step.on{border-color:var(--vo-accent-border);box-shadow:var(--vo-glass-hi),var(--vo-accent-glow)}
+/* свет под стеклом: мягкий из угла .06-.08 */
+.glowbg{filter:none}
+.hero .halo{background:radial-gradient(circle,rgba(196,164,255,.08),transparent 62%)}
+.fcta .halo{background:radial-gradient(ellipse,rgba(196,164,255,.07),transparent 62%)}
+.lit{position:absolute;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(196,164,255,.07),transparent 62%)}
+/* кнопки: светлое стекло, белый текст */
+.btn{height:46px;padding:0 24px;border-radius:13px;font-weight:500;color:var(--vo-ink);background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.17);box-shadow:inset 0 1px 0 rgba(255,255,255,.14);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.btn:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 30px rgba(0,0,0,.35)}
+.btn:after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent)}
+.btn.ghost{background:transparent;border-color:rgba(255,255,255,.10)}
+footer .cols a.btn{color:var(--vo-ink)}
+/* вес не выше 600, цифры 500 до 40px */
+.bigword{font-weight:600;background:var(--vo-grad-giant);-webkit-background-clip:text;background-clip:text;opacity:.14}
+.hero .bigword{font-size:min(22vw,320px)}.wf .bigword{font-size:220px}.proof .vword{font-size:180px}
+.step .n{font-weight:500;font-size:48px;background:linear-gradient(180deg,rgba(244,241,236,.32),rgba(244,241,236,.06));-webkit-background-clip:text;background-clip:text}
+.pc .vt{font-weight:600;font-size:56px}
+.tiles b{font-weight:500;font-size:16px;color:rgba(244,241,236,.82);background:none;-webkit-text-fill-color:currentColor}
+.tiles span{font-size:13px}
+.calc .res strong{font-size:40px;font-weight:500;background:none;color:rgba(244,241,236,.82);-webkit-text-fill-color:currentColor}
+.calc .ln b{font-weight:500}
+.team .stats b{font-size:36px;font-weight:500;color:rgba(244,241,236,.82)}
+.hero .r strong{font-size:22px;font-weight:500}
+.scard .nm h3{font-size:22px;font-weight:500}.slide h3{font-size:22px}.slide h3 b{font-weight:500}
+.co b{font-size:15px;font-weight:500}.co span{font-size:13px}
+.sd .it h3{font-size:18px;font-weight:500}.pc .cap b{font-size:18px;font-weight:500}.price h3{font-size:20px;font-weight:500}
+.faq summary{font-size:16px;font-weight:500}.step .more h4{font-size:18px;font-weight:500}.step h4{font-size:15px;font-weight:500}
+/* иконки: линейные лаванда, около 20px */
+.scard .nm svg{width:26px;height:26px}.scard .nm svg *,.lead2 .row svg *,.step .ic *{stroke:#C4A4FF}
+.lead2 .row svg{width:22px;height:22px}.step .ic{width:22px;height:22px}
+.strip b svg{width:18px;height:18px;stroke:#C4A4FF;opacity:1}
+/* отступы: не впритык */
+.mband .card{padding:56px 0 0 56px}
+.scard{padding:48px 0 0 48px}
+.tiles{gap:14px}.tiles div{padding:18px 16px}
+.lead2 .row{padding:22px 26px}
+.calc .card{padding:56px}.calc .box{padding:32px}
+.co{padding:16px 22px}
+.step{padding:30px}.step .ic{left:30px}.step h4{left:30px;right:30px;bottom:30px}.step .more{left:32px;right:32px;bottom:32px}
+.price>div{padding:40px}.founding{padding:22px 30px}
+.refuse .box{padding:34px 38px}
+.pc .cap{left:32px;right:32px;bottom:30px}
+.faq summary{padding:24px 4px}.faq details p{padding:0 44px 24px 4px}
+/* слои: плашки уходят за телефон */
+.slide .ph{z-index:4}.co{z-index:2}
+.co.c1{left:calc(50% - 330px);top:470px}.co.c2{left:calc(50% + 70px);top:220px;padding-left:96px}
+.co.c1{padding-right:96px}
+/* первый экран в сетке */
+.hero .l{left:48px;top:50%;transform:translateY(-30%)}.hero .l.rv{transform:translateY(calc(-30% + 28px))}.hero .l.rv.in{transform:translateY(-30%)}
+.hero .r{right:48px}
+.hero .l .acts{position:static;transform:none;left:auto;bottom:auto;display:flex;gap:12px;margin-top:30px}
+.scard{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015)),rgba(14,14,19,.88);box-shadow:var(--vo-glass-hi),0 -24px 60px rgba(0,0,0,.55)}
+@media (max-width:1000px){
+ .wrap{padding:0 24px}
+ .t{font-size:22px}.hero .l h1{font-size:32px}.fcta .t{font-size:28px}
+ .hero .stage{padding:110px 24px 0}.hero .l,.hero .l.rv,.hero .l.rv.in{transform:none}
+ .mband .card{padding:32px 24px 0}.scard{padding:30px 24px 0}.calc .card{padding:30px 24px}.calc .box{padding:24px}
+ .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tiles div{max-width:none}
+ .lead2 .row{padding:18px 20px}.price>div{padding:30px 24px}.refuse .box{padding:26px 24px}
+ .co{padding:12px 16px}.co.c1{left:12px;top:480px;padding-right:16px}.co.c2{left:auto;right:12px;top:200px;padding-left:16px}
+ .co{display:none}
+ .tiles{grid-template-columns:1fr;gap:8px}.tiles div{display:flex;justify-content:space-between;align-items:center;text-align:left;padding:14px 18px}.tiles b{margin-top:0;text-align:right}
+ .step{padding:24px}.step h4{left:96px}.step .more{left:24px;right:24px;bottom:24px}
+ .pc .cap{left:24px;right:24px}
+ .hero .bigword{font-size:28vw}
+}
+
+/* ===== Единое стекло и стандартный масштаб сайта (28.11) ===== */
+/* все плашки и кнопки: одно стекло */
+.hero .acts .ghost,.btn.ghost{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015)),rgba(16,16,22,.32);border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.10);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.car .arr,.lang{background:var(--vo-glass-bg);border:1px solid var(--vo-glass-border);box-shadow:var(--vo-glass-hi);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.lang button.on{background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.04));box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.scard{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015)),rgba(16,16,22,.62);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px)}
+b,strong{font-weight:500}
+.lead2 .answer b{font-weight:500;color:var(--vo-ink)}
+/* шрифт: текст 15px, читаемый контраст */
+body{font-size:15px;line-height:1.6}
+.lead,.proof .sub,.hero .l p,.fcta p{font-size:15px;color:rgba(244,241,236,.66)}
+.scard p.d,.lead2 .row p,.step .more p,.price li,.refuse .box div,.sd .it p,.faq details p,.car .desc{font-size:15px;color:rgba(244,241,236,.80)}
+.sd .it h3 em{font-size:15px}
+.lead2 .answer{font-size:16px;color:rgba(244,241,236,.66)}
+.hero .l h1{font-size:40px}.fcta .t{font-size:32px}.t{font-size:24px}
+.slide h3{font-size:20px}.scard .nm h3{font-size:20px}.sd .it h3{font-size:17px}.price h3{font-size:18px}
+.hero .r strong{font-size:20px}.hero .r p{font-size:14px}
+.strip b{font-size:16px;font-weight:500}.strip span{font-size:13px}
+.team .stats b{font-size:32px}.calc .res strong{font-size:36px}.calc .ln b{font-size:18px}
+.tiles span{font-size:13px}.tiles b{font-size:15px}
+.chip,.pill,.mq span{font-size:12px}.pill{padding:7px 16px}.chip{padding:5px 13px}.mq span{padding:10px 18px;font-size:13px}
+.co b{font-size:14px}.co span{font-size:12px}
+.faq summary{font-size:15px;padding:20px 4px}
+/* шапка и кнопки стандартные */
+nav .wrap{height:64px}nav .logo img{height:18px}nav .links{font-size:14px;gap:28px}
+.btn{height:44px;padding:0 22px;font-size:14px}.btn.sm{height:36px;padding:0 16px;font-size:13px;border-radius:11px}
+/* контейнер и ритм секций */
+.wrap{max-width:1160px}
+section{padding:96px 0}.mband{padding:80px 0 40px}.proof{padding:64px 0 96px}.stack{padding:96px 0 40px}.fcta{padding:112px 0 96px}
+/* визуалы меньше */
+.hero .stage{height:max(100vh,820px)}
+.hero .ph{width:330px;margin-left:-165px;bottom:-110px}
+.hero .bigword{font-size:min(19vw,260px);top:100px}.wf .bigword{font-size:180px}.proof .vword{font-size:150px}
+.mband .card{min-height:400px;padding:48px 0 0 48px}.mband .phones{min-height:400px}.mband .phones img{width:210px}.mband .phones .p2{left:200px}
+.car{height:720px;margin-top:48px}.slide .ph{width:240px;margin-left:-120px;top:84px}.slide .side{width:160px;top:200px}
+.co.c1{left:calc(50% - 300px);top:430px}.co.c2{left:calc(50% + 60px);top:200px}
+.car .arr{top:360px;width:42px;height:42px}.car .prev{left:calc(50% - 420px)}.car .next{right:calc(50% - 420px)}
+.proof .after{margin-top:72px}
+.scard{min-height:420px;padding:44px 0 0 44px;margin-bottom:48px}.scard .nm{margin-top:26px}.tiles{margin:28px 0 44px}.tiles div{max-width:160px;padding:16px 14px}
+.scard .im img{width:250px;margin-left:-125px}
+.calc .card{padding:48px}.calc .box{padding:28px}
+.sd .o1{width:420px}.sd .o2{width:220px}.sd .o3{width:280px}.sd .list{max-width:640px;margin-top:56px}.sd .it{padding:24px 0}.sd .it img{width:60px;height:60px}.sd .it{grid-template-columns:1fr 60px}
+.wf .row{height:380px;margin-top:48px}.step{height:290px;padding:26px}.step.on{height:380px}.step .n{font-size:40px}.step .ill{width:110px;margin-left:-55px;top:34px}
+.pc{height:380px}.pc .vt{font-size:48px}.pcards{margin-top:44px}.team .stats{margin-top:32px}
+.price{max-width:860px;margin-top:44px}.price>div{padding:34px}.founding{max-width:860px}
+.faq{max-width:820px}
+@media (max-width:1000px){
+ .hero .l h1{font-size:30px}.t{font-size:21px}.fcta .t{font-size:26px}
+ .hero .ph{width:270px;margin:36px auto -150px}
+ section{padding:72px 0}.mband .card{padding:30px 22px 0}.scard{padding:28px 22px 0}
+ .mband .phones img{width:180px}.mband .phones .p2{left:110px}
+ .scard .im{height:300px}.scard .im img{width:220px;margin-left:-110px}
+ .slide .ph{width:230px;margin-left:-115px}.car{height:640px}
+ .wf .row{height:auto}.step{height:96px}.step.on{height:300px}.step h4{top:34px;bottom:auto}.pc{height:340px}
+}
+
+/* ===== Стекло как в приложении VOLYO (index.html, body.bgph .card) ===== */
+:root{--app-card:radial-gradient(110% 90% at 0% 0%,rgba(255,255,255,.10),transparent 50%),radial-gradient(80% 60% at 100% 0%,rgba(196,164,255,.05),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01) 60%,rgba(0,0,0,.22)),rgba(12,10,22,.45);
+--app-card-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -20px 34px -20px rgba(0,0,0,.7),0 1px 2px rgba(0,0,0,.35),0 8px 16px -6px rgba(0,0,0,.45),0 28px 56px -18px rgba(0,0,0,.7);
+--app-pill:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.01)),rgba(12,10,22,.5)}
+.glass,.scard,.step,.calc .box,.tiles div,.co,.lead2 .row,.refuse .box,.founding,.price>div,.mband .card,.calc .card{background:var(--app-card);border:1px solid rgba(255,255,255,.07);border-top-color:rgba(255,255,255,.22);border-bottom-color:rgba(0,0,0,.45);box-shadow:var(--app-card-shadow);backdrop-filter:blur(22px) saturate(1.25);-webkit-backdrop-filter:blur(22px) saturate(1.25)}
+.tiles div,.calc .box{background:radial-gradient(120% 100% at 0% 0%,rgba(255,255,255,.07),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.03),rgba(0,0,0,.2)),rgba(8,7,14,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),inset 0 -14px 24px -16px rgba(0,0,0,.7)}
+.scard{background:radial-gradient(110% 90% at 0% 0%,rgba(255,255,255,.10),transparent 50%),radial-gradient(80% 60% at 100% 0%,rgba(196,164,255,.05),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01) 60%,rgba(0,0,0,.22)),rgba(11,10,18,.82);backdrop-filter:blur(28px) saturate(1.25);-webkit-backdrop-filter:blur(28px) saturate(1.25)}
+.price .full,.step.on{border-color:rgba(155,111,232,.45);border-top-color:rgba(196,164,255,.6);box-shadow:var(--app-card-shadow),0 0 40px rgba(155,111,232,.09)}
+.mband .card:before{display:none}
+.pill,.chip,.mq span,.lang,.car .arr{background:var(--app-pill);border:1px solid rgba(255,255,255,.10);border-top-color:rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 6px 14px -6px rgba(0,0,0,.6)}
+.btn,.btn.ghost,.hero .acts .ghost{background:var(--app-pill);border:1px solid rgba(255,255,255,.12);border-top-color:rgba(255,255,255,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 18px -8px rgba(0,0,0,.7)}
+.btn:not(.ghost){border-color:rgba(255,255,255,.16);border-top-color:rgba(255,255,255,.30);background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.02)),rgba(12,10,22,.5)}
+.lang button.on{background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.03));box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
+nav.sc{background:rgba(8,8,13,.72)}
+
+/* ===== Масштаб ещё меньше (28.11, шаг 2) ===== */
+body{font-size:14px}
+.lead,.proof .sub,.hero .l p,.fcta p,.scard p.d,.lead2 .row p,.step .more p,.price li,.refuse .box div,.sd .it p,.faq details p,.car .desc,.sd .it h3 em{font-size:14px}
+.lead2 .answer{font-size:15px}
+.hero .l h1{font-size:34px}.t{font-size:21px}.fcta .t{font-size:28px}
+.slide h3{font-size:18px}.scard .nm h3{font-size:18px}.sd .it h3{font-size:16px}.price h3{font-size:17px}.step .more h4{font-size:16px}.step h4{font-size:14px}
+.hero .r strong{font-size:18px}.hero .r p{font-size:13px}.hero .r{max-width:290px}.hero .l{max-width:360px}
+.strip{padding:20px 0}.strip b{font-size:14px}.strip span{font-size:12px}
+.team .stats b{font-size:28px}.team .stats span{font-size:13px}.calc .res strong{font-size:32px}.calc .ln b{font-size:16px}.calc .ln{font-size:14px}
+.tiles span{font-size:12px}.tiles b{font-size:14px}.tiles div{padding:14px 12px;max-width:145px}.tiles{gap:10px;margin:24px 0 38px}
+.chip,.pill{font-size:12px}.mq span{font-size:12px;padding:9px 16px}
+.faq summary{font-size:14px;padding:18px 4px}.faq{max-width:760px}
+nav .wrap{height:58px}nav .logo img{height:16px}nav .links{font-size:13px;gap:24px}
+.btn{height:40px;padding:0 18px;font-size:13px;border-radius:12px}.btn.sm{height:34px;padding:0 14px;font-size:12px}
+.lang button{font-size:12px;padding:4px 10px}
+.wrap{max-width:1080px}
+section{padding:80px 0}.mband{padding:64px 0 32px}.proof{padding:48px 0 80px}.stack{padding:80px 0 32px}.fcta{padding:96px 0 80px}
+.hero .stage{height:max(100vh,760px);max-width:1180px}
+.hero .ph{width:290px;margin-left:-145px;bottom:-100px}
+.hero .bigword{font-size:min(17vw,230px);top:92px}.wf .bigword{font-size:150px}.proof .vword{font-size:130px}
+.mband .card{min-height:350px;padding:42px 0 0 42px}.mband .phones{min-height:350px}.mband .phones img{width:180px}.mband .phones .p1{left:30px}.mband .phones .p2{left:175px}
+.car{height:640px;margin-top:40px}.slide .ph{width:215px;margin-left:-107px;top:76px}.slide .side{width:140px;top:180px}
+.co{padding:13px 18px}.co.c1{left:calc(50% - 270px);top:380px}.co.c2{left:calc(50% + 50px);top:180px}.co b{font-size:13px}.co span{font-size:12px}
+.car .arr{top:320px;width:38px;height:38px;font-size:17px}.car .prev{left:calc(50% - 380px)}.car .next{right:calc(50% - 380px)}
+.proof .after{margin-top:60px}
+.scard{min-height:370px;padding:38px 0 0 38px;margin-bottom:40px}.scard .nm{margin-top:22px}.scard .nm svg{width:22px;height:22px}
+.scard .im img{width:215px;margin-left:-107px}
+.stack .head{top:84px}
+.lead2 .row{padding:18px 22px}.lead2 .grid{gap:48px}.lead2 .answer{margin-top:56px}
+.calc .card{padding:42px}.calc .box{padding:24px}
+.sd .o1{width:360px}.sd .o2{width:190px}.sd .o3{width:240px}.sd .list{max-width:580px;margin-top:48px}.sd .it{padding:20px 0;grid-template-columns:1fr 52px;gap:22px}.sd .it img{width:52px;height:52px}
+.wf .row{height:330px;margin-top:40px;gap:12px}.step{height:250px;padding:22px}.step.on{height:330px}.step .n{font-size:34px}.step .ill{width:92px;margin-left:-46px;top:28px}
+.step .ic{left:22px;bottom:78px;width:20px;height:20px}.step h4{left:22px;right:22px;bottom:22px}.step .more{left:24px;right:24px;bottom:24px}
+.pc{height:330px}.pc .vt{font-size:42px}.pc .cap{left:26px;right:26px;bottom:24px}.pc .cap b{font-size:16px}.pc .cap p{font-size:13px}.pcards{margin-top:36px;gap:14px}.team .stats{margin-top:26px}
+.price{max-width:780px;margin-top:36px;gap:14px}.price>div{padding:30px}.price ul{gap:10px;margin:20px 0 26px}.founding{max-width:780px;padding:18px 26px}.founding b,.founding p{font-size:14px}
+.refuse .box{padding:28px 32px;gap:14px}
+.mq{margin-top:36px;gap:10px}.mq .tr{gap:10px}
+footer{padding:48px 0 30px}footer h5{font-size:14px}footer .cols a,footer .cols p{font-size:13px}footer .logo img{height:16px}
+@media (max-width:1000px){
+ .hero .l h1{font-size:28px}.t{font-size:20px}.fcta .t{font-size:24px}
+ .hero .stage{height:auto}.hero .ph{width:250px;margin:32px auto -140px;bottom:auto}
+ section{padding:64px 0}.mband .card{padding:28px 20px 0}.scard{padding:26px 20px 0}
+ .mband .phones{min-height:320px}.mband .phones img{width:165px}.mband .phones .p1{left:0}.mband .phones .p2{left:105px}
+ .scard .im{height:280px}.scard .im img{width:200px;margin-left:-100px}
+ .slide .ph{width:210px;margin-left:-105px}.car{height:580px}.car .arr{top:auto}
+ .wf .row{height:auto}.step{height:84px}.step.on{height:280px}.step h4{left:86px;top:30px}.step .n{font-size:30px}
+ .pc{height:300px}.calc .card{padding:28px 20px}
+ .tiles div{max-width:none;padding:12px 16px}
+}
+
+/* ===== Телефон-история и бриллиант по прокрутке ===== */
+.story{padding:80px 0 40px;overflow:clip}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:40px}
+.steps{display:flex;flex-direction:column;gap:22vh;padding:18vh 0 22vh}
+.st{padding:34px 36px;opacity:.38;transform:scale(.97);transition:opacity .5s,transform .5s,border-color .5s,box-shadow .5s}
+.st.on{opacity:1;transform:none;border-color:rgba(155,111,232,.4);border-top-color:rgba(196,164,255,.55);box-shadow:var(--app-card-shadow),0 0 40px rgba(155,111,232,.08)}
+.st .chips{display:flex;gap:8px}.st .nm{display:flex;align-items:center;gap:14px;margin-top:20px}.st .nm svg{width:22px;height:22px}
+.st .nm h3{font-size:18px;font-weight:500}.st p.d{margin-top:12px;font-size:14px;color:rgba(244,241,236,.8);max-width:440px}
+.st .tiles{margin:22px 0 0}.st .mph{display:none}
+.sphone{position:sticky;top:calc(50vh - 250px);height:500px;align-self:start}
+.sphone .scr{position:absolute;left:50%;top:0;width:245px;margin-left:-122px;opacity:0;transform:translateY(14px) scale(.98);transition:opacity .6s,transform .6s;filter:drop-shadow(0 40px 70px rgba(0,0,0,.7))}
+.sphone .scr.on{opacity:1;transform:none}
+.sphone .halo2{position:absolute;left:50%;top:50%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,rgba(196,164,255,.08),transparent 62%)}
+.sdots{position:absolute;right:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px}
+.sdots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.18);transition:all .35s}
+.sdots i.on{height:22px;border-radius:6px;background:#E3DDEE}
+.story .vword{left:-30px;top:240px}
+/* бриллиант */
+.dmw{position:fixed;right:28px;top:50%;z-index:40;width:96px;margin-top:-70px;text-align:center;opacity:0;transform:translateX(20px);transition:opacity .5s,transform .5s;pointer-events:none}
+.dmw.show{opacity:1;transform:none}
+.dmw .gems{position:relative;width:96px;height:96px;transition:transform .2s linear}
+.dmw .gems img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.dmw .gems img:first-of-type{filter:brightness(1.4)}
+.dmw .lit2{opacity:0;filter:drop-shadow(0 8px 22px rgba(155,111,232,.35))}
+.dmw .gw{position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(circle,rgba(196,164,255,.12),transparent 62%);opacity:0}
+.dmw p{margin-top:8px;font-size:12px;line-height:1.3;color:var(--vo-muted)}
+.dmw p b{display:block;font-size:18px;font-weight:500;color:rgba(244,241,236,.85);font-variant-numeric:tabular-nums}
+@media (max-width:1240px){.dmw{right:12px;width:70px}.dmw .gems{width:70px;height:70px}}
+@media (max-width:1000px){
+ .sgrid{grid-template-columns:1fr;gap:0}.sphone{display:none}
+ .steps{gap:18px;padding:0}.st{opacity:1;transform:none;padding:26px 20px}
+ .st .mph{display:block;width:210px;margin:0 auto 24px;filter:drop-shadow(0 30px 50px rgba(0,0,0,.6))}
+ .dmw{display:none}
+}
+footer .bot{display:flex;justify-content:space-between;gap:20px}footer .bot .lg{display:flex;gap:22px}footer .bot a{color:var(--vo-muted)}footer .bot a:hover{color:var(--vo-ink)}
 </style>
 </head>
 <body>
-<div class="w">
-<nav class="nav"><a href="https://volyo.app/"><img src="../logo-volyo.png" alt="VOLYO"></a><a class="b" href="https://volyo.app/">Открыть</a></nav>
 
-<header class="hero">
- <img src="../logo-volyo.png" alt="VOLYO">
- <div class="rule"></div>
- <h1>Становись тем, кем хочешь быть</h1>
- <p class="sub">Дисциплина — путь к свободе. Привычки, планы и прогресс в одном приложении.</p>
- <a class="cta" href="https://volyo.app/">Открыть VOLYO</a>
- <p class="note">Бесплатно. Работает на телефоне и компьютере.</p>
-</header>
+<nav id="nav"><div class="wrap">
+ <a class="logo" href="#top"><img src="img/logo.png" alt="VOLYO"></a>
+ <div class="links"><a href="#inside">Features</a><a href="#facets">Facets</a><a href="#programs">Programs</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+ <div class="right"><div class="lang"><button data-l="en">EN</button><button data-l="ru">RU</button></div><a class="btn sm" href="https://volyo.app/">Open VOLYO</a></div>
+</div></nav>
 
-<section>
- <div class="lb">Философия</div>
- <h2>Свобода через дисциплину</h2>
- <div class="phx"><div class="pn"><div class="vz v1"><svg viewBox="0 0 560 220" preserveAspectRatio="xMidYMid slice" fill="none"><defs><linearGradient id="tr" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#C4A4FF" stop-opacity="0"/><stop offset="1" stop-color="#E8DFFF"/></linearGradient><linearGradient id="hz" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><circle cx="20" cy="10" r="1.1" fill="#fff" opacity="0.15"/><circle cx="117" cy="63" r="0.6" fill="#fff" opacity="0.46818181818181814"/><circle cx="214" cy="116" r="0.6" fill="#fff" opacity="0.3318181818181818"/><circle cx="311" cy="19" r="1.1" fill="#fff" opacity="0.19545454545454544"/><circle cx="408" cy="72" r="0.6" fill="#fff" opacity="0.5136363636363637"/><circle cx="505" cy="125" r="0.6" fill="#fff" opacity="0.37727272727272726"/><circle cx="82" cy="28" r="1.1" fill="#fff" opacity="0.2409090909090909"/><circle cx="179" cy="81" r="0.6" fill="#fff" opacity="0.5590909090909091"/><circle cx="276" cy="134" r="0.6" fill="#fff" opacity="0.42272727272727273"/><circle cx="373" cy="37" r="1.1" fill="#fff" opacity="0.2863636363636364"/><circle cx="470" cy="90" r="0.6" fill="#fff" opacity="0.15"/><circle cx="47" cy="143" r="0.6" fill="#fff" opacity="0.46818181818181814"/><circle cx="144" cy="46" r="1.1" fill="#fff" opacity="0.3318181818181818"/><circle cx="241" cy="99" r="0.6" fill="#fff" opacity="0.19545454545454544"/><circle cx="338" cy="152" r="0.6" fill="#fff" opacity="0.5136363636363637"/><circle cx="435" cy="55" r="1.1" fill="#fff" opacity="0.37727272727272726"/><circle cx="532" cy="108" r="0.6" fill="#fff" opacity="0.2409090909090909"/><circle cx="109" cy="11" r="0.6" fill="#fff" opacity="0.5590909090909091"/><circle cx="206" cy="64" r="1.1" fill="#fff" opacity="0.42272727272727273"/><circle cx="303" cy="117" r="0.6" fill="#fff" opacity="0.2863636363636364"/><circle cx="400" cy="20" r="0.6" fill="#fff" opacity="0.15"/><circle cx="497" cy="73" r="1.1" fill="#fff" opacity="0.46818181818181814"/><circle cx="74" cy="126" r="0.6" fill="#fff" opacity="0.3318181818181818"/><circle cx="171" cy="29" r="0.6" fill="#fff" opacity="0.19545454545454544"/><circle cx="268" cy="82" r="1.1" fill="#fff" opacity="0.5136363636363637"/><circle cx="365" cy="135" r="0.6" fill="#fff" opacity="0.37727272727272726"/><circle cx="462" cy="38" r="0.6" fill="#fff" opacity="0.2409090909090909"/><circle cx="39" cy="91" r="1.1" fill="#fff" opacity="0.5590909090909091"/><circle cx="136" cy="144" r="0.6" fill="#fff" opacity="0.42272727272727273"/><circle cx="233" cy="47" r="0.6" fill="#fff" opacity="0.2863636363636364"/><circle cx="330" cy="100" r="1.1" fill="#fff" opacity="0.15"/><circle cx="427" cy="153" r="0.6" fill="#fff" opacity="0.46818181818181814"/><circle cx="524" cy="56" r="0.6" fill="#fff" opacity="0.3318181818181818"/><circle cx="101" cy="109" r="1.1" fill="#fff" opacity="0.19545454545454544"/><path d="M0 186H560" stroke="url(#hz)"/><path d="M0 196c60-6 100 4 160-2s120 6 180 0 140 4 220-2" stroke="rgba(255,255,255,.1)"/><path d="M0 208c80-5 140 5 220-1s180 5 340-1" stroke="rgba(255,255,255,.06)"/><path d="M40 184C170 180 300 150 372 98" stroke="url(#tr)" stroke-width="1.6" stroke-linecap="round"/><path d="M40 184C170 180 300 150 372 98" stroke="url(#tr)" stroke-width="6" stroke-linecap="round" opacity=".18"/></svg><img src="../v-mark.png" alt=""></div>
-<div class="tx"><div class="no"><b>01</b>Свобода</div><h3>Свобода начинается с того, что ты делаешь каждый день</h3><p>Когда решения принимаешь ты, а не настроение, усталость или чужие ожидания, жизнь идёт туда, куда ты её ведёшь. Эту свободу даёт дисциплина. Дисциплина — путь к свободе.</p></div></div>
+<!-- HERO -->
+<section class="hero" id="top">
+ <div class="bigword">VOLYO</div>
+ <div class="glowbg halo"></div>
+ <div class="stage">
+  <div class="l rv">
+   <span class="pill">Daily discipline system</span>
+   <h1 class="t"><span class="a">Become who</span><span class="b">you want to be</span></h1>
+   <p>Tasks, habits and focus in one place. Every morning you know what to do, and every action leaves a mark</p>
+   <div class="acts"><a class="btn" href="https://volyo.app/">Start free</a><a class="btn ghost" href="#how">How it works</a></div>
+  </div>
+  <div class="r rv d2">
+   <strong>Founding 100</strong>
+   <p>The first hundred pay once and keep full access forever, including every future feature</p>
+  </div>
+  <img class="ph" src="img/ip-home.webp" alt="VOLYO home screen">
+  <div class="fade"></div>
+ </div>
+</section>
 
-<div class="pn"><div class="vz v2"><div class="st"><svg class="gem" viewBox="0 0 320 250"><defs>
-   <linearGradient id="gkDa" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E2C38"/><stop offset=".55" stop-color="#0E0D14"/><stop offset="1" stop-color="#040306"/></linearGradient>
-   <linearGradient id="gkMa" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5E5B6C"/><stop offset=".5" stop-color="#1B1A22"/><stop offset="1" stop-color="#08070C"/></linearGradient>
-   <linearGradient id="gkLa" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#DAD6EA" stop-opacity=".55"/><stop offset="1" stop-color="#8E8AA2" stop-opacity="0"/></linearGradient>
-   <linearGradient id="gkEa" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset=".3" stop-color="#fff"/><stop offset=".72" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity=".25"/></linearGradient>
-   <radialGradient id="gkFa"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".35" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-   <filter id="gk540100sa" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".011 .026" numOctaves="5" seed="7" result="n"/><feColorMatrix in="n" values="0 0 0 0 .88  0 0 0 0 .87  0 0 0 0 .92  0 0 0 2.2 -.8"/><feGaussianBlur stdDeviation="1.4"/></filter>
-   <radialGradient id="gk540100m1a" cx=".5" cy=".8" r=".46"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-   <radialGradient id="gk540100m2a" cx=".5" cy=".45" r=".48"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".7" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-   <mask id="gk540100ma"><rect width="320" height="250" fill="url(#gk540100m1a)"/><rect width="320" height="250" fill="url(#gk540100m2a)"/></mask>
-   <radialGradient id="gk540100ba" cx=".5" cy=".18" r=".42"><stop offset="0" stop-color="#F2EEFF" stop-opacity=".55"/><stop offset=".45" stop-color="#C9C4DA" stop-opacity=".16"/><stop offset="1" stop-color="#C9C4DA" stop-opacity="0"/></radialGradient>
-   <filter id="gk540100ga" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter></defs>
-   <polygon points="66.0,92.0 89.5,92.0 125.5,62.0" fill="url(#gkMa)"/><polygon points="66.0,92.0 89.5,92.0 125.5,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="66.0,92.0 125.5,62.0 114.0,62.0" fill="url(#gkDa)"/><polygon points="66.0,92.0 125.5,62.0 114.0,62.0" fill="url(#gkLa)" fill-opacity="0.07"/><polygon points="66.0,92.0 125.5,62.0 114.0,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="89.5,92.0 113.0,92.0 137.0,62.0" fill="url(#gkDa)"/><polygon points="89.5,92.0 113.0,92.0 137.0,62.0" fill="url(#gkLa)" fill-opacity="0.07"/><polygon points="89.5,92.0 113.0,92.0 137.0,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="89.5,92.0 137.0,62.0 125.5,62.0" fill="url(#gkMa)"/><polygon points="89.5,92.0 137.0,62.0 125.5,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="113.0,92.0 136.5,92.0 148.5,62.0" fill="url(#gkMa)"/><polygon points="113.0,92.0 136.5,92.0 148.5,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="113.0,92.0 148.5,62.0 137.0,62.0" fill="url(#gkDa)"/><polygon points="113.0,92.0 148.5,62.0 137.0,62.0" fill="url(#gkLa)" fill-opacity="0.07"/><polygon points="113.0,92.0 148.5,62.0 137.0,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="136.5,92.0 160.0,92.0 160.0,62.0" fill="url(#gkDa)"/><polygon points="136.5,92.0 160.0,92.0 160.0,62.0" fill="url(#gkLa)" fill-opacity="0.07"/><polygon points="136.5,92.0 160.0,92.0 160.0,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="136.5,92.0 160.0,62.0 148.5,62.0" fill="url(#gkMa)"/><polygon points="136.5,92.0 160.0,62.0 148.5,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,92.0 183.5,92.0 171.5,62.0" fill="url(#gkMa)"/><polygon points="160.0,92.0 183.5,92.0 171.5,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,92.0 171.5,62.0 160.0,62.0" fill="url(#gkDa)"/><polygon points="160.0,92.0 171.5,62.0 160.0,62.0" fill="url(#gkLa)" fill-opacity="0.07"/><polygon points="160.0,92.0 171.5,62.0 160.0,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="183.5,92.0 207.0,92.0 183.0,62.0" fill="url(#gkDa)"/><polygon points="183.5,92.0 207.0,92.0 183.0,62.0" fill="url(#gkLa)" fill-opacity="0.07"/><polygon points="183.5,92.0 207.0,92.0 183.0,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="183.5,92.0 183.0,62.0 171.5,62.0" fill="url(#gkMa)"/><polygon points="183.5,92.0 183.0,62.0 171.5,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="207.0,92.0 230.5,92.0 194.5,62.0" fill="url(#gkMa)"/><polygon points="207.0,92.0 230.5,92.0 194.5,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="207.0,92.0 194.5,62.0 183.0,62.0" fill="url(#gkDa)"/><polygon points="207.0,92.0 194.5,62.0 183.0,62.0" fill="url(#gkLa)" fill-opacity="0.07"/><polygon points="207.0,92.0 194.5,62.0 183.0,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="230.5,92.0 254.0,92.0 206.0,62.0" fill="url(#gkDa)"/><polygon points="230.5,92.0 254.0,92.0 206.0,62.0" fill="url(#gkLa)" fill-opacity="0.07"/><polygon points="230.5,92.0 254.0,92.0 206.0,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="230.5,92.0 206.0,62.0 194.5,62.0" fill="url(#gkMa)"/><polygon points="230.5,92.0 206.0,62.0 194.5,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="66.0,92.0 89.5,92.0 110.7,128.0" fill="url(#gkDa)"/><polygon points="66.0,92.0 89.5,92.0 110.7,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="66.0,92.0 110.7,128.0 94.2,128.0" fill="url(#gkMa)"/><polygon points="66.0,92.0 110.7,128.0 94.2,128.0" fill="url(#gkLa)" fill-opacity="0.04"/><polygon points="66.0,92.0 110.7,128.0 94.2,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="94.2,128.0 110.7,128.0 160.0,212.0" fill="url(#gkMa)"/><polygon points="94.2,128.0 110.7,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="89.5,92.0 113.0,92.0 127.1,128.0" fill="url(#gkDa)"/><polygon points="89.5,92.0 113.0,92.0 127.1,128.0" fill="url(#gkLa)" fill-opacity="0.05"/><polygon points="89.5,92.0 113.0,92.0 127.1,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="89.5,92.0 127.1,128.0 110.7,128.0" fill="url(#gkMa)"/><polygon points="89.5,92.0 127.1,128.0 110.7,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="110.7,128.0 127.1,128.0 160.0,212.0" fill="url(#gkDa)"/><polygon points="110.7,128.0 127.1,128.0 160.0,212.0" fill="url(#gkLa)" fill-opacity="0.05"/><polygon points="110.7,128.0 127.1,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="113.0,92.0 136.5,92.0 143.6,128.0" fill="url(#gkDa)"/><polygon points="113.0,92.0 136.5,92.0 143.6,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="113.0,92.0 143.6,128.0 127.1,128.0" fill="url(#gkMa)"/><polygon points="113.0,92.0 143.6,128.0 127.1,128.0" fill="url(#gkLa)" fill-opacity="0.04"/><polygon points="113.0,92.0 143.6,128.0 127.1,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="127.1,128.0 143.6,128.0 160.0,212.0" fill="url(#gkMa)"/><polygon points="127.1,128.0 143.6,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="136.5,92.0 160.0,92.0 160.0,128.0" fill="url(#gkDa)"/><polygon points="136.5,92.0 160.0,92.0 160.0,128.0" fill="url(#gkLa)" fill-opacity="0.05"/><polygon points="136.5,92.0 160.0,92.0 160.0,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="136.5,92.0 160.0,128.0 143.6,128.0" fill="url(#gkMa)"/><polygon points="136.5,92.0 160.0,128.0 143.6,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="143.6,128.0 160.0,128.0 160.0,212.0" fill="url(#gkDa)"/><polygon points="143.6,128.0 160.0,128.0 160.0,212.0" fill="url(#gkLa)" fill-opacity="0.03"/><polygon points="143.6,128.0 160.0,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,92.0 183.5,92.0 176.4,128.0" fill="url(#gkDa)"/><polygon points="160.0,92.0 183.5,92.0 176.4,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,92.0 176.4,128.0 160.0,128.0" fill="url(#gkMa)"/><polygon points="160.0,92.0 176.4,128.0 160.0,128.0" fill="url(#gkLa)" fill-opacity="0.04"/><polygon points="160.0,92.0 176.4,128.0 160.0,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,128.0 176.4,128.0 160.0,212.0" fill="url(#gkMa)"/><polygon points="160.0,128.0 176.4,128.0 160.0,212.0" fill="url(#gkLa)" fill-opacity="0.04"/><polygon points="160.0,128.0 176.4,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="183.5,92.0 207.0,92.0 192.9,128.0" fill="url(#gkDa)"/><polygon points="183.5,92.0 207.0,92.0 192.9,128.0" fill="url(#gkLa)" fill-opacity="0.05"/><polygon points="183.5,92.0 207.0,92.0 192.9,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="183.5,92.0 192.9,128.0 176.4,128.0" fill="url(#gkMa)"/><polygon points="183.5,92.0 192.9,128.0 176.4,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="176.4,128.0 192.9,128.0 160.0,212.0" fill="url(#gkDa)"/><polygon points="176.4,128.0 192.9,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="207.0,92.0 230.5,92.0 209.3,128.0" fill="url(#gkDa)"/><polygon points="207.0,92.0 230.5,92.0 209.3,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="207.0,92.0 209.3,128.0 192.9,128.0" fill="url(#gkMa)"/><polygon points="207.0,92.0 209.3,128.0 192.9,128.0" fill="url(#gkLa)" fill-opacity="0.04"/><polygon points="207.0,92.0 209.3,128.0 192.9,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="192.9,128.0 209.3,128.0 160.0,212.0" fill="url(#gkMa)"/><polygon points="192.9,128.0 209.3,128.0 160.0,212.0" fill="url(#gkLa)" fill-opacity="0.06"/><polygon points="192.9,128.0 209.3,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="230.5,92.0 254.0,92.0 225.8,128.0" fill="url(#gkDa)"/><polygon points="230.5,92.0 254.0,92.0 225.8,128.0" fill="url(#gkLa)" fill-opacity="0.05"/><polygon points="230.5,92.0 254.0,92.0 225.8,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="230.5,92.0 225.8,128.0 209.3,128.0" fill="url(#gkMa)"/><polygon points="230.5,92.0 225.8,128.0 209.3,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="209.3,128.0 225.8,128.0 160.0,212.0" fill="url(#gkDa)"/><polygon points="209.3,128.0 225.8,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><line x1="66" y1="92" x2="254" y2="92" stroke="url(#gkEa)" stroke-width="2"/><line x1="114" y1="62" x2="206" y2="62" stroke="rgba(255,255,255,.85)" stroke-width="1.4"/><polyline points="66.0,92.0 114.0,62.0" stroke="rgba(255,255,255,.4)" stroke-width=".9" fill="none"/><polyline points="254.0,92.0 206.0,62.0" stroke="rgba(255,255,255,.4)" stroke-width=".9" fill="none"/><polyline points="66.0,92.0 160.0,212.0 254.0,92.0" stroke="rgba(255,255,255,.28)" stroke-width=".9" fill="none"/>
-   <g opacity="0.60"><circle cx="92" cy="89" r="7.800000000000001" fill="url(#gkFa)"/><path d="M92 77L92.78 88.22L104 89L92.78 89.78L92 101L91.22 89.78L80 89L91.22 88.22Z" fill="#fff"/></g><g opacity="0.70"><circle cx="168" cy="62" r="9.75" fill="url(#gkFa)"/><path d="M168 47L168.975 61.025L183 62L168.975 62.975L168 77L167.025 62.975L153 62L167.025 61.025Z" fill="#fff"/></g><g opacity="0.35"><circle cx="214" cy="65" r="4.55" fill="url(#gkFa)"/><path d="M214 58L214.455 64.545L221 65L214.455 65.455L214 72L213.545 65.455L207 65L213.545 64.545Z" fill="#fff"/></g><g opacity="0.20"><circle cx="186" cy="130" r="5.2" fill="url(#gkFa)"/><path d="M186 122L186.52 129.48L194 130L186.52 130.52L186 138L185.48 130.52L178 130L185.48 129.48Z" fill="#fff"/></g><g opacity="0.15"><circle cx="132" cy="122" r="4.55" fill="url(#gkFa)"/><path d="M132 115L132.455 121.545L139 122L132.455 122.455L132 129L131.545 122.455L125 122L131.545 121.545Z" fill="#fff"/></g>
-   </svg><em>камень</em></div><div class="ar"></div><div class="st"><svg class="gem" viewBox="0 0 320 250"><defs>
-   <linearGradient id="gkDb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E2C38"/><stop offset=".55" stop-color="#0E0D14"/><stop offset="1" stop-color="#040306"/></linearGradient>
-   <linearGradient id="gkMb" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5E5B6C"/><stop offset=".5" stop-color="#1B1A22"/><stop offset="1" stop-color="#08070C"/></linearGradient>
-   <linearGradient id="gkLb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#DAD6EA" stop-opacity=".55"/><stop offset="1" stop-color="#8E8AA2" stop-opacity="0"/></linearGradient>
-   <linearGradient id="gkEb" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset=".3" stop-color="#fff"/><stop offset=".72" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity=".25"/></linearGradient>
-   <radialGradient id="gkFb"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".35" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-   <filter id="gk405891sb" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".011 .026" numOctaves="5" seed="7" result="n"/><feColorMatrix in="n" values="0 0 0 0 .88  0 0 0 0 .87  0 0 0 0 .92  0 0 0 2.2 -.8"/><feGaussianBlur stdDeviation="1.4"/></filter>
-   <radialGradient id="gk405891m1b" cx=".5" cy=".8" r=".46"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-   <radialGradient id="gk405891m2b" cx=".5" cy=".45" r=".48"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".7" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-   <mask id="gk405891mb"><rect width="320" height="250" fill="url(#gk405891m1b)"/><rect width="320" height="250" fill="url(#gk405891m2b)"/></mask>
-   <radialGradient id="gk405891bb" cx=".5" cy=".18" r=".42"><stop offset="0" stop-color="#F2EEFF" stop-opacity=".55"/><stop offset=".45" stop-color="#C9C4DA" stop-opacity=".16"/><stop offset="1" stop-color="#C9C4DA" stop-opacity="0"/></radialGradient>
-   <filter id="gk405891gb" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter></defs>
-   <polygon points="66.0,92.0 89.5,92.0 125.5,62.0" fill="url(#gkMb)"/><polygon points="66.0,92.0 89.5,92.0 125.5,62.0" fill="url(#gkLb)" fill-opacity="0.34"/><polygon points="66.0,92.0 89.5,92.0 125.5,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="66.0,92.0 125.5,62.0 114.0,62.0" fill="url(#gkDb)"/><polygon points="66.0,92.0 125.5,62.0 114.0,62.0" fill="url(#gkLb)" fill-opacity="0.82"/><polygon points="66.0,92.0 125.5,62.0 114.0,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="89.5,92.0 113.0,92.0 137.0,62.0" fill="url(#gkDb)"/><polygon points="89.5,92.0 113.0,92.0 137.0,62.0" fill="url(#gkLb)" fill-opacity="0.78"/><polygon points="89.5,92.0 113.0,92.0 137.0,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="89.5,92.0 137.0,62.0 125.5,62.0" fill="url(#gkMb)"/><polygon points="89.5,92.0 137.0,62.0 125.5,62.0" fill="url(#gkLb)" fill-opacity="0.27"/><polygon points="89.5,92.0 137.0,62.0 125.5,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="113.0,92.0 136.5,92.0 148.5,62.0" fill="url(#gkMb)"/><polygon points="113.0,92.0 136.5,92.0 148.5,62.0" fill="url(#gkLb)" fill-opacity="0.34"/><polygon points="113.0,92.0 136.5,92.0 148.5,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="113.0,92.0 148.5,62.0 137.0,62.0" fill="url(#gkDb)"/><polygon points="113.0,92.0 148.5,62.0 137.0,62.0" fill="url(#gkLb)" fill-opacity="0.82"/><polygon points="113.0,92.0 148.5,62.0 137.0,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="136.5,92.0 160.0,92.0 160.0,62.0" fill="url(#gkDb)"/><polygon points="136.5,92.0 160.0,92.0 160.0,62.0" fill="url(#gkLb)" fill-opacity="0.07"/><polygon points="136.5,92.0 160.0,92.0 160.0,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="136.5,92.0 160.0,62.0 148.5,62.0" fill="url(#gkMb)"/><polygon points="136.5,92.0 160.0,62.0 148.5,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,92.0 183.5,92.0 171.5,62.0" fill="url(#gkMb)"/><polygon points="160.0,92.0 183.5,92.0 171.5,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,92.0 171.5,62.0 160.0,62.0" fill="url(#gkDb)"/><polygon points="160.0,92.0 171.5,62.0 160.0,62.0" fill="url(#gkLb)" fill-opacity="0.07"/><polygon points="160.0,92.0 171.5,62.0 160.0,62.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="183.5,92.0 207.0,92.0 183.0,62.0" fill="url(#gkDb)"/><polygon points="183.5,92.0 207.0,92.0 183.0,62.0" fill="url(#gkLb)" fill-opacity="0.43"/><polygon points="183.5,92.0 207.0,92.0 183.0,62.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="183.5,92.0 183.0,62.0 171.5,62.0" fill="url(#gkMb)"/><polygon points="183.5,92.0 183.0,62.0 171.5,62.0" fill="url(#gkLb)" fill-opacity="0.15"/><polygon points="183.5,92.0 183.0,62.0 171.5,62.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="207.0,92.0 230.5,92.0 194.5,62.0" fill="url(#gkMb)"/><polygon points="207.0,92.0 230.5,92.0 194.5,62.0" fill="url(#gkLb)" fill-opacity="0.18"/><polygon points="207.0,92.0 230.5,92.0 194.5,62.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="207.0,92.0 194.5,62.0 183.0,62.0" fill="url(#gkDb)"/><polygon points="207.0,92.0 194.5,62.0 183.0,62.0" fill="url(#gkLb)" fill-opacity="0.44"/><polygon points="207.0,92.0 194.5,62.0 183.0,62.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="230.5,92.0 254.0,92.0 206.0,62.0" fill="url(#gkDb)"/><polygon points="230.5,92.0 254.0,92.0 206.0,62.0" fill="url(#gkLb)" fill-opacity="0.43"/><polygon points="230.5,92.0 254.0,92.0 206.0,62.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="230.5,92.0 206.0,62.0 194.5,62.0" fill="url(#gkMb)"/><polygon points="230.5,92.0 206.0,62.0 194.5,62.0" fill="url(#gkLb)" fill-opacity="0.15"/><polygon points="230.5,92.0 206.0,62.0 194.5,62.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="66.0,92.0 89.5,92.0 110.7,128.0" fill="url(#gkDb)"/><polygon points="66.0,92.0 89.5,92.0 110.7,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="66.0,92.0 110.7,128.0 94.2,128.0" fill="url(#gkMb)"/><polygon points="66.0,92.0 110.7,128.0 94.2,128.0" fill="url(#gkLb)" fill-opacity="0.04"/><polygon points="66.0,92.0 110.7,128.0 94.2,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="94.2,128.0 110.7,128.0 160.0,212.0" fill="url(#gkMb)"/><polygon points="94.2,128.0 110.7,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="89.5,92.0 113.0,92.0 127.1,128.0" fill="url(#gkDb)"/><polygon points="89.5,92.0 113.0,92.0 127.1,128.0" fill="url(#gkLb)" fill-opacity="0.05"/><polygon points="89.5,92.0 113.0,92.0 127.1,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="89.5,92.0 127.1,128.0 110.7,128.0" fill="url(#gkMb)"/><polygon points="89.5,92.0 127.1,128.0 110.7,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="110.7,128.0 127.1,128.0 160.0,212.0" fill="url(#gkDb)"/><polygon points="110.7,128.0 127.1,128.0 160.0,212.0" fill="url(#gkLb)" fill-opacity="0.05"/><polygon points="110.7,128.0 127.1,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="113.0,92.0 136.5,92.0 143.6,128.0" fill="url(#gkDb)"/><polygon points="113.0,92.0 136.5,92.0 143.6,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="113.0,92.0 143.6,128.0 127.1,128.0" fill="url(#gkMb)"/><polygon points="113.0,92.0 143.6,128.0 127.1,128.0" fill="url(#gkLb)" fill-opacity="0.04"/><polygon points="113.0,92.0 143.6,128.0 127.1,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="127.1,128.0 143.6,128.0 160.0,212.0" fill="url(#gkMb)"/><polygon points="127.1,128.0 143.6,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="136.5,92.0 160.0,92.0 160.0,128.0" fill="url(#gkDb)"/><polygon points="136.5,92.0 160.0,92.0 160.0,128.0" fill="url(#gkLb)" fill-opacity="0.05"/><polygon points="136.5,92.0 160.0,92.0 160.0,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="136.5,92.0 160.0,128.0 143.6,128.0" fill="url(#gkMb)"/><polygon points="136.5,92.0 160.0,128.0 143.6,128.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="143.6,128.0 160.0,128.0 160.0,212.0" fill="url(#gkDb)"/><polygon points="143.6,128.0 160.0,128.0 160.0,212.0" fill="url(#gkLb)" fill-opacity="0.03"/><polygon points="143.6,128.0 160.0,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,92.0 183.5,92.0 176.4,128.0" fill="url(#gkDb)"/><polygon points="160.0,92.0 183.5,92.0 176.4,128.0" fill="url(#gkLb)" fill-opacity="0.11"/><polygon points="160.0,92.0 183.5,92.0 176.4,128.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,92.0 176.4,128.0 160.0,128.0" fill="url(#gkMb)"/><polygon points="160.0,92.0 176.4,128.0 160.0,128.0" fill="url(#gkLb)" fill-opacity="0.26"/><polygon points="160.0,92.0 176.4,128.0 160.0,128.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,128.0 176.4,128.0 160.0,212.0" fill="url(#gkMb)"/><polygon points="160.0,128.0 176.4,128.0 160.0,212.0" fill="url(#gkLb)" fill-opacity="0.28"/><polygon points="160.0,128.0 176.4,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="183.5,92.0 207.0,92.0 192.9,128.0" fill="url(#gkDb)"/><polygon points="183.5,92.0 207.0,92.0 192.9,128.0" fill="url(#gkLb)" fill-opacity="0.31"/><polygon points="183.5,92.0 207.0,92.0 192.9,128.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="183.5,92.0 192.9,128.0 176.4,128.0" fill="url(#gkMb)"/><polygon points="183.5,92.0 192.9,128.0 176.4,128.0" fill="url(#gkLb)" fill-opacity="0.13"/><polygon points="183.5,92.0 192.9,128.0 176.4,128.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="176.4,128.0 192.9,128.0 160.0,212.0" fill="url(#gkDb)"/><polygon points="176.4,128.0 192.9,128.0 160.0,212.0" fill="url(#gkLb)" fill-opacity="0.07"/><polygon points="176.4,128.0 192.9,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="207.0,92.0 230.5,92.0 209.3,128.0" fill="url(#gkDb)"/><polygon points="207.0,92.0 230.5,92.0 209.3,128.0" fill="url(#gkLb)" fill-opacity="0.11"/><polygon points="207.0,92.0 230.5,92.0 209.3,128.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="207.0,92.0 209.3,128.0 192.9,128.0" fill="url(#gkMb)"/><polygon points="207.0,92.0 209.3,128.0 192.9,128.0" fill="url(#gkLb)" fill-opacity="0.26"/><polygon points="207.0,92.0 209.3,128.0 192.9,128.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="192.9,128.0 209.3,128.0 160.0,212.0" fill="url(#gkMb)"/><polygon points="192.9,128.0 209.3,128.0 160.0,212.0" fill="url(#gkLb)" fill-opacity="0.35"/><polygon points="192.9,128.0 209.3,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="230.5,92.0 254.0,92.0 225.8,128.0" fill="url(#gkDb)"/><polygon points="230.5,92.0 254.0,92.0 225.8,128.0" fill="url(#gkLb)" fill-opacity="0.31"/><polygon points="230.5,92.0 254.0,92.0 225.8,128.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="230.5,92.0 225.8,128.0 209.3,128.0" fill="url(#gkMb)"/><polygon points="230.5,92.0 225.8,128.0 209.3,128.0" fill="url(#gkLb)" fill-opacity="0.13"/><polygon points="230.5,92.0 225.8,128.0 209.3,128.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><polygon points="209.3,128.0 225.8,128.0 160.0,212.0" fill="url(#gkDb)"/><polygon points="209.3,128.0 225.8,128.0 160.0,212.0" fill="url(#gkLb)" fill-opacity="0.11"/><polygon points="209.3,128.0 225.8,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width=".55" stroke-linejoin="round"/><line x1="66" y1="92" x2="254" y2="92" stroke="url(#gkEb)" stroke-width="2"/><line x1="114" y1="62" x2="206" y2="62" stroke="rgba(255,255,255,.85)" stroke-width="1.4"/><polyline points="66.0,92.0 114.0,62.0" stroke="rgba(255,255,255,.4)" stroke-width=".9" fill="none"/><polyline points="254.0,92.0 206.0,62.0" stroke="rgba(255,255,255,.4)" stroke-width=".9" fill="none"/><polyline points="66.0,92.0 160.0,212.0 254.0,92.0" stroke="rgba(255,255,255,.28)" stroke-width=".9" fill="none"/>
-   <g opacity="1.00"><circle cx="92" cy="89" r="7.800000000000001" fill="url(#gkFb)"/><path d="M92 77L92.78 88.22L104 89L92.78 89.78L92 101L91.22 89.78L80 89L91.22 88.22Z" fill="#fff"/></g><g opacity="0.70"><circle cx="168" cy="62" r="9.75" fill="url(#gkFb)"/><path d="M168 47L168.975 61.025L183 62L168.975 62.975L168 77L167.025 62.975L153 62L167.025 61.025Z" fill="#fff"/></g><g opacity="0.63"><circle cx="214" cy="65" r="4.55" fill="url(#gkFb)"/><path d="M214 58L214.455 64.545L221 65L214.455 65.455L214 72L213.545 65.455L207 65L213.545 64.545Z" fill="#fff"/></g><g opacity="0.55"><circle cx="186" cy="130" r="5.2" fill="url(#gkFb)"/><path d="M186 122L186.52 129.48L194 130L186.52 130.52L186 138L185.48 130.52L178 130L185.48 129.48Z" fill="#fff"/></g><g opacity="0.15"><circle cx="132" cy="122" r="4.55" fill="url(#gkFb)"/><path d="M132 115L132.455 121.545L139 122L132.455 122.455L132 129L131.545 122.455L125 122L131.545 121.545Z" fill="#fff"/></g>
-   </svg><em>огранка</em></div><div class="ar"></div><div class="st"><svg class="gem" viewBox="0 0 320 250"><defs>
-   <linearGradient id="gkDc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E2C38"/><stop offset=".55" stop-color="#0E0D14"/><stop offset="1" stop-color="#040306"/></linearGradient>
-   <linearGradient id="gkMc" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5E5B6C"/><stop offset=".5" stop-color="#1B1A22"/><stop offset="1" stop-color="#08070C"/></linearGradient>
-   <linearGradient id="gkLc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#DAD6EA" stop-opacity=".55"/><stop offset="1" stop-color="#8E8AA2" stop-opacity="0"/></linearGradient>
-   <linearGradient id="gkEc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset=".3" stop-color="#fff"/><stop offset=".72" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity=".25"/></linearGradient>
-   <radialGradient id="gkFc"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".35" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-   <filter id="gk43853sc" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".011 .026" numOctaves="5" seed="7" result="n"/><feColorMatrix in="n" values="0 0 0 0 .88  0 0 0 0 .87  0 0 0 0 .92  0 0 0 2.2 -.8"/><feGaussianBlur stdDeviation="1.4"/></filter>
-   <radialGradient id="gk43853m1c" cx=".5" cy=".8" r=".46"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-   <radialGradient id="gk43853m2c" cx=".5" cy=".45" r=".48"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".7" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-   <mask id="gk43853mc"><rect width="320" height="250" fill="url(#gk43853m1c)"/><rect width="320" height="250" fill="url(#gk43853m2c)"/></mask>
-   <radialGradient id="gk43853bc" cx=".5" cy=".18" r=".42"><stop offset="0" stop-color="#F2EEFF" stop-opacity=".55"/><stop offset=".45" stop-color="#C9C4DA" stop-opacity=".16"/><stop offset="1" stop-color="#C9C4DA" stop-opacity="0"/></radialGradient>
-   <filter id="gk43853gc" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter></defs>
-   <polygon points="66.0,92.0 89.5,92.0 125.5,62.0" fill="url(#gkMc)"/><polygon points="66.0,92.0 89.5,92.0 125.5,62.0" fill="url(#gkLc)" fill-opacity="0.34"/><polygon points="66.0,92.0 89.5,92.0 125.5,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="66.0,92.0 125.5,62.0 114.0,62.0" fill="url(#gkDc)"/><polygon points="66.0,92.0 125.5,62.0 114.0,62.0" fill="url(#gkLc)" fill-opacity="0.82"/><polygon points="66.0,92.0 125.5,62.0 114.0,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="89.5,92.0 113.0,92.0 137.0,62.0" fill="url(#gkDc)"/><polygon points="89.5,92.0 113.0,92.0 137.0,62.0" fill="url(#gkLc)" fill-opacity="0.78"/><polygon points="89.5,92.0 113.0,92.0 137.0,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="89.5,92.0 137.0,62.0 125.5,62.0" fill="url(#gkMc)"/><polygon points="89.5,92.0 137.0,62.0 125.5,62.0" fill="url(#gkLc)" fill-opacity="0.27"/><polygon points="89.5,92.0 137.0,62.0 125.5,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="113.0,92.0 136.5,92.0 148.5,62.0" fill="url(#gkMc)"/><polygon points="113.0,92.0 136.5,92.0 148.5,62.0" fill="url(#gkLc)" fill-opacity="0.34"/><polygon points="113.0,92.0 136.5,92.0 148.5,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="113.0,92.0 148.5,62.0 137.0,62.0" fill="url(#gkDc)"/><polygon points="113.0,92.0 148.5,62.0 137.0,62.0" fill="url(#gkLc)" fill-opacity="0.82"/><polygon points="113.0,92.0 148.5,62.0 137.0,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="136.5,92.0 160.0,92.0 160.0,62.0" fill="url(#gkDc)"/><polygon points="136.5,92.0 160.0,92.0 160.0,62.0" fill="url(#gkLc)" fill-opacity="0.78"/><polygon points="136.5,92.0 160.0,92.0 160.0,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="136.5,92.0 160.0,62.0 148.5,62.0" fill="url(#gkMc)"/><polygon points="136.5,92.0 160.0,62.0 148.5,62.0" fill="url(#gkLc)" fill-opacity="0.27"/><polygon points="136.5,92.0 160.0,62.0 148.5,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,92.0 183.5,92.0 171.5,62.0" fill="url(#gkMc)"/><polygon points="160.0,92.0 183.5,92.0 171.5,62.0" fill="url(#gkLc)" fill-opacity="0.34"/><polygon points="160.0,92.0 183.5,92.0 171.5,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,92.0 171.5,62.0 160.0,62.0" fill="url(#gkDc)"/><polygon points="160.0,92.0 171.5,62.0 160.0,62.0" fill="url(#gkLc)" fill-opacity="0.82"/><polygon points="160.0,92.0 171.5,62.0 160.0,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="183.5,92.0 207.0,92.0 183.0,62.0" fill="url(#gkDc)"/><polygon points="183.5,92.0 207.0,92.0 183.0,62.0" fill="url(#gkLc)" fill-opacity="0.78"/><polygon points="183.5,92.0 207.0,92.0 183.0,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="183.5,92.0 183.0,62.0 171.5,62.0" fill="url(#gkMc)"/><polygon points="183.5,92.0 183.0,62.0 171.5,62.0" fill="url(#gkLc)" fill-opacity="0.27"/><polygon points="183.5,92.0 183.0,62.0 171.5,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="207.0,92.0 230.5,92.0 194.5,62.0" fill="url(#gkMc)"/><polygon points="207.0,92.0 230.5,92.0 194.5,62.0" fill="url(#gkLc)" fill-opacity="0.34"/><polygon points="207.0,92.0 230.5,92.0 194.5,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="207.0,92.0 194.5,62.0 183.0,62.0" fill="url(#gkDc)"/><polygon points="207.0,92.0 194.5,62.0 183.0,62.0" fill="url(#gkLc)" fill-opacity="0.82"/><polygon points="207.0,92.0 194.5,62.0 183.0,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="230.5,92.0 254.0,92.0 206.0,62.0" fill="url(#gkDc)"/><polygon points="230.5,92.0 254.0,92.0 206.0,62.0" fill="url(#gkLc)" fill-opacity="0.78"/><polygon points="230.5,92.0 254.0,92.0 206.0,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="230.5,92.0 206.0,62.0 194.5,62.0" fill="url(#gkMc)"/><polygon points="230.5,92.0 206.0,62.0 194.5,62.0" fill="url(#gkLc)" fill-opacity="0.27"/><polygon points="230.5,92.0 206.0,62.0 194.5,62.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="66.0,92.0 89.5,92.0 110.7,128.0" fill="url(#gkDc)"/><polygon points="66.0,92.0 89.5,92.0 110.7,128.0" fill="url(#gkLc)" fill-opacity="0.20"/><polygon points="66.0,92.0 89.5,92.0 110.7,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="66.0,92.0 110.7,128.0 94.2,128.0" fill="url(#gkMc)"/><polygon points="66.0,92.0 110.7,128.0 94.2,128.0" fill="url(#gkLc)" fill-opacity="0.48"/><polygon points="66.0,92.0 110.7,128.0 94.2,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="94.2,128.0 110.7,128.0 160.0,212.0" fill="url(#gkMc)"/><polygon points="94.2,128.0 110.7,128.0 160.0,212.0" fill="url(#gkLc)" fill-opacity="0.17"/><polygon points="94.2,128.0 110.7,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="89.5,92.0 113.0,92.0 127.1,128.0" fill="url(#gkDc)"/><polygon points="89.5,92.0 113.0,92.0 127.1,128.0" fill="url(#gkLc)" fill-opacity="0.58"/><polygon points="89.5,92.0 113.0,92.0 127.1,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="89.5,92.0 127.1,128.0 110.7,128.0" fill="url(#gkMc)"/><polygon points="89.5,92.0 127.1,128.0 110.7,128.0" fill="url(#gkLc)" fill-opacity="0.24"/><polygon points="89.5,92.0 127.1,128.0 110.7,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="110.7,128.0 127.1,128.0 160.0,212.0" fill="url(#gkDc)"/><polygon points="110.7,128.0 127.1,128.0 160.0,212.0" fill="url(#gkLc)" fill-opacity="0.61"/><polygon points="110.7,128.0 127.1,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="113.0,92.0 136.5,92.0 143.6,128.0" fill="url(#gkDc)"/><polygon points="113.0,92.0 136.5,92.0 143.6,128.0" fill="url(#gkLc)" fill-opacity="0.20"/><polygon points="113.0,92.0 136.5,92.0 143.6,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="113.0,92.0 143.6,128.0 127.1,128.0" fill="url(#gkMc)"/><polygon points="113.0,92.0 143.6,128.0 127.1,128.0" fill="url(#gkLc)" fill-opacity="0.48"/><polygon points="113.0,92.0 143.6,128.0 127.1,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="127.1,128.0 143.6,128.0 160.0,212.0" fill="url(#gkMc)"/><polygon points="127.1,128.0 143.6,128.0 160.0,212.0" fill="url(#gkLc)" fill-opacity="0.14"/><polygon points="127.1,128.0 143.6,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="136.5,92.0 160.0,92.0 160.0,128.0" fill="url(#gkDc)"/><polygon points="136.5,92.0 160.0,92.0 160.0,128.0" fill="url(#gkLc)" fill-opacity="0.58"/><polygon points="136.5,92.0 160.0,92.0 160.0,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="136.5,92.0 160.0,128.0 143.6,128.0" fill="url(#gkMc)"/><polygon points="136.5,92.0 160.0,128.0 143.6,128.0" fill="url(#gkLc)" fill-opacity="0.24"/><polygon points="136.5,92.0 160.0,128.0 143.6,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="143.6,128.0 160.0,128.0 160.0,212.0" fill="url(#gkDc)"/><polygon points="143.6,128.0 160.0,128.0 160.0,212.0" fill="url(#gkLc)" fill-opacity="0.37"/><polygon points="143.6,128.0 160.0,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,92.0 183.5,92.0 176.4,128.0" fill="url(#gkDc)"/><polygon points="160.0,92.0 183.5,92.0 176.4,128.0" fill="url(#gkLc)" fill-opacity="0.20"/><polygon points="160.0,92.0 183.5,92.0 176.4,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,92.0 176.4,128.0 160.0,128.0" fill="url(#gkMc)"/><polygon points="160.0,92.0 176.4,128.0 160.0,128.0" fill="url(#gkLc)" fill-opacity="0.48"/><polygon points="160.0,92.0 176.4,128.0 160.0,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="160.0,128.0 176.4,128.0 160.0,212.0" fill="url(#gkMc)"/><polygon points="160.0,128.0 176.4,128.0 160.0,212.0" fill="url(#gkLc)" fill-opacity="0.51"/><polygon points="160.0,128.0 176.4,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="183.5,92.0 207.0,92.0 192.9,128.0" fill="url(#gkDc)"/><polygon points="183.5,92.0 207.0,92.0 192.9,128.0" fill="url(#gkLc)" fill-opacity="0.58"/><polygon points="183.5,92.0 207.0,92.0 192.9,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="183.5,92.0 192.9,128.0 176.4,128.0" fill="url(#gkMc)"/><polygon points="183.5,92.0 192.9,128.0 176.4,128.0" fill="url(#gkLc)" fill-opacity="0.24"/><polygon points="183.5,92.0 192.9,128.0 176.4,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="176.4,128.0 192.9,128.0 160.0,212.0" fill="url(#gkDc)"/><polygon points="176.4,128.0 192.9,128.0 160.0,212.0" fill="url(#gkLc)" fill-opacity="0.14"/><polygon points="176.4,128.0 192.9,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="207.0,92.0 230.5,92.0 209.3,128.0" fill="url(#gkDc)"/><polygon points="207.0,92.0 230.5,92.0 209.3,128.0" fill="url(#gkLc)" fill-opacity="0.20"/><polygon points="207.0,92.0 230.5,92.0 209.3,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="207.0,92.0 209.3,128.0 192.9,128.0" fill="url(#gkMc)"/><polygon points="207.0,92.0 209.3,128.0 192.9,128.0" fill="url(#gkLc)" fill-opacity="0.48"/><polygon points="207.0,92.0 209.3,128.0 192.9,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="192.9,128.0 209.3,128.0 160.0,212.0" fill="url(#gkMc)"/><polygon points="192.9,128.0 209.3,128.0 160.0,212.0" fill="url(#gkLc)" fill-opacity="0.65"/><polygon points="192.9,128.0 209.3,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="230.5,92.0 254.0,92.0 225.8,128.0" fill="url(#gkDc)"/><polygon points="230.5,92.0 254.0,92.0 225.8,128.0" fill="url(#gkLc)" fill-opacity="0.58"/><polygon points="230.5,92.0 254.0,92.0 225.8,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="230.5,92.0 225.8,128.0 209.3,128.0" fill="url(#gkMc)"/><polygon points="230.5,92.0 225.8,128.0 209.3,128.0" fill="url(#gkLc)" fill-opacity="0.24"/><polygon points="230.5,92.0 225.8,128.0 209.3,128.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><polygon points="209.3,128.0 225.8,128.0 160.0,212.0" fill="url(#gkDc)"/><polygon points="209.3,128.0 225.8,128.0 160.0,212.0" fill="url(#gkLc)" fill-opacity="0.20"/><polygon points="209.3,128.0 225.8,128.0 160.0,212.0" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width=".55" stroke-linejoin="round"/><line x1="66" y1="92" x2="254" y2="92" stroke="url(#gkEc)" stroke-width="2"/><line x1="114" y1="62" x2="206" y2="62" stroke="rgba(255,255,255,.85)" stroke-width="1.4"/><polyline points="66.0,92.0 114.0,62.0" stroke="rgba(255,255,255,.4)" stroke-width=".9" fill="none"/><polyline points="254.0,92.0 206.0,62.0" stroke="rgba(255,255,255,.4)" stroke-width=".9" fill="none"/><polyline points="66.0,92.0 160.0,212.0 254.0,92.0" stroke="rgba(255,255,255,.28)" stroke-width=".9" fill="none"/>
-   <g opacity="1.00"><circle cx="92" cy="89" r="7.800000000000001" fill="url(#gkFc)"/><path d="M92 77L92.78 88.22L104 89L92.78 89.78L92 101L91.22 89.78L80 89L91.22 88.22Z" fill="#fff"/></g><g opacity="1.00"><circle cx="168" cy="62" r="9.75" fill="url(#gkFc)"/><path d="M168 47L168.975 61.025L183 62L168.975 62.975L168 77L167.025 62.975L153 62L167.025 61.025Z" fill="#fff"/></g><g opacity="0.90"><circle cx="214" cy="65" r="4.55" fill="url(#gkFc)"/><path d="M214 58L214.455 64.545L221 65L214.455 65.455L214 72L213.545 65.455L207 65L213.545 64.545Z" fill="#fff"/></g><g opacity="0.90"><circle cx="186" cy="130" r="5.2" fill="url(#gkFc)"/><path d="M186 122L186.52 129.48L194 130L186.52 130.52L186 138L185.48 130.52L178 130L185.48 129.48Z" fill="#fff"/></g><g opacity="0.85"><circle cx="132" cy="122" r="4.55" fill="url(#gkFc)"/><path d="M132 115L132.455 121.545L139 122L132.455 122.455L132 129L131.545 122.455L125 122L131.545 121.545Z" fill="#fff"/></g>
-   </svg><em>бриллиант</em></div></div>
-<div class="tx"><div class="no"><b>02</b>Огранка</div><h3>Каждый человек похож на бриллиант, который ещё не огранён</h3><p>Сила, ум, характер и дело уже есть, а форму им даёт работа над собой, грань за гранью. В этой огранке человек становится тем, кем хочет быть. В классическом бриллианте 57 граней, и сияние ему дают нижние, которых снаружи не видно: они отражают свет обратно. С дисциплиной так же: её не видно другим, а свет человеку даёт именно она.</p></div></div>
+<div class="strip"><div class="wrap">
+ <span>Built on methods by</span>
+ <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>James Clear</b>
+ <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>David Allen</b>
+ <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>Cal Newport</b>
+ <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>BJ Fogg</b>
+</div></div>
 
-<div class="pn"><div class="vz v3"><svg viewBox="0 0 548 150" fill="none"><defs><radialGradient id="dg"><stop offset="0" stop-color="#C4A4FF"/><stop offset="1" stop-color="#C4A4FF" stop-opacity="0"/></radialGradient></defs><circle cx="14.0" cy="16.0" r="3.2" fill="#E8DFFF" opacity="0.10"/><circle cx="41.4" cy="16.0" r="3.2" fill="#E8DFFF" opacity="0.10"/><circle cx="68.8" cy="16.0" r="3.2" fill="#E8DFFF" opacity="0.10"/><circle cx="96.2" cy="16.0" r="3.3" fill="#E8DFFF" opacity="0.10"/><circle cx="123.6" cy="16.0" r="3.3" fill="#E8DFFF" opacity="0.11"/><circle cx="151.0" cy="16.0" r="3.3" fill="#E8DFFF" opacity="0.11"/><circle cx="178.4" cy="16.0" r="3.3" fill="#E8DFFF" opacity="0.11"/><circle cx="205.8" cy="16.0" r="3.4" fill="#E8DFFF" opacity="0.11"/><circle cx="233.2" cy="16.0" r="3.4" fill="#E8DFFF" opacity="0.12"/><circle cx="260.6" cy="16.0" r="3.4" fill="#E8DFFF" opacity="0.12"/><circle cx="288.0" cy="16.0" r="3.4" fill="#E8DFFF" opacity="0.12"/><circle cx="315.4" cy="16.0" r="3.4" fill="#E8DFFF" opacity="0.13"/><circle cx="342.8" cy="16.0" r="3.5" fill="#E8DFFF" opacity="0.13"/><circle cx="370.2" cy="16.0" r="3.5" fill="#E8DFFF" opacity="0.13"/><circle cx="397.6" cy="16.0" r="3.5" fill="#E8DFFF" opacity="0.14"/><circle cx="425.0" cy="16.0" r="3.5" fill="#E8DFFF" opacity="0.14"/><circle cx="452.4" cy="16.0" r="3.6" fill="#E8DFFF" opacity="0.15"/><circle cx="479.8" cy="16.0" r="3.6" fill="#E8DFFF" opacity="0.15"/><circle cx="507.2" cy="16.0" r="3.6" fill="#E8DFFF" opacity="0.16"/><circle cx="534.6" cy="16.0" r="3.6" fill="#E8DFFF" opacity="0.16"/><circle cx="14.0" cy="43.0" r="3.6" fill="#E8DFFF" opacity="0.17"/><circle cx="41.4" cy="43.0" r="3.7" fill="#E8DFFF" opacity="0.18"/><circle cx="68.8" cy="43.0" r="3.7" fill="#E8DFFF" opacity="0.18"/><circle cx="96.2" cy="43.0" r="3.7" fill="#E8DFFF" opacity="0.19"/><circle cx="123.6" cy="43.0" r="3.7" fill="#E8DFFF" opacity="0.19"/><circle cx="151.0" cy="43.0" r="3.8" fill="#E8DFFF" opacity="0.20"/><circle cx="178.4" cy="43.0" r="3.8" fill="#E8DFFF" opacity="0.21"/><circle cx="205.8" cy="43.0" r="3.8" fill="#E8DFFF" opacity="0.21"/><circle cx="233.2" cy="43.0" r="3.8" fill="#E8DFFF" opacity="0.22"/><circle cx="260.6" cy="43.0" r="3.8" fill="#E8DFFF" opacity="0.23"/><circle cx="288.0" cy="43.0" r="3.9" fill="#E8DFFF" opacity="0.23"/><circle cx="315.4" cy="43.0" r="3.9" fill="#E8DFFF" opacity="0.24"/><circle cx="342.8" cy="43.0" r="3.9" fill="#E8DFFF" opacity="0.25"/><circle cx="370.2" cy="43.0" r="3.9" fill="#E8DFFF" opacity="0.26"/><circle cx="397.6" cy="43.0" r="4.0" fill="#E8DFFF" opacity="0.26"/><circle cx="425.0" cy="43.0" r="4.0" fill="#E8DFFF" opacity="0.27"/><circle cx="452.4" cy="43.0" r="4.0" fill="#E8DFFF" opacity="0.28"/><circle cx="479.8" cy="43.0" r="4.0" fill="#E8DFFF" opacity="0.29"/><circle cx="507.2" cy="43.0" r="4.0" fill="#E8DFFF" opacity="0.29"/><circle cx="534.6" cy="43.0" r="4.1" fill="#E8DFFF" opacity="0.30"/><circle cx="14.0" cy="70.0" r="4.1" fill="#E8DFFF" opacity="0.31"/><circle cx="41.4" cy="70.0" r="4.1" fill="#E8DFFF" opacity="0.32"/><circle cx="68.8" cy="70.0" r="4.1" fill="#E8DFFF" opacity="0.33"/><circle cx="96.2" cy="70.0" r="4.2" fill="#E8DFFF" opacity="0.34"/><circle cx="123.6" cy="70.0" r="4.2" fill="#E8DFFF" opacity="0.35"/><circle cx="151.0" cy="70.0" r="4.2" fill="#E8DFFF" opacity="0.35"/><circle cx="178.4" cy="70.0" r="4.2" fill="#E8DFFF" opacity="0.36"/><circle cx="205.8" cy="70.0" r="4.2" fill="#E8DFFF" opacity="0.37"/><circle cx="233.2" cy="70.0" r="4.3" fill="#E8DFFF" opacity="0.38"/><circle cx="260.6" cy="70.0" r="4.3" fill="#E8DFFF" opacity="0.39"/><circle cx="288.0" cy="70.0" r="4.3" fill="#E8DFFF" opacity="0.40"/><circle cx="315.4" cy="70.0" r="4.3" fill="#E8DFFF" opacity="0.41"/><circle cx="342.8" cy="70.0" r="4.4" fill="#E8DFFF" opacity="0.42"/><circle cx="370.2" cy="70.0" r="4.4" fill="#E8DFFF" opacity="0.43"/><circle cx="397.6" cy="70.0" r="4.4" fill="#E8DFFF" opacity="0.44"/><circle cx="425.0" cy="70.0" r="4.4" fill="#E8DFFF" opacity="0.45"/><circle cx="452.4" cy="70.0" r="4.4" fill="#E8DFFF" opacity="0.46"/><circle cx="479.8" cy="70.0" r="4.5" fill="#E8DFFF" opacity="0.47"/><circle cx="507.2" cy="70.0" r="4.5" fill="#E8DFFF" opacity="0.48"/><circle cx="534.6" cy="70.0" r="4.5" fill="#E8DFFF" opacity="0.49"/><circle cx="14.0" cy="97.0" r="4.5" fill="#E8DFFF" opacity="0.50"/><circle cx="41.4" cy="97.0" r="4.6" fill="#E8DFFF" opacity="0.51"/><circle cx="68.8" cy="97.0" r="4.6" fill="#E8DFFF" opacity="0.53"/><circle cx="96.2" cy="97.0" r="4.6" fill="#E8DFFF" opacity="0.54"/><circle cx="123.6" cy="97.0" r="4.6" fill="#E8DFFF" opacity="0.55"/><circle cx="151.0" cy="97.0" r="4.6" fill="#E8DFFF" opacity="0.56"/><circle cx="178.4" cy="97.0" r="4.7" fill="#E8DFFF" opacity="0.57"/><circle cx="205.8" cy="97.0" r="4.7" fill="#E8DFFF" opacity="0.58"/><circle cx="233.2" cy="97.0" r="4.7" fill="#E8DFFF" opacity="0.59"/><circle cx="260.6" cy="97.0" r="4.7" fill="#E8DFFF" opacity="0.61"/><circle cx="288.0" cy="97.0" r="4.8" fill="#E8DFFF" opacity="0.62"/><circle cx="315.4" cy="97.0" r="4.8" fill="#E8DFFF" opacity="0.63"/><circle cx="342.8" cy="97.0" r="4.8" fill="#E8DFFF" opacity="0.64"/><circle cx="370.2" cy="97.0" r="4.8" fill="#E8DFFF" opacity="0.65"/><circle cx="397.6" cy="97.0" r="4.8" fill="#E8DFFF" opacity="0.66"/><circle cx="425.0" cy="97.0" r="4.9" fill="#E8DFFF" opacity="0.68"/><circle cx="452.4" cy="97.0" r="4.9" fill="#E8DFFF" opacity="0.69"/><circle cx="479.8" cy="97.0" r="4.9" fill="#E8DFFF" opacity="0.70"/><circle cx="507.2" cy="97.0" r="4.9" fill="#E8DFFF" opacity="0.71"/><circle cx="534.6" cy="97.0" r="9" fill="url(#dg)" opacity="0.36"/><circle cx="534.6" cy="97.0" r="5.0" fill="#E8DFFF" opacity="0.73"/><circle cx="14.0" cy="124.0" r="9" fill="url(#dg)" opacity="0.37"/><circle cx="14.0" cy="124.0" r="5.0" fill="#E8DFFF" opacity="0.74"/><circle cx="41.4" cy="124.0" r="9" fill="url(#dg)" opacity="0.38"/><circle cx="41.4" cy="124.0" r="5.0" fill="#E8DFFF" opacity="0.75"/><circle cx="68.8" cy="124.0" r="9" fill="url(#dg)" opacity="0.38"/><circle cx="68.8" cy="124.0" r="5.0" fill="#E8DFFF" opacity="0.77"/><circle cx="96.2" cy="124.0" r="9" fill="url(#dg)" opacity="0.39"/><circle cx="96.2" cy="124.0" r="5.0" fill="#E8DFFF" opacity="0.78"/><circle cx="123.6" cy="124.0" r="9" fill="url(#dg)" opacity="0.40"/><circle cx="123.6" cy="124.0" r="5.1" fill="#E8DFFF" opacity="0.79"/><circle cx="151.0" cy="124.0" r="9" fill="url(#dg)" opacity="0.40"/><circle cx="151.0" cy="124.0" r="5.1" fill="#E8DFFF" opacity="0.81"/><circle cx="178.4" cy="124.0" r="9" fill="url(#dg)" opacity="0.41"/><circle cx="178.4" cy="124.0" r="5.1" fill="#E8DFFF" opacity="0.82"/><circle cx="205.8" cy="124.0" r="9" fill="url(#dg)" opacity="0.42"/><circle cx="205.8" cy="124.0" r="5.1" fill="#E8DFFF" opacity="0.83"/><circle cx="233.2" cy="124.0" r="9" fill="url(#dg)" opacity="0.42"/><circle cx="233.2" cy="124.0" r="5.2" fill="#E8DFFF" opacity="0.85"/><circle cx="260.6" cy="124.0" r="9" fill="url(#dg)" opacity="0.43"/><circle cx="260.6" cy="124.0" r="5.2" fill="#E8DFFF" opacity="0.86"/><circle cx="288.0" cy="124.0" r="9" fill="url(#dg)" opacity="0.44"/><circle cx="288.0" cy="124.0" r="5.2" fill="#E8DFFF" opacity="0.87"/><circle cx="315.4" cy="124.0" r="9" fill="url(#dg)" opacity="0.44"/><circle cx="315.4" cy="124.0" r="5.2" fill="#E8DFFF" opacity="0.89"/><circle cx="342.8" cy="124.0" r="9" fill="url(#dg)" opacity="0.45"/><circle cx="342.8" cy="124.0" r="5.2" fill="#E8DFFF" opacity="0.90"/><circle cx="370.2" cy="124.0" r="9" fill="url(#dg)" opacity="0.46"/><circle cx="370.2" cy="124.0" r="5.3" fill="#E8DFFF" opacity="0.91"/><circle cx="397.6" cy="124.0" r="9" fill="url(#dg)" opacity="0.46"/><circle cx="397.6" cy="124.0" r="5.3" fill="#E8DFFF" opacity="0.93"/><circle cx="425.0" cy="124.0" r="9" fill="url(#dg)" opacity="0.47"/><circle cx="425.0" cy="124.0" r="5.3" fill="#E8DFFF" opacity="0.94"/><circle cx="452.4" cy="124.0" r="9" fill="url(#dg)" opacity="0.48"/><circle cx="452.4" cy="124.0" r="5.3" fill="#E8DFFF" opacity="0.96"/><circle cx="479.8" cy="124.0" r="9" fill="url(#dg)" opacity="0.49"/><circle cx="479.8" cy="124.0" r="5.4" fill="#E8DFFF" opacity="0.97"/><circle cx="507.2" cy="124.0" r="9" fill="url(#dg)" opacity="0.49"/><circle cx="507.2" cy="124.0" r="5.4" fill="#E8DFFF" opacity="0.99"/><circle cx="534.6" cy="124.0" r="9" fill="url(#dg)" opacity="0.50"/><circle cx="534.6" cy="124.0" r="5.4" fill="#E8DFFF" opacity="1.00"/></svg><span class="a">1 день</span><span class="b">100 дней</span></div>
-<div class="tx"><div class="no"><b>03</b>Постоянство</div><h3>Огранка идёт медленно, как вода точит камень</h3><p>Одно и то же действие снова и снова. Одна тренировка почти ничего не меняет, а сто таких дней меняют человека. Самое трудное — продолжать, когда первый запал прошёл, а результата ещё не видно.</p></div></div>
+<!-- MBAND -->
+<section class="mband"><div class="lit" style="left:-200px;top:0;width:800px;height:800px"></div><div class="lit" style="right:-200px;bottom:-200px;width:700px;height:700px"></div><div class="wrap">
+ <div class="card glass rv">
+  <div class="txt">
+   <h2 class="t"><span class="a">One app instead of five</span><span class="b">for the day and the long goal</span></h2>
+   <p class="lead">Tasks, habits, focus, programs and progress live together, so nothing falls between apps</p>
+   <div class="chips"><span class="chip">iPhone</span><span class="chip">Android</span><span class="chip">Web</span></div>
+   <a class="btn" href="https://volyo.app/">Open VOLYO</a>
+  </div>
+  <div class="phones"><img class="p1" src="img/ip-plans.webp" alt=""><img class="p2" src="img/ip-habits.webp" alt=""></div>
+ </div>
+</div></section>
 
-<div class="pn wide"><div class="tx"><div class="no"><b>04</b>VOLYO</div><h3>VOLYO берёт на себя всё, что обычно ломает дисциплину</h3>
-<div class="rows">
- <div class="rw"><s>«Не знаю, с чего начать»</s><i></i><b>Каждое утро понятно, что делать</b></div>
- <div class="rw"><s>«Не вижу результата»</s><i></i><b>Каждое дело оставляет след: растут грани, копится серия</b></div>
- <div class="rw"><s>«Хочется бросить»</s><i></i><b>Приложение напоминает, сколько уже пройдено</b></div>
- <div class="rw"><s>«Один пропуск, и всё зря»</s><i></i><b>Пропуск не стирает прошлую работу</b></div>
+<!-- STORY: one sticky phone, screens change on scroll -->
+<section class="story" id="inside">
+ <div class="bigword vword">DISCIPLINE</div>
+ <div class="lit" style="right:-200px;top:200px;width:900px;height:900px"></div>
+ <div class="wrap">
+  <div class="center"><h2 class="t rv"><span class="a">Built on proven methods</span><span class="b">not on willpower</span></h2>
+  <p class="lead rv d1" style="margin-top:12px">Atomic Habits, Getting Things Done, Deep Work and Tiny Habits inside one app</p></div>
+  <div class="sgrid">
+   <div class="steps">
+  <div class="st glass on" data-i="0">
+   <img class="mph" src="img/ip-home.webp" alt="">
+   <div class="chips"><span class="chip">Today</span><span class="chip">Focus</span></div>
+   <div class="nm"><svg viewBox="0 0 44 44" fill="none" stroke="#C4A4FF" stroke-width="1.4"><circle cx="22" cy="22" r="15"/><circle cx="22" cy="22" r="8"/></svg><h3>Today</h3></div>
+   <p class="d">Every morning VOLYO shows the main thing: what to do, which habits are waiting and how much focus the day needs</p>
+   <div class="tiles"><div><span>One ring</span><b>tasks, habits and focus</b></div><div><span>Next task</span><b>with time left until it starts</b></div><div><span>Evening</span><b>Close the day</b></div></div>
+  </div>
+  <div class="st glass" data-i="1">
+   <img class="mph" src="img/ip-plans.webp" alt="">
+   <div class="chips"><span class="chip">Plans</span><span class="chip">Priorities</span></div>
+   <div class="nm"><svg viewBox="0 0 44 44" fill="none" stroke="#C4A4FF" stroke-width="1.4"><rect x="7" y="9" width="30" height="28" rx="6"/><path d="M7 17h30M15 5v8M29 5v8"/></svg><h3>Plans</h3></div>
+   <p class="d">Your whole week on one screen. Day, week and month views, a priority matrix and a score for every day</p>
+   <div class="tiles"><div><span>Views</span><b>Day, week, month</b></div><div><span>Priorities</span><b>Matrix</b></div><div><span>Every day</span><b>Gets a score</b></div></div>
+  </div>
+  <div class="st glass" data-i="2">
+   <img class="mph" src="img/ip-habits.webp" alt="">
+   <div class="chips"><span class="chip">Habits</span><span class="chip">Streak</span></div>
+   <div class="nm"><svg viewBox="0 0 44 44" fill="none" stroke="#C4A4FF" stroke-width="1.4"><circle cx="22" cy="22" r="15"/><path d="M15 22l5 5 9-10"/></svg><h3>Habits</h3></div>
+   <p class="d">One tap a day. A streak breaks only after two misses in a row, so one bad day doesn’t erase the work</p>
+   <div class="tiles"><div><span>Mark</span><b>One tap</b></div><div><span>Streak breaks</span><b>After 2 misses</b></div><div><span>Overview</span><b>Whole month</b></div></div>
+  </div>
+  <div class="st glass" data-i="3">
+   <img class="mph" src="img/ip-progress.webp" alt="">
+   <div class="chips"><span class="chip">Progress</span><span class="chip">Score</span></div>
+   <div class="nm"><svg viewBox="0 0 44 44" fill="none" stroke="#C4A4FF" stroke-width="1.4"><path d="M8 36V8M8 36h28"/><path d="M14 28l7-8 6 5 9-11"/></svg><h3>Progress</h3></div>
+   <p class="d">See your growth in real numbers: execution, persistence and wins, week after week</p>
+   <div class="tiles"><div><span>Counts</span><b>Only done</b></div><div><span>Weekly target</span><b>80%</b></div><div><span>Horizon</span><b>Month and year</b></div></div>
+  </div>
+  <div class="st glass" data-i="4">
+   <img class="mph" src="img/ip-gemcutter.webp" alt="">
+   <div class="chips"><span class="chip">Weekly review</span><span class="chip">AI</span></div>
+   <div class="nm"><svg viewBox="0 0 44 44" fill="none" stroke="#C4A4FF" stroke-width="1.4"><path d="M22 5l10 9-10 25-10-25z"/><path d="M12 14h20M22 5v34"/></svg><h3>The Gemcutter</h3></div>
+   <p class="d">Every week it finds the main reason things slipped and gives a principle and a plan for the next one</p>
+   <div class="tiles"><div><span>Finds</span><b>One root cause</b></div><div><span>Gives</span><b>Principle and plan</b></div><div><span>Based on</span><b>4 methods</b></div></div>
+  </div>
+   </div>
+   <div class="sphone">
+    <div class="halo2"></div>
+    <img class="scr on" src="img/ip-home.webp" alt="Today screen">
+    <img class="scr" src="img/ip-plans.webp" alt="Plans screen">
+    <img class="scr" src="img/ip-habits.webp" alt="Habits screen">
+    <img class="scr" src="img/ip-progress.webp" alt="Progress screen">
+    <img class="scr" src="img/ip-gemcutter.webp" alt="The Gemcutter screen">
+    <div class="sdots"><i class=on></i><i></i><i></i><i></i><i></i></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- LEADGEN -->
+<section class="lead2"><div class="lit" style="right:-200px;top:-100px;width:800px;height:800px"></div><div class="wrap">
+ <div class="grid">
+  <h2 class="t rv"><span class="a">Recognise</span><span class="b">yourself?</span></h2>
+  <div class="rows">
+   <div class="row glass rv"><svg viewBox="0 0 30 30" fill="none" stroke="#DCD6E8" stroke-width="1.4"><rect x="5" y="4" width="20" height="23" rx="4"/><path d="M10 11h10M10 16h10M10 21h6"/></svg><p>Plans fall apart by Wednesday: the list keeps growing and the day goes elsewhere</p></div>
+   <div class="row glass rv d1"><svg viewBox="0 0 30 30" fill="none" stroke="#DCD6E8" stroke-width="1.4"><rect x="4" y="4" width="9" height="9" rx="2"/><rect x="17" y="4" width="9" height="9" rx="2"/><rect x="4" y="17" width="9" height="9" rx="2"/><rect x="17" y="17" width="9" height="9" rx="2"/></svg><p>Five apps, none of them talk: tasks here, habits there, notes somewhere else</p></div>
+   <div class="row glass rv d2"><svg viewBox="0 0 30 30" fill="none" stroke="#DCD6E8" stroke-width="1.4"><path d="M8 8l14 14M22 8L8 22"/></svg><p>Motivation lasts a week, and one missed day erases the whole streak</p></div>
+  </div>
+ </div>
+ <p class="answer rv">VOLYO keeps <b>the day, the habits and the long goal</b> in one system, so discipline stops depending on mood</p>
+</div></section>
+
+<!-- CALC -->
+<section class="calc" style="padding-top:40px"><div class="lit" style="left:-200px;top:-100px;width:800px;height:800px"></div><div class="wrap">
+ <div class="card glass rv">
+  <div>
+   <h2 class="t"><span class="a">What does 1% a day</span><span class="b">turn into? Count in a second</span></h2>
+   <p class="lead">Move the slider and the result updates instantly. Plain math, no promises</p>
+   <a class="btn" href="#calc" id="calcbtn">Count for your year</a>
+  </div>
+  <div class="box" id="calc">
+   <small>For example</small>
+   <div class="ln"><i></i><b>1%</b><span>better every day</span></div>
+   <div class="ln"><i>×</i><b id="dvn">365</b><span>days of steady work</span></div>
+   <input id="dr" type="range" min="7" max="365" value="365" aria-label="Days">
+   <div class="res"><i>=</i><div><strong id="up">×37.8</strong><span>stronger than at the start</span></div></div>
+   <p class="worse">1% worse every day: <b id="dn">×0.03</b></p>
+  </div>
+ </div>
+</div></section>
+
+<!-- FACETS -->
+<section class="sd" id="facets">
+ <img class="orb o1" src="img/diamond.webp" alt=""><img class="orb o2" src="img/gem-dark.webp" alt=""><img class="orb o3" src="img/diamond.webp" alt="">
+ <div class="wrap">
+  <div class="center"><h2 class="t rv"><span class="a">Five facets of who you become:</span><span class="b">strength, mind, spirit, work and discipline</span></h2>
+  <p class="lead rv d1" style="margin-top:16px">Every habit cuts one of 57 facets of your inner diamond</p></div>
+  <div class="list">
+   <div class="it rv"><div><h3>Strength <em>body and energy</em></h3><p>Sleep, movement and food. The base everything else stands on</p></div><img src="img/side-str.webp" alt=""></div>
+   <div class="it rv"><div><h3>Mind <em>knowledge and skills</em></h3><p>Reading, learning and practice that compound over months</p></div><img src="img/side-int.webp" alt=""></div>
+   <div class="it rv"><div><h3>Spirit <em>calm and close people</em></h3><p>Balance, rest and time with the people who matter</p></div><img src="img/side-spi.webp" alt=""></div>
+   <div class="it rv"><div><h3>Work <em>projects and money</em></h3><p>The tasks that move your work and income forward</p></div><img src="img/side-biz.webp" alt=""></div>
+   <div class="it rv"><div><h3>Discipline <em>promises to yourself</em></h3><p>Doing what you said you would, especially on hard days</p></div><img src="img/side-dis.webp" alt=""></div>
+  </div>
+ </div>
+</section>
+
+<!-- WORKFLOW -->
+<section class="wf" id="how">
+ <div class="bigword">RHYTHM</div>
+ <div class="wrap">
+  <h2 class="t rv"><span class="a">How a day</span><span class="b">works in VOLYO</span></h2>
+  <div class="row" id="wf">
+   <div class="step on"><div class="n">01</div><svg class="ic" viewBox="0 0 28 28" fill="none" stroke="#DCD6E8" stroke-width="1.4"><circle cx="14" cy="14" r="5"/><path d="M14 3v3M14 22v3M3 14h3M22 14h3"/></svg><h4>Morning</h4>
+    <img class="ill" src="img/side-str.webp" alt=""><div class="more"><h4>Morning: see the main thing</h4><p>The day’s tasks, habits and focus on one screen. You know what to do before you open anything else</p></div></div>
+   <div class="step"><div class="n">02</div><svg class="ic" viewBox="0 0 28 28" fill="none" stroke="#DCD6E8" stroke-width="1.4"><circle cx="14" cy="14" r="10"/><path d="M9 14l4 4 7-8"/></svg><h4>Day</h4>
+    <img class="ill" src="img/side-dis.webp" alt=""><div class="more"><h4>Day: mark in one tap</h4><p>Every done task and habit leaves a mark. Say your plans by voice and VOLYO sorts them</p></div></div>
+   <div class="step"><div class="n">03</div><svg class="ic" viewBox="0 0 28 28" fill="none" stroke="#DCD6E8" stroke-width="1.4"><path d="M20 17A9 9 0 1 1 11 6a7 7 0 0 0 9 11z"/></svg><h4>Evening</h4>
+    <img class="ill" src="img/side-spi.webp" alt=""><div class="more"><h4>Evening: close the day</h4><p>Energy, sleep, the win of the day and the main thing for tomorrow. One minute</p></div></div>
+   <div class="step"><div class="n">04</div><svg class="ic" viewBox="0 0 28 28" fill="none" stroke="#DCD6E8" stroke-width="1.4"><path d="M14 3l7 6-7 16-7-16z"/></svg><h4>End of the week</h4>
+    <img class="ill" src="img/gem-lit.webp" alt=""><div class="more"><h4>End of the week: the review</h4><p>The Gemcutter finds the root cause and gives a principle and a plan for the next week</p></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="team" id="programs"><div class="wrap center">
+ <h2 class="t rv"><span class="a">Programs that take you</span><span class="b">to the goal step by step</span></h2>
+ <div class="stats rv d1"><div><b>3</b><span>built-in programs</span></div><hr><div><b>57</b><span>facets of your diamond</span></div><hr><div><b>5</b><span>areas of life</span></div></div>
+ <div class="pcards">
+  <div class="pc rv"><div class="bg" style="background-image:url(img/prog-w12.webp)"></div><div class="vt">VOLYO</div><div class="cap"><b>12 weeks</b><p>A year’s results in one quarter</p><em class="chip">Up to 3 goals and a weekly score</em></div></div>
+  <div class="pc rv d1"><div class="bg" style="background-image:url(img/prog-h75.webp)"></div><div class="vt">VOLYO</div><div class="cap"><b>75 days</b><p>The no-compromise challenge</p><em class="chip">Miss a day, start again</em></div></div>
+  <div class="pc rv d2"><div class="bg" style="background-image:url(img/prog-m6.webp)"></div><div class="vt">VOLYO</div><div class="cap"><b>Six-Month Theory</b><p>One big goal in half a year</p><em class="chip">26 weeks of steady steps</em></div></div>
+ </div>
+ <a class="btn" href="https://volyo.app/" style="margin-top:44px">Start a program</a>
+</div></section>
+
+<!-- MARQUEE -->
+<section style="padding-top:40px"><div class="wrap center">
+ <h2 class="t rv"><span class="a">Methods</span><span class="b">inside the app</span></h2>
+ <p class="lead rv d1" style="margin-top:14px">VOLYO is built on proven systems of personal effectiveness</p>
 </div>
-<div class="pfin">Так дисциплина становится частью тебя, и вместе с ней приходит свобода жить по своим правилам. <b>Через месяц изменения видны в цифрах, через год в тебе самом.</b></div></div></div>
-</div>
-</section>
-
-<section>
- <div class="lb">Как проходит день</div>
- <h2>Пара минут в день, и ритм держится сам</h2>
- <div class="g3">
-  <div class="card"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/></svg><h3>Утро</h3><p>Приложение показывает главное на день: дела, привычки и шаг программы.</p></div>
-  <div class="card"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12l3 3 5-6"/></svg><h3>День</h3><p>Сделанное отмечается одним касанием. Задачу можно добавить голосом.</p></div>
-  <div class="card"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><h3>Вечер</h3><p>День закрывается за минуту, и видно, что получилось на самом деле.</p></div>
+ <div class="mq">
+  <div class="tr"><span>Atomic Habits</span><span>Getting Things Done</span><span>Deep Work</span><span>Tiny Habits</span><span>12 Week Year</span><span>Eisenhower matrix</span><span>Atomic Habits</span><span>Getting Things Done</span><span>Deep Work</span><span>Tiny Habits</span><span>12 Week Year</span><span>Eisenhower matrix</span></div>
+  <div class="tr rev"><span>Time blocking</span><span>Habit stacking</span><span>Weekly review</span><span>Never miss twice</span><span>One main thing a day</span><span>Time blocking</span><span>Habit stacking</span><span>Weekly review</span><span>Never miss twice</span><span>One main thing a day</span></div>
  </div>
 </section>
 
-<section>
- <div class="lb">Что внутри</div>
- <h2>Всё для дисциплины в одном месте</h2>
- <div class="g3">
-  <div class="card"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h9a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H9"/><path d="M4 8h8M4 12h8M4 16h5"/></svg><h3>План на каждый день</h3><p>Дела на сегодня, неделя и месяц. Задачи с подзадачами и приоритетом.</p></div>
-  <div class="card"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><h3>Привычки</h3><p>Отметка одним касанием. Серия переживает один пропуск.</p></div>
-  <div class="card"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg><h3>Задачи голосом</h3><p>Скажи «завтра в 9 созвон», и задача появится сама, с датой и временем.</p></div>
-  <div class="card"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M8 15l4-4 3 3 5-6"/></svg><h3>Прогресс</h3><p>Видно, как ты меняешься неделя за неделей, месяц за месяцем и за год.</p></div>
-  <div class="card"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M12 21L8 9l4-6 4 6z"/></svg><h3>Огранка</h3><p>Пять граней характера: Сила, Интеллект, Дух, Дело и Дисциплина. Растут от привычек и дел.</p></div>
-  <div class="card"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="8"/></svg><h3>Итоги недели</h3><p>Что получилось и что поменять в следующей неделе.</p></div>
+<!-- PRICING -->
+<section id="pricing"><div class="lit" style="left:50%;top:100px;width:1000px;height:800px;margin-left:-500px"></div><div class="wrap center">
+ <h2 class="t rv"><span class="a">Start free</span><span class="b">go deeper when you’re ready</span></h2>
+ <div class="price">
+  <div class="glass rv"><h3>Free</h3><p class="sub">Everything for a daily rhythm</p>
+   <ul><li>Tasks, calendar and Today</li><li>3 habits with a streak</li><li>Last 7 days of progress</li><li>Message of the day and journal</li><li>Five facets</li></ul>
+   <a class="btn ghost" href="https://volyo.app/">Start free</a></div>
+  <div class="glass full rv d1"><h3>Full access</h3><p class="sub">For people who build themselves seriously</p>
+   <ul><li>All programs</li><li>Unlimited habits</li><li>Progress over months and the year</li><li>Weekly review by the Gemcutter</li><li>Voice input and streak protection</li><li>Groups of 2–5 people</li></ul>
+   <a class="btn" href="https://volyo.app/">Get full access</a></div>
  </div>
-</section>
+ <div class="founding glass rv"><b>Founding 100</b><p>The first hundred pay once and keep everything forever, including future features</p></div>
+</div></section>
 
-<section>
- <div class="lb">Программы</div>
- <h2>Проверенные методы достижения целей, настроенные под тебя</h2>
- <p class="lead">Методы, которые годами проверяли на тысячах людей.</p>
- <div class="steps">
-  <div><b>1</b><h3>Выбираешь метод</h3><p>Готовая программа или своя</p></div>
-  <i></i>
-  <div><b>2</b><h3>Ставишь свои цели</h3><p>Срок, цели и действия под себя</p></div>
-  <i></i>
-  <div><b>3</b><h3>Приложение ведёт</h3><p>Каждый день понятно, что делать</p></div>
+<!-- REFUSE -->
+<section class="refuse"><div class="lit" style="right:-200px;top:-150px;width:700px;height:700px"></div><div class="wrap">
+ <div class="grid">
+  <h2 class="t rv"><span class="a">VOLYO is not</span><span class="b">for you if</span></h2>
+  <div class="box glass rv d1">
+   <div><i></i>You want results without daily steps</div>
+   <div><i></i>You need a team project manager, not a personal system</div>
+   <div><i></i>You’re looking for motivation, not a rhythm</div>
+  </div>
  </div>
- <div class="g2">
-  <div class="card"><h3>12 недель</h3><div class="org">По книге Брайана Морана «12 недель в году»</div><ul><li>До трёх целей и действия под каждой</li><li>Каждую неделю счёт: закрыто 85% и больше</li><li>Воскресный разбор, на 13-й неделе итоги</li></ul></div>
-  <div class="card"><h3>75 дней без компромиссов</h3><div class="org">Жёсткий режим на 75 дней, версия для дела</div><ul><li>2 часа глубокой работы без телефона каждый день</li><li>Главная задача дня закрыта до обеда</li><li>Пропуск любого пункта — день 1 заново</li></ul></div>
-  <div class="card"><h3>Теория шести месяцев</h3><div class="org">За полгода можно изменить жизнь</div><ul><li>26 недель, до трёх больших целей</li><li>Недельный счёт и итоги каждые 4 недели</li><li>Длинная дистанция, где важнее не бросить</li></ul></div>
-  <div class="card"><h3>Своя программа</h3><div class="org">Любой срок и свои правила</div><ul><li>Срок, цели и действия на твой выбор</li><li>Способ счёта: планка недели, строгий режим или копилка дней</li><li>Подходит, если готовые программы не под твой ритм</li></ul></div>
- </div>
-</section>
+</div></section>
 
-<section>
- <div class="lb">Принципы</div>
- <h2>На чём держится VOLYO</h2>
- <div class="g2">
-  <div class="card"><h3>Цифры честные</h3><p>Считается только сделанное. За вход в приложение ничего не начисляется.</p></div>
-  <div class="card"><h3>Один пропуск ничего не ломает</h3><p>Серия рвётся только после двух пропусков подряд. Вернуться проще, чем начинать заново.</p></div>
-  <div class="card"><h3>Данные твои</h3><p>Без рекламы и чужих счётчиков. Всё выгружается и удаляется за пару касаний.</p></div>
-  <div class="card"><h3>Покупка один раз</h3><p>Без подписки и автосписаний. 14 дней на возврат.</p></div>
- </div>
-</section>
-
-<section id="rvS" hidden>
- <div class="lb">Отзывы</div>
- <h2>Что говорят первые пользователи</h2>
- <div class="rvl" id="rvL"></div>
-</section>
-
-<section class="price">
- <div class="lb">Цена</div>
- <h2>Начни бесплатно</h2>
- <div class="g2">
-  <div class="card"><h3>Бесплатно</h3><b class="v">0 ₽</b><span class="s">навсегда</span><ul><li>Дела, календарь и «Сегодня»</li><li>Три привычки</li><li>Прогресс за последние 7 дней</li><li>Огранка, дневник и послание дня</li></ul></div>
-  <div class="card full"><h3>Полный доступ</h3><b class="v">3 777 ₽</b><span class="s">один раз и навсегда</span><ul><li>Программы и разбор недели</li><li>Сколько угодно привычек</li><li>Прогресс за месяцы и год</li><li>Задачи голосом и защита серии</li><li>Группы до 5 человек</li></ul></div>
- </div>
-</section>
-
-<section>
- <div class="lb">Вопросы</div>
- <h2>Частые вопросы</h2>
+<!-- FAQ -->
+<section id="faq" style="padding-top:40px"><div class="wrap">
+ <div class="center"><h2 class="t rv"><span class="a">Questions</span><span class="b">and short answers</span></h2></div>
  <div class="faq">
-  <details class="card"><summary>Нужно ли устанавливать приложение?</summary><p>VOLYO открывается в браузере на телефоне и компьютере. На телефоне его можно добавить на экран «Домой», и оно работает как обычное приложение.</p></details>
-  <details class="card"><summary>Работает на iPhone и Android?</summary><p>Да, на iPhone, Android и компьютере. С аккаунтом всё синхронизируется между устройствами.</p></details>
-  <details class="card"><summary>Что будет, если пропустить день?</summary><p>Серия переживает один пропуск и рвётся только после двух пропусков подряд. В полном доступе можно заморозить день или включить режим отпуска.</p></details>
-  <details class="card"><summary>Это подписка?</summary><p>Нет. Полный доступ покупается один раз, без автосписаний.</p></details>
-  <details class="card"><summary>Можно вернуть деньги?</summary><p>Да, в течение 14 дней после покупки.</p></details>
+  <details><summary>What is VOLYO?</summary><p>A daily discipline system: tasks, habits, focus, programs and progress in one app</p></details>
+  <details><summary>Where does it work?</summary><p>On iPhone, Android and in any browser. Your data syncs across devices</p></details>
+  <details><summary>Is it free?</summary><p>Yes, the core is free. Full access opens programs, unlimited habits, long-term progress and the weekly review</p></details>
+  <details><summary>What happens if I miss a day?</summary><p>Nothing breaks. A streak ends only after two misses in a row, and every done day stays with you</p></details>
+  <details><summary>What is the Gemcutter?</summary><p>A weekly review that finds the main reason your week slipped and gives a principle and a plan</p></details>
+  <details><summary>Is my data private?</summary><p>No ads. You can export or delete all your data at any time</p></details>
+ </div>
+</div></section>
+
+<!-- FINAL -->
+<section class="fcta">
+ <div class="glowbg halo"></div>
+ <div class="wrap">
+  <h2 class="t rv"><span class="a">Discipline is</span><span class="b">the path to freedom</span></h2>
+  <p class="rv d1">Start today with one task and one habit. VOLYO will keep the rhythm</p>
+  <div class="acts rv d2"><a class="btn ghost" href="#how">How it works</a><a class="btn" href="https://volyo.app/">Start free</a></div>
  </div>
 </section>
 
-<section class="fin">
- <h2>Становись тем, кем хочешь быть</h2>
- <a class="cta" href="https://volyo.app/">Открыть VOLYO</a>
- <p class="note">Дисциплина — путь к свободе.</p>
-</section>
+<div class="dmw" id="dm" aria-hidden="true"><div class="gems"><div class="gw"></div><img src="img/gem-dark.webp" alt=""><img class="lit2" src="img/diamond.webp" alt=""></div><p><b>0</b> <span>of 57 facets</span></p></div>
 
-<footer>
- <span>VOLYO by WIKKI.OCEAN</span>
- <a href="../legal/privacy.html">Политика конфиденциальности</a>
- <a href="../legal/terms.html">Условия использования</a>
- <a href="https://t.me/wikki_shark">Написать в Telegram</a>
-</footer>
-</div>
-<script>(function(){var e=function(t){return String(t||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};fetch('/reviews.json?v='+Date.now()).then(function(r){return r.ok?r.json():[]}).then(function(a){if(!a||!a.length)return;document.getElementById('rvL').innerHTML=a.slice(0,6).map(function(r){return '<div class="rv-m"><img class="rv-a" src="/'+e(r.p).replace(/^\//,'')+'" alt="" loading="lazy"><div class="rv-b"><div class="rv-h"><b>'+e(r.n)+'</b>'+(r.r?'<span>'+e(r.r)+'</span>':'')+'</div><p>'+e(r.t)+'</p></div></div>'}).join('');document.getElementById('rvS').hidden=false}).catch(function(){})})()</script>
+<footer><div class="wrap">
+ <div class="cols">
+  <div><a class="logo" href="#top"><img src="img/logo.png" alt="VOLYO"></a><p>Daily discipline system for people who build themselves</p></div>
+  <div><h5>Product</h5><a href="#inside">Features</a><a href="#facets">Facets</a><a href="#programs">Programs</a><a href="#pricing">Pricing</a></div>
+  <div><h5>VOLYO</h5><a href="#how">How it works</a><a href="#faq">FAQ</a></div>
+  <div><h5>Start today</h5><a class="btn sm" href="https://volyo.app/">Open VOLYO</a></div>
+ </div>
+ <div class="bot"><span>© 2026 VOLYO</span><span class="lg"><a href="https://volyo.app/legal/privacy.html">Privacy</a><a href="https://volyo.app/legal/terms.html">Terms</a></span></div>
+</div></footer>
+
+<script>
+function ruDays(n){var a=n%10,b=n%100;return a===1&&b!==11?'день':a>=2&&a<=4&&(b<10||b>=20)?'дня':'дней'}
+(function(){
+ // nav background
+ var nav=document.getElementById('nav');function sc(){nav.classList.toggle('sc',scrollY>20)}addEventListener('scroll',sc,{passive:true});sc();
+ // reveal
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+ if(/shot/.test(location.search))document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')});else document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+ // sticky phone story
+ var sts=[].slice.call(document.querySelectorAll('.story .st')),scr=[].slice.call(document.querySelectorAll('.sphone .scr')),sd=[].slice.call(document.querySelectorAll('.sdots i')),cur=-1;
+ function story(){var mid=innerHeight*.5,best=0,bd=1e9;sts.forEach(function(st,i){var r=st.getBoundingClientRect(),d=Math.abs(r.top+r.height/2-mid);if(d<bd){bd=d;best=i}});
+  if(best!==cur){cur=best;sts.forEach(function(x,k){x.classList.toggle('on',k===best)});scr.forEach(function(x,k){x.classList.toggle('on',k===best)});sd.forEach(function(x,k){x.classList.toggle('on',k===best)})}}
+ addEventListener('scroll',story,{passive:true});addEventListener('resize',story);story();
+ // diamond cut by scroll
+ var dm=document.getElementById('dm'),lit=dm.querySelector('.lit2'),cnt=dm.querySelector('b'),ft=document.querySelector('footer');
+ function cut(){var h=document.documentElement.scrollHeight-innerHeight,p=Math.min(1,Math.max(0,scrollY/h));
+  var f=Math.round(p*57);cnt.textContent=f;lit.style.opacity=Math.pow(p,1.2).toFixed(3);dm.querySelector('.gw').style.opacity=(p*0.9).toFixed(3);
+  dm.querySelector('.gems').style.transform='rotate('+(p*18-9).toFixed(2)+'deg) scale('+(0.92+p*0.1).toFixed(3)+')';
+  var show=scrollY>innerHeight*.6&&ft.getBoundingClientRect().top>innerHeight*.7;dm.classList.toggle('show',show)}
+ addEventListener('scroll',cut,{passive:true});addEventListener('resize',cut);cut();
+ // workflow auto cycle
+ var st=[].slice.call(document.querySelectorAll('#wf .step')),wi=0,wt,hover=false;
+ function wset(i){st.forEach(function(s,k){s.classList.toggle('on',k===i)});wi=i}
+ st.forEach(function(s,i){s.addEventListener('mouseenter',function(){hover=true;wset(i)});s.addEventListener('mouseleave',function(){hover=false});s.addEventListener('click',function(){wset(i)})});
+ wt=setInterval(function(){if(!hover)wset((wi+1)%st.length)},3800);
+ // calculator
+ var r=document.getElementById('dr'),dvn=document.getElementById('dvn'),up=document.getElementById('up'),dn=document.getElementById('dn'),lbl=dvn.nextElementSibling;
+ function f(x){return x>=10?x.toFixed(1):x.toFixed(2)}
+ function draw(){var d=+r.value;dvn.textContent=d;up.textContent='×'+f(Math.pow(1.01,d));dn.textContent='×'+f(Math.pow(.99,d));
+  lbl.textContent=window.LANG==='ru'?ruDays(d)+' ровной работы':(d===1?'day':'days')+' of steady work'}
+ window.redraw=draw;r.addEventListener('input',draw);draw();
+ document.getElementById('calcbtn').onclick=function(e){e.preventDefault();r.focus();var v=7;var t=setInterval(function(){v+=12;if(v>=365){v=365;clearInterval(t)}r.value=v;draw()},16)};
+})();
+</script>
+<script>
+(function(){
+ var RU={"Features": "Функции", "Facets": "Грани", "Programs": "Программы", "Pricing": "Тарифы", "FAQ": "Вопросы", "Open VOLYO": "Открыть VOLYO", "Daily discipline system": "Система ежедневной дисциплины", "Become who": "Становись тем,", "you want to be": "кем хочешь быть", "Tasks, habits and focus in one place. Every morning you know what to do, and every action leaves a mark": "Дела, привычки и фокус в одном месте. Каждое утро понятно, что делать, и каждое действие оставляет след", "Start free": "Начать бесплатно", "How it works": "Как это работает", "Works on iPhone, Android and the web": "Работает на iPhone, Android и в браузере", "Built on methods by": "В основе методы", "Recognise yourself?": "Узнаёшь себя?", "Big plans on Monday": "В понедельник большие планы,", "and nothing left by Friday": "а к пятнице от них ничего", "Plans fall apart by Wednesday": "К среде планы разваливаются", "The list keeps growing, the day goes elsewhere": "Список растёт, а день уходит на другое", "Five apps, none of them talk": "Пять приложений, и все порознь", "Tasks here, habits there, notes somewhere else": "Дела в одном, привычки в другом, заметки в третьем", "Motivation lasts a week": "Мотивации хватает на неделю", "One missed day and the whole streak is gone": "Один пропуск, и вся серия сгорает", "VOLYO keeps": "VOLYO держит", "the day, the habits and the long goal": "день, привычки и большую цель", "in one system, so discipline stops depending on mood": "в одной системе, и дисциплина перестаёт зависеть от настроения", "The 1% rule": "Правило 1%", "Small steps every day": "Маленькие шаги каждый день", "change everything": "меняют всё", "Move the slider and see what 1% better or worse each day turns into": "Подвигай ползунок и посмотри, во что превращается 1% лучше или хуже каждый день", "Days of steady work": "Дней ровной работы", "1% better every day": "На 1% лучше каждый день", "1% worse every day": "На 1% хуже каждый день", "1.01 to the power of days. Plain math, no promises": "1,01 в степени дней. Просто математика, без обещаний", "Tasks, habits and focus": "Дела, привычки и фокус", "in one place": "в одном месте", "Today": "Главное", "Know what to do": "Каждое утро понятно,", "every morning": "что делать", "The day, habits and focus in one ring": "День, привычки и фокус в одном кольце", "The next task with time left until it starts": "Ближайшее дело и сколько до него осталось", "Close the day in a minute in the evening": "Вечером день закрывается за минуту", "Voice or text": "Голосом или текстом", "Say your whole day": "Скажи весь свой день,", "VOLYO plans it": "VOLYO его распланирует", "One phrase becomes several tasks": "Из одной фразы получается несколько дел", "Date, time and area are filled in for you": "Дата, время и сфера заполняются сами", "Works in English and Russian": "Понимает русский и английский", "Plans": "Планы", "Your whole week": "Вся неделя", "on one screen": "на одном экране", "Day, week and month views": "День, неделя и месяц", "Priority matrix for what matters most": "Матрица приоритетов для самого важного", "A score for every day of the week": "Оценка каждого дня недели", "Habits": "Привычки", "One tap a day": "Одно касание в день,", "a miss won’t reset your streak": "и пропуск не обнулит серию", "Mark a habit in one tap": "Отметка привычки одним касанием", "A streak breaks only after two misses in a row": "Серия рвётся только после двух пропусков подряд", "See every habit across the month": "Каждая привычка видна за весь месяц", "Progress": "Прогресс", "See your growth": "Твой рост", "in real numbers": "в настоящих цифрах", "Execution, persistence and wins": "Выполнение, постоянство и победы", "Weekly score with an 80% target": "Оценка недели с целью 80%", "Only what you actually did is counted": "Считается только то, что сделано на самом деле", "Five facets": "Пять граней", "Every habit": "Каждая привычка", "shapes who you become": "делает тебя тем, кем ты становишься", "Your habits cut 57 facets of your inner diamond": "Привычки гранят 57 граней твоего внутреннего бриллианта", "Strength": "Сила", "Body and energy: sleep, movement, food": "Тело и энергия: сон, движение, еда", "Mind": "Интеллект", "Knowledge and skills": "Знания и навыки", "Spirit": "Дух", "Calm, balance and close people": "Спокойствие, баланс и близкие", "Work": "Дело", "Work, projects and money": "Работа, проекты и деньги", "Discipline": "Дисциплина", "Keeping promises to yourself": "Держать обещания себе", "Day 1": "День 1", "Day 100": "День 100", "Built-in programs": "Встроенные программы", "Proven methods": "Проверенные методики", "to reach your goals": "для твоих целей", "The most popular goal systems, ready to start in one tap": "Самые популярные системы достижения целей, запускаются одним касанием", "12 weeks": "12 недель", "A year’s results in one quarter": "Результат года за один квартал", "Up to 3 goals · weekly score": "До 3 целей и оценка недели", "75 days": "75 дней", "The no-compromise challenge": "Челлендж без компромиссов", "Miss a day, start again": "Пропуск значит старт заново", "Six-Month Theory": "Теория шести месяцев", "One big goal in half a year": "Одна большая цель за полгода", "26 weeks of steady steps": "26 недель ровных шагов", "Weekly review": "Разбор недели", "Your week, reviewed": "Твоя неделя глазами", "like an expert would": "эксперта", "Sees the patterns": "Видит закономерности", "Which days, habits and goals keep the rhythm": "Какие дни, привычки и цели держат ритм", "Finds the root cause": "Находит главную причину", "One, not ten, explained with your own numbers": "Одну, а не десять, на твоих же цифрах", "Gives a principle and a plan": "Даёт принцип и план", "What to keep, what to drop and where to start": "Что оставить, что убрать и с чего начать", "Principles from Atomic habits, Getting Things Done, Deep Work and Tiny Habits methods": "Принципы из методов Atomic Habits, Getting Things Done, Deep Work и Tiny Habits", "A few minutes a day": "Несколько минут в день,", "and the rhythm holds itself": "и ритм держится сам", "Morning": "Утро", "See the main thing": "Видишь главное", "The day’s tasks, habits and focus on one screen": "Дела, привычки и фокус дня на одном экране", "Day": "День", "Mark in one tap": "Отмечаешь одним касанием", "Every done task and habit leaves a mark": "Каждое дело и привычка оставляют след", "Evening": "Вечер", "Close the day": "Закрываешь день", "Energy, sleep, the win of the day and the main thing for tomorrow": "Энергия, сон, победа дня и главное на завтра", "go deeper when you’re ready": "дальше, когда будешь готов", "Free": "Бесплатно", "Everything for a daily rhythm": "Всё для ежедневного ритма", "Tasks, calendar and Today": "Дела, календарь и Главное", "3 habits with a streak": "3 привычки с серией", "Last 7 days of progress": "Прогресс за последние 7 дней", "Message of the day and journal": "Послание дня и дневник", "Full access": "Полный доступ", "For people who build themselves seriously": "Для тех, кто всерьёз строит себя", "All programs": "Все программы", "Unlimited habits": "Привычки без ограничений", "Progress over months and the year": "Прогресс за месяцы и год", "Weekly review by the Gemcutter": "Разбор недели от Огранщика", "Voice input and streak protection": "Голосовой ввод и защита серии", "Groups of 2–5 people": "Группы на 2–5 человек", "Get full access": "Открыть полный доступ", "The first hundred pay once and keep everything forever, including future features": "Первые сто платят один раз и получают всё навсегда, включая будущие функции", "Honestly": "Честно", "VOLYO is not for you": "VOLYO не для тебя,", "if you want a quick fix": "если нужен быстрый результат", "You want results without daily steps": "Хочется результата без ежедневных шагов", "You need a team project manager, not a personal system": "Нужен командный таск-трекер, а не личная система", "You’re looking for motivation, not a rhythm": "Ищешь мотивацию, а не ритм", "Questions": "Вопросы", "and short answers": "и короткие ответы", "What is VOLYO?": "Что такое VOLYO?", "A daily discipline system: tasks, habits, focus, programs and progress in one app": "Система ежедневной дисциплины: дела, привычки, фокус, программы и прогресс в одном приложении", "Where does it work?": "Где работает?", "On iPhone, Android and in any browser. Your data syncs across devices": "На iPhone, Android и в любом браузере. Данные синхронизируются между устройствами", "Is it free?": "Это бесплатно?", "Yes, the core is free. Full access opens programs, unlimited habits, long-term progress and the weekly review": "Да, основа бесплатная. Полный доступ открывает программы, привычки без ограничений, долгий прогресс и разбор недели", "What happens if I miss a day?": "Что будет, если пропустить день?", "Nothing breaks. A streak ends only after two misses in a row, and every done day stays with you": "Ничего не ломается. Серия рвётся только после двух пропусков подряд, а каждый сделанный день остаётся с тобой", "What is the Gemcutter?": "Кто такой Огранщик?", "A weekly review that finds the main reason your week slipped and gives a principle and a plan": "Разбор недели: находит главную причину, почему неделя просела, и даёт принцип и план", "Is my data private?": "Мои данные в безопасности?", "No ads. You can export or delete all your data at any time": "Без рекламы. Все данные можно выгрузить или удалить в любой момент", "Discipline is": "Дисциплина —", "the path to freedom": "путь к свободе", "Legal": "Документы", "VOLYO home screen": "Главный экран VOLYO", "Today screen": "Экран Главное", "Voice input": "Голосовой ввод", "Plans screen": "Экран Планы", "Habits screen": "Экран Привычки", "Progress screen": "Экран Прогресс", "The Gemcutter": "Огранщик", "The first hundred pay once and keep full access forever, including every future feature": "Первые сто платят один раз и получают полный доступ навсегда, включая все будущие функции", "One app instead of five": "Одно приложение вместо пяти", "for the day and the long goal": "для дня и большой цели", "Tasks, habits, focus, programs and progress live together, so nothing falls between apps": "Дела, привычки, фокус, программы и прогресс живут вместе, и ничего не теряется между приложениями", "Web": "Браузер", "Built on proven methods": "В основе проверенные методики,", "not on willpower": "а не сила воли", "Atomic Habits, Getting Things Done, Deep Work and Tiny Habits inside one app": "Atomic Habits, Getting Things Done, Deep Work и Tiny Habits в одном приложении", "Your day": "Твой день", "One ring": "Одно кольцо", "tasks, habits and focus": "дела, привычки и фокус", "Next task": "Ближайшее дело", "with time left until it starts": "и сколько до него осталось", "Every morning VOLYO shows the main thing: what to do, which habits are waiting and how much focus the day needs": "Каждое утро VOLYO показывает главное: что сделать, какие привычки ждут и сколько фокуса нужно дню", "across the whole month": "за весь месяц", "One tap": "Одно касание", "to mark a habit": "чтобы отметить привычку", "Two misses": "Два пропуска", "before a streak breaks": "прежде чем серия прервётся", "A miss won’t reset your streak. The month shows which habits hold and which slip": "Пропуск не обнулит серию. Месяц показывает, какие привычки держатся, а какие проседают", "Your week": "Твоя неделя", "reviewed like an expert would": "глазами эксперта", "One root cause": "Одна главная причина", "not ten": "а не десять", "Principle and plan": "Принцип и план", "for the next week": "на следующую неделю", "The Gemcutter finds the main reason your week slipped and explains it with your own numbers": "Огранщик находит главную причину, почему неделя просела, и объясняет её на твоих цифрах", "Growth": "Рост", "weekly target": "цель на неделю", "Only done": "Только сделанное", "is counted": "идёт в счёт", "Execution, persistence and wins week after week. Only what you actually did": "Выполнение, постоянство и победы неделя за неделей. Только то, что сделано на самом деле", "Big goals": "Большие цели", "in small daily steps": "маленькими шагами каждый день", "VOLYO keeps the rhythm even on the days when motivation is gone": "VOLYO держит ритм даже в те дни, когда мотивации нет", "What’s inside": "Что внутри", "Priorities": "Приоритеты", "Your whole week on one screen. Day, week and month views, a priority matrix and a score for every day": "Вся неделя на одном экране. День, неделя и месяц, матрица приоритетов и оценка каждого дня", "Views": "Режимы", "Day, week, month": "День, неделя, месяц", "Matrix": "Матрица", "Every day": "Каждый день", "Gets a score": "Получает оценку", "Streak": "Серия", "One tap a day. A streak breaks only after two misses in a row, so one bad day doesn’t erase the work": "Одно касание в день. Серия рвётся только после двух пропусков подряд, и один плохой день не стирает работу", "Mark": "Отметка", "Streak breaks": "Серия рвётся", "After 2 misses": "После 2 пропусков", "Overview": "Обзор", "Whole month": "Весь месяц", "Score": "Оценка", "See your growth in real numbers: execution, persistence and wins, week after week": "Твой рост в настоящих цифрах: выполнение, постоянство и победы неделя за неделей", "Counts": "Считается", "Weekly target": "Цель недели", "Horizon": "Горизонт", "Month and year": "Месяц и год", "Every week it finds the main reason things slipped and gives a principle and a plan for the next one": "Каждую неделю находит главную причину, почему что-то просело, и даёт принцип и план на следующую", "Finds": "Находит", "Gives": "Даёт", "Based on": "Опирается на", "4 methods": "4 методики", "Recognise": "Узнаёшь", "yourself?": "себя?", "Plans fall apart by Wednesday: the list keeps growing and the day goes elsewhere": "К среде планы разваливаются: список растёт, а день уходит на другое", "Five apps, none of them talk: tasks here, habits there, notes somewhere else": "Пять приложений, и все порознь: дела в одном, привычки в другом, заметки в третьем", "Motivation lasts a week, and one missed day erases the whole streak": "Мотивации хватает на неделю, а один пропуск стирает всю серию", "What does 1% a day": "Во что превращается", "turn into? Count in a second": "1% в день? Посчитай за секунду", "Move the slider and the result updates instantly. Plain math, no promises": "Двигай ползунок, и результат сразу пересчитается. Просто математика, без обещаний", "Count for your year": "Посчитать на год", "For example": "Например", "better every day": "лучше каждый день", "days of steady work": "дней ровной работы", "stronger than at the start": "сильнее, чем на старте", "1% worse every day:": "На 1% хуже каждый день:", "Five facets of who you become:": "Пять граней того, кем ты становишься:", "strength, mind, spirit, work and discipline": "сила, интеллект, дух, дело и дисциплина", "Every habit cuts one of 57 facets of your inner diamond": "Каждая привычка гранит одну из 57 граней твоего внутреннего бриллианта", "body and energy": "тело и энергия", "Sleep, movement and food. The base everything else stands on": "Сон, движение и еда. Основа, на которой держится всё остальное", "knowledge and skills": "знания и навыки", "Reading, learning and practice that compound over months": "Чтение, учёба и практика, которые копятся месяцами", "calm and close people": "спокойствие и близкие", "Balance, rest and time with the people who matter": "Баланс, отдых и время с теми, кто важен", "projects and money": "проекты и деньги", "The tasks that move your work and income forward": "Дела, которые двигают работу и доход", "promises to yourself": "обещания себе", "Doing what you said you would, especially on hard days": "Делать то, что пообещал себе, особенно в трудные дни", "How a day": "Как проходит день", "works in VOLYO": "в VOLYO", "Morning: see the main thing": "Утро: видишь главное", "The day’s tasks, habits and focus on one screen. You know what to do before you open anything else": "Дела, привычки и фокус дня на одном экране. Понятно, что делать, ещё до того, как откроешь что-то другое", "Day: mark in one tap": "День: отмечаешь одним касанием", "Every done task and habit leaves a mark. Say your plans by voice and VOLYO sorts them": "Каждое дело и привычка оставляют след. Скажи планы голосом, и VOLYO их разложит", "Evening: close the day": "Вечер: закрываешь день", "Energy, sleep, the win of the day and the main thing for tomorrow. One minute": "Энергия, сон, победа дня и главное на завтра. Одна минута", "End of the week": "Конец недели", "End of the week: the review": "Конец недели: разбор", "The Gemcutter finds the root cause and gives a principle and a plan for the next week": "Огранщик находит главную причину и даёт принцип и план на следующую неделю", "Programs that take you": "Программы, которые ведут", "to the goal step by step": "к цели шаг за шагом", "built-in programs": "встроенные программы", "facets of your diamond": "граней бриллианта", "areas of life": "сфер жизни", "Up to 3 goals and a weekly score": "До 3 целей и оценка недели", "Start a program": "Начать программу", "Methods": "Методики", "inside the app": "внутри приложения", "VOLYO is built on proven systems of personal effectiveness": "VOLYO построен на проверенных системах личной эффективности", "12 Week Year": "Год за 12 недель", "Eisenhower matrix": "Матрица Эйзенхауэра", "Time blocking": "Блоки времени", "Habit stacking": "Связки привычек", "Never miss twice": "Не пропускай дважды", "One main thing a day": "Одно главное дело в день", "VOLYO is not": "VOLYO не для тебя,", "for you if": "если", "Start today with one task and one habit. VOLYO will keep the rhythm": "Начни сегодня с одного дела и одной привычки. Ритм VOLYO удержит", "Daily discipline system for people who build themselves": "Система ежедневной дисциплины для тех, кто строит себя", "Product": "Продукт", "Start today": "Начни сегодня", "Month view": "Месяц", "Focus": "Фокус", "of 57 facets": "из 57 граней", "The Gemcutter screen": "Экран Огранщик", "Privacy": "Конфиденциальность", "Terms": "Условия"}, nodes=[], imgs=[];
+ var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null),n;
+ while(n=w.nextNode()){var t=n.nodeValue.trim();if(t&&RU[t]&&!n.parentNode.closest('script'))nodes.push([n,n.nodeValue,t])}
+ document.querySelectorAll('img[alt]').forEach(function(i){if(RU[i.alt])imgs.push([i,i.alt])});
+ function set(l){window.LANG=l;document.documentElement.lang=l;
+  nodes.forEach(function(x){x[0].nodeValue=l==='ru'?x[1].replace(x[2],RU[x[2]]):x[1]});
+  imgs.forEach(function(x){x[0].alt=l==='ru'?RU[x[1]]:x[1]});
+  document.title=l==='ru'?'VOLYO — система ежедневной дисциплины':'VOLYO — your daily discipline system';
+  document.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('on',b.dataset.l===l)});
+  try{localStorage.setItem('volyo-lang',l)}catch(e){}
+  if(window.redraw)window.redraw()}
+ document.querySelectorAll('.lang button').forEach(function(b){b.onclick=function(){set(b.dataset.l)}});
+ var q=(location.search.match(/lang=(ru|en)/)||[])[1],saved=null;try{saved=localStorage.getItem('volyo-lang')}catch(e){}
+ set(q||saved||((navigator.language||'').slice(0,2)==='ru'?'ru':'en'));
+})();
+</script>
 </body>
 </html>
