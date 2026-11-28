@@ -547,6 +547,33 @@ footer{padding:48px 0 30px}footer h5{font-size:14px}footer .cols a,footer .cols 
  .dmw{display:none}
 }
 footer .bot{display:flex;justify-content:space-between;gap:20px}footer .bot .lg{display:flex;gap:22px}footer .bot a{color:var(--vo-muted)}footer .bot a:hover{color:var(--vo-ink)}
+
+/* ===== Телефон: доводка (28.11) ===== */
+.strip b{gap:0}
+@media (max-width:1000px){
+ .hero .stage{padding-top:150px}
+ .hero .bigword{top:66px;font-size:24vw;opacity:.12}
+ .strip .wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}.strip span{grid-column:1/-1}
+ .strip b{font-size:14px;padding-left:14px;position:relative}.strip b:before{content:"";position:absolute;left:0;top:50%;width:5px;height:5px;margin-top:-2px;border-radius:50%;background:#C4A4FF}
+ .mband .phones{min-height:300px}.mband .phones img{width:160px}.mband .phones .p1{left:calc(50% - 150px);bottom:-110px}.mband .phones .p2{left:calc(50% - 20px);bottom:-50px}
+ /* история: свайп-лента карточек, как телефон на ноутбуке */
+ .story .sgrid{margin-top:28px}
+ .steps{flex-direction:row;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -24px;padding:6px 24px 18px;scrollbar-width:none}
+ .steps::-webkit-scrollbar{display:none}
+ .st{flex:0 0 84%;scroll-snap-align:center;opacity:.55;transform:scale(.97);padding:22px 20px}
+ .st.on{opacity:1;transform:none}
+ .st .mph{width:170px;margin:0 auto 18px}
+ .st .tiles{margin-top:16px;gap:8px}.st .tiles div{display:block;text-align:left;padding:11px 14px}.st .tiles span{font-size:12px}.st .tiles b{text-align:left;margin-top:2px;font-size:14px}.st p.d{font-size:14px}
+ .sdots.m{display:flex;position:static;transform:none;flex-direction:row;justify-content:center;gap:8px;margin-top:6px}
+ .sdots.m i.on{width:22px;height:6px}
+ .calc .ln{grid-template-columns:18px 64px 1fr}.calc .ln span{font-size:13px}
+ .sd .orb{display:none}
+ .sd .it{text-align:left;grid-template-columns:1fr 48px}.sd .it img{width:48px;height:48px}
+ .sd .list{margin-top:32px}
+ .team .stats{gap:14px}.team .stats div{text-align:center}.team .stats b{font-size:24px}.team .stats span{font-size:12px;display:block;line-height:1.3}
+ .wf .bigword{opacity:.08}
+}
+@media (min-width:1001px){.sdots.m{display:none}}
 </style>
 </head>
 <body>
@@ -579,10 +606,10 @@ footer .bot{display:flex;justify-content:space-between;gap:20px}footer .bot .lg{
 
 <div class="strip"><div class="wrap">
  <span>Built on methods by</span>
- <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>James Clear</b>
- <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>David Allen</b>
- <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>Cal Newport</b>
- <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>BJ Fogg</b>
+ <b>James Clear</b>
+ <b>David Allen</b>
+ <b>Cal Newport</b>
+ <b>BJ Fogg</b>
 </div></div>
 
 <!-- MBAND -->
@@ -643,6 +670,7 @@ footer .bot{display:flex;justify-content:space-between;gap:20px}footer .bot .lg{
    <div class="tiles"><div><span>Finds</span><b>One root cause</b></div><div><span>Gives</span><b>Principle and plan</b></div><div><span>Based on</span><b>4 methods</b></div></div>
   </div>
    </div>
+   <div class="sdots m"><i class="on"></i><i></i><i></i><i></i><i></i></div>
    <div class="sphone">
     <div class="halo2"></div>
     <img class="scr on" src="img/ip-home.webp" alt="Today screen">
@@ -816,9 +844,13 @@ function ruDays(n){var a=n%10,b=n%100;return a===1&&b!==11?'день':a>=2&&a<=4
  if(/shot/.test(location.search))document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')});else document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
  // sticky phone story
  var sts=[].slice.call(document.querySelectorAll('.story .st')),scr=[].slice.call(document.querySelectorAll('.sphone .scr')),sd=[].slice.call(document.querySelectorAll('.sdots i')),cur=-1;
- function story(){var mid=innerHeight*.5,best=0,bd=1e9;sts.forEach(function(st,i){var r=st.getBoundingClientRect(),d=Math.abs(r.top+r.height/2-mid);if(d<bd){bd=d;best=i}});
+ function story(){if(innerWidth<=1000)return;var mid=innerHeight*.5,best=0,bd=1e9;sts.forEach(function(st,i){var r=st.getBoundingClientRect(),d=Math.abs(r.top+r.height/2-mid);if(d<bd){bd=d;best=i}});
   if(best!==cur){cur=best;sts.forEach(function(x,k){x.classList.toggle('on',k===best)});scr.forEach(function(x,k){x.classList.toggle('on',k===best)});sd.forEach(function(x,k){x.classList.toggle('on',k===best)})}}
  addEventListener('scroll',story,{passive:true});addEventListener('resize',story);story();
+ var stBox=document.querySelector('.steps'),md=[].slice.call(document.querySelectorAll('.sdots.m i'));
+ function hstory(){if(innerWidth>1000)return;var c=stBox.scrollLeft+stBox.clientWidth/2,b=0,bd=1e9;sts.forEach(function(st,i){var d=Math.abs(st.offsetLeft+st.offsetWidth/2-c);if(d<bd){bd=d;b=i}});
+  sts.forEach(function(x,k){x.classList.toggle('on',k===b)});md.forEach(function(x,k){x.classList.toggle('on',k===b)})}
+ stBox.addEventListener('scroll',hstory,{passive:true});md.forEach(function(d,i){d.onclick=function(){stBox.scrollTo({left:sts[i].offsetLeft-24,behavior:'smooth'})}});hstory();
  // diamond cut by scroll
  var dm=document.getElementById('dm'),lit=dm.querySelector('.lit2'),cnt=dm.querySelector('b'),ft=document.querySelector('footer');
  function cut(){var h=document.documentElement.scrollHeight-innerHeight,p=Math.min(1,Math.max(0,scrollY/h));
